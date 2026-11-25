@@ -2,6 +2,7 @@ package com.chinoisfacile.mandarin.data
 
 import com.chinoisfacile.mandarin.data.model.CatalogDto
 import java.io.File
+import java.text.Normalizer
 import kotlinx.serialization.json.Json
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
@@ -13,7 +14,9 @@ class CatalogJsonParsingTest {
     fun `all hsk1 to hsk6 catalog json files parse cleanly with unique ids and hanzi`() {
         val json = Json { ignoreUnknownKeys = true }
         val toneRegex = Regex("[āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ]")
-        val neutralParticles = setOf("ma", "ne", "de", "le", "ba", "zhe", "guo", "a", "ya", "wa", "na")
+        val neutralParticles = setOf(
+            "ma", "ne", "de", "le", "ba", "zhe", "guo", "a", "ya", "wa", "na", "la", "o", "en",
+        )
         val globalUnitIds = mutableSetOf<String>()
         val globalLessonIds = mutableSetOf<String>()
         val globalWordIds = mutableSetOf<String>()
@@ -145,6 +148,67 @@ class CatalogJsonParsingTest {
             "Violations du plafond de vocabulaire (${violations.size}) :\n" +
                 violations.take(20).joinToString("\n"),
             violations.isEmpty(),
+        )
+    }
+
+    @Test
+    fun `all hsk1 to hsk6 words have valid non-surname pinyin french and matching example pinyin`() {
+        val json = Json { ignoreUnknownKeys = true }
+        val allowedProperNouns = setOf(
+            "中国", "北京", "汉语", "中文", "亚洲", "京剧", "长城", "长江",
+            "元旦", "华裔", "国庆节", "礼拜天", "除夕", "互联网", "元宵节", "华侨",
+            "国务院", "摄氏度", "欧洲", "正月", "端午节", "重阳节",
+        )
+        val surnameRegex = Regex("nom de famille|patronyme", RegexOption.IGNORE_CASE)
+        val sandhiOrParticleWords = setOf(
+            "一", "不", "的", "了", "吗", "呢", "吧", "着", "过", "得", "地", "啊",
+            "嘛", "哇", "啦", "哦", "嗯",
+        )
+        val nonPinyinChars = Regex("[^a-zāáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜü]")
+        val combiningMarks = Regex("\\p{M}+")
+
+        fun normPy(raw: String): String =
+            raw.lowercase().replace("v", "ü").replace(nonPinyinChars, "")
+
+        fun stripTones(norm: String): String =
+            Normalizer.normalize(norm, Normalizer.Form.NFD).replace(combiningMarks, "")
+
+        val issues = mutableListOf<String>()
+        for (level in 1..6) {
+            val candidates = listOf(
+                File("src/main/assets/catalog/hsk$level.json"),
+                File("app/src/main/assets/catalog/hsk$level.json"),
+            )
+            val jsonFile = candidates.firstOrNull { it.exists() }
+                ?: error("Fichier catalog/hsk$level.json introuvable")
+            val catalog = json.decodeFromString<CatalogDto>(jsonFile.readText())
+
+            for (word in catalog.words) {
+                if (word.pinyin.any { it.isUpperCase() } && word.hanzi !in allowedProperNouns) {
+                    issues += "HSK$level ${word.id} (${word.hanzi}): pinyin avec majuscule '${word.pinyin}'"
+                }
+                if (surnameRegex.containsMatchIn(word.french) && word.hanzi != "姓") {
+                    issues += "HSK$level ${word.id} (${word.hanzi}): traduction nom de famille '${word.french}'"
+                }
+                if (word.hanzi !in word.example.tokens) {
+                    issues += "HSK$level ${word.id} (${word.hanzi}): mot absent de example.tokens"
+                }
+                val nWordPy = normPy(word.pinyin)
+                val nExPy = normPy(word.example.pinyin)
+                if (nWordPy.isNotEmpty() && nWordPy !in nExPy) {
+                    val sandhiOk = word.hanzi in sandhiOrParticleWords &&
+                        stripTones(nWordPy) in stripTones(nExPy)
+                    if (!sandhiOk) {
+                        issues += "HSK$level ${word.id} (${word.hanzi}): pinyin '${word.pinyin}' absent de '${word.example.pinyin}'"
+                    }
+                }
+            }
+        }
+
+        assertTrue(
+            "Anomalies pinyin/polyphones détectées (${issues.size}) :\n" +
+                issues.take(25).joinToString("\n"),
+            issues.isEmpty(),
         )
     }
 }

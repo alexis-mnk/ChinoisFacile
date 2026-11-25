@@ -9,7 +9,6 @@ import com.chinoisfacile.mandarin.domain.lexicon.LexiconFilter
 import com.chinoisfacile.mandarin.domain.lexicon.LexiconStatusCounts
 import com.chinoisfacile.mandarin.domain.lexicon.LexiconStatusFilter
 import com.chinoisfacile.mandarin.domain.search.IndexedVocabWord
-import com.chinoisfacile.mandarin.domain.search.VocabularySearchFilter
 import java.time.LocalDate
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -55,7 +54,7 @@ class LexiconViewModel(
                     hskLevel = level,
                     todayEpochDay = today,
                     counts = LexiconFilter.computeCounts(words, today),
-                    indexed = VocabularySearchFilter.buildIndex(words),
+                    indexed = LexiconFilter.buildSortedIndex(words),
                 )
             }
         }

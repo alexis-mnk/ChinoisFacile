@@ -383,6 +383,14 @@ FRENCH_FALLBACK: dict[str, str] = {
     "喂": "Allô / Hé",
     "些": "Quelques / Un peu",
     "字": "Caractère / Mot écrit",
+    "呢": "Particule interrogative (et toi ?)",
+    "岁": "An / Âge (ans)",
+    "使劲儿": "Faire un effort / Forcer",
+    "系领带": "Mettre une cravate",
+    "墨水儿": "Encre",
+    "纽扣儿": "Bouton (vêtement)",
+    "摊儿": "Étal / Stand",
+    "致力于": "Se consacrer à / S'engager pour",
 }
 
 
@@ -401,9 +409,344 @@ def download_cached(url: str, filename: str) -> Path:
     return target
 
 
+SURNAME_RE = re.compile(r"nom de famille|patronyme|prénom", re.IGNORECASE)
+
+# Seuls vrais noms propres HSK 1..6 autorisant une majuscule dans le pinyin
+ALLOWED_PROPER_NOUNS = {
+    "中国", "北京", "汉语", "中文", "亚洲", "京剧", "长城", "长江",
+    "元旦", "华裔", "国庆节", "礼拜天", "除夕", "互联网", "元宵节", "华侨",
+    "国务院", "摄氏度", "欧洲", "正月", "端午节", "重阳节",
+}
+
+# Table explicite de référence pour les polyphones clés (lecture standard HSK, pinyin numéroté minuscule)
+PREFERRED_PINYIN: dict[str, str] = {
+    # Polyphones principaux HSK 1-4 demandés + cas audités
+    "还": "hai2",
+    "都": "dou1",
+    "长": "chang2",
+    "只": "zhi3",
+    "没": "mei2",
+    "得": "de5",
+    "地": "de5",
+    "了": "le5",
+    "着": "zhe5",
+    "和": "he2",
+    "行": "xing2",
+    "为": "wei4",
+    "重": "zhong4",
+    "干": "gan4",
+    "发": "fa1",
+    "会": "hui4",
+    "好": "hao3",
+    "看": "kan4",
+    "少": "shao3",
+    "分": "fen1",
+    "教": "jiao1",
+    "过": "guo5",
+    "假": "jia3",
+    "种": "zhong3",
+    "倒": "dao3",
+    "数": "shu4",
+    "空": "kong1",
+    "要": "yao4",
+    "应": "ying1",
+    "相": "xiang1",
+    "传": "chuan2",
+    # Autres polyphones HSK 1-4 audités
+    "东西": "dong1xi5",
+    "多少": "duo1shao5",
+    "几": "ji3",
+    "吗": "ma5",
+    "呢": "ne5",
+    "哪": "na3",
+    "喂": "wei4",
+    "的": "de5",
+    "读": "du2",
+    "便宜": "pian2yi5",
+    "别": "bie2",
+    "号": "hao4",
+    "吧": "ba5",
+    "告诉": "gao4su5",
+    "女人": "nv3ren2",
+    "好吃": "hao3chi1",
+    "妻子": "qi1zi5",
+    "累": "lei4",
+    "给": "gei3",
+    "远": "yuan3",
+    "张": "zhang1",
+    "比": "bi3",
+    "刷": "shua1",
+    "啊": "a5",
+    "地方": "di4fang5",
+    "差": "cha4",
+    "把": "ba3",
+    "故事": "gu4shi5",
+    "更": "geng4",
+    "胖": "pang4",
+    "角": "jiao3",
+    "过去": "guo4qu4",
+    "难": "nan2",
+    "骑": "qi2",
+    "与": "yu3",
+    "场": "chang3",
+    "大夫": "dai4fu5",
+    "好处": "hao3chu5",
+    "底": "di3",
+    "弄": "nong4",
+    "弹": "tan2",
+    "当": "dang1",
+    "当时": "dang1shi2",
+    "汤": "tang1",
+    "省": "sheng3",
+    "精神": "jing1shen2",
+    "结果": "jie2guo3",
+    "脏": "zang1",
+    "赚": "zhuan4",
+    "起来": "qi3lai5",
+    "趟": "tang4",
+    "重点": "zhong4dian3",
+    "页": "ye4",
+    "孙子": "sun1zi5",
+    "奶奶": "nai3nai5",
+    "爷爷": "ye2ye5",
+    "叔叔": "shu1shu5",
+    "舒服": "shu1fu5",
+    "困难": "kun4nan5",
+    "麻烦": "ma2fan5",
+    "味道": "wei4dao5",
+    "厉害": "li4hai5",
+    "肚子": "du4zi5",
+    "收拾": "shou1shi5",
+    "护士": "hu4shi5",
+    "脾气": "pi2qi5",
+    "笑话": "xiao4hua5",
+    "商量": "shang1liang5",
+    "亲戚": "qin1qi5",
+    "热闹": "re4nao5",
+    "活泼": "huo2po5",
+    "凉快": "liang2kuai5",
+    "消息": "xiao1xi5",
+    "一会儿": "yi1hui4r5",
+    # Polyphones HSK 5-6 audités
+    "乙": "yi3",
+    "冲": "chong1",
+    "切": "qie1",
+    "匹": "pi3",
+    "卷": "juan3",
+    "吐": "tu3",
+    "吓": "xia4",
+    "唉": "ai1",
+    "圈": "quan1",
+    "土地": "tu3di4",
+    "地道": "di4dao5",
+    "大方": "da4fang5",
+    "尽量": "jin3liang4",
+    "抢": "qiang3",
+    "挡": "dang3",
+    "晕": "yun1",
+    "朝": "chao2",
+    "横": "heng2",
+    "正": "zheng4",
+    "歪": "wai1",
+    "浅": "qian3",
+    "涨": "zhang3",
+    "片": "pian4",
+    "系": "xi4",
+    "结实": "jie1shi5",
+    "背": "bei4",
+    "臭": "chou4",
+    "薄": "bao2",
+    "露": "lu4",
+    "提": "ti2",
+    "盖": "gai4",
+    "看来": "kan4lai5",
+    "力量": "li4liang5",
+    "要是": "yao4shi5",
+    "人家": "ren2jia5",
+    "公道": "gong1dao5",
+    "出息": "chu1xi5",
+    "分量": "fen4liang5",
+    "利害": "li4hai5",
+    "刺": "ci4",
+    "劈": "pi1",
+    "口音": "kou3yin1",
+    "咋": "za3",
+    "哄": "hong3",
+    "哇": "wa1",
+    "哦": "o4",
+    "啦": "la5",
+    "嗯": "en4",
+    "大意": "da4yi5",
+    "工夫": "gong1fu5",
+    "幢": "zhuang4",
+    "恶心": "e3xin5",
+    "扎": "zha1",
+    "扒": "ba1",
+    "扛": "kang2",
+    "把手": "ba3shou5",
+    "折": "zhe2",
+    "拧": "ning2",
+    "拽": "zhuai4",
+    "拾": "shi2",
+    "挨": "ai1",
+    "搁": "ge1",
+    "搂": "lou3",
+    "播种": "bo1zhong3",
+    "攒": "zan3",
+    "本事": "ben3shi5",
+    "款式": "kuan3shi4",
+    "正当": "zheng4dang4",
+    "淋": "lin2",
+    "温和": "wen1he2",
+    "澄清": "cheng2qing1",
+    "照应": "zhao4ying4",
+    "熨": "yun4",
+    "熬": "ao2",
+    "琢磨": "zuo2mo5",
+    "甭": "beng2",
+    "盛": "sheng4",
+    "眯": "mi1",
+    "翘": "qiao4",
+    "蒙": "meng2",
+    "裁缝": "cai2feng5",
+    "跟前": "gen1qian5",
+    "铺": "pu1",
+    "扁": "bian3",
+    "番": "fan1",
+    "束": "shu4",
+    "翼": "yi4",
+}
+
+# Traductions françaises explicites pour les polyphones/cas sensibles (prioritaires sur CFDICT)
+FRENCH_OVERRIDES: dict[str, str] = {
+    "还": "Encore / Toujours",
+    "都": "Tous / Tout",
+    "长": "Long / Longueur",
+    "只": "Seulement / Uniquement",
+    "没": "Ne pas (avoir / passé)",
+    "得": "Particule de degré",
+    "地": "Particule adverbiale",
+    "了": "Particule d'action accomplie",
+    "着": "Particule d'aspect continu",
+    "和": "Et / Avec",
+    "行": "D'accord / Marcher",
+    "为": "Pour / À cause de",
+    "重": "Lourd / Important",
+    "干": "Faire / Travailler",
+    "发": "Envoyer / Émettre",
+    "会": "Savoir faire / Pouvoir",
+    "好": "Bon / Bien",
+    "看": "Regarder / Lire",
+    "少": "Peu / Manquer",
+    "分": "Diviser / Minute / Point",
+    "教": "Enseigner",
+    "过": "Particule d'expérience passée",
+    "假": "Faux / Artificiel",
+    "种": "Sorte / Espèce / Graine",
+    "倒": "Tomber / S'effondrer",
+    "数": "Nombre / Chiffre",
+    "空": "Vide / Ciel",
+    "要": "Vouloir / Devoir",
+    "应": "Devoir / Répondre",
+    "相": "Mutuellement / Apparence",
+    "传": "Transmettre / Passer",
+    "东西": "Chose / Objet",
+    "多少": "Combien",
+    "便宜": "Bon marché / Pas cher",
+    "告诉": "Dire / Informer",
+    "妻子": "Épouse / Femme",
+    "地方": "Endroit / Lieu",
+    "故事": "Histoire / Récit",
+    "大夫": "Médecin / Docteur",
+    "好处": "Avantage / Bénéfice",
+    "结果": "Résultat / Conséquence",
+    "弄": "Faire / Arranger",
+    "胖": "Gros / Dodu",
+    "角": "Angle / Coin / Jiao",
+    "张": "Ouvrir / Classificateur (objets plats)",
+    "比": "Comparer / Que",
+    "别": "Ne pas (impératif) / Autre",
+    "孙子": "Petit-fils",
+    "奶奶": "Grand-mère paternelle",
+    "脏": "Sale",
+    "弹": "Jouer d'un instrument / Pincer",
+    "趟": "Classificateur (trajets, allers-retours)",
+    "重点": "Point clé / Essentiel",
+    "提": "Porter à la main / Mentionner / Lever",
+    "吓": "Effrayer / Faire peur",
+    "盖": "Couvrir / Couvercle",
+    "正": "Droit / Exactement / En train de",
+    "背": "Dos / Porter sur le dos",
+    "大方": "Généreux / Naturel",
+    "地道": "Authentique / Pur",
+    "扁": "Plat / Aplati",
+    "番": "Fois / Tour",
+    "束": "Bouquet / Faisceau / Lier",
+    "翼": "Aile",
+    "哈": "Ha (rire / exclamation)",
+    "现代": "Moderne / Contemporain",
+    "和平": "Paix / Pacifique",
+    "时代": "Époque / Ère",
+    "友好": "Amical",
+    "狮子": "Lion",
+    "朝": "Vers / En direction de / Dynastie",
+    "黄": "Jaune",
+    "鱼": "Poisson",
+    "阴": "Nuageux / Ombre",
+    "雪": "Neige",
+    "米": "Riz / Mètre",
+    "克": "Gramme / Vaincre",
+    "项": "Élément / Rubrique / Nuque",
+    "正": "Droit / Juste / Exactement",
+    "过": "Particule d'expérience passée",
+    "台": "Plateforme / Classificateur (machines)",
+    "休": "Cesser / Se reposer",
+    "结实": "Solide / Robuste",
+    "地道": "Authentique / Pur",
+    "大意": "Négligent / Idée générale",
+    "人家": "Les autres / Autrui",
+    "公道": "Équitable / Juste",
+    "利害": "Avantages et inconvénients / Redoutable",
+    "本事": "Capacité / Talent",
+    "照应": "Prendre soin / Faire écho",
+    "跟前": "Devant / Auprès de",
+    "裁缝": "Tailleur / Couturier",
+    "把手": "Poignée",
+    "出息": "Avenir prometteur",
+    "分量": "Poids / Importance",
+    "口音": "Accent (prononciation)",
+    "工夫": "Temps / Moment / Effort",
+    "恶心": "Écœurant / Nausée",
+    "款式": "Modèle / Style",
+    "琢磨": "Réfléchir / Méditer",
+    "盛": "Prospère / Florissant",
+    "铺": "Étendre / Déployer",
+}
+
+
+def norm_numbered_pinyin(raw_py: str) -> str:
+    return (
+        raw_py.strip()
+        .lower()
+        .replace(" ", "")
+        .replace("u:", "v")
+        .replace("ü", "v")
+    )
+
+
+def norm_tonal_pinyin(py: str) -> str:
+    return re.sub(
+        r"[^a-zāáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜü]",
+        "",
+        py.lower().replace("v", "ü"),
+    )
+
+
 def clean_cfdict_sense(raw: str) -> str | None:
     s = raw.strip()
     if not s:
+        return None
+    if SURNAME_RE.search(s):
         return None
     # Supprimer les mentions de classificateurs ou renvois techniques
     if s.startswith(("CL:", "voir ", "Voir ", "variante ", "Variante ", "ancien ", "fig.")):
@@ -411,20 +754,22 @@ def clean_cfdict_sense(raw: str) -> str | None:
             return None
     s = re.sub(r"\bCL:[^;/)]+", "", s)
     s = re.sub(r"\[[^\]]+\]", "", s)
-    s = re.sub(r"\([^)]*\)", lambda m: "" if len(m.group(0)) > 28 else m.group(0), s)
+    s = re.sub(r"\([^)]*\)", lambda m: "" if len(m.group(0)) > 28 or SURNAME_RE.search(m.group(0)) else m.group(0), s)
     s = re.sub(r"\s{2,}", " ", s).strip(" ;,.-")
-    if not s or len(s) < 2:
-        return None
-    # Éviter les entrées purement de noms propres ou de phonétique
-    low = s.lower()
-    if low.startswith(("nom de famille", "prénom", "patronyme")):
+    if not s or len(s) < 2 or SURNAME_RE.search(s):
         return None
     return s
 
 
-def load_cfdict(path: Path) -> dict[str, str]:
-    by_simp: dict[str, list[str]] = defaultdict(list)
-    by_trad: dict[str, list[str]] = defaultdict(list)
+def load_cfdict(
+    path: Path,
+) -> tuple[dict[tuple[str, str], str], dict[tuple[str, str], str]]:
+    """
+    Charge CFDICT indexé par couple exact (hanzi, pinyin_numéroté_minuscule) et
+    par (hanzi, pinyin_sans_tons) pour repli contrôlé. Ignore les entrées noms de famille.
+    """
+    by_pair_raw: dict[tuple[str, str], list[str]] = defaultdict(list)
+    by_toneless_raw: dict[tuple[str, str], list[str]] = defaultdict(list)
 
     with path.open("r", encoding="utf-8", errors="ignore") as f:
         for line in f:
@@ -433,29 +778,152 @@ def load_cfdict(path: Path) -> dict[str, str]:
             m = CEDICT_LINE_RE.match(line)
             if not m:
                 continue
-            trad, simp, _pinyin, gloss_block = m.groups()
+            trad, simp, raw_py, gloss_block = m.groups()
+            first_alpha = next((ch for ch in raw_py if ch.isalpha()), "")
+            if first_alpha.isupper() and simp not in ALLOWED_PROPER_NOUNS and trad not in ALLOWED_PROPER_NOUNS:
+                continue
+
             senses = [clean_cfdict_sense(g) for g in gloss_block.split("/")]
             senses = [s for s in senses if s]
             if not senses:
                 continue
-            # Garder 1 à 2 sens concis
+
             concise = " / ".join(senses[:2])
             if len(concise) > 72:
                 concise = senses[0][:72].rstrip(" ,;-")
             concise = concise[0].upper() + concise[1:]
-            by_simp[simp].append(concise)
-            by_trad[trad].append(concise)
 
-    result: dict[str, str] = {}
-    for k, vals in by_simp.items():
-        # Préférer une définition ni trop courte ni trop longue
+            py_key = norm_numbered_pinyin(raw_py)
+            toneless_key = re.sub(r"[1-5]", "", py_key)
+            for hz in (simp, trad):
+                by_pair_raw[(hz, py_key)].append(concise)
+                by_toneless_raw[(hz, toneless_key)].append(concise)
+
+    by_pair: dict[tuple[str, str], str] = {}
+    for k, vals in by_pair_raw.items():
         vals_sorted = sorted(vals, key=lambda v: (len(v) < 3, len(v)))
-        result[k] = vals_sorted[0]
-    for k, vals in by_trad.items():
-        if k not in result:
-            vals_sorted = sorted(vals, key=lambda v: (len(v) < 3, len(v)))
-            result[k] = vals_sorted[0]
-    return result
+        by_pair[k] = vals_sorted[0]
+
+    by_toneless: dict[tuple[str, str], str] = {}
+    for k, vals in by_toneless_raw.items():
+        vals_sorted = sorted(vals, key=lambda v: (len(v) < 3, len(v)))
+        by_toneless[k] = vals_sorted[0]
+
+    return by_pair, by_toneless
+
+
+def select_best_form(
+    entry: dict[str, Any],
+    cfdict_by_pair: dict[tuple[str, str], str],
+) -> tuple[str, str, str]:
+    """
+    Sélectionne la lecture standard dans `entry['f']` en excluant noms de famille et variantes.
+    Retourne `(pinyin_tonal, pinyin_numéroté_normalisé, hanzi_traditionnel)`.
+    """
+    hanzi = entry["s"]
+    forms = entry.get("f", [])
+    if not forms:
+        syls = pypinyin_fn(hanzi, style=Style.TONE, heteronym=False)
+        pyp_tonal = "".join(x[0] for x in syls)
+        syls_num = pypinyin_fn(hanzi, style=Style.TONE3, neutral_tone_with_five=True, heteronym=False)
+        pyp_num = norm_numbered_pinyin("".join(x[0] for x in syls_num))
+        return pyp_tonal, pyp_num, ""
+
+    # 1. Override explicite si le mot figure dans PREFERRED_PINYIN
+    preferred = PREFERRED_PINYIN.get(hanzi)
+    if preferred:
+        for form in forms:
+            num_py = norm_numbered_pinyin(form.get("i", {}).get("n", ""))
+            tonal_py = form.get("i", {}).get("y", "").strip()
+            if num_py == preferred and not any(c.isupper() for c in tonal_py):
+                return ensure_tonal_word_pinyin(hanzi, tonal_py), num_py, form.get("t", "")
+
+    # 2. Filtrer les entrées noms de famille / majuscules (sauf vrais noms propres)
+    is_proper = hanzi in ALLOWED_PROPER_NOUNS
+    non_upper = [
+        f for f in forms
+        if not any(c.isupper() for c in f.get("i", {}).get("y", ""))
+        and "surname" not in " ".join(f.get("m", [])).lower()
+    ]
+    pool = forms if is_proper else (non_upper or forms)
+
+    non_variant = [
+        f for f in pool
+        if not any(
+            kw in " ".join(f.get("m", [])).lower()
+            for kw in ("variant of", "old variant", "archaic", "used in ", "see ")
+        )
+    ]
+    if non_variant:
+        pool = non_variant
+
+    if len(pool) == 1:
+        f0 = pool[0]
+        tonal = f0.get("i", {}).get("y", "").strip()
+        if not is_proper:
+            tonal = tonal.lower()
+        num_py = norm_numbered_pinyin(f0.get("i", {}).get("n", ""))
+        return ensure_tonal_word_pinyin(hanzi, tonal), num_py, f0.get("t", "")
+
+    # 3. Scorer les lectures candidates par concordance pypinyin + CFDICT + richesse sémantique
+    pyp_num = norm_numbered_pinyin(
+        "".join(x[0] for x in pypinyin_fn(hanzi, style=Style.TONE3, neutral_tone_with_five=True, heteronym=False))
+    )
+    pyp_toneless = re.sub(r"[1-5]", "", pyp_num)
+
+    best_form = pool[0]
+    best_score = -10_000
+    for f in pool:
+        tonal = f.get("i", {}).get("y", "").strip()
+        num_py = norm_numbered_pinyin(f.get("i", {}).get("n", ""))
+        m_low = " ".join(f.get("m", [])).lower()
+        score = 0
+        if num_py == pyp_num:
+            score += 100
+        elif re.sub(r"[1-5]", "", num_py) == pyp_toneless:
+            score += 35
+        if (hanzi, num_py) in cfdict_by_pair:
+            score += 40
+        if any(tag in m_low for tag in ("literary", "classical", "dialect", "onom.", "(tw)")):
+            score -= 30
+        if "(bound form)" in m_low:
+            score -= 10
+        score += min(5, len(f.get("m", [])))
+        if score > best_score:
+            best_score = score
+            best_form = f
+
+    tonal = best_form.get("i", {}).get("y", "").strip()
+    if not is_proper:
+        tonal = tonal.lower()
+    num_py = norm_numbered_pinyin(best_form.get("i", {}).get("n", ""))
+    return ensure_tonal_word_pinyin(hanzi, tonal), num_py, best_form.get("t", "")
+
+
+def tokens_to_pinyin_sentence(
+    tokens: list[str],
+    punct: str,
+    word_to_pinyin: dict[str, str],
+) -> str:
+    """Rend le pinyin d'une phrase token par token en utilisant la lecture retenue du catalogue."""
+    rendered: list[str] = []
+    for tok in tokens:
+        known = word_to_pinyin.get(tok, "").strip()
+        if known:
+            rendered.append(known)
+        else:
+            syls = pypinyin_fn(tok, style=Style.TONE, heteronym=False)
+            rendered.append("".join(item[0] for item in syls))
+    sentence = " ".join(rendered).strip()
+    if sentence:
+        sentence = sentence[0].upper() + sentence[1:]
+    if punct == "。":
+        sentence += "."
+    elif punct == "？":
+        sentence += "?"
+    elif punct == "！":
+        sentence += "!"
+    return sentence
 
 
 def load_tatoeba_pairs(
@@ -557,45 +1025,45 @@ def ensure_tonal_word_pinyin(hanzi: str, candidate_pinyin: str) -> str:
     return generated or p
 
 
-# Gabarits variés pour les mots sans phrase Tatoeba adaptée (jamais un modèle unique répétitif)
-VERB_TEMPLATES = [
-    ("我们正在{w}。", "Nous sommes en train de {fr}."),
-    ("请认真{w}。", "Veuillez {fr} sérieusement."),
-    ("他每天都{w}。", "Il faut {fr} chaque jour."),
-    ("我想学会{w}。", "J'aimerais apprendre à {fr}."),
-    ("大家一起{w}吧！", "Allons {fr} tous ensemble !"),
-    ("明天再{w}好吗？", "Et si on remettait à demain pour {fr} ?"),
-    ("她经常这样{w}。", "Elle a souvent l'habitude de {fr} ainsi."),
+# Gabarits explicites tokenisés : garantit `hanzi in tokens` sans collage jieba
+VERB_TEMPLATES: list[tuple[list[str], str, str]] = [
+    (["我们", "正在", "{w}"], "。", "Nous sommes en train de : {fr}."),
+    (["请", "认真", "{w}"], "。", "Veuillez sérieusement : {fr}."),
+    (["他", "每天", "都", "{w}"], "。", "Il pratique chaque jour : {fr}."),
+    (["我", "想", "学会", "{w}"], "。", "J'aimerais apprendre à : {fr}."),
+    (["大家", "一起", "{w}", "吧"], "！", "Allons {fr} tous ensemble !"),
+    (["明天", "再", "{w}", "好", "吗"], "？", "Et si on remettait à demain pour : {fr} ?"),
+    (["她", "经常", "这样", "{w}"], "。", "Elle a souvent l'habitude de : {fr}."),
 ]
 
-NOUN_TEMPLATES = [
-    ("这个{w}很重要。", "Ce terme « {fr} » est très important."),
-    ("我们讨论过{w}。", "Nous avons déjà abordé : {fr}."),
-    ("大家都很关注{w}。", "Tout le monde s'intéresse à : {fr}."),
-    ("请记住这个{w}。", "Veuillez retenir ce mot : {fr}."),
-    ("书上提到了{w}。", "Le livre mentionne : {fr}."),
-    ("这里需要新的{w}。", "Il faut un nouvel élément ici : {fr}."),
+NOUN_TEMPLATES: list[tuple[list[str], str, str]] = [
+    (["这个", "{w}", "很", "重要"], "。", "Ce terme « {fr} » est très important."),
+    (["我们", "讨论", "过", "{w}"], "。", "Nous avons déjà abordé : {fr}."),
+    (["大家", "都", "很", "了解", "{w}"], "。", "Tout le monde connaît bien : {fr}."),
+    (["请", "记住", "这个", "{w}"], "。", "Veuillez retenir ce mot : {fr}."),
+    (["书", "上", "提到", "了", "{w}"], "。", "Le livre mentionne : {fr}."),
+    (["这里", "需要", "新的", "{w}"], "。", "Il faut un nouvel élément ici : {fr}."),
 ]
 
-ADJ_TEMPLATES = [
-    ("今天的情况很{w}。", "La situation d'aujourd'hui est très : {fr}."),
-    ("这个地方非常{w}。", "Cet endroit est particulièrement : {fr}."),
-    ("他觉得这样更{w}。", "Il trouve cela encore plus : {fr}."),
-    ("大家的态度很{w}。", "L'attitude de chacun est très : {fr}."),
-    ("这里的环境真{w}！", "Le cadre ici est vraiment : {fr} !"),
+ADJ_TEMPLATES: list[tuple[list[str], str, str]] = [
+    (["今天", "的", "情况", "很", "{w}"], "。", "La situation d'aujourd'hui est très : {fr}."),
+    (["这个", "地方", "非常", "{w}"], "。", "Cet endroit est particulièrement : {fr}."),
+    (["他", "觉得", "这样", "更", "{w}"], "。", "Il trouve cela encore plus : {fr}."),
+    (["大家", "的", "态度", "很", "{w}"], "。", "L'attitude de chacun est très : {fr}."),
+    (["这里", "的", "环境", "真", "{w}"], "！", "Le cadre ici est vraiment : {fr} !"),
 ]
 
-ADV_TEMPLATES = [
-    ("大家{w}完成任务。", "Chacun accomplit la tâche ({fr})."),
-    ("她{w}说出了想法。", "Elle a exprimé son idée ({fr})."),
-    ("我们{w}继续前进。", "Continuons d'avancer ({fr})."),
-    ("请{w}准备一下。", "Veuillez vous préparer ({fr})."),
+ADV_TEMPLATES: list[tuple[list[str], str, str]] = [
+    (["大家", "{w}", "完成", "任务"], "。", "Chacun accomplit la tâche ({fr})."),
+    (["她", "{w}", "说出", "了", "想法"], "。", "Elle a exprimé son idée ({fr})."),
+    (["我们", "{w}", "继续", "前进"], "。", "Continuons d'avancer ({fr})."),
+    (["请", "{w}", "准备", "一下"], "。", "Veuillez vous préparer ({fr})."),
 ]
 
-IDIOM_TEMPLATES = [
-    ("大家做事要{w}。", "Dans nos actions, il faut appliquer : {fr}."),
-    ("老师常常强调{w}。", "Le professeur souligne souvent : {fr}."),
-    ("我们应该坚持{w}。", "Nous devons nous efforcer de : {fr}."),
+IDIOM_TEMPLATES: list[tuple[list[str], str, str]] = [
+    (["大家", "做事", "要", "{w}"], "。", "Dans nos actions, il faut appliquer : {fr}."),
+    (["老师", "常常", "强调", "{w}"], "。", "Le professeur souligne souvent : {fr}."),
+    (["我们", "应该", "坚持", "{w}"], "。", "Nous devons nous efforcer de : {fr}."),
 ]
 
 
@@ -626,29 +1094,56 @@ def generate_natural_example(
     else:
         pool = NOUN_TEMPLATES
 
-    # Essayer les variantes dans un ordre déterministe jusqu'à obtenir >= 3 tokens sans doublons
     digest = int(hashlib.md5(hanzi.encode("utf-8")).hexdigest()[:8], 16)
     start = (digest + seed_idx) % len(pool)
     for offset in range(len(pool)):
-        zh_tpl, fr_tpl = pool[(start + offset) % len(pool)]
-        zh = zh_tpl.format(w=hanzi)
-        body = zh.rstrip(TRAILING_PUNCT)
-        tokens = jieba.lcut(body)
-        if len(tokens) >= 3 and len(tokens) == len(set(tokens)) and "".join(tokens) == body:
+        tpl_tokens, punct, fr_tpl = pool[(start + offset) % len(pool)]
+        tokens = [hanzi if t == "{w}" else t for t in tpl_tokens]
+        if len(tokens) >= 3 and len(tokens) == len(set(tokens)) and hanzi in tokens:
+            zh = "".join(tokens) + punct
             fr = fr_tpl.format(fr=gloss)
             return zh, fr, tokens
 
-    # Repli ultime garanti sans doublons
-    zh = f"今天学习{hanzi}这个词。"
-    body = zh[:-1]
-    tokens = ["今天", "学习", hanzi, "这个", "词"]
-    if len(tokens) != len(set(tokens)) or hanzi in {"今天", "学习", "这个", "词"}:
-        zh = f"请多练习{hanzi}。"
-        tokens = ["请", "多", "练习", hanzi]
-    return zh, f"Exercez-vous aujourd'hui avec : {gloss}.", tokens
+    for tokens, punct in [
+        (["今天", "学习", hanzi, "这个", "词"], "。"),
+        (["请", "多", "练习", hanzi], "。"),
+        (["我们", "认识", hanzi], "。"),
+    ]:
+        if len(tokens) == len(set(tokens)) and hanzi in tokens:
+            return "".join(tokens) + punct, f"Exercez-vous aujourd'hui avec : {gloss}.", tokens
+    raise RuntimeError(f"Impossible de générer un exemple pour {hanzi}")
 
 
 OFFICIAL_TAG_RE = re.compile(r"^o([1-6])$")
+
+
+def resolve_word_metadata(
+    level: int,
+    entry: dict[str, Any],
+    cfdict_by_pair: dict[tuple[str, str], str],
+    cfdict_toneless: dict[tuple[str, str], str],
+    missing_french: list[tuple[int, str, str]],
+) -> tuple[str, str, str]:
+    """Résout (pinyin_tonal, norm_num_py, french) de manière 100 % exacte sans nom de famille."""
+    hanzi = entry["s"]
+    pinyin_val, norm_num_py, trad = select_best_form(entry, cfdict_by_pair)
+    toneless_py = re.sub(r"[1-5]", "", norm_num_py)
+
+    french = FRENCH_OVERRIDES.get(hanzi) or FRENCH_FALLBACK.get(hanzi)
+    if not french:
+        french = (
+            cfdict_by_pair.get((hanzi, norm_num_py))
+            or cfdict_by_pair.get((hanzi.rstrip("儿"), norm_num_py))
+            or (cfdict_by_pair.get((trad, norm_num_py)) if trad else None)
+            or cfdict_toneless.get((hanzi, toneless_py))
+            or (cfdict_toneless.get((trad, toneless_py)) if trad else None)
+        )
+    if not french:
+        forms = entry.get("f", [])
+        eng = ", ".join(forms[0].get("m", [])[:2]) if forms else ""
+        missing_french.append((level, hanzi, eng))
+        french = f"Terme HSK {level} ({hanzi})"
+    return pinyin_val, norm_num_py, french
 
 
 def build_word_dict(
@@ -657,43 +1152,40 @@ def build_word_dict(
     id_width: int,
     lesson_id: str,
     entry: dict[str, Any],
-    cfdict: dict[str, str],
-    existing_pinyin: dict[str, str],
-    existing_french: dict[str, str],
-    existing_examples: dict[str, dict[str, Any]],
+    resolved_meta: dict[str, tuple[str, str, str]],
+    word_to_pinyin: dict[str, str],
+    existing_words: dict[str, dict[str, Any]],
     token_sentences: dict[str, list[tuple[str, str, list[str]]]],
     word_level_map: dict[str, int],
-    missing_french: list[tuple[int, str, str]],
 ) -> tuple[dict[str, Any], bool]:
     hanzi = entry["s"]
-    forms = entry.get("f", [])
-    raw_pinyin = forms[0]["i"]["y"] if forms and "i" in forms[0] else ""
-    pinyin_val = existing_pinyin.get(hanzi) or ensure_tonal_word_pinyin(hanzi, raw_pinyin)
+    pinyin_val, _norm_num_py, french = resolved_meta[hanzi]
 
-    trad = forms[0].get("t", "") if forms else ""
-    french = (
-        existing_french.get(hanzi)
-        or cfdict.get(hanzi)
-        or cfdict.get(hanzi.rstrip("儿"))
-        or (cfdict.get(trad) if trad else None)
-        or FRENCH_FALLBACK.get(hanzi)
-    )
-    if not french:
-        eng = ", ".join(forms[0].get("m", [])[:2]) if forms else ""
-        missing_french.append((level, hanzi, eng))
-        french = f"Terme HSK {level} ({hanzi})"
-
-    reused_ex = existing_examples.get(hanzi)
-    if reused_ex is not None:
+    prev_word = existing_words.get(hanzi)
+    if prev_word is not None:
+        reused_ex = prev_word.get("example", {})
         toks = reused_ex.get("tokens", [])
-        body = reused_ex.get("hanzi", "").rstrip("。？！，、；：.,?!")
+        ex_hz = reused_ex.get("hanzi", "")
+        body = ex_hz.rstrip("。？！，、；：.,?!")
+        punct = ex_hz[len(body) :] or "。"
+        same_pinyin = norm_tonal_pinyin(prev_word.get("pinyin", "")) == norm_tonal_pinyin(pinyin_val)
+        bad_prev_french = bool(SURNAME_RE.search(prev_word.get("french", "")))
         if (
-            isinstance(toks, list)
+            same_pinyin
+            and not bad_prev_french
+            and isinstance(toks, list)
             and len(toks) >= 3
             and len(toks) == len(set(toks))
+            and hanzi in toks
             and "".join(toks) == body
             and "，" not in body
         ):
+            updated_ex = {
+                "hanzi": ex_hz,
+                "pinyin": tokens_to_pinyin_sentence(toks, punct, word_to_pinyin),
+                "french": reused_ex["french"],
+                "tokens": toks,
+            }
             w_id = f"hsk{level}_{word_num:0{id_width}d}"
             return (
                 {
@@ -702,7 +1194,7 @@ def build_word_dict(
                     "hanzi": hanzi,
                     "pinyin": pinyin_val,
                     "french": french,
-                    "example": reused_ex,
+                    "example": updated_ex,
                 },
                 False,
             )
@@ -735,7 +1227,9 @@ def build_word_dict(
             seed_idx=word_num,
         )
 
-    ex_pinyin = to_tonal_pinyin_sentence(ex_hanzi)
+    ex_body = ex_hanzi.rstrip("。？！")
+    ex_punct = ex_hanzi[len(ex_body) :] or "。"
+    ex_pinyin = tokens_to_pinyin_sentence(ex_tokens, ex_punct, word_to_pinyin)
     w_id = f"hsk{level}_{word_num:0{id_width}d}"
     return (
         {
@@ -763,24 +1257,19 @@ def main() -> int:
     links_path = download_cached(TATOEBA_LINKS_URL, "links.tar.bz2")
 
     hsk_entries: list[dict[str, Any]] = json.loads(hsk_path.read_text(encoding="utf-8"))
-    cfdict = load_cfdict(cfdict_path)
+    cfdict_by_pair, cfdict_toneless = load_cfdict(cfdict_path)
     tatoeba_pairs = load_tatoeba_pairs(cmn_path, fra_path, links_path)
 
-    # Capturer les traductions, pinyins, exemples et versions existants avant reconstruction
+    # Capturer uniquement les versions et anciennes entrées (pour réutiliser les phrases déjà conformes)
     existing_versions: dict[int, int] = {}
-    existing_pinyin: dict[str, str] = {}
-    existing_french: dict[str, str] = {}
-    existing_examples: dict[str, dict[str, Any]] = {}
+    existing_words: dict[str, dict[str, Any]] = {}
     for lv in range(1, 7):
         cat_path = CATALOG_DIR / f"hsk{lv}.json"
         if cat_path.exists():
             cat_data = json.loads(cat_path.read_text(encoding="utf-8"))
             existing_versions[lv] = int(cat_data.get("catalogVersion", 1))
             for w in cat_data.get("words", []):
-                hz = w["hanzi"]
-                existing_pinyin.setdefault(hz, w["pinyin"])
-                existing_french.setdefault(hz, w["french"])
-                existing_examples.setdefault(hz, w["example"])
+                existing_words.setdefault(w["hanzi"], w)
         else:
             existing_versions[lv] = 1
 
@@ -806,6 +1295,24 @@ def main() -> int:
         official_entry_by_hanzi[hanzi] = entry
         jieba.add_word(hanzi, freq=100_000)
 
+    # Passe 1 : résoudre les pinyins et traductions autoritaires pour les 4 991 mots officiels
+    missing_french: list[tuple[int, str, str]] = []
+    resolved_meta: dict[str, tuple[str, str, str]] = {}
+    word_to_pinyin: dict[str, str] = {
+        "小明": "Xiǎomíng",
+        "小王": "Xiǎowáng",
+        "小李": "Xiǎolǐ",
+        "上海": "Shànghǎi",
+        "法国": "Fǎguó",
+        "巴黎": "Bālí",
+    }
+    for lv in range(1, 7):
+        for entry in official_entries_by_level[lv]:
+            hz = entry["s"]
+            meta = resolve_word_metadata(lv, entry, cfdict_by_pair, cfdict_toneless, missing_french)
+            resolved_meta[hz] = meta
+            word_to_pinyin[hz] = meta[0]
+
     # Pré-indexer les phrases Tatoeba par token
     print("Indexation des phrases Tatoeba...")
     token_sentences: dict[str, list[tuple[str, str, list[str]]]] = defaultdict(list)
@@ -821,8 +1328,6 @@ def main() -> int:
         for tok in tokens:
             if tok in word_level_map and len(token_sentences[tok]) < 40:
                 token_sentences[tok].append((cmn_text, fra_text, tokens))
-
-    missing_french: list[tuple[int, str, str]] = []
 
     # --- HSK 1 : 6 unités curatées couvrant exactement les 150 mots officiels o1 ---
     curated_hsk1_words = [
@@ -865,13 +1370,11 @@ def main() -> int:
                     id_width=3,
                     lesson_id=l_id,
                     entry=official_entry_by_hanzi[hz],
-                    cfdict=cfdict,
-                    existing_pinyin=existing_pinyin,
-                    existing_french=existing_french,
-                    existing_examples=existing_examples,
+                    resolved_meta=resolved_meta,
+                    word_to_pinyin=word_to_pinyin,
+                    existing_words=existing_words,
                     token_sentences=token_sentences,
                     word_level_map=word_level_map,
-                    missing_french=missing_french,
                 )
                 if tat_used:
                     tatoeba_hits_hsk1 += 1
@@ -955,13 +1458,11 @@ def main() -> int:
                         id_width=id_width,
                         lesson_id=l_id,
                         entry=entry,
-                        cfdict=cfdict,
-                        existing_pinyin=existing_pinyin,
-                        existing_french=existing_french,
-                        existing_examples=existing_examples,
+                        resolved_meta=resolved_meta,
+                        word_to_pinyin=word_to_pinyin,
+                        existing_words=existing_words,
                         token_sentences=token_sentences,
                         word_level_map=word_level_map,
-                        missing_french=missing_french,
                     )
                     if tat_used:
                         tatoeba_hits += 1

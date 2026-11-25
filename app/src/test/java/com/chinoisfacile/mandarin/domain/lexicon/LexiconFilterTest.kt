@@ -30,7 +30,7 @@ class LexiconFilterTest {
     @Test
     fun `filter combines status filter and accent-insensitive search`() {
         assertEquals(
-            listOf("2", "3"),
+            listOf("3", "2"),
             LexiconFilter.filter(sampleWords, LexiconStatusFilter.DUE, "", today).map { it.word.id },
         )
         assertEquals(
@@ -44,6 +44,42 @@ class LexiconFilterTest {
         assertEquals(
             listOf("4"),
             LexiconFilter.filter(sampleWords, LexiconStatusFilter.NEW, "", today).map { it.word.id },
+        )
+    }
+
+    @Test
+    fun `buildSortedIndex and filter sort alphabetically by normalized pinyin regardless of tones`() {
+        val unsorted = listOf(
+            word(id = "da", hanzi = "大", pinyin = "dà", french = "Grand", mastery = MasteryLevel.LEARNING, nextDay = today),
+            word(id = "nv", hanzi = "女", pinyin = "nǚ", french = "Femme", mastery = MasteryLevel.MASTERED, nextDay = today + 5),
+            word(id = "chi", hanzi = "吃", pinyin = "chī", french = "Manger", mastery = MasteryLevel.LEARNING, nextDay = today),
+            word(id = "ma3", hanzi = "马", pinyin = "mǎ", french = "Cheval", mastery = MasteryLevel.NEW, nextDay = 0L),
+            word(id = "beijing", hanzi = "北京", pinyin = "Běi jīng", french = "Pékin", mastery = MasteryLevel.MASTERED, nextDay = today + 3),
+            word(id = "ai", hanzi = "哀", pinyin = "āi", french = "Tristesse", mastery = MasteryLevel.LEARNING, nextDay = today),
+            word(id = "nu3", hanzi = "努", pinyin = "nǔ", french = "S'efforcer", mastery = MasteryLevel.NEW, nextDay = 0L),
+            word(id = "ba", hanzi = "八", pinyin = "bā", french = "Huit", mastery = MasteryLevel.MASTERED, nextDay = today + 2),
+            word(id = "ma1", hanzi = "妈", pinyin = "mā", french = "Maman", mastery = MasteryLevel.NEW, nextDay = 0L),
+        )
+
+        val expectedAll = listOf("ai", "ba", "beijing", "chi", "da", "ma1", "ma3", "nu3", "nv")
+        val indexed = LexiconFilter.buildSortedIndex(unsorted)
+
+        assertEquals(expectedAll, indexed.map { it.item.word.id })
+        assertEquals(
+            expectedAll,
+            LexiconFilter.filterIndexed(indexed, LexiconStatusFilter.ALL, "", today).map { it.word.id },
+        )
+        assertEquals(
+            listOf("ai", "chi", "da"),
+            LexiconFilter.filterIndexed(indexed, LexiconStatusFilter.LEARNING, "", today).map { it.word.id },
+        )
+        assertEquals(
+            listOf("ba", "beijing", "nv"),
+            LexiconFilter.filterIndexed(indexed, LexiconStatusFilter.MASTERED, "", today).map { it.word.id },
+        )
+        assertEquals(
+            listOf("nu3", "nv"),
+            LexiconFilter.filterIndexed(indexed, LexiconStatusFilter.ALL, "nu", today).map { it.word.id },
         )
     }
 

@@ -50,6 +50,7 @@ HANDCRAFTED_EXAMPLES: dict[tuple[int, str], tuple[list[str], str, str]] = {
     (1, "猫"): (["她", "很", "喜欢", "这", "个", "猫"], "。", "Elle aime beaucoup ce chat."),
     (1, "狗"): (["那", "个", "狗", "很", "大"], "。", "Ce chien est très grand."),
     (1, "八"): (["我", "八", "点", "去", "学校"], "。", "Je vais à l'école à huit heures."),
+    (1, "二"): (["我", "有", "二", "十", "块", "钱"], "。", "J'ai vingt yuans."),
     (1, "零"): (["现在", "零", "点", "了"], "。", "Il est maintenant minuit."),
     (1, "小"): (["这", "个", "杯子", "很", "小"], "。", "Cette tasse est très petite."),
     (1, "里"): (["老师", "在", "学校", "里"], "。", "Le professeur est dans l'école."),
@@ -153,6 +154,21 @@ IDIOM_TEMPLATES: list[tuple[int, list[str], str, str]] = [
     (3, ["我们", "应该", "明白", "{w}"], "。", "Nous devons comprendre : {fr}."),
     (3, ["大家", "需要", "记得", "{w}"], "。", "Tout le monde doit retenir : {fr}."),
 ]
+
+
+SANDHI_OR_PARTICLE_WORDS = {
+    "一", "不", "的", "了", "吗", "呢", "吧", "着", "过", "得", "地", "啊",
+}
+
+
+def norm_tonal_pinyin(py: str) -> str:
+    return re.sub(r"[^a-zāáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜü]", "", py.lower().replace("v", "ü"))
+
+
+def is_example_pinyin_consistent(word_hanzi: str, word_py: str, ex_py: str) -> bool:
+    n_w = norm_tonal_pinyin(word_py)
+    n_ex = norm_tonal_pinyin(ex_py)
+    return n_w in n_ex
 
 
 def is_token_allowed(tok: str, level: int, allowed_vocab: set[str], word_to_level: dict[str, int]) -> bool:
@@ -432,8 +448,10 @@ def main() -> int:
             old_body = old_hanzi.rstrip(TRAILING_PUNCT)
             old_punct = old_hanzi[len(old_body) :] or "。"
 
-            already_valid = all(
-                is_token_allowed(t, level, allowed_vocab, word_to_level) for t in old_tokens
+            already_valid = (
+                hz in old_tokens
+                and all(is_token_allowed(t, level, allowed_vocab, word_to_level) for t in old_tokens)
+                and is_example_pinyin_consistent(hz, w["pinyin"], ex["pinyin"])
             )
             if already_valid:
                 stats["kept"] += 1

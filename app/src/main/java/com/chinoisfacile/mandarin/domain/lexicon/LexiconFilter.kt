@@ -23,6 +23,15 @@ data class LexiconStatusCounts(
 
 object LexiconFilter {
 
+    private val pinyinIndexedComparator: Comparator<IndexedVocabWord> = compareBy(
+        { it.compactPinyin.replace("'", "") },
+        { it.item.word.pinyin },
+        { it.item.word.hanzi },
+    )
+
+    fun buildSortedIndex(words: List<WordWithProgress>): List<IndexedVocabWord> =
+        VocabularySearchFilter.buildIndex(words).sortedWith(pinyinIndexedComparator)
+
     fun isDueToday(item: WordWithProgress, todayEpochDay: Long): Boolean =
         item.masteryLevel != MasteryLevel.NEW && item.nextReviewEpochDay <= todayEpochDay
 
@@ -76,14 +85,10 @@ object LexiconFilter {
         statusFilter: LexiconStatusFilter,
         searchQuery: String,
         todayEpochDay: Long,
-    ): List<WordWithProgress> {
-        val statusMatched = when (statusFilter) {
-            LexiconStatusFilter.ALL -> words
-            LexiconStatusFilter.DUE -> words.filter { isDueToday(it, todayEpochDay) }
-            LexiconStatusFilter.LEARNING -> words.filter { it.masteryLevel == MasteryLevel.LEARNING }
-            LexiconStatusFilter.MASTERED -> words.filter { it.masteryLevel == MasteryLevel.MASTERED }
-            LexiconStatusFilter.NEW -> words.filter { it.masteryLevel == MasteryLevel.NEW }
-        }
-        return VocabularySearchFilter.filter(statusMatched, searchQuery)
-    }
+    ): List<WordWithProgress> = filterIndexed(
+        indexed = buildSortedIndex(words),
+        statusFilter = statusFilter,
+        searchQuery = searchQuery,
+        todayEpochDay = todayEpochDay,
+    )
 }

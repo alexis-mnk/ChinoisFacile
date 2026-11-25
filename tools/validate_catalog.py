@@ -6,14 +6,38 @@ from __future__ import annotations
 import json
 import re
 import sys
+import unicodedata
 from pathlib import Path
 
 TONE_MARKS_RE = re.compile(r"[āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ]")
 TRAILING_PUNCT = "。？！，、；：.,?!"
-NEUTRAL_TONE_PARTICLES = {"ma", "ne", "de", "le", "ba", "zhe", "guo", "a", "ya", "wa", "na"}
+NEUTRAL_TONE_PARTICLES = {"ma", "ne", "de", "le", "ba", "zhe", "guo", "a", "ya", "wa", "na", "la", "o", "en"}
 DIGITS_RE = re.compile(r"^[零一二两三四五六七八九十百千万0-9]+$")
 ALLOWED_SIMPLE_PROPER_NOUNS = {"中国", "北京", "上海", "小明", "小王", "小李", "法国", "巴黎"}
+ALLOWED_PROPER_NOUNS = {
+    "中国", "北京", "汉语", "中文", "亚洲", "京剧", "长城", "长江",
+    "元旦", "华裔", "国庆节", "礼拜天", "除夕", "互联网", "元宵节", "华侨",
+    "国务院", "摄氏度", "欧洲", "正月", "端午节", "重阳节",
+}
+SURNAME_RE = re.compile(r"nom de famille|patronyme", re.IGNORECASE)
+SANDHI_OR_PARTICLE_WORDS = {
+    "一", "不", "的", "了", "吗", "呢", "吧", "着", "过", "得", "地", "啊",
+    "嘛", "哇", "啦", "哦", "嗯",
+}
 OFFICIAL_TAG_RE = re.compile(r"^o([1-6])$")
+
+
+def norm_pinyin(py: str) -> str:
+    return re.sub(
+        r"[^a-zāáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜü]",
+        "",
+        py.lower().replace("v", "ü"),
+    )
+
+
+def strip_tones(py: str) -> str:
+    nfd = unicodedata.normalize("NFD", py)
+    return "".join(ch for ch in nfd if unicodedata.category(ch) != "Mn")
 
 
 def load_official_hsk_map(repo_root: Path) -> tuple[dict[str, int], dict[int, set[str]]]:
@@ -174,9 +198,17 @@ def validate_catalog_files(catalog_dir: Path, repo_root: Path) -> int:
                     errors.append(
                         f"[{path.name}] {wid} ({hanzi}) n'a pas de marque de ton Unicode valide : {pinyin!r}"
                     )
+                if any(ch.isupper() for ch in pinyin) and hanzi not in ALLOWED_PROPER_NOUNS:
+                    errors.append(
+                        f"[{path.name}] {wid} ({hanzi}) a un pinyin avec majuscule (nom de famille ?) : {pinyin!r}"
+                    )
 
             if not french.strip():
                 errors.append(f"[{path.name}] {wid} a une traduction française vide")
+            elif SURNAME_RE.search(french) and hanzi != "姓":
+                errors.append(
+                    f"[{path.name}] {wid} ({hanzi}) a une traduction de nom de famille : {french!r}"
+                )
 
             ex_hanzi = example.get("hanzi", "")
             ex_pinyin = example.get("pinyin", "")
@@ -191,12 +223,29 @@ def validate_catalog_files(catalog_dir: Path, repo_root: Path) -> int:
             else:
                 if len(tokens) != len(set(tokens)):
                     errors.append(f"[{path.name}] {wid} a des tokens dupliqués : {tokens!r}")
+                if hanzi not in tokens:
+                    errors.append(
+                        f"[{path.name}] {wid} ({hanzi}) n'apparaît pas comme token dans example.tokens : {tokens!r}"
+                    )
                 cleaned_hanzi = ex_hanzi.rstrip(TRAILING_PUNCT)
                 joined = "".join(tokens)
                 if joined != cleaned_hanzi:
                     errors.append(
                         f"[{path.name}] {wid} tokens incohérents : {joined!r} != {cleaned_hanzi!r}"
                     )
+
+            if pinyin.strip() and ex_pinyin.strip():
+                n_wpy = norm_pinyin(pinyin)
+                n_expy = norm_pinyin(ex_pinyin)
+                if n_wpy and n_wpy not in n_expy:
+                    is_sandhi_ok = (
+                        hanzi in SANDHI_OR_PARTICLE_WORDS
+                        and strip_tones(n_wpy) in strip_tones(n_expy)
+                    )
+                    if not is_sandhi_ok:
+                        errors.append(
+                            f"[{path.name}] {wid} ({hanzi}) pinyin {pinyin!r} absent de example.pinyin {ex_pinyin!r}"
+                        )
 
         if isinstance(hsk_level, int) and 1 <= hsk_level <= 6:
             missing_official = sorted(official_by_level[hsk_level] - local_hanzi)
