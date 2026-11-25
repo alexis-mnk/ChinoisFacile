@@ -39,6 +39,15 @@ interface LessonDao {
     @Upsert
     suspend fun upsertUnits(units: List<UnitEntity>)
 
+    @Upsert
+    suspend fun upsertLessons(lessons: List<LessonEntity>)
+
+    @Query("DELETE FROM units WHERE hskLevel = :hskLevel")
+    suspend fun deleteUnitsByLevel(hskLevel: Int)
+
+    @Query("DELETE FROM lessons WHERE hskLevel = :hskLevel")
+    suspend fun deleteLessonsByLevel(hskLevel: Int)
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertLessonsIgnore(lessons: List<LessonEntity>)
 

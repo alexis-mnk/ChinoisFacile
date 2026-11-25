@@ -44,41 +44,122 @@ CJK_ONLY_RE = re.compile(r"^[\u4e00-\u9fff]+$")
 TRAILING_PUNCT = "。？！"
 NEUTRAL_TONE_PARTICLES = {"ma", "ne", "de", "le", "ba", "zhe", "guo", "a", "ya", "wa", "na"}
 
-LESSON_SIZES = {2: 5, 3: 5, 4: 8, 5: 10, 6: 10}
+LESSON_SIZES = {1: 5, 2: 5, 3: 5, 4: 8, 5: 10, 6: 10}
 
-# Unités thématiques progressives ajoutées après les 3 unités initiales conservées
+# Progression pédagogique curatée des 150 mots officiels HSK 1 (6 unités × 5 leçons × 5 mots)
+HSK1_CURATED_UNITS: list[tuple[str, str, list[tuple[str, list[str]]]]] = [
+    (
+        "Unité 1 — Salutations, Pronoms & Bases",
+        "Premiers échanges pour se présenter et poser des questions simples.",
+        [
+            ("Leçon 1 — Salutations et politesse", ["你", "好", "谢谢", "再见", "喂"]),
+            ("Leçon 2 — Excuses et courtoisie", ["请", "对不起", "没关系", "不客气", "高兴"]),
+            ("Leçon 3 — Pronoms et être", ["我", "他", "她", "我们", "是"]),
+            ("Leçon 4 — Négation et questions", ["不", "没", "吗", "呢", "谁"]),
+            ("Leçon 5 — Identité et démonstratifs", ["叫", "什么", "名字", "这", "那"]),
+        ],
+    ),
+    (
+        "Unité 2 — Famille, Personnes & Goûts",
+        "Parler de ses proches, des personnes et de l'alimentation.",
+        [
+            ("Leçon 6 — La famille", ["家", "爸爸", "妈妈", "儿子", "女儿"]),
+            ("Leçon 7 — Personnes et présentations", ["人", "朋友", "先生", "小姐", "同学"]),
+            ("Leçon 8 — Goûts et boissons", ["爱", "喜欢", "吃", "喝", "水"]),
+            ("Leçon 9 — Repas et fruits", ["茶", "米饭", "菜", "水果", "苹果"]),
+            ("Leçon 10 — Animaux et possessif", ["猫", "狗", "的", "很", "太"]),
+        ],
+    ),
+    (
+        "Unité 3 — Chiffres, Dates & Heures",
+        "Compter, donner l'heure, la date et son âge.",
+        [
+            ("Leçon 11 — Chiffres 0 à 4", ["零", "一", "二", "三", "四"]),
+            ("Leçon 12 — Chiffres 5 à 10", ["五", "六", "七", "八", "九"]),
+            ("Leçon 13 — Dizaines et âge", ["十", "几", "多少", "岁", "个"]),
+            ("Leçon 14 — Dates et calendrier", ["年", "月", "日", "星期", "今天"]),
+            ("Leçon 15 — Heures et moments", ["明天", "昨天", "现在", "点", "分钟"]),
+        ],
+    ),
+    (
+        "Unité 4 — Lieux, Repères & Maison",
+        "Se repérer dans l'espace et décrire son quotidien.",
+        [
+            ("Leçon 16 — Moments du jour", ["上午", "中午", "下午", "时候", "了"]),
+            ("Leçon 17 — Pays et lieux publics", ["中国", "北京", "饭馆", "商店", "医院"]),
+            ("Leçon 18 — Transports et déplacements", ["学校", "火车站", "飞机", "出租车", "电影"]),
+            ("Leçon 19 — Repères spatiaux", ["哪", "里", "前面", "后面", "上"]),
+            ("Leçon 20 — Meubles et objets", ["下", "桌子", "椅子", "杯子", "东西"]),
+        ],
+    ),
+    (
+        "Unité 5 — Actions, Achats & Météo",
+        "Exprimer ses actions quotidiennes, faire des achats et parler du temps.",
+        [
+            ("Leçon 21 — Déplacements et métiers", ["去", "来", "回", "住", "坐"]),
+            ("Leçon 22 — Travail et études", ["工作", "学习", "老师", "学生", "医生"]),
+            ("Leçon 23 — Perception et lecture", ["看", "看见", "听", "说话", "读"]),
+            ("Leçon 24 — Écrire, dormir et appeler", ["写", "字", "书", "睡觉", "打电话"]),
+            ("Leçon 25 — Achats, argent et météo", ["买", "钱", "块", "天气", "下雨"]),
+        ],
+    ),
+    (
+        "Unité 6 — Qualités, Modaux & Connecteurs",
+        "Nuancer son propos, utiliser les verbes modaux et relier ses idées.",
+        [
+            ("Leçon 26 — Objets et classificateurs", ["衣服", "电脑", "电视", "本", "些"]),
+            ("Leçon 27 — Adjectifs courants", ["大", "小", "多", "少", "漂亮"]),
+            ("Leçon 28 — Sensations et verbes d'action", ["冷", "热", "做", "开", "有"]),
+            ("Leçon 29 — Capacité et connaissance", ["在", "会", "能", "想", "认识"]),
+            ("Leçon 30 — Langue et connecteurs", ["汉语", "和", "都", "怎么", "怎么样"]),
+        ],
+    ),
+]
+
 THEMATIC_UNITS = {
     2: [
-        ("Actions & Vie quotidienne", "Verbes courants et situations de tous les jours."),
-        ("Objets, Lieux & Temps", "Vocabulaire concret, repères et durée."),
-        ("Qualités & Relations", "Adjectifs, sentiments et nuances simples."),
-        ("Communication & Pratique", "Échanges pratiques, quantités et connecteurs."),
+        ("Premiers échanges", "Connecteurs simples, questions et bases du quotidien."),
+        ("Temps & Repères", "Horaires, jours, durées et orientation."),
+        ("Actions du quotidien", "Verbes courants, déplacements et loisirs."),
+        ("Personnes, Objets & Vie pratique", "Famille, achats, vêtements et nourriture."),
+        ("Qualités & Nuances", "Adjectifs essentiels, états et sentiments."),
+        ("Structures & Expressions", "Particules grammaticales et comparaisons."),
     ],
     3: [
-        ("Actions & Projets", "Verbes d'action, décisions et démarches."),
-        ("Vie sociale & Lieux", "Environnement, lieux publics et relations."),
-        ("Descriptions & Nuances", "Adjectifs variés, états et qualités."),
-        ("Temps, Culture & Connecteurs", "Articulations logiques et expressions usuelles."),
+        ("Raisonnement & Échanges", "Opinions, questions complexes et communication."),
+        ("Actions & Démarches", "Décisions, habitudes et vie pratique."),
+        ("Lieux & Environnement", "Ville, nature, saisons et voyages."),
+        ("Relations & Sentiments", "Comportements, émotions et rapports humains."),
+        ("Descriptions & Précisions", "Adjectifs variés, degrés et qualités."),
+        ("Connecteurs & Grammaire", "Articulations logiques et tournures clés."),
     ],
     4: [
-        ("Monde professionnel & Études", "Carrière, organisation et compétences."),
-        ("Société & Communication", "Relations humaines, règles et échanges."),
-        ("Culture, Sciences & Voyages", "Découvertes, technologies et déplacements."),
-        ("Nuances & Argumentation", "Connecteurs, attitudes et expression précise."),
+        ("Études & Carrière", "Compétences, projets et vie professionnelle."),
+        ("Société & Relations", "Échanges sociaux, règles et entraide."),
+        ("Culture, Médias & Savoirs", "Éducation, informations et lecture."),
+        ("Voyages, Nature & Quotidien", "Déplacements, santé et environnement."),
+        ("Attitudes & Qualités", "Caractère, émotions et jugements."),
+        ("Argumentation & Connecteurs", "Nuances logiques et expression structurée."),
     ],
     5: [
         ("Analyse & Pensée", "Raisonnement, faits et argumentation structurée."),
-        ("Économie, Travail & Société", "Enjeux contemporains et vie collective."),
-        ("Sciences, Médias & Culture", "Arts, savoirs et environnement."),
-        ("Comportements & Caractère", "Qualités humaines, émotions et réactions."),
-        ("Style soutenu & Expressions", "Tournures idiomatiques et vocabulaire avancé."),
+        ("Travail, Économie & Gestion", "Organisation, ressources et monde professionnel."),
+        ("Société & Vie collective", "Institutions, règles et phénomènes sociaux."),
+        ("Sciences, Médias & Techniques", "Recherche, technologies et information."),
+        ("Culture, Arts & Patrimoine", "Traditions, littérature et création."),
+        ("Nature, Santé & Cadre de vie", "Environnement, énergie et bien-être."),
+        ("Psychologie & Comportements", "Traits de caractère, émotions et attitudes."),
+        ("Style soutenu & Idiomes", "Tournures littéraires et chengyu courants."),
     ],
     6: [
         ("Discours & Méthodologie", "Verbes analytiques et vocabulaire académique."),
-        ("Institutions & Société", "Droit, gouvernance, économie et dynamique sociale."),
-        ("Culture, Histoire & Savoirs", "Patrimoine, philosophie et arts."),
-        ("Psychologie & Éthique", "Attitudes morales, introspection et caractère."),
-        ("Nuances littéraires & Chengyu", "Adjectifs soutenus et expressions quadrisyllabiques."),
+        ("Droit, Gouvernance & Institutions", "Politique, législation et administration."),
+        ("Économie, Stratégie & Développement", "Marchés, production et innovation."),
+        ("Société, Éthique & Relations", "Normes sociales, devoirs et valeurs morales."),
+        ("Culture, Histoire & Philosophie", "Patrimoine, pensée et arts classiques."),
+        ("Sciences, Nature & Technologie", "Phénomènes physiques, biologie et technique."),
+        ("Psychologie & Introspection", "Nuances affectives, caractère et jugement."),
+        ("Expressions soutenues & Chengyu", "Adjectifs littéraires et locutions quadrisyllabiques."),
     ],
 }
 
@@ -294,6 +375,14 @@ FRENCH_FALLBACK: dict[str, str] = {
     "举世闻名": "Célèbre dans le monde entier",
     "继往开来": "Poursuivre l'œuvre passée vers l'avenir",
     "锦绣前程": "Avenir radieux",
+    "东西": "Chose / Objet",
+    "饭馆": "Restaurant",
+    "里": "Dedans / À l'intérieur",
+    "零": "Zéro",
+    "没": "Ne pas (avoir / passé)",
+    "喂": "Allô / Hé",
+    "些": "Quelques / Un peu",
+    "字": "Caractère / Mot écrit",
 }
 
 
@@ -559,6 +648,113 @@ def generate_natural_example(
     return zh, f"Exercez-vous aujourd'hui avec : {gloss}.", tokens
 
 
+OFFICIAL_TAG_RE = re.compile(r"^o([1-6])$")
+
+
+def build_word_dict(
+    level: int,
+    word_num: int,
+    id_width: int,
+    lesson_id: str,
+    entry: dict[str, Any],
+    cfdict: dict[str, str],
+    existing_pinyin: dict[str, str],
+    existing_french: dict[str, str],
+    existing_examples: dict[str, dict[str, Any]],
+    token_sentences: dict[str, list[tuple[str, str, list[str]]]],
+    word_level_map: dict[str, int],
+    missing_french: list[tuple[int, str, str]],
+) -> tuple[dict[str, Any], bool]:
+    hanzi = entry["s"]
+    forms = entry.get("f", [])
+    raw_pinyin = forms[0]["i"]["y"] if forms and "i" in forms[0] else ""
+    pinyin_val = existing_pinyin.get(hanzi) or ensure_tonal_word_pinyin(hanzi, raw_pinyin)
+
+    trad = forms[0].get("t", "") if forms else ""
+    french = (
+        existing_french.get(hanzi)
+        or cfdict.get(hanzi)
+        or cfdict.get(hanzi.rstrip("儿"))
+        or (cfdict.get(trad) if trad else None)
+        or FRENCH_FALLBACK.get(hanzi)
+    )
+    if not french:
+        eng = ", ".join(forms[0].get("m", [])[:2]) if forms else ""
+        missing_french.append((level, hanzi, eng))
+        french = f"Terme HSK {level} ({hanzi})"
+
+    reused_ex = existing_examples.get(hanzi)
+    if reused_ex is not None:
+        toks = reused_ex.get("tokens", [])
+        body = reused_ex.get("hanzi", "").rstrip("。？！，、；：.,?!")
+        if (
+            isinstance(toks, list)
+            and len(toks) >= 3
+            and len(toks) == len(set(toks))
+            and "".join(toks) == body
+            and "，" not in body
+        ):
+            w_id = f"hsk{level}_{word_num:0{id_width}d}"
+            return (
+                {
+                    "id": w_id,
+                    "lessonId": lesson_id,
+                    "hanzi": hanzi,
+                    "pinyin": pinyin_val,
+                    "french": french,
+                    "example": reused_ex,
+                },
+                False,
+            )
+
+    best_tatoeba = None
+    best_score = -10_000.0
+    for cmn_text, fra_text, tokens in token_sentences.get(hanzi, []):
+        known_count = sum(1 for t in tokens if word_level_map.get(t, 99) <= level)
+        max_tok_lv = max(word_level_map.get(t, 7) for t in tokens)
+        ratio = known_count / len(tokens)
+        score = (
+            ratio * 100.0
+            - max(0, max_tok_lv - level) * 35.0
+            - abs(len(cmn_text) - 10) * 1.5
+            - abs(len(tokens) - 5) * 2.0
+        )
+        if score > best_score:
+            best_score = score
+            best_tatoeba = (cmn_text, fra_text, tokens)
+
+    tatoeba_used = False
+    if best_tatoeba is not None and best_score >= 30.0:
+        ex_hanzi, ex_french, ex_tokens = best_tatoeba
+        tatoeba_used = True
+    else:
+        ex_hanzi, ex_french, ex_tokens = generate_natural_example(
+            hanzi=hanzi,
+            french=french,
+            pos_tags=entry.get("p", []),
+            seed_idx=word_num,
+        )
+
+    ex_pinyin = to_tonal_pinyin_sentence(ex_hanzi)
+    w_id = f"hsk{level}_{word_num:0{id_width}d}"
+    return (
+        {
+            "id": w_id,
+            "lessonId": lesson_id,
+            "hanzi": hanzi,
+            "pinyin": pinyin_val,
+            "french": french,
+            "example": {
+                "hanzi": ex_hanzi,
+                "pinyin": ex_pinyin,
+                "french": ex_french,
+                "tokens": ex_tokens,
+            },
+        },
+        tatoeba_used,
+    )
+
+
 def main() -> int:
     hsk_path = download_cached(HSK_URL, "complete.min.json")
     cfdict_path = download_cached(CFDICT_URL, "cfdict.u8")
@@ -570,27 +766,45 @@ def main() -> int:
     cfdict = load_cfdict(cfdict_path)
     tatoeba_pairs = load_tatoeba_pairs(cmn_path, fra_path, links_path)
 
-    # Enregistrer tous les mots HSK 1-6 dans jieba pour préserver les tokens cibles
-    word_level_map: dict[str, int] = {}
+    # Capturer les traductions, pinyins, exemples et versions existants avant reconstruction
+    existing_versions: dict[int, int] = {}
+    existing_pinyin: dict[str, str] = {}
+    existing_french: dict[str, str] = {}
+    existing_examples: dict[str, dict[str, Any]] = {}
     for lv in range(1, 7):
-        tag = f"o{lv}"
-        for entry in hsk_entries:
-            if tag in entry.get("l", []):
-                w = entry["s"]
-                if w not in word_level_map:
-                    word_level_map[w] = lv
-                jieba.add_word(w, freq=100_000)
+        cat_path = CATALOG_DIR / f"hsk{lv}.json"
+        if cat_path.exists():
+            cat_data = json.loads(cat_path.read_text(encoding="utf-8"))
+            existing_versions[lv] = int(cat_data.get("catalogVersion", 1))
+            for w in cat_data.get("words", []):
+                hz = w["hanzi"]
+                existing_pinyin.setdefault(hz, w["pinyin"])
+                existing_french.setdefault(hz, w["french"])
+                existing_examples.setdefault(hz, w["example"])
+        else:
+            existing_versions[lv] = 1
 
-    # Charger HSK 1 (intact) + les 30 mots conservés de HSK 2-6 pour garantir zéro doublon inter-niveaux
-    hsk1_data = json.loads((CATALOG_DIR / "hsk1.json").read_text(encoding="utf-8"))
-    global_seen_hanzi: set[str] = {w["hanzi"] for w in hsk1_data["words"]}
-    for lv in range(2, 7):
-        lv_data = json.loads((CATALOG_DIR / f"hsk{lv}.json").read_text(encoding="utf-8"))
-        for w in lv_data["words"][:30]:
-            global_seen_hanzi.add(w["hanzi"])
-    for w in global_seen_hanzi:
-        word_level_map.setdefault(w, 1)
-        jieba.add_word(w, freq=100_000)
+    # Extraire la liste officielle HSK 2.0 100 % exacte (o1..o6) sans doublon inter-niveaux
+    word_level_map: dict[str, int] = {}
+    official_entries_by_level: dict[int, list[dict[str, Any]]] = {lv: [] for lv in range(1, 7)}
+    official_entry_by_hanzi: dict[str, dict[str, Any]] = {}
+
+    for entry in hsk_entries:
+        levels = []
+        for tag in entry.get("l", []):
+            match = OFFICIAL_TAG_RE.match(tag)
+            if match:
+                levels.append(int(match.group(1)))
+        if not levels:
+            continue
+        hanzi = entry["s"]
+        if hanzi in word_level_map:
+            continue
+        lv = min(levels)
+        word_level_map[hanzi] = lv
+        official_entries_by_level[lv].append(entry)
+        official_entry_by_hanzi[hanzi] = entry
+        jieba.add_word(hanzi, freq=100_000)
 
     # Pré-indexer les phrases Tatoeba par token
     print("Indexation des phrases Tatoeba...")
@@ -608,35 +822,87 @@ def main() -> int:
             if tok in word_level_map and len(token_sentences[tok]) < 40:
                 token_sentences[tok].append((cmn_text, fra_text, tokens))
 
-    # Regrouper les entrées o2..o6
-    entries_by_level: dict[int, list[dict[str, Any]]] = {lv: [] for lv in range(2, 7)}
-    for entry in hsk_entries:
-        for lv in range(2, 7):
-            if f"o{lv}" in entry.get("l", []):
-                entries_by_level[lv].append(entry)
-
     missing_french: list[tuple[int, str, str]] = []
 
+    # --- HSK 1 : 6 unités curatées couvrant exactement les 150 mots officiels o1 ---
+    curated_hsk1_words = [
+        hanzi
+        for _u_title, _u_desc, lessons in HSK1_CURATED_UNITS
+        for _l_title, words_list in lessons
+        for hanzi in words_list
+    ]
+    official_o1_set = {e["s"] for e in official_entries_by_level[1]}
+    assert len(curated_hsk1_words) == len(official_o1_set), (
+        f"HSK 1 curated count {len(curated_hsk1_words)} != official {len(official_o1_set)}"
+    )
+    assert len(set(curated_hsk1_words)) == len(official_o1_set), "Doublon dans HSK1_CURATED_UNITS"
+    assert set(curated_hsk1_words) == official_o1_set, (
+        f"Écart HSK 1 curated vs officiel : "
+        f"manquants={official_o1_set - set(curated_hsk1_words)}, "
+        f"en trop={set(curated_hsk1_words) - official_o1_set}"
+    )
+
+    hsk1_units: list[dict[str, Any]] = []
+    hsk1_words: list[dict[str, Any]] = []
+    l_order = 1
+    w_num = 1
+    tatoeba_hits_hsk1 = 0
+    for u_idx, (u_title, u_desc, lesson_specs) in enumerate(HSK1_CURATED_UNITS, start=1):
+        u_id = f"hsk1_u{u_idx}"
+        u_lessons: list[dict[str, Any]] = []
+        for l_title, lesson_hanzi_list in lesson_specs:
+            l_id = f"hsk1_u{u_idx}_l{l_order}"
+            u_lessons.append({
+                "id": l_id,
+                "orderIndex": l_order,
+                "title": l_title,
+            })
+            l_order += 1
+            for hz in lesson_hanzi_list:
+                word_dict, tat_used = build_word_dict(
+                    level=1,
+                    word_num=w_num,
+                    id_width=3,
+                    lesson_id=l_id,
+                    entry=official_entry_by_hanzi[hz],
+                    cfdict=cfdict,
+                    existing_pinyin=existing_pinyin,
+                    existing_french=existing_french,
+                    existing_examples=existing_examples,
+                    token_sentences=token_sentences,
+                    word_level_map=word_level_map,
+                    missing_french=missing_french,
+                )
+                if tat_used:
+                    tatoeba_hits_hsk1 += 1
+                hsk1_words.append(word_dict)
+                w_num += 1
+        hsk1_units.append({
+            "id": u_id,
+            "orderIndex": u_idx,
+            "title": u_title,
+            "description": u_desc,
+            "lessons": u_lessons,
+        })
+
+    hsk1_catalog = {
+        "hskLevel": 1,
+        "catalogVersion": existing_versions[1] + 1,
+        "units": hsk1_units,
+        "words": hsk1_words,
+    }
+    (CATALOG_DIR / "hsk1.json").write_text(
+        json.dumps(hsk1_catalog, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    print(
+        f"HSK 1 (v{hsk1_catalog['catalogVersion']}) : "
+        f"{len(hsk1_units)} unités, {l_order - 1} leçons, {len(hsk1_words)} mots"
+    )
+
+    # --- HSK 2 à HSK 6 : 100 % officiel o2..o6 avec tri incrémental et IDs propres ---
     for level in range(2, 7):
-        existing_path = CATALOG_DIR / f"hsk{level}.json"
-        existing = json.loads(existing_path.read_text(encoding="utf-8"))
-
-        preserved_units = existing["units"][:3]
-        preserved_words = existing["words"][:30]
-        preserved_hanzi = {w["hanzi"] for w in preserved_words}
-
-        # Déduplication stricte avec tous les mots déjà conservés ou générés
-        level_seen = set(global_seen_hanzi)
-
-        candidates: list[dict[str, Any]] = []
-        for entry in entries_by_level[level]:
-            hanzi = entry["s"]
-            if hanzi in level_seen:
-                continue
-            level_seen.add(hanzi)
-            candidates.append(entry)
-
-        # Tri incrémental : mots courts & fréquents en premier
+        candidates = list(official_entries_by_level[level])
         candidates.sort(
             key=lambda e: (
                 0 if len(e["s"]) <= 2 else (1 if len(e["s"]) == 3 else 2),
@@ -646,7 +912,6 @@ def main() -> int:
             )
         )
 
-        # Construire les nouvelles unités et leçons à la suite des 3 unités / 6 leçons existantes
         lesson_size = LESSON_SIZES[level]
         chunks: list[list[dict[str, Any]]] = [
             candidates[i : i + lesson_size] for i in range(0, len(candidates), lesson_size)
@@ -656,131 +921,78 @@ def main() -> int:
             chunks.pop()
 
         thematic_specs = THEMATIC_UNITS[level]
-        num_new_units = len(thematic_specs)
-        lessons_per_unit = max(1, (len(chunks) + num_new_units - 1) // num_new_units)
+        num_units = len(thematic_specs)
+        lessons_per_unit = max(1, (len(chunks) + num_units - 1) // num_units)
+        id_width = 3 if level <= 4 else 4
 
-        new_units: list[dict[str, Any]] = []
-        new_words: list[dict[str, Any]] = []
-
-        next_unit_order = len(preserved_units) + 1
-        next_lesson_order = sum(len(u["lessons"]) for u in preserved_units) + 1
-        next_word_num = len(preserved_words) + 1
-
+        all_units: list[dict[str, Any]] = []
+        all_words: list[dict[str, Any]] = []
+        next_lesson_order = 1
+        next_word_num = 1
         tatoeba_hits = 0
         chunk_idx = 0
-        for u_idx, (u_title_short, u_desc) in enumerate(thematic_specs):
-            u_order = next_unit_order + u_idx
-            u_id = f"hsk{level}_u{u_order}"
+
+        for u_idx, (u_title_short, u_desc) in enumerate(thematic_specs, start=1):
+            u_id = f"hsk{level}_u{u_idx}"
             u_lessons: list[dict[str, Any]] = []
 
-            end_chunk = len(chunks) if u_idx == num_new_units - 1 else min(len(chunks), chunk_idx + lessons_per_unit)
+            end_chunk = len(chunks) if u_idx == num_units else min(len(chunks), chunk_idx + lessons_per_unit)
             while chunk_idx < end_chunk:
                 chunk = chunks[chunk_idx]
                 l_order = next_lesson_order
                 next_lesson_order += 1
-                l_id = f"hsk{level}_u{u_order}_l{l_order}"
+                l_id = f"hsk{level}_u{u_idx}_l{l_order}"
                 u_lessons.append({
                     "id": l_id,
                     "orderIndex": l_order,
                     "title": f"Leçon {l_order} — {u_title_short}",
                 })
 
-                for w_idx, entry in enumerate(chunk):
-                    hanzi = entry["s"]
-                    forms = entry.get("f", [])
-                    raw_pinyin = forms[0]["i"]["y"] if forms and "i" in forms[0] else ""
-                    pinyin_val = ensure_tonal_word_pinyin(hanzi, raw_pinyin)
-
-                    # Traduction française : CFDICT -> sans 儿 -> forme traditionnelle -> table locale
-                    trad = forms[0].get("t", "") if forms else ""
-                    french = (
-                        cfdict.get(hanzi)
-                        or cfdict.get(hanzi.rstrip("儿"))
-                        or (cfdict.get(trad) if trad else None)
-                        or FRENCH_FALLBACK.get(hanzi)
+                for entry in chunk:
+                    word_dict, tat_used = build_word_dict(
+                        level=level,
+                        word_num=next_word_num,
+                        id_width=id_width,
+                        lesson_id=l_id,
+                        entry=entry,
+                        cfdict=cfdict,
+                        existing_pinyin=existing_pinyin,
+                        existing_french=existing_french,
+                        existing_examples=existing_examples,
+                        token_sentences=token_sentences,
+                        word_level_map=word_level_map,
+                        missing_french=missing_french,
                     )
-                    if not french:
-                        # Dernier recours : recherche dans complete-hsk gloss anglais uniquement pour loguer
-                        eng = ", ".join(forms[0].get("m", [])[:2]) if forms else ""
-                        missing_french.append((level, hanzi, eng))
-                        french = f"Terme HSK {level} ({hanzi})"
-
-                    # Choisir la meilleure phrase Tatoeba adaptée au niveau <= level
-                    best_tatoeba = None
-                    best_score = -10_000.0
-                    for cmn_text, fra_text, tokens in token_sentences.get(hanzi, []):
-                        known_count = sum(1 for t in tokens if word_level_map.get(t, 99) <= level)
-                        max_tok_lv = max(word_level_map.get(t, 7) for t in tokens)
-                        ratio = known_count / len(tokens)
-                        score = (
-                            ratio * 100.0
-                            - max(0, max_tok_lv - level) * 35.0
-                            - abs(len(cmn_text) - 10) * 1.5
-                            - abs(len(tokens) - 5) * 2.0
-                        )
-                        if score > best_score:
-                            best_score = score
-                            best_tatoeba = (cmn_text, fra_text, tokens)
-
-                    if best_tatoeba is not None and best_score >= 30.0:
-                        ex_hanzi, ex_french, ex_tokens = best_tatoeba
+                    if tat_used:
                         tatoeba_hits += 1
-                    else:
-                        ex_hanzi, ex_french, ex_tokens = generate_natural_example(
-                            hanzi=hanzi,
-                            french=french,
-                            pos_tags=entry.get("p", []),
-                            seed_idx=next_word_num + w_idx,
-                        )
-
-                    ex_pinyin = to_tonal_pinyin_sentence(ex_hanzi)
-                    w_id = f"hsk{level}_{next_word_num:03d}"
+                    all_words.append(word_dict)
                     next_word_num += 1
-
-                    new_words.append({
-                        "id": w_id,
-                        "lessonId": l_id,
-                        "hanzi": hanzi,
-                        "pinyin": pinyin_val,
-                        "french": french,
-                        "example": {
-                            "hanzi": ex_hanzi,
-                            "pinyin": ex_pinyin,
-                            "french": ex_french,
-                            "tokens": ex_tokens,
-                        },
-                    })
 
                 chunk_idx += 1
 
             if u_lessons:
-                new_units.append({
+                all_units.append({
                     "id": u_id,
-                    "orderIndex": u_order,
-                    "title": f"Unité {u_order} — {u_title_short}",
+                    "orderIndex": u_idx,
+                    "title": f"Unité {u_idx} — {u_title_short}",
                     "description": u_desc,
                     "lessons": u_lessons,
                 })
 
-        all_units = preserved_units + new_units
-        all_words = preserved_words + new_words
-        global_seen_hanzi.update(w["hanzi"] for w in all_words)
-
         updated_catalog = {
             "hskLevel": level,
-            "catalogVersion": existing["catalogVersion"] + 1,
+            "catalogVersion": existing_versions[level] + 1,
             "units": all_units,
             "words": all_words,
         }
-        existing_path.write_text(
+        (CATALOG_DIR / f"hsk{level}.json").write_text(
             json.dumps(updated_catalog, ensure_ascii=False, indent=2) + "\n",
             encoding="utf-8",
         )
         total_lessons = sum(len(u["lessons"]) for u in all_units)
         print(
             f"HSK {level} (v{updated_catalog['catalogVersion']}) : "
-            f"{len(all_units)} unités, {total_lessons} leçons, {len(all_words)} mots "
-            f"(Tatoeba: {tatoeba_hits}/{len(new_words)})"
+            f"{len(all_units)} unités, {total_lessons} leçons, {len(all_words)} mots"
         )
 
     if missing_french:
@@ -789,7 +1001,6 @@ def main() -> int:
             print(f"  HSK {lv}: {hz} -> {eng}")
         if len(missing_french) > 40:
             print(f"  ... et {len(missing_french) - 40} autres")
-        # Sauvegarder la liste dans .cache pour inspection facile
         (CACHE_DIR / "missing_french.json").write_text(
             json.dumps(missing_french, ensure_ascii=False, indent=2),
             encoding="utf-8",

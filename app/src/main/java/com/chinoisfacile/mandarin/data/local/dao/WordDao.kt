@@ -40,4 +40,7 @@ interface WordDao {
 
     @Upsert
     suspend fun upsertWords(words: List<WordEntity>)
+
+    @Query("DELETE FROM words WHERE hskLevel = :hskLevel")
+    suspend fun deleteWordsByLevel(hskLevel: Int)
 }

@@ -117,4 +117,56 @@ class ExerciseGeneratorTest {
             }
         }
     }
+
+    @Test
+    fun `distractors never include words from a higher hsk level`() {
+        val higherLevelWords = listOf(
+            VocabWord(
+                id = "h2_001",
+                lessonId = "hsk2_u1_l1",
+                hskLevel = 2,
+                hanzi = "但是",
+                pinyin = "dànshì",
+                french = "Mais",
+                exampleHanzi = "今天下雨但是我很高兴。",
+                examplePinyin = "Jīntiān xiàyǔ dànshì wǒ hěn gāoxìng.",
+                exampleFrench = "Il pleut aujourd'hui, mais je suis très content.",
+                exampleTokens = listOf("今天", "下雨", "但是", "我", "很", "高兴"),
+            ),
+            VocabWord(
+                id = "h4_001",
+                lessonId = "hsk4_u1_l1",
+                hskLevel = 4,
+                hanzi = "经验",
+                pinyin = "jīngyàn",
+                french = "Expérience",
+                exampleHanzi = "她有丰富的教学经验。",
+                examplePinyin = "Tā yǒu fēngfù de jiàoxué jīngyàn.",
+                exampleFrench = "Elle a une riche expérience d'enseignement.",
+                exampleTokens = listOf("她", "有", "丰富", "的", "教学", "经验"),
+            ),
+        )
+
+        val exercises = generator.generateSession(
+            targetWords = sampleWords,
+            distractorPool = sampleWords + higherLevelWords,
+            sessionSize = 10,
+            random = Random(7),
+        )
+
+        val forbiddenHanzi = higherLevelWords.map { it.hanzi }.toSet()
+        val forbiddenFrench = higherLevelWords.map { it.french }.toSet()
+
+        exercises.forEach { exercise ->
+            when (exercise) {
+                is Exercise.HanziToFrench -> {
+                    assertTrue(exercise.options.none { it in forbiddenFrench })
+                }
+                is Exercise.AudioToHanzi -> {
+                    assertTrue(exercise.options.none { it in forbiddenHanzi })
+                }
+                is Exercise.SentenceOrder -> Unit
+            }
+        }
+    }
 }

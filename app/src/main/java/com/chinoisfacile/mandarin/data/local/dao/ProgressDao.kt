@@ -30,6 +30,9 @@ interface ProgressDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsertProgress(items: List<WordProgressEntity>)
 
+    @Query("DELETE FROM word_progress WHERE wordId NOT IN (SELECT id FROM words)")
+    suspend fun deleteOrphanedProgress()
+
     @Query("DELETE FROM word_progress")
     suspend fun clearAllProgress()
 }

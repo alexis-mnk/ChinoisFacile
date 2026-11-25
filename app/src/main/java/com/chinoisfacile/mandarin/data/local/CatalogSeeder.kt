@@ -30,7 +30,9 @@ class CatalogSeeder(
             mutex.withLock {
                 val lessonDao = database.lessonDao()
                 val wordDao = database.wordDao()
+                val progressDao = database.progressDao()
                 val statsDao = database.userStatsDao()
+                var anyLevelUpdated = false
 
                 _isSeeding.value = true
                 try {
@@ -70,23 +72,36 @@ class CatalogSeeder(
                         val wordEntities = catalog.words.map { it.toEntity(hskLevel) }
 
                         database.withTransaction {
-                            lessonDao.upsertUnits(unitEntities)
-
-                            lessonDao.insertLessonsIgnore(lessonEntities)
-                            if (existingLessons > 0) {
-                                lessonEntities.forEach { lesson ->
-                                    lessonDao.updateLessonMetadata(
-                                        id = lesson.id,
-                                        unitId = lesson.unitId,
-                                        hskLevel = lesson.hskLevel,
-                                        orderIndex = lesson.orderIndex,
-                                        title = lesson.title,
+                            val existingLessonsById = lessonDao.getLessonsByLevel(hskLevel)
+                                .associateBy { it.id }
+                            val mergedLessonEntities = lessonEntities.map { lesson ->
+                                val previous = existingLessonsById[lesson.id]
+                                if (previous != null) {
+                                    lesson.copy(
+                                        isUnlocked = previous.isUnlocked || (lesson.orderIndex == minOrder),
+                                        isCompleted = previous.isCompleted,
+                                        bestScore = previous.bestScore,
+                                        completedCount = previous.completedCount,
                                     )
+                                } else {
+                                    lesson
                                 }
                             }
 
+                            // Remplacement propre par niveau pour éliminer les anciens IDs devenus orphelins
+                            lessonDao.deleteUnitsByLevel(hskLevel)
+                            lessonDao.upsertUnits(unitEntities)
+
+                            lessonDao.deleteLessonsByLevel(hskLevel)
+                            lessonDao.upsertLessons(mergedLessonEntities)
+
                             val persistedLessons = lessonDao.getLessonsByLevel(hskLevel)
                                 .sortedBy { it.orderIndex }
+                            persistedLessons.firstOrNull()?.let { firstLesson ->
+                                if (!firstLesson.isUnlocked) {
+                                    lessonDao.unlockLesson(firstLesson.id)
+                                }
+                            }
                             for (i in 0 until persistedLessons.lastIndex) {
                                 val current = persistedLessons[i]
                                 val next = persistedLessons[i + 1]
@@ -95,6 +110,7 @@ class CatalogSeeder(
                                 }
                             }
 
+                            wordDao.deleteWordsByLevel(hskLevel)
                             wordDao.upsertWords(wordEntities)
 
                             if (statsDao.getStatsOnce() == null) {
@@ -103,6 +119,11 @@ class CatalogSeeder(
                         }
 
                         preferences.setSeededCatalogVersion(level, catalog.catalogVersion)
+                        anyLevelUpdated = true
+                    }
+
+                    if (anyLevelUpdated) {
+                        progressDao.deleteOrphanedProgress()
                     }
                 } finally {
                     _isSeeding.value = false

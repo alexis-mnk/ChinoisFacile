@@ -22,7 +22,9 @@ class ExerciseGenerator {
         random: Random = Random.Default,
     ): List<Exercise> {
         require(targetWords.isNotEmpty()) { "La liste des mots cibles ne peut pas être vide." }
-        val pool = (targetWords + distractorPool).distinctBy { it.id }
+        val maxTargetLevel = targetWords.maxOf { it.hskLevel }
+        val safeDistractorPool = distractorPool.filter { it.hskLevel <= maxTargetLevel }
+        val pool = (targetWords + safeDistractorPool).distinctBy { it.id }
 
         val typePlan = buildTypePlan(sessionSize, random)
         val shuffledTargets = targetWords.shuffled(random)
