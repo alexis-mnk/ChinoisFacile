@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Medaillon central -->
+    <path
+        android:fillColor="#FFF8E1"
+        android:pathData="M54,24a30,30 0 1,0 0,60a30,30 0 1,0 0,-60z" />
+    <!-- Caractere stylise 中 (Zhōng) -->
+    <path
+        android:fillColor="#C62828"
+        android:pathData="M36,41h36v20h-36zM41,46v10h10.5v-10zM56.5,46v10h10.5v-10z" />
+    <path
+        android:fillColor="#C62828"
+        android:pathData="M51.5,31h5v46h-5z" />
+</vector>

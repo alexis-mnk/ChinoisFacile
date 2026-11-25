@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ChinoisFacile</string>
+
+    <!-- Navigation -->
+    <string name="nav_home">Parcours</string>
+    <string name="nav_lexicon">Lexique</string>
+    <string name="nav_stats">Progrès</string>
+    <string name="nav_settings">Paramètres</string>
+
+    <!-- Accueil (HomeScreen) -->
+    <string name="home_title_hsk">Mandarin HSK %1$d</string>
+    <string name="hsk_level_chip">HSK %1$d</string>
+    <string name="home_subtitle">100 % hors-ligne • Vies illimitées</string>
+    <string name="home_stat_streak">%1$d j</string>
+    <string name="home_stat_streak_label">Série</string>
+    <string name="home_stat_xp">%1$d XP</string>
+    <string name="home_stat_xp_label">Total XP</string>
+    <string name="home_stat_mastered">%1$d / %2$d</string>
+    <string name="home_stat_mastered_label">Maîtrisés</string>
+
+    <string name="home_quick_review_title">Révision rapide</string>
+    <string name="home_quick_review_due_one">1 mot à réviser aujourd\'hui</string>
+    <string name="home_quick_review_due_many">%1$d mots à réviser aujourd\'hui</string>
+    <string name="home_quick_review_none">Tout est à jour ! Entraînement libre sur les mots débloqués</string>
+    <string name="home_quick_review_button">Réviser (10 exercices)</string>
+
+    <string name="home_lesson_word_count">%1$d mots</string>
+    <string name="home_lesson_status_locked">Terminez la leçon précédente pour débloquer</string>
+    <string name="home_lesson_status_available">Prête à démarrer</string>
+    <string name="home_lesson_status_completed">Terminée • Meilleur score : %1$d %%</string>
+    <string name="home_lesson_start">Commencer</string>
+    <string name="home_lesson_replay">Rejouer</string>
+    <string name="home_loading">Chargement du parcours…</string>
+    <string name="home_updating_catalog">Mise à jour du catalogue HSK…</string>
+    <string name="home_node_start_bubble">COMMENCER</string>
+    <string name="home_jump_to_active">Reprendre</string>
+    <string name="home_preview_words_label">Aperçu des mots (%1$d)</string>
+    <string name="home_preview_score_badge">%1$d %%</string>
+
+    <!-- Session d'exercices (LessonScreen) -->
+    <string name="lesson_quick_review_title">Révision rapide</string>
+    <string name="lesson_progress_counter">%1$d / %2$d</string>
+    <string name="lesson_close_cd">Quitter la session</string>
+    <string name="lesson_quit_dialog_title">Quitter la session ?</string>
+    <string name="lesson_quit_dialog_message">Votre progression sur cette session en cours ne sera pas enregistrée.</string>
+    <string name="lesson_quit_confirm">Quitter</string>
+    <string name="lesson_quit_cancel">Continuer</string>
+    <string name="lesson_loading">Préparation des exercices…</string>
+    <string name="lesson_error_empty">Impossible de charger les exercices pour cette leçon.</string>
+    <string name="lesson_back_home">Retour au parcours</string>
+
+    <!-- Consignes et contrôles d'exercices -->
+    <string name="exercise_hanzi_to_french_prompt">Que signifie ce mot en français ?</string>
+    <string name="exercise_audio_to_hanzi_prompt">Écoutez et choisissez le bon caractère</string>
+    <string name="exercise_sentence_order_prompt">Remettez les mots dans l\'ordre pour traduire :</string>
+    <string name="exercise_sentence_placeholder">Touchez les mots ci-dessous pour former la phrase</string>
+    <string name="exercise_sentence_clear">Effacer</string>
+
+    <string name="pinyin_show">Afficher le pinyin</string>
+    <string name="pinyin_hide">Masquer le pinyin</string>
+
+    <string name="audio_play_normal">Normal 1.0x</string>
+    <string name="audio_play_slow">Lent 0.7x</string>
+    <string name="audio_listen_word">Écouter</string>
+    <string name="audio_listen_example">Écouter la phrase</string>
+
+    <!-- Avertissement TTS hors-ligne -->
+    <string name="tts_missing_warning">La voix chinoise (zh-CN) n\'est pas installée sur cet appareil. Activez-la dans Paramètres Android &gt; Synthèse vocale, ou affichez le pinyin pour continuer.</string>
+    <string name="tts_show_pinyin_fallback">Afficher le pinyin</string>
+
+    <!-- Boutons validation & feedback -->
+    <string name="lesson_check_answer">Vérifier</string>
+    <string name="lesson_continue">Continuer</string>
+    <string name="feedback_correct_title">Excellent !</string>
+    <string name="feedback_wrong_title">Pas tout à fait…</string>
+    <string name="feedback_correct_answer_label">Bonne réponse :</string>
+    <string name="feedback_example_label">Exemple :</string>
+    <string name="feedback_retry_notice">Cet exercice reviendra en fin de session pour vous aider à le retenir.</string>
+
+    <!-- Écran récapitulatif de fin de session -->
+    <string name="summary_title">Session terminée !</string>
+    <string name="summary_subtitle">Bravo pour votre régularité, continuez ainsi.</string>
+    <string name="summary_accuracy_label">Précision</string>
+    <string name="summary_accuracy_value">%1$d %%</string>
+    <string name="summary_xp_label">XP gagnés</string>
+    <string name="summary_xp_value">+%1$d XP</string>
+    <string name="summary_streak_label">Série actuelle</string>
+    <string name="summary_streak_value">%1$d jour(s)</string>
+    <string name="summary_unlocked_next">Nouvelle leçon débloquée : %1$s</string>
+    <string name="summary_words_section">Mots pratiqués &amp; prochaine révision (SM-2)</string>
+    <string name="summary_next_review_tomorrow">Demain</string>
+    <string name="summary_next_review_days">Dans %1$d jours</string>
+    <string name="summary_done_button">Terminer</string>
+
+    <!-- Écran Progrès (StatsScreen) -->
+    <string name="stats_title">Vos progrès</string>
+    <string name="stats_total_xp_label">XP cumulés</string>
+    <string name="stats_current_streak_label">Série actuelle</string>
+    <string name="stats_longest_streak_label">Record</string>
+    <string name="stats_sessions_label">Sessions</string>
+    <string name="stats_days_value">%1$d j</string>
+    <string name="stats_mastery_title_hsk">Maîtrise du vocabulaire HSK %1$d</string>
+    <string name="stats_mastered_count">%1$d maîtrisé(s)</string>
+    <string name="stats_learning_count">%1$d en cours</string>
+    <string name="stats_new_count">%1$d nouveau(x)</string>
+    <string name="stats_settings_title">Préférences d\'apprentissage</string>
+    <string name="stats_pinyin_default_title">Afficher le pinyin par défaut</string>
+    <string name="stats_pinyin_default_desc">Affiche la transcription pinyin sous les caractères lors des QCM.</string>
+    <string name="stats_sound_effects_title">Effets sonores</string>
+    <string name="stats_sound_effects_desc">Joue un son discret lors des réponses et en fin de session.</string>
+    <string name="stats_vocabulary_title_hsk">Lexique HSK %1$d (%2$d mots)</string>
+    <string name="stats_vocabulary_filtered_title_hsk">Lexique HSK %1$d (%2$d / %3$d mots)</string>
+    <string name="stats_search_placeholder">Rechercher (hanzi, pinyin ou français)…</string>
+    <string name="stats_search_clear_cd">Effacer la recherche</string>
+    <string name="stats_search_empty">Aucun mot ne correspond à votre recherche.</string>
+    <string name="stats_badge_mastered">Maîtrisé</string>
+    <string name="stats_badge_learning">En cours</string>
+    <string name="stats_badge_new">À découvrir</string>
+    <string name="stats_due_today">À réviser aujourd\'hui</string>
+    <string name="stats_due_in_days">Révision dans %1$d j</string>
+    <string name="stats_due_tomorrow">Révision demain</string>
+    <string name="stats_global_mastery_title">Maîtrise globale</string>
+    <string name="stats_global_mastery_subtitle">%1$d mots maîtrisés sur %2$d</string>
+    <string name="stats_due_count">%1$d à revoir</string>
+    <string name="stats_by_level_title">Maîtrise par niveau HSK</string>
+
+    <!-- Écran Lexique (LexiconScreen) -->
+    <string name="lexicon_title_hsk">Lexique HSK %1$d (%2$d)</string>
+    <string name="lexicon_search_placeholder">Hanzi, pinyin ou français…</string>
+    <string name="lexicon_search_empty">Aucun mot trouvé</string>
+    <string name="lexicon_switch_to_list_cd">Afficher en liste compacte</string>
+    <string name="lexicon_switch_to_grid_cd">Afficher en grille</string>
+    <string name="lexicon_filter_due">À revoir</string>
+    <string name="lexicon_filter_all_count">Tous (%1$d)</string>
+    <string name="lexicon_filter_due_count">À revoir (%1$d)</string>
+    <string name="lexicon_filter_learning_count">En cours (%1$d)</string>
+    <string name="lexicon_filter_mastered_count">Maîtrisés (%1$d)</string>
+    <string name="lexicon_filter_new_count">Nouveaux (%1$d)</string>
+    <string name="lexicon_detail_example_title">Phrase d\'exemple</string>
+    <string name="lexicon_detail_sm2_title">Suivi de mémorisation (SM-2)</string>
+    <string name="lexicon_detail_not_studied">Pas encore étudié</string>
+    <string name="lexicon_detail_next_review">Prochaine révision</string>
+    <string name="lexicon_detail_correct_wrong">Réussites / Erreurs</string>
+    <string name="lexicon_detail_correct_wrong_value">%1$d / %2$d</string>
+    <string name="lexicon_detail_repetitions">Répétitions / Intervalle</string>
+    <string name="lexicon_detail_repetitions_value">%1$d • %2$d j</string>
+
+    <!-- Écran Paramètres (SettingsScreen) -->
+    <string name="settings_title">Paramètres</string>
+    <string name="settings_appearance_title">Apparence</string>
+    <string name="settings_appearance_desc">Choisissez le thème clair, sombre ou celui du système.</string>
+    <string name="settings_theme_system">Système</string>
+    <string name="settings_theme_light">Clair</string>
+    <string name="settings_theme_dark">Sombre</string>
+    <string name="settings_tts_title">Synthèse vocale Android (TTS)</string>
+    <string name="settings_tts_desc">Ouvrir les paramètres système pour installer ou régler la voix chinoise.</string>
+    <string name="settings_data_title">Données locales</string>
+    <string name="settings_reset_desc">Remet à zéro les XP, la série, la maîtrise SM-2 et le déblocage des leçons.</string>
+    <string name="settings_reset_button">Réinitialiser ma progression</string>
+    <string name="settings_reset_dialog_title">Réinitialiser toute la progression ?</string>
+    <string name="settings_reset_dialog_message">Cette action effacera définitivement vos XP, votre série quotidienne, l\'historique SM-2 de tous les mots et verrouillera à nouveau les leçons (sauf la Leçon 1 de chaque niveau).</string>
+    <string name="settings_reset_confirm">Réinitialiser</string>
+    <string name="settings_reset_cancel">Annuler</string>
+    <string name="settings_reset_done">Progression réinitialisée.</string>
+</resources>
