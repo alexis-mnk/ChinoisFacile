@@ -35,22 +35,21 @@ import com.chinoisfacile.mandarin.ui.settings.SettingsScreen
 import com.chinoisfacile.mandarin.ui.settings.SettingsViewModel
 import com.chinoisfacile.mandarin.ui.stats.StatsScreen
 import com.chinoisfacile.mandarin.ui.stats.StatsViewModel
-import com.chinoisfacile.mandarin.ui.unitlesson.UnitLessonScreen
-import com.chinoisfacile.mandarin.ui.unitlesson.UnitLessonViewModel
+import com.chinoisfacile.mandarin.ui.steplesson.StepLessonScreen
+import com.chinoisfacile.mandarin.ui.steplesson.StepLessonViewModel
 
 private object Routes {
     const val HOME = "home"
     const val LEXICON = "lexicon"
     const val STATS = "stats"
     const val SETTINGS = "settings"
-    const val UNIT_ARG = "unitId"
     const val LESSON_ARG = "lessonId"
     const val HSK_LEVEL_ARG = "hskLevel"
-    const val UNIT_LESSON = "unit_lesson/{unitId}"
+    const val STEP_LESSON = "step_lesson/{lessonId}"
     const val LESSON = "lesson/{lessonId}"
     const val QUICK_REVIEW = "quick_review/{hskLevel}"
 
-    fun unitLessonRoute(unitId: String): String = "unit_lesson/$unitId"
+    fun stepLessonRoute(lessonId: String): String = "step_lesson/$lessonId"
     fun lessonRoute(lessonId: String): String = "lesson/$lessonId"
     fun quickReviewRoute(hskLevel: Int): String = "quick_review/$hskLevel"
 }
@@ -140,8 +139,8 @@ fun AppNavHost(
                 )
                 HomeScreen(
                     viewModel = viewModel,
-                    onOpenUnitLesson = { unitId ->
-                        navController.navigate(Routes.unitLessonRoute(unitId))
+                    onOpenStepLesson = { lessonId ->
+                        navController.navigate(Routes.stepLessonRoute(lessonId))
                     },
                     onStartLesson = { lessonId ->
                         navController.navigate(Routes.lessonRoute(lessonId))
@@ -177,20 +176,20 @@ fun AppNavHost(
             }
 
             composable(
-                route = Routes.UNIT_LESSON,
+                route = Routes.STEP_LESSON,
                 arguments = listOf(
-                    navArgument(Routes.UNIT_ARG) { type = NavType.StringType },
+                    navArgument(Routes.LESSON_ARG) { type = NavType.StringType },
                 ),
             ) { entry ->
-                val unitId = entry.arguments?.getString(Routes.UNIT_ARG).orEmpty()
-                val viewModel: UnitLessonViewModel = viewModel(
-                    factory = container.unitLessonViewModelFactory(unitId = unitId),
+                val lessonId = entry.arguments?.getString(Routes.LESSON_ARG).orEmpty()
+                val viewModel: StepLessonViewModel = viewModel(
+                    factory = container.stepLessonViewModelFactory(lessonId = lessonId),
                 )
-                UnitLessonScreen(
+                StepLessonScreen(
                     viewModel = viewModel,
                     onBack = { navController.popBackStack() },
-                    onStartQuiz = { lessonId ->
-                        navController.navigate(Routes.lessonRoute(lessonId)) {
+                    onStartQuiz = { targetLessonId ->
+                        navController.navigate(Routes.lessonRoute(targetLessonId)) {
                             popUpTo(Routes.HOME)
                         }
                     },

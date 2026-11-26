@@ -13,12 +13,17 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.rounded.VolumeOff
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -188,10 +193,10 @@ fun LessonScreen(
                             is Exercise.AudioToEnglish -> AudioToEnglishView(
                                 exercise = currentExercise,
                                 selectedOption = uiState.selectedOption,
-                                showPinyin = uiState.showPinyin,
+                                showPinyinHint = uiState.showAudioPinyinHint,
                                 audioEnabled = audioReady,
                                 locked = locked,
-                                onTogglePinyin = viewModel::onTogglePinyin,
+                                onTogglePinyinHint = viewModel::onToggleAudioPinyinHint,
                                 onPlayNormal = { viewModel.onPlayNormal(currentExercise.word.hanzi) },
                                 onPlaySlow = { viewModel.onPlaySlow(currentExercise.word.hanzi) },
                                 onSelectOption = viewModel::onSelectOption,
@@ -231,18 +236,41 @@ fun LessonScreen(
 
                     val feedback = uiState.feedback
                     if (feedback == null) {
-                        Button(
-                            onClick = viewModel::onCheckAnswer,
-                            enabled = uiState.canCheckAnswer,
+                        Column(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(16.dp),
-                            shape = RoundedCornerShape(14.dp),
+                                .padding(
+                                    start = 16.dp,
+                                    end = 16.dp,
+                                    top = 12.dp,
+                                    bottom = if (currentExercise is Exercise.AudioToEnglish) 8.dp else 16.dp,
+                                ),
+                            horizontalAlignment = Alignment.CenterHorizontally,
                         ) {
-                            Text(
-                                text = stringResource(R.string.lesson_check_answer),
-                                modifier = Modifier.padding(vertical = 4.dp),
-                            )
+                            Button(
+                                onClick = viewModel::onCheckAnswer,
+                                enabled = uiState.canCheckAnswer,
+                                modifier = Modifier.fillMaxWidth(),
+                                shape = RoundedCornerShape(14.dp),
+                            ) {
+                                Text(
+                                    text = stringResource(R.string.lesson_check_answer),
+                                    modifier = Modifier.padding(vertical = 4.dp),
+                                )
+                            }
+
+                            if (currentExercise is Exercise.AudioToEnglish) {
+                                Spacer(modifier = Modifier.height(4.dp))
+                                TextButton(onClick = viewModel::skipListeningExercise) {
+                                    Icon(
+                                        imageVector = Icons.AutoMirrored.Rounded.VolumeOff,
+                                        contentDescription = null,
+                                        modifier = Modifier.size(18.dp),
+                                    )
+                                    Spacer(modifier = Modifier.width(6.dp))
+                                    Text(text = stringResource(R.string.audio_cant_listen_now))
+                                }
+                            }
                         }
                     }
 

@@ -44,6 +44,45 @@ data class ExampleSentenceDto(
     val tokens: List<String>,
 )
 
+@Serializable
+data class GrammarNotesCatalogDto(
+    val notes: List<GrammarNoteDto>,
+)
+
+@Serializable
+data class GrammarNoteDto(
+    val id: String,
+    val hskLevel: Int,
+    val triggerWord: String,
+    val title: String,
+    val pattern: String,
+    val explanation: String,
+    val examples: List<GrammarExampleDto>,
+)
+
+@Serializable
+data class GrammarExampleDto(
+    val chinese: String,
+    val pinyin: String,
+    val english: String,
+)
+
+data class GrammarExample(
+    val chinese: String,
+    val pinyin: String,
+    val english: String,
+)
+
+data class GrammarNote(
+    val id: String,
+    val hskLevel: Int,
+    val triggerWord: String,
+    val title: String,
+    val pattern: String,
+    val explanation: String,
+    val examples: List<GrammarExample>,
+)
+
 enum class MasteryLevel {
     NEW,
     LEARNING,
@@ -98,13 +137,15 @@ data class LessonSummary(
     val hskLevel: Int,
     val orderIndex: Int,
     val title: String,
+    val stepTheme: String = "",
     val isUnlocked: Boolean,
     val isCompleted: Boolean,
+    val isStepLessonUnlocked: Boolean = false,
+    val isStepLessonCompleted: Boolean = false,
     val bestScore: Int,
     val completedCount: Int,
     val wordCount: Int,
     val previewHanzi: List<String> = emptyList(),
-    val isFirstInUnit: Boolean = false,
 )
 
 data class LearningUnit(
@@ -114,8 +155,6 @@ data class LearningUnit(
     val title: String,
     val description: String,
     val lessons: List<LessonSummary>,
-    val isLessonUnlocked: Boolean = false,
-    val isLessonCompleted: Boolean = false,
     val totalWordCount: Int = lessons.sumOf { it.wordCount },
 )
 
@@ -148,7 +187,6 @@ data class SessionCompletionSummary(
     val earnedXp: Int,
     val accuracyPercent: Int,
     val currentStreak: Int,
-    val unlockedNextLessonTitle: String?,
+    val unlockedNextStepLessonTitle: String?,
     val reviewedWords: List<WordReviewSummary>,
-    val unlockedNextUnitLessonTitle: String? = null,
 )

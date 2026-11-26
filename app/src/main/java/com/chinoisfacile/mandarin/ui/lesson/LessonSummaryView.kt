@@ -16,7 +16,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.MenuBook
 import androidx.compose.material.icons.filled.EmojiEvents
-import androidx.compose.material.icons.filled.LockOpen
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -106,35 +105,7 @@ fun LessonSummaryView(
                 }
             }
 
-            summary.unlockedNextLessonTitle?.let { unlockedTitle ->
-                item {
-                    val extended = MandarinTheme.extendedColors
-                    Surface(
-                        modifier = Modifier.fillMaxWidth(),
-                        shape = RoundedCornerShape(14.dp),
-                        color = extended.successContainer,
-                    ) {
-                        Row(
-                            modifier = Modifier.padding(14.dp),
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(10.dp),
-                        ) {
-                            Icon(
-                                imageVector = Icons.Default.LockOpen,
-                                contentDescription = null,
-                                tint = extended.onSuccessContainer,
-                            )
-                            Text(
-                                text = stringResource(R.string.summary_unlocked_next, unlockedTitle),
-                                style = MaterialTheme.typography.titleMedium,
-                                color = extended.onSuccessContainer,
-                            )
-                        }
-                    }
-                }
-            }
-
-            summary.unlockedNextUnitLessonTitle?.let { unlockedUnitTitle ->
+            summary.unlockedNextStepLessonTitle?.takeIf { it.isNotBlank() }?.let { unlockedStepTitle ->
                 item {
                     val extended = MandarinTheme.extendedColors
                     Surface(
@@ -153,7 +124,7 @@ fun LessonSummaryView(
                                 tint = extended.onLessonNodeContainer,
                             )
                             Text(
-                                text = stringResource(R.string.summary_unlocked_unit_lesson, unlockedUnitTitle),
+                                text = stringResource(R.string.summary_unlocked_step_lesson, unlockedStepTitle),
                                 style = MaterialTheme.typography.titleMedium,
                                 color = extended.onLessonNodeContainer,
                             )

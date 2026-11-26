@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
 import com.chinoisfacile.mandarin.data.local.AppDatabase
 import com.chinoisfacile.mandarin.data.local.CatalogSeeder
+import com.chinoisfacile.mandarin.data.local.GrammarNotesLoader
 import com.chinoisfacile.mandarin.data.local.UserPreferencesDataStore
 import com.chinoisfacile.mandarin.data.repository.MandarinRepository
 import com.chinoisfacile.mandarin.domain.audio.AudioPlayer
@@ -20,7 +21,7 @@ import com.chinoisfacile.mandarin.ui.lesson.LessonViewModel
 import com.chinoisfacile.mandarin.ui.lexicon.LexiconViewModel
 import com.chinoisfacile.mandarin.ui.settings.SettingsViewModel
 import com.chinoisfacile.mandarin.ui.stats.StatsViewModel
-import com.chinoisfacile.mandarin.ui.unitlesson.UnitLessonViewModel
+import com.chinoisfacile.mandarin.ui.steplesson.StepLessonViewModel
 
 class AppContainer(context: Context) {
 
@@ -48,6 +49,10 @@ class AppContainer(context: Context) {
         )
     }
 
+    private val grammarNotesLoader: GrammarNotesLoader by lazy {
+        GrammarNotesLoader(appContext)
+    }
+
     val sm2Scheduler: Sm2Scheduler by lazy { Sm2Scheduler() }
     val streakCalculator: StreakCalculator by lazy { StreakCalculator() }
     val exerciseGenerator: ExerciseGenerator by lazy { ExerciseGenerator() }
@@ -57,6 +62,7 @@ class AppContainer(context: Context) {
             database = database,
             seeder = catalogSeeder,
             preferences = preferencesDataStore,
+            grammarNotesLoader = grammarNotesLoader,
             sm2Scheduler = sm2Scheduler,
             streakCalculator = streakCalculator,
         )
@@ -115,12 +121,12 @@ class AppContainer(context: Context) {
         }
     }
 
-    fun unitLessonViewModelFactory(unitId: String): ViewModelProvider.Factory =
+    fun stepLessonViewModelFactory(lessonId: String): ViewModelProvider.Factory =
         object : ViewModelProvider.Factory {
             @Suppress("UNCHECKED_CAST")
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return UnitLessonViewModel(
-                    unitId = unitId,
+                return StepLessonViewModel(
+                    lessonId = lessonId,
                     repository = repository,
                     audioPlayer = audioPlayer,
                     soundEffects = soundEffects,

@@ -7,9 +7,10 @@ import com.chinoisfacile.mandarin.domain.audio.AudioPlayer
 import com.chinoisfacile.mandarin.domain.audio.SoundEffects
 import com.chinoisfacile.mandarin.domain.lesson.Exercise
 import com.chinoisfacile.mandarin.domain.lesson.ExerciseGenerator
+import com.chinoisfacile.mandarin.domain.lesson.LessonSessionEngine
+import com.chinoisfacile.mandarin.domain.lesson.SessionAdvanceResult
+import com.chinoisfacile.mandarin.domain.lesson.SessionCompletionData
 import com.chinoisfacile.mandarin.domain.lesson.TokenChip
-import com.chinoisfacile.mandarin.domain.lesson.WordSessionOutcome
-import com.chinoisfacile.mandarin.domain.srs.StreakCalculator
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -31,10 +32,7 @@ class LessonViewModel(
     private val _uiState = MutableStateFlow(LessonUiState())
     val uiState: StateFlow<LessonUiState> = _uiState.asStateFlow()
 
-    private val exerciseQueue = ArrayDeque<Exercise>()
-    private val failedInitialIds = mutableSetOf<String>()
-    private val wordStats = mutableMapOf<String, MutableWordStats>()
-    private var retryCounter = 0
+    private val sessionEngine = LessonSessionEngine()
 
     @Volatile
     private var soundEffectsEnabled: Boolean = true
@@ -81,19 +79,18 @@ class LessonViewModel(
                 distractorPool = payload.distractorPool,
                 knownTokens = payload.knownTokens,
             )
-
-            exerciseQueue.clear()
-            exerciseQueue.addAll(exercises)
+            sessionEngine.start(exercises)
 
             _uiState.update {
                 it.copy(
                     isLoading = false,
                     isError = false,
                     sessionTitle = payload.lessonTitle,
-                    currentExercise = exerciseQueue.firstOrNull(),
-                    completedCount = 0,
-                    totalCount = exercises.size,
+                    currentExercise = sessionEngine.currentExercise,
+                    completedCount = sessionEngine.completedCount,
+                    totalCount = sessionEngine.totalCount,
                     showPinyin = defaultShowPinyin,
+                    showAudioPinyinHint = false,
                 )
             }
         }
@@ -129,8 +126,12 @@ class LessonViewModel(
         }
     }
 
+    fun onToggleAudioPinyinHint() {
+        _uiState.update { it.copy(showAudioPinyinHint = !it.showAudioPinyinHint) }
+    }
+
     fun onShowPinyinFallback() {
-        _uiState.update { it.copy(showPinyin = true) }
+        _uiState.update { it.copy(showPinyin = true, showAudioPinyinHint = true) }
     }
 
     fun onPlayNormal(text: String) {
@@ -155,22 +156,19 @@ class LessonViewModel(
                 state.selectedTokens.map { it.text } == exercise.expectedTokens
         }
 
-        val stats = wordStats.getOrPut(exercise.word.id) { MutableWordStats() }
-        if (isCorrect) {
-            stats.correctAttempts += 1
-            if ((exercise is Exercise.HanziToEnglish || exercise is Exercise.EnglishToHanzi) &&
-                !state.showPinyin
-            ) {
-                stats.answeredWithoutPinyin = true
-            }
-            if (soundEffectsEnabled) {
+        val answeredWithoutPinyin = isCorrect &&
+            (exercise is Exercise.HanziToEnglish || exercise is Exercise.EnglishToHanzi) &&
+            !state.showPinyin
+        sessionEngine.recordAnswer(
+            exercise = exercise,
+            isCorrect = isCorrect,
+            answeredWithoutPinyin = answeredWithoutPinyin,
+        )
+
+        if (soundEffectsEnabled) {
+            if (isCorrect) {
                 soundEffects.playCorrect()
-            }
-        } else {
-            stats.wrongAttempts += 1
-            val baseId = exercise.id.substringBefore("_retry_")
-            failedInitialIds += baseId
-            if (soundEffectsEnabled) {
+            } else {
                 soundEffects.playWrong()
             }
         }
@@ -186,75 +184,48 @@ class LessonViewModel(
     }
 
     fun onContinue() {
-        val state = _uiState.value
-        val feedback = state.feedback ?: return
-        val current = exerciseQueue.removeFirstOrNull() ?: return
-
+        val feedback = _uiState.value.feedback ?: return
         audioPlayer.stop()
+        val result = sessionEngine.advanceAfterFeedback(wasCorrect = feedback.isCorrect) ?: return
+        applyAdvanceResult(result)
+    }
 
-        val newCompletedCount = if (feedback.isCorrect) {
-            state.completedCount + 1
-        } else {
-            exerciseQueue.addLast(cloneForRetry(current))
-            state.completedCount
-        }
+    fun skipListeningExercise() {
+        val state = _uiState.value
+        if (state.feedback != null || state.currentExercise !is Exercise.AudioToEnglish) return
+        audioPlayer.stop()
+        val result = sessionEngine.skipListeningExercise() ?: return
+        applyAdvanceResult(result)
+    }
 
-        val nextExercise = exerciseQueue.firstOrNull()
-        if (nextExercise != null) {
-            _uiState.update {
-                it.copy(
-                    currentExercise = nextExercise,
-                    completedCount = newCompletedCount,
-                    selectedOption = null,
-                    selectedTokens = emptyList(),
-                    feedback = null,
-                )
+    private fun applyAdvanceResult(result: SessionAdvanceResult) {
+        when (result) {
+            is SessionAdvanceResult.NextExercise -> {
+                _uiState.update {
+                    it.copy(
+                        currentExercise = result.exercise,
+                        completedCount = result.completedCount,
+                        selectedOption = null,
+                        selectedTokens = emptyList(),
+                        showAudioPinyinHint = false,
+                        feedback = null,
+                    )
+                }
             }
-        } else {
-            finishSession(completedCount = newCompletedCount, totalCount = state.totalCount)
+
+            is SessionAdvanceResult.Finished -> {
+                finishSession(result.completion)
+            }
         }
     }
 
-    private fun cloneForRetry(exercise: Exercise): Exercise {
-        retryCounter += 1
-        val retryId = "${exercise.id.substringBefore("_retry_")}_retry_$retryCounter"
-        return when (exercise) {
-            is Exercise.HanziToEnglish -> exercise.copy(id = retryId)
-            is Exercise.AudioToEnglish -> exercise.copy(id = retryId)
-            is Exercise.AudioToHanzi -> exercise.copy(id = retryId)
-            is Exercise.EnglishToHanzi -> exercise.copy(id = retryId)
-            is Exercise.SentenceOrder -> exercise.copy(
-                id = retryId,
-                shuffledChips = exercise.shuffledChips.shuffled(),
-            )
-        }
-    }
-
-    private fun finishSession(completedCount: Int, totalCount: Int) {
+    private fun finishSession(completion: SessionCompletionData) {
         viewModelScope.launch {
-            val firstTryCorrect = (totalCount - failedInitialIds.size).coerceAtLeast(0)
-            val accuracyPercent = if (totalCount > 0) {
-                (firstTryCorrect * 100) / totalCount
-            } else {
-                100
-            }
-            val earnedXp = completedCount * StreakCalculator.XP_PER_EXERCISE +
-                StreakCalculator.XP_SESSION_BONUS
-
-            val outcomes = wordStats.map { (wordId, stats) ->
-                WordSessionOutcome(
-                    wordId = wordId,
-                    correctAttempts = stats.correctAttempts,
-                    wrongAttempts = stats.wrongAttempts,
-                    answeredWithoutPinyin = stats.answeredWithoutPinyin,
-                )
-            }
-
             val summary = repository.recordSessionCompletion(
                 lessonId = lessonId,
-                outcomes = outcomes,
-                earnedXp = earnedXp,
-                accuracyPercent = accuracyPercent,
+                outcomes = completion.outcomes,
+                earnedXp = completion.earnedXp,
+                accuracyPercent = completion.accuracyPercent,
             )
 
             if (soundEffectsEnabled) {
@@ -264,9 +235,10 @@ class LessonViewModel(
             _uiState.update {
                 it.copy(
                     currentExercise = null,
-                    completedCount = completedCount,
+                    completedCount = completion.completedCount,
                     selectedOption = null,
                     selectedTokens = emptyList(),
+                    showAudioPinyinHint = false,
                     feedback = null,
                     summary = summary,
                 )
@@ -286,10 +258,4 @@ class LessonViewModel(
         audioPlayer.stop()
         super.onCleared()
     }
-
-    private data class MutableWordStats(
-        var correctAttempts: Int = 0,
-        var wrongAttempts: Int = 0,
-        var answeredWithoutPinyin: Boolean = false,
-    )
 }

@@ -92,19 +92,6 @@ class CatalogSeeder(
                             lessonDao.deleteLessonsByLevel(hskLevel)
                             lessonDao.upsertLessons(mergedLessonEntities)
 
-                            val persistedLessons = lessonDao.getLessonsByLevel(hskLevel)
-                                .sortedBy { it.orderIndex }
-                            for (i in 0 until persistedLessons.lastIndex) {
-                                val current = persistedLessons[i]
-                                val next = persistedLessons[i + 1]
-                                if (current.isCompleted &&
-                                    current.unitId == next.unitId &&
-                                    !next.isUnlocked
-                                ) {
-                                    lessonDao.unlockLesson(next.id)
-                                }
-                            }
-
                             wordDao.deleteWordsByLevel(hskLevel)
                             wordDao.upsertWords(wordEntities)
 

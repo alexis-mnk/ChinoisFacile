@@ -21,6 +21,7 @@ data class LessonUiState(
     val selectedOption: String? = null,
     val selectedTokens: List<TokenChip> = emptyList(),
     val showPinyin: Boolean = true,
+    val showAudioPinyinHint: Boolean = false,
     val feedback: FeedbackState? = null,
     val ttsStatus: TtsStatus = TtsStatus.INITIALIZING,
     val summary: SessionCompletionSummary? = null,

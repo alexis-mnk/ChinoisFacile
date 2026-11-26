@@ -43,11 +43,11 @@ class UserPreferencesDataStore(context: Context) {
         LexiconViewMode.entries.firstOrNull { it.name == raw } ?: LexiconViewMode.GRID
     }
 
-    val completedUnitLessons: Flow<Set<String>> = dataStore.data.map { prefs ->
-        prefs[KEY_COMPLETED_UNIT_LESSONS] ?: emptySet()
+    val completedStepLessons: Flow<Set<String>> = dataStore.data.map { prefs ->
+        prefs[KEY_COMPLETED_STEP_LESSONS] ?: emptySet()
     }
 
-    suspend fun getCompletedUnitLessons(): Set<String> = completedUnitLessons.first()
+    suspend fun getCompletedStepLessons(): Set<String> = completedStepLessons.first()
 
     suspend fun getSeededCatalogVersion(hskLevel: Int): Int {
         val prefs = dataStore.data.first()
@@ -96,16 +96,17 @@ class UserPreferencesDataStore(context: Context) {
         }
     }
 
-    suspend fun markUnitLessonCompleted(unitId: String) {
+    suspend fun markStepLessonCompleted(lessonId: String) {
         dataStore.edit { prefs ->
-            val current = prefs[KEY_COMPLETED_UNIT_LESSONS] ?: emptySet()
-            prefs[KEY_COMPLETED_UNIT_LESSONS] = current + unitId
+            val current = prefs[KEY_COMPLETED_STEP_LESSONS] ?: emptySet()
+            prefs[KEY_COMPLETED_STEP_LESSONS] = current + lessonId
         }
     }
 
-    suspend fun clearCompletedUnitLessons() {
+    suspend fun clearCompletedStepLessons() {
         dataStore.edit { prefs ->
-            prefs.remove(KEY_COMPLETED_UNIT_LESSONS)
+            prefs.remove(KEY_COMPLETED_STEP_LESSONS)
+            prefs.remove(KEY_LEGACY_COMPLETED_UNIT_LESSONS)
         }
     }
 
@@ -119,7 +120,8 @@ class UserPreferencesDataStore(context: Context) {
         val KEY_SELECTED_HSK_LEVEL = intPreferencesKey("selected_hsk_level")
         val KEY_THEME_MODE = stringPreferencesKey("theme_mode")
         val KEY_LEXICON_VIEW_MODE = stringPreferencesKey("lexicon_view_mode")
-        val KEY_COMPLETED_UNIT_LESSONS = stringSetPreferencesKey("completed_unit_lessons")
+        val KEY_COMPLETED_STEP_LESSONS = stringSetPreferencesKey("completed_step_lessons")
+        val KEY_LEGACY_COMPLETED_UNIT_LESSONS = stringSetPreferencesKey("completed_unit_lessons")
         val KEY_LEGACY_SEEDED_CATALOG_VERSION = intPreferencesKey("seeded_catalog_version")
 
         fun seededCatalogVersionKey(hskLevel: Int): Preferences.Key<Int> =

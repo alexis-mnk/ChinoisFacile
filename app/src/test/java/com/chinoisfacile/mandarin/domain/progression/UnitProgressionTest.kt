@@ -2,29 +2,14 @@ package com.chinoisfacile.mandarin.domain.progression
 
 import com.chinoisfacile.mandarin.data.model.LearningUnit
 import com.chinoisfacile.mandarin.data.model.LessonSummary
-import com.chinoisfacile.mandarin.data.model.VocabWord
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
-import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class UnitProgressionTest {
 
-    private fun word(id: String, lessonId: String, hanzi: String) = VocabWord(
-        id = id,
-        lessonId = lessonId,
-        hskLevel = 1,
-        hanzi = hanzi,
-        pinyin = "ni",
-        english = "test",
-        exampleHanzi = hanzi,
-        examplePinyin = "ni",
-        exampleEnglish = "test",
-        exampleTokens = listOf(hanzi),
-    )
-
-    private fun quiz(
+    private fun step(
         id: String,
         unitId: String,
         orderIndex: Int,
@@ -46,12 +31,12 @@ class UnitProgressionTest {
     )
 
     private fun sampleUnits(
-        u1q1Unlocked: Boolean = false,
-        u1q1Completed: Boolean = false,
-        u1q2Unlocked: Boolean = false,
-        u1q2Completed: Boolean = false,
-        u2q1Unlocked: Boolean = false,
-        u2q1Completed: Boolean = false,
+        u1s1QuizUnlocked: Boolean = false,
+        u1s1QuizCompleted: Boolean = false,
+        u1s2QuizUnlocked: Boolean = false,
+        u1s2QuizCompleted: Boolean = false,
+        u2s1QuizUnlocked: Boolean = false,
+        u2s1QuizCompleted: Boolean = false,
     ): List<LearningUnit> = listOf(
         LearningUnit(
             id = "u1",
@@ -60,8 +45,8 @@ class UnitProgressionTest {
             title = "Unit 1 — First Steps",
             description = "Desc 1",
             lessons = listOf(
-                quiz("u1_q1", "u1", 1, "Lesson 1 — Greetings", u1q1Unlocked, u1q1Completed, 5),
-                quiz("u1_q2", "u1", 2, "Quiz 2 — Courtesy", u1q2Unlocked, u1q2Completed, 5),
+                step("u1_q1", "u1", 1, "Lesson 1 — Greetings & Politeness", u1s1QuizUnlocked, u1s1QuizCompleted, 5),
+                step("u1_q2", "u1", 2, "Quiz 2 — Courtesy", u1s2QuizUnlocked, u1s2QuizCompleted, 5),
             ),
         ),
         LearningUnit(
@@ -71,13 +56,13 @@ class UnitProgressionTest {
             title = "Unit 2 — Family",
             description = "Desc 2",
             lessons = listOf(
-                quiz("u2_q6", "u2", 6, "Quiz 6 — Family", u2q1Unlocked, u2q1Completed, 5),
+                step("u2_q6", "u2", 6, "Quiz 6 — Family", u2s1QuizUnlocked, u2s1QuizCompleted, 5),
             ),
         ),
     )
 
     @Test
-    fun formatQuizTitleNormalizesLessonAndQuizPrefixesPreservingNumber() {
+    fun formattingHelpersNormalizeStepThemesAndLabels() {
         assertEquals(
             "Quiz 1 — Greetings & Politeness",
             UnitProgressionResolver.formatQuizTitle("Lesson 1 — Greetings & Politeness"),
@@ -87,191 +72,175 @@ class UnitProgressionTest {
             UnitProgressionResolver.formatQuizTitle("quiz 33 — Law & Governance"),
         )
         assertEquals("Quiz 6", UnitProgressionResolver.formatQuizShortLabel(6))
+        assertEquals("Lesson 6", UnitProgressionResolver.formatStepLessonLabel(6))
+        assertEquals(
+            "Greetings & Politeness",
+            UnitProgressionResolver.extractStepTheme("Quiz 1 — Greetings & Politeness"),
+        )
+        assertEquals(
+            "Greetings & Politeness",
+            UnitProgressionResolver.extractStepTheme("Lesson 1 — Greetings & Politeness"),
+        )
+        assertEquals("", UnitProgressionResolver.extractStepTheme("Quiz 4"))
+        assertEquals(
+            "Lesson 1 — Greetings & Politeness",
+            UnitProgressionResolver.formatStepLessonTitle(1, "Quiz 1 — Greetings & Politeness"),
+        )
+        assertEquals(
+            "Lesson 4",
+            UnitProgressionResolver.formatStepLessonTitle(4, "Quiz 4"),
+        )
     }
 
     @Test
-    fun freshStartUnlocksUnit1LessonOnlyAndKeepsQuiz1Locked() {
+    fun freshStartUnlocksOnlyStep1LessonAndKeepsQuiz1AndLaterStepsLocked() {
         val resolved = UnitProgressionResolver.resolveUnits(
             units = sampleUnits(),
-            completedUnitLessonIds = emptySet(),
+            completedStepLessonIds = emptySet(),
         )
 
         val u1 = resolved[0]
-        assertTrue(u1.isLessonUnlocked)
-        assertFalse(u1.isLessonCompleted)
         assertEquals(10, u1.totalWordCount)
-        assertEquals("Quiz 1 — Greetings", u1.lessons[0].title)
-        assertTrue(u1.lessons[0].isFirstInUnit)
-        assertFalse(u1.lessons[0].isUnlocked)
-        assertFalse(u1.lessons[1].isFirstInUnit)
-        assertFalse(u1.lessons[1].isUnlocked)
 
-        val u2 = resolved[1]
-        assertFalse(u2.isLessonUnlocked)
-        assertFalse(u2.lessons[0].isUnlocked)
+        val step1 = u1.lessons[0]
+        assertEquals("Quiz 1 — Greetings & Politeness", step1.title)
+        assertEquals("Greetings & Politeness", step1.stepTheme)
+        assertTrue(step1.isStepLessonUnlocked)
+        assertFalse(step1.isStepLessonCompleted)
+        assertFalse(step1.isUnlocked)
+        assertFalse(step1.isCompleted)
 
-        assertEquals(ActivePathTarget.UnitLesson("u1"), UnitProgressionResolver.findActiveTarget(resolved))
+        val step2 = u1.lessons[1]
+        assertFalse(step2.isStepLessonUnlocked)
+        assertFalse(step2.isStepLessonCompleted)
+        assertFalse(step2.isUnlocked)
+
+        val step6 = resolved[1].lessons[0]
+        assertFalse(step6.isStepLessonUnlocked)
+        assertFalse(step6.isUnlocked)
+
+        assertEquals(
+            ActivePathTarget.StepLesson(unitId = "u1", lessonId = "u1_q1", orderIndex = 1),
+            UnitProgressionResolver.findActiveTarget(resolved),
+        )
     }
 
     @Test
-    fun completingUnitLessonUnlocksFirstQuizAndKeepsLessonReopenable() {
+    fun completingStep1LessonUnlocksQuiz1WhileKeepingStep2Locked() {
         val resolved = UnitProgressionResolver.resolveUnits(
             units = sampleUnits(),
-            completedUnitLessonIds = setOf("u1"),
+            completedStepLessonIds = setOf("u1_q1"),
         )
 
-        val u1 = resolved[0]
-        assertTrue(u1.isLessonUnlocked)
-        assertTrue(u1.isLessonCompleted)
-        assertTrue(u1.lessons[0].isUnlocked)
-        assertFalse(u1.lessons[1].isUnlocked)
+        val step1 = resolved[0].lessons[0]
+        assertTrue(step1.isStepLessonUnlocked)
+        assertTrue(step1.isStepLessonCompleted)
+        assertTrue(step1.isUnlocked)
+        assertFalse(step1.isCompleted)
+
+        val step2 = resolved[0].lessons[1]
+        assertFalse(step2.isStepLessonUnlocked)
+        assertFalse(step2.isUnlocked)
 
         assertEquals(
-            ActivePathTarget.Quiz("u1", "u1_q1"),
+            ActivePathTarget.Quiz(unitId = "u1", lessonId = "u1_q1", orderIndex = 1),
             UnitProgressionResolver.findActiveTarget(resolved),
         )
     }
 
     @Test
-    fun completingLastQuizOfUnit1UnlocksUnit2LessonWithoutPrematurelyUnlockingQuiz6() {
+    fun completingQuiz1UnlocksStep2LessonWithoutPrematurelyUnlockingQuiz2() {
         val resolved = UnitProgressionResolver.resolveUnits(
             units = sampleUnits(
-                u1q1Unlocked = true,
-                u1q1Completed = true,
-                u1q2Unlocked = true,
-                u1q2Completed = true,
+                u1s1QuizUnlocked = true,
+                u1s1QuizCompleted = true,
             ),
-            completedUnitLessonIds = setOf("u1"),
+            completedStepLessonIds = setOf("u1_q1"),
         )
 
-        val u2 = resolved[1]
-        assertTrue(u2.isLessonUnlocked)
-        assertFalse(u2.isLessonCompleted)
-        assertFalse(u2.lessons[0].isUnlocked)
+        val step1 = resolved[0].lessons[0]
+        assertTrue(step1.isCompleted)
+        assertTrue(step1.isStepLessonCompleted)
 
-        assertEquals(ActivePathTarget.UnitLesson("u2"), UnitProgressionResolver.findActiveTarget(resolved))
-    }
-
-    @Test
-    fun existingQuizProgressKeepsUnitLessonAccessibleWithoutBlockingQuizzes() {
-        val resolved = UnitProgressionResolver.resolveUnits(
-            units = sampleUnits(
-                u1q1Unlocked = true,
-                u1q1Completed = true,
-                u1q2Unlocked = true,
-                u1q2Completed = false,
-            ),
-            completedUnitLessonIds = emptySet(),
-        )
-
-        val u1 = resolved[0]
-        assertTrue(u1.isLessonUnlocked)
-        assertFalse(u1.isLessonCompleted)
-        assertTrue(u1.lessons[0].isUnlocked)
-        assertTrue(u1.lessons[1].isUnlocked)
+        val step2 = resolved[0].lessons[1]
+        assertTrue(step2.isStepLessonUnlocked)
+        assertFalse(step2.isStepLessonCompleted)
+        assertFalse(step2.isUnlocked)
 
         assertEquals(
-            ActivePathTarget.Quiz("u1", "u1_q2"),
+            ActivePathTarget.StepLesson(unitId = "u1", lessonId = "u1_q2", orderIndex = 2),
             UnitProgressionResolver.findActiveTarget(resolved),
         )
     }
 
     @Test
-    fun quizGroupFilteringAndLaunchTargetFollowSelectedOrPendingUnlockedQuiz() {
-        val groups = listOf(
-            UnitLessonQuizGroup(
-                lessonId = "u2_q6",
-                orderIndex = 6,
-                shortLabel = "Quiz 6",
-                title = "Quiz 6 — Family",
-                isUnlocked = true,
-                isCompleted = true,
-                words = listOf(word("w1", "u2_q6", "家"), word("w2", "u2_q6", "爸")),
+    fun completingLastQuizOfUnit1UnlocksUnit2FirstLessonWithoutUnlockingQuiz6() {
+        val resolved = UnitProgressionResolver.resolveUnits(
+            units = sampleUnits(
+                u1s1QuizUnlocked = true,
+                u1s1QuizCompleted = true,
+                u1s2QuizUnlocked = true,
+                u1s2QuizCompleted = true,
             ),
-            UnitLessonQuizGroup(
-                lessonId = "u2_q7",
-                orderIndex = 7,
-                shortLabel = "Quiz 7",
-                title = "Quiz 7 — People",
-                isUnlocked = true,
-                isCompleted = false,
-                words = listOf(word("w3", "u2_q7", "人")),
+            completedStepLessonIds = setOf("u1_q1", "u1_q2"),
+        )
+
+        val step6 = resolved[1].lessons[0]
+        assertTrue(step6.isStepLessonUnlocked)
+        assertFalse(step6.isStepLessonCompleted)
+        assertFalse(step6.isUnlocked)
+
+        assertEquals(
+            ActivePathTarget.StepLesson(unitId = "u2", lessonId = "u2_q6", orderIndex = 6),
+            UnitProgressionResolver.findActiveTarget(resolved),
+        )
+    }
+
+    @Test
+    fun legacyQuizProgressKeepsStepLessonAccessibleAndDoesNotRelockUnlockedQuizzes() {
+        val resolved = UnitProgressionResolver.resolveUnits(
+            units = sampleUnits(
+                u1s1QuizUnlocked = true,
+                u1s1QuizCompleted = true,
+                u1s2QuizUnlocked = true,
+                u1s2QuizCompleted = false,
             ),
-            UnitLessonQuizGroup(
-                lessonId = "u2_q8",
-                orderIndex = 8,
-                shortLabel = "Quiz 8",
-                title = "Quiz 8 — Verbs",
-                isUnlocked = false,
-                isCompleted = false,
-                words = listOf(word("w4", "u2_q8", "去")),
+            completedStepLessonIds = emptySet(),
+        )
+
+        val step1 = resolved[0].lessons[0]
+        assertTrue(step1.isStepLessonUnlocked)
+        assertTrue(step1.isUnlocked)
+        assertTrue(step1.isCompleted)
+
+        val step2 = resolved[0].lessons[1]
+        assertTrue(step2.isStepLessonUnlocked)
+        assertTrue(step2.isUnlocked)
+        assertFalse(step2.isCompleted)
+
+        assertEquals(
+            ActivePathTarget.Quiz(unitId = "u1", lessonId = "u1_q2", orderIndex = 2),
+            UnitProgressionResolver.findActiveTarget(resolved),
+        )
+    }
+
+    @Test
+    fun whenAllStepsCompletedActiveTargetFallsBackToLastUnlockedQuiz() {
+        val resolved = UnitProgressionResolver.resolveUnits(
+            units = sampleUnits(
+                u1s1QuizUnlocked = true,
+                u1s1QuizCompleted = true,
+                u1s2QuizUnlocked = true,
+                u1s2QuizCompleted = true,
+                u2s1QuizUnlocked = true,
+                u2s1QuizCompleted = true,
             ),
+            completedStepLessonIds = setOf("u1_q1", "u1_q2", "u2_q6"),
         )
 
         assertEquals(
-            UnitLessonFilterSelection.SingleQuiz("u2_q7"),
-            UnitProgressionResolver.defaultFilterSelection(groups),
-        )
-
-        assertEquals(
-            listOf("w3"),
-            UnitProgressionResolver.filterWords(groups, UnitLessonFilterSelection.SingleQuiz("u2_q7"))
-                .map { it.word.id },
-        )
-        assertEquals(
-            listOf("w1", "w2", "w3", "w4"),
-            UnitProgressionResolver.filterWords(groups, UnitLessonFilterSelection.All)
-                .map { it.word.id },
-        )
-
-        assertEquals(
-            "u2_q7",
-            UnitProgressionResolver.resolveLaunchQuizTarget(
-                groups = groups,
-                selection = UnitLessonFilterSelection.SingleQuiz("u2_q7"),
-                isUnitLessonCompleted = true,
-            )?.lessonId,
-        )
-        assertEquals(
-            "u2_q6",
-            UnitProgressionResolver.resolveLaunchQuizTarget(
-                groups = groups,
-                selection = UnitLessonFilterSelection.SingleQuiz("u2_q6"),
-                isUnitLessonCompleted = true,
-            )?.lessonId,
-        )
-        assertEquals(
-            "u2_q7",
-            UnitProgressionResolver.resolveLaunchQuizTarget(
-                groups = groups,
-                selection = UnitLessonFilterSelection.SingleQuiz("u2_q8"),
-                isUnitLessonCompleted = true,
-            )?.lessonId,
-        )
-        assertEquals(
-            "u2_q7",
-            UnitProgressionResolver.resolveLaunchQuizTarget(
-                groups = groups,
-                selection = UnitLessonFilterSelection.All,
-                isUnitLessonCompleted = true,
-            )?.lessonId,
-        )
-
-        val lockedGroups = groups.map { it.copy(isUnlocked = false, isCompleted = false) }
-        assertNull(
-            UnitProgressionResolver.resolveLaunchQuizTarget(
-                groups = lockedGroups,
-                selection = UnitLessonFilterSelection.SingleQuiz("u2_q6"),
-                isUnitLessonCompleted = false,
-            ),
-        )
-        assertEquals(
-            "u2_q6",
-            UnitProgressionResolver.resolveLaunchQuizTarget(
-                groups = lockedGroups,
-                selection = UnitLessonFilterSelection.All,
-                isUnitLessonCompleted = true,
-            )?.lessonId,
+            ActivePathTarget.Quiz(unitId = "u2", lessonId = "u2_q6", orderIndex = 6),
+            UnitProgressionResolver.findActiveTarget(resolved),
         )
     }
 }

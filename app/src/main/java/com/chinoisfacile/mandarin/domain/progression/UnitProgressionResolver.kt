@@ -1,88 +1,125 @@
 package com.chinoisfacile.mandarin.domain.progression
 
+import com.chinoisfacile.mandarin.data.model.GrammarNote
 import com.chinoisfacile.mandarin.data.model.LearningUnit
 import com.chinoisfacile.mandarin.data.model.VocabWord
 
 sealed interface ActivePathTarget {
     val unitId: String
+    val lessonId: String
+    val orderIndex: Int
 
-    data class UnitLesson(override val unitId: String) : ActivePathTarget
+    data class StepLesson(
+        override val unitId: String,
+        override val lessonId: String,
+        override val orderIndex: Int,
+    ) : ActivePathTarget
 
     data class Quiz(
         override val unitId: String,
-        val lessonId: String,
+        override val lessonId: String,
+        override val orderIndex: Int,
     ) : ActivePathTarget
 }
 
-data class UnitLessonQuizGroup(
-    val lessonId: String,
-    val orderIndex: Int,
-    val shortLabel: String,
-    val title: String,
-    val isUnlocked: Boolean,
-    val isCompleted: Boolean,
-    val words: List<VocabWord>,
-)
+sealed interface StepLessonCardItem {
+    val key: String
 
-data class UnitLessonWordItem(
-    val word: VocabWord,
-    val lessonId: String,
-    val quizOrderIndex: Int,
-    val quizShortLabel: String,
-    val quizTitle: String,
-)
+    data class WordCard(val word: VocabWord) : StepLessonCardItem {
+        override val key: String get() = "word_${word.id}"
+    }
 
-sealed interface UnitLessonFilterSelection {
-    data class SingleQuiz(val lessonId: String) : UnitLessonFilterSelection
+    data class GrammarCard(val note: GrammarNote) : StepLessonCardItem {
+        override val key: String get() = "grammar_${note.id}"
+    }
+}
 
-    data object All : UnitLessonFilterSelection
+object StepLessonDeckBuilder {
+    /**
+     * Interleaves each word card with its matching sentence-pattern card (when present),
+     * avoiding duplicate grammar cards within the same step.
+     */
+    fun buildDeck(
+        words: List<VocabWord>,
+        notesByTrigger: Map<String, GrammarNote>,
+    ): List<StepLessonCardItem> {
+        val result = ArrayList<StepLessonCardItem>(words.size + notesByTrigger.size)
+        val insertedNoteIds = HashSet<String>()
+        for (word in words) {
+            result += StepLessonCardItem.WordCard(word)
+            val note = notesByTrigger[word.hanzi]
+            if (note != null && insertedNoteIds.add(note.id)) {
+                result += StepLessonCardItem.GrammarCard(note)
+            }
+        }
+        return result
+    }
 }
 
 object UnitProgressionResolver {
 
     private val QUIZ_PREFIX_REGEX = Regex("^(?:Lesson|Quiz)\\b", RegexOption.IGNORE_CASE)
+    private val STEP_THEME_PREFIX_REGEX = Regex("^(?:Lesson|Quiz)\\s+\\d+\\s*[—–:-]\\s*", RegexOption.IGNORE_CASE)
+    private val STANDALONE_STEP_REGEX = Regex("^(?:Lesson|Quiz)\\s+\\d+$", RegexOption.IGNORE_CASE)
 
     fun formatQuizTitle(rawTitle: String): String =
         rawTitle.trim().replaceFirst(QUIZ_PREFIX_REGEX, "Quiz")
 
     fun formatQuizShortLabel(orderIndex: Int): String = "Quiz $orderIndex"
 
+    fun formatStepLessonLabel(orderIndex: Int): String = "Lesson $orderIndex"
+
+    fun extractStepTheme(rawTitle: String): String {
+        val trimmed = rawTitle.trim()
+        if (trimmed.isEmpty() || STANDALONE_STEP_REGEX.matches(trimmed)) {
+            return ""
+        }
+        val stripped = trimmed.replaceFirst(STEP_THEME_PREFIX_REGEX, "").trim()
+        return if (stripped == trimmed && QUIZ_PREFIX_REGEX.containsMatchIn(trimmed)) "" else stripped
+    }
+
+    fun formatStepLessonTitle(orderIndex: Int, rawTitle: String): String {
+        val theme = extractStepTheme(rawTitle)
+        return if (theme.isNotBlank()) "Lesson $orderIndex — $theme" else "Lesson $orderIndex"
+    }
+
     fun resolveUnits(
         units: List<LearningUnit>,
-        completedUnitLessonIds: Set<String>,
+        completedStepLessonIds: Set<String>,
     ): List<LearningUnit> {
         val sortedUnits = units.sortedBy { it.orderIndex }
         val resolved = ArrayList<LearningUnit>(sortedUnits.size)
+        var isVeryFirstStep = true
+        var previousQuizCompleted = false
 
-        for ((index, unit) in sortedUnits.withIndex()) {
-            val sortedQuizzes = unit.lessons.sortedBy { it.orderIndex }
-            val previousUnit = resolved.getOrNull(index - 1)
-            val prevUnitCompleted = previousUnit != null &&
-                previousUnit.lessons.isNotEmpty() &&
-                previousUnit.lessons.last().isCompleted
-            val hasExistingQuizProgress = sortedQuizzes.any { it.isUnlocked || it.isCompleted }
-            val isLessonCompleted = unit.id in completedUnitLessonIds
-            val isLessonUnlocked = (index == 0) ||
-                prevUnitCompleted ||
-                hasExistingQuizProgress ||
-                isLessonCompleted
+        for (unit in sortedUnits) {
+            val sortedSteps = unit.lessons.sortedBy { it.orderIndex }
+            val resolvedSteps = ArrayList<com.chinoisfacile.mandarin.data.model.LessonSummary>(sortedSteps.size)
 
-            val resolvedQuizzes = sortedQuizzes.mapIndexed { quizIdx, quiz ->
-                val effectiveUnlocked = quiz.isUnlocked ||
-                    quiz.isCompleted ||
-                    (quizIdx == 0 && isLessonCompleted)
-                quiz.copy(
-                    title = formatQuizTitle(quiz.title),
-                    isUnlocked = effectiveUnlocked,
-                    isFirstInUnit = quizIdx == 0,
+            for (step in sortedSteps) {
+                val isStepLessonCompleted = step.id in completedStepLessonIds
+                val hasLegacyOrExistingQuizProgress = step.isUnlocked || step.isCompleted
+                val isStepLessonUnlocked = isVeryFirstStep ||
+                    previousQuizCompleted ||
+                    isStepLessonCompleted ||
+                    hasLegacyOrExistingQuizProgress
+                val effectiveQuizUnlocked = step.isUnlocked || step.isCompleted || isStepLessonCompleted
+
+                resolvedSteps += step.copy(
+                    title = formatQuizTitle(step.title),
+                    stepTheme = extractStepTheme(step.title),
+                    isUnlocked = effectiveQuizUnlocked,
+                    isStepLessonUnlocked = isStepLessonUnlocked,
+                    isStepLessonCompleted = isStepLessonCompleted,
                 )
+
+                isVeryFirstStep = false
+                previousQuizCompleted = step.isCompleted
             }
 
             resolved += unit.copy(
-                lessons = resolvedQuizzes,
-                isLessonUnlocked = isLessonUnlocked,
-                isLessonCompleted = isLessonCompleted,
-                totalWordCount = resolvedQuizzes.sumOf { it.wordCount },
+                lessons = resolvedSteps,
+                totalWordCount = resolvedSteps.sumOf { it.wordCount },
             )
         }
 
@@ -91,84 +128,43 @@ object UnitProgressionResolver {
 
     fun findActiveTarget(units: List<LearningUnit>): ActivePathTarget? {
         for (unit in units) {
-            if (unit.isLessonUnlocked && !unit.isLessonCompleted && unit.lessons.none { it.isCompleted }) {
-                return ActivePathTarget.UnitLesson(unit.id)
-            }
-            val nextQuiz = unit.lessons.firstOrNull { it.isUnlocked && !it.isCompleted }
-            if (nextQuiz != null) {
-                return ActivePathTarget.Quiz(unitId = unit.id, lessonId = nextQuiz.id)
+            for (step in unit.lessons) {
+                if (step.isStepLessonUnlocked && !step.isStepLessonCompleted && !step.isUnlocked && !step.isCompleted) {
+                    return ActivePathTarget.StepLesson(
+                        unitId = unit.id,
+                        lessonId = step.id,
+                        orderIndex = step.orderIndex,
+                    )
+                }
+                if (step.isUnlocked && !step.isCompleted) {
+                    return ActivePathTarget.Quiz(
+                        unitId = unit.id,
+                        lessonId = step.id,
+                        orderIndex = step.orderIndex,
+                    )
+                }
             }
         }
 
-        val lastUnlockedQuiz = units
-            .flatMap { it.lessons }
-            .lastOrNull { it.isUnlocked }
+        val allSteps = units.flatMap { it.lessons }
+        val lastUnlockedQuiz = allSteps.lastOrNull { it.isUnlocked }
         if (lastUnlockedQuiz != null) {
             return ActivePathTarget.Quiz(
                 unitId = lastUnlockedQuiz.unitId,
                 lessonId = lastUnlockedQuiz.id,
+                orderIndex = lastUnlockedQuiz.orderIndex,
             )
         }
 
-        return units.lastOrNull { it.isLessonUnlocked }?.let { ActivePathTarget.UnitLesson(it.id) }
-    }
-
-    fun defaultFilterSelection(groups: List<UnitLessonQuizGroup>): UnitLessonFilterSelection {
-        val targetGroup = groups.firstOrNull { !it.isCompleted } ?: groups.firstOrNull()
-        return if (targetGroup != null) {
-            UnitLessonFilterSelection.SingleQuiz(targetGroup.lessonId)
-        } else {
-            UnitLessonFilterSelection.All
-        }
-    }
-
-    fun filterWords(
-        groups: List<UnitLessonQuizGroup>,
-        selection: UnitLessonFilterSelection,
-    ): List<UnitLessonWordItem> {
-        val selectedGroups = when (selection) {
-            is UnitLessonFilterSelection.SingleQuiz -> groups.filter { it.lessonId == selection.lessonId }
-            UnitLessonFilterSelection.All -> groups
-        }
-        return selectedGroups.flatMap { group ->
-            group.words.map { word ->
-                UnitLessonWordItem(
-                    word = word,
-                    lessonId = group.lessonId,
-                    quizOrderIndex = group.orderIndex,
-                    quizShortLabel = group.shortLabel,
-                    quizTitle = group.title,
-                )
-            }
-        }
-    }
-
-    fun resolveLaunchQuizTarget(
-        groups: List<UnitLessonQuizGroup>,
-        selection: UnitLessonFilterSelection,
-        isUnitLessonCompleted: Boolean,
-    ): UnitLessonQuizGroup? {
-        if (groups.isEmpty()) return null
-
-        fun isEffectivelyUnlocked(index: Int, group: UnitLessonQuizGroup): Boolean =
-            group.isUnlocked || group.isCompleted || (index == 0 && isUnitLessonCompleted)
-
-        if (selection is UnitLessonFilterSelection.SingleQuiz) {
-            val selectedIndex = groups.indexOfFirst { it.lessonId == selection.lessonId }
-            if (selectedIndex >= 0 && isEffectivelyUnlocked(selectedIndex, groups[selectedIndex])) {
-                return groups[selectedIndex]
-            }
+        val lastUnlockedStepLesson = allSteps.lastOrNull { it.isStepLessonUnlocked }
+        if (lastUnlockedStepLesson != null) {
+            return ActivePathTarget.StepLesson(
+                unitId = lastUnlockedStepLesson.unitId,
+                lessonId = lastUnlockedStepLesson.id,
+                orderIndex = lastUnlockedStepLesson.orderIndex,
+            )
         }
 
-        val firstPendingUnlocked = groups.withIndex().firstOrNull { (idx, group) ->
-            isEffectivelyUnlocked(idx, group) && !group.isCompleted
-        }?.value
-        if (firstPendingUnlocked != null) {
-            return firstPendingUnlocked
-        }
-
-        return groups.withIndex().firstOrNull { (idx, group) ->
-            isEffectivelyUnlocked(idx, group)
-        }?.value
+        return null
     }
 }

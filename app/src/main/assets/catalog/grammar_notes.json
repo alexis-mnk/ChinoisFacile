@@ -1,0 +1,1124 @@
+{
+  "notes": [
+    {
+      "id": "hsk1_shi",
+      "hskLevel": 1,
+      "triggerWord": "是",
+      "title": "Equating nouns with 是",
+      "pattern": "Subject + 是 + Noun",
+      "explanation": "Use 是 (shì) to link two nouns, like 'am', 'is', or 'are' in English. Don't put 是 before simple adjectives.",
+      "examples": [
+        {
+          "chinese": "我是学生。",
+          "pinyin": "Wǒ shì xuésheng.",
+          "english": "I am a student."
+        },
+        {
+          "chinese": "他是老师。",
+          "pinyin": "Tā shì lǎoshī.",
+          "english": "He is a teacher."
+        }
+      ]
+    },
+    {
+      "id": "hsk1_ma",
+      "hskLevel": 1,
+      "triggerWord": "吗",
+      "title": "Yes/no questions with 吗",
+      "pattern": "Statement + 吗?",
+      "explanation": "Add 吗 (ma) to the end of any statement to turn it into a yes-or-no question without changing word order.",
+      "examples": [
+        {
+          "chinese": "你是中国人吗？",
+          "pinyin": "Nǐ shì Zhōngguórén ma?",
+          "english": "Are you Chinese?"
+        },
+        {
+          "chinese": "你喝茶吗？",
+          "pinyin": "Nǐ hē chá ma?",
+          "english": "Do you drink tea?"
+        }
+      ]
+    },
+    {
+      "id": "hsk1_bu",
+      "hskLevel": 1,
+      "triggerWord": "不",
+      "title": "Negating with 不",
+      "pattern": "Subject + 不 + Verb / Adj",
+      "explanation": "Place 不 (bù) directly before a verb or adjective to negate present, habitual, or future actions and states.",
+      "examples": [
+        {
+          "chinese": "我不是老师。",
+          "pinyin": "Wǒ bú shì lǎoshī.",
+          "english": "I am not a teacher."
+        },
+        {
+          "chinese": "今天不冷。",
+          "pinyin": "Jīntiān bù lěng.",
+          "english": "Today isn't cold."
+        }
+      ]
+    },
+    {
+      "id": "hsk1_ne",
+      "hskLevel": 1,
+      "triggerWord": "呢",
+      "title": "Bounce-back questions with 呢",
+      "pattern": "Noun / Pronoun + 呢?",
+      "explanation": "Attach 呢 (ne) after a noun or pronoun to ask 'What about ...?' or 'Where is ...?' based on context.",
+      "examples": [
+        {
+          "chinese": "我很好，你呢？",
+          "pinyin": "Wǒ hěn hǎo, nǐ ne?",
+          "english": "I'm fine, how about you?"
+        },
+        {
+          "chinese": "我的书呢？",
+          "pinyin": "Wǒ de shū ne?",
+          "english": "Where is my book?"
+        }
+      ]
+    },
+    {
+      "id": "hsk1_meiyou",
+      "hskLevel": 1,
+      "triggerWord": "没有",
+      "title": "Negating 有 and past actions",
+      "pattern": "Subject + 没有 + Object / Verb",
+      "explanation": "Always use 没有 (méiyǒu) instead of 不 to negate 有 ('don't have') or to say something did not happen.",
+      "examples": [
+        {
+          "chinese": "我没有猫。",
+          "pinyin": "Wǒ méiyǒu māo.",
+          "english": "I don't have a cat."
+        },
+        {
+          "chinese": "他昨天没去学校。",
+          "pinyin": "Tā zuótiān méi qù xuéxiào.",
+          "english": "He didn't go to school yesterday."
+        }
+      ]
+    },
+    {
+      "id": "hsk1_shenme",
+      "hskLevel": 1,
+      "triggerWord": "什么",
+      "title": "Asking 'what' with 什么",
+      "pattern": "Subject + Verb + 什么 (+ Noun)?",
+      "explanation": "Keep 什么 (shénme) in the exact spot where the answer goes, rather than moving it to the front of the sentence.",
+      "examples": [
+        {
+          "chinese": "你叫什么名字？",
+          "pinyin": "Nǐ jiào shénme míngzi?",
+          "english": "What is your name?"
+        },
+        {
+          "chinese": "你想吃什么？",
+          "pinyin": "Nǐ xiǎng chī shénme?",
+          "english": "What would you like to eat?"
+        }
+      ]
+    },
+    {
+      "id": "hsk1_zhe",
+      "hskLevel": 1,
+      "triggerWord": "这",
+      "title": "Pointing with 这 and 那",
+      "pattern": "这 / 那 + Measure Word + Noun",
+      "explanation": "When 这 ('this') or 那 ('that') comes before a noun, place a measure word such as 个 or 本 between them.",
+      "examples": [
+        {
+          "chinese": "这本书很好看。",
+          "pinyin": "Zhè běn shū hěn hǎokàn.",
+          "english": "This book is very interesting."
+        },
+        {
+          "chinese": "那个人是我爸爸。",
+          "pinyin": "Nà ge rén shì wǒ bàba.",
+          "english": "That person is my dad."
+        }
+      ]
+    },
+    {
+      "id": "hsk1_de",
+      "hskLevel": 1,
+      "triggerWord": "的",
+      "title": "Possession and modifiers with 的",
+      "pattern": "Owner / Modifier + 的 + Noun",
+      "explanation": "Use 的 (de) after a pronoun or noun to show ownership, much like ''s' in English. It can be dropped for close family.",
+      "examples": [
+        {
+          "chinese": "这是我的电脑。",
+          "pinyin": "Zhè shì wǒ de diànnǎo.",
+          "english": "This is my computer."
+        },
+        {
+          "chinese": "他是王老师的学生。",
+          "pinyin": "Tā shì Wáng lǎoshī de xuésheng.",
+          "english": "He is Teacher Wang's student."
+        }
+      ]
+    },
+    {
+      "id": "hsk1_hen",
+      "hskLevel": 1,
+      "triggerWord": "很",
+      "title": "Linking adjectives with 很",
+      "pattern": "Subject + 很 + Adjective",
+      "explanation": "Put 很 (hěn) before an adjective to form a natural statement; it often acts as a neutral link rather than strong 'very'.",
+      "examples": [
+        {
+          "chinese": "今天很热。",
+          "pinyin": "Jīntiān hěn rè.",
+          "english": "It is hot today."
+        },
+        {
+          "chinese": "汉语很有意思。",
+          "pinyin": "Hànyǔ hěn yǒu yìsi.",
+          "english": "Chinese is interesting."
+        }
+      ]
+    },
+    {
+      "id": "hsk1_tai",
+      "hskLevel": 1,
+      "triggerWord": "太",
+      "title": "Expressing 'too' or 'so' with 太…了",
+      "pattern": "太 + Adjective + 了",
+      "explanation": "Wrap an adjective between 太 (tài) and 了 (le) to express 'too ...' or enthusiastic 'so ...!'.",
+      "examples": [
+        {
+          "chinese": "这个菜太好吃了！",
+          "pinyin": "Zhège cài tài hǎochī le!",
+          "english": "This dish is so delicious!"
+        },
+        {
+          "chinese": "今天太冷了。",
+          "pinyin": "Jīntiān tài lěng le.",
+          "english": "Today is too cold."
+        }
+      ]
+    },
+    {
+      "id": "hsk1_ge",
+      "hskLevel": 1,
+      "triggerWord": "个",
+      "title": "Counting nouns with measure words",
+      "pattern": "Number + 个 + Noun",
+      "explanation": "Mandarin nouns require a measure word after a number. 个 (gè) is the general default when no specific classifier applies.",
+      "examples": [
+        {
+          "chinese": "我有两个朋友。",
+          "pinyin": "Wǒ yǒu liǎng ge péngyou.",
+          "english": "I have two friends."
+        },
+        {
+          "chinese": "桌子上有一个苹果。",
+          "pinyin": "Zhuōzi shàng yǒu yí ge píngguǒ.",
+          "english": "There is an apple on the table."
+        }
+      ]
+    },
+    {
+      "id": "hsk1_ji",
+      "hskLevel": 1,
+      "triggerWord": "几",
+      "title": "Asking small numbers with 几",
+      "pattern": "几 + Measure Word + Noun?",
+      "explanation": "Use 几 (jǐ) to ask 'how many' when expecting a small number (roughly under 10), always paired with a measure word.",
+      "examples": [
+        {
+          "chinese": "你家有几口人？",
+          "pinyin": "Nǐ jiā yǒu jǐ kǒu rén?",
+          "english": "How many people are in your family?"
+        },
+        {
+          "chinese": "现在几点了？",
+          "pinyin": "Xiànzài jǐ diǎn le?",
+          "english": "What time is it now?"
+        }
+      ]
+    },
+    {
+      "id": "hsk1_dian",
+      "hskLevel": 1,
+      "triggerWord": "点",
+      "title": "Telling the time with 点",
+      "pattern": "Number + 点 (+ Number + 分)",
+      "explanation": "Put the hour before 点 (diǎn, o'clock) and minutes before 分 (fēn). Use 半 (bàn) for half past the hour.",
+      "examples": [
+        {
+          "chinese": "现在上午九点。",
+          "pinyin": "Xiànzài shàngwǔ jiǔ diǎn.",
+          "english": "It is nine in the morning now."
+        },
+        {
+          "chinese": "我八点半去工作。",
+          "pinyin": "Wǒ bā diǎn bàn qù gōngzuò.",
+          "english": "I go to work at eight thirty."
+        }
+      ]
+    },
+    {
+      "id": "hsk1_le",
+      "hskLevel": 1,
+      "triggerWord": "了",
+      "title": "Completed action or new state with 了",
+      "pattern": "Verb + 了 + Object  /  Clause + 了",
+      "explanation": "Placed after a verb, 了 (le) marks a completed action; at the end of a sentence, it signals a change or new situation.",
+      "examples": [
+        {
+          "chinese": "我买了一杯茶。",
+          "pinyin": "Wǒ mǎi le yì bēi chá.",
+          "english": "I bought a cup of tea."
+        },
+        {
+          "chinese": "下雨了。",
+          "pinyin": "Xià yǔ le.",
+          "english": "It started raining."
+        }
+      ]
+    },
+    {
+      "id": "hsk1_nar",
+      "hskLevel": 1,
+      "triggerWord": "哪儿",
+      "title": "Asking 'where' with 哪儿",
+      "pattern": "Subject + 在 + 哪儿? / 去 + 哪儿?",
+      "explanation": "Place 哪儿 (nǎr) right where the location answer belongs, after 在 ('to be at') or a movement verb like 去 ('to go').",
+      "examples": [
+        {
+          "chinese": "你在哪儿学习？",
+          "pinyin": "Nǐ zài nǎr xuéxí?",
+          "english": "Where do you study?"
+        },
+        {
+          "chinese": "妈妈去哪儿了？",
+          "pinyin": "Māma qù nǎr le?",
+          "english": "Where did Mom go?"
+        }
+      ]
+    },
+    {
+      "id": "hsk1_zai",
+      "hskLevel": 1,
+      "triggerWord": "在",
+      "title": "Locations before actions with 在",
+      "pattern": "Subject + 在 + Place + Verb",
+      "explanation": "When saying where an action happens, put 在 (zài) + place BEFORE the main verb, never at the end of the sentence.",
+      "examples": [
+        {
+          "chinese": "我在家吃饭。",
+          "pinyin": "Wǒ zài jiā chī fàn.",
+          "english": "I eat at home."
+        },
+        {
+          "chinese": "他在医院工作。",
+          "pinyin": "Tā zài yīyuàn gōngzuò.",
+          "english": "He works at the hospital."
+        }
+      ]
+    },
+    {
+      "id": "hsk1_hui",
+      "hskLevel": 1,
+      "triggerWord": "会",
+      "title": "Learned skills and future with 会",
+      "pattern": "Subject + 会 + Verb",
+      "explanation": "Use 会 (huì) before a verb for a skill you learned (like speaking a language) or to say something will happen.",
+      "examples": [
+        {
+          "chinese": "我会说一点儿汉语。",
+          "pinyin": "Wǒ huì shuō yìdiǎnr Hànyǔ.",
+          "english": "I can speak a little Chinese."
+        },
+        {
+          "chinese": "明天会下雨吗？",
+          "pinyin": "Míngtiān huì xià yǔ ma?",
+          "english": "Will it rain tomorrow?"
+        }
+      ]
+    },
+    {
+      "id": "hsk1_xiang",
+      "hskLevel": 1,
+      "triggerWord": "想",
+      "title": "Wishes and plans with 想",
+      "pattern": "Subject + 想 + Verb (+ Object)",
+      "explanation": "Put 想 (xiǎng) before a verb to politely express 'would like to' or 'want to'.",
+      "examples": [
+        {
+          "chinese": "我想喝水。",
+          "pinyin": "Wǒ xiǎng hē shuǐ.",
+          "english": "I would like to drink some water."
+        },
+        {
+          "chinese": "明天我想去商店。",
+          "pinyin": "Míngtiān wǒ xiǎng qù shāngdiàn.",
+          "english": "Tomorrow I want to go to the store."
+        }
+      ]
+    },
+    {
+      "id": "hsk1_dou",
+      "hskLevel": 1,
+      "triggerWord": "都",
+      "title": "'All' or 'both' with 都",
+      "pattern": "Plural Subject + 都 + Verb / Adj",
+      "explanation": "都 (dōu, 'all / both') always goes BEFORE the verb or adjective, never after it as in English.",
+      "examples": [
+        {
+          "chinese": "我们都是学生。",
+          "pinyin": "Wǒmen dōu shì xuésheng.",
+          "english": "We are all students."
+        },
+        {
+          "chinese": "这些书我都喜欢。",
+          "pinyin": "Zhèxiē shū wǒ dōu xǐhuan.",
+          "english": "I like all of these books."
+        }
+      ]
+    },
+    {
+      "id": "hsk1_zenme",
+      "hskLevel": 1,
+      "triggerWord": "怎么",
+      "title": "Asking 'how' with 怎么",
+      "pattern": "Subject + 怎么 + Verb?",
+      "explanation": "Place 怎么 (zěnme, 'how') directly in front of the verb to ask how an action is done or how to get somewhere.",
+      "examples": [
+        {
+          "chinese": "这个字怎么写？",
+          "pinyin": "Zhège zì zěnme xiě?",
+          "english": "How do you write this character?"
+        },
+        {
+          "chinese": "我们怎么去火车站？",
+          "pinyin": "Wǒmen zěnme qù huǒchēzhàn?",
+          "english": "How do we get to the train station?"
+        }
+      ]
+    },
+    {
+      "id": "hsk2_yao",
+      "hskLevel": 2,
+      "triggerWord": "要",
+      "title": "Wanting and 'going to' with 要",
+      "pattern": "Subject + 要 + Verb / Noun",
+      "explanation": "Use 要 (yào) for direct wants ('want'), ordering items, or actions you are about to do.",
+      "examples": [
+        {
+          "chinese": "我要一杯咖啡。",
+          "pinyin": "Wǒ yào yì bēi kāfēi.",
+          "english": "I want a cup of coffee."
+        },
+        {
+          "chinese": "下午我要去机场。",
+          "pinyin": "Xiàwǔ wǒ yào qù jīchǎng.",
+          "english": "I am going to the airport this afternoon."
+        }
+      ]
+    },
+    {
+      "id": "hsk2_keyi",
+      "hskLevel": 2,
+      "triggerWord": "可以",
+      "title": "Permission and possibility with 可以",
+      "pattern": "Subject + 可以 + Verb (+ 吗)?",
+      "explanation": "Put 可以 (kěyǐ) before a verb to ask for or grant permission ('may / can'). Use 不能 (bù néng) to refuse.",
+      "examples": [
+        {
+          "chinese": "我可以坐这里吗？",
+          "pinyin": "Wǒ kěyǐ zuò zhèlǐ ma?",
+          "english": "May I sit here?"
+        },
+        {
+          "chinese": "你今天可以休息一下。",
+          "pinyin": "Nǐ jīntiān kěyǐ xiūxi yíxià.",
+          "english": "You can take a short rest today."
+        }
+      ]
+    },
+    {
+      "id": "hsk2_ye",
+      "hskLevel": 2,
+      "triggerWord": "也",
+      "title": "Adding 'also' with 也",
+      "pattern": "Subject + 也 + Verb / Adj",
+      "explanation": "Just like 都, the adverb 也 (yě, 'also / too') must stand after the subject and before the verb or adjective.",
+      "examples": [
+        {
+          "chinese": "我姐姐也喜欢跳舞。",
+          "pinyin": "Wǒ jiějie yě xǐhuan tiàowǔ.",
+          "english": "My older sister also likes dancing."
+        },
+        {
+          "chinese": "他很累，我也很累。",
+          "pinyin": "Tā hěn lèi, wǒ yě hěn lèi.",
+          "english": "He is tired, and I am tired too."
+        }
+      ]
+    },
+    {
+      "id": "hsk2_zui",
+      "hskLevel": 2,
+      "triggerWord": "最",
+      "title": "Superlatives with 最",
+      "pattern": "最 + Adjective / Mental Verb",
+      "explanation": "Place 最 (zuì) before an adjective or feeling verb (like 喜欢) to express 'the most' or '-est'.",
+      "examples": [
+        {
+          "chinese": "我最喜欢打篮球。",
+          "pinyin": "Wǒ zuì xǐhuan dǎ lánqiú.",
+          "english": "I like playing basketball the most."
+        },
+        {
+          "chinese": "这条路最近。",
+          "pinyin": "Zhè tiáo lù zuì jìn.",
+          "english": "This road is the closest."
+        }
+      ]
+    },
+    {
+      "id": "hsk2_wang",
+      "hskLevel": 2,
+      "triggerWord": "往",
+      "title": "Giving directions with 往",
+      "pattern": "往 + Direction + Verb",
+      "explanation": "Use 往 (wǎng, 'towards') followed by a direction word before a motion verb like 走 ('walk') or 开 ('drive').",
+      "examples": [
+        {
+          "chinese": "一直往前走。",
+          "pinyin": "Yìzhí wǎng qián zǒu.",
+          "english": "Walk straight ahead."
+        },
+        {
+          "chinese": "请往左看。",
+          "pinyin": "Qǐng wǎng zuǒ kàn.",
+          "english": "Please look to the left."
+        }
+      ]
+    },
+    {
+      "id": "hsk2_li",
+      "hskLevel": 2,
+      "triggerWord": "离",
+      "title": "Distance between places with 离",
+      "pattern": "Place A + 离 + Place B + 很近 / 很远",
+      "explanation": "Use 离 (lí) to measure how close or far Place A is from Place B, always placing the adjective at the end.",
+      "examples": [
+        {
+          "chinese": "我家离公司很近。",
+          "pinyin": "Wǒ jiā lí gōngsī hěn jìn.",
+          "english": "My home is very close to the company."
+        },
+        {
+          "chinese": "机场离市中心远吗？",
+          "pinyin": "Jīchǎng lí shìzhōngxīn yuǎn ma?",
+          "english": "Is the airport far from downtown?"
+        }
+      ]
+    },
+    {
+      "id": "hsk2_dui",
+      "hskLevel": 2,
+      "triggerWord": "对",
+      "title": "Attitude or effect with 对",
+      "pattern": "A + 对 + B + Verb / Adjective",
+      "explanation": "Place 对 (duì) + target before the verb or adjective to show who or what an action or feeling is directed toward.",
+      "examples": [
+        {
+          "chinese": "多喝水对身体好。",
+          "pinyin": "Duō hē shuǐ duì shēntǐ hǎo.",
+          "english": "Drinking plenty of water is good for your health."
+        },
+        {
+          "chinese": "老师对学生很好。",
+          "pinyin": "Lǎoshī duì xuésheng hěn hǎo.",
+          "english": "The teacher is very kind to the students."
+        }
+      ]
+    },
+    {
+      "id": "hsk2_zhengzai",
+      "hskLevel": 2,
+      "triggerWord": "正在",
+      "title": "Ongoing actions with 正在",
+      "pattern": "Subject + 正在 + Verb (+ 呢)",
+      "explanation": "Put 正在 (zhèngzài) before a verb to show an action is happening right now, like English '-ing'.",
+      "examples": [
+        {
+          "chinese": "妹妹正在做作业呢。",
+          "pinyin": "Mèimei zhèngzài zuò zuòyè ne.",
+          "english": "My younger sister is doing her homework right now."
+        },
+        {
+          "chinese": "外面正在下雪。",
+          "pinyin": "Wàimiàn zhèngzài xià xuě.",
+          "english": "It is snowing outside right now."
+        }
+      ]
+    },
+    {
+      "id": "hsk2_yijing",
+      "hskLevel": 2,
+      "triggerWord": "已经",
+      "title": "'Already' with 已经…了",
+      "pattern": "Subject + 已经 + Verb / Adj + 了",
+      "explanation": "Put 已经 (yǐjīng, 'already') before the verb or adjective, and pair it with 了 at the end of the clause.",
+      "examples": [
+        {
+          "chinese": "我已经吃过早饭了。",
+          "pinyin": "Wǒ yǐjīng chī guò zǎofàn le.",
+          "english": "I have already eaten breakfast."
+        },
+        {
+          "chinese": "时间已经不早了。",
+          "pinyin": "Shíjiān yǐjīng bù zǎo le.",
+          "english": "It is already getting late."
+        }
+      ]
+    },
+    {
+      "id": "hsk2_zhe",
+      "hskLevel": 2,
+      "triggerWord": "着",
+      "title": "Continuous states with 着",
+      "pattern": "Subject + Verb + 着 (+ Object)",
+      "explanation": "Attach 着 (zhe) right after a verb to describe an ongoing posture or state, such as wearing clothes or keeping a door open.",
+      "examples": [
+        {
+          "chinese": "门开着呢。",
+          "pinyin": "Mén kāi zhe ne.",
+          "english": "The door is open."
+        },
+        {
+          "chinese": "她穿着一件红衣服。",
+          "pinyin": "Tā chuān zhe yí jiàn hóng yīfu.",
+          "english": "She is wearing a red outfit."
+        }
+      ]
+    },
+    {
+      "id": "hsk2_guo",
+      "hskLevel": 2,
+      "triggerWord": "过",
+      "title": "Past experiences with 过",
+      "pattern": "Subject + Verb + 过 + Object",
+      "explanation": "Follow a verb with 过 (guò) to talk about whether you have ever done or experienced something before.",
+      "examples": [
+        {
+          "chinese": "我去过北京。",
+          "pinyin": "Wǒ qù guò Běijīng.",
+          "english": "I have been to Beijing."
+        },
+        {
+          "chinese": "你看过这个电影吗？",
+          "pinyin": "Nǐ kàn guò zhège diànyǐng ma?",
+          "english": "Have you ever seen this movie?"
+        }
+      ]
+    },
+    {
+      "id": "hsk2_hai",
+      "hskLevel": 2,
+      "triggerWord": "还",
+      "title": "'Still' or 'also' with 还",
+      "pattern": "Subject + 还 + Verb / Adj",
+      "explanation": "Put 还 (hái) before a verb or adjective to mean 'still' (continuing) or 'also / in addition' within the same subject.",
+      "examples": [
+        {
+          "chinese": "他还在教室里看书。",
+          "pinyin": "Tā hái zài jiàoshì lǐ kàn shū.",
+          "english": "He is still reading in the classroom."
+        },
+        {
+          "chinese": "我买了苹果，还买了西瓜。",
+          "pinyin": "Wǒ mǎi le píngguǒ, hái mǎi le xīguā.",
+          "english": "I bought apples, and also bought watermelon."
+        }
+      ]
+    },
+    {
+      "id": "hsk2_jiu",
+      "hskLevel": 2,
+      "triggerWord": "就",
+      "title": "Immediate or early action with 就",
+      "pattern": "Time / Condition + 就 + Verb",
+      "explanation": "Use 就 (jiù) before a verb to show something happens sooner than expected or right after another event.",
+      "examples": [
+        {
+          "chinese": "他每天六点就起床了。",
+          "pinyin": "Tā měitiān liù diǎn jiù qǐchuáng le.",
+          "english": "He gets up as early as six every day."
+        },
+        {
+          "chinese": "下了课我就回家。",
+          "pinyin": "Xià le kè wǒ jiù huí jiā.",
+          "english": "I'll go home right after class ends."
+        }
+      ]
+    },
+    {
+      "id": "hsk2_cong",
+      "hskLevel": 2,
+      "triggerWord": "从",
+      "title": "Starting points with 从…到…",
+      "pattern": "从 + Start + 到 + End",
+      "explanation": "Pair 从 (cóng, 'from') with 到 (dào, 'to') to express a span in either time or distance.",
+      "examples": [
+        {
+          "chinese": "我从星期一到星期五上班。",
+          "pinyin": "Wǒ cóng xīngqīyī dào xīngqīwǔ shàngbān.",
+          "english": "I work from Monday to Friday."
+        },
+        {
+          "chinese": "从这里到地铁站怎么走？",
+          "pinyin": "Cóng zhèlǐ dào dìtiězhàn zěnme zǒu?",
+          "english": "How do I get from here to the subway station?"
+        }
+      ]
+    },
+    {
+      "id": "hsk2_bi",
+      "hskLevel": 2,
+      "triggerWord": "比",
+      "title": "Comparing two things with 比",
+      "pattern": "A + 比 + B + Adjective",
+      "explanation": "Put A before 比 (bǐ) and B after it, followed directly by the adjective (without 很). Add 一点儿 or 多了 after to show degree.",
+      "examples": [
+        {
+          "chinese": "哥哥比我高。",
+          "pinyin": "Gēge bǐ wǒ gāo.",
+          "english": "My older brother is taller than me."
+        },
+        {
+          "chinese": "今天比昨天热一点儿。",
+          "pinyin": "Jīntiān bǐ zuótiān rè yìdiǎnr.",
+          "english": "Today is a bit hotter than yesterday."
+        }
+      ]
+    },
+    {
+      "id": "hsk2_de",
+      "hskLevel": 2,
+      "triggerWord": "得",
+      "title": "Describing how an action is done with 得",
+      "pattern": "Verb + 得 (+ 很) + Adjective",
+      "explanation": "Insert 得 (de) after a verb to describe how well or in what way the action is performed.",
+      "examples": [
+        {
+          "chinese": "他跑得很快。",
+          "pinyin": "Tā pǎo de hěn kuài.",
+          "english": "He runs very fast."
+        },
+        {
+          "chinese": "你的汉语说得真好！",
+          "pinyin": "Nǐ de Hànyǔ shuō de zhēn hǎo!",
+          "english": "You speak Chinese really well!"
+        }
+      ]
+    },
+    {
+      "id": "hsk2_bie",
+      "hskLevel": 2,
+      "triggerWord": "别",
+      "title": "Negative commands with 别",
+      "pattern": "别 + Verb (+ 了)",
+      "explanation": "Start a sentence with 别 (bié) before a verb to tell someone 'Don't ...' or ask them to stop doing something.",
+      "examples": [
+        {
+          "chinese": "别说话，认真听！",
+          "pinyin": "Bié shuōhuà, rènzhēn tīng!",
+          "english": "Don't talk, listen carefully!"
+        },
+        {
+          "chinese": "天晚了，别看了。",
+          "pinyin": "Tiān wǎn le, bié kàn le.",
+          "english": "It's late, stop watching now."
+        }
+      ]
+    },
+    {
+      "id": "hsk2_ba",
+      "hskLevel": 2,
+      "triggerWord": "吧",
+      "title": "Suggestions and guesses with 吧",
+      "pattern": "Statement / Imperative + 吧",
+      "explanation": "Add 吧 (ba) at the end of a sentence to make a friendly suggestion ('let's ...') or soften a guess ('I suppose').",
+      "examples": [
+        {
+          "chinese": "我们一起走吧。",
+          "pinyin": "Wǒmen yìqǐ zǒu ba.",
+          "english": "Let's go together."
+        },
+        {
+          "chinese": "你累了吧，休息一下。",
+          "pinyin": "Nǐ lèi le ba, xiūxi yíxià.",
+          "english": "You must be tired; take a rest."
+        }
+      ]
+    },
+    {
+      "id": "hsk2_yinwei",
+      "hskLevel": 2,
+      "triggerWord": "因为",
+      "title": "Cause and effect with 因为…所以…",
+      "pattern": "因为 + Reason, 所以 + Result",
+      "explanation": "Mandarin often keeps both 因为 ('because') and 所以 ('so') in the same sentence, whereas English uses only one.",
+      "examples": [
+        {
+          "chinese": "因为下雨，所以我没去跑步。",
+          "pinyin": "Yīnwèi xià yǔ, suǒyǐ wǒ méi qù pǎobù.",
+          "english": "Because it rained, I didn't go running."
+        },
+        {
+          "chinese": "因为生病了，所以他今天在家。",
+          "pinyin": "Yīnwèi shēngbìng le, suǒyǐ tā jīntiān zài jiā.",
+          "english": "Since he got sick, he is at home today."
+        }
+      ]
+    },
+    {
+      "id": "hsk2_suiran",
+      "hskLevel": 2,
+      "triggerWord": "虽然",
+      "title": "Concession with 虽然…但是…",
+      "pattern": "虽然 + Clause A, 但是 + Clause B",
+      "explanation": "Pair 虽然 (suīrán, 'although') with 但是 (dànshì, 'but') to link two contrasting facts in one sentence.",
+      "examples": [
+        {
+          "chinese": "虽然今天很冷，但是天气很好。",
+          "pinyin": "Suīrán jīntiān hěn lěng, dànshì tiānqì hěn hǎo.",
+          "english": "Although today is cold, the weather is great."
+        },
+        {
+          "chinese": "汉字虽然难，但是很有意思。",
+          "pinyin": "Hànzì suīrán nán, dànshì hěn yǒu yìsi.",
+          "english": "Although Chinese characters are hard, they are very interesting."
+        }
+      ]
+    },
+    {
+      "id": "hsk3_ba",
+      "hskLevel": 3,
+      "triggerWord": "把",
+      "title": "Moving objects before the verb with 把",
+      "pattern": "Subject + 把 + Object + Verb + Result",
+      "explanation": "Use 把 (bǎ) to put a specific object before the verb when you emphasize how the action changes or moves it.",
+      "examples": [
+        {
+          "chinese": "请把门关上。",
+          "pinyin": "Qǐng bǎ mén guān shàng.",
+          "english": "Please close the door."
+        },
+        {
+          "chinese": "我把作业写完了。",
+          "pinyin": "Wǒ bǎ zuòyè xiě wán le.",
+          "english": "I finished writing my homework."
+        }
+      ]
+    },
+    {
+      "id": "hsk3_bei",
+      "hskLevel": 3,
+      "triggerWord": "被",
+      "title": "Passive sentences with 被",
+      "pattern": "Receiver + 被 (+ Doer) + Verb + Result",
+      "explanation": "Put the person or thing affected by an action first, followed by 被 (bèi) and the doer (which can be omitted).",
+      "examples": [
+        {
+          "chinese": "我的自行车被偷了。",
+          "pinyin": "Wǒ de zìxíngchē bèi tōu le.",
+          "english": "My bicycle was stolen."
+        },
+        {
+          "chinese": "杯子被弟弟打碎了。",
+          "pinyin": "Bēizi bèi dìdi dǎ suì le.",
+          "english": "The cup was broken by my younger brother."
+        }
+      ]
+    },
+    {
+      "id": "hsk3_ruguo",
+      "hskLevel": 3,
+      "triggerWord": "如果",
+      "title": "Conditionals with 如果…就…",
+      "pattern": "如果 + Condition, 就 + Result",
+      "explanation": "Introduce a hypothetical situation with 如果 (rúguǒ, 'if') and link the outcome with 就 ('then').",
+      "examples": [
+        {
+          "chinese": "如果明天不下雨，我们就去爬山。",
+          "pinyin": "Rúguǒ míngtiān bú xià yǔ, wǒmen jiù qù páshān.",
+          "english": "If it doesn't rain tomorrow, we will go hiking."
+        },
+        {
+          "chinese": "如果你有时间，就来我家玩吧。",
+          "pinyin": "Rúguǒ nǐ yǒu shíjiān, jiù lái wǒ jiā wán ba.",
+          "english": "If you have time, come hang out at my place."
+        }
+      ]
+    },
+    {
+      "id": "hsk3_geng",
+      "hskLevel": 3,
+      "triggerWord": "更",
+      "title": "'Even more' with 更",
+      "pattern": "Subject + 更 + Adjective / Verb",
+      "explanation": "Place 更 (gèng) before an adjective or mental verb to mean 'even more ...' compared to something already good or bad.",
+      "examples": [
+        {
+          "chinese": "这家饭馆的菜更好吃。",
+          "pinyin": "Zhè jiā fànguǎn de cài gèng hǎochī.",
+          "english": "The dishes at this restaurant are even more delicious."
+        },
+        {
+          "chinese": "今天风很大，比昨天更冷。",
+          "pinyin": "Jīntiān fēng hěn dà, bǐ zuótiān gèng lěng.",
+          "english": "It's very windy today, even colder than yesterday."
+        }
+      ]
+    },
+    {
+      "id": "hsk3_cai",
+      "hskLevel": 3,
+      "triggerWord": "才",
+      "title": "Late or 'only then' with 才",
+      "pattern": "Time / Condition + 才 + Verb",
+      "explanation": "Unlike 就 (early/fast), 才 (cái) shows that an action happened later than expected or only after a condition was met.",
+      "examples": [
+        {
+          "chinese": "他昨晚十一点才回家。",
+          "pinyin": "Tā zuówǎn shíyī diǎn cái huí jiā.",
+          "english": "He didn't get home until eleven last night."
+        },
+        {
+          "chinese": "我等了半个小时他才来。",
+          "pinyin": "Wǒ děng le bàn ge xiǎoshí tā cái lái.",
+          "english": "He didn't arrive until I had waited half an hour."
+        }
+      ]
+    },
+    {
+      "id": "hsk3_de_adverb",
+      "hskLevel": 3,
+      "triggerWord": "地",
+      "title": "Turning adjectives into adverbs with 地",
+      "pattern": "Adjective / Phrase + 地 + Verb",
+      "explanation": "Place 地 (de) after an adjective or manner phrase right before the verb to show the attitude or way an action happens.",
+      "examples": [
+        {
+          "chinese": "同学们都在认真地听讲。",
+          "pinyin": "Tóngxuémen dōu zài rènzhēn de tīngjiǎng.",
+          "english": "The classmates are all listening attentively."
+        },
+        {
+          "chinese": "他高兴地笑了起来。",
+          "pinyin": "Tā gāoxìng de xiào le qǐlái.",
+          "english": "He happily started laughing."
+        }
+      ]
+    },
+    {
+      "id": "hsk3_haishi",
+      "hskLevel": 3,
+      "triggerWord": "还是",
+      "title": "'Or' in questions vs. 'had better' with 还是",
+      "pattern": "Option A + 还是 + Option B?  /  还是 + Verb + 吧",
+      "explanation": "Use 还是 (háishi) for choices inside questions, or before a verb + 吧 to suggest what someone had better do.",
+      "examples": [
+        {
+          "chinese": "你想喝茶还是喝咖啡？",
+          "pinyin": "Nǐ xiǎng hē chá háishi hē kāfēi?",
+          "english": "Would you like tea or coffee?"
+        },
+        {
+          "chinese": "外面太热了，我们还是坐出租车吧。",
+          "pinyin": "Wàimiàn tài rè le, wǒmen háishi zuò chūzūchē ba.",
+          "english": "It's too hot outside; we'd better take a taxi."
+        }
+      ]
+    },
+    {
+      "id": "hsk3_weile",
+      "hskLevel": 3,
+      "triggerWord": "为了",
+      "title": "Expressing purpose with 为了",
+      "pattern": "为了 + Goal, Subject + Action",
+      "explanation": "Start a sentence with 为了 (wèile, 'in order to / for the sake of') to highlight the goal before stating the action taken.",
+      "examples": [
+        {
+          "chinese": "为了学好汉语，她每天练习。",
+          "pinyin": "Wèile xuéhǎo Hànyǔ, tā měitiān liànxí.",
+          "english": "To learn Chinese well, she practices every day."
+        },
+        {
+          "chinese": "为了健康，我少喝甜饮料。",
+          "pinyin": "Wèile jiànkāng, wǒ shǎo hē tián yǐnliào.",
+          "english": "For my health, I drink fewer sweet beverages."
+        }
+      ]
+    },
+    {
+      "id": "hsk3_yiyang",
+      "hskLevel": 3,
+      "triggerWord": "一样",
+      "title": "Equality with 跟…一样",
+      "pattern": "A + 跟 + B + 一样 (+ Adjective)",
+      "explanation": "Use 跟 (gēn) ... 一样 (yíyàng) to say A and B are the same, optionally adding an adjective at the end.",
+      "examples": [
+        {
+          "chinese": "我的想法跟你一样。",
+          "pinyin": "Wǒ de xiǎngfǎ gēn nǐ yíyàng.",
+          "english": "My idea is the same as yours."
+        },
+        {
+          "chinese": "这双鞋跟那双一样贵。",
+          "pinyin": "Zhè shuāng xié gēn nà shuāng yíyàng guì.",
+          "english": "This pair of shoes is just as expensive as that one."
+        }
+      ]
+    },
+    {
+      "id": "hsk3_xian",
+      "hskLevel": 3,
+      "triggerWord": "先",
+      "title": "Sequencing steps with 先…然后…",
+      "pattern": "先 + Action 1, 然后 + Action 2",
+      "explanation": "Place 先 (xiān, 'first') before the first verb, then introduce the next step with 然后 (ránhòu, 'then').",
+      "examples": [
+        {
+          "chinese": "我们先吃饭，然后再去散步。",
+          "pinyin": "Wǒmen xiān chī fàn, ránhòu zài qù sànbù.",
+          "english": "Let's eat first, and then go for a walk."
+        },
+        {
+          "chinese": "请先洗手，然后坐下。",
+          "pinyin": "Qǐng xiān xǐ shǒu, ránhòu zuò xià.",
+          "english": "Please wash your hands first, then sit down."
+        }
+      ]
+    },
+    {
+      "id": "hsk3_zhiyou",
+      "hskLevel": 3,
+      "triggerWord": "只有",
+      "title": "'Only if' with 只有…才…",
+      "pattern": "只有 + Necessary Condition, 才 + Result",
+      "explanation": "Combine 只有 (zhǐyǒu, 'only') with 才 (cái) to stress that a condition is the sole way to achieve the result.",
+      "examples": [
+        {
+          "chinese": "只有多练习，汉语才会进步。",
+          "pinyin": "Zhǐyǒu duō liànxí, Hànyǔ cái huì jìnbù.",
+          "english": "Only by practicing more will your Chinese improve."
+        },
+        {
+          "chinese": "只有努力工作，才能成功。",
+          "pinyin": "Zhǐyǒu nǔlì gōngzuò, cái néng chénggōng.",
+          "english": "Only if you work hard can you succeed."
+        }
+      ]
+    },
+    {
+      "id": "hsk3_yue",
+      "hskLevel": 3,
+      "triggerWord": "越",
+      "title": "'The more..., the more...' with 越…越…",
+      "pattern": "Subject + 越 + Verb / Adj 1 + 越 + Adj / Verb 2",
+      "explanation": "Pair two 越 (yuè) clauses to show that as one quality or action increases, the second changes along with it.",
+      "examples": [
+        {
+          "chinese": "雨越下越大。",
+          "pinyin": "Yǔ yuè xià yuè dà.",
+          "english": "The rain is getting heavier and heavier."
+        },
+        {
+          "chinese": "汉字越学越有意思。",
+          "pinyin": "Hànzì yuè xué yuè yǒu yìsi.",
+          "english": "The more you study Chinese characters, the more interesting they get."
+        }
+      ]
+    },
+    {
+      "id": "hsk3_chule",
+      "hskLevel": 3,
+      "triggerWord": "除了",
+      "title": "'Besides' or 'except' with 除了…以外",
+      "pattern": "除了 + A (+ 以外), Subject + 还 / 都 + B",
+      "explanation": "Use 除了 (chúle)... 以外 with 还/也 in the second clause for 'besides/in addition', or with 都 for 'except'.",
+      "examples": [
+        {
+          "chinese": "除了英语以外，他还会说日语。",
+          "pinyin": "Chúle Yīngyǔ yǐwài, tā hái huì shuō Rìyǔ.",
+          "english": "Besides English, he can also speak Japanese."
+        },
+        {
+          "chinese": "除了星期天，我每天都上班。",
+          "pinyin": "Chúle Xīngqītiān, wǒ měitiān dōu shàngbān.",
+          "english": "Except for Sunday, I work every day."
+        }
+      ]
+    },
+    {
+      "id": "hsk3_yibian",
+      "hskLevel": 3,
+      "triggerWord": "一边",
+      "title": "Doing two things at once with 一边…一边…",
+      "pattern": "Subject + 一边 + Verb 1, 一边 + Verb 2",
+      "explanation": "Put 一边 (yìbiān) before two verbs performed by the same person at the same time.",
+      "examples": [
+        {
+          "chinese": "他喜欢一边听音乐，一边看书。",
+          "pinyin": "Tā xǐhuan yìbiān tīng yīnyuè, yìbiān kàn shū.",
+          "english": "He likes listening to music while reading."
+        },
+        {
+          "chinese": "我们一边走，一边聊天吧。",
+          "pinyin": "Wǒmen yìbiān zǒu, yìbiān liáotiān ba.",
+          "english": "Let's chat while we walk."
+        }
+      ]
+    },
+    {
+      "id": "hsk3_budan",
+      "hskLevel": 3,
+      "triggerWord": "不但",
+      "title": "'Not only..., but also...' with 不但…而且…",
+      "pattern": "不但 + Clause A, 而且 + Clause B",
+      "explanation": "Use 不但 (búdàn, 'not only') followed by 而且 (érqiě, 'moreover / but also') to build on a first point.",
+      "examples": [
+        {
+          "chinese": "这里的水果不但便宜，而且新鲜。",
+          "pinyin": "Zhèlǐ de shuǐguǒ búdàn piányi, érqiě xīnxiān.",
+          "english": "The fruit here is not only cheap, but also fresh."
+        },
+        {
+          "chinese": "她不但聪明，而且非常努力。",
+          "pinyin": "Tā búdàn cōngming, érqiě fēicháng nǔlì.",
+          "english": "She is not only smart, but also very hardworking."
+        }
+      ]
+    },
+    {
+      "id": "hsk3_ganxingqu",
+      "hskLevel": 3,
+      "triggerWord": "感兴趣",
+      "title": "'Interested in' with 对…感兴趣",
+      "pattern": "Subject + 对 + Topic + 感兴趣",
+      "explanation": "Put the topic after 对 (duì) before 感兴趣 (gǎn xìngqù); never place the topic directly after 感兴趣.",
+      "examples": [
+        {
+          "chinese": "我对中国历史很感兴趣。",
+          "pinyin": "Wǒ duì Zhōngguó lìshǐ hěn gǎn xìngqù.",
+          "english": "I am very interested in Chinese history."
+        },
+        {
+          "chinese": "你对音乐感兴趣吗？",
+          "pinyin": "Nǐ duì yīnyuè gǎn xìngqù ma?",
+          "english": "Are you interested in music?"
+        }
+      ]
+    }
+  ]
+}

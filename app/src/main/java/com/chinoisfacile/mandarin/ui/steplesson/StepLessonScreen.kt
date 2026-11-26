@@ -1,5 +1,6 @@
-package com.chinoisfacile.mandarin.ui.unitlesson
+package com.chinoisfacile.mandarin.ui.steplesson
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,15 +15,14 @@ import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.VolumeUp
+import androidx.compose.material.icons.filled.AutoAwesome
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.PlayArrow
@@ -33,7 +33,6 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.FilledTonalIconButton
-import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
@@ -47,7 +46,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -58,9 +56,10 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.chinoisfacile.mandarin.R
+import com.chinoisfacile.mandarin.data.model.GrammarNote
+import com.chinoisfacile.mandarin.data.model.VocabWord
 import com.chinoisfacile.mandarin.domain.audio.TtsStatus
-import com.chinoisfacile.mandarin.domain.progression.UnitLessonFilterSelection
-import com.chinoisfacile.mandarin.domain.progression.UnitLessonWordItem
+import com.chinoisfacile.mandarin.domain.progression.StepLessonCardItem
 import com.chinoisfacile.mandarin.ui.components.AudioControlButtons
 import com.chinoisfacile.mandarin.ui.components.TtsMissingBanner
 import com.chinoisfacile.mandarin.ui.theme.CjkTextStyles
@@ -68,24 +67,13 @@ import com.chinoisfacile.mandarin.ui.theme.MandarinTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun UnitLessonScreen(
-    viewModel: UnitLessonViewModel,
+fun StepLessonScreen(
+    viewModel: StepLessonViewModel,
     onBack: () -> Unit,
     onStartQuiz: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    val chipsListState = rememberLazyListState()
-
-    LaunchedEffect(uiState.quizGroups) {
-        val selected = uiState.selectedFilter
-        if (selected is UnitLessonFilterSelection.SingleQuiz) {
-            val idx = uiState.quizGroups.indexOfFirst { it.lessonId == selected.lessonId }
-            if (idx >= 0) {
-                chipsListState.scrollToItem(idx)
-            }
-        }
-    }
 
     Surface(
         modifier = modifier
@@ -102,7 +90,7 @@ fun UnitLessonScreen(
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
                         CircularProgressIndicator()
                         Spacer(modifier = Modifier.height(12.dp))
-                        Text(text = stringResource(R.string.unit_lesson_loading))
+                        Text(text = stringResource(R.string.step_lesson_loading))
                     }
                 }
             }
@@ -119,7 +107,7 @@ fun UnitLessonScreen(
                         verticalArrangement = Arrangement.spacedBy(12.dp),
                     ) {
                         Text(
-                            text = stringResource(R.string.unit_lesson_error),
+                            text = stringResource(R.string.step_lesson_error),
                             style = MaterialTheme.typography.bodyLarge,
                             textAlign = TextAlign.Center,
                         )
@@ -133,10 +121,26 @@ fun UnitLessonScreen(
             else -> {
                 val audioReady = uiState.ttsStatus == TtsStatus.READY
                 val extended = MandarinTheme.extendedColors
-                val launchTarget = uiState.launchQuizTarget
+                val subtitleText = when (uiState.grammarNotes.size) {
+                    0 -> stringResource(
+                        R.string.step_lesson_subtitle,
+                        uiState.hskLevel,
+                        uiState.words.size,
+                    )
+                    1 -> stringResource(
+                        R.string.step_lesson_subtitle_with_pattern_one,
+                        uiState.hskLevel,
+                        uiState.words.size,
+                    )
+                    else -> stringResource(
+                        R.string.step_lesson_subtitle_with_patterns,
+                        uiState.hskLevel,
+                        uiState.words.size,
+                        uiState.grammarNotes.size,
+                    )
+                }
 
                 Column(modifier = Modifier.fillMaxSize()) {
-                    // En-tête
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -146,24 +150,22 @@ fun UnitLessonScreen(
                         IconButton(onClick = onBack) {
                             Icon(
                                 imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                                contentDescription = stringResource(R.string.unit_lesson_back_cd),
+                                contentDescription = stringResource(R.string.step_lesson_back_cd),
                             )
                         }
                         Column(modifier = Modifier.weight(1f)) {
                             Text(
-                                text = uiState.unitTitle,
+                                text = uiState.stepTitle,
                                 style = MaterialTheme.typography.titleMedium,
                                 maxLines = 1,
                                 overflow = TextOverflow.Ellipsis,
                             )
                             Text(
-                                text = stringResource(
-                                    R.string.unit_lesson_subtitle,
-                                    uiState.hskLevel,
-                                    uiState.totalUnitWords,
-                                ),
+                                text = subtitleText,
                                 style = MaterialTheme.typography.bodyMedium,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis,
                             )
                         }
                         if (uiState.isLessonCompleted) {
@@ -184,7 +186,7 @@ fun UnitLessonScreen(
                                         modifier = Modifier.size(16.dp),
                                     )
                                     Text(
-                                        text = stringResource(R.string.unit_lesson_completed_badge),
+                                        text = stringResource(R.string.step_lesson_completed_badge),
                                         style = MaterialTheme.typography.labelLarge,
                                         color = extended.onSuccessContainer,
                                     )
@@ -192,15 +194,14 @@ fun UnitLessonScreen(
                             }
                         } else {
                             TextButton(onClick = viewModel::onCompleteLesson) {
-                                Text(text = stringResource(R.string.unit_lesson_complete_short))
+                                Text(text = stringResource(R.string.step_lesson_complete_short))
                             }
                         }
                     }
 
-                    // Sélecteur Cartes / Fiche
                     val modeOptions = listOf(
-                        UnitLessonDisplayMode.CARDS to R.string.unit_lesson_mode_cards,
-                        UnitLessonDisplayMode.SHEET to R.string.unit_lesson_mode_sheet,
+                        StepLessonDisplayMode.CARDS to R.string.step_lesson_mode_cards,
+                        StepLessonDisplayMode.LIST to R.string.step_lesson_mode_list,
                     )
                     SingleChoiceSegmentedButtonRow(
                         modifier = Modifier
@@ -222,55 +223,6 @@ fun UnitLessonScreen(
                     }
 
                     Spacer(modifier = Modifier.height(6.dp))
-
-                    // Puces de sélection Quiz N ... / Tout
-                    LazyRow(
-                        state = chipsListState,
-                        contentPadding = PaddingValues(horizontal = 16.dp),
-                        horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    ) {
-                        itemsIndexed(
-                            items = uiState.quizGroups,
-                            key = { _, group -> group.lessonId },
-                        ) { _, group ->
-                            val selected =
-                                uiState.selectedFilter == UnitLessonFilterSelection.SingleQuiz(group.lessonId)
-                            FilterChip(
-                                selected = selected,
-                                onClick = {
-                                    viewModel.onSelectFilter(
-                                        UnitLessonFilterSelection.SingleQuiz(group.lessonId),
-                                    )
-                                },
-                                label = { Text(text = group.shortLabel) },
-                                leadingIcon = if (group.isCompleted) {
-                                    {
-                                        Icon(
-                                            imageVector = Icons.Default.Check,
-                                            contentDescription = null,
-                                            modifier = Modifier.size(16.dp),
-                                        )
-                                    }
-                                } else {
-                                    null
-                                },
-                            )
-                        }
-                        item(key = "filter_all") {
-                            FilterChip(
-                                selected = uiState.selectedFilter == UnitLessonFilterSelection.All,
-                                onClick = { viewModel.onSelectFilter(UnitLessonFilterSelection.All) },
-                                label = {
-                                    Text(
-                                        text = stringResource(
-                                            R.string.unit_lesson_filter_all,
-                                            uiState.totalUnitWords,
-                                        ),
-                                    )
-                                },
-                            )
-                        }
-                    }
 
                     if (uiState.ttsStatus == TtsStatus.LANGUAGE_MISSING ||
                         uiState.ttsStatus == TtsStatus.ERROR
@@ -301,7 +253,10 @@ fun UnitLessonScreen(
                                     tint = extended.onSuccessContainer,
                                 )
                                 Text(
-                                    text = stringResource(R.string.unit_lesson_completed_banner),
+                                    text = stringResource(
+                                        R.string.step_lesson_completed_banner,
+                                        uiState.orderIndex,
+                                    ),
                                     style = MaterialTheme.typography.bodyMedium,
                                     fontWeight = FontWeight.Medium,
                                     color = extended.onSuccessContainer,
@@ -311,8 +266,8 @@ fun UnitLessonScreen(
                     }
 
                     when (uiState.displayMode) {
-                        UnitLessonDisplayMode.CARDS -> {
-                            UnitLessonCardsContent(
+                        StepLessonDisplayMode.CARDS -> {
+                            StepLessonCardsContent(
                                 uiState = uiState,
                                 audioReady = audioReady,
                                 onPlayNormal = viewModel::onPlayNormal,
@@ -320,21 +275,18 @@ fun UnitLessonScreen(
                                 onPreviousCard = viewModel::onPreviousCard,
                                 onNextCard = viewModel::onNextCard,
                                 onCompleteLesson = viewModel::onCompleteLesson,
-                                onStartQuiz = onStartQuiz,
-                                onBack = onBack,
+                                onStartQuiz = { onStartQuiz(uiState.lessonId) },
                                 modifier = Modifier.weight(1f),
                             )
                         }
 
-                        UnitLessonDisplayMode.SHEET -> {
-                            UnitLessonSheetContent(
+                        StepLessonDisplayMode.LIST -> {
+                            StepLessonListContent(
                                 uiState = uiState,
                                 audioReady = audioReady,
                                 onPlayNormal = viewModel::onPlayNormal,
                                 onCompleteLesson = viewModel::onCompleteLesson,
-                                onStartQuiz = onStartQuiz,
-                                launchTargetOrder = launchTarget?.orderIndex,
-                                launchTargetLessonId = launchTarget?.lessonId,
+                                onStartQuiz = { onStartQuiz(uiState.lessonId) },
                                 modifier = Modifier.weight(1f),
                             )
                         }
@@ -346,22 +298,21 @@ fun UnitLessonScreen(
 }
 
 @Composable
-private fun UnitLessonCardsContent(
-    uiState: UnitLessonUiState,
+private fun StepLessonCardsContent(
+    uiState: StepLessonUiState,
     audioReady: Boolean,
     onPlayNormal: (String) -> Unit,
     onPlaySlow: (String) -> Unit,
     onPreviousCard: () -> Unit,
     onNextCard: () -> Unit,
     onCompleteLesson: () -> Unit,
-    onStartQuiz: (String) -> Unit,
-    onBack: () -> Unit,
+    onStartQuiz: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val visibleWords = uiState.visibleWords
-    val item = uiState.currentWordItem ?: return
-    val word = item.word
-    val launchTarget = uiState.launchQuizTarget
+    val item = uiState.currentItem ?: return
+    val deckSize = uiState.deckItems.size
+    val extended = MandarinTheme.extendedColors
+    val isGrammarCard = item is StepLessonCardItem.GrammarCard
 
     Column(modifier = modifier.fillMaxWidth()) {
         Column(
@@ -376,20 +327,47 @@ private fun UnitLessonCardsContent(
             ) {
                 Surface(
                     shape = RoundedCornerShape(8.dp),
-                    color = MaterialTheme.colorScheme.secondaryContainer,
+                    color = if (isGrammarCard) {
+                        extended.learningContainer
+                    } else {
+                        MaterialTheme.colorScheme.secondaryContainer
+                    },
                 ) {
-                    Text(
-                        text = item.quizShortLabel,
-                        style = MaterialTheme.typography.labelLarge,
-                        color = MaterialTheme.colorScheme.onSecondaryContainer,
-                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp),
-                    )
+                    Row(
+                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(4.dp),
+                    ) {
+                        if (isGrammarCard) {
+                            Icon(
+                                imageVector = Icons.Default.AutoAwesome,
+                                contentDescription = null,
+                                tint = extended.onLearningContainer,
+                                modifier = Modifier.size(13.dp),
+                            )
+                        }
+                        Text(
+                            text = stringResource(
+                                if (isGrammarCard) {
+                                    R.string.step_lesson_grammar_badge
+                                } else {
+                                    R.string.step_lesson_word_badge
+                                },
+                            ),
+                            style = MaterialTheme.typography.labelLarge,
+                            color = if (isGrammarCard) {
+                                extended.onLearningContainer
+                            } else {
+                                MaterialTheme.colorScheme.onSecondaryContainer
+                            },
+                        )
+                    }
                 }
                 Text(
                     text = stringResource(
-                        R.string.unit_lesson_card_progress,
+                        R.string.step_lesson_card_progress,
                         uiState.safeCardIndex + 1,
-                        visibleWords.size,
+                        deckSize,
                     ),
                     style = MaterialTheme.typography.labelLarge,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -397,8 +375,9 @@ private fun UnitLessonCardsContent(
             }
             Spacer(modifier = Modifier.height(6.dp))
             LinearProgressIndicator(
-                progress = { (uiState.safeCardIndex + 1).toFloat() / visibleWords.size.coerceAtLeast(1) },
+                progress = { (uiState.safeCardIndex + 1).toFloat() / deckSize.coerceAtLeast(1) },
                 modifier = Modifier.fillMaxWidth(),
+                color = if (isGrammarCard) extended.learning else MaterialTheme.colorScheme.primary,
             )
         }
 
@@ -409,85 +388,21 @@ private fun UnitLessonCardsContent(
                 .padding(horizontal = 16.dp, vertical = 8.dp),
             verticalArrangement = Arrangement.spacedBy(14.dp),
         ) {
-            Card(
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(20.dp),
-                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-                elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
-            ) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 20.dp, vertical = 24.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                ) {
-                    Text(
-                        text = word.hanzi,
-                        style = CjkTextStyles.HanziDisplay,
-                        color = MaterialTheme.colorScheme.onSurface,
-                        textAlign = TextAlign.Center,
-                    )
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Text(
-                        text = word.pinyin,
-                        style = CjkTextStyles.Pinyin,
-                        color = MaterialTheme.colorScheme.primary,
-                        textAlign = TextAlign.Center,
-                    )
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Text(
-                        text = word.english,
-                        style = MaterialTheme.typography.titleLarge,
-                        color = MaterialTheme.colorScheme.onSurface,
-                        textAlign = TextAlign.Center,
-                    )
-                    Spacer(modifier = Modifier.height(18.dp))
-                    AudioControlButtons(
-                        enabled = audioReady,
-                        onPlayNormal = { onPlayNormal(word.hanzi) },
-                        onPlaySlow = { onPlaySlow(word.hanzi) },
+            when (item) {
+                is StepLessonCardItem.WordCard -> {
+                    WordDeckCards(
+                        word = item.word,
+                        audioReady = audioReady,
+                        onPlayNormal = onPlayNormal,
+                        onPlaySlow = onPlaySlow,
                     )
                 }
-            }
 
-            Card(
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(18.dp),
-                colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceVariant,
-                ),
-            ) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(8.dp),
-                ) {
-                    Text(
-                        text = stringResource(R.string.unit_lesson_example_label),
-                        style = MaterialTheme.typography.labelLarge,
-                        color = MaterialTheme.colorScheme.primary,
-                    )
-                    Text(
-                        text = word.exampleHanzi,
-                        style = CjkTextStyles.HanziListItem,
-                        color = MaterialTheme.colorScheme.onSurface,
-                    )
-                    Text(
-                        text = word.examplePinyin,
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.primary,
-                    )
-                    Text(
-                        text = word.exampleEnglish,
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    )
-                    Spacer(modifier = Modifier.height(2.dp))
-                    AudioControlButtons(
-                        enabled = audioReady,
-                        onPlayNormal = { onPlayNormal(word.exampleHanzi) },
-                        onPlaySlow = { onPlaySlow(word.exampleHanzi) },
+                is StepLessonCardItem.GrammarCard -> {
+                    GrammarPatternCard(
+                        note = item.note,
+                        audioReady = audioReady,
+                        onPlayNormal = onPlayNormal,
                     )
                 }
             }
@@ -510,7 +425,7 @@ private fun UnitLessonCardsContent(
                     shape = RoundedCornerShape(14.dp),
                 ) {
                     Text(
-                        text = stringResource(R.string.unit_lesson_prev),
+                        text = stringResource(R.string.step_lesson_prev),
                         modifier = Modifier.padding(vertical = 4.dp),
                     )
                 }
@@ -523,7 +438,7 @@ private fun UnitLessonCardsContent(
                             shape = RoundedCornerShape(14.dp),
                         ) {
                             Text(
-                                text = stringResource(R.string.unit_lesson_next),
+                                text = stringResource(R.string.step_lesson_next),
                                 modifier = Modifier.padding(vertical = 4.dp),
                             )
                         }
@@ -536,15 +451,15 @@ private fun UnitLessonCardsContent(
                             shape = RoundedCornerShape(14.dp),
                         ) {
                             Text(
-                                text = stringResource(R.string.unit_lesson_complete_cta),
+                                text = stringResource(R.string.step_lesson_complete_cta),
                                 modifier = Modifier.padding(vertical = 4.dp),
                             )
                         }
                     }
 
-                    launchTarget != null -> {
+                    else -> {
                         Button(
-                            onClick = { onStartQuiz(launchTarget.lessonId) },
+                            onClick = onStartQuiz,
                             modifier = Modifier.weight(1f),
                             shape = RoundedCornerShape(14.dp),
                         ) {
@@ -555,22 +470,12 @@ private fun UnitLessonCardsContent(
                             )
                             Spacer(modifier = Modifier.width(6.dp))
                             Text(
-                                text = stringResource(R.string.unit_lesson_launch_quiz, launchTarget.orderIndex),
+                                text = stringResource(
+                                    R.string.step_lesson_launch_quiz,
+                                    uiState.orderIndex,
+                                ),
                                 maxLines = 1,
                                 overflow = TextOverflow.Ellipsis,
-                                modifier = Modifier.padding(vertical = 4.dp),
-                            )
-                        }
-                    }
-
-                    else -> {
-                        Button(
-                            onClick = onBack,
-                            modifier = Modifier.weight(1f),
-                            shape = RoundedCornerShape(14.dp),
-                        ) {
-                            Text(
-                                text = stringResource(R.string.lesson_back_home),
                                 modifier = Modifier.padding(vertical = 4.dp),
                             )
                         }
@@ -578,9 +483,9 @@ private fun UnitLessonCardsContent(
                 }
             }
 
-            if (uiState.isLessonCompleted && !uiState.isOnLastCard && launchTarget != null) {
+            if (uiState.isLessonCompleted && !uiState.isOnLastCard) {
                 FilledTonalButton(
-                    onClick = { onStartQuiz(launchTarget.lessonId) },
+                    onClick = onStartQuiz,
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(14.dp),
                 ) {
@@ -590,7 +495,12 @@ private fun UnitLessonCardsContent(
                         modifier = Modifier.size(18.dp),
                     )
                     Spacer(modifier = Modifier.width(6.dp))
-                    Text(text = stringResource(R.string.unit_lesson_launch_quiz, launchTarget.orderIndex))
+                    Text(
+                        text = stringResource(
+                            R.string.step_lesson_launch_quiz,
+                            uiState.orderIndex,
+                        ),
+                    )
                 }
             }
         }
@@ -598,48 +508,289 @@ private fun UnitLessonCardsContent(
 }
 
 @Composable
-private fun UnitLessonSheetContent(
-    uiState: UnitLessonUiState,
+private fun WordDeckCards(
+    word: VocabWord,
+    audioReady: Boolean,
+    onPlayNormal: (String) -> Unit,
+    onPlaySlow: (String) -> Unit,
+) {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(20.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 20.dp, vertical = 24.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            Text(
+                text = word.hanzi,
+                style = CjkTextStyles.HanziDisplay,
+                color = MaterialTheme.colorScheme.onSurface,
+                textAlign = TextAlign.Center,
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                text = word.pinyin,
+                style = CjkTextStyles.Pinyin,
+                color = MaterialTheme.colorScheme.primary,
+                textAlign = TextAlign.Center,
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                text = word.english,
+                style = MaterialTheme.typography.titleLarge,
+                color = MaterialTheme.colorScheme.onSurface,
+                textAlign = TextAlign.Center,
+            )
+            Spacer(modifier = Modifier.height(18.dp))
+            AudioControlButtons(
+                enabled = audioReady,
+                onPlayNormal = { onPlayNormal(word.hanzi) },
+                onPlaySlow = { onPlaySlow(word.hanzi) },
+            )
+        }
+    }
+
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(18.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surfaceVariant,
+        ),
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
+            Text(
+                text = stringResource(R.string.step_lesson_example_label),
+                style = MaterialTheme.typography.labelLarge,
+                color = MaterialTheme.colorScheme.primary,
+            )
+            Text(
+                text = word.exampleHanzi,
+                style = CjkTextStyles.HanziListItem,
+                color = MaterialTheme.colorScheme.onSurface,
+            )
+            Text(
+                text = word.examplePinyin,
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.primary,
+            )
+            Text(
+                text = word.exampleEnglish,
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+            Spacer(modifier = Modifier.height(2.dp))
+            AudioControlButtons(
+                enabled = audioReady,
+                onPlayNormal = { onPlayNormal(word.exampleHanzi) },
+                onPlaySlow = { onPlaySlow(word.exampleHanzi) },
+            )
+        }
+    }
+}
+
+@Composable
+private fun GrammarPatternCard(
+    note: GrammarNote,
+    audioReady: Boolean,
+    onPlayNormal: (String) -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    val extended = MandarinTheme.extendedColors
+
+    Card(
+        modifier = modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(20.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+        border = BorderStroke(width = 1.5.dp, color = extended.learning),
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp),
+        ) {
+            Surface(
+                shape = RoundedCornerShape(8.dp),
+                color = extended.learningContainer,
+            ) {
+                Row(
+                    modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(6.dp),
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.AutoAwesome,
+                        contentDescription = null,
+                        tint = extended.onLearningContainer,
+                        modifier = Modifier.size(14.dp),
+                    )
+                    Text(
+                        text = stringResource(R.string.step_lesson_grammar_badge),
+                        style = MaterialTheme.typography.labelLarge,
+                        fontWeight = FontWeight.Bold,
+                        color = extended.onLearningContainer,
+                    )
+                }
+            }
+
+            Text(
+                text = note.title,
+                style = MaterialTheme.typography.titleLarge,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onSurface,
+            )
+
+            Surface(
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(12.dp),
+                color = extended.learningContainer,
+            ) {
+                Text(
+                    text = note.pattern,
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Bold,
+                    color = extended.onLearningContainer,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 14.dp, vertical = 12.dp),
+                )
+            }
+
+            Text(
+                text = note.explanation,
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onSurface,
+            )
+
+            Text(
+                text = stringResource(R.string.step_lesson_examples_label),
+                style = MaterialTheme.typography.labelLarge,
+                color = MaterialTheme.colorScheme.primary,
+            )
+
+            note.examples.forEachIndexed { index, example ->
+                Surface(
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(12.dp),
+                    color = MaterialTheme.colorScheme.surfaceVariant,
+                ) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 12.dp, vertical = 10.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(10.dp),
+                    ) {
+                        Column(
+                            modifier = Modifier.weight(1f),
+                            verticalArrangement = Arrangement.spacedBy(2.dp),
+                        ) {
+                            Text(
+                                text = example.chinese,
+                                style = CjkTextStyles.HanziListItem,
+                                color = MaterialTheme.colorScheme.onSurface,
+                            )
+                            Text(
+                                text = example.pinyin,
+                                style = MaterialTheme.typography.bodyMedium,
+                                fontWeight = FontWeight.Medium,
+                                color = MaterialTheme.colorScheme.primary,
+                            )
+                            Text(
+                                text = example.english,
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            )
+                        }
+                        FilledTonalIconButton(
+                            onClick = { onPlayNormal(example.chinese) },
+                            enabled = audioReady,
+                            modifier = Modifier.size(48.dp),
+                            colors = IconButtonDefaults.filledTonalIconButtonColors(
+                                containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                                contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                            ),
+                        ) {
+                            Icon(
+                                imageVector = Icons.AutoMirrored.Filled.VolumeUp,
+                                contentDescription = stringResource(
+                                    R.string.step_lesson_listen_grammar_example_cd,
+                                    index + 1,
+                                ),
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun StepLessonListContent(
+    uiState: StepLessonUiState,
     audioReady: Boolean,
     onPlayNormal: (String) -> Unit,
     onCompleteLesson: () -> Unit,
-    onStartQuiz: (String) -> Unit,
-    launchTargetOrder: Int?,
-    launchTargetLessonId: String?,
+    onStartQuiz: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val visibleWords = uiState.visibleWords
-    val showGroupHeaders = uiState.selectedFilter is UnitLessonFilterSelection.All
-
     Column(modifier = modifier.fillMaxWidth()) {
         LazyColumn(
             modifier = Modifier.weight(1f),
             contentPadding = PaddingValues(horizontal = 16.dp, vertical = 10.dp),
-            verticalArrangement = Arrangement.spacedBy(10.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-            itemsIndexed(
-                items = visibleWords,
-                key = { _, item -> item.word.id },
-            ) { index, item ->
-                val isNewGroup = showGroupHeaders &&
-                    (index == 0 || visibleWords[index - 1].lessonId != item.lessonId)
-                if (isNewGroup) {
+            if (uiState.grammarNotes.isNotEmpty()) {
+                item(key = "section_patterns") {
                     Text(
-                        text = item.quizTitle,
+                        text = stringResource(R.string.step_lesson_section_patterns),
                         style = MaterialTheme.typography.titleMedium,
                         color = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.padding(
-                            top = if (index == 0) 2.dp else 8.dp,
-                            bottom = 4.dp,
-                        ),
                     )
                 }
+                items(
+                    items = uiState.grammarNotes,
+                    key = { "list_grammar_${it.id}" },
+                ) { note ->
+                    GrammarPatternCard(
+                        note = note,
+                        audioReady = audioReady,
+                        onPlayNormal = onPlayNormal,
+                    )
+                }
+            }
 
-                SheetWordCard(
-                    item = item,
+            item(key = "section_vocabulary") {
+                Text(
+                    text = stringResource(R.string.step_lesson_section_vocabulary),
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.padding(top = if (uiState.grammarNotes.isNotEmpty()) 6.dp else 0.dp),
+                )
+            }
+
+            items(
+                items = uiState.words,
+                key = { "list_word_${it.id}" },
+            ) { word ->
+                StepWordListCard(
+                    word = word,
                     audioReady = audioReady,
-                    onListenWord = { onPlayNormal(item.word.hanzi) },
-                    onListenExample = { onPlayNormal(item.word.exampleHanzi) },
+                    onListenWord = { onPlayNormal(word.hanzi) },
+                    onListenExample = { onPlayNormal(word.exampleHanzi) },
                 )
             }
         }
@@ -656,13 +807,13 @@ private fun UnitLessonSheetContent(
                     shape = RoundedCornerShape(14.dp),
                 ) {
                     Text(
-                        text = stringResource(R.string.unit_lesson_complete_cta),
+                        text = stringResource(R.string.step_lesson_complete_cta),
                         modifier = Modifier.padding(vertical = 4.dp),
                     )
                 }
-            } else if (launchTargetLessonId != null && launchTargetOrder != null) {
+            } else {
                 Button(
-                    onClick = { onStartQuiz(launchTargetLessonId) },
+                    onClick = onStartQuiz,
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(14.dp),
                 ) {
@@ -673,7 +824,10 @@ private fun UnitLessonSheetContent(
                     )
                     Spacer(modifier = Modifier.width(6.dp))
                     Text(
-                        text = stringResource(R.string.unit_lesson_launch_quiz, launchTargetOrder),
+                        text = stringResource(
+                            R.string.step_lesson_launch_quiz,
+                            uiState.orderIndex,
+                        ),
                         modifier = Modifier.padding(vertical = 4.dp),
                     )
                 }
@@ -683,13 +837,12 @@ private fun UnitLessonSheetContent(
 }
 
 @Composable
-private fun SheetWordCard(
-    item: UnitLessonWordItem,
+private fun StepWordListCard(
+    word: VocabWord,
     audioReady: Boolean,
     onListenWord: () -> Unit,
     onListenExample: () -> Unit,
 ) {
-    val word = item.word
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(14.dp),
@@ -741,7 +894,7 @@ private fun SheetWordCard(
                 ) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.VolumeUp,
-                        contentDescription = stringResource(R.string.unit_lesson_listen_word_cd),
+                        contentDescription = stringResource(R.string.step_lesson_listen_word_cd),
                     )
                 }
             }
@@ -777,7 +930,7 @@ private fun SheetWordCard(
                     ) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.VolumeUp,
-                            contentDescription = stringResource(R.string.unit_lesson_listen_example_cd),
+                            contentDescription = stringResource(R.string.step_lesson_listen_example_cd),
                             tint = MaterialTheme.colorScheme.primary,
                             modifier = Modifier.size(20.dp),
                         )

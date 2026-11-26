@@ -65,20 +65,35 @@ fun WordEntity.toDomain(): VocabWord = VocabWord(
 fun LessonEntity.toSummary(
     wordCount: Int,
     previewHanzi: List<String> = emptyList(),
-    isFirstInUnit: Boolean = false,
 ): LessonSummary = LessonSummary(
     id = id,
     unitId = unitId,
     hskLevel = hskLevel,
     orderIndex = orderIndex,
     title = UnitProgressionResolver.formatQuizTitle(title),
+    stepTheme = UnitProgressionResolver.extractStepTheme(title),
     isUnlocked = isUnlocked,
     isCompleted = isCompleted,
     bestScore = bestScore,
     completedCount = completedCount,
     wordCount = wordCount,
     previewHanzi = previewHanzi,
-    isFirstInUnit = isFirstInUnit,
+)
+
+fun GrammarExampleDto.toDomain(): GrammarExample = GrammarExample(
+    chinese = chinese,
+    pinyin = pinyin,
+    english = english,
+)
+
+fun GrammarNoteDto.toDomain(): GrammarNote = GrammarNote(
+    id = id,
+    hskLevel = hskLevel,
+    triggerWord = triggerWord,
+    title = title,
+    pattern = pattern,
+    explanation = explanation,
+    examples = examples.map { it.toDomain() },
 )
 
 fun UserStatsEntity.toDomain(): UserStats = UserStats(

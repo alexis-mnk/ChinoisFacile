@@ -40,6 +40,7 @@ class HomeViewModel(
             masteredCount = data.masteredCount,
             totalWordsCount = data.totalWordsCount,
             dueWordsCount = data.dueWordsCount,
+            seenWordsCount = data.seenWordsCount,
         )
     }.stateIn(
         scope = viewModelScope,

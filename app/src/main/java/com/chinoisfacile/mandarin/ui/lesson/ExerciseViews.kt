@@ -13,14 +13,20 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.VolumeUp
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.FilterChip
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.SuggestionChip
 import androidx.compose.material3.SuggestionChipDefaults
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -36,6 +42,7 @@ import com.chinoisfacile.mandarin.domain.lesson.TokenChip
 import com.chinoisfacile.mandarin.ui.components.AudioControlButtons
 import com.chinoisfacile.mandarin.ui.components.HanziCard
 import com.chinoisfacile.mandarin.ui.theme.CjkTextStyles
+import com.chinoisfacile.mandarin.ui.theme.MandarinTheme
 
 @Composable
 fun HanziToEnglishView(
@@ -85,15 +92,17 @@ fun HanziToEnglishView(
 fun AudioToEnglishView(
     exercise: Exercise.AudioToEnglish,
     selectedOption: String?,
-    showPinyin: Boolean,
+    showPinyinHint: Boolean,
     audioEnabled: Boolean,
     locked: Boolean,
-    onTogglePinyin: () -> Unit,
+    onTogglePinyinHint: () -> Unit,
     onPlayNormal: () -> Unit,
     onPlaySlow: () -> Unit,
     onSelectOption: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    val extended = MandarinTheme.extendedColors
+
     Column(
         modifier = modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(16.dp),
@@ -112,30 +121,83 @@ fun AudioToEnglishView(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 20.dp, vertical = 16.dp),
+                    .padding(horizontal = 20.dp, vertical = 20.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(10.dp),
+                verticalArrangement = Arrangement.spacedBy(14.dp),
             ) {
+                Surface(
+                    onClick = onPlayNormal,
+                    enabled = audioEnabled,
+                    shape = CircleShape,
+                    color = if (audioEnabled) extended.lessonNode else extended.neutralContainer,
+                    contentColor = if (audioEnabled) extended.onLessonNode else extended.neutral,
+                    shadowElevation = if (audioEnabled) 3.dp else 0.dp,
+                    modifier = Modifier.size(72.dp),
+                ) {
+                    Box(contentAlignment = Alignment.Center) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.VolumeUp,
+                            contentDescription = stringResource(R.string.audio_tap_to_listen_cd),
+                            modifier = Modifier.size(36.dp),
+                        )
+                    }
+                }
+
                 AudioControlButtons(
                     enabled = audioEnabled,
                     onPlayNormal = onPlayNormal,
                     onPlaySlow = onPlaySlow,
                 )
 
-                AnimatedVisibility(visible = !audioEnabled || showPinyin) {
-                    Text(
-                        text = exercise.word.pinyin,
-                        style = CjkTextStyles.Pinyin,
-                        color = MaterialTheme.colorScheme.primary,
-                    )
-                }
+                if (locked) {
+                    Surface(
+                        shape = RoundedCornerShape(12.dp),
+                        color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.55f),
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        ) {
+                            Text(
+                                text = exercise.word.hanzi,
+                                style = CjkTextStyles.HanziChoice,
+                                color = MaterialTheme.colorScheme.onPrimaryContainer,
+                            )
+                            Text(
+                                text = "•",
+                                style = MaterialTheme.typography.titleMedium,
+                                color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.7f),
+                            )
+                            Text(
+                                text = exercise.word.pinyin,
+                                style = CjkTextStyles.Pinyin,
+                                color = MaterialTheme.colorScheme.primary,
+                            )
+                        }
+                    }
+                } else {
+                    AnimatedVisibility(visible = !audioEnabled || showPinyinHint) {
+                        Text(
+                            text = exercise.word.pinyin,
+                            style = CjkTextStyles.Pinyin,
+                            color = MaterialTheme.colorScheme.primary,
+                        )
+                    }
 
-                TextButton(onClick = onTogglePinyin) {
-                    Text(
-                        text = stringResource(
-                            if (showPinyin) R.string.pinyin_hide else R.string.pinyin_show,
-                        ),
-                    )
+                    if (audioEnabled) {
+                        TextButton(onClick = onTogglePinyinHint) {
+                            Text(
+                                text = stringResource(
+                                    if (showPinyinHint) {
+                                        R.string.audio_hide_pinyin_hint
+                                    } else {
+                                        R.string.audio_show_pinyin_hint
+                                    },
+                                ),
+                            )
+                        }
+                    }
                 }
             }
         }

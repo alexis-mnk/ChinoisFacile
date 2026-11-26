@@ -41,15 +41,17 @@ import com.chinoisfacile.mandarin.ui.theme.MandarinTheme
 fun LessonPreviewSheet(
     lesson: LessonSummary,
     onStartLesson: (String) -> Unit,
+    onOpenStepLesson: () -> Unit,
     onDismiss: () -> Unit,
-    unitLessonUnlocked: Boolean = false,
-    onOpenUnitLesson: (() -> Unit)? = null,
 ) {
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val extended = MandarinTheme.extendedColors
-    val lockedMessage = stringResource(
-        if (lesson.isFirstInUnit) R.string.home_quiz_first_locked else R.string.home_lesson_status_locked,
-    )
+    val prevQuizOrder = (lesson.orderIndex - 1).coerceAtLeast(1)
+    val lockedMessage = if (lesson.isStepLessonUnlocked) {
+        stringResource(R.string.home_quiz_locked_step_lesson, lesson.orderIndex)
+    } else {
+        stringResource(R.string.home_quiz_locked_prev_quiz, prevQuizOrder)
+    }
 
     val (badgeBg, badgeFg, statusText) = when {
         lesson.isCompleted -> Triple(
@@ -143,38 +145,117 @@ fun LessonPreviewSheet(
 
             Spacer(modifier = Modifier.height(20.dp))
 
-            if (lesson.isUnlocked) {
-                Button(
-                    onClick = {
-                        onDismiss()
-                        onStartLesson(lesson.id)
-                    },
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(14.dp),
-                ) {
-                    Icon(
-                        imageVector = if (lesson.isCompleted) {
-                            Icons.Default.Replay
-                        } else {
-                            Icons.Default.PlayArrow
-                        },
-                        contentDescription = null,
-                    )
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text(
-                        text = stringResource(
-                            if (lesson.isCompleted) R.string.home_lesson_replay else R.string.home_lesson_start,
-                        ),
-                        fontWeight = FontWeight.Bold,
-                        modifier = Modifier.padding(vertical = 4.dp),
-                    )
+            when {
+                lesson.isUnlocked -> {
+                    Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                        Button(
+                            onClick = {
+                                onDismiss()
+                                onStartLesson(lesson.id)
+                            },
+                            modifier = Modifier.fillMaxWidth(),
+                            shape = RoundedCornerShape(14.dp),
+                        ) {
+                            Icon(
+                                imageVector = if (lesson.isCompleted) {
+                                    Icons.Default.Replay
+                                } else {
+                                    Icons.Default.PlayArrow
+                                },
+                                contentDescription = null,
+                            )
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text(
+                                text = stringResource(
+                                    if (lesson.isCompleted) R.string.home_lesson_replay else R.string.home_lesson_start,
+                                ),
+                                fontWeight = FontWeight.Bold,
+                                modifier = Modifier.padding(vertical = 4.dp),
+                            )
+                        }
+
+                        if (lesson.isStepLessonUnlocked || lesson.isStepLessonCompleted) {
+                            FilledTonalButton(
+                                onClick = {
+                                    onDismiss()
+                                    onOpenStepLesson()
+                                },
+                                modifier = Modifier.fillMaxWidth(),
+                                shape = RoundedCornerShape(14.dp),
+                            ) {
+                                Icon(
+                                    imageVector = Icons.AutoMirrored.Rounded.MenuBook,
+                                    contentDescription = null,
+                                )
+                                Spacer(modifier = Modifier.width(8.dp))
+                                Text(
+                                    text = stringResource(
+                                        R.string.home_review_step_lesson,
+                                        lesson.orderIndex,
+                                    ),
+                                    fontWeight = FontWeight.Bold,
+                                    modifier = Modifier.padding(vertical = 4.dp),
+                                )
+                            }
+                        }
+                    }
                 }
-            } else if (lesson.isFirstInUnit && unitLessonUnlocked && onOpenUnitLesson != null) {
-                Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+
+                lesson.isStepLessonUnlocked -> {
+                    Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                        Surface(
+                            modifier = Modifier.fillMaxWidth(),
+                            shape = RoundedCornerShape(14.dp),
+                            color = extended.lessonNodeContainer,
+                        ) {
+                            Row(
+                                modifier = Modifier.padding(14.dp),
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(10.dp),
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.Lock,
+                                    contentDescription = null,
+                                    tint = extended.onLessonNodeContainer,
+                                )
+                                Text(
+                                    text = lockedMessage,
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    color = extended.onLessonNodeContainer,
+                                )
+                            }
+                        }
+
+                        FilledTonalButton(
+                            onClick = {
+                                onDismiss()
+                                onOpenStepLesson()
+                            },
+                            modifier = Modifier.fillMaxWidth(),
+                            shape = RoundedCornerShape(14.dp),
+                        ) {
+                            Icon(
+                                imageVector = Icons.AutoMirrored.Rounded.MenuBook,
+                                contentDescription = null,
+                            )
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text(
+                                text = stringResource(
+                                    R.string.home_open_step_lesson,
+                                    lesson.orderIndex,
+                                ),
+                                fontWeight = FontWeight.Bold,
+                                modifier = Modifier.padding(vertical = 4.dp),
+                            )
+                        }
+                    }
+                }
+
+                else -> {
                     Surface(
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(14.dp),
-                        color = extended.lessonNodeContainer,
+                        color = extended.neutralContainer,
                     ) {
                         Row(
                             modifier = Modifier.padding(14.dp),
@@ -184,57 +265,14 @@ fun LessonPreviewSheet(
                             Icon(
                                 imageVector = Icons.Default.Lock,
                                 contentDescription = null,
-                                tint = extended.onLessonNodeContainer,
+                                tint = extended.neutral,
                             )
                             Text(
                                 text = lockedMessage,
                                 style = MaterialTheme.typography.bodyMedium,
-                                color = extended.onLessonNodeContainer,
+                                color = extended.onNeutralContainer,
                             )
                         }
-                    }
-
-                    FilledTonalButton(
-                        onClick = {
-                            onDismiss()
-                            onOpenUnitLesson()
-                        },
-                        modifier = Modifier.fillMaxWidth(),
-                        shape = RoundedCornerShape(14.dp),
-                    ) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Rounded.MenuBook,
-                            contentDescription = null,
-                        )
-                        Spacer(modifier = Modifier.width(8.dp))
-                        Text(
-                            text = stringResource(R.string.home_open_unit_lesson),
-                            fontWeight = FontWeight.Bold,
-                            modifier = Modifier.padding(vertical = 4.dp),
-                        )
-                    }
-                }
-            } else {
-                Surface(
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(14.dp),
-                    color = extended.neutralContainer,
-                ) {
-                    Row(
-                        modifier = Modifier.padding(14.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(10.dp),
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Lock,
-                            contentDescription = null,
-                            tint = extended.neutral,
-                        )
-                        Text(
-                            text = lockedMessage,
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = extended.onNeutralContainer,
-                        )
                     }
                 }
             }

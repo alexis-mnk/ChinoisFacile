@@ -11,7 +11,6 @@
     <!-- Home (HomeScreen) -->
     <string name="home_title_hsk">Mandarin HSK %1$d</string>
     <string name="hsk_level_chip">HSK %1$d</string>
-    <string name="home_subtitle">100% offline • Unlimited lives</string>
     <string name="home_stat_streak">%1$d d</string>
     <string name="home_stat_streak_label">Streak</string>
     <string name="home_stat_xp">%1$d XP</string>
@@ -20,26 +19,25 @@
     <string name="home_stat_mastered_label">Mastered</string>
 
     <string name="home_quick_review_title">Quick Review</string>
-    <string name="home_quick_review_due_one">1 word to review today</string>
-    <string name="home_quick_review_due_many">%1$d words to review today</string>
-    <string name="home_quick_review_none">All caught up! Free practice on unlocked words</string>
-    <string name="home_quick_review_button">Review (10 exercises)</string>
+    <string name="home_quick_review_compact_due">Quick Review • %1$d due</string>
 
     <string name="home_lesson_word_count">%1$d words</string>
-    <string name="home_lesson_status_locked">Complete the previous quiz to unlock</string>
     <string name="home_lesson_status_available">Ready to start</string>
     <string name="home_lesson_status_completed">Completed • Best score: %1$d%%</string>
     <string name="home_lesson_start">Start</string>
     <string name="home_lesson_replay">Replay</string>
-    <string name="home_unit_lesson_node_label">Lesson • %1$d words</string>
-    <string name="home_unit_lesson_badge">LESSON</string>
-    <string name="home_unit_lesson_locked">Complete the last quiz of the previous unit to unlock this lesson.</string>
-    <string name="home_quiz_first_locked">Complete the unit lesson to unlock this quiz</string>
-    <string name="home_open_unit_lesson">Open lesson</string>
+    <string name="home_step_header">%1$s • %2$d words</string>
+    <string name="home_step_lesson_label">Lesson %1$d</string>
+    <string name="home_step_quiz_label">Quiz %1$d</string>
+    <string name="home_step_lesson_locked">Complete Quiz %1$d to unlock this lesson.</string>
+    <string name="home_quiz_locked_step_lesson">Complete Lesson %1$d to unlock this quiz</string>
+    <string name="home_quiz_locked_prev_quiz">Complete Quiz %1$d to unlock this step</string>
+    <string name="home_open_step_lesson">Open Lesson %1$d</string>
+    <string name="home_review_step_lesson">Review Lesson %1$d</string>
     <string name="home_loading">Loading path…</string>
     <string name="home_updating_catalog">Updating HSK catalog…</string>
     <string name="home_node_start_bubble">START</string>
-    <string name="home_jump_to_active">Resume</string>
+    <string name="home_jump_to_active">Continue</string>
     <string name="home_preview_words_label">Word preview (%1$d)</string>
     <string name="home_preview_score_badge">%1$d%%</string>
 
@@ -55,25 +53,32 @@
     <string name="lesson_error_empty">Unable to load exercises for this quiz.</string>
     <string name="lesson_back_home">Back to path</string>
 
-    <!-- Unit Discovery Lesson (UnitLessonScreen) -->
-    <string name="unit_lesson_back_cd">Back to path</string>
-    <string name="unit_lesson_subtitle">HSK %1$d • %2$d words</string>
-    <string name="unit_lesson_mode_cards">Cards</string>
-    <string name="unit_lesson_mode_sheet">List</string>
-    <string name="unit_lesson_filter_all">All (%1$d)</string>
-    <string name="unit_lesson_card_progress">Word %1$d / %2$d</string>
-    <string name="unit_lesson_example_label">Example sentence</string>
-    <string name="unit_lesson_prev">Previous</string>
-    <string name="unit_lesson_next">Next</string>
-    <string name="unit_lesson_complete_cta">Complete lesson</string>
-    <string name="unit_lesson_complete_short">Done</string>
-    <string name="unit_lesson_completed_badge">Completed</string>
-    <string name="unit_lesson_completed_banner">Lesson complete! You\'re ready to practice.</string>
-    <string name="unit_lesson_launch_quiz">Start Quiz %1$d</string>
-    <string name="unit_lesson_loading">Loading lesson…</string>
-    <string name="unit_lesson_error">Unable to load this unit lesson.</string>
-    <string name="unit_lesson_listen_word_cd">Listen to word</string>
-    <string name="unit_lesson_listen_example_cd">Listen to example sentence</string>
+    <!-- Step Discovery Lesson (StepLessonScreen) -->
+    <string name="step_lesson_back_cd">Back to path</string>
+    <string name="step_lesson_subtitle">HSK %1$d • %2$d words</string>
+    <string name="step_lesson_subtitle_with_pattern_one">HSK %1$d • %2$d words • 1 pattern</string>
+    <string name="step_lesson_subtitle_with_patterns">HSK %1$d • %2$d words • %3$d patterns</string>
+    <string name="step_lesson_mode_cards">Cards</string>
+    <string name="step_lesson_mode_list">List</string>
+    <string name="step_lesson_card_progress">Card %1$d / %2$d</string>
+    <string name="step_lesson_word_badge">VOCABULARY</string>
+    <string name="step_lesson_grammar_badge">SENTENCE PATTERN</string>
+    <string name="step_lesson_section_patterns">Sentence Patterns</string>
+    <string name="step_lesson_section_vocabulary">Vocabulary</string>
+    <string name="step_lesson_examples_label">Examples</string>
+    <string name="step_lesson_example_label">Example sentence</string>
+    <string name="step_lesson_prev">Previous</string>
+    <string name="step_lesson_next">Next</string>
+    <string name="step_lesson_complete_cta">Complete lesson</string>
+    <string name="step_lesson_complete_short">Done</string>
+    <string name="step_lesson_completed_badge">Completed</string>
+    <string name="step_lesson_completed_banner">Lesson complete! Quiz %1$d is now unlocked.</string>
+    <string name="step_lesson_launch_quiz">Start Quiz %1$d</string>
+    <string name="step_lesson_loading">Loading lesson…</string>
+    <string name="step_lesson_error">Unable to load this lesson.</string>
+    <string name="step_lesson_listen_word_cd">Listen to word</string>
+    <string name="step_lesson_listen_example_cd">Listen to example sentence</string>
+    <string name="step_lesson_listen_grammar_example_cd">Listen to example %1$d</string>
 
     <!-- Exercise Prompts & Controls -->
     <string name="exercise_hanzi_to_english_prompt">What does this word mean in English?</string>
@@ -91,6 +96,10 @@
     <string name="audio_play_slow">Slow 0.7x</string>
     <string name="audio_listen_word">Listen</string>
     <string name="audio_listen_example">Listen to sentence</string>
+    <string name="audio_tap_to_listen_cd">Tap to listen</string>
+    <string name="audio_show_pinyin_hint">Show pinyin hint</string>
+    <string name="audio_hide_pinyin_hint">Hide pinyin hint</string>
+    <string name="audio_cant_listen_now">Can\'t listen now</string>
 
     <!-- Offline TTS Warning -->
     <string name="tts_missing_warning">The Chinese voice (zh-CN) is not installed on this device. Enable it in Android Settings &gt; Text-to-speech, or show pinyin to continue.</string>
@@ -115,8 +124,7 @@
     <string name="summary_xp_value">+%1$d XP</string>
     <string name="summary_streak_label">Current streak</string>
     <string name="summary_streak_value">%1$d day(s)</string>
-    <string name="summary_unlocked_next">New quiz unlocked: %1$s</string>
-    <string name="summary_unlocked_unit_lesson">New lesson unlocked: %1$s</string>
+    <string name="summary_unlocked_step_lesson">%1$s unlocked</string>
     <string name="summary_words_section">Practiced words &amp; next review (SM-2)</string>
     <string name="summary_next_review_tomorrow">Tomorrow</string>
     <string name="summary_next_review_days">In %1$d days</string>
@@ -188,7 +196,7 @@
     <string name="settings_reset_desc">Resets XP, streak, SM-2 mastery, and unlocked units and quizzes.</string>
     <string name="settings_reset_button">Reset my progress</string>
     <string name="settings_reset_dialog_title">Reset all progress?</string>
-    <string name="settings_reset_dialog_message">This will permanently erase your XP, daily streak, SM-2 word history, and re-lock all units and quizzes (except Unit 1 Lesson of each level).</string>
+    <string name="settings_reset_dialog_message">This will permanently erase your XP, daily streak, SM-2 word history, and re-lock all lessons and quizzes (except Lesson 1 of each level).</string>
     <string name="settings_reset_confirm">Reset</string>
     <string name="settings_reset_cancel">Cancel</string>
     <string name="settings_reset_done">Progress reset.</string>

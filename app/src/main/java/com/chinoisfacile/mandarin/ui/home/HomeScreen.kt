@@ -3,6 +3,7 @@ package com.chinoisfacile.mandarin.ui.home
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,18 +13,16 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PlayArrow
-import androidx.compose.material.icons.filled.Refresh
-import androidx.compose.material3.Button
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
+import androidx.compose.material.icons.rounded.Refresh
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
@@ -42,30 +41,33 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.chinoisfacile.mandarin.R
-import com.chinoisfacile.mandarin.data.model.LearningUnit
 import com.chinoisfacile.mandarin.data.model.LessonSummary
 import com.chinoisfacile.mandarin.domain.progression.UnitProgressionResolver
 import com.chinoisfacile.mandarin.ui.components.HskLevelSelector
+import com.chinoisfacile.mandarin.ui.theme.MandarinTheme
 import kotlinx.coroutines.launch
 
 @Composable
 fun HomeScreen(
     viewModel: HomeViewModel,
-    onOpenUnitLesson: (String) -> Unit,
+    onOpenStepLesson: (String) -> Unit,
     onStartLesson: (String) -> Unit,
     onStartQuickReview: (Int) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    var previewTarget by remember { mutableStateOf<Pair<LearningUnit, LessonSummary>?>(null) }
+    var previewTarget by remember { mutableStateOf<LessonSummary?>(null) }
     val listState = rememberLazyListState()
     val snackbarHostState = remember { SnackbarHostState() }
     val coroutineScope = rememberCoroutineScope()
-    val lockedUnitLessonMessage = stringResource(R.string.home_unit_lesson_locked)
+    val context = LocalContext.current
 
     if (uiState.isLoading || (uiState.isSeeding && uiState.units.isEmpty())) {
         Box(
@@ -85,12 +87,13 @@ fun HomeScreen(
         return
     }
 
+    val showQuickReview = uiState.isQuickReviewAvailable
     val activeTarget = remember(uiState.units) {
         UnitProgressionResolver.findActiveTarget(uiState.units)
     }
     val activeUnitKey = activeTarget?.unitId
-    val activeUnitItemIndex = remember(uiState.units, activeUnitKey, uiState.isSeeding) {
-        val headerCount = (if (uiState.isSeeding) 1 else 0) + 3
+    val activeUnitItemIndex = remember(uiState.units, activeUnitKey, uiState.isSeeding, showQuickReview) {
+        val headerCount = (if (uiState.isSeeding) 1 else 0) + 2 + (if (showQuickReview) 1 else 0)
         val unitIndex = uiState.units.indexOfFirst { it.id == activeUnitKey }
         if (unitIndex >= 0) headerCount + unitIndex else -1
     }
@@ -102,11 +105,10 @@ fun HomeScreen(
         }
     }
 
-    previewTarget?.let { (unit, lesson) ->
+    previewTarget?.let { lesson ->
         LessonPreviewSheet(
             lesson = lesson,
-            unitLessonUnlocked = unit.isLessonUnlocked,
-            onOpenUnitLesson = { onOpenUnitLesson(unit.id) },
+            onOpenStepLesson = { onOpenStepLesson(lesson.id) },
             onStartLesson = onStartLesson,
             onDismiss = { previewTarget = null },
         )
@@ -140,17 +142,10 @@ fun HomeScreen(
             }
 
             item(key = "header_title") {
-                Column {
-                    Text(
-                        text = stringResource(R.string.home_title_hsk, uiState.selectedHskLevel),
-                        style = MaterialTheme.typography.headlineMedium,
-                    )
-                    Text(
-                        text = stringResource(R.string.home_subtitle),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    )
-                }
+                Text(
+                    text = stringResource(R.string.home_title_hsk, uiState.selectedHskLevel),
+                    style = MaterialTheme.typography.headlineMedium,
+                )
             }
 
             item(key = "hsk_selector") {
@@ -160,12 +155,13 @@ fun HomeScreen(
                 )
             }
 
-            item(key = "quick_review") {
-                QuickReviewCard(
-                    dueWordsCount = uiState.dueWordsCount,
-                    enabled = uiState.totalWordsCount > 0,
-                    onClick = { onStartQuickReview(uiState.selectedHskLevel) },
-                )
+            if (showQuickReview) {
+                item(key = "quick_review") {
+                    QuickReviewButton(
+                        dueWordsCount = uiState.dueWordsCount,
+                        onClick = { onStartQuickReview(uiState.selectedHskLevel) },
+                    )
+                }
             }
 
             items(
@@ -178,17 +174,22 @@ fun HomeScreen(
                     UnitLessonPath(
                         unit = unit,
                         activeTarget = activeTarget,
-                        onUnitLessonClick = { clickedUnit ->
-                            if (clickedUnit.isLessonUnlocked) {
-                                onOpenUnitLesson(clickedUnit.id)
+                        onStepLessonClick = { clickedStep ->
+                            if (clickedStep.isStepLessonUnlocked || clickedStep.isStepLessonCompleted) {
+                                onOpenStepLesson(clickedStep.id)
                             } else {
+                                val previousQuizOrder = (clickedStep.orderIndex - 1).coerceAtLeast(1)
+                                val message = context.getString(
+                                    R.string.home_step_lesson_locked,
+                                    previousQuizOrder,
+                                )
                                 coroutineScope.launch {
                                     snackbarHostState.currentSnackbarData?.dismiss()
-                                    snackbarHostState.showSnackbar(lockedUnitLessonMessage)
+                                    snackbarHostState.showSnackbar(message)
                                 }
                             }
                         },
-                        onLessonClick = { lesson -> previewTarget = unit to lesson },
+                        onQuizClick = { lesson -> previewTarget = lesson },
                     )
                 }
             }
@@ -234,53 +235,64 @@ fun HomeScreen(
 }
 
 @Composable
-private fun QuickReviewCard(
+private fun QuickReviewButton(
     dueWordsCount: Int,
-    enabled: Boolean,
     onClick: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
-    val dueText = when (dueWordsCount) {
-        0 -> stringResource(R.string.home_quick_review_none)
-        1 -> stringResource(R.string.home_quick_review_due_one)
-        else -> stringResource(R.string.home_quick_review_due_many, dueWordsCount)
+    val extended = MandarinTheme.extendedColors
+    val hasDue = dueWordsCount > 0
+    val containerColor = if (hasDue) {
+        extended.dueContainer
+    } else {
+        MaterialTheme.colorScheme.secondaryContainer
+    }
+    val contentColor = if (hasDue) {
+        extended.onDueContainer
+    } else {
+        MaterialTheme.colorScheme.onSecondaryContainer
+    }
+    val border = if (hasDue) {
+        BorderStroke(width = 1.dp, color = extended.due.copy(alpha = 0.35f))
+    } else {
+        null
+    }
+    val labelText = if (hasDue) {
+        stringResource(R.string.home_quick_review_compact_due, dueWordsCount)
+    } else {
+        stringResource(R.string.home_quick_review_title)
     }
 
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(18.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.secondaryContainer,
-        ),
+    Surface(
+        onClick = onClick,
+        modifier = modifier
+            .fillMaxWidth()
+            .heightIn(min = 46.dp),
+        shape = RoundedCornerShape(14.dp),
+        color = containerColor,
+        contentColor = contentColor,
+        border = border,
     ) {
-        Column(modifier = Modifier.padding(16.dp)) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Icon(
-                    imageVector = Icons.Default.Refresh,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onSecondaryContainer,
-                )
-                Spacer(modifier = Modifier.width(8.dp))
-                Text(
-                    text = stringResource(R.string.home_quick_review_title),
-                    style = MaterialTheme.typography.titleLarge,
-                    color = MaterialTheme.colorScheme.onSecondaryContainer,
-                )
-            }
-            Spacer(modifier = Modifier.height(6.dp))
-            Text(
-                text = dueText,
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSecondaryContainer,
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 10.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center,
+        ) {
+            Icon(
+                imageVector = Icons.Rounded.Refresh,
+                contentDescription = null,
+                modifier = Modifier.size(18.dp),
             )
-            Spacer(modifier = Modifier.height(12.dp))
-            Button(
-                onClick = onClick,
-                enabled = enabled,
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(12.dp),
-            ) {
-                Text(text = stringResource(R.string.home_quick_review_button))
-            }
+            Spacer(modifier = Modifier.size(8.dp))
+            Text(
+                text = labelText,
+                style = MaterialTheme.typography.labelLarge,
+                fontWeight = FontWeight.SemiBold,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+            )
         }
     }
 }
