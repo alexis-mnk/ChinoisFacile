@@ -38,8 +38,8 @@ import com.chinoisfacile.mandarin.ui.components.HanziCard
 import com.chinoisfacile.mandarin.ui.theme.CjkTextStyles
 
 @Composable
-fun HanziToFrenchView(
-    exercise: Exercise.HanziToFrench,
+fun HanziToEnglishView(
+    exercise: Exercise.HanziToEnglish,
     selectedOption: String?,
     showPinyin: Boolean,
     audioEnabled: Boolean,
@@ -54,7 +54,7 @@ fun HanziToFrenchView(
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         Text(
-            text = stringResource(R.string.exercise_hanzi_to_french_prompt),
+            text = stringResource(R.string.exercise_hanzi_to_english_prompt),
             style = MaterialTheme.typography.titleLarge,
         )
 
@@ -82,8 +82,8 @@ fun HanziToFrenchView(
 }
 
 @Composable
-fun AudioToFrenchView(
-    exercise: Exercise.AudioToFrench,
+fun AudioToEnglishView(
+    exercise: Exercise.AudioToEnglish,
     selectedOption: String?,
     showPinyin: Boolean,
     audioEnabled: Boolean,
@@ -99,7 +99,7 @@ fun AudioToFrenchView(
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         Text(
-            text = stringResource(R.string.exercise_audio_to_french_prompt),
+            text = stringResource(R.string.exercise_audio_to_english_prompt),
             style = MaterialTheme.typography.titleLarge,
         )
 
@@ -227,8 +227,8 @@ fun AudioToHanziView(
 }
 
 @Composable
-fun FrenchToHanziView(
-    exercise: Exercise.FrenchToHanzi,
+fun EnglishToHanziView(
+    exercise: Exercise.EnglishToHanzi,
     selectedOption: String?,
     showPinyin: Boolean,
     locked: Boolean,
@@ -241,7 +241,7 @@ fun FrenchToHanziView(
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         Text(
-            text = stringResource(R.string.exercise_french_to_hanzi_prompt),
+            text = stringResource(R.string.exercise_english_to_hanzi_prompt),
             style = MaterialTheme.typography.titleLarge,
         )
 
@@ -259,7 +259,7 @@ fun FrenchToHanziView(
                 verticalArrangement = Arrangement.spacedBy(6.dp),
             ) {
                 Text(
-                    text = exercise.word.french,
+                    text = exercise.word.english,
                     style = MaterialTheme.typography.headlineMedium,
                     color = MaterialTheme.colorScheme.onSurface,
                     textAlign = TextAlign.Center,
@@ -328,7 +328,7 @@ fun SentenceOrderView(
             ),
         ) {
             Text(
-                text = exercise.promptFrench,
+                text = exercise.promptEnglish,
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.SemiBold,
                 modifier = Modifier.padding(16.dp),

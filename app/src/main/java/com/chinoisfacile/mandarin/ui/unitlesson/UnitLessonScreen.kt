@@ -436,7 +436,7 @@ private fun UnitLessonCardsContent(
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
-                        text = word.french,
+                        text = word.english,
                         style = MaterialTheme.typography.titleLarge,
                         color = MaterialTheme.colorScheme.onSurface,
                         textAlign = TextAlign.Center,
@@ -479,7 +479,7 @@ private fun UnitLessonCardsContent(
                         color = MaterialTheme.colorScheme.primary,
                     )
                     Text(
-                        text = word.exampleFrench,
+                        text = word.exampleEnglish,
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
@@ -725,7 +725,7 @@ private fun SheetWordCard(
                     }
                     Spacer(modifier = Modifier.height(2.dp))
                     Text(
-                        text = word.french,
+                        text = word.english,
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
@@ -766,7 +766,7 @@ private fun SheetWordCard(
                             color = MaterialTheme.colorScheme.onSurface,
                         )
                         Text(
-                            text = word.exampleFrench,
+                            text = word.exampleEnglish,
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )

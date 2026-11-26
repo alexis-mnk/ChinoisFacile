@@ -4,10 +4,10 @@ import com.chinoisfacile.mandarin.data.model.VocabWord
 import kotlin.random.Random
 
 /**
- * Génère une session progressive en 3 paliers :
- * 1. Reconnaissance simple (Hanzi -> Français, Audio -> Français)
- * 2. Rappel inverse (Français -> Hanzi)
- * 3. Construction de phrases (SentenceOrder), uniquement si 100 % des tokens sont déjà connus.
+ * Generates a progressive 3-tier session:
+ * 1. Simple recognition (Hanzi -> English, Audio -> English)
+ * 2. Reverse recall (English -> Hanzi)
+ * 3. Sentence ordering (SentenceOrder), only when 100% of tokens are already known.
  */
 class ExerciseGenerator {
 
@@ -26,7 +26,7 @@ class ExerciseGenerator {
         sessionSize: Int = DEFAULT_SESSION_SIZE,
         random: Random = Random.Default,
     ): List<Exercise> {
-        require(targetWords.isNotEmpty()) { "La liste des mots cibles ne peut pas être vide." }
+        require(targetWords.isNotEmpty()) { "Target word list cannot be empty." }
         if (sessionSize <= 0) return emptyList()
 
         val maxTargetLevel = targetWords.maxOf { it.hskLevel }
@@ -42,26 +42,25 @@ class ExerciseGenerator {
         val tier1Count = if (remaining <= 1) remaining else (remaining * 6 + 5) / 10
         val tier2Count = remaining - tier1Count
 
-        val hanziToFrenchCount = (tier1Count + 1) / 2
-        val audioToFrenchCount = tier1Count - hanziToFrenchCount
+        val hanziToEnglishCount = (tier1Count + 1) / 2
 
-        // Palier 1 : reconnaissance simple mélangée
+        // Tier 1: simple recognition shuffled within tier
         val tier1Targets = targetWords.shuffled(random)
         val tier1Raw = ArrayList<Pair<Boolean, VocabWord>>(tier1Count)
         repeat(tier1Count) { slot ->
             val word = tier1Targets[slot % tier1Targets.size]
-            val useHanziToFrench = slot < hanziToFrenchCount
-            tier1Raw += (useHanziToFrench to word)
+            val useHanziToEnglish = slot < hanziToEnglishCount
+            tier1Raw += (useHanziToEnglish to word)
         }
         val tier1Shuffled = tier1Raw.shuffled(random)
 
-        // Palier 2 : rappel inverse mélangé
+        // Tier 2: reverse recall shuffled within tier
         val tier2Targets = targetWords.shuffled(random)
         val tier2Raw = List(tier2Count) { slot ->
             tier2Targets[slot % tier2Targets.size]
         }.shuffled(random)
 
-        // Palier 3 : phrases autorisées en fin de session
+        // Tier 3: eligible sentence ordering at the end of session
         val tier3Raw = eligibleSentenceWords
             .shuffled(random)
             .take(sentenceCount)
@@ -70,16 +69,16 @@ class ExerciseGenerator {
         val exercises = ArrayList<Exercise>(sessionSize)
         var exerciseIndex = 0
 
-        for ((isHanziToFrench, word) in tier1Shuffled) {
-            exercises += if (isHanziToFrench) {
-                createHanziToFrench(exerciseIndex++, word, pool, random)
+        for ((isHanziToEnglish, word) in tier1Shuffled) {
+            exercises += if (isHanziToEnglish) {
+                createHanziToEnglish(exerciseIndex++, word, pool, random)
             } else {
-                createAudioToFrench(exerciseIndex++, word, pool, random)
+                createAudioToEnglish(exerciseIndex++, word, pool, random)
             }
         }
 
         for (word in tier2Raw) {
-            exercises += createFrenchToHanzi(exerciseIndex++, word, pool, random)
+            exercises += createEnglishToHanzi(exerciseIndex++, word, pool, random)
         }
 
         for (word in tier3Raw) {
@@ -94,52 +93,52 @@ class ExerciseGenerator {
             token in ALLOWED_PROPER_NOUNS ||
             SIMPLE_DIGITS_REGEX.matches(token)
 
-    private fun pickFrenchOptions(
+    private fun pickEnglishOptions(
         word: VocabWord,
         pool: List<VocabWord>,
         random: Random,
     ): List<String> {
         val distractors = pool
             .asSequence()
-            .filter { it.id != word.id && it.french != word.french }
-            .map { it.french }
+            .filter { it.id != word.id && it.english != word.english }
+            .map { it.english }
             .distinct()
             .shuffled(random)
             .take(OPTION_COUNT - 1)
             .toList()
-        return (distractors + word.french).shuffled(random)
+        return (distractors + word.english).shuffled(random)
     }
 
-    private fun createHanziToFrench(
+    private fun createHanziToEnglish(
         index: Int,
         word: VocabWord,
         pool: List<VocabWord>,
         random: Random,
-    ): Exercise.HanziToFrench = Exercise.HanziToFrench(
-        id = "ex_${index}_${word.id}_htf",
+    ): Exercise.HanziToEnglish = Exercise.HanziToEnglish(
+        id = "ex_${index}_${word.id}_hte",
         word = word,
-        options = pickFrenchOptions(word, pool, random),
-        correctOption = word.french,
+        options = pickEnglishOptions(word, pool, random),
+        correctOption = word.english,
     )
 
-    private fun createAudioToFrench(
+    private fun createAudioToEnglish(
         index: Int,
         word: VocabWord,
         pool: List<VocabWord>,
         random: Random,
-    ): Exercise.AudioToFrench = Exercise.AudioToFrench(
-        id = "ex_${index}_${word.id}_atf",
+    ): Exercise.AudioToEnglish = Exercise.AudioToEnglish(
+        id = "ex_${index}_${word.id}_ate",
         word = word,
-        options = pickFrenchOptions(word, pool, random),
-        correctOption = word.french,
+        options = pickEnglishOptions(word, pool, random),
+        correctOption = word.english,
     )
 
-    private fun createFrenchToHanzi(
+    private fun createEnglishToHanzi(
         index: Int,
         word: VocabWord,
         pool: List<VocabWord>,
         random: Random,
-    ): Exercise.FrenchToHanzi {
+    ): Exercise.EnglishToHanzi {
         val distractorWords = pool
             .asSequence()
             .filter { it.id != word.id && it.hanzi != word.hanzi }
@@ -152,8 +151,8 @@ class ExerciseGenerator {
         val options = optionWords.map { it.hanzi }
         val optionPinyins = optionWords.associate { it.hanzi to it.pinyin }
 
-        return Exercise.FrenchToHanzi(
-            id = "ex_${index}_${word.id}_fth",
+        return Exercise.EnglishToHanzi(
+            id = "ex_${index}_${word.id}_eth",
             word = word,
             options = options,
             optionPinyins = optionPinyins,
@@ -189,7 +188,7 @@ class ExerciseGenerator {
         return Exercise.SentenceOrder(
             id = "ex_${index}_${word.id}_ord",
             word = word,
-            promptFrench = word.exampleFrench,
+            promptEnglish = word.exampleEnglish,
             expectedTokens = expectedTokens,
             shuffledChips = shuffled,
         )

@@ -259,7 +259,7 @@ private fun ReviewedWordCard(item: WordReviewSummary) {
                     )
                 }
                 Text(
-                    text = item.word.french,
+                    text = item.word.english,
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )

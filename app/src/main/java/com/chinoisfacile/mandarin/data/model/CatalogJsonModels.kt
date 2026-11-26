@@ -32,7 +32,7 @@ data class WordDto(
     val lessonId: String,
     val hanzi: String,
     val pinyin: String,
-    val french: String,
+    val english: String,
     val example: ExampleSentenceDto,
 )
 
@@ -40,7 +40,7 @@ data class WordDto(
 data class ExampleSentenceDto(
     val hanzi: String,
     val pinyin: String,
-    val french: String,
+    val english: String,
     val tokens: List<String>,
 )
 
@@ -85,10 +85,10 @@ data class VocabWord(
     val hskLevel: Int,
     val hanzi: String,
     val pinyin: String,
-    val french: String,
+    val english: String,
     val exampleHanzi: String,
     val examplePinyin: String,
-    val exampleFrench: String,
+    val exampleEnglish: String,
     val exampleTokens: List<String>,
 )
 

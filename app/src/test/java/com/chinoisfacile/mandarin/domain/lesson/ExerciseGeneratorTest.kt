@@ -18,10 +18,10 @@ class ExerciseGeneratorTest {
             hskLevel = 1,
             hanzi = "你好",
             pinyin = "nǐ hǎo",
-            french = "Bonjour",
+            english = "Hello",
             exampleHanzi = "你好吗？",
             examplePinyin = "Nǐ hǎo ma?",
-            exampleFrench = "Comment vas-tu ?",
+            exampleEnglish = "How are you?",
             exampleTokens = listOf("你", "好", "吗"),
         ),
         VocabWord(
@@ -30,10 +30,10 @@ class ExerciseGeneratorTest {
             hskLevel = 1,
             hanzi = "谢谢",
             pinyin = "xièxie",
-            french = "Merci",
+            english = "Thank you",
             exampleHanzi = "谢谢你的茶。",
             examplePinyin = "Xièxie nǐ de chá.",
-            exampleFrench = "Merci pour ton thé.",
+            exampleEnglish = "Thank you for your tea.",
             exampleTokens = listOf("谢谢", "你", "的", "茶"),
         ),
         VocabWord(
@@ -42,10 +42,10 @@ class ExerciseGeneratorTest {
             hskLevel = 1,
             hanzi = "再见",
             pinyin = "zàijiàn",
-            french = "Au revoir",
+            english = "Goodbye",
             exampleHanzi = "我们明天再见。",
             examplePinyin = "Wǒmen míngtiān zàijiàn.",
-            exampleFrench = "Au revoir, à demain.",
+            exampleEnglish = "Goodbye, see you tomorrow.",
             exampleTokens = listOf("我们", "明天", "再见"),
         ),
         VocabWord(
@@ -54,10 +54,10 @@ class ExerciseGeneratorTest {
             hskLevel = 1,
             hanzi = "茶",
             pinyin = "chá",
-            french = "Thé",
+            english = "Tea",
             exampleHanzi = "我喜欢喝茶。",
             examplePinyin = "Wǒ xǐhuan hē chá.",
-            exampleFrench = "J'aime boire du thé.",
+            exampleEnglish = "I like drinking tea.",
             exampleTokens = listOf("我", "喜欢", "喝", "茶"),
         ),
         VocabWord(
@@ -66,10 +66,10 @@ class ExerciseGeneratorTest {
             hskLevel = 1,
             hanzi = "水",
             pinyin = "shuǐ",
-            french = "Eau",
+            english = "Water",
             exampleHanzi = "你喝水吗？",
             examplePinyin = "Nǐ hē shuǐ ma?",
-            exampleFrench = "Bois-tu de l'eau ?",
+            exampleEnglish = "Do you drink water?",
             exampleTokens = listOf("你", "喝", "水", "吗"),
         ),
     )
@@ -81,10 +81,10 @@ class ExerciseGeneratorTest {
             hskLevel = 1,
             hanzi = "你",
             pinyin = "nǐ",
-            french = "Tu / toi",
+            english = "You",
             exampleHanzi = "你好我很高兴。",
             examplePinyin = "Nǐ hǎo wǒ hěn gāo xìng.",
-            exampleFrench = "Bonjour, je suis très content.",
+            exampleEnglish = "Hello, I am very happy.",
             exampleTokens = listOf("你", "好", "我", "很", "高兴"),
         ),
         VocabWord(
@@ -93,10 +93,10 @@ class ExerciseGeneratorTest {
             hskLevel = 1,
             hanzi = "好",
             pinyin = "hǎo",
-            french = "Bon / bien",
+            english = "Good / Well",
             exampleHanzi = "你好认识很高兴！",
             examplePinyin = "Nǐ hǎo rèn shi hěn gāo xìng!",
-            exampleFrench = "Bonjour, ravi de faire connaissance !",
+            exampleEnglish = "Hello, nice to meet you!",
             exampleTokens = listOf("你", "好", "认识", "很", "高兴"),
         ),
         VocabWord(
@@ -105,10 +105,10 @@ class ExerciseGeneratorTest {
             hskLevel = 1,
             hanzi = "谢谢",
             pinyin = "xièxie",
-            french = "Merci",
+            english = "Thank you",
             exampleHanzi = "老师谢谢你！",
             examplePinyin = "Lǎo shī xiè xie nǐ!",
-            exampleFrench = "Merci, professeur !",
+            exampleEnglish = "Thank you, teacher!",
             exampleTokens = listOf("老师", "谢谢", "你"),
         ),
         VocabWord(
@@ -117,10 +117,10 @@ class ExerciseGeneratorTest {
             hskLevel = 1,
             hanzi = "再见",
             pinyin = "zàijiàn",
-            french = "Au revoir",
+            english = "Goodbye",
             exampleHanzi = "朋友明天再见！",
             examplePinyin = "Péng you míng tiān zài jiàn!",
-            exampleFrench = "À demain mon ami !",
+            exampleEnglish = "Goodbye my friend, see you tomorrow!",
             exampleTokens = listOf("朋友", "明天", "再见"),
         ),
         VocabWord(
@@ -129,20 +129,20 @@ class ExerciseGeneratorTest {
             hskLevel = 1,
             hanzi = "喂",
             pinyin = "wèi",
-            french = "Allô",
+            english = "Hello (phone)",
             exampleHanzi = "喂你好在家吗？",
             examplePinyin = "Wèi nǐ hǎo zài jiā ma?",
-            exampleFrench = "Allô, bonjour, es-tu à la maison ?",
+            exampleEnglish = "Hello, are you at home?",
             exampleTokens = listOf("喂", "你", "好", "在", "家", "吗"),
         ),
     )
 
     private fun tierRank(exercise: Exercise): Int = when (exercise) {
-        is Exercise.HanziToFrench,
-        is Exercise.AudioToFrench,
+        is Exercise.HanziToEnglish,
+        is Exercise.AudioToEnglish,
         -> 1
         is Exercise.AudioToHanzi,
-        is Exercise.FrenchToHanzi,
+        is Exercise.EnglishToHanzi,
         -> 2
         is Exercise.SentenceOrder -> 3
     }
@@ -161,25 +161,25 @@ class ExerciseGeneratorTest {
         )
 
         assertEquals(10, exercises.size)
-        assertEquals(4, exercises.count { it is Exercise.HanziToFrench || it is Exercise.AudioToFrench })
-        assertEquals(3, exercises.count { it is Exercise.FrenchToHanzi })
+        assertEquals(4, exercises.count { it is Exercise.HanziToEnglish || it is Exercise.AudioToEnglish })
+        assertEquals(3, exercises.count { it is Exercise.EnglishToHanzi })
         assertEquals(3, exercises.count { it is Exercise.SentenceOrder })
 
         val ranks = exercises.map(::tierRank)
         assertEquals(ranks.sorted(), ranks)
         assertTrue(exercises.take(4).all { tierRank(it) == 1 })
-        assertTrue(exercises.subList(4, 7).all { it is Exercise.FrenchToHanzi })
+        assertTrue(exercises.subList(4, 7).all { it is Exercise.EnglishToHanzi })
         assertTrue(exercises.takeLast(3).all { it is Exercise.SentenceOrder })
 
         exercises.forEach { exercise ->
             when (exercise) {
-                is Exercise.HanziToFrench -> {
+                is Exercise.HanziToEnglish -> {
                     assertEquals(4, exercise.options.size)
                     assertEquals(4, exercise.options.distinct().size)
                     assertTrue(exercise.correctOption in exercise.options)
                 }
 
-                is Exercise.AudioToFrench -> {
+                is Exercise.AudioToEnglish -> {
                     assertEquals(4, exercise.options.size)
                     assertEquals(4, exercise.options.distinct().size)
                     assertTrue(exercise.correctOption in exercise.options)
@@ -190,7 +190,7 @@ class ExerciseGeneratorTest {
                     assertTrue(exercise.correctOption in exercise.options)
                 }
 
-                is Exercise.FrenchToHanzi -> {
+                is Exercise.EnglishToHanzi -> {
                     assertEquals(4, exercise.options.size)
                     assertEquals(4, exercise.options.distinct().size)
                     assertTrue(exercise.correctOption in exercise.options)
@@ -233,8 +233,8 @@ class ExerciseGeneratorTest {
 
         val ranks = exercises.map(::tierRank)
         assertEquals(ranks.sorted(), ranks)
-        assertEquals(6, exercises.count { it is Exercise.HanziToFrench || it is Exercise.AudioToFrench })
-        assertEquals(4, exercises.count { it is Exercise.FrenchToHanzi })
+        assertEquals(6, exercises.count { it is Exercise.HanziToEnglish || it is Exercise.AudioToEnglish })
+        assertEquals(4, exercises.count { it is Exercise.EnglishToHanzi })
     }
 
     @Test
@@ -245,10 +245,10 @@ class ExerciseGeneratorTest {
             hskLevel = 1,
             hanzi = "不",
             pinyin = "bù",
-            french = "Ne ... pas",
+            english = "No / Not",
             exampleHanzi = "我不喝茶。",
             examplePinyin = "Wǒ bù hē chá.",
-            exampleFrench = "Je ne bois pas de thé.",
+            exampleEnglish = "I don't drink tea.",
             exampleTokens = listOf("我", "不", "喝", "茶"),
         )
         val singleTokenWord = VocabWord(
@@ -257,10 +257,10 @@ class ExerciseGeneratorTest {
             hskLevel = 1,
             hanzi = "吗",
             pinyin = "ma",
-            french = "Particule interrogative",
+            english = "Question particle",
             exampleHanzi = "好吗？",
             examplePinyin = "Hǎo ma?",
-            exampleFrench = "D'accord ?",
+            exampleEnglish = "Okay?",
             exampleTokens = listOf("好吗"),
         )
 
@@ -294,10 +294,10 @@ class ExerciseGeneratorTest {
                 hskLevel = 2,
                 hanzi = "但是",
                 pinyin = "dànshì",
-                french = "Mais",
+                english = "But",
                 exampleHanzi = "今天下雨但是我很高兴。",
                 examplePinyin = "Jīntiān xiàyǔ dànshì wǒ hěn gāoxìng.",
-                exampleFrench = "Il pleut aujourd'hui, mais je suis très content.",
+                exampleEnglish = "It's raining today, but I'm very happy.",
                 exampleTokens = listOf("今天", "下雨", "但是", "我", "很", "高兴"),
             ),
             VocabWord(
@@ -306,10 +306,10 @@ class ExerciseGeneratorTest {
                 hskLevel = 4,
                 hanzi = "经验",
                 pinyin = "jīngyàn",
-                french = "Expérience",
+                english = "Experience",
                 exampleHanzi = "她有丰富的教学经验。",
                 examplePinyin = "Tā yǒu fēngfù de jiàoxué jīngyàn.",
-                exampleFrench = "Elle a une riche expérience d'enseignement.",
+                exampleEnglish = "She has rich teaching experience.",
                 exampleTokens = listOf("她", "有", "丰富", "的", "教学", "经验"),
             ),
         )
@@ -326,14 +326,14 @@ class ExerciseGeneratorTest {
         )
 
         val forbiddenHanzi = higherLevelWords.map { it.hanzi }.toSet()
-        val forbiddenFrench = higherLevelWords.map { it.french }.toSet()
+        val forbiddenEnglish = higherLevelWords.map { it.english }.toSet()
 
         exercises.forEach { exercise ->
             when (exercise) {
-                is Exercise.HanziToFrench -> assertTrue(exercise.options.none { it in forbiddenFrench })
-                is Exercise.AudioToFrench -> assertTrue(exercise.options.none { it in forbiddenFrench })
+                is Exercise.HanziToEnglish -> assertTrue(exercise.options.none { it in forbiddenEnglish })
+                is Exercise.AudioToEnglish -> assertTrue(exercise.options.none { it in forbiddenEnglish })
                 is Exercise.AudioToHanzi -> assertTrue(exercise.options.none { it in forbiddenHanzi })
-                is Exercise.FrenchToHanzi -> assertTrue(exercise.options.none { it in forbiddenHanzi })
+                is Exercise.EnglishToHanzi -> assertTrue(exercise.options.none { it in forbiddenHanzi })
                 is Exercise.SentenceOrder -> Unit
             }
         }

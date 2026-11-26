@@ -23,10 +23,10 @@ class SoundEffectAssetsTest {
                 File("src/main/res/raw/$filename"),
                 File("app/src/main/res/raw/$filename"),
             ).firstOrNull { it.exists() }
-                ?: error("Fichier res/raw/$filename introuvable")
+                ?: error("Missing res/raw/$filename")
 
             val bytes = file.readBytes()
-            assertTrue("En-tête WAV trop court pour $filename", bytes.size > 44)
+            assertTrue("WAV header too short for $filename", bytes.size > 44)
             assertEquals("RIFF", String(bytes, 0, 4, Charsets.US_ASCII))
             assertEquals("WAVE", String(bytes, 8, 4, Charsets.US_ASCII))
 
@@ -37,14 +37,14 @@ class SoundEffectAssetsTest {
             val bitsPerSample = header.getShort(34).toInt()
             val dataSize = header.getInt(40)
 
-            assertEquals("Format PCM attendu pour $filename", 1, audioFormat)
-            assertEquals("Mono attendu pour $filename", 1, channels)
-            assertEquals("44.1 kHz attendu pour $filename", 44_100, sampleRate)
-            assertEquals("16-bit attendu pour $filename", 16, bitsPerSample)
+            assertEquals("Expected PCM format for $filename", 1, audioFormat)
+            assertEquals("Expected mono channel for $filename", 1, channels)
+            assertEquals("Expected 44.1 kHz for $filename", 44_100, sampleRate)
+            assertEquals("Expected 16-bit for $filename", 16, bitsPerSample)
 
             val sampleCount = dataSize / 2
             val expectedSamples = (expectedMs * 44_100) / 1000
-            assertEquals("Durée inattendue pour $filename", expectedSamples, sampleCount)
+            assertEquals("Unexpected duration for $filename", expectedSamples, sampleCount)
 
             val pcm = ByteBuffer.wrap(bytes, 44, dataSize).order(ByteOrder.LITTLE_ENDIAN)
             var peak = 0
@@ -54,8 +54,8 @@ class SoundEffectAssetsTest {
                 peak = maxOf(peak, abs(sample))
                 lastSample = sample
             }
-            assertTrue("Pic hors plage (~85%) pour $filename : $peak", peak in 26_000..29_000)
-            assertTrue("Fade-out final attendu pour $filename : $lastSample", abs(lastSample) < 50)
+            assertTrue("Peak out of range (~85%) for $filename: $peak", peak in 26_000..29_000)
+            assertTrue("Expected final fade-out for $filename: $lastSample", abs(lastSample) < 50)
         }
     }
 }

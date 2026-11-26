@@ -8,12 +8,12 @@ data class IndexedVocabWord(
     val item: WordWithProgress,
     val normalizedPinyin: String,
     val compactPinyin: String,
-    val normalizedFrench: String,
+    val normalizedEnglish: String,
 )
 
 /**
- * Filtre les mots du lexique par hanzi, pinyin (avec ou sans marques de tons/espaces)
- * et traduction française (insensible à la casse et aux accents).
+ * Filters lexicon words by hanzi, pinyin (with or without tone marks/spaces),
+ * and English translation (case- and accent-insensitive).
  */
 object VocabularySearchFilter {
 
@@ -27,7 +27,7 @@ object VocabularySearchFilter {
                 item = entry,
                 normalizedPinyin = normalizedPinyin,
                 compactPinyin = normalizedPinyin.replace(whitespaceRegex, ""),
-                normalizedFrench = normalizeLatin(entry.word.french),
+                normalizedEnglish = normalizeLatin(entry.word.english),
             )
         }
 
@@ -46,7 +46,7 @@ object VocabularySearchFilter {
             val matched = entry.item.word.hanzi.contains(trimmed, ignoreCase = true) ||
                 entry.normalizedPinyin.contains(normalizedQuery) ||
                 (compactQuery.isNotEmpty() && entry.compactPinyin.contains(compactQuery)) ||
-                entry.normalizedFrench.contains(normalizedQuery)
+                entry.normalizedEnglish.contains(normalizedQuery)
             if (matched) {
                 results += entry.item
             }

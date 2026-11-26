@@ -28,10 +28,10 @@ data class LessonUiState(
 ) {
     val canCheckAnswer: Boolean
         get() = feedback == null && when (currentExercise) {
-            is Exercise.HanziToFrench,
-            is Exercise.AudioToFrench,
+            is Exercise.HanziToEnglish,
+            is Exercise.AudioToEnglish,
             is Exercise.AudioToHanzi,
-            is Exercise.FrenchToHanzi,
+            is Exercise.EnglishToHanzi,
             -> selectedOption != null
             is Exercise.SentenceOrder -> selectedTokens.isNotEmpty()
             null -> false

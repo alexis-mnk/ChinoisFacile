@@ -12,14 +12,14 @@ sealed interface Exercise {
     val id: String
     val word: VocabWord
 
-    data class HanziToFrench(
+    data class HanziToEnglish(
         override val id: String,
         override val word: VocabWord,
         val options: List<String>,
         val correctOption: String,
     ) : Exercise
 
-    data class AudioToFrench(
+    data class AudioToEnglish(
         override val id: String,
         override val word: VocabWord,
         val options: List<String>,
@@ -33,7 +33,7 @@ sealed interface Exercise {
         val correctOption: String,
     ) : Exercise
 
-    data class FrenchToHanzi(
+    data class EnglishToHanzi(
         override val id: String,
         override val word: VocabWord,
         val options: List<String>,
@@ -44,7 +44,7 @@ sealed interface Exercise {
     data class SentenceOrder(
         override val id: String,
         override val word: VocabWord,
-        val promptFrench: String,
+        val promptEnglish: String,
         val expectedTokens: List<String>,
         val shuffledChips: List<TokenChip>,
     ) : Exercise

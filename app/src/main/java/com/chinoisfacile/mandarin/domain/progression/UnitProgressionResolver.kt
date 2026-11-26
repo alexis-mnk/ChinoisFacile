@@ -40,10 +40,10 @@ sealed interface UnitLessonFilterSelection {
 
 object UnitProgressionResolver {
 
-    private val LECON_PREFIX_REGEX = Regex("^Leçon\\b", RegexOption.IGNORE_CASE)
+    private val QUIZ_PREFIX_REGEX = Regex("^(?:Lesson|Quiz)\\b", RegexOption.IGNORE_CASE)
 
     fun formatQuizTitle(rawTitle: String): String =
-        rawTitle.trim().replaceFirst(LECON_PREFIX_REGEX, "Quiz")
+        rawTitle.trim().replaceFirst(QUIZ_PREFIX_REGEX, "Quiz")
 
     fun formatQuizShortLabel(orderIndex: Int): String = "Quiz $orderIndex"
 

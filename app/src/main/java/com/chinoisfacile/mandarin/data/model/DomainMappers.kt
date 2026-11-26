@@ -42,10 +42,10 @@ fun WordDto.toEntity(hskLevel: Int): WordEntity = WordEntity(
     hskLevel = hskLevel,
     hanzi = hanzi,
     pinyin = pinyin,
-    french = french,
+    english = english,
     exampleHanzi = example.hanzi,
     examplePinyin = example.pinyin,
-    exampleFrench = example.french,
+    exampleEnglish = example.english,
     exampleTokensJson = tokensJson.encodeToString(example.tokens),
 )
 
@@ -55,10 +55,10 @@ fun WordEntity.toDomain(): VocabWord = VocabWord(
     hskLevel = hskLevel,
     hanzi = hanzi,
     pinyin = pinyin,
-    french = french,
+    english = english,
     exampleHanzi = exampleHanzi,
     examplePinyin = examplePinyin,
-    exampleFrench = exampleFrench,
+    exampleEnglish = exampleEnglish,
     exampleTokens = tokensJson.decodeFromString<List<String>>(exampleTokensJson),
 )
 

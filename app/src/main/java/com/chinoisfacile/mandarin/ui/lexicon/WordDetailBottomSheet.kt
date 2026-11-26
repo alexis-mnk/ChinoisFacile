@@ -130,7 +130,7 @@ fun WordDetailBottomSheet(
             Spacer(modifier = Modifier.height(6.dp))
 
             Text(
-                text = item.word.french,
+                text = item.word.english,
                 style = MaterialTheme.typography.titleLarge,
                 color = MaterialTheme.colorScheme.onSurface,
                 textAlign = TextAlign.Center,
@@ -172,7 +172,7 @@ fun WordDetailBottomSheet(
                     )
                     Spacer(modifier = Modifier.height(4.dp))
                     Text(
-                        text = item.word.exampleFrench,
+                        text = item.word.exampleEnglish,
                         style = MaterialTheme.typography.bodyLarge,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )

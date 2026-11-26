@@ -11,10 +11,10 @@ class LexiconFilterTest {
     private val today = 20_000L
 
     private val sampleWords = listOf(
-        word(id = "1", hanzi = "你好", pinyin = "nǐ hǎo", french = "Bonjour", mastery = MasteryLevel.MASTERED, nextDay = today + 10),
-        word(id = "2", hanzi = "学习", pinyin = "xuéxí", french = "Étudier", mastery = MasteryLevel.LEARNING, nextDay = today),
-        word(id = "3", hanzi = "茶", pinyin = "chá", french = "Thé", mastery = MasteryLevel.MASTERED, nextDay = today - 1),
-        word(id = "4", hanzi = "水", pinyin = "shuǐ", french = "Eau", mastery = MasteryLevel.NEW, nextDay = 0L),
+        word(id = "1", hanzi = "你好", pinyin = "nǐ hǎo", english = "Hello", mastery = MasteryLevel.MASTERED, nextDay = today + 10),
+        word(id = "2", hanzi = "学习", pinyin = "xuéxí", english = "To study", mastery = MasteryLevel.LEARNING, nextDay = today),
+        word(id = "3", hanzi = "茶", pinyin = "chá", english = "Tea", mastery = MasteryLevel.MASTERED, nextDay = today - 1),
+        word(id = "4", hanzi = "水", pinyin = "shuǐ", english = "Water", mastery = MasteryLevel.NEW, nextDay = 0L),
     )
 
     @Test
@@ -35,7 +35,7 @@ class LexiconFilterTest {
         )
         assertEquals(
             listOf("2"),
-            LexiconFilter.filter(sampleWords, LexiconStatusFilter.DUE, "etudier", today).map { it.word.id },
+            LexiconFilter.filter(sampleWords, LexiconStatusFilter.DUE, "study", today).map { it.word.id },
         )
         assertEquals(
             listOf("1"),
@@ -50,15 +50,15 @@ class LexiconFilterTest {
     @Test
     fun `buildSortedIndex and filter sort alphabetically by normalized pinyin regardless of tones`() {
         val unsorted = listOf(
-            word(id = "da", hanzi = "大", pinyin = "dà", french = "Grand", mastery = MasteryLevel.LEARNING, nextDay = today),
-            word(id = "nv", hanzi = "女", pinyin = "nǚ", french = "Femme", mastery = MasteryLevel.MASTERED, nextDay = today + 5),
-            word(id = "chi", hanzi = "吃", pinyin = "chī", french = "Manger", mastery = MasteryLevel.LEARNING, nextDay = today),
-            word(id = "ma3", hanzi = "马", pinyin = "mǎ", french = "Cheval", mastery = MasteryLevel.NEW, nextDay = 0L),
-            word(id = "beijing", hanzi = "北京", pinyin = "Běi jīng", french = "Pékin", mastery = MasteryLevel.MASTERED, nextDay = today + 3),
-            word(id = "ai", hanzi = "哀", pinyin = "āi", french = "Tristesse", mastery = MasteryLevel.LEARNING, nextDay = today),
-            word(id = "nu3", hanzi = "努", pinyin = "nǔ", french = "S'efforcer", mastery = MasteryLevel.NEW, nextDay = 0L),
-            word(id = "ba", hanzi = "八", pinyin = "bā", french = "Huit", mastery = MasteryLevel.MASTERED, nextDay = today + 2),
-            word(id = "ma1", hanzi = "妈", pinyin = "mā", french = "Maman", mastery = MasteryLevel.NEW, nextDay = 0L),
+            word(id = "da", hanzi = "大", pinyin = "dà", english = "Big", mastery = MasteryLevel.LEARNING, nextDay = today),
+            word(id = "nv", hanzi = "女", pinyin = "nǚ", english = "Woman", mastery = MasteryLevel.MASTERED, nextDay = today + 5),
+            word(id = "chi", hanzi = "吃", pinyin = "chī", english = "To eat", mastery = MasteryLevel.LEARNING, nextDay = today),
+            word(id = "ma3", hanzi = "马", pinyin = "mǎ", english = "Horse", mastery = MasteryLevel.NEW, nextDay = 0L),
+            word(id = "beijing", hanzi = "北京", pinyin = "Běi jīng", english = "Beijing", mastery = MasteryLevel.MASTERED, nextDay = today + 3),
+            word(id = "ai", hanzi = "哀", pinyin = "āi", english = "Sorrow", mastery = MasteryLevel.LEARNING, nextDay = today),
+            word(id = "nu3", hanzi = "努", pinyin = "nǔ", english = "To strive", mastery = MasteryLevel.NEW, nextDay = 0L),
+            word(id = "ba", hanzi = "八", pinyin = "bā", english = "Eight", mastery = MasteryLevel.MASTERED, nextDay = today + 2),
+            word(id = "ma1", hanzi = "妈", pinyin = "mā", english = "Mom", mastery = MasteryLevel.NEW, nextDay = 0L),
         )
 
         val expectedAll = listOf("ai", "ba", "beijing", "chi", "da", "ma1", "ma3", "nu3", "nv")
@@ -87,7 +87,7 @@ class LexiconFilterTest {
         id: String,
         hanzi: String,
         pinyin: String,
-        french: String,
+        english: String,
         mastery: MasteryLevel,
         nextDay: Long,
     ): WordWithProgress = WordWithProgress(
@@ -97,10 +97,10 @@ class LexiconFilterTest {
             hskLevel = 1,
             hanzi = hanzi,
             pinyin = pinyin,
-            french = french,
+            english = english,
             exampleHanzi = hanzi,
             examplePinyin = pinyin,
-            exampleFrench = french,
+            exampleEnglish = english,
             exampleTokens = listOf(hanzi),
         ),
         repetitions = if (mastery == MasteryLevel.NEW) 0 else 2,

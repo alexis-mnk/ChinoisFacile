@@ -32,7 +32,7 @@ class AppContainer(context: Context) {
             AppDatabase::class.java,
             "chinois_facile.db",
         )
-            .addMigrations(AppDatabase.MIGRATION_1_2)
+            .fallbackToDestructiveMigration()
             .build()
     }
 

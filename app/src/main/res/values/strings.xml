@@ -1,195 +1,195 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ChinoisFacile</string>
+    <string name="app_name">EasyMandarin</string>
 
     <!-- Navigation -->
-    <string name="nav_home">Parcours</string>
-    <string name="nav_lexicon">Lexique</string>
-    <string name="nav_stats">Progrès</string>
-    <string name="nav_settings">Paramètres</string>
+    <string name="nav_home">Path</string>
+    <string name="nav_lexicon">Lexicon</string>
+    <string name="nav_stats">Progress</string>
+    <string name="nav_settings">Settings</string>
 
-    <!-- Accueil (HomeScreen) -->
+    <!-- Home (HomeScreen) -->
     <string name="home_title_hsk">Mandarin HSK %1$d</string>
     <string name="hsk_level_chip">HSK %1$d</string>
-    <string name="home_subtitle">100 % hors-ligne • Vies illimitées</string>
-    <string name="home_stat_streak">%1$d j</string>
-    <string name="home_stat_streak_label">Série</string>
+    <string name="home_subtitle">100% offline • Unlimited lives</string>
+    <string name="home_stat_streak">%1$d d</string>
+    <string name="home_stat_streak_label">Streak</string>
     <string name="home_stat_xp">%1$d XP</string>
     <string name="home_stat_xp_label">Total XP</string>
     <string name="home_stat_mastered">%1$d / %2$d</string>
-    <string name="home_stat_mastered_label">Maîtrisés</string>
+    <string name="home_stat_mastered_label">Mastered</string>
 
-    <string name="home_quick_review_title">Révision rapide</string>
-    <string name="home_quick_review_due_one">1 mot à réviser aujourd\'hui</string>
-    <string name="home_quick_review_due_many">%1$d mots à réviser aujourd\'hui</string>
-    <string name="home_quick_review_none">Tout est à jour ! Entraînement libre sur les mots débloqués</string>
-    <string name="home_quick_review_button">Réviser (10 exercices)</string>
+    <string name="home_quick_review_title">Quick Review</string>
+    <string name="home_quick_review_due_one">1 word to review today</string>
+    <string name="home_quick_review_due_many">%1$d words to review today</string>
+    <string name="home_quick_review_none">All caught up! Free practice on unlocked words</string>
+    <string name="home_quick_review_button">Review (10 exercises)</string>
 
-    <string name="home_lesson_word_count">%1$d mots</string>
-    <string name="home_lesson_status_locked">Terminez le quiz précédent pour débloquer</string>
-    <string name="home_lesson_status_available">Prêt à démarrer</string>
-    <string name="home_lesson_status_completed">Terminé • Meilleur score : %1$d %%</string>
-    <string name="home_lesson_start">Commencer</string>
-    <string name="home_lesson_replay">Rejouer</string>
-    <string name="home_unit_lesson_node_label">Leçon • %1$d mots</string>
-    <string name="home_unit_lesson_badge">LEÇON</string>
-    <string name="home_unit_lesson_locked">Terminez le dernier quiz de l\'unité précédente pour débloquer cette leçon.</string>
-    <string name="home_quiz_first_locked">Terminez la leçon de l\'unité pour débloquer ce quiz</string>
-    <string name="home_open_unit_lesson">Ouvrir la leçon</string>
-    <string name="home_loading">Chargement du parcours…</string>
-    <string name="home_updating_catalog">Mise à jour du catalogue HSK…</string>
-    <string name="home_node_start_bubble">COMMENCER</string>
-    <string name="home_jump_to_active">Reprendre</string>
-    <string name="home_preview_words_label">Aperçu des mots (%1$d)</string>
-    <string name="home_preview_score_badge">%1$d %%</string>
+    <string name="home_lesson_word_count">%1$d words</string>
+    <string name="home_lesson_status_locked">Complete the previous quiz to unlock</string>
+    <string name="home_lesson_status_available">Ready to start</string>
+    <string name="home_lesson_status_completed">Completed • Best score: %1$d%%</string>
+    <string name="home_lesson_start">Start</string>
+    <string name="home_lesson_replay">Replay</string>
+    <string name="home_unit_lesson_node_label">Lesson • %1$d words</string>
+    <string name="home_unit_lesson_badge">LESSON</string>
+    <string name="home_unit_lesson_locked">Complete the last quiz of the previous unit to unlock this lesson.</string>
+    <string name="home_quiz_first_locked">Complete the unit lesson to unlock this quiz</string>
+    <string name="home_open_unit_lesson">Open lesson</string>
+    <string name="home_loading">Loading path…</string>
+    <string name="home_updating_catalog">Updating HSK catalog…</string>
+    <string name="home_node_start_bubble">START</string>
+    <string name="home_jump_to_active">Resume</string>
+    <string name="home_preview_words_label">Word preview (%1$d)</string>
+    <string name="home_preview_score_badge">%1$d%%</string>
 
-    <!-- Session de quiz (LessonScreen) -->
-    <string name="lesson_quick_review_title">Révision rapide</string>
+    <!-- Quiz Session (LessonScreen) -->
+    <string name="lesson_quick_review_title">Quick Review</string>
     <string name="lesson_progress_counter">%1$d / %2$d</string>
-    <string name="lesson_close_cd">Quitter le quiz</string>
-    <string name="lesson_quit_dialog_title">Quitter le quiz ?</string>
-    <string name="lesson_quit_dialog_message">Votre progression sur cette session en cours ne sera pas enregistrée.</string>
-    <string name="lesson_quit_confirm">Quitter</string>
-    <string name="lesson_quit_cancel">Continuer</string>
-    <string name="lesson_loading">Préparation du quiz…</string>
-    <string name="lesson_error_empty">Impossible de charger les exercices pour ce quiz.</string>
-    <string name="lesson_back_home">Retour au parcours</string>
+    <string name="lesson_close_cd">Quit quiz</string>
+    <string name="lesson_quit_dialog_title">Quit quiz?</string>
+    <string name="lesson_quit_dialog_message">Your progress in this session will not be saved.</string>
+    <string name="lesson_quit_confirm">Quit</string>
+    <string name="lesson_quit_cancel">Keep going</string>
+    <string name="lesson_loading">Preparing quiz…</string>
+    <string name="lesson_error_empty">Unable to load exercises for this quiz.</string>
+    <string name="lesson_back_home">Back to path</string>
 
-    <!-- Écran de leçon d'unité (UnitLessonScreen) -->
-    <string name="unit_lesson_back_cd">Retour au parcours</string>
-    <string name="unit_lesson_subtitle">HSK %1$d • %2$d mots</string>
-    <string name="unit_lesson_mode_cards">Cartes</string>
-    <string name="unit_lesson_mode_sheet">Fiche</string>
-    <string name="unit_lesson_filter_all">Tout (%1$d)</string>
-    <string name="unit_lesson_card_progress">Mot %1$d / %2$d</string>
-    <string name="unit_lesson_example_label">Phrase d\'exemple</string>
-    <string name="unit_lesson_prev">Précédent</string>
-    <string name="unit_lesson_next">Suivant</string>
-    <string name="unit_lesson_complete_cta">Terminer la leçon</string>
-    <string name="unit_lesson_complete_short">Valider</string>
-    <string name="unit_lesson_completed_badge">Validée</string>
-    <string name="unit_lesson_completed_banner">Leçon terminée ! Vous êtes prêt pour la pratique.</string>
-    <string name="unit_lesson_launch_quiz">Lancer le Quiz %1$d</string>
-    <string name="unit_lesson_loading">Chargement de la leçon…</string>
-    <string name="unit_lesson_error">Impossible de charger cette leçon d\'unité.</string>
-    <string name="unit_lesson_listen_word_cd">Écouter le mot</string>
-    <string name="unit_lesson_listen_example_cd">Écouter la phrase d\'exemple</string>
+    <!-- Unit Discovery Lesson (UnitLessonScreen) -->
+    <string name="unit_lesson_back_cd">Back to path</string>
+    <string name="unit_lesson_subtitle">HSK %1$d • %2$d words</string>
+    <string name="unit_lesson_mode_cards">Cards</string>
+    <string name="unit_lesson_mode_sheet">List</string>
+    <string name="unit_lesson_filter_all">All (%1$d)</string>
+    <string name="unit_lesson_card_progress">Word %1$d / %2$d</string>
+    <string name="unit_lesson_example_label">Example sentence</string>
+    <string name="unit_lesson_prev">Previous</string>
+    <string name="unit_lesson_next">Next</string>
+    <string name="unit_lesson_complete_cta">Complete lesson</string>
+    <string name="unit_lesson_complete_short">Done</string>
+    <string name="unit_lesson_completed_badge">Completed</string>
+    <string name="unit_lesson_completed_banner">Lesson complete! You\'re ready to practice.</string>
+    <string name="unit_lesson_launch_quiz">Start Quiz %1$d</string>
+    <string name="unit_lesson_loading">Loading lesson…</string>
+    <string name="unit_lesson_error">Unable to load this unit lesson.</string>
+    <string name="unit_lesson_listen_word_cd">Listen to word</string>
+    <string name="unit_lesson_listen_example_cd">Listen to example sentence</string>
 
-    <!-- Consignes et contrôles d'exercices -->
-    <string name="exercise_hanzi_to_french_prompt">Que signifie ce mot en français ?</string>
-    <string name="exercise_audio_to_french_prompt">Écoutez et choisissez la bonne traduction</string>
-    <string name="exercise_audio_to_hanzi_prompt">Écoutez et choisissez le bon caractère</string>
-    <string name="exercise_french_to_hanzi_prompt">Comment dit-on ce mot en chinois ?</string>
-    <string name="exercise_sentence_order_prompt">Remettez les mots dans l\'ordre pour traduire :</string>
-    <string name="exercise_sentence_placeholder">Touchez les mots ci-dessous pour former la phrase</string>
-    <string name="exercise_sentence_clear">Effacer</string>
+    <!-- Exercise Prompts & Controls -->
+    <string name="exercise_hanzi_to_english_prompt">What does this word mean in English?</string>
+    <string name="exercise_audio_to_english_prompt">Listen and choose the right meaning</string>
+    <string name="exercise_audio_to_hanzi_prompt">Listen and choose the right character</string>
+    <string name="exercise_english_to_hanzi_prompt">How do you say this in Chinese?</string>
+    <string name="exercise_sentence_order_prompt">Put the words in order to translate:</string>
+    <string name="exercise_sentence_placeholder">Tap the words below to build the sentence</string>
+    <string name="exercise_sentence_clear">Clear</string>
 
-    <string name="pinyin_show">Afficher le pinyin</string>
-    <string name="pinyin_hide">Masquer le pinyin</string>
+    <string name="pinyin_show">Show pinyin</string>
+    <string name="pinyin_hide">Hide pinyin</string>
 
     <string name="audio_play_normal">Normal 1.0x</string>
-    <string name="audio_play_slow">Lent 0.7x</string>
-    <string name="audio_listen_word">Écouter</string>
-    <string name="audio_listen_example">Écouter la phrase</string>
+    <string name="audio_play_slow">Slow 0.7x</string>
+    <string name="audio_listen_word">Listen</string>
+    <string name="audio_listen_example">Listen to sentence</string>
 
-    <!-- Avertissement TTS hors-ligne -->
-    <string name="tts_missing_warning">La voix chinoise (zh-CN) n\'est pas installée sur cet appareil. Activez-la dans Paramètres Android &gt; Synthèse vocale, ou affichez le pinyin pour continuer.</string>
-    <string name="tts_show_pinyin_fallback">Afficher le pinyin</string>
+    <!-- Offline TTS Warning -->
+    <string name="tts_missing_warning">The Chinese voice (zh-CN) is not installed on this device. Enable it in Android Settings &gt; Text-to-speech, or show pinyin to continue.</string>
+    <string name="tts_show_pinyin_fallback">Show pinyin</string>
 
-    <!-- Boutons validation & feedback -->
-    <string name="lesson_check_answer">Vérifier</string>
-    <string name="lesson_continue">Continuer</string>
-    <string name="feedback_correct_title">Excellent !</string>
-    <string name="feedback_wrong_title">Pas tout à fait…</string>
-    <string name="feedback_correct_answer_label">Bonne réponse :</string>
-    <string name="feedback_example_label">Exemple :</string>
-    <string name="feedback_retry_notice">Cet exercice reviendra en fin de session pour vous aider à le retenir.</string>
+    <!-- Validation & Feedback -->
+    <string name="lesson_check_answer">Check</string>
+    <string name="lesson_continue">Continue</string>
+    <string name="feedback_correct_title">Awesome!</string>
+    <string name="feedback_wrong_title">Not quite…</string>
+    <string name="feedback_correct_answer_label">Correct answer:</string>
+    <string name="feedback_example_label">Example:</string>
+    <string name="feedback_retry_notice">This exercise will return at the end of the session to help you master it.</string>
 
-    <!-- Écran récapitulatif de fin de session -->
-    <string name="summary_title">Quiz terminé !</string>
-    <string name="summary_quick_review_title">Révision terminée !</string>
-    <string name="summary_subtitle">Bravo pour votre régularité, continuez ainsi.</string>
-    <string name="summary_accuracy_label">Précision</string>
-    <string name="summary_accuracy_value">%1$d %%</string>
-    <string name="summary_xp_label">XP gagnés</string>
+    <!-- Session Summary -->
+    <string name="summary_title">Quiz complete!</string>
+    <string name="summary_quick_review_title">Review complete!</string>
+    <string name="summary_subtitle">Great consistency, keep it up!</string>
+    <string name="summary_accuracy_label">Accuracy</string>
+    <string name="summary_accuracy_value">%1$d%%</string>
+    <string name="summary_xp_label">XP earned</string>
     <string name="summary_xp_value">+%1$d XP</string>
-    <string name="summary_streak_label">Série actuelle</string>
-    <string name="summary_streak_value">%1$d jour(s)</string>
-    <string name="summary_unlocked_next">Nouveau quiz débloqué : %1$s</string>
-    <string name="summary_unlocked_unit_lesson">Nouvelle leçon débloquée : %1$s</string>
-    <string name="summary_words_section">Mots pratiqués &amp; prochaine révision (SM-2)</string>
-    <string name="summary_next_review_tomorrow">Demain</string>
-    <string name="summary_next_review_days">Dans %1$d jours</string>
-    <string name="summary_done_button">Terminer</string>
+    <string name="summary_streak_label">Current streak</string>
+    <string name="summary_streak_value">%1$d day(s)</string>
+    <string name="summary_unlocked_next">New quiz unlocked: %1$s</string>
+    <string name="summary_unlocked_unit_lesson">New lesson unlocked: %1$s</string>
+    <string name="summary_words_section">Practiced words &amp; next review (SM-2)</string>
+    <string name="summary_next_review_tomorrow">Tomorrow</string>
+    <string name="summary_next_review_days">In %1$d days</string>
+    <string name="summary_done_button">Done</string>
 
-    <!-- Écran Progrès (StatsScreen) -->
-    <string name="stats_title">Vos progrès</string>
-    <string name="stats_total_xp_label">XP cumulés</string>
-    <string name="stats_current_streak_label">Série actuelle</string>
-    <string name="stats_longest_streak_label">Record</string>
+    <!-- Progress (StatsScreen) -->
+    <string name="stats_title">Your Progress</string>
+    <string name="stats_total_xp_label">Total XP</string>
+    <string name="stats_current_streak_label">Current streak</string>
+    <string name="stats_longest_streak_label">Best streak</string>
     <string name="stats_sessions_label">Sessions</string>
-    <string name="stats_days_value">%1$d j</string>
-    <string name="stats_mastery_title_hsk">Maîtrise du vocabulaire HSK %1$d</string>
-    <string name="stats_mastered_count">%1$d maîtrisé(s)</string>
-    <string name="stats_learning_count">%1$d en cours</string>
-    <string name="stats_new_count">%1$d nouveau(x)</string>
-    <string name="stats_settings_title">Préférences d\'apprentissage</string>
-    <string name="stats_pinyin_default_title">Afficher le pinyin par défaut</string>
-    <string name="stats_pinyin_default_desc">Affiche la transcription pinyin sous les caractères lors des QCM.</string>
-    <string name="stats_sound_effects_title">Effets sonores</string>
-    <string name="stats_sound_effects_desc">Joue un son discret lors des réponses et en fin de session.</string>
-    <string name="stats_vocabulary_title_hsk">Lexique HSK %1$d (%2$d mots)</string>
-    <string name="stats_vocabulary_filtered_title_hsk">Lexique HSK %1$d (%2$d / %3$d mots)</string>
-    <string name="stats_search_placeholder">Rechercher (hanzi, pinyin ou français)…</string>
-    <string name="stats_search_clear_cd">Effacer la recherche</string>
-    <string name="stats_search_empty">Aucun mot ne correspond à votre recherche.</string>
-    <string name="stats_badge_mastered">Maîtrisé</string>
-    <string name="stats_badge_learning">En cours</string>
-    <string name="stats_badge_new">À découvrir</string>
-    <string name="stats_due_today">À réviser aujourd\'hui</string>
-    <string name="stats_due_in_days">Révision dans %1$d j</string>
-    <string name="stats_due_tomorrow">Révision demain</string>
-    <string name="stats_global_mastery_title">Maîtrise globale</string>
-    <string name="stats_global_mastery_subtitle">%1$d mots maîtrisés sur %2$d</string>
-    <string name="stats_due_count">%1$d à revoir</string>
-    <string name="stats_by_level_title">Maîtrise par niveau HSK</string>
+    <string name="stats_days_value">%1$d d</string>
+    <string name="stats_mastery_title_hsk">HSK %1$d Vocabulary Mastery</string>
+    <string name="stats_mastered_count">%1$d mastered</string>
+    <string name="stats_learning_count">%1$d learning</string>
+    <string name="stats_new_count">%1$d new</string>
+    <string name="stats_settings_title">Learning preferences</string>
+    <string name="stats_pinyin_default_title">Show pinyin by default</string>
+    <string name="stats_pinyin_default_desc">Displays pinyin transcription below characters during exercises.</string>
+    <string name="stats_sound_effects_title">Sound effects</string>
+    <string name="stats_sound_effects_desc">Plays a subtle chime for answers and completed sessions.</string>
+    <string name="stats_vocabulary_title_hsk">HSK %1$d Lexicon (%2$d words)</string>
+    <string name="stats_vocabulary_filtered_title_hsk">HSK %1$d Lexicon (%2$d / %3$d words)</string>
+    <string name="stats_search_placeholder">Search (hanzi, pinyin, or English)…</string>
+    <string name="stats_search_clear_cd">Clear search</string>
+    <string name="stats_search_empty">No words match your search.</string>
+    <string name="stats_badge_mastered">Mastered</string>
+    <string name="stats_badge_learning">Learning</string>
+    <string name="stats_badge_new">New</string>
+    <string name="stats_due_today">Due today</string>
+    <string name="stats_due_in_days">Review in %1$d d</string>
+    <string name="stats_due_tomorrow">Review tomorrow</string>
+    <string name="stats_global_mastery_title">Overall Mastery</string>
+    <string name="stats_global_mastery_subtitle">%1$d of %2$d words mastered</string>
+    <string name="stats_due_count">%1$d due</string>
+    <string name="stats_by_level_title">Mastery by HSK Level</string>
 
-    <!-- Écran Lexique (LexiconScreen) -->
-    <string name="lexicon_title_hsk">Lexique HSK %1$d (%2$d)</string>
-    <string name="lexicon_search_placeholder">Hanzi, pinyin ou français…</string>
-    <string name="lexicon_search_empty">Aucun mot trouvé</string>
-    <string name="lexicon_switch_to_list_cd">Afficher en liste compacte</string>
-    <string name="lexicon_switch_to_grid_cd">Afficher en grille</string>
-    <string name="lexicon_filter_due">À revoir</string>
-    <string name="lexicon_filter_all_count">Tous (%1$d)</string>
-    <string name="lexicon_filter_due_count">À revoir (%1$d)</string>
-    <string name="lexicon_filter_learning_count">En cours (%1$d)</string>
-    <string name="lexicon_filter_mastered_count">Maîtrisés (%1$d)</string>
-    <string name="lexicon_filter_new_count">Nouveaux (%1$d)</string>
-    <string name="lexicon_detail_example_title">Phrase d\'exemple</string>
-    <string name="lexicon_detail_sm2_title">Suivi de mémorisation (SM-2)</string>
-    <string name="lexicon_detail_not_studied">Pas encore étudié</string>
-    <string name="lexicon_detail_next_review">Prochaine révision</string>
-    <string name="lexicon_detail_correct_wrong">Réussites / Erreurs</string>
+    <!-- Lexicon (LexiconScreen) -->
+    <string name="lexicon_title_hsk">HSK %1$d Lexicon (%2$d)</string>
+    <string name="lexicon_search_placeholder">Hanzi, pinyin, or English…</string>
+    <string name="lexicon_search_empty">No words found</string>
+    <string name="lexicon_switch_to_list_cd">Switch to compact list</string>
+    <string name="lexicon_switch_to_grid_cd">Switch to grid view</string>
+    <string name="lexicon_filter_due">Due</string>
+    <string name="lexicon_filter_all_count">All (%1$d)</string>
+    <string name="lexicon_filter_due_count">Due (%1$d)</string>
+    <string name="lexicon_filter_learning_count">Learning (%1$d)</string>
+    <string name="lexicon_filter_mastered_count">Mastered (%1$d)</string>
+    <string name="lexicon_filter_new_count">New (%1$d)</string>
+    <string name="lexicon_detail_example_title">Example Sentence</string>
+    <string name="lexicon_detail_sm2_title">Memory Tracking (SM-2)</string>
+    <string name="lexicon_detail_not_studied">Not studied yet</string>
+    <string name="lexicon_detail_next_review">Next review</string>
+    <string name="lexicon_detail_correct_wrong">Correct / Mistakes</string>
     <string name="lexicon_detail_correct_wrong_value">%1$d / %2$d</string>
-    <string name="lexicon_detail_repetitions">Répétitions / Intervalle</string>
-    <string name="lexicon_detail_repetitions_value">%1$d • %2$d j</string>
+    <string name="lexicon_detail_repetitions">Repetitions / Interval</string>
+    <string name="lexicon_detail_repetitions_value">%1$d • %2$d d</string>
 
-    <!-- Écran Paramètres (SettingsScreen) -->
-    <string name="settings_title">Paramètres</string>
-    <string name="settings_appearance_title">Apparence</string>
-    <string name="settings_appearance_desc">Choisissez le thème clair, sombre ou celui du système.</string>
-    <string name="settings_theme_system">Système</string>
-    <string name="settings_theme_light">Clair</string>
-    <string name="settings_theme_dark">Sombre</string>
-    <string name="settings_tts_title">Synthèse vocale Android (TTS)</string>
-    <string name="settings_tts_desc">Ouvrir les paramètres système pour installer ou régler la voix chinoise.</string>
-    <string name="settings_data_title">Données locales</string>
-    <string name="settings_reset_desc">Remet à zéro les XP, la série, la maîtrise SM-2 et le déblocage des unités et des quiz.</string>
-    <string name="settings_reset_button">Réinitialiser ma progression</string>
-    <string name="settings_reset_dialog_title">Réinitialiser toute la progression ?</string>
-    <string name="settings_reset_dialog_message">Cette action effacera définitivement vos XP, votre série quotidienne, l\'historique SM-2 de tous les mots et verrouillera à nouveau les unités et les quiz (seule la Leçon de l\'Unité 1 de chaque niveau restera débloquée).</string>
-    <string name="settings_reset_confirm">Réinitialiser</string>
-    <string name="settings_reset_cancel">Annuler</string>
-    <string name="settings_reset_done">Progression réinitialisée.</string>
+    <!-- Settings (SettingsScreen) -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_appearance_title">Appearance</string>
+    <string name="settings_appearance_desc">Choose light, dark, or system default theme.</string>
+    <string name="settings_theme_system">System</string>
+    <string name="settings_theme_light">Light</string>
+    <string name="settings_theme_dark">Dark</string>
+    <string name="settings_tts_title">Android Text-to-Speech (TTS)</string>
+    <string name="settings_tts_desc">Open system settings to install or configure the Chinese voice.</string>
+    <string name="settings_data_title">Local Data</string>
+    <string name="settings_reset_desc">Resets XP, streak, SM-2 mastery, and unlocked units and quizzes.</string>
+    <string name="settings_reset_button">Reset my progress</string>
+    <string name="settings_reset_dialog_title">Reset all progress?</string>
+    <string name="settings_reset_dialog_message">This will permanently erase your XP, daily streak, SM-2 word history, and re-lock all units and quizzes (except Unit 1 Lesson of each level).</string>
+    <string name="settings_reset_confirm">Reset</string>
+    <string name="settings_reset_cancel">Cancel</string>
+    <string name="settings_reset_done">Progress reset.</string>
 </resources>

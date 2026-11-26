@@ -1,15 +1,15 @@
-# ChinoisFacile
+# EasyMandarin
 
-ChinoisFacile est une application Android gratuite, illimitée et 100 % hors-ligne pour apprendre le chinois mandarin, inspirée de Duolingo.
-Sans publicité, sans système de cœurs et sans création de compte, elle accompagne les francophones du niveau débutant jusqu'au niveau avancé.
+EasyMandarin is a free, unlimited, 100% offline Android app for learning Mandarin Chinese, inspired by Duolingo.
+With no ads, no hearts system, and no account required, it guides learners from beginner to advanced levels.
 
-## Fonctionnalités
-- Programme complet HSK 1 à 6 (~5 000 mots)
-- Parcours ludique progressif par unités et leçons
-- Révision espacée (algorithme SM-2)
-- Prononciation audio hors-ligne via TextToSpeech (normal et lent)
-- Lexique complet avec recherche et filtres par niveau
-- Mode sombre et suivi de progression
+## Features
+- Complete HSK 1 to 6 curriculum (~5,000 official HSK 2.0 words)
+- Progressive learning path with unit discovery lessons and tiered quizzes
+- Spaced repetition (SM-2 algorithm)
+- Offline Mandarin pronunciation via Android TextToSpeech (`zh-CN`, normal and slow speed)
+- Full lexicon with instant alphabetical pinyin sorting, search, and mastery filters
+- Dark mode and progress tracking
 
-## Téléchargement
-Téléchargez la dernière version (APK) depuis les [GitHub Releases](https://github.com/alexis-mnk/ChinoisFacile/releases).
+## Download
+Download the latest APK from [GitHub Releases](https://github.com/alexis-mnk/ChinoisFacile/releases).

@@ -17,10 +17,10 @@ class UnitProgressionTest {
         hskLevel = 1,
         hanzi = hanzi,
         pinyin = "ni",
-        french = "test",
+        english = "test",
         exampleHanzi = hanzi,
         examplePinyin = "ni",
-        exampleFrench = "test",
+        exampleEnglish = "test",
         exampleTokens = listOf(hanzi),
     )
 
@@ -57,34 +57,34 @@ class UnitProgressionTest {
             id = "u1",
             hskLevel = 1,
             orderIndex = 1,
-            title = "Unité 1 — Premiers pas",
+            title = "Unit 1 — First Steps",
             description = "Desc 1",
             lessons = listOf(
-                quiz("u1_q1", "u1", 1, "Leçon 1 — Salutations", u1q1Unlocked, u1q1Completed, 5),
-                quiz("u1_q2", "u1", 2, "Leçon 2 — Courtoisie", u1q2Unlocked, u1q2Completed, 5),
+                quiz("u1_q1", "u1", 1, "Lesson 1 — Greetings", u1q1Unlocked, u1q1Completed, 5),
+                quiz("u1_q2", "u1", 2, "Quiz 2 — Courtesy", u1q2Unlocked, u1q2Completed, 5),
             ),
         ),
         LearningUnit(
             id = "u2",
             hskLevel = 1,
             orderIndex = 2,
-            title = "Unité 2 — Famille",
+            title = "Unit 2 — Family",
             description = "Desc 2",
             lessons = listOf(
-                quiz("u2_q6", "u2", 6, "Leçon 6 — La famille", u2q1Unlocked, u2q1Completed, 5),
+                quiz("u2_q6", "u2", 6, "Quiz 6 — Family", u2q1Unlocked, u2q1Completed, 5),
             ),
         ),
     )
 
     @Test
-    fun formatQuizTitleRenamesLeconPrefixToQuizPreservingNumber() {
+    fun formatQuizTitleNormalizesLessonAndQuizPrefixesPreservingNumber() {
         assertEquals(
-            "Quiz 1 — Salutations et politesse",
-            UnitProgressionResolver.formatQuizTitle("Leçon 1 — Salutations et politesse"),
+            "Quiz 1 — Greetings & Politeness",
+            UnitProgressionResolver.formatQuizTitle("Lesson 1 — Greetings & Politeness"),
         )
         assertEquals(
-            "Quiz 33 — Droit",
-            UnitProgressionResolver.formatQuizTitle("leçon 33 — Droit"),
+            "Quiz 33 — Law & Governance",
+            UnitProgressionResolver.formatQuizTitle("quiz 33 — Law & Governance"),
         )
         assertEquals("Quiz 6", UnitProgressionResolver.formatQuizShortLabel(6))
     }
@@ -100,7 +100,7 @@ class UnitProgressionTest {
         assertTrue(u1.isLessonUnlocked)
         assertFalse(u1.isLessonCompleted)
         assertEquals(10, u1.totalWordCount)
-        assertEquals("Quiz 1 — Salutations", u1.lessons[0].title)
+        assertEquals("Quiz 1 — Greetings", u1.lessons[0].title)
         assertTrue(u1.lessons[0].isFirstInUnit)
         assertFalse(u1.lessons[0].isUnlocked)
         assertFalse(u1.lessons[1].isFirstInUnit)
@@ -177,13 +177,13 @@ class UnitProgressionTest {
     }
 
     @Test
-    fun quizGroupFilteringAndLaunchTargetFollowUserAdjustments() {
+    fun quizGroupFilteringAndLaunchTargetFollowSelectedOrPendingUnlockedQuiz() {
         val groups = listOf(
             UnitLessonQuizGroup(
                 lessonId = "u2_q6",
                 orderIndex = 6,
                 shortLabel = "Quiz 6",
-                title = "Quiz 6 — Famille",
+                title = "Quiz 6 — Family",
                 isUnlocked = true,
                 isCompleted = true,
                 words = listOf(word("w1", "u2_q6", "家"), word("w2", "u2_q6", "爸")),
@@ -192,7 +192,7 @@ class UnitProgressionTest {
                 lessonId = "u2_q7",
                 orderIndex = 7,
                 shortLabel = "Quiz 7",
-                title = "Quiz 7 — Personnes",
+                title = "Quiz 7 — People",
                 isUnlocked = true,
                 isCompleted = false,
                 words = listOf(word("w3", "u2_q7", "人")),
@@ -201,7 +201,7 @@ class UnitProgressionTest {
                 lessonId = "u2_q8",
                 orderIndex = 8,
                 shortLabel = "Quiz 8",
-                title = "Quiz 8 — Verbes",
+                title = "Quiz 8 — Verbs",
                 isUnlocked = false,
                 isCompleted = false,
                 words = listOf(word("w4", "u2_q8", "去")),
@@ -224,7 +224,6 @@ class UnitProgressionTest {
                 .map { it.word.id },
         )
 
-        // Puce sélectionnée débloquée -> lance ce quiz directement (ex: Quiz 7, ou Quiz 6 rejoué)
         assertEquals(
             "u2_q7",
             UnitProgressionResolver.resolveLaunchQuizTarget(
@@ -241,7 +240,6 @@ class UnitProgressionTest {
                 isUnitLessonCompleted = true,
             )?.lessonId,
         )
-        // Puce verrouillée (Quiz 8) ou filtre Tout -> premier quiz débloqué non terminé (Quiz 7)
         assertEquals(
             "u2_q7",
             UnitProgressionResolver.resolveLaunchQuizTarget(
@@ -259,7 +257,6 @@ class UnitProgressionTest {
             )?.lessonId,
         )
 
-        // Leçon non encore validée et aucun quiz débloqué -> pas de cible de lancement
         val lockedGroups = groups.map { it.copy(isUnlocked = false, isCompleted = false) }
         assertNull(
             UnitProgressionResolver.resolveLaunchQuizTarget(
@@ -268,7 +265,6 @@ class UnitProgressionTest {
                 isUnitLessonCompleted = false,
             ),
         )
-        // Une fois validée -> lance le premier quiz (Quiz 6)
         assertEquals(
             "u2_q6",
             UnitProgressionResolver.resolveLaunchQuizTarget(

@@ -435,7 +435,7 @@ private fun LexiconCompactRow(
         )
         Spacer(modifier = Modifier.width(10.dp))
         Text(
-            text = item.word.french,
+            text = item.word.english,
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             maxLines = 1,

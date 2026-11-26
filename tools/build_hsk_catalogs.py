@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """
-Génère les catalogues HSK 2 à HSK 6 complets (programme HSK 2.0) dans
-app/src/main/assets/catalog/hsk{2..6}.json à partir de :
-  - complete-hsk-vocabulary (listes officielles HSK 2.0 + fréquence + POS + pinyin)
-  - CFDICT (dictionnaire chinois-français open-source)
-  - Tatoeba (paires de phrases chinois-français open-source)
-  - jieba + pypinyin (segmentation en tokens et pinyin tonal Unicode)
+Generates HSK 1 to HSK 6 catalogs (strict official Hanban HSK 2.0 2012 wordlists) in
+app/src/main/assets/catalog/hsk{1..6}.json from:
+  - tools/data/hsk2012_l1..l6.txt (4,995 unique HSK 2.0 words)
+  - complete-hsk-vocabulary (English CC-CEDICT glosses + frequency + POS + pinyin)
+  - Tatoeba (open-source Chinese-English sentence pairs: cmn-eng)
+  - jieba + pypinyin (token segmentation and Unicode tone-marked pinyin)
 
-Exécuté uniquement sur PC ; l'application Android reste 100 % hors-ligne.
+Runs offline on PC; the Android app remains 100% offline.
 """
 
 from __future__ import annotations
@@ -31,474 +31,245 @@ CACHE_DIR = Path(__file__).resolve().parent / ".cache"
 DATA_DIR = Path(__file__).resolve().parent / "data"
 
 HSK_URL = "https://raw.githubusercontent.com/drkameleon/complete-hsk-vocabulary/main/complete.min.json"
-CFDICT_URL = "https://chine.in/assets/cfdict/cfdict.u8"
 TATOEBA_CMN_URL = "https://downloads.tatoeba.org/exports/per_language/cmn/cmn_sentences.tsv.bz2"
-TATOEBA_FRA_URL = "https://downloads.tatoeba.org/exports/per_language/fra/fra_sentences.tsv.bz2"
+TATOEBA_ENG_URL = "https://downloads.tatoeba.org/exports/per_language/eng/eng_sentences.tsv.bz2"
 TATOEBA_LINKS_URL = "https://downloads.tatoeba.org/exports/links.tar.bz2"
 
 TONE_MARKS_RE = re.compile(r"[āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ]")
-CEDICT_LINE_RE = re.compile(r"^(\S+)\s+(\S+)\s+\[([^\]]+)\]\s+/(.+)/\s*$")
 BAD_SENTENCE_CHARS_RE = re.compile(
     r"[A-Za-z0-9，、；：（）()\[\]「」『』《》“”\"'…—·,.;:/\\@#&*+=<>|~`]"
 )
 CJK_ONLY_RE = re.compile(r"^[\u4e00-\u9fff]+$")
 TRAILING_PUNCT = "。？！"
-NEUTRAL_TONE_PARTICLES = {"ma", "ne", "de", "le", "ba", "zhe", "guo", "a", "ya", "wa", "na"}
+NEUTRAL_TONE_PARTICLES = {"ma", "ne", "de", "le", "ba", "zhe", "guo", "a", "ya", "wa", "na", "la", "o", "en"}
 
 LESSON_SIZES = {1: 5, 2: 5, 3: 5, 4: 8, 5: 10, 6: 10}
 
-# Progression pédagogique curatée des 150 mots officiels Hanban 2012 HSK 1 (6 unités × 5 leçons × 5 mots)
+# Curated progression for all 150 official Hanban 2012 HSK 1 words (6 units x 5 quizzes x 5 words)
 HSK1_CURATED_UNITS: list[tuple[str, str, list[tuple[str, list[str]]]]] = [
     (
-        "Unité 1 — Salutations, Pronoms & Bases",
-        "Premiers échanges pour se présenter et poser des questions simples.",
+        "Unit 1 — Greetings, Pronouns & Basics",
+        "First exchanges to introduce yourself and ask simple questions.",
         [
-            ("Leçon 1 — Salutations et politesse", ["你", "好", "谢谢", "再见", "喂"]),
-            ("Leçon 2 — Excuses et courtoisie", ["请", "对不起", "没关系", "不客气", "高兴"]),
-            ("Leçon 3 — Pronoms et être", ["我", "他", "她", "我们", "是"]),
-            ("Leçon 4 — Négation et questions", ["不", "没有", "吗", "呢", "谁"]),
-            ("Leçon 5 — Identité et démonstratifs", ["叫", "什么", "名字", "这", "那"]),
+            ("Quiz 1 — Greetings & Politeness", ["你", "好", "谢谢", "再见", "喂"]),
+            ("Quiz 2 — Apologies & Courtesy", ["请", "对不起", "没关系", "不客气", "高兴"]),
+            ("Quiz 3 — Pronouns & To Be", ["我", "他", "她", "我们", "是"]),
+            ("Quiz 4 — Negation & Questions", ["不", "没有", "吗", "呢", "谁"]),
+            ("Quiz 5 — Identity & Demonstratives", ["叫", "什么", "名字", "这", "那"]),
         ],
     ),
     (
-        "Unité 2 — Famille, Personnes & Goûts",
-        "Parler de ses proches, des personnes et de l'alimentation.",
+        "Unit 2 — Family, People & Food",
+        "Talking about family, people around you, and everyday food.",
         [
-            ("Leçon 6 — La famille", ["家", "爸爸", "妈妈", "儿子", "女儿"]),
-            ("Leçon 7 — Personnes et présentations", ["人", "朋友", "先生", "小姐", "同学"]),
-            ("Leçon 8 — Goûts et boissons", ["爱", "喜欢", "吃", "喝", "水"]),
-            ("Leçon 9 — Repas et fruits", ["茶", "米饭", "菜", "水果", "苹果"]),
-            ("Leçon 10 — Animaux et possessif", ["猫", "狗", "的", "很", "太"]),
+            ("Quiz 6 — Family", ["家", "爸爸", "妈妈", "儿子", "女儿"]),
+            ("Quiz 7 — People & Introductions", ["人", "朋友", "先生", "小姐", "同学"]),
+            ("Quiz 8 — Likes & Drinks", ["爱", "喜欢", "吃", "喝", "水"]),
+            ("Quiz 9 — Meals & Fruit", ["茶", "米饭", "菜", "水果", "苹果"]),
+            ("Quiz 10 — Animals & Possessives", ["猫", "狗", "的", "很", "太"]),
         ],
     ),
     (
-        "Unité 3 — Chiffres, Dates & Heures",
-        "Compter, donner l'heure, la date et son âge.",
+        "Unit 3 — Numbers, Dates & Time",
+        "Counting, telling the time, dates, and age.",
         [
-            ("Leçon 11 — Chiffres 1 à 5", ["一", "二", "三", "四", "五"]),
-            ("Leçon 12 — Chiffres 6 à 10", ["六", "七", "八", "九", "十"]),
-            ("Leçon 13 — Quantités et âge", ["几", "多少", "岁", "个", "号"]),
-            ("Leçon 14 — Dates et calendrier", ["年", "月", "星期", "今天", "明天"]),
-            ("Leçon 15 — Heures et moments", ["昨天", "现在", "点", "分钟", "一点儿"]),
+            ("Quiz 11 — Numbers 1 to 5", ["一", "二", "三", "四", "五"]),
+            ("Quiz 12 — Numbers 6 to 10", ["六", "七", "八", "九", "十"]),
+            ("Quiz 13 — Quantities & Age", ["几", "多少", "岁", "个", "号"]),
+            ("Quiz 14 — Dates & Calendar", ["年", "月", "星期", "今天", "明天"]),
+            ("Quiz 15 — Time & Moments", ["昨天", "现在", "点", "分钟", "一点儿"]),
         ],
     ),
     (
-        "Unité 4 — Lieux, Repères & Maison",
-        "Se repérer dans l'espace et décrire son quotidien.",
+        "Unit 4 — Places, Directions & Home",
+        "Getting around and describing everyday spaces.",
         [
-            ("Leçon 16 — Moments du jour", ["上午", "中午", "下午", "时候", "了"]),
-            ("Leçon 17 — Pays et lieux publics", ["中国", "北京", "饭店", "商店", "医院"]),
-            ("Leçon 18 — Transports et logement", ["学校", "飞机", "出租车", "电影", "住"]),
-            ("Leçon 19 — Repères spatiaux", ["哪", "哪儿", "里", "前面", "后面"]),
-            ("Leçon 20 — Meubles et objets", ["上", "下", "桌子", "椅子", "杯子"]),
+            ("Quiz 16 — Parts of the Day", ["上午", "中午", "下午", "时候", "了"]),
+            ("Quiz 17 — Countries & Public Places", ["中国", "北京", "饭店", "商店", "医院"]),
+            ("Quiz 18 — Transport & Housing", ["学校", "飞机", "出租车", "电影", "住"]),
+            ("Quiz 19 — Spatial Words", ["哪", "哪儿", "里", "前面", "后面"]),
+            ("Quiz 20 — Furniture & Objects", ["上", "下", "桌子", "椅子", "杯子"]),
         ],
     ),
     (
-        "Unité 5 — Actions, Achats & Météo",
-        "Exprimer ses actions quotidiennes, faire des achats et parler du temps.",
+        "Unit 5 — Actions, Shopping & Weather",
+        "Expressing daily actions, shopping, and talking about the weather.",
         [
-            ("Leçon 21 — Déplacements et regard", ["去", "来", "回", "坐", "看"]),
-            ("Leçon 22 — Travail et études", ["工作", "学习", "老师", "学生", "医生"]),
-            ("Leçon 23 — Perception et langage", ["看见", "听", "说", "读", "写"]),
-            ("Leçon 24 — Livres, sommeil et appels", ["字", "书", "睡觉", "打电话", "东西"]),
-            ("Leçon 25 — Achats, argent et météo", ["买", "钱", "块", "天气", "下雨"]),
+            ("Quiz 21 — Movement & Looking", ["去", "来", "回", "坐", "看"]),
+            ("Quiz 22 — Work & Study", ["工作", "学习", "老师", "学生", "医生"]),
+            ("Quiz 23 — Senses & Language", ["看见", "听", "说", "读", "写"]),
+            ("Quiz 24 — Books, Sleep & Calls", ["字", "书", "睡觉", "打电话", "东西"]),
+            ("Quiz 25 — Shopping, Money & Weather", ["买", "钱", "块", "天气", "下雨"]),
         ],
     ),
     (
-        "Unité 6 — Qualités, Modaux & Connecteurs",
-        "Nuancer son propos, utiliser les verbes modaux et relier ses idées.",
+        "Unit 6 — Qualities, Modals & Connectors",
+        "Describing things, using modal verbs, and linking ideas.",
         [
-            ("Leçon 26 — Objets et classificateurs", ["衣服", "电脑", "电视", "本", "些"]),
-            ("Leçon 27 — Adjectifs courants", ["大", "小", "多", "少", "漂亮"]),
-            ("Leçon 28 — Sensations et verbes d'action", ["冷", "热", "做", "开", "有"]),
-            ("Leçon 29 — Capacité et connaissance", ["在", "会", "能", "想", "认识"]),
-            ("Leçon 30 — Langue et connecteurs", ["汉语", "和", "都", "怎么", "怎么样"]),
+            ("Quiz 26 — Everyday Items & Measure Words", ["衣服", "电脑", "电视", "本", "些"]),
+            ("Quiz 27 — Common Adjectives", ["大", "小", "多", "少", "漂亮"]),
+            ("Quiz 28 — Feelings & Core Verbs", ["冷", "热", "做", "开", "有"]),
+            ("Quiz 29 — Ability & Knowing", ["在", "会", "能", "想", "认识"]),
+            ("Quiz 30 — Language & Connectors", ["汉语", "和", "都", "怎么", "怎么样"]),
         ],
     ),
 ]
 
-# Progression pédagogique douce des 151 mots officiels Hanban 2012 HSK 2 (concret -> abstrait)
+# Curated progression for all 151 official Hanban 2012 HSK 2 words (concrete -> abstract)
 HSK2_CURATED_UNITS: list[tuple[str, str, list[tuple[str, list[str]]]]] = [
     (
-        "Unité 1 — Premiers échanges & Bases simples",
-        "Personnes, verbes courants et adverbes usuels du quotidien.",
+        "Unit 1 — Everyday Essentials & People",
+        "People, essential verbs, and high-frequency adverbs.",
         [
-            ("Leçon 1 — Politesse et personnes", ["您", "大家", "男", "女", "孩子"]),
-            ("Leçon 2 — Verbes essentiels", ["要", "可以", "知道", "觉得", "希望"]),
-            ("Leçon 3 — Adverbes simples", ["也", "真", "非常", "最", "两"]),
-            ("Leçon 4 — Famille et proches", ["哥哥", "姐姐", "弟弟", "妹妹", "丈夫"]),
-            ("Leçon 5 — Présentation et identité", ["妻子", "姓", "介绍", "它", "快乐"]),
+            ("Quiz 1 — Politeness & People", ["您", "大家", "男", "女", "孩子"]),
+            ("Quiz 2 — Essential Verbs", ["要", "可以", "知道", "觉得", "希望"]),
+            ("Quiz 3 — Simple Adverbs", ["也", "真", "非常", "最", "两"]),
+            ("Quiz 4 — Extended Family", ["哥哥", "姐姐", "弟弟", "妹妹", "丈夫"]),
+            ("Quiz 5 — Introductions & Identity", ["妻子", "姓", "介绍", "它", "快乐"]),
         ],
     ),
     (
-        "Unité 2 — Temps, Chiffres & Repères",
-        "Chiffres, durées, calendrier et repères dans l'espace.",
+        "Unit 2 — Time, Numbers & Location",
+        "Numbers, durations, calendar words, and spatial orientation.",
         [
-            ("Leçon 6 — Chiffres et ordre", ["零", "百", "千", "第一", "次"]),
-            ("Leçon 7 — Calendrier et moments", ["日", "去年", "生日", "早上", "晚上", "时间"]),
-            ("Leçon 8 — Durée et rythme", ["小时", "每", "开始", "准备", "完"]),
-            ("Leçon 9 — Lieu et direction", ["旁边", "外", "左边", "右边", "往"]),
-            ("Leçon 10 — Distance et position", ["近", "远", "离", "到", "进"]),
+            ("Quiz 6 — Numbers & Order", ["零", "百", "千", "第一", "次"]),
+            ("Quiz 7 — Calendar & Time of Day", ["日", "去年", "生日", "早上", "晚上", "时间"]),
+            ("Quiz 8 — Duration & Pace", ["小时", "每", "开始", "准备", "完"]),
+            ("Quiz 9 — Places & Directions", ["旁边", "外", "左边", "右边", "往"]),
+            ("Quiz 10 — Distance & Position", ["近", "远", "离", "到", "进"]),
         ],
     ),
     (
-        "Unité 3 — Nourriture, Objets & Achats",
-        "Boissons, repas, vêtements, objets du quotidien et couleurs.",
+        "Unit 3 — Food, Objects & Shopping",
+        "Drinks, meals, clothing, daily items, and colors.",
         [
-            ("Leçon 11 — Boissons et repas", ["咖啡", "牛奶", "鸡蛋", "面条", "鱼"]),
-            ("Leçon 12 — Fruits, plats et restaurant", ["羊肉", "西瓜", "好吃", "服务员", "贵"]),
-            ("Leçon 13 — Prix et vêtements", ["便宜", "卖", "件", "穿", "洗"]),
-            ("Leçon 14 — Objets du quotidien", ["手机", "手表", "铅笔", "报纸", "新"]),
-            ("Leçon 15 — Couleurs et apparence", ["颜色", "红", "白", "黑", "长"]),
+            ("Quiz 11 — Drinks & Meals", ["咖啡", "牛奶", "鸡蛋", "面条", "鱼"]),
+            ("Quiz 12 — Dishes & Dining Out", ["羊肉", "西瓜", "好吃", "服务员", "贵"]),
+            ("Quiz 13 — Prices & Clothing", ["便宜", "卖", "件", "穿", "洗"]),
+            ("Quiz 14 — Everyday Items", ["手机", "手表", "铅笔", "报纸", "新"]),
+            ("Quiz 15 — Colors & Appearance", ["颜色", "红", "白", "黑", "长"]),
         ],
     ),
     (
-        "Unité 4 — Lieux, Transports & Santé",
-        "Bâtiments, déplacements, météo, corps et santé.",
+        "Unit 4 — Places, Travel & Health",
+        "Buildings, getting around, weather, body, and health.",
         [
-            ("Leçon 16 — Maison et bâtiments", ["门", "房间", "教室", "公司", "宾馆"]),
-            ("Leçon 17 — Transports et trajets", ["火车站", "机场", "公共汽车", "路", "票"]),
-            ("Leçon 18 — Déplacements et actions", ["旅游", "走", "出", "送", "找"]),
-            ("Leçon 19 — Météo et traits physiques", ["晴", "阴", "雪", "高", "眼睛"]),
-            ("Leçon 20 — Corps, santé et repos", ["身体", "生病", "药", "累", "休息"]),
+            ("Quiz 16 — Home & Buildings", ["门", "房间", "教室", "公司", "宾馆"]),
+            ("Quiz 17 — Transit & Trips", ["火车站", "机场", "公共汽车", "路", "票"]),
+            ("Quiz 18 — Travel & Actions", ["旅游", "走", "出", "送", "找"]),
+            ("Quiz 19 — Weather & Physical Traits", ["晴", "阴", "雪", "高", "眼睛"]),
+            ("Quiz 20 — Body, Health & Rest", ["身体", "生病", "药", "累", "休息"]),
         ],
     ),
     (
-        "Unité 5 — Activités, Études & Communication",
-        "Routine, sports, loisirs, études et échanges.",
+        "Unit 5 — Routines, Study & Communication",
+        "Daily routines, sports, hobbies, school, and conversation.",
         [
-            ("Leçon 21 — Routine et travail", ["起床", "上班", "忙", "笑", "玩"]),
-            ("Leçon 22 — Sports et loisirs", ["运动", "跑步", "游泳", "踢足球", "打篮球"]),
-            ("Leçon 23 — Musique et études", ["唱歌", "跳舞", "课", "考试", "题"]),
-            ("Leçon 24 — Communication", ["说话", "问", "问题", "告诉", "懂"]),
-            ("Leçon 25 — Entraide et sens", ["帮助", "意思", "事情", "对", "等"]),
+            ("Quiz 21 — Routine & Work", ["起床", "上班", "忙", "笑", "玩"]),
+            ("Quiz 22 — Sports & Leisure", ["运动", "跑步", "游泳", "踢足球", "打篮球"]),
+            ("Quiz 23 — Music & Study", ["唱歌", "跳舞", "课", "考试", "题"]),
+            ("Quiz 24 — Communication", ["说话", "问", "问题", "告诉", "懂"]),
+            ("Quiz 25 — Help & Meaning", ["帮助", "意思", "事情", "对", "等"]),
         ],
     ),
     (
-        "Unité 6 — Grammaire, Nuances & Connecteurs",
-        "Aspects verbaux, comparaisons, nuances et connecteurs logiques.",
+        "Unit 6 — Grammar, Nuance & Connectors",
+        "Aspect particles, comparisons, nuances, and logical connectors.",
         [
-            ("Leçon 26 — Temps et durée d'action", ["正在", "已经", "过", "着", "一下"]),
-            ("Leçon 27 — Adverbes et vitesse", ["还", "再", "一起", "快", "慢"]),
-            ("Leçon 28 — Structures et comparaison", ["就", "从", "比", "得", "错"]),
-            ("Leçon 29 — Interaction et modalité", ["给", "让", "别", "吧", "可能"]),
-            ("Leçon 30 — Cause, concession et logique", ["为什么", "因为", "所以", "虽然", "但是"]),
+            ("Quiz 26 — Time & Verb Aspect", ["正在", "已经", "过", "着", "一下"]),
+            ("Quiz 27 — Adverbs & Speed", ["还", "再", "一起", "快", "慢"]),
+            ("Quiz 28 — Structures & Comparison", ["就", "从", "比", "得", "错"]),
+            ("Quiz 29 — Interaction & Modality", ["给", "让", "别", "吧", "可能"]),
+            ("Quiz 30 — Cause & Logic", ["为什么", "因为", "所以", "虽然", "但是"]),
         ],
     ),
 ]
 
 THEMATIC_UNITS = {
-    2: [
-        ("Premiers échanges", "Connecteurs simples, questions et bases du quotidien."),
-        ("Temps & Repères", "Horaires, jours, durées et orientation."),
-        ("Actions du quotidien", "Verbes courants, déplacements et loisirs."),
-        ("Personnes, Objets & Vie pratique", "Famille, achats, vêtements et nourriture."),
-        ("Qualités & Nuances", "Adjectifs essentiels, états et sentiments."),
-        ("Structures & Expressions", "Particules grammaticales et comparaisons."),
-    ],
     3: [
-        ("Raisonnement & Échanges", "Opinions, questions complexes et communication."),
-        ("Actions & Démarches", "Décisions, habitudes et vie pratique."),
-        ("Lieux & Environnement", "Ville, nature, saisons et voyages."),
-        ("Relations & Sentiments", "Comportements, émotions et rapports humains."),
-        ("Descriptions & Précisions", "Adjectifs variés, degrés et qualités."),
-        ("Connecteurs & Grammaire", "Articulations logiques et tournures clés."),
+        ("Reasoning & Exchanges", "Opinions, complex questions, and everyday communication."),
+        ("Actions & Habits", "Decisions, routines, and practical daily life."),
+        ("Places & Nature", "City life, environment, seasons, and travel."),
+        ("Relationships & Feelings", "Behaviors, emotions, and interpersonal ties."),
+        ("Descriptions & Details", "Rich adjectives, degrees, and qualities."),
+        ("Connectors & Grammar", "Logical links and key sentence structures."),
     ],
     4: [
-        ("Études & Carrière", "Compétences, projets et vie professionnelle."),
-        ("Société & Relations", "Échanges sociaux, règles et entraide."),
-        ("Culture, Médias & Savoirs", "Éducation, informations et lecture."),
-        ("Voyages, Nature & Quotidien", "Déplacements, santé et environnement."),
-        ("Attitudes & Qualités", "Caractère, émotions et jugements."),
-        ("Argumentation & Connecteurs", "Nuances logiques et expression structurée."),
+        ("Studies & Career", "Skills, goals, and professional life."),
+        ("Society & Relationships", "Social interactions, rules, and mutual support."),
+        ("Culture, Media & Knowledge", "Education, news, and reading."),
+        ("Travel, Nature & Daily Life", "Journeys, health, and the world around you."),
+        ("Attitudes & Character", "Personality traits, feelings, and judgments."),
+        ("Argumentation & Connectors", "Logical nuances and structured expression."),
     ],
     5: [
-        ("Analyse & Pensée", "Raisonnement, faits et argumentation structurée."),
-        ("Travail, Économie & Gestion", "Organisation, ressources et monde professionnel."),
-        ("Société & Vie collective", "Institutions, règles et phénomènes sociaux."),
-        ("Sciences, Médias & Techniques", "Recherche, technologies et information."),
-        ("Culture, Arts & Patrimoine", "Traditions, littérature et création."),
-        ("Nature, Santé & Cadre de vie", "Environnement, énergie et bien-être."),
-        ("Psychologie & Comportements", "Traits de caractère, émotions et attitudes."),
-        ("Style soutenu & Idiomes", "Tournures littéraires et chengyu courants."),
+        ("Analysis & Thought", "Reasoning, facts, and structured arguments."),
+        ("Work, Economy & Management", "Organization, resources, and the workplace."),
+        ("Society & Public Life", "Institutions, rules, and social trends."),
+        ("Science, Media & Tech", "Research, technology, and information."),
+        ("Culture, Arts & Heritage", "Traditions, literature, and creativity."),
+        ("Nature, Health & Living", "Environment, energy, and well-being."),
+        ("Psychology & Behavior", "Personality, emotions, and attitudes."),
+        ("Formal Style & Idioms", "Literary expressions and common chengyu."),
     ],
     6: [
-        ("Discours & Méthodologie", "Verbes analytiques et vocabulaire académique."),
-        ("Droit, Gouvernance & Institutions", "Politique, législation et administration."),
-        ("Économie, Stratégie & Développement", "Marchés, production et innovation."),
-        ("Société, Éthique & Relations", "Normes sociales, devoirs et valeurs morales."),
-        ("Culture, Histoire & Philosophie", "Patrimoine, pensée et arts classiques."),
-        ("Sciences, Nature & Technologie", "Phénomènes physiques, biologie et technique."),
-        ("Psychologie & Introspection", "Nuances affectives, caractère et jugement."),
-        ("Expressions soutenues & Chengyu", "Adjectifs littéraires et locutions quadrisyllabiques."),
+        ("Discourse & Methodology", "Analytical verbs and academic vocabulary."),
+        ("Law, Governance & Institutions", "Politics, legislation, and public administration."),
+        ("Economy, Strategy & Growth", "Markets, production, and innovation."),
+        ("Society, Ethics & Values", "Social norms, duties, and moral values."),
+        ("Culture, History & Philosophy", "Heritage, thought, and classical arts."),
+        ("Science, Nature & Technology", "Natural phenomena, biology, and engineering."),
+        ("Psychology & Reflection", "Emotional nuance, character, and judgment."),
+        ("Literary Expressions & Chengyu", "Formal adjectives and four-character idioms."),
     ],
 }
 
-# Repli français pour d'éventuelles entrées absentes de CFDICT (ex. variantes/expressions composées)
-FRENCH_FALLBACK: dict[str, str] = {
-    "一下": "Un instant / Un peu",
-    "一点儿": "Un peu",
-    "一块儿": "Ensemble",
-    "一起": "Ensemble",
-    "一直": "Toujours / Tout droit",
-    "一般": "Ordinaire / En général",
-    "一边": "D'un côté / En même temps",
-    "一会儿": "Un moment",
-    "一样": "Pareil / Identique",
-    "非常": "Très / Extrêmement",
-    "大家": "Tout le monde",
-    "别的": "Autre",
-    "男": "Masculin / Homme",
-    "女": "Féminin / Femme",
-    "号": "Numéro / Jour du mois",
-    "吧": "Particule de suggestion",
-    "着": "Particule d'aspect continu",
-    "过": "Particule d'expérience passée",
-    "得": "Particule de degré / Obtenir",
-    "地": "Particule adverbiale",
-    "把": "Particule de disposition (objet)",
-    "被": "Marque du passif",
-    "比": "Comparer / Que",
-    "更": "Encore plus",
-    "最": "Le plus",
-    "还": "Encore / Toujours",
-    "就": "Alors / Tout de suite",
-    "才": "Seulement alors / À peine",
-    "再": "Encore / De nouveau",
-    "又": "De nouveau (passé)",
-    "别": "Ne pas (impératif) / Autre",
-    "真": "Vraiment / Vrai",
-    "正在": "Être en train de",
-    "干什么": "Que faire / Pourquoi",
-    "为什么": "Pourquoi",
-    "怎么": "Comment",
-    "怎么样": "Comment est / Qu'en penses-tu",
-    "哪儿": "Où",
-    "这儿": "Ici",
-    "那儿": "Là-bas",
-    "一会儿见": "À tout à l'heure",
-    "没问题": "Pas de problème",
-    "差不多": "À peu près",
-    "越来越": "De plus en plus",
-    "不得不": "Être obligé de",
-    "说不定": "Peut-être / Qui sait",
-    "怪不得": "Pas étonnant que",
-    "来不及": "Ne pas avoir le temps de",
-    "来得及": "Avoir le temps de",
-    "舍不得": "Avoir du mal à quitter",
-    "恨不得": "Mourir d'envie de",
-    "巴不得": "Souhaiter ardemment",
-    "好容易": "Avec beaucoup de peine",
-    "好不容易": "Non sans mal",
-    "看样子": "À en juger par l'apparence",
-    "要不然": "Sinon / Autrement",
-    "总而言之": "En un mot / En somme",
-    "换句话说": "Autrement dit",
-    "众所周知": "Comme chacun sait",
-    "实事求是": "Chercher la vérité dans les faits",
-    "无微不至": "Avec un soin minutieux",
-    "画蛇添足": "Ajouter du superflu",
-    "半途而废": "Abandonner à mi-chemin",
-    "一举两得": "Faire d'une pierre deux coups",
-    "雪中送炭": "Apporter une aide au moment critique",
-    "锦上添花": "Ajouter la cerise sur le gâteau",
-    "自相矛盾": "Se contredire soi-même",
-    "不可思议": "Inconcevable / Incroyable",
-    "理所当然": "Qui va de soi",
-    "莫名其妙": "Inexplicable / Déconcertant",
-    "兴高采烈": "Transporté de joie",
-    "千方百计": "Par tous les moyens",
-    "想方设法": "Chercher par tous les moyens",
-    "津津有味": "Avec grand appétit / Passionnément",
-    "微不足道": "Insignifiant / Négligeable",
-    "急于求成": "Impatient de réussir",
-    "循序渐进": "Progresser étape par étape",
-    "潜移默化": "Influencer imperceptiblement",
-    "精打细算": "Calculer au plus juste",
-    "名副其实": "Digne de son nom",
-    "当务之急": "Tâche la plus urgente",
-    "举足轻重": "D'un poids décisif",
-    "见义勇为": "Agir avec courage pour la justice",
-    "实话实说": "Dire franchement la vérité",
-    "东张西望": "Regarder de tous côtés",
-    "七嘴八舌": "Parler tous à la fois",
-    "三心二意": "Hésitant / Indécis",
-    "十全十美": "Parfait à tous égards",
-    "百花齐放": "Laisser s'épanouir cent fleurs",
-    "川流不息": "Couler sans interruption",
-    "朝气蓬勃": "Débordant de vitalité",
-    "专心致志": "Se concentrer pleinement",
-    "再接再厉": "Redoubler d'efforts",
-    "坚持不懈": "Persévérer sans relâche",
-    "异口同声": "D'une seule voix",
-    "不约而同": "Spontanément d'accord",
-    "心甘情愿": "De plein gré",
-    "迫不及待": "Impatient / Sans pouvoir attendre",
-    "忍无可忍": "À bout de patience",
-    "无可奈何": "Impuissant / Sans recours",
-    "无精打采": "Abattu / Sans énergie",
-    "精神抖擞": "Plein d'entrain",
-    "兴致勃勃": "Plein d'enthousiasme",
-    "热泪盈眶": "Les larmes aux yeux",
-    "喜出望外": "Fou de joie par surprise",
-    "大吃一惊": "Être stupéfait",
-    "目瞪口呆": "Bouche bée",
-    "鸦雀无声": "Silence absolu",
-    "人山人海": "Une foule immense",
-    "水落石出": "La vérité finit par éclater",
-    "胸有成竹": "Avoir un plan bien arrêté",
-    "一帆风顺": "Bon vent / Sans encombre",
-    "事半功倍": "Doubler l'efficacité avec moitié moins d'effort",
-    "得不偿失": "Le jeu n'en vaut pas la chandelle",
-    "因小失大": "Perdre gros pour un petit gain",
-    "顾全大局": "Tenir compte de l'intérêt général",
-    "以身作则": "Donner l'exemple",
-    "克勤克俭": "Travailleur et économe",
-    "勤俭节约": "Économe et frugal",
-    "实事求是": "Réaliste et pragmatique",
-    "脚踏实地": "Les pieds sur terre",
-    "高瞻远瞩": "Voir loin / Prévoyant",
-    "深思熟虑": "Mûrement réfléchi",
-    "果断": "Décidé / Résolu",
-    "不言而喻": "Cela va sans dire",
-    "不屑一顾": "Ne pas daigner regarder",
-    "不在乎": "Peu importe / Ne pas se soucier",
-    "免不了": "Inévitablement",
-    "怪不得": "Pas étonnant",
-    "来不及": "Trop tard pour",
-    "顾不上": "Ne pas avoir le temps de s'occuper de",
-    "巴不得": "Ne demander qu'à",
-    "恨不得": "Avoir très envie de",
-    "忍不住": "Ne pas pouvoir s'empêcher de",
-    "靠不住": "Peu fiable",
-    "靠得住": "Fiable",
-    "对得起": "Être digne de",
-    "对不起": "Désolé / Pardon",
-    "看不惯": "Ne pas supporter de voir",
-    "看不起": "Mépriser",
-    "看得起": "Estimer / Respecter",
-    "听不懂": "Ne pas comprendre à l'écoute",
-    "说不定": "Peut-être",
-    "想不到": "Ne pas s'attendre à",
-    "想起来": "Se souvenir de",
-    "找不着": "Ne pas trouver",
-    "受不了": "Insupportable / Ne plus supporter",
-    "吃不消": "Ne pas tenir le coup",
-    "吃得消": "Pouvoir supporter",
-    "划得来": "Valoir la peine",
-    "划不来": "Ne pas valoir la peine",
-    "了不起": "Extraordinaire / Formidable",
-    "不得了": "Extrêmement / Terrible",
-    "谈不上": "On ne peut pas parler de",
-    "说不过去": "Injustifiable",
-    "过不去": "Ne pas pouvoir passer / En vouloir à",
-    "打交道": "Avoir affaire à",
-    "开玩笑": "Plaisanter",
-    "闹笑话": "Faire rire de soi / Gaffe",
-    "占便宜": "Tirer profit",
-    "吃亏": "Subir une perte",
-    "帮忙": "Donner un coup de main",
-    "操心": "Se faire du souci",
-    "放心": "Être rassuré",
-    "小心": "Faire attention",
-    "用心": "Avec application",
-    "灰心": "Se décourager",
-    "专心": "Concentré",
-    "粗心": "Négligent / Étourdi",
-    "细心": "Attentionné / Minutieux",
-    "热心": "Chaleureux / Serviable",
-    "虚心": "Modeste / Ouvert aux conseils",
-    "野心": "Ambition",
-    "决心": "Détermination",
-    "耐心": "Patience",
-    "信心": "Confiance en soi",
-    "开心": "Joyeux / Content",
-    "伤心": "Avoir le cœur brisé",
-    "关心": "Se soucier de",
-    "担心": "S'inquiéter",
-    "恶心": "Écœurant / Nausée",
-    "点心": "Pâtisserie / En-cas",
-    "核心": "Noyau / Cœur",
-    "重心": "Centre de gravité",
-    "中心": "Centre",
-    "姓": "Nom de famille / S'appeler",
-    "辆": "Classificateur des véhicules",
-    "棵": "Classificateur des arbres et plantes",
-    "放暑假": "Être en vacances d'été",
-    "池子": "Étang / Bassin",
-    "解说员": "Commentateur",
-    "嘛": "Particule d'évidence / Donc",
-    "艘": "Classificateur des navires",
-    "枚": "Classificateur (pièces, médailles)",
-    "没辙": "À court d'idées / Impuissant",
-    "公婆": "Beaux-parents (côté mari)",
-    "滋长": "Se développer / Croître",
-    "斑纹": "Rayure / Tache",
-    "做东": "Inviter / Payer la tournée",
-    "通货": "Monnaie / Devise en circulation",
-    "砖瓦": "Briques et tuiles",
-    "乘务员": "Hôtesse / Agent de bord",
-    "螺丝钉": "Vis",
-    "出洋相": "Se couvrir de ridicule",
-    "糖葫芦": "Brochette d'aubépines caramélisées",
-    "重阳节": "Fête du Double Neuf",
-    "无可奉告": "Sans commentaire",
-    "举世闻名": "Célèbre dans le monde entier",
-    "继往开来": "Poursuivre l'œuvre passée vers l'avenir",
-    "锦绣前程": "Avenir radieux",
-    "东西": "Chose / Objet",
-    "饭馆": "Restaurant",
-    "里": "Dedans / À l'intérieur",
-    "零": "Zéro",
-    "没": "Ne pas (avoir / passé)",
-    "喂": "Allô / Hé",
-    "些": "Quelques / Un peu",
-    "字": "Caractère / Mot écrit",
-    "呢": "Particule interrogative (et toi ?)",
-    "岁": "An / Âge (ans)",
-    "使劲儿": "Faire un effort / Forcer",
-    "系领带": "Mettre une cravate",
-    "墨水儿": "Encre",
-    "纽扣儿": "Bouton (vêtement)",
-    "摊儿": "Étal / Stand",
-    "致力于": "Se consacrer à / S'engager pour",
-    "烟花爆竹": "Feux d'artifice et pétards",
-    "侃侃而谈": "Parler avec assurance et aisance",
-    "儒家": "École confucéenne / Confucianisme",
+ENGLISH_FALLBACK: dict[str, str] = {
+    "一下": "For a moment / A bit",
+    "一点儿": "A little bit",
+    "一块儿": "Together",
+    "一起": "Together",
+    "一直": "Always / Straight ahead",
+    "一般": "Ordinary / In general",
+    "一边": "On one hand / At the same time",
+    "一会儿": "A little while",
+    "一样": "Same / Alike",
+    "非常": "Very / Extremely",
+    "大家": "Everyone / Everybody",
+    "别的": "Other / Else",
+    "干什么": "What are you doing / Why",
+    "一会儿见": "See you soon",
+    "没问题": "No problem",
+    "放暑假": "To be on summer vacation",
+    "系领带": "To wear a tie",
+    "烟花爆竹": "Fireworks and firecrackers",
 }
 
-
-def download_cached(url: str, filename: str) -> Path:
-    CACHE_DIR.mkdir(parents=True, exist_ok=True)
-    target = CACHE_DIR / filename
-    if target.exists() and target.stat().st_size > 0:
-        return target
-    print(f"Téléchargement : {url} -> {target.name} ...")
-    with requests.get(url, stream=True, timeout=60) as resp:
-        resp.raise_for_status()
-        with target.open("wb") as f:
-            for chunk in resp.iter_content(chunk_size=1024 * 256):
-                if chunk:
-                    f.write(chunk)
-    return target
-
-
-SURNAME_RE = re.compile(r"nom de famille|patronyme|prénom", re.IGNORECASE)
+SURNAME_RE = re.compile(r"\bsurname\b|\bfamily name\b|\bclan name\b", re.IGNORECASE)
+RADICAL_OR_TECH_RE = re.compile(
+    r"(\(slang\)|\(vulgar\)|\(dialect\)|\(taboo\)|\(derog\.\)|\(euphem\.\)|\(jocular\)|"
+    r"\bKangxi radical\b|\bvariant of\b|\bold variant\b|\berhua variant\b|"
+    r"\barchaic variant\b|\bJapanese surname\b|\bKorean surname\b|"
+    r"\bsee also\b|\bTaiwan pr\.|\balso pr\.|\babbr\. for\b|\babbr\. to\b)",
+    re.IGNORECASE,
+)
 VULGAR_OR_SLANG_RE = re.compile(
-    r"(\(argot\)|\(vulg\.?\)|\(fam\.?\)|radical\)|\bputain\b|\bmerde\b|\bbordel\b|\bsalope\b|\bconnard\w*\b|\bconnasse\b|\bencul\w*\b|\bnichons?\b|\bbranl\w*\b|\bculotte\b|\bporn\w*\b|\bpénis\b|\bvagin\b|\bcouille\w*\b|\bchatte\b|\bbite\b|\bchier\b|\bchiant\w*\b|\bfoutre\b|\bfous\b|\bfout\b|\bgueule\b|\bpisse\w*\b|\bcaca\b|\bpipi\b|\bsalaud\b|\benfoiré\w*\b|\bbâtard\w*\b|\bnique\w*\b|\bpétasse\b|\bgarce\b|\bdégueulasse\b|\bemmerd\w*\b|\bculs?\b|\bprostitu\w*\b|\bsapes\b|\bcon\b|\bcons\b|\bconne\b)",
+    r"(\(slang\)|\(vulgar\)|\(dialect\)|\(taboo\)|\(derog\.\)|"
+    r"\bfuck\w*\b|\bshit\w*\b|\bbitch\w*\b|\bcunt\w*\b|\bwhore\w*\b|"
+    r"\bporn\w*\b|\bpenis\b|\bvagina\b|\bbastard\w*\b|\basshole\w*\b|"
+    r"\bdickhead\w*\b|\bcock\b|\bpiss\w*\b|\bcrap\b|\bboobs\b|\btits\b|\bscrotum\b)",
     re.IGNORECASE,
 )
 
-# Seuls vrais noms propres HSK 1..6 autorisant une majuscule dans le pinyin
+# Only genuine proper nouns in HSK 1..6 allowed to start with an uppercase letter in pinyin
 ALLOWED_PROPER_NOUNS = {
     "中国", "北京", "汉语", "中文", "黄河", "亚洲", "京剧", "长城", "长江",
     "元旦", "华裔", "国庆节", "礼拜天", "除夕", "互联网", "元宵节", "华侨",
     "国务院", "摄氏度", "欧洲", "正月", "端午节", "重阳节",
 }
 
-# Table explicite de référence pour les polyphones clés (lecture standard HSK, pinyin numéroté minuscule)
+# Authoritative HSK polyphone readings (lowercase numbered pinyin)
 PREFERRED_PINYIN: dict[str, str] = {
-    # Polyphones principaux HSK 1-4 demandés + cas audités
     "喝": "he1",
     "说": "shuo1",
     "没有": "mei2you3",
@@ -541,7 +312,6 @@ PREFERRED_PINYIN: dict[str, str] = {
     "应": "ying1",
     "相": "xiang1",
     "传": "chuan2",
-    # Autres polyphones HSK 1-4 audités
     "东西": "dong1xi5",
     "多少": "duo1shao5",
     "几": "ji3",
@@ -616,7 +386,6 @@ PREFERRED_PINYIN: dict[str, str] = {
     "凉快": "liang2kuai5",
     "消息": "xiao1xi5",
     "一会儿": "yi1hui4r5",
-    # Polyphones HSK 5-6 audités
     "乙": "yi3",
     "冲": "chong1",
     "切": "qie1",
@@ -706,162 +475,397 @@ PREFERRED_PINYIN: dict[str, str] = {
     "翼": "yi4",
 }
 
-# Traductions françaises explicites pour les polyphones/cas sensibles (prioritaires sur CFDICT)
-FRENCH_OVERRIDES: dict[str, str] = {
-    "喝": "Boire",
-    "不客气": "De rien / Je vous en prie",
-    "吗": "Particule interrogative (est-ce que)",
-    "叫": "S'appeler / Appeler",
-    "那": "Ce ...-là / Cela",
-    "个": "Classificateur général",
-    "点": "Heure / Point / Un peu",
-    "上": "Sur / Dessus / Monter",
-    "回": "Revenir / Rentrer",
-    "本": "Classificateur des livres",
-    "能": "Pouvoir / Être capable de",
-    "想": "Vouloir / Penser",
-    "猫": "Chat",
-    "狗": "Chien",
-    "二": "Deux",
-    "飞机": "Avion",
-    "没有": "Ne pas avoir / Ne pas (passé)",
-    "一点儿": "Un peu",
-    "哪儿": "Où",
-    "说": "Dire / Parler",
-    "饭店": "Restaurant / Hôtel",
-    "还": "Encore / Toujours",
-    "都": "Tous / Tout",
+# Short, natural English glosses for core HSK 1-3 words and sensitive polyphones
+ENGLISH_OVERRIDES: dict[str, str] = {
+    "你": "You",
+    "好": "Good / Well",
+    "谢谢": "Thank you",
+    "再见": "Goodbye",
+    "喂": "Hello (on the phone)",
+    "请": "Please / To invite",
+    "对不起": "Sorry / Excuse me",
+    "没关系": "No problem / It's okay",
+    "不客气": "You're welcome",
+    "高兴": "Happy / Glad",
+    "我": "I / Me",
+    "他": "He / Him",
+    "她": "She / Her",
+    "我们": "We / Us",
+    "是": "To be",
+    "不": "No / Not",
+    "没有": "Don't have / Did not",
+    "吗": "Question particle",
+    "呢": "Question particle (and you?)",
+    "谁": "Who",
+    "叫": "To be called / To call",
+    "什么": "What",
+    "名字": "Name",
+    "这": "This",
+    "那": "That",
+    "家": "Home / Family",
+    "爸爸": "Dad / Father",
+    "妈妈": "Mom / Mother",
+    "儿子": "Son",
+    "女儿": "Daughter",
+    "人": "Person / People",
+    "朋友": "Friend",
+    "先生": "Mister / Sir",
+    "小姐": "Miss / Young lady",
+    "同学": "Classmate",
+    "爱": "To love",
+    "喜欢": "To like",
+    "吃": "To eat",
+    "喝": "To drink",
+    "水": "Water",
+    "茶": "Tea",
+    "米饭": "Cooked rice",
+    "菜": "Dish / Vegetable",
+    "水果": "Fruit",
+    "苹果": "Apple",
+    "猫": "Cat",
+    "狗": "Dog",
+    "的": "Possessive particle",
+    "很": "Very",
+    "太": "Too (excessively)",
+    "一": "One",
+    "二": "Two",
+    "三": "Three",
+    "四": "Four",
+    "五": "Five",
+    "六": "Six",
+    "七": "Seven",
+    "八": "Eight",
+    "九": "Nine",
+    "十": "Ten",
+    "几": "How many (a few)",
+    "多少": "How many / How much",
+    "岁": "Years old (age)",
+    "个": "General measure word",
+    "号": "Number / Day of month",
+    "年": "Year",
+    "月": "Month / Moon",
+    "星期": "Week",
+    "今天": "Today",
+    "明天": "Tomorrow",
+    "昨天": "Yesterday",
+    "现在": "Now",
+    "点": "O'clock / Dot / A little",
+    "分钟": "Minute",
+    "一点儿": "A little bit",
+    "上午": "Morning",
+    "中午": "Noon",
+    "下午": "Afternoon",
+    "时候": "Time / Moment",
+    "了": "Completed action particle",
+    "中国": "China",
+    "北京": "Beijing",
+    "饭店": "Restaurant / Hotel",
+    "商店": "Shop / Store",
+    "医院": "Hospital",
+    "学校": "School",
+    "飞机": "Airplane",
+    "出租车": "Taxi",
+    "电影": "Movie",
+    "住": "To live / To stay",
+    "哪": "Which",
+    "哪儿": "Where",
+    "里": "Inside / In",
+    "前面": "In front",
+    "后面": "Behind",
+    "上": "On / Above / To go up",
+    "下": "Below / Under / To go down",
+    "桌子": "Table / Desk",
+    "椅子": "Chair",
+    "杯子": "Cup / Glass",
+    "去": "To go",
+    "来": "To come",
+    "回": "To return / Go back",
+    "坐": "To sit / Take (transport)",
+    "看": "To look / Watch / Read",
+    "工作": "Work / To work",
+    "学习": "To study / Learn",
+    "老师": "Teacher",
+    "学生": "Student",
+    "医生": "Doctor",
+    "看见": "To see",
+    "听": "To listen / Hear",
+    "说": "To speak / Say",
+    "读": "To read",
+    "写": "To write",
+    "字": "Character / Word",
+    "书": "Book",
+    "睡觉": "To sleep",
+    "打电话": "To make a phone call",
+    "东西": "Thing / Object",
+    "买": "To buy",
+    "钱": "Money",
+    "块": "Yuan (currency) / Piece",
+    "天气": "Weather",
+    "下雨": "To rain",
+    "衣服": "Clothes",
+    "电脑": "Computer",
+    "电视": "Television",
+    "本": "Measure word for books",
+    "些": "Some / A few",
+    "大": "Big / Large",
+    "小": "Small / Little",
+    "多": "Many / Much",
+    "少": "Few / Little",
+    "漂亮": "Pretty / Beautiful",
+    "冷": "Cold",
+    "热": "Hot",
+    "做": "To do / Make",
+    "开": "To open / Drive / Turn on",
+    "有": "To have / There is",
+    "在": "At / In / Currently",
+    "会": "Can (learned skill) / Will",
+    "能": "Can / Be able to",
+    "想": "To want / Think / Miss",
+    "认识": "To know (a person) / Recognize",
+    "汉语": "Chinese language",
+    "和": "And / With",
+    "都": "All / Both",
+    "怎么": "How / Why",
+    "怎么样": "How about / How is it",
+    # Key HSK 2-6 overrides & polyphones
+    "姓": "Surname / Family name",
+    "还": "Still / Also / Yet",
     "长": "Long",
-    "晴": "Ensoleillé / Clair (météo)",
-    "只": "Seulement / Uniquement",
-    "没": "Ne pas (avoir / passé)",
-    "得": "Particule de degré",
-    "地": "Particule adverbiale",
-    "了": "Particule d'action accomplie",
-    "着": "Particule d'aspect continu",
-    "和": "Et / Avec",
-    "行": "D'accord / Marcher",
-    "为": "Pour / À cause de",
-    "重": "Lourd / Important",
-    "干": "Faire / Travailler",
-    "发": "Envoyer / Émettre",
-    "会": "Savoir faire / Pouvoir",
-    "好": "Bon / Bien",
-    "看": "Regarder / Lire",
-    "少": "Peu / Manquer",
-    "分": "Diviser / Minute / Point",
-    "教": "Enseigner",
-    "过": "Particule d'expérience passée",
-    "假": "Faux / Artificiel",
-    "种": "Sorte / Espèce / Graine",
-    "倒": "Tomber / S'effondrer",
-    "数": "Nombre / Chiffre",
-    "空": "Vide / Ciel",
-    "要": "Vouloir / Devoir",
-    "应": "Devoir / Répondre",
-    "相": "Mutuellement / Apparence",
-    "传": "Transmettre / Passer",
-    "东西": "Chose / Objet",
-    "多少": "Combien",
-    "便宜": "Bon marché / Pas cher",
-    "告诉": "Dire / Informer",
-    "妻子": "Épouse / Femme",
-    "地方": "Endroit / Lieu",
-    "故事": "Histoire / Récit",
-    "大夫": "Médecin / Docteur",
-    "好处": "Avantage / Bénéfice",
-    "结果": "Résultat / Conséquence",
-    "弄": "Faire / Arranger",
-    "胖": "Gros / Dodu",
-    "角": "Angle / Coin / Jiao",
-    "张": "Ouvrir / Classificateur (objets plats)",
-    "比": "Comparer / Que",
-    "别": "Ne pas (impératif) / Autre",
-    "让": "Laisser / Faire faire",
-    "穿": "Porter (un vêtement) / S'habiller",
-    "累": "Fatigué",
-    "鸡蛋": "Œuf",
-    "踢足球": "Jouer au football",
-    "一下": "Un instant / Un peu",
-    "男": "Masculin / Homme",
-    "女": "Féminin / Femme",
-    "对": "Juste / Correct / Envers",
-    "等": "Attendre / Etc.",
-    "往": "Vers / En direction de",
-    "面条": "Nouilles",
-    "铅笔": "Crayon",
-    "宾馆": "Hôtel",
-    "刷牙": "Se brosser les dents",
-    "刮风": "Venter / Le vent souffle",
-    "只有": "Seulement si / Il n'y a que",
-    "感兴趣": "S'intéresser à",
-    "电子邮件": "Courriel / E-mail",
-    "黄河": "Fleuve Jaune",
-    "鸟": "Oiseau",
-    "裤子": "Pantalon",
-    "春": "Printemps",
-    "玻璃": "Verre",
-    "屁股": "Fesses / Postérieur",
-    "犬": "Chien",
-    "得罪": "Offenser / Froisser",
-    "正当": "Légitime / Honnête",
-    "幢": "Classificateur des immeubles / bâtiments",
-    "孙子": "Petit-fils",
-    "奶奶": "Grand-mère paternelle",
-    "脏": "Sale",
-    "弹": "Jouer d'un instrument / Pincer",
-    "趟": "Classificateur (trajets, allers-retours)",
-    "重点": "Point clé / Essentiel",
-    "提": "Porter à la main / Mentionner / Lever",
-    "吓": "Effrayer / Faire peur",
-    "盖": "Couvrir / Couvercle",
-    "正": "Droit / Exactement / En train de",
-    "背": "Dos / Porter sur le dos",
-    "大方": "Généreux / Naturel",
-    "地道": "Authentique / Pur",
-    "扁": "Plat / Aplati",
-    "番": "Fois / Tour",
-    "束": "Bouquet / Faisceau / Lier",
-    "翼": "Aile",
-    "哈": "Ha (rire / exclamation)",
-    "现代": "Moderne / Contemporain",
-    "和平": "Paix / Pacifique",
-    "时代": "Époque / Ère",
-    "友好": "Amical",
-    "狮子": "Lion",
-    "朝": "Vers / En direction de / Dynastie",
-    "黄": "Jaune",
-    "鱼": "Poisson",
-    "阴": "Nuageux / Ombre",
-    "雪": "Neige",
-    "米": "Riz / Mètre",
-    "克": "Gramme / Vaincre",
-    "项": "Élément / Rubrique / Nuque",
-    "正": "Droit / Juste / Exactement",
-    "过": "Particule d'expérience passée",
-    "台": "Plateforme / Classificateur (machines)",
-    "休": "Cesser / Se reposer",
-    "结实": "Solide / Robuste",
-    "地道": "Authentique / Pur",
-    "大意": "Négligent / Idée générale",
-    "人家": "Les autres / Autrui",
-    "公道": "Équitable / Juste",
-    "利害": "Avantages et inconvénients / Redoutable",
-    "本事": "Capacité / Talent",
-    "照应": "Prendre soin / Faire écho",
-    "跟前": "Devant / Auprès de",
-    "裁缝": "Tailleur / Couturier",
-    "把手": "Poignée",
-    "出息": "Avenir prometteur",
-    "分量": "Poids / Importance",
-    "口音": "Accent (prononciation)",
-    "工夫": "Temps / Moment / Effort",
-    "恶心": "Écœurant / Nausée",
-    "款式": "Modèle / Style",
-    "琢磨": "Réfléchir / Méditer",
-    "盛": "Prospère / Florissant",
-    "铺": "Étendre / Déployer",
+    "晴": "Sunny / Clear (weather)",
+    "只": "Only / Just",
+    "没": "Not have / Did not",
+    "得": "Degree particle",
+    "地": "Adverbial particle",
+    "着": "Continuous aspect particle",
+    "行": "Okay / All right / To walk",
+    "为": "For / Because of",
+    "重": "Heavy / Important",
+    "干": "To do / Work",
+    "发": "To send / Emit",
+    "分": "Minute / Point / Divide",
+    "教": "To teach",
+    "过": "Past experience particle",
+    "假": "Fake / False",
+    "种": "Kind / Type / Seed",
+    "倒": "To fall / Collapse",
+    "数": "Number / Figure",
+    "空": "Empty / Sky",
+    "要": "To want / Must / Will",
+    "应": "Should / To answer",
+    "相": "Mutually / Appearance",
+    "传": "To pass on / Spread",
+    "便宜": "Cheap / Inexpensive",
+    "告诉": "To tell / Inform",
+    "妻子": "Wife",
+    "地方": "Place / Location",
+    "故事": "Story",
+    "大夫": "Doctor / Physician",
+    "好处": "Benefit / Advantage",
+    "结果": "Result / Outcome",
+    "弄": "To do / Handle",
+    "胖": "Fat / Plump",
+    "角": "Corner / Angle / Jiao",
+    "张": "To open / Measure word for flat objects",
+    "比": "To compare / Than",
+    "别": "Don't (imperative) / Other",
+    "让": "To let / Allow / Make",
+    "穿": "To wear / Put on",
+    "累": "Tired",
+    "鸡蛋": "Egg",
+    "踢足球": "To play soccer",
+    "男孩": "Boy",
+    "男": "Male / Man",
+    "女": "Female / Woman",
+    "对": "Correct / Right / Toward",
+    "等": "To wait / Etc.",
+    "往": "Toward",
+    "面条": "Noodles",
+    "铅笔": "Pencil",
+    "宾馆": "Hotel",
+    "刷牙": "To brush teeth",
+    "刮风": "To be windy",
+    "只有": "Only if",
+    "感兴趣": "To be interested in",
+    "电子邮件": "Email",
+    "黄河": "Yellow River",
+    "鸟": "Bird",
+    "裤子": "Pants / Trousers",
+    "春": "Spring (season)",
+    "玻璃": "Glass (material)",
+    "屁股": "Bottom / Rear",
+    "犬": "Dog",
+    "得罪": "To offend",
+    "正当": "Proper / Legitimate",
+    "幢": "Measure word for buildings",
+    "孙子": "Grandson",
+    "奶奶": "Paternal grandmother",
+    "脏": "Dirty",
+    "弹": "To play (a plucked instrument)",
+    "趟": "Measure word for trips",
+    "重点": "Key point / Focus",
+    "提": "To carry / Mention / Raise",
+    "吓": "To scare / Frighten",
+    "盖": "To cover / Lid",
+    "正": "Straight / Right / In the middle of",
+    "背": "Back / Carry on one's back",
+    "大方": "Generous / Natural",
+    "地道": "Authentic / Genuine",
+    "扁": "Flat",
+    "番": "Time / Turn",
+    "束": "Bundle / Bouquet / To tie",
+    "翼": "Wing",
+    "吧": "Suggestion particle",
+    "把": "Object marker (ba)",
+    "被": "Passive marker (bei)",
+    "更": "Even more",
+    "最": "Most",
+    "就": "Then / Right away",
+    "才": "Only then / Just",
+    "再": "Again (future)",
+    "又": "Again (past)",
+    "真": "Really / True",
+    "正在": "In the middle of (doing)",
+    "为什么": "Why",
+    "您": "You (polite)",
+    "它": "It",
+    "两": "Two (before measure words)",
+    "哥哥": "Older brother",
+    "姐姐": "Older sister",
+    "弟弟": "Younger brother",
+    "妹妹": "Younger sister",
+    "丈夫": "Husband",
+    "介绍": "To introduce",
+    "快乐": "Happy / Joyful",
+    "零": "Zero",
+    "百": "Hundred",
+    "千": "Thousand",
+    "第一": "First",
+    "次": "Time (occurrence)",
+    "日": "Day / Sun",
+    "去年": "Last year",
+    "生日": "Birthday",
+    "早上": "Morning",
+    "晚上": "Evening",
+    "时间": "Time",
+    "小时": "Hour",
+    "每": "Every / Each",
+    "开始": "To start / Begin",
+    "准备": "To prepare",
+    "完": "To finish / Complete",
+    "旁边": "Beside / Next to",
+    "外": "Outside",
+    "左边": "Left side",
+    "右边": "Right side",
+    "近": "Near / Close",
+    "远": "Far",
+    "离": "Away from",
+    "到": "To arrive",
+    "进": "To enter",
+    "咖啡": "Coffee",
+    "牛奶": "Milk",
+    "鱼": "Fish",
+    "羊肉": "Lamb / Mutton",
+    "西瓜": "Watermelon",
+    "好吃": "Delicious",
+    "服务员": "Waiter / Attendant",
+    "贵": "Expensive",
+    "卖": "To sell",
+    "件": "Measure word for clothes",
+    "洗": "To wash",
+    "手机": "Mobile phone",
+    "手表": "Wristwatch",
+    "报纸": "Newspaper",
+    "新": "New",
+    "颜色": "Color",
+    "红": "Red",
+    "白": "White",
+    "黑": "Black",
+    "门": "Door",
+    "房间": "Room",
+    "教室": "Classroom",
+    "公司": "Company / Office",
+    "火车站": "Train station",
+    "机场": "Airport",
+    "公共汽车": "Bus",
+    "路": "Road / Way",
+    "票": "Ticket",
+    "旅游": "To travel",
+    "走": "To walk / Go",
+    "出": "To go out",
+    "送": "To give / Deliver / See off",
+    "找": "To look for / Find",
+    "阴": "Cloudy / Overcast",
+    "雪": "Snow",
+    "高": "Tall / High",
+    "眼睛": "Eye",
+    "身体": "Body / Health",
+    "生病": "To get sick",
+    "药": "Medicine",
+    "休息": "To rest",
+    "起床": "To get up",
+    "上班": "To go to work",
+    "忙": "Busy",
+    "笑": "To smile / Laugh",
+    "玩": "To play / Have fun",
+    "运动": "Exercise / Sport",
+    "跑步": "To run / Jog",
+    "游泳": "To swim",
+    "打篮球": "To play basketball",
+    "唱歌": "To sing",
+    "跳舞": "To dance",
+    "课": "Class / Lesson",
+    "考试": "Exam / Test",
+    "题": "Question / Topic",
+    "说话": "To speak / Talk",
+    "问": "To ask",
+    "问题": "Question / Problem",
+    "懂": "To understand",
+    "帮助": "To help",
+    "意思": "Meaning / Idea",
+    "事情": "Matter / Thing / Affair",
+    "已经": "Already",
+    "快": "Fast / Soon",
+    "慢": "Slow",
+    "从": "From",
+    "错": "Wrong / Mistake",
+    "可能": "Maybe / Possible",
+    "因为": "Because",
+    "所以": "Therefore / So",
+    "虽然": "Although",
+    "但是": "But / However",
+    "可以": "Can / May",
+    "知道": "To know",
+    "觉得": "To feel / Think",
+    "希望": "To hope",
+    "孩子": "Child",
+    "乙": "Second (in a sequence) / B",
+    "幢": "Measure word for buildings",
+    "啊": "Ah (interjection)",
+    "哇": "Wow (interjection)",
+    "哦": "Oh (interjection)",
+    "啦": "Sentence-final particle",
+    "嗯": "Uh-huh / Mhm",
+    "呀": "Particle expressing surprise or doubt",
+    "纪录": "Record / Minutes / Notes",
+    "啰唆": "Long-winded / Wordy",
+    "贤惠": "Virtuous and kindhearted",
+    "做主": "To decide / Take charge",
 }
+
+
+def download_cached(url: str, filename: str) -> Path:
+    CACHE_DIR.mkdir(parents=True, exist_ok=True)
+    target = CACHE_DIR / filename
+    if target.exists() and target.stat().st_size > 0:
+        return target
+    print(f"Downloading: {url} -> {target.name} ...")
+    with requests.get(url, stream=True, timeout=120) as resp:
+        resp.raise_for_status()
+        with target.open("wb") as f:
+            for chunk in resp.iter_content(chunk_size=1024 * 256):
+                if chunk:
+                    f.write(chunk)
+    return target
 
 
 def norm_numbered_pinyin(raw_py: str) -> str:
@@ -882,83 +886,79 @@ def norm_tonal_pinyin(py: str) -> str:
     )
 
 
-def clean_cfdict_sense(raw: str) -> str | None:
+def clean_english_sense(raw: str, hanzi: str, strict: bool = True) -> str | None:
     s = raw.strip()
     if not s:
         return None
-    if SURNAME_RE.search(s) or VULGAR_OR_SLANG_RE.search(s):
+    if hanzi != "姓" and SURNAME_RE.search(s):
         return None
-    # Supprimer les mentions de classificateurs ou renvois techniques
-    if s.startswith(("CL:", "voir ", "Voir ", "variante ", "Variante ", "ancien ", "fig.")):
-        if s.startswith("CL:"):
-            return None
+    if VULGAR_OR_SLANG_RE.search(s):
+        return None
+    if strict and RADICAL_OR_TECH_RE.search(s):
+        return None
+    if not strict and re.search(r"(\bKangxi radical\b|\bvariant of\b|\bold variant\b|\barchaic variant\b|\bJapanese surname\b)", s, re.IGNORECASE):
+        return None
+    if s.startswith(("CL:", "see ", "See ", "Taiwan pr.", "also pr.")):
+        return None
+
     s = re.sub(r"\bCL:[^;/)]+", "", s)
     s = re.sub(r"\[[^\]]+\]", "", s)
-    s = re.sub(r"\([^)]*\)", lambda m: "" if len(m.group(0)) > 28 or SURNAME_RE.search(m.group(0)) or VULGAR_OR_SLANG_RE.search(m.group(0)) else m.group(0), s)
+    if not strict:
+        s = re.sub(r"\((?:coll\.|fig\.|lit\.|dialect|archaic|onom\.|euphem\.|slang|tw)\)", "", s, flags=re.IGNORECASE)
+    s = re.sub(
+        r"\([^)]*\)",
+        lambda m: ""
+        if len(m.group(0)) > 28
+        or SURNAME_RE.search(m.group(0))
+        or VULGAR_OR_SLANG_RE.search(m.group(0))
+        or (strict and RADICAL_OR_TECH_RE.search(m.group(0)))
+        else m.group(0),
+        s,
+    )
     s = re.sub(r"\s{2,}", " ", s).strip(" ;,.-")
-    if not s or len(s) < 2 or SURNAME_RE.search(s) or VULGAR_OR_SLANG_RE.search(s):
+    if not s or len(s) < 2:
+        return None
+    if hanzi != "姓" and SURNAME_RE.search(s):
+        return None
+    if VULGAR_OR_SLANG_RE.search(s):
         return None
     return s
 
 
-def load_cfdict(
-    path: Path,
-) -> tuple[dict[tuple[str, str], str], dict[tuple[str, str], str]]:
+def clean_form_glosses(hanzi: str, meanings: list[str]) -> str | None:
+    cleaned = [clean_english_sense(m, hanzi, strict=True) for m in meanings]
+    cleaned = [c for c in cleaned if c]
+    if not cleaned:
+        cleaned = [clean_english_sense(m, hanzi, strict=False) for m in meanings]
+        cleaned = [c for c in cleaned if c]
+    if not cleaned:
+        return None
+
+    # Deduplicate preserving order
+    unique: list[str] = []
+    seen_low: set[str] = set()
+    for s in cleaned:
+        low = s.lower()
+        if low not in seen_low:
+            seen_low.add(low)
+            unique.append(s)
+
+    concise = " / ".join(unique[:2])
+    if len(concise) > 72:
+        first = unique[0]
+        if len(first) > 72:
+            concise = first.split(";")[0].split(",")[0].strip()[:72].rstrip(" ,;-")
+        else:
+            concise = first
+    if not concise:
+        return None
+    return concise[0].upper() + concise[1:]
+
+
+def select_best_form(entry: dict[str, Any]) -> tuple[str, str, list[str]]:
     """
-    Charge CFDICT indexé par couple exact (hanzi, pinyin_numéroté_minuscule) et
-    par (hanzi, pinyin_sans_tons) pour repli contrôlé. Ignore les entrées noms de famille.
-    """
-    by_pair_raw: dict[tuple[str, str], list[str]] = defaultdict(list)
-    by_toneless_raw: dict[tuple[str, str], list[str]] = defaultdict(list)
-
-    with path.open("r", encoding="utf-8", errors="ignore") as f:
-        for line in f:
-            if not line or line.startswith("#"):
-                continue
-            m = CEDICT_LINE_RE.match(line)
-            if not m:
-                continue
-            trad, simp, raw_py, gloss_block = m.groups()
-            first_alpha = next((ch for ch in raw_py if ch.isalpha()), "")
-            if first_alpha.isupper() and simp not in ALLOWED_PROPER_NOUNS and trad not in ALLOWED_PROPER_NOUNS:
-                continue
-
-            senses = [clean_cfdict_sense(g) for g in gloss_block.split("/")]
-            senses = [s for s in senses if s]
-            if not senses:
-                continue
-
-            concise = " / ".join(senses[:2])
-            if len(concise) > 72:
-                concise = senses[0][:72].rstrip(" ,;-")
-            concise = concise[0].upper() + concise[1:]
-
-            py_key = norm_numbered_pinyin(raw_py)
-            toneless_key = re.sub(r"[1-5]", "", py_key)
-            for hz in (simp, trad):
-                by_pair_raw[(hz, py_key)].append(concise)
-                by_toneless_raw[(hz, toneless_key)].append(concise)
-
-    by_pair: dict[tuple[str, str], str] = {}
-    for k, vals in by_pair_raw.items():
-        vals_sorted = sorted(vals, key=lambda v: (len(v) < 3, len(v)))
-        by_pair[k] = vals_sorted[0]
-
-    by_toneless: dict[tuple[str, str], str] = {}
-    for k, vals in by_toneless_raw.items():
-        vals_sorted = sorted(vals, key=lambda v: (len(v) < 3, len(v)))
-        by_toneless[k] = vals_sorted[0]
-
-    return by_pair, by_toneless
-
-
-def select_best_form(
-    entry: dict[str, Any],
-    cfdict_by_pair: dict[tuple[str, str], str],
-) -> tuple[str, str, str]:
-    """
-    Sélectionne la lecture standard dans `entry['f']` en excluant noms de famille et variantes.
-    Retourne `(pinyin_tonal, pinyin_numéroté_normalisé, hanzi_traditionnel)`.
+    Selects the standard reading in `entry['f']` excluding surnames and obscure variants.
+    Returns `(tonal_pinyin, normalized_numbered_pinyin, meanings_list)`.
     """
     hanzi = entry["s"]
     forms = entry.get("f", [])
@@ -967,28 +967,28 @@ def select_best_form(
         pyp_tonal = "".join(x[0] for x in syls)
         syls_num = pypinyin_fn(hanzi, style=Style.TONE3, neutral_tone_with_five=True, heteronym=False)
         pyp_num = norm_numbered_pinyin("".join(x[0] for x in syls_num))
-        return pyp_tonal, pyp_num, ""
+        return pyp_tonal, pyp_num, []
 
-    # 1. Override explicite si le mot figure dans PREFERRED_PINYIN
     preferred = PREFERRED_PINYIN.get(hanzi)
     if preferred:
         for form in forms:
             num_py = norm_numbered_pinyin(form.get("i", {}).get("n", ""))
             tonal_py = form.get("i", {}).get("y", "").strip()
             if num_py == preferred and not any(c.isupper() for c in tonal_py):
-                return ensure_tonal_word_pinyin(hanzi, tonal_py), num_py, form.get("t", "")
+                return ensure_tonal_word_pinyin(hanzi, tonal_py), num_py, form.get("m", [])
 
-    # 2. Filtrer les entrées noms de famille / majuscules (sauf vrais noms propres)
     is_proper = hanzi in ALLOWED_PROPER_NOUNS
     non_upper = [
-        f for f in forms
+        f
+        for f in forms
         if not any(c.isupper() for c in f.get("i", {}).get("y", ""))
         and "surname" not in " ".join(f.get("m", [])).lower()
     ]
     pool = forms if is_proper else (non_upper or forms)
 
     non_variant = [
-        f for f in pool
+        f
+        for f in pool
         if not (
             f.get("m")
             and all(
@@ -1007,9 +1007,8 @@ def select_best_form(
         if not is_proper:
             tonal = tonal.lower()
         num_py = norm_numbered_pinyin(f0.get("i", {}).get("n", ""))
-        return ensure_tonal_word_pinyin(hanzi, tonal), num_py, f0.get("t", "")
+        return ensure_tonal_word_pinyin(hanzi, tonal), num_py, f0.get("m", [])
 
-    # 3. Scorer les lectures candidates par concordance pypinyin + CFDICT + richesse sémantique
     pyp_num = norm_numbered_pinyin(
         "".join(x[0] for x in pypinyin_fn(hanzi, style=Style.TONE3, neutral_tone_with_five=True, heteronym=False))
     )
@@ -1020,19 +1019,20 @@ def select_best_form(
     for f in pool:
         tonal = f.get("i", {}).get("y", "").strip()
         num_py = norm_numbered_pinyin(f.get("i", {}).get("n", ""))
-        m_low = " ".join(f.get("m", [])).lower()
+        meanings = f.get("m", [])
+        m_low = " ".join(meanings).lower()
         score = 0
         if num_py == pyp_num:
             score += 100
         elif re.sub(r"[1-5]", "", num_py) == pyp_toneless:
             score += 35
-        if (hanzi, num_py) in cfdict_by_pair:
+        if clean_form_glosses(hanzi, meanings):
             score += 40
         if any(tag in m_low for tag in ("literary", "classical", "dialect", "onom.", "(tw)")):
             score -= 30
         if "(bound form)" in m_low:
             score -= 10
-        score += min(5, len(f.get("m", [])))
+        score += min(5, len(meanings))
         if score > best_score:
             best_score = score
             best_form = f
@@ -1041,7 +1041,7 @@ def select_best_form(
     if not is_proper:
         tonal = tonal.lower()
     num_py = norm_numbered_pinyin(best_form.get("i", {}).get("n", ""))
-    return ensure_tonal_word_pinyin(hanzi, tonal), num_py, best_form.get("t", "")
+    return ensure_tonal_word_pinyin(hanzi, tonal), num_py, best_form.get("m", [])
 
 
 def tokens_to_pinyin_sentence(
@@ -1049,7 +1049,7 @@ def tokens_to_pinyin_sentence(
     punct: str,
     word_to_pinyin: dict[str, str],
 ) -> str:
-    """Rend le pinyin d'une phrase token par token en utilisant la lecture retenue du catalogue."""
+    """Renders sentence pinyin token by token using catalog word readings."""
     rendered: list[str] = []
     for tok in tokens:
         known = word_to_pinyin.get(tok, "").strip()
@@ -1072,10 +1072,10 @@ def tokens_to_pinyin_sentence(
 
 def load_tatoeba_pairs(
     cmn_bz2: Path,
-    fra_bz2: Path,
+    eng_bz2: Path,
     links_tar_bz2: Path,
 ) -> list[tuple[str, str]]:
-    cached_tsv = CACHE_DIR / "tatoeba_cmn_fra.tsv"
+    cached_tsv = CACHE_DIR / "tatoeba_cmn_eng.tsv"
     if cached_tsv.exists() and cached_tsv.stat().st_size > 0:
         pairs: list[tuple[str, str]] = []
         with cached_tsv.open("r", encoding="utf-8") as f:
@@ -1085,7 +1085,7 @@ def load_tatoeba_pairs(
                     pairs.append((parts[0], parts[1]))
         return pairs
 
-    print("Extraction des phrases Tatoeba chinois-français...")
+    print("Extracting Tatoeba Chinese-English sentence pairs...")
     cmn_map: dict[str, str] = {}
     with bz2.open(cmn_bz2, "rt", encoding="utf-8") as f:
         for line in f:
@@ -1106,15 +1106,15 @@ def load_tatoeba_pairs(
                 continue
             cmn_map[sid] = text
 
-    fra_map: dict[str, str] = {}
-    with bz2.open(fra_bz2, "rt", encoding="utf-8") as f:
+    eng_map: dict[str, str] = {}
+    with bz2.open(eng_bz2, "rt", encoding="utf-8") as f:
         for line in f:
             parts = line.rstrip("\n").split("\t")
             if len(parts) < 3:
                 continue
             sid, lang, text = parts[0], parts[1], parts[2].strip()
-            if lang == "fra" and 4 <= len(text) <= 120:
-                fra_map[sid] = text
+            if lang == "eng" and 4 <= len(text) <= 120 and not VULGAR_OR_SLANG_RE.search(text):
+                eng_map[sid] = text
 
     pairs_map: dict[str, tuple[str, str]] = {}
     with tarfile.open(links_tar_bz2, "r:bz2") as tar:
@@ -1127,37 +1127,16 @@ def load_tatoeba_pairs(
             if len(parts) < 2:
                 continue
             src_id, tgt_id = parts[0], parts[1]
-            if src_id in cmn_map and tgt_id in fra_map:
-                if src_id not in pairs_map or len(fra_map[tgt_id]) < len(pairs_map[src_id][1]):
-                    pairs_map[src_id] = (cmn_map[src_id], fra_map[tgt_id])
+            if src_id in cmn_map and tgt_id in eng_map:
+                if src_id not in pairs_map or len(eng_map[tgt_id]) < len(pairs_map[src_id][1]):
+                    pairs_map[src_id] = (cmn_map[src_id], eng_map[tgt_id])
 
     pairs = list(pairs_map.values())
     with cached_tsv.open("w", encoding="utf-8") as out:
-        for cmn_text, fra_text in pairs:
-            out.write(f"{cmn_text}\t{fra_text}\n")
-    print(f"Tatoeba : {len(pairs)} paires chinois-français propres extraites.")
+        for cmn_text, eng_text in pairs:
+            out.write(f"{cmn_text}\t{eng_text}\n")
+    print(f"Tatoeba: {len(pairs)} clean Chinese-English pairs extracted.")
     return pairs
-
-
-def to_tonal_pinyin_sentence(chinese_text: str) -> str:
-    """Convertit une phrase chinoise en pinyin tonal Unicode lisible."""
-    body = chinese_text.rstrip(TRAILING_PUNCT)
-    punct = chinese_text[len(body) :]
-    tokens = jieba.lcut(body)
-    rendered_tokens: list[str] = []
-    for tok in tokens:
-        syls = pypinyin_fn(tok, style=Style.TONE, heteronym=False)
-        rendered_tokens.append("".join(item[0] for item in syls))
-    sentence = " ".join(rendered_tokens).strip()
-    if sentence:
-        sentence = sentence[0].upper() + sentence[1:]
-    if punct == "。":
-        sentence += "."
-    elif punct == "？":
-        sentence += "?"
-    elif punct == "！":
-        sentence += "!"
-    return sentence
 
 
 def ensure_tonal_word_pinyin(hanzi: str, candidate_pinyin: str) -> str:
@@ -1169,62 +1148,61 @@ def ensure_tonal_word_pinyin(hanzi: str, candidate_pinyin: str) -> str:
     return generated or p
 
 
-# Gabarits explicites tokenisés : garantit `hanzi in tokens` sans collage jieba
 VERB_TEMPLATES: list[tuple[list[str], str, str]] = [
-    (["我们", "正在", "{w}"], "。", "Nous sommes en train de : {fr}."),
-    (["请", "认真", "{w}"], "。", "Veuillez sérieusement : {fr}."),
-    (["他", "每天", "都", "{w}"], "。", "Il pratique chaque jour : {fr}."),
-    (["我", "想", "学会", "{w}"], "。", "J'aimerais apprendre à : {fr}."),
-    (["大家", "一起", "{w}", "吧"], "！", "Allons {fr} tous ensemble !"),
-    (["明天", "再", "{w}", "好", "吗"], "？", "Et si on remettait à demain pour : {fr} ?"),
-    (["她", "经常", "这样", "{w}"], "。", "Elle a souvent l'habitude de : {fr}."),
+    (["我们", "正在", "{w}"], "。", "We are currently practicing: {en}."),
+    (["请", "认真", "{w}"], "。", "Please carefully practice: {en}."),
+    (["他", "每天", "都", "{w}"], "。", "Every day he practices: {en}."),
+    (["我", "想", "学会", "{w}"], "。", "I want to learn how to: {en}."),
+    (["大家", "一起", "{w}", "吧"], "！", "Let's all do this together: {en}!"),
+    (["明天", "再", "{w}", "好", "吗"], "？", "Shall we continue tomorrow with: {en}?"),
+    (["她", "经常", "这样", "{w}"], "。", "She often acts this way: {en}."),
 ]
 
 NOUN_TEMPLATES: list[tuple[list[str], str, str]] = [
-    (["这个", "{w}", "很", "重要"], "。", "Ce terme « {fr} » est très important."),
-    (["我们", "讨论", "过", "{w}"], "。", "Nous avons déjà abordé : {fr}."),
-    (["大家", "都", "很", "了解", "{w}"], "。", "Tout le monde connaît bien : {fr}."),
-    (["请", "记住", "这个", "{w}"], "。", "Veuillez retenir ce mot : {fr}."),
-    (["书", "上", "提到", "了", "{w}"], "。", "Le livre mentionne : {fr}."),
-    (["这里", "需要", "新的", "{w}"], "。", "Il faut un nouvel élément ici : {fr}."),
+    (["这个", "{w}", "很", "重要"], "。", "This concept \"{en}\" is very important."),
+    (["我们", "讨论", "过", "{w}"], "。", "We have already discussed: {en}."),
+    (["大家", "都", "很", "了解", "{w}"], "。", "Everyone knows a lot about: {en}."),
+    (["请", "记住", "这个", "{w}"], "。", "Please remember this term: {en}."),
+    (["书", "上", "提到", "了", "{w}"], "。", "The book mentions: {en}."),
+    (["这里", "需要", "新的", "{w}"], "。", "Here we need something new: {en}."),
 ]
 
 ADJ_TEMPLATES: list[tuple[list[str], str, str]] = [
-    (["今天", "的", "情况", "很", "{w}"], "。", "La situation d'aujourd'hui est très : {fr}."),
-    (["这个", "地方", "非常", "{w}"], "。", "Cet endroit est particulièrement : {fr}."),
-    (["他", "觉得", "这样", "更", "{w}"], "。", "Il trouve cela encore plus : {fr}."),
-    (["大家", "的", "态度", "很", "{w}"], "。", "L'attitude de chacun est très : {fr}."),
-    (["这里", "的", "环境", "真", "{w}"], "！", "Le cadre ici est vraiment : {fr} !"),
+    (["今天", "的", "情况", "很", "{w}"], "。", "Today's situation is very: {en}."),
+    (["这个", "地方", "非常", "{w}"], "。", "This place is particularly: {en}."),
+    (["他", "觉得", "这样", "更", "{w}"], "。", "He feels this way is even more: {en}."),
+    (["大家", "的", "态度", "很", "{w}"], "。", "Everyone's attitude is very: {en}."),
+    (["这里", "的", "环境", "真", "{w}"], "！", "The environment here is really: {en}!"),
 ]
 
 ADV_TEMPLATES: list[tuple[list[str], str, str]] = [
-    (["大家", "{w}", "完成", "任务"], "。", "Chacun accomplit la tâche ({fr})."),
-    (["她", "{w}", "说出", "了", "想法"], "。", "Elle a exprimé son idée ({fr})."),
-    (["我们", "{w}", "继续", "前进"], "。", "Continuons d'avancer ({fr})."),
-    (["请", "{w}", "准备", "一下"], "。", "Veuillez vous préparer ({fr})."),
+    (["大家", "{w}", "完成", "任务"], "。", "Everyone completes the task ({en})."),
+    (["她", "{w}", "说出", "了", "想法"], "。", "She expressed her idea ({en})."),
+    (["我们", "{w}", "继续", "前进"], "。", "Let us keep moving forward ({en})."),
+    (["请", "{w}", "准备", "一下"], "。", "Please get ready ({en})."),
 ]
 
 IDIOM_TEMPLATES: list[tuple[list[str], str, str]] = [
-    (["大家", "做事", "要", "{w}"], "。", "Dans nos actions, il faut appliquer : {fr}."),
-    (["老师", "常常", "强调", "{w}"], "。", "Le professeur souligne souvent : {fr}."),
-    (["我们", "应该", "坚持", "{w}"], "。", "Nous devons nous efforcer de : {fr}."),
+    (["大家", "做事", "要", "{w}"], "。", "In what we do, remember: {en}."),
+    (["老师", "常常", "强调", "{w}"], "。", "The teacher often emphasizes: {en}."),
+    (["我们", "应该", "坚持", "{w}"], "。", "We should uphold: {en}."),
 ]
 
 
-def short_french_gloss(french: str) -> str:
-    head = french.split("/")[0].strip()
+def short_english_gloss(english: str) -> str:
+    head = english.split("/")[0].strip()
     if not head:
-        return french
+        return english
     return head[0].lower() + head[1:]
 
 
 def generate_natural_example(
     hanzi: str,
-    french: str,
+    english: str,
     pos_tags: list[str],
     seed_idx: int,
 ) -> tuple[str, str, list[str]]:
-    gloss = short_french_gloss(french)
+    gloss = short_english_gloss(english)
     pos_joined = " ".join(pos_tags).lower()
 
     if len(hanzi) == 4 or "i" in pos_tags:
@@ -1241,12 +1219,12 @@ def generate_natural_example(
     digest = int(hashlib.md5(hanzi.encode("utf-8")).hexdigest()[:8], 16)
     start = (digest + seed_idx) % len(pool)
     for offset in range(len(pool)):
-        tpl_tokens, punct, fr_tpl = pool[(start + offset) % len(pool)]
+        tpl_tokens, punct, en_tpl = pool[(start + offset) % len(pool)]
         tokens = [hanzi if t == "{w}" else t for t in tpl_tokens]
         if len(tokens) >= 3 and len(tokens) == len(set(tokens)) and hanzi in tokens:
             zh = "".join(tokens) + punct
-            fr = fr_tpl.format(fr=gloss)
-            return zh, fr, tokens
+            en = en_tpl.format(en=gloss)
+            return zh, en, tokens
 
     for tokens, punct in [
         (["今天", "学习", hanzi, "这个", "词"], "。"),
@@ -1254,40 +1232,32 @@ def generate_natural_example(
         (["我们", "认识", hanzi], "。"),
     ]:
         if len(tokens) == len(set(tokens)) and hanzi in tokens:
-            return "".join(tokens) + punct, f"Exercez-vous aujourd'hui avec : {gloss}.", tokens
-    raise RuntimeError(f"Impossible de générer un exemple pour {hanzi}")
-
-
-OFFICIAL_TAG_RE = re.compile(r"^o([1-6])$")
+            return "".join(tokens) + punct, f"Practice this word today: {gloss}.", tokens
+    raise RuntimeError(f"Unable to generate example for {hanzi}")
 
 
 def resolve_word_metadata(
     level: int,
     entry: dict[str, Any],
-    cfdict_by_pair: dict[tuple[str, str], str],
-    cfdict_toneless: dict[tuple[str, str], str],
-    missing_french: list[tuple[int, str, str]],
+    missing_english: list[tuple[int, str, list[str]]],
 ) -> tuple[str, str, str]:
-    """Résout (pinyin_tonal, norm_num_py, french) de manière 100 % exacte sans nom de famille."""
+    """Resolves authoritative (tonal_pinyin, norm_num_py, english) without surnames or slang."""
     hanzi = entry["s"]
-    pinyin_val, norm_num_py, trad = select_best_form(entry, cfdict_by_pair)
-    toneless_py = re.sub(r"[1-5]", "", norm_num_py)
+    pinyin_val, norm_num_py, form_meanings = select_best_form(entry)
 
-    french = FRENCH_OVERRIDES.get(hanzi) or FRENCH_FALLBACK.get(hanzi)
-    if not french:
-        french = (
-            cfdict_by_pair.get((hanzi, norm_num_py))
-            or cfdict_by_pair.get((hanzi.rstrip("儿"), norm_num_py))
-            or (cfdict_by_pair.get((trad, norm_num_py)) if trad else None)
-            or cfdict_toneless.get((hanzi, toneless_py))
-            or (cfdict_toneless.get((trad, toneless_py)) if trad else None)
-        )
-    if not french:
-        forms = entry.get("f", [])
-        eng = ", ".join(forms[0].get("m", [])[:2]) if forms else ""
-        missing_french.append((level, hanzi, eng))
-        french = f"Terme HSK {level} ({hanzi})"
-    return pinyin_val, norm_num_py, french
+    english = ENGLISH_OVERRIDES.get(hanzi) or ENGLISH_FALLBACK.get(hanzi)
+    if not english:
+        english = clean_form_glosses(hanzi, form_meanings)
+    if not english:
+        for alt_form in entry.get("f", []):
+            alt_m = clean_form_glosses(hanzi, alt_form.get("m", []))
+            if alt_m:
+                english = alt_m
+                break
+    if not english:
+        missing_english.append((level, hanzi, form_meanings))
+        english = f"HSK {level} term ({hanzi})"
+    return pinyin_val, norm_num_py, english
 
 
 def build_word_dict(
@@ -1298,78 +1268,15 @@ def build_word_dict(
     entry: dict[str, Any],
     resolved_meta: dict[str, tuple[str, str, str]],
     word_to_pinyin: dict[str, str],
-    existing_words: dict[str, dict[str, Any]],
     token_sentences: dict[str, list[tuple[str, str, list[str]]]],
     word_level_map: dict[str, int],
 ) -> tuple[dict[str, Any], bool]:
     hanzi = entry["s"]
-    pinyin_val, _norm_num_py, french = resolved_meta[hanzi]
-
-    prev_word = existing_words.get(hanzi)
-    if prev_word is not None and hanzi != "屁股":
-        reused_ex = prev_word.get("example", {})
-        toks = reused_ex.get("tokens", [])
-        ex_hz = reused_ex.get("hanzi", "")
-        ex_fr = reused_ex.get("french", "")
-        body = ex_hz.rstrip("。？！，、；：.,?!")
-        punct = ex_hz[len(body) :] or "。"
-        same_pinyin = norm_tonal_pinyin(prev_word.get("pinyin", "")) == norm_tonal_pinyin(pinyin_val)
-        same_french = prev_word.get("french", "") == french
-        bad_prev_french = bool(SURNAME_RE.search(prev_word.get("french", "")))
-        bad_ex_french = bool(VULGAR_OR_SLANG_RE.search(ex_fr)) or ("terme hsk" in ex_fr.lower())
-        if (
-            same_pinyin
-            and same_french
-            and not bad_prev_french
-            and not bad_ex_french
-            and isinstance(toks, list)
-            and len(toks) >= 3
-            and len(toks) == len(set(toks))
-            and hanzi in toks
-            and "".join(toks) == body
-            and "，" not in body
-        ):
-            updated_ex = {
-                "hanzi": ex_hz,
-                "pinyin": tokens_to_pinyin_sentence(toks, punct, word_to_pinyin),
-                "french": ex_fr,
-                "tokens": toks,
-            }
-            w_id = f"hsk{level}_{word_num:0{id_width}d}"
-            return (
-                {
-                    "id": w_id,
-                    "lessonId": lesson_id,
-                    "hanzi": hanzi,
-                    "pinyin": pinyin_val,
-                    "french": french,
-                    "example": updated_ex,
-                },
-                False,
-            )
-
-    if hanzi == "屁股":
-        hc_toks = ["小", "孩子", "摔", "到", "了", "屁股"]
-        return (
-            {
-                "id": f"hsk{level}_{word_num:0{id_width}d}",
-                "lessonId": lesson_id,
-                "hanzi": hanzi,
-                "pinyin": pinyin_val,
-                "french": french,
-                "example": {
-                    "hanzi": "".join(hc_toks) + "。",
-                    "pinyin": tokens_to_pinyin_sentence(hc_toks, "。", word_to_pinyin),
-                    "french": "Le petit enfant est tombé sur les fesses.",
-                    "tokens": hc_toks,
-                },
-            },
-            False,
-        )
+    pinyin_val, _norm_num_py, english = resolved_meta[hanzi]
 
     best_tatoeba = None
     best_score = -10_000.0
-    for cmn_text, fra_text, tokens in token_sentences.get(hanzi, []):
+    for cmn_text, eng_text, tokens in token_sentences.get(hanzi, []):
         known_count = sum(1 for t in tokens if word_level_map.get(t, 99) <= level)
         max_tok_lv = max(word_level_map.get(t, 7) for t in tokens)
         ratio = known_count / len(tokens)
@@ -1381,16 +1288,16 @@ def build_word_dict(
         )
         if score > best_score:
             best_score = score
-            best_tatoeba = (cmn_text, fra_text, tokens)
+            best_tatoeba = (cmn_text, eng_text, tokens)
 
     tatoeba_used = False
     if best_tatoeba is not None and best_score >= 30.0:
-        ex_hanzi, ex_french, ex_tokens = best_tatoeba
+        ex_hanzi, ex_english, ex_tokens = best_tatoeba
         tatoeba_used = True
     else:
-        ex_hanzi, ex_french, ex_tokens = generate_natural_example(
+        ex_hanzi, ex_english, ex_tokens = generate_natural_example(
             hanzi=hanzi,
-            french=french,
+            english=english,
             pos_tags=entry.get("p", []),
             seed_idx=word_num,
         )
@@ -1405,11 +1312,11 @@ def build_word_dict(
             "lessonId": lesson_id,
             "hanzi": hanzi,
             "pinyin": pinyin_val,
-            "french": french,
+            "english": english,
             "example": {
                 "hanzi": ex_hanzi,
                 "pinyin": ex_pinyin,
-                "french": ex_french,
+                "english": ex_english,
                 "tokens": ex_tokens,
             },
         },
@@ -1420,10 +1327,7 @@ def build_word_dict(
 def load_hanban_2012_levels(
     complete_by_hanzi: dict[str, dict[str, Any]],
 ) -> tuple[dict[str, int], dict[int, list[dict[str, Any]]], dict[str, dict[str, Any]]]:
-    """
-    Charge les 6 listes officielles Hanban HSK 2.0 (2012) sauvegardées dans tools/data/hsk2012_l1..l6.txt
-    et associe chaque mot à son entrée complete.min.json (ou synthétise depuis le TSV pour les 51 absents).
-    """
+    """Loads official Hanban HSK 2.0 (2012) wordlists from tools/data/hsk2012_l1..l6.txt."""
     word_level_map: dict[str, int] = {}
     entries_by_level: dict[int, list[dict[str, Any]]] = {lv: [] for lv in range(1, 7)}
     entry_by_hanzi: dict[str, dict[str, Any]] = {}
@@ -1431,7 +1335,7 @@ def load_hanban_2012_levels(
     for lv in range(1, 7):
         path = DATA_DIR / f"hsk2012_l{lv}.txt"
         if not path.exists():
-            raise FileNotFoundError(f"Liste officielle Hanban 2012 introuvable : {path}")
+            raise FileNotFoundError(f"Official Hanban 2012 list not found: {path}")
         for raw_line in path.read_text(encoding="utf-8").splitlines():
             clean = raw_line.lstrip("\ufeff").strip()
             if not clean or clean.startswith("#"):
@@ -1478,7 +1382,6 @@ def write_curated_catalog(
     entry_by_hanzi: dict[str, dict[str, Any]],
     resolved_meta: dict[str, tuple[str, str, str]],
     word_to_pinyin: dict[str, str],
-    existing_words: dict[str, dict[str, Any]],
     token_sentences: dict[str, list[tuple[str, str, list[str]]]],
     word_level_map: dict[str, int],
 ) -> None:
@@ -1492,17 +1395,18 @@ def write_curated_catalog(
     assert len(curated_words) == len(official_set), (
         f"HSK {level} curated count {len(curated_words)} != official {len(official_set)}"
     )
-    assert len(set(curated_words)) == len(official_set), f"Doublon dans HSK{level}_CURATED_UNITS"
+    assert len(set(curated_words)) == len(official_set), f"Duplicate in HSK{level}_CURATED_UNITS"
     assert set(curated_words) == official_set, (
-        f"Écart HSK {level} curated vs officiel : "
-        f"manquants={official_set - set(curated_words)}, "
-        f"en trop={set(curated_words) - official_set}"
+        f"HSK {level} mismatch vs official: "
+        f"missing={official_set - set(curated_words)}, "
+        f"extra={set(curated_words) - official_set}"
     )
 
     units_out: list[dict[str, Any]] = []
     words_out: list[dict[str, Any]] = []
     l_order = 1
     w_num = 1
+    tatoeba_hits = 0
     for u_idx, (u_title, u_desc, lesson_specs) in enumerate(curated_units, start=1):
         u_id = f"hsk{level}_u{u_idx}"
         u_lessons: list[dict[str, Any]] = []
@@ -1515,7 +1419,7 @@ def write_curated_catalog(
             })
             l_order += 1
             for hz in lesson_hanzi_list:
-                word_dict, _tat_used = build_word_dict(
+                word_dict, tat_used = build_word_dict(
                     level=level,
                     word_num=w_num,
                     id_width=3,
@@ -1523,10 +1427,11 @@ def write_curated_catalog(
                     entry=entry_by_hanzi[hz],
                     resolved_meta=resolved_meta,
                     word_to_pinyin=word_to_pinyin,
-                    existing_words=existing_words,
                     token_sentences=token_sentences,
                     word_level_map=word_level_map,
                 )
+                if tat_used:
+                    tatoeba_hits += 1
                 words_out.append(word_dict)
                 w_num += 1
         units_out.append({
@@ -1548,16 +1453,15 @@ def write_curated_catalog(
         encoding="utf-8",
     )
     print(
-        f"HSK {level} (v{catalog_obj['catalogVersion']}) : "
-        f"{len(units_out)} unités, {l_order - 1} leçons, {len(words_out)} mots"
+        f"HSK {level} (v{catalog_obj['catalogVersion']}): "
+        f"{len(units_out)} units, {l_order - 1} quizzes, {len(words_out)} words, {tatoeba_hits} Tatoeba"
     )
 
 
 def main() -> int:
     hsk_path = download_cached(HSK_URL, "complete.min.json")
-    cfdict_path = download_cached(CFDICT_URL, "cfdict.u8")
     cmn_path = download_cached(TATOEBA_CMN_URL, "cmn_sentences.tsv.bz2")
-    fra_path = download_cached(TATOEBA_FRA_URL, "fra_sentences.tsv.bz2")
+    eng_path = download_cached(TATOEBA_ENG_URL, "eng_sentences.tsv.bz2")
     links_path = download_cached(TATOEBA_LINKS_URL, "links.tar.bz2")
 
     hsk_entries: list[dict[str, Any]] = json.loads(hsk_path.read_text(encoding="utf-8"))
@@ -1565,29 +1469,22 @@ def main() -> int:
     for entry in hsk_entries:
         complete_by_hanzi.setdefault(entry["s"], entry)
 
-    cfdict_by_pair, cfdict_toneless = load_cfdict(cfdict_path)
-    tatoeba_pairs = load_tatoeba_pairs(cmn_path, fra_path, links_path)
+    tatoeba_pairs = load_tatoeba_pairs(cmn_path, eng_path, links_path)
 
-    # Capturer uniquement les versions et anciennes entrées (pour réutiliser les phrases déjà conformes)
     existing_versions: dict[int, int] = {}
-    existing_words: dict[str, dict[str, Any]] = {}
     for lv in range(1, 7):
         cat_path = CATALOG_DIR / f"hsk{lv}.json"
         if cat_path.exists():
             cat_data = json.loads(cat_path.read_text(encoding="utf-8"))
             existing_versions[lv] = int(cat_data.get("catalogVersion", 1))
-            for w in cat_data.get("words", []):
-                existing_words.setdefault(w["hanzi"], w)
         else:
             existing_versions[lv] = 1
 
-    # Charger la liste officielle Hanban HSK 2.0 (2012) stricte (4 995 mots uniques)
     word_level_map, official_entries_by_level, official_entry_by_hanzi = load_hanban_2012_levels(
         complete_by_hanzi
     )
 
-    # Passe 1 : résoudre les pinyins et traductions autoritaires pour les 4 995 mots officiels
-    missing_french: list[tuple[int, str, str]] = []
+    missing_english: list[tuple[int, str, list[str]]] = []
     resolved_meta: dict[str, tuple[str, str, str]] = {}
     word_to_pinyin: dict[str, str] = {
         "小明": "Xiǎomíng",
@@ -1601,14 +1498,13 @@ def main() -> int:
     for lv in range(1, 7):
         for entry in official_entries_by_level[lv]:
             hz = entry["s"]
-            meta = resolve_word_metadata(lv, entry, cfdict_by_pair, cfdict_toneless, missing_french)
+            meta = resolve_word_metadata(lv, entry, missing_english)
             resolved_meta[hz] = meta
             word_to_pinyin[hz] = meta[0]
 
-    # Pré-indexer les phrases Tatoeba par token
-    print("Indexation des phrases Tatoeba...")
+    print("Indexing Tatoeba Chinese-English sentences...")
     token_sentences: dict[str, list[tuple[str, str, list[str]]]] = defaultdict(list)
-    for cmn_text, fra_text in tatoeba_pairs:
+    for cmn_text, eng_text in tatoeba_pairs:
         body = cmn_text.rstrip(TRAILING_PUNCT)
         tokens = jieba.lcut(body)
         if not (3 <= len(tokens) <= 9):
@@ -1619,9 +1515,8 @@ def main() -> int:
             continue
         for tok in tokens:
             if tok in word_level_map and len(token_sentences[tok]) < 40:
-                token_sentences[tok].append((cmn_text, fra_text, tokens))
+                token_sentences[tok].append((cmn_text, eng_text, tokens))
 
-    # --- HSK 1 (150) & HSK 2 (151) : progressions curatées ---
     write_curated_catalog(
         level=1,
         curated_units=HSK1_CURATED_UNITS,
@@ -1630,7 +1525,6 @@ def main() -> int:
         entry_by_hanzi=official_entry_by_hanzi,
         resolved_meta=resolved_meta,
         word_to_pinyin=word_to_pinyin,
-        existing_words=existing_words,
         token_sentences=token_sentences,
         word_level_map=word_level_map,
     )
@@ -1642,12 +1536,10 @@ def main() -> int:
         entry_by_hanzi=official_entry_by_hanzi,
         resolved_meta=resolved_meta,
         word_to_pinyin=word_to_pinyin,
-        existing_words=existing_words,
         token_sentences=token_sentences,
         word_level_map=word_level_map,
     )
 
-    # --- HSK 3 à HSK 6 : 100 % officiel Hanban 2012 avec tri incrémental et IDs propres ---
     for level in range(3, 7):
         candidates = list(official_entries_by_level[level])
         candidates.sort(
@@ -1692,7 +1584,7 @@ def main() -> int:
                 u_lessons.append({
                     "id": l_id,
                     "orderIndex": l_order,
-                    "title": f"Leçon {l_order} — {u_title_short}",
+                    "title": f"Quiz {l_order} — {u_title_short}",
                 })
 
                 for entry in chunk:
@@ -1704,7 +1596,6 @@ def main() -> int:
                         entry=entry,
                         resolved_meta=resolved_meta,
                         word_to_pinyin=word_to_pinyin,
-                        existing_words=existing_words,
                         token_sentences=token_sentences,
                         word_level_map=word_level_map,
                     )
@@ -1719,7 +1610,7 @@ def main() -> int:
                 all_units.append({
                     "id": u_id,
                     "orderIndex": u_idx,
-                    "title": f"Unité {u_idx} — {u_title_short}",
+                    "title": f"Unit {u_idx} — {u_title_short}",
                     "description": u_desc,
                     "lessons": u_lessons,
                 })
@@ -1736,18 +1627,16 @@ def main() -> int:
         )
         total_lessons = sum(len(u["lessons"]) for u in all_units)
         print(
-            f"HSK {level} (v{updated_catalog['catalogVersion']}) : "
-            f"{len(all_units)} unités, {total_lessons} leçons, {len(all_words)} mots"
+            f"HSK {level} (v{updated_catalog['catalogVersion']}): "
+            f"{len(all_units)} units, {total_lessons} quizzes, {len(all_words)} words, {tatoeba_hits} Tatoeba"
         )
 
-    if missing_french:
-        print(f"\nATTENTION : {len(missing_french)} mots sans traduction CFDICT/fallback :")
-        for lv, hz, eng in missing_french[:40]:
-            print(f"  HSK {lv}: {hz} -> {eng}")
-        if len(missing_french) > 40:
-            print(f"  ... et {len(missing_french) - 40} autres")
-        (CACHE_DIR / "missing_french.json").write_text(
-            json.dumps(missing_french, ensure_ascii=False, indent=2),
+    if missing_english:
+        print(f"\nWARNING: {len(missing_english)} word(s) fell back to placeholder English:")
+        for lv, hz, raw_m in missing_english[:40]:
+            print(f"  HSK {lv}: {hz} -> {raw_m}")
+        (CACHE_DIR / "missing_english.json").write_text(
+            json.dumps(missing_english, ensure_ascii=False, indent=2),
             encoding="utf-8",
         )
 

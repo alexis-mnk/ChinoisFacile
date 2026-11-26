@@ -17,9 +17,9 @@ data class WordEntity(
     val hskLevel: Int = 1,
     val hanzi: String,
     val pinyin: String,
-    val french: String,
+    val english: String,
     val exampleHanzi: String,
     val examplePinyin: String,
-    val exampleFrench: String,
+    val exampleEnglish: String,
     val exampleTokensJson: String,
 )

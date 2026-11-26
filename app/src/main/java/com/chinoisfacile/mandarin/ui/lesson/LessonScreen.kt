@@ -52,7 +52,7 @@ fun LessonScreen(
 
     val currentExercise = uiState.currentExercise
     LaunchedEffect(currentExercise?.id, uiState.ttsStatus) {
-        if ((currentExercise is Exercise.AudioToHanzi || currentExercise is Exercise.AudioToFrench) &&
+        if ((currentExercise is Exercise.AudioToHanzi || currentExercise is Exercise.AudioToEnglish) &&
             uiState.ttsStatus == TtsStatus.READY
         ) {
             viewModel.onPlayNormal(currentExercise.word.hanzi)
@@ -174,7 +174,7 @@ fun LessonScreen(
                     ) {
                         val locked = uiState.feedback != null
                         when (currentExercise) {
-                            is Exercise.HanziToFrench -> HanziToFrenchView(
+                            is Exercise.HanziToEnglish -> HanziToEnglishView(
                                 exercise = currentExercise,
                                 selectedOption = uiState.selectedOption,
                                 showPinyin = uiState.showPinyin,
@@ -185,7 +185,7 @@ fun LessonScreen(
                                 onSelectOption = viewModel::onSelectOption,
                             )
 
-                            is Exercise.AudioToFrench -> AudioToFrenchView(
+                            is Exercise.AudioToEnglish -> AudioToEnglishView(
                                 exercise = currentExercise,
                                 selectedOption = uiState.selectedOption,
                                 showPinyin = uiState.showPinyin,
@@ -208,7 +208,7 @@ fun LessonScreen(
                                 onSelectOption = viewModel::onSelectOption,
                             )
 
-                            is Exercise.FrenchToHanzi -> FrenchToHanziView(
+                            is Exercise.EnglishToHanzi -> EnglishToHanziView(
                                 exercise = currentExercise,
                                 selectedOption = uiState.selectedOption,
                                 showPinyin = uiState.showPinyin,

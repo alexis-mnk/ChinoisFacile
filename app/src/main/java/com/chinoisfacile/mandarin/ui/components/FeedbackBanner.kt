@@ -79,7 +79,7 @@ fun FeedbackBanner(
             Spacer(modifier = Modifier.height(8.dp))
 
             Text(
-                text = "${stringResource(R.string.feedback_correct_answer_label)} ${word.hanzi} (${word.pinyin}) — ${word.french}",
+                text = "${stringResource(R.string.feedback_correct_answer_label)} ${word.hanzi} (${word.pinyin}) — ${word.english}",
                 style = MaterialTheme.typography.bodyLarge,
                 fontWeight = FontWeight.SemiBold,
                 color = contentColor,
@@ -88,7 +88,7 @@ fun FeedbackBanner(
             Spacer(modifier = Modifier.height(4.dp))
 
             Text(
-                text = "${stringResource(R.string.feedback_example_label)} ${word.exampleHanzi} (${word.examplePinyin}) • ${word.exampleFrench}",
+                text = "${stringResource(R.string.feedback_example_label)} ${word.exampleHanzi} (${word.examplePinyin}) • ${word.exampleEnglish}",
                 style = MaterialTheme.typography.bodyMedium,
                 color = contentColor,
             )
