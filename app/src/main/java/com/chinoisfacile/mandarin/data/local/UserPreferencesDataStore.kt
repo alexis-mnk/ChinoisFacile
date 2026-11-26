@@ -7,6 +7,7 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.core.stringSetPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.chinoisfacile.mandarin.data.model.LexiconViewMode
 import com.chinoisfacile.mandarin.data.model.ThemeMode
@@ -41,6 +42,12 @@ class UserPreferencesDataStore(context: Context) {
         val raw = prefs[KEY_LEXICON_VIEW_MODE]
         LexiconViewMode.entries.firstOrNull { it.name == raw } ?: LexiconViewMode.GRID
     }
+
+    val completedUnitLessons: Flow<Set<String>> = dataStore.data.map { prefs ->
+        prefs[KEY_COMPLETED_UNIT_LESSONS] ?: emptySet()
+    }
+
+    suspend fun getCompletedUnitLessons(): Set<String> = completedUnitLessons.first()
 
     suspend fun getSeededCatalogVersion(hskLevel: Int): Int {
         val prefs = dataStore.data.first()
@@ -89,6 +96,19 @@ class UserPreferencesDataStore(context: Context) {
         }
     }
 
+    suspend fun markUnitLessonCompleted(unitId: String) {
+        dataStore.edit { prefs ->
+            val current = prefs[KEY_COMPLETED_UNIT_LESSONS] ?: emptySet()
+            prefs[KEY_COMPLETED_UNIT_LESSONS] = current + unitId
+        }
+    }
+
+    suspend fun clearCompletedUnitLessons() {
+        dataStore.edit { prefs ->
+            prefs.remove(KEY_COMPLETED_UNIT_LESSONS)
+        }
+    }
+
     private companion object {
         const val MIN_HSK_LEVEL = 1
         const val MAX_HSK_LEVEL = 6
@@ -99,6 +119,7 @@ class UserPreferencesDataStore(context: Context) {
         val KEY_SELECTED_HSK_LEVEL = intPreferencesKey("selected_hsk_level")
         val KEY_THEME_MODE = stringPreferencesKey("theme_mode")
         val KEY_LEXICON_VIEW_MODE = stringPreferencesKey("lexicon_view_mode")
+        val KEY_COMPLETED_UNIT_LESSONS = stringSetPreferencesKey("completed_unit_lessons")
         val KEY_LEGACY_SEEDED_CATALOG_VERSION = intPreferencesKey("seeded_catalog_version")
 
         fun seededCatalogVersionKey(hskLevel: Int): Preferences.Key<Int> =

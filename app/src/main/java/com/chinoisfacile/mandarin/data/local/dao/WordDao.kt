@@ -22,8 +22,30 @@ interface WordDao {
     @Query("SELECT * FROM words WHERE lessonId = :lessonId ORDER BY id ASC")
     suspend fun getWordsForLesson(lessonId: String): List<WordEntity>
 
+    @Query(
+        """
+        SELECT w.* FROM words w
+        INNER JOIN lessons l ON w.lessonId = l.id
+        WHERE l.unitId = :unitId
+        ORDER BY l.orderIndex ASC, w.id ASC
+        """,
+    )
+    suspend fun getWordsForUnit(unitId: String): List<WordEntity>
+
     @Query("SELECT * FROM words WHERE hskLevel = :hskLevel ORDER BY id ASC")
     suspend fun getWordsByLevel(hskLevel: Int): List<WordEntity>
+
+    @Query("SELECT hanzi FROM words WHERE hskLevel < :hskLevel")
+    suspend fun getHanziBelowLevel(hskLevel: Int): List<String>
+
+    @Query(
+        """
+        SELECT w.hanzi FROM words w
+        INNER JOIN lessons l ON w.lessonId = l.id
+        WHERE w.hskLevel = :hskLevel AND l.orderIndex <= :maxOrderIndex
+        """,
+    )
+    suspend fun getHanziUpToLessonOrder(hskLevel: Int, maxOrderIndex: Int): List<String>
 
     @Query("SELECT * FROM words ORDER BY id ASC")
     suspend fun getAllWords(): List<WordEntity>

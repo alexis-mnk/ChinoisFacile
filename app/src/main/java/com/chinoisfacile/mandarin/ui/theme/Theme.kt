@@ -31,6 +31,11 @@ data class MandarinExtendedColors(
     val pathLocked: Color,
     val neutralContainer: Color,
     val onNeutralContainer: Color,
+    val lessonNode: Color,
+    val onLessonNode: Color,
+    val lessonNodeShadow: Color,
+    val lessonNodeContainer: Color,
+    val onLessonNodeContainer: Color,
 )
 
 private val LightExtendedColors = MandarinExtendedColors(
@@ -53,6 +58,11 @@ private val LightExtendedColors = MandarinExtendedColors(
     pathLocked = LightPathLocked,
     neutralContainer = LightSurfaceVariant,
     onNeutralContainer = LightOnSurfaceVariant,
+    lessonNode = SkyAudio,
+    onLessonNode = Color.White,
+    lessonNodeShadow = SkyAudioShadow,
+    lessonNodeContainer = SkyAudioContainer,
+    onLessonNodeContainer = OnSkyAudioContainer,
 )
 
 private val DarkExtendedColors = MandarinExtendedColors(
@@ -75,6 +85,11 @@ private val DarkExtendedColors = MandarinExtendedColors(
     pathLocked = DarkPathLocked,
     neutralContainer = DarkSurfaceVariant,
     onNeutralContainer = DarkOnSurfaceVariant,
+    lessonNode = DarkSkyAudio,
+    onLessonNode = Color(0xFF002638),
+    lessonNodeShadow = DarkSkyAudioShadow,
+    lessonNodeContainer = DarkSkyAudioContainer,
+    onLessonNodeContainer = DarkOnSkyAudioContainer,
 )
 
 private val LocalExtendedColors = staticCompositionLocalOf { LightExtendedColors }

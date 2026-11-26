@@ -20,6 +20,7 @@ import com.chinoisfacile.mandarin.ui.lesson.LessonViewModel
 import com.chinoisfacile.mandarin.ui.lexicon.LexiconViewModel
 import com.chinoisfacile.mandarin.ui.settings.SettingsViewModel
 import com.chinoisfacile.mandarin.ui.stats.StatsViewModel
+import com.chinoisfacile.mandarin.ui.unitlesson.UnitLessonViewModel
 
 class AppContainer(context: Context) {
 
@@ -113,4 +114,17 @@ class AppContainer(context: Context) {
             ) as T
         }
     }
+
+    fun unitLessonViewModelFactory(unitId: String): ViewModelProvider.Factory =
+        object : ViewModelProvider.Factory {
+            @Suppress("UNCHECKED_CAST")
+            override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                return UnitLessonViewModel(
+                    unitId = unitId,
+                    repository = repository,
+                    audioPlayer = audioPlayer,
+                    soundEffects = soundEffects,
+                ) as T
+            }
+        }
 }

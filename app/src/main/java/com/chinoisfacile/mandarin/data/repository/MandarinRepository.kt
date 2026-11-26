@@ -21,6 +21,8 @@ import com.chinoisfacile.mandarin.data.model.computeMasteryLevel
 import com.chinoisfacile.mandarin.data.model.toDomain
 import com.chinoisfacile.mandarin.data.model.toSummary
 import com.chinoisfacile.mandarin.domain.lesson.WordSessionOutcome
+import com.chinoisfacile.mandarin.domain.progression.UnitLessonQuizGroup
+import com.chinoisfacile.mandarin.domain.progression.UnitProgressionResolver
 import com.chinoisfacile.mandarin.domain.srs.Sm2Scheduler
 import com.chinoisfacile.mandarin.domain.srs.Sm2State
 import com.chinoisfacile.mandarin.domain.srs.StreakCalculator
@@ -41,6 +43,16 @@ data class SessionPayload(
     val lessonTitle: String?,
     val targetWords: List<VocabWord>,
     val distractorPool: List<VocabWord>,
+    val knownTokens: Set<String> = emptySet(),
+)
+
+data class UnitLessonPayload(
+    val unitId: String,
+    val hskLevel: Int,
+    val unitTitle: String,
+    val unitDescription: String,
+    val isLessonCompleted: Boolean,
+    val quizGroups: List<UnitLessonQuizGroup>,
 )
 
 class MandarinRepository(
@@ -94,52 +106,64 @@ class MandarinRepository(
     fun observeHomeData(
         hskLevel: Int,
         todayEpochDay: Long = LocalDate.now().toEpochDay(),
-    ): Flow<HomeData> = combine(
-        lessonDao.observeUnitsByLevel(hskLevel),
-        lessonDao.observeLessonsByLevel(hskLevel),
-        wordDao.observeWordsByLevel(hskLevel),
-        progressDao.observeAllProgress(),
-        statsDao.observeStats(),
-    ) { units, lessons, words, progressList, statsEntity ->
-        val wordsByLesson = words.groupBy { it.lessonId }
-        val levelWordIds = words.mapTo(HashSet()) { it.id }
-        val lessonsByUnit = lessons.groupBy { it.unitId }
+    ): Flow<HomeData> {
+        val roomHomeFlow = combine(
+            lessonDao.observeUnitsByLevel(hskLevel),
+            lessonDao.observeLessonsByLevel(hskLevel),
+            wordDao.observeWordsByLevel(hskLevel),
+            progressDao.observeAllProgress(),
+            statsDao.observeStats(),
+        ) { units, lessons, words, progressList, statsEntity ->
+            val wordsByLesson = words.groupBy { it.lessonId }
+            val levelWordIds = words.mapTo(HashSet()) { it.id }
+            val lessonsByUnit = lessons.groupBy { it.unitId }
 
-        val domainUnits = units.map { unit ->
-            val unitLessons = lessonsByUnit[unit.id]
-                .orEmpty()
-                .sortedBy { it.orderIndex }
-                .map { lesson ->
-                    val lessonWords = wordsByLesson[lesson.id].orEmpty()
-                    lesson.toSummary(
-                        wordCount = lessonWords.size,
-                        previewHanzi = lessonWords.map { it.hanzi },
-                    )
-                }
-            LearningUnit(
-                id = unit.id,
-                hskLevel = unit.hskLevel,
-                orderIndex = unit.orderIndex,
-                title = unit.title,
-                description = unit.description,
-                lessons = unitLessons,
+            val domainUnits = units.map { unit ->
+                val unitLessons = lessonsByUnit[unit.id]
+                    .orEmpty()
+                    .sortedBy { it.orderIndex }
+                    .mapIndexed { idx, lesson ->
+                        val lessonWords = wordsByLesson[lesson.id].orEmpty()
+                        lesson.toSummary(
+                            wordCount = lessonWords.size,
+                            previewHanzi = lessonWords.map { it.hanzi },
+                            isFirstInUnit = idx == 0,
+                        )
+                    }
+                LearningUnit(
+                    id = unit.id,
+                    hskLevel = unit.hskLevel,
+                    orderIndex = unit.orderIndex,
+                    title = unit.title,
+                    description = unit.description,
+                    lessons = unitLessons,
+                )
+            }
+
+            val levelProgress = progressList.filter { it.wordId in levelWordIds }
+            val masteredCount = levelProgress.count {
+                Sm2Scheduler.isMastered(it.repetitions, it.intervalDays)
+            }
+            val dueCount = levelProgress.count { it.nextReviewEpochDay <= todayEpochDay }
+
+            HomeData(
+                hskLevel = hskLevel,
+                units = domainUnits,
+                stats = statsEntity?.toDomain() ?: UserStats(),
+                masteredCount = masteredCount,
+                totalWordsCount = words.size,
+                dueWordsCount = dueCount,
             )
         }
 
-        val levelProgress = progressList.filter { it.wordId in levelWordIds }
-        val masteredCount = levelProgress.count {
-            Sm2Scheduler.isMastered(it.repetitions, it.intervalDays)
+        return combine(roomHomeFlow, preferences.completedUnitLessons) { homeData, completedUnitLessons ->
+            homeData.copy(
+                units = UnitProgressionResolver.resolveUnits(
+                    units = homeData.units,
+                    completedUnitLessonIds = completedUnitLessons,
+                ),
+            )
         }
-        val dueCount = levelProgress.count { it.nextReviewEpochDay <= todayEpochDay }
-
-        HomeData(
-            hskLevel = hskLevel,
-            units = domainUnits,
-            stats = statsEntity?.toDomain() ?: UserStats(),
-            masteredCount = masteredCount,
-            totalWordsCount = words.size,
-            dueWordsCount = dueCount,
-        )
     }
 
     fun observeLexiconWords(hskLevel: Int): Flow<List<WordWithProgress>> = combine(
@@ -224,11 +248,65 @@ class MandarinRepository(
         val targetWords = wordDao.getWordsForLesson(lessonId).map { it.toDomain() }
         val level = lesson?.hskLevel ?: targetWords.firstOrNull()?.hskLevel ?: 1
         val levelPool = wordDao.getWordsByLevel(level).map { it.toDomain() }
+        val knownBelow = wordDao.getHanziBelowLevel(level)
+        val knownInLevel = if (lesson != null) {
+            wordDao.getHanziUpToLessonOrder(level, lesson.orderIndex)
+        } else {
+            emptyList()
+        }
+        val knownTokens = buildSet {
+            addAll(knownBelow)
+            addAll(knownInLevel)
+            targetWords.forEach { add(it.hanzi) }
+        }
         return SessionPayload(
-            lessonTitle = lesson?.title,
+            lessonTitle = lesson?.title?.let(UnitProgressionResolver::formatQuizTitle),
             targetWords = targetWords,
             distractorPool = levelPool,
+            knownTokens = knownTokens,
         )
+    }
+
+    suspend fun getUnitLessonPayload(unitId: String): UnitLessonPayload? {
+        ensureSeeded()
+        val unit = lessonDao.getUnitById(unitId) ?: return null
+        val unitLessons = lessonDao.getLessonsByUnit(unitId).sortedBy { it.orderIndex }
+        val wordsByLesson = wordDao.getWordsForUnit(unitId)
+            .map { it.toDomain() }
+            .groupBy { it.lessonId }
+        val completedUnitLessons = preferences.getCompletedUnitLessons()
+        val isLessonCompleted = unitId in completedUnitLessons
+
+        val quizGroups = unitLessons.mapIndexed { index, lesson ->
+            UnitLessonQuizGroup(
+                lessonId = lesson.id,
+                orderIndex = lesson.orderIndex,
+                shortLabel = UnitProgressionResolver.formatQuizShortLabel(lesson.orderIndex),
+                title = UnitProgressionResolver.formatQuizTitle(lesson.title),
+                isUnlocked = lesson.isUnlocked || lesson.isCompleted || (index == 0 && isLessonCompleted),
+                isCompleted = lesson.isCompleted,
+                words = wordsByLesson[lesson.id].orEmpty(),
+            )
+        }
+
+        return UnitLessonPayload(
+            unitId = unit.id,
+            hskLevel = unit.hskLevel,
+            unitTitle = unit.title,
+            unitDescription = unit.description,
+            isLessonCompleted = isLessonCompleted,
+            quizGroups = quizGroups,
+        )
+    }
+
+    suspend fun completeUnitLesson(unitId: String): String? {
+        ensureSeeded()
+        preferences.markUnitLessonCompleted(unitId)
+        val firstQuiz = lessonDao.getLessonsByUnit(unitId).minByOrNull { it.orderIndex }
+        if (firstQuiz != null && !firstQuiz.isUnlocked) {
+            lessonDao.unlockLesson(firstQuiz.id)
+        }
+        return firstQuiz?.id
     }
 
     suspend fun getQuickReviewPayload(
@@ -252,10 +330,18 @@ class MandarinRepository(
             .distinctBy { it.id }
             .take(QUICK_REVIEW_TARGET_WORDS)
 
+        val knownBelow = wordDao.getHanziBelowLevel(hskLevel)
+        val knownTokens = buildSet {
+            addAll(knownBelow)
+            unlockedWords.forEach { add(it.hanzi) }
+            combined.forEach { add(it.hanzi) }
+        }
+
         return SessionPayload(
             lessonTitle = null,
             targetWords = combined,
             distractorPool = levelWords,
+            knownTokens = knownTokens,
         )
     }
 
@@ -268,6 +354,7 @@ class MandarinRepository(
     ): SessionCompletionSummary {
         ensureSeeded()
         val allWordsById = wordDao.getAllWords().associateBy { it.id }
+        val completedUnitLessons = preferences.getCompletedUnitLessons()
 
         return database.withTransaction {
             val wordIds = outcomes.map { it.wordId }.distinct()
@@ -337,17 +424,30 @@ class MandarinRepository(
             )
 
             var unlockedNextTitle: String? = null
+            var unlockedNextUnitLessonTitle: String? = null
             if (lessonId != null) {
                 val completedLesson = lessonDao.getLessonById(lessonId)
+                val wasAlreadyCompleted = completedLesson?.isCompleted == true
                 lessonDao.markLessonCompleted(lessonId = lessonId, score = accuracyPercent)
                 if (completedLesson != null) {
                     val nextLesson = lessonDao.getNextLessonAfterOrder(
                         hskLevel = completedLesson.hskLevel,
                         currentOrder = completedLesson.orderIndex,
                     )
-                    if (nextLesson != null && !nextLesson.isUnlocked) {
-                        lessonDao.unlockLesson(nextLesson.id)
-                        unlockedNextTitle = nextLesson.title
+                    if (nextLesson != null) {
+                        if (nextLesson.unitId == completedLesson.unitId) {
+                            if (!nextLesson.isUnlocked) {
+                                lessonDao.unlockLesson(nextLesson.id)
+                                unlockedNextTitle = UnitProgressionResolver.formatQuizTitle(nextLesson.title)
+                            }
+                        } else if (!wasAlreadyCompleted) {
+                            val nextUnitLessons = lessonDao.getLessonsByUnit(nextLesson.unitId)
+                            val nextUnitAlreadyAccessible = nextLesson.unitId in completedUnitLessons ||
+                                nextUnitLessons.any { it.isUnlocked || it.isCompleted }
+                            if (!nextUnitAlreadyAccessible) {
+                                unlockedNextUnitLessonTitle = lessonDao.getUnitById(nextLesson.unitId)?.title
+                            }
+                        }
                     }
                 }
             }
@@ -358,6 +458,7 @@ class MandarinRepository(
                 currentStreak = streakResult.currentStreak,
                 unlockedNextLessonTitle = unlockedNextTitle,
                 reviewedWords = reviewSummaries,
+                unlockedNextUnitLessonTitle = unlockedNextUnitLessonTitle,
             )
         }
     }
@@ -369,6 +470,7 @@ class MandarinRepository(
             statsDao.upsertStats(UserStatsEntity())
             lessonDao.resetAllLessonsProgress()
         }
+        preferences.clearCompletedUnitLessons()
     }
 
     companion object {

@@ -7,7 +7,6 @@ import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,12 +16,9 @@ import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.WarningAmber
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -40,6 +36,7 @@ import com.chinoisfacile.mandarin.domain.audio.TtsStatus
 import com.chinoisfacile.mandarin.domain.lesson.Exercise
 import com.chinoisfacile.mandarin.ui.components.FeedbackBanner
 import com.chinoisfacile.mandarin.ui.components.LessonProgressBar
+import com.chinoisfacile.mandarin.ui.components.TtsMissingBanner
 
 @Composable
 fun LessonScreen(
@@ -55,7 +52,9 @@ fun LessonScreen(
 
     val currentExercise = uiState.currentExercise
     LaunchedEffect(currentExercise?.id, uiState.ttsStatus) {
-        if (currentExercise is Exercise.AudioToHanzi && uiState.ttsStatus == TtsStatus.READY) {
+        if ((currentExercise is Exercise.AudioToHanzi || currentExercise is Exercise.AudioToFrench) &&
+            uiState.ttsStatus == TtsStatus.READY
+        ) {
             viewModel.onPlayNormal(currentExercise.word.hanzi)
         }
     }
@@ -128,6 +127,7 @@ fun LessonScreen(
             uiState.summary != null -> {
                 LessonSummaryView(
                     summary = uiState.summary!!,
+                    isQuizSession = uiState.sessionTitle != null,
                     onDone = onExitSession,
                 )
             }
@@ -185,6 +185,18 @@ fun LessonScreen(
                                 onSelectOption = viewModel::onSelectOption,
                             )
 
+                            is Exercise.AudioToFrench -> AudioToFrenchView(
+                                exercise = currentExercise,
+                                selectedOption = uiState.selectedOption,
+                                showPinyin = uiState.showPinyin,
+                                audioEnabled = audioReady,
+                                locked = locked,
+                                onTogglePinyin = viewModel::onTogglePinyin,
+                                onPlayNormal = { viewModel.onPlayNormal(currentExercise.word.hanzi) },
+                                onPlaySlow = { viewModel.onPlaySlow(currentExercise.word.hanzi) },
+                                onSelectOption = viewModel::onSelectOption,
+                            )
+
                             is Exercise.AudioToHanzi -> AudioToHanziView(
                                 exercise = currentExercise,
                                 selectedOption = uiState.selectedOption,
@@ -196,10 +208,21 @@ fun LessonScreen(
                                 onSelectOption = viewModel::onSelectOption,
                             )
 
+                            is Exercise.FrenchToHanzi -> FrenchToHanziView(
+                                exercise = currentExercise,
+                                selectedOption = uiState.selectedOption,
+                                showPinyin = uiState.showPinyin,
+                                locked = locked,
+                                onTogglePinyin = viewModel::onTogglePinyin,
+                                onSelectOption = viewModel::onSelectOption,
+                            )
+
                             is Exercise.SentenceOrder -> SentenceOrderView(
                                 exercise = currentExercise,
                                 selectedTokens = uiState.selectedTokens,
+                                showPinyin = uiState.showPinyin,
                                 locked = locked,
+                                onTogglePinyin = viewModel::onTogglePinyin,
                                 onToggleToken = viewModel::onToggleSentenceToken,
                                 onClearTokens = viewModel::onClearSentenceTokens,
                             )
@@ -237,43 +260,6 @@ fun LessonScreen(
                                 onContinue = viewModel::onContinue,
                             )
                         }
-                    }
-                }
-            }
-        }
-    }
-}
-
-@Composable
-private fun TtsMissingBanner(
-    showFallbackButton: Boolean,
-    onShowPinyin: () -> Unit,
-    modifier: Modifier = Modifier,
-) {
-    Surface(
-        modifier = modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(12.dp),
-        color = MaterialTheme.colorScheme.tertiaryContainer,
-    ) {
-        Row(
-            modifier = Modifier.padding(12.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(10.dp),
-        ) {
-            Icon(
-                imageVector = Icons.Default.WarningAmber,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.onTertiaryContainer,
-            )
-            Column(modifier = Modifier.weight(1f)) {
-                Text(
-                    text = stringResource(R.string.tts_missing_warning),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onTertiaryContainer,
-                )
-                if (showFallbackButton) {
-                    TextButton(onClick = onShowPinyin) {
-                        Text(text = stringResource(R.string.tts_show_pinyin_fallback))
                     }
                 }
             }

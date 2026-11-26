@@ -12,11 +12,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.rounded.MenuBook
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Replay
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
@@ -40,9 +42,14 @@ fun LessonPreviewSheet(
     lesson: LessonSummary,
     onStartLesson: (String) -> Unit,
     onDismiss: () -> Unit,
+    unitLessonUnlocked: Boolean = false,
+    onOpenUnitLesson: (() -> Unit)? = null,
 ) {
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val extended = MandarinTheme.extendedColors
+    val lockedMessage = stringResource(
+        if (lesson.isFirstInUnit) R.string.home_quiz_first_locked else R.string.home_lesson_status_locked,
+    )
 
     val (badgeBg, badgeFg, statusText) = when {
         lesson.isCompleted -> Triple(
@@ -58,7 +65,7 @@ fun LessonPreviewSheet(
         else -> Triple(
             extended.neutralContainer,
             extended.onNeutralContainer,
-            stringResource(R.string.home_lesson_status_locked),
+            lockedMessage,
         )
     }
 
@@ -162,6 +169,51 @@ fun LessonPreviewSheet(
                         modifier = Modifier.padding(vertical = 4.dp),
                     )
                 }
+            } else if (lesson.isFirstInUnit && unitLessonUnlocked && onOpenUnitLesson != null) {
+                Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                    Surface(
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(14.dp),
+                        color = extended.lessonNodeContainer,
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(14.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(10.dp),
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Lock,
+                                contentDescription = null,
+                                tint = extended.onLessonNodeContainer,
+                            )
+                            Text(
+                                text = lockedMessage,
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = extended.onLessonNodeContainer,
+                            )
+                        }
+                    }
+
+                    FilledTonalButton(
+                        onClick = {
+                            onDismiss()
+                            onOpenUnitLesson()
+                        },
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(14.dp),
+                    ) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Rounded.MenuBook,
+                            contentDescription = null,
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(
+                            text = stringResource(R.string.home_open_unit_lesson),
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier.padding(vertical = 4.dp),
+                        )
+                    }
+                }
             } else {
                 Surface(
                     modifier = Modifier.fillMaxWidth(),
@@ -179,7 +231,7 @@ fun LessonPreviewSheet(
                             tint = extended.neutral,
                         )
                         Text(
-                            text = stringResource(R.string.home_lesson_status_locked),
+                            text = lockedMessage,
                             style = MaterialTheme.typography.bodyMedium,
                             color = extended.onNeutralContainer,
                         )

@@ -104,6 +104,7 @@ data class LessonSummary(
     val completedCount: Int,
     val wordCount: Int,
     val previewHanzi: List<String> = emptyList(),
+    val isFirstInUnit: Boolean = false,
 )
 
 data class LearningUnit(
@@ -113,6 +114,9 @@ data class LearningUnit(
     val title: String,
     val description: String,
     val lessons: List<LessonSummary>,
+    val isLessonUnlocked: Boolean = false,
+    val isLessonCompleted: Boolean = false,
+    val totalWordCount: Int = lessons.sumOf { it.wordCount },
 )
 
 data class WordWithProgress(
@@ -146,4 +150,5 @@ data class SessionCompletionSummary(
     val currentStreak: Int,
     val unlockedNextLessonTitle: String?,
     val reviewedWords: List<WordReviewSummary>,
+    val unlockedNextUnitLessonTitle: String? = null,
 )

@@ -57,15 +57,12 @@ class CatalogSeeder(
 
                         val hskLevel = catalog.hskLevel
                         val unitEntities = catalog.units.map { it.toEntity(hskLevel) }
-                        val minOrder = catalog.units
-                            .flatMap { it.lessons }
-                            .minOfOrNull { it.orderIndex } ?: 1
                         val lessonEntities = catalog.units.flatMap { unit ->
                             unit.lessons.map { lesson ->
                                 lesson.toEntity(
                                     unitId = unit.id,
                                     hskLevel = hskLevel,
-                                    unlockedByDefault = lesson.orderIndex == minOrder,
+                                    unlockedByDefault = false,
                                 )
                             }
                         }
@@ -78,7 +75,7 @@ class CatalogSeeder(
                                 val previous = existingLessonsById[lesson.id]
                                 if (previous != null) {
                                     lesson.copy(
-                                        isUnlocked = previous.isUnlocked || (lesson.orderIndex == minOrder),
+                                        isUnlocked = previous.isUnlocked || previous.isCompleted,
                                         isCompleted = previous.isCompleted,
                                         bestScore = previous.bestScore,
                                         completedCount = previous.completedCount,
@@ -97,15 +94,13 @@ class CatalogSeeder(
 
                             val persistedLessons = lessonDao.getLessonsByLevel(hskLevel)
                                 .sortedBy { it.orderIndex }
-                            persistedLessons.firstOrNull()?.let { firstLesson ->
-                                if (!firstLesson.isUnlocked) {
-                                    lessonDao.unlockLesson(firstLesson.id)
-                                }
-                            }
                             for (i in 0 until persistedLessons.lastIndex) {
                                 val current = persistedLessons[i]
                                 val next = persistedLessons[i + 1]
-                                if (current.isCompleted && !next.isUnlocked) {
+                                if (current.isCompleted &&
+                                    current.unitId == next.unitId &&
+                                    !next.isUnlocked
+                                ) {
                                     lessonDao.unlockLesson(next.id)
                                 }
                             }

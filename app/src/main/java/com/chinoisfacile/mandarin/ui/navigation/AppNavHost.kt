@@ -35,17 +35,22 @@ import com.chinoisfacile.mandarin.ui.settings.SettingsScreen
 import com.chinoisfacile.mandarin.ui.settings.SettingsViewModel
 import com.chinoisfacile.mandarin.ui.stats.StatsScreen
 import com.chinoisfacile.mandarin.ui.stats.StatsViewModel
+import com.chinoisfacile.mandarin.ui.unitlesson.UnitLessonScreen
+import com.chinoisfacile.mandarin.ui.unitlesson.UnitLessonViewModel
 
 private object Routes {
     const val HOME = "home"
     const val LEXICON = "lexicon"
     const val STATS = "stats"
     const val SETTINGS = "settings"
+    const val UNIT_ARG = "unitId"
     const val LESSON_ARG = "lessonId"
     const val HSK_LEVEL_ARG = "hskLevel"
+    const val UNIT_LESSON = "unit_lesson/{unitId}"
     const val LESSON = "lesson/{lessonId}"
     const val QUICK_REVIEW = "quick_review/{hskLevel}"
 
+    fun unitLessonRoute(unitId: String): String = "unit_lesson/$unitId"
     fun lessonRoute(lessonId: String): String = "lesson/$lessonId"
     fun quickReviewRoute(hskLevel: Int): String = "quick_review/$hskLevel"
 }
@@ -135,6 +140,9 @@ fun AppNavHost(
                 )
                 HomeScreen(
                     viewModel = viewModel,
+                    onOpenUnitLesson = { unitId ->
+                        navController.navigate(Routes.unitLessonRoute(unitId))
+                    },
                     onStartLesson = { lessonId ->
                         navController.navigate(Routes.lessonRoute(lessonId))
                     },
@@ -166,6 +174,27 @@ fun AppNavHost(
                     factory = container.settingsViewModelFactory(),
                 )
                 SettingsScreen(viewModel = viewModel)
+            }
+
+            composable(
+                route = Routes.UNIT_LESSON,
+                arguments = listOf(
+                    navArgument(Routes.UNIT_ARG) { type = NavType.StringType },
+                ),
+            ) { entry ->
+                val unitId = entry.arguments?.getString(Routes.UNIT_ARG).orEmpty()
+                val viewModel: UnitLessonViewModel = viewModel(
+                    factory = container.unitLessonViewModelFactory(unitId = unitId),
+                )
+                UnitLessonScreen(
+                    viewModel = viewModel,
+                    onBack = { navController.popBackStack() },
+                    onStartQuiz = { lessonId ->
+                        navController.navigate(Routes.lessonRoute(lessonId)) {
+                            popUpTo(Routes.HOME)
+                        }
+                    },
+                )
             }
 
             composable(

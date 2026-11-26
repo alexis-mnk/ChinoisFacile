@@ -20,6 +20,12 @@ interface LessonDao {
     @Query("SELECT * FROM lessons WHERE hskLevel = :hskLevel ORDER BY orderIndex ASC")
     suspend fun getLessonsByLevel(hskLevel: Int): List<LessonEntity>
 
+    @Query("SELECT * FROM units WHERE id = :unitId LIMIT 1")
+    suspend fun getUnitById(unitId: String): UnitEntity?
+
+    @Query("SELECT * FROM lessons WHERE unitId = :unitId ORDER BY orderIndex ASC")
+    suspend fun getLessonsByUnit(unitId: String): List<LessonEntity>
+
     @Query("SELECT * FROM lessons WHERE id = :lessonId LIMIT 1")
     suspend fun getLessonById(lessonId: String): LessonEntity?
 
@@ -94,7 +100,7 @@ interface LessonDao {
         SET isCompleted = 0,
             bestScore = 0,
             completedCount = 0,
-            isUnlocked = CASE WHEN orderIndex = 1 THEN 1 ELSE 0 END
+            isUnlocked = 0
         """,
     )
     suspend fun resetAllLessonsProgress()

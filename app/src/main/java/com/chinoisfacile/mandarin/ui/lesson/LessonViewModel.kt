@@ -79,6 +79,7 @@ class LessonViewModel(
             val exercises = exerciseGenerator.generateSession(
                 targetWords = payload.targetWords,
                 distractorPool = payload.distractorPool,
+                knownTokens = payload.knownTokens,
             )
 
             exerciseQueue.clear()
@@ -147,7 +148,9 @@ class LessonViewModel(
 
         val isCorrect = when (exercise) {
             is Exercise.HanziToFrench -> state.selectedOption == exercise.correctOption
+            is Exercise.AudioToFrench -> state.selectedOption == exercise.correctOption
             is Exercise.AudioToHanzi -> state.selectedOption == exercise.correctOption
+            is Exercise.FrenchToHanzi -> state.selectedOption == exercise.correctOption
             is Exercise.SentenceOrder ->
                 state.selectedTokens.map { it.text } == exercise.expectedTokens
         }
@@ -155,7 +158,9 @@ class LessonViewModel(
         val stats = wordStats.getOrPut(exercise.word.id) { MutableWordStats() }
         if (isCorrect) {
             stats.correctAttempts += 1
-            if (exercise is Exercise.HanziToFrench && !state.showPinyin) {
+            if ((exercise is Exercise.HanziToFrench || exercise is Exercise.FrenchToHanzi) &&
+                !state.showPinyin
+            ) {
                 stats.answeredWithoutPinyin = true
             }
             if (soundEffectsEnabled) {
@@ -215,7 +220,9 @@ class LessonViewModel(
         val retryId = "${exercise.id.substringBefore("_retry_")}_retry_$retryCounter"
         return when (exercise) {
             is Exercise.HanziToFrench -> exercise.copy(id = retryId)
+            is Exercise.AudioToFrench -> exercise.copy(id = retryId)
             is Exercise.AudioToHanzi -> exercise.copy(id = retryId)
+            is Exercise.FrenchToHanzi -> exercise.copy(id = retryId)
             is Exercise.SentenceOrder -> exercise.copy(
                 id = retryId,
                 shuffledChips = exercise.shuffledChips.shuffled(),

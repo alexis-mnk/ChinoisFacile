@@ -5,6 +5,7 @@ import com.chinoisfacile.mandarin.data.model.VocabWord
 data class TokenChip(
     val id: Int,
     val text: String,
+    val pinyin: String = "",
 )
 
 sealed interface Exercise {
@@ -18,10 +19,25 @@ sealed interface Exercise {
         val correctOption: String,
     ) : Exercise
 
+    data class AudioToFrench(
+        override val id: String,
+        override val word: VocabWord,
+        val options: List<String>,
+        val correctOption: String,
+    ) : Exercise
+
     data class AudioToHanzi(
         override val id: String,
         override val word: VocabWord,
         val options: List<String>,
+        val correctOption: String,
+    ) : Exercise
+
+    data class FrenchToHanzi(
+        override val id: String,
+        override val word: VocabWord,
+        val options: List<String>,
+        val optionPinyins: Map<String, String> = emptyMap(),
         val correctOption: String,
     ) : Exercise
 

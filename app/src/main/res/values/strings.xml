@@ -26,11 +26,16 @@
     <string name="home_quick_review_button">Réviser (10 exercices)</string>
 
     <string name="home_lesson_word_count">%1$d mots</string>
-    <string name="home_lesson_status_locked">Terminez la leçon précédente pour débloquer</string>
-    <string name="home_lesson_status_available">Prête à démarrer</string>
-    <string name="home_lesson_status_completed">Terminée • Meilleur score : %1$d %%</string>
+    <string name="home_lesson_status_locked">Terminez le quiz précédent pour débloquer</string>
+    <string name="home_lesson_status_available">Prêt à démarrer</string>
+    <string name="home_lesson_status_completed">Terminé • Meilleur score : %1$d %%</string>
     <string name="home_lesson_start">Commencer</string>
     <string name="home_lesson_replay">Rejouer</string>
+    <string name="home_unit_lesson_node_label">Leçon • %1$d mots</string>
+    <string name="home_unit_lesson_badge">LEÇON</string>
+    <string name="home_unit_lesson_locked">Terminez le dernier quiz de l\'unité précédente pour débloquer cette leçon.</string>
+    <string name="home_quiz_first_locked">Terminez la leçon de l\'unité pour débloquer ce quiz</string>
+    <string name="home_open_unit_lesson">Ouvrir la leçon</string>
     <string name="home_loading">Chargement du parcours…</string>
     <string name="home_updating_catalog">Mise à jour du catalogue HSK…</string>
     <string name="home_node_start_bubble">COMMENCER</string>
@@ -38,21 +43,43 @@
     <string name="home_preview_words_label">Aperçu des mots (%1$d)</string>
     <string name="home_preview_score_badge">%1$d %%</string>
 
-    <!-- Session d'exercices (LessonScreen) -->
+    <!-- Session de quiz (LessonScreen) -->
     <string name="lesson_quick_review_title">Révision rapide</string>
     <string name="lesson_progress_counter">%1$d / %2$d</string>
-    <string name="lesson_close_cd">Quitter la session</string>
-    <string name="lesson_quit_dialog_title">Quitter la session ?</string>
+    <string name="lesson_close_cd">Quitter le quiz</string>
+    <string name="lesson_quit_dialog_title">Quitter le quiz ?</string>
     <string name="lesson_quit_dialog_message">Votre progression sur cette session en cours ne sera pas enregistrée.</string>
     <string name="lesson_quit_confirm">Quitter</string>
     <string name="lesson_quit_cancel">Continuer</string>
-    <string name="lesson_loading">Préparation des exercices…</string>
-    <string name="lesson_error_empty">Impossible de charger les exercices pour cette leçon.</string>
+    <string name="lesson_loading">Préparation du quiz…</string>
+    <string name="lesson_error_empty">Impossible de charger les exercices pour ce quiz.</string>
     <string name="lesson_back_home">Retour au parcours</string>
+
+    <!-- Écran de leçon d'unité (UnitLessonScreen) -->
+    <string name="unit_lesson_back_cd">Retour au parcours</string>
+    <string name="unit_lesson_subtitle">HSK %1$d • %2$d mots</string>
+    <string name="unit_lesson_mode_cards">Cartes</string>
+    <string name="unit_lesson_mode_sheet">Fiche</string>
+    <string name="unit_lesson_filter_all">Tout (%1$d)</string>
+    <string name="unit_lesson_card_progress">Mot %1$d / %2$d</string>
+    <string name="unit_lesson_example_label">Phrase d\'exemple</string>
+    <string name="unit_lesson_prev">Précédent</string>
+    <string name="unit_lesson_next">Suivant</string>
+    <string name="unit_lesson_complete_cta">Terminer la leçon</string>
+    <string name="unit_lesson_complete_short">Valider</string>
+    <string name="unit_lesson_completed_badge">Validée</string>
+    <string name="unit_lesson_completed_banner">Leçon terminée ! Vous êtes prêt pour la pratique.</string>
+    <string name="unit_lesson_launch_quiz">Lancer le Quiz %1$d</string>
+    <string name="unit_lesson_loading">Chargement de la leçon…</string>
+    <string name="unit_lesson_error">Impossible de charger cette leçon d\'unité.</string>
+    <string name="unit_lesson_listen_word_cd">Écouter le mot</string>
+    <string name="unit_lesson_listen_example_cd">Écouter la phrase d\'exemple</string>
 
     <!-- Consignes et contrôles d'exercices -->
     <string name="exercise_hanzi_to_french_prompt">Que signifie ce mot en français ?</string>
+    <string name="exercise_audio_to_french_prompt">Écoutez et choisissez la bonne traduction</string>
     <string name="exercise_audio_to_hanzi_prompt">Écoutez et choisissez le bon caractère</string>
+    <string name="exercise_french_to_hanzi_prompt">Comment dit-on ce mot en chinois ?</string>
     <string name="exercise_sentence_order_prompt">Remettez les mots dans l\'ordre pour traduire :</string>
     <string name="exercise_sentence_placeholder">Touchez les mots ci-dessous pour former la phrase</string>
     <string name="exercise_sentence_clear">Effacer</string>
@@ -79,7 +106,8 @@
     <string name="feedback_retry_notice">Cet exercice reviendra en fin de session pour vous aider à le retenir.</string>
 
     <!-- Écran récapitulatif de fin de session -->
-    <string name="summary_title">Session terminée !</string>
+    <string name="summary_title">Quiz terminé !</string>
+    <string name="summary_quick_review_title">Révision terminée !</string>
     <string name="summary_subtitle">Bravo pour votre régularité, continuez ainsi.</string>
     <string name="summary_accuracy_label">Précision</string>
     <string name="summary_accuracy_value">%1$d %%</string>
@@ -87,7 +115,8 @@
     <string name="summary_xp_value">+%1$d XP</string>
     <string name="summary_streak_label">Série actuelle</string>
     <string name="summary_streak_value">%1$d jour(s)</string>
-    <string name="summary_unlocked_next">Nouvelle leçon débloquée : %1$s</string>
+    <string name="summary_unlocked_next">Nouveau quiz débloqué : %1$s</string>
+    <string name="summary_unlocked_unit_lesson">Nouvelle leçon débloquée : %1$s</string>
     <string name="summary_words_section">Mots pratiqués &amp; prochaine révision (SM-2)</string>
     <string name="summary_next_review_tomorrow">Demain</string>
     <string name="summary_next_review_days">Dans %1$d jours</string>
@@ -156,10 +185,10 @@
     <string name="settings_tts_title">Synthèse vocale Android (TTS)</string>
     <string name="settings_tts_desc">Ouvrir les paramètres système pour installer ou régler la voix chinoise.</string>
     <string name="settings_data_title">Données locales</string>
-    <string name="settings_reset_desc">Remet à zéro les XP, la série, la maîtrise SM-2 et le déblocage des leçons.</string>
+    <string name="settings_reset_desc">Remet à zéro les XP, la série, la maîtrise SM-2 et le déblocage des unités et des quiz.</string>
     <string name="settings_reset_button">Réinitialiser ma progression</string>
     <string name="settings_reset_dialog_title">Réinitialiser toute la progression ?</string>
-    <string name="settings_reset_dialog_message">Cette action effacera définitivement vos XP, votre série quotidienne, l\'historique SM-2 de tous les mots et verrouillera à nouveau les leçons (sauf la Leçon 1 de chaque niveau).</string>
+    <string name="settings_reset_dialog_message">Cette action effacera définitivement vos XP, votre série quotidienne, l\'historique SM-2 de tous les mots et verrouillera à nouveau les unités et les quiz (seule la Leçon de l\'Unité 1 de chaque niveau restera débloquée).</string>
     <string name="settings_reset_confirm">Réinitialiser</string>
     <string name="settings_reset_cancel">Annuler</string>
     <string name="settings_reset_done">Progression réinitialisée.</string>

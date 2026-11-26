@@ -29,6 +29,8 @@ import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -44,21 +46,26 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.chinoisfacile.mandarin.R
+import com.chinoisfacile.mandarin.data.model.LearningUnit
 import com.chinoisfacile.mandarin.data.model.LessonSummary
+import com.chinoisfacile.mandarin.domain.progression.UnitProgressionResolver
 import com.chinoisfacile.mandarin.ui.components.HskLevelSelector
 import kotlinx.coroutines.launch
 
 @Composable
 fun HomeScreen(
     viewModel: HomeViewModel,
+    onOpenUnitLesson: (String) -> Unit,
     onStartLesson: (String) -> Unit,
     onStartQuickReview: (Int) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    var previewLesson by remember { mutableStateOf<LessonSummary?>(null) }
+    var previewTarget by remember { mutableStateOf<Pair<LearningUnit, LessonSummary>?>(null) }
     val listState = rememberLazyListState()
+    val snackbarHostState = remember { SnackbarHostState() }
     val coroutineScope = rememberCoroutineScope()
+    val lockedUnitLessonMessage = stringResource(R.string.home_unit_lesson_locked)
 
     if (uiState.isLoading || (uiState.isSeeding && uiState.units.isEmpty())) {
         Box(
@@ -78,14 +85,10 @@ fun HomeScreen(
         return
     }
 
-    val allLessons = remember(uiState.units) {
-        uiState.units.flatMap { it.lessons }
+    val activeTarget = remember(uiState.units) {
+        UnitProgressionResolver.findActiveTarget(uiState.units)
     }
-    val activeLesson = remember(allLessons) {
-        allLessons.firstOrNull { it.isUnlocked && !it.isCompleted }
-            ?: allLessons.lastOrNull { it.isUnlocked }
-    }
-    val activeUnitKey = activeLesson?.unitId
+    val activeUnitKey = activeTarget?.unitId
     val activeUnitItemIndex = remember(uiState.units, activeUnitKey, uiState.isSeeding) {
         val headerCount = (if (uiState.isSeeding) 1 else 0) + 3
         val unitIndex = uiState.units.indexOfFirst { it.id == activeUnitKey }
@@ -99,11 +102,13 @@ fun HomeScreen(
         }
     }
 
-    previewLesson?.let { lesson ->
+    previewTarget?.let { (unit, lesson) ->
         LessonPreviewSheet(
             lesson = lesson,
+            unitLessonUnlocked = unit.isLessonUnlocked,
+            onOpenUnitLesson = { onOpenUnitLesson(unit.id) },
             onStartLesson = onStartLesson,
-            onDismiss = { previewLesson = null },
+            onDismiss = { previewTarget = null },
         )
     }
 
@@ -171,9 +176,19 @@ fun HomeScreen(
                 Column(modifier = Modifier.fillMaxWidth()) {
                     UnitBanner(unit = unit)
                     UnitLessonPath(
-                        lessons = unit.lessons,
-                        activeLessonId = activeLesson?.id,
-                        onLessonClick = { lesson -> previewLesson = lesson },
+                        unit = unit,
+                        activeTarget = activeTarget,
+                        onUnitLessonClick = { clickedUnit ->
+                            if (clickedUnit.isLessonUnlocked) {
+                                onOpenUnitLesson(clickedUnit.id)
+                            } else {
+                                coroutineScope.launch {
+                                    snackbarHostState.currentSnackbarData?.dismiss()
+                                    snackbarHostState.showSnackbar(lockedUnitLessonMessage)
+                                }
+                            }
+                        },
+                        onLessonClick = { lesson -> previewTarget = unit to lesson },
                     )
                 }
             }
@@ -208,6 +223,13 @@ fun HomeScreen(
                 },
             )
         }
+
+        SnackbarHost(
+            hostState = snackbarHostState,
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .padding(bottom = 8.dp),
+        )
     }
 }
 

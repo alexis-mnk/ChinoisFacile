@@ -14,6 +14,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.rounded.MenuBook
 import androidx.compose.material.icons.filled.EmojiEvents
 import androidx.compose.material.icons.filled.LockOpen
 import androidx.compose.material3.Button
@@ -41,6 +42,7 @@ fun LessonSummaryView(
     summary: SessionCompletionSummary,
     onDone: () -> Unit,
     modifier: Modifier = Modifier,
+    isQuizSession: Boolean = true,
 ) {
     Column(
         modifier = modifier
@@ -65,7 +67,9 @@ fun LessonSummaryView(
                     )
                     Spacer(modifier = Modifier.height(10.dp))
                     Text(
-                        text = stringResource(R.string.summary_title),
+                        text = stringResource(
+                            if (isQuizSession) R.string.summary_title else R.string.summary_quick_review_title,
+                        ),
                         style = MaterialTheme.typography.headlineMedium,
                         textAlign = TextAlign.Center,
                     )
@@ -124,6 +128,34 @@ fun LessonSummaryView(
                                 text = stringResource(R.string.summary_unlocked_next, unlockedTitle),
                                 style = MaterialTheme.typography.titleMedium,
                                 color = extended.onSuccessContainer,
+                            )
+                        }
+                    }
+                }
+            }
+
+            summary.unlockedNextUnitLessonTitle?.let { unlockedUnitTitle ->
+                item {
+                    val extended = MandarinTheme.extendedColors
+                    Surface(
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(14.dp),
+                        color = extended.lessonNodeContainer,
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(14.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(10.dp),
+                        ) {
+                            Icon(
+                                imageVector = Icons.AutoMirrored.Rounded.MenuBook,
+                                contentDescription = null,
+                                tint = extended.onLessonNodeContainer,
+                            )
+                            Text(
+                                text = stringResource(R.string.summary_unlocked_unit_lesson, unlockedUnitTitle),
+                                style = MaterialTheme.typography.titleMedium,
+                                color = extended.onLessonNodeContainer,
                             )
                         }
                     }

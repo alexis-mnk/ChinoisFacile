@@ -5,6 +5,7 @@ import com.chinoisfacile.mandarin.data.local.entity.UnitEntity
 import com.chinoisfacile.mandarin.data.local.entity.UserStatsEntity
 import com.chinoisfacile.mandarin.data.local.entity.WordEntity
 import com.chinoisfacile.mandarin.data.local.entity.WordProgressEntity
+import com.chinoisfacile.mandarin.domain.progression.UnitProgressionResolver
 import com.chinoisfacile.mandarin.domain.srs.Sm2Scheduler
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -64,18 +65,20 @@ fun WordEntity.toDomain(): VocabWord = VocabWord(
 fun LessonEntity.toSummary(
     wordCount: Int,
     previewHanzi: List<String> = emptyList(),
+    isFirstInUnit: Boolean = false,
 ): LessonSummary = LessonSummary(
     id = id,
     unitId = unitId,
     hskLevel = hskLevel,
     orderIndex = orderIndex,
-    title = title,
+    title = UnitProgressionResolver.formatQuizTitle(title),
     isUnlocked = isUnlocked,
     isCompleted = isCompleted,
     bestScore = bestScore,
     completedCount = completedCount,
     wordCount = wordCount,
     previewHanzi = previewHanzi,
+    isFirstInUnit = isFirstInUnit,
 )
 
 fun UserStatsEntity.toDomain(): UserStats = UserStats(

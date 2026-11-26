@@ -82,6 +82,79 @@ fun HanziToFrenchView(
 }
 
 @Composable
+fun AudioToFrenchView(
+    exercise: Exercise.AudioToFrench,
+    selectedOption: String?,
+    showPinyin: Boolean,
+    audioEnabled: Boolean,
+    locked: Boolean,
+    onTogglePinyin: () -> Unit,
+    onPlayNormal: () -> Unit,
+    onPlaySlow: () -> Unit,
+    onSelectOption: (String) -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Column(
+        modifier = modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+    ) {
+        Text(
+            text = stringResource(R.string.exercise_audio_to_french_prompt),
+            style = MaterialTheme.typography.titleLarge,
+        )
+
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(20.dp),
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+            elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 20.dp, vertical = 16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(10.dp),
+            ) {
+                AudioControlButtons(
+                    enabled = audioEnabled,
+                    onPlayNormal = onPlayNormal,
+                    onPlaySlow = onPlaySlow,
+                )
+
+                AnimatedVisibility(visible = !audioEnabled || showPinyin) {
+                    Text(
+                        text = exercise.word.pinyin,
+                        style = CjkTextStyles.Pinyin,
+                        color = MaterialTheme.colorScheme.primary,
+                    )
+                }
+
+                TextButton(onClick = onTogglePinyin) {
+                    Text(
+                        text = stringResource(
+                            if (showPinyin) R.string.pinyin_hide else R.string.pinyin_show,
+                        ),
+                    )
+                }
+            }
+        }
+
+        Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            exercise.options.forEach { option ->
+                ChoiceCard(
+                    text = option,
+                    isSelected = selectedOption == option,
+                    isCjk = false,
+                    enabled = !locked,
+                    onClick = { onSelectOption(option) },
+                )
+            }
+        }
+    }
+}
+
+@Composable
 fun AudioToHanziView(
     exercise: Exercise.AudioToHanzi,
     selectedOption: String?,
@@ -153,12 +226,85 @@ fun AudioToHanziView(
     }
 }
 
+@Composable
+fun FrenchToHanziView(
+    exercise: Exercise.FrenchToHanzi,
+    selectedOption: String?,
+    showPinyin: Boolean,
+    locked: Boolean,
+    onTogglePinyin: () -> Unit,
+    onSelectOption: (String) -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Column(
+        modifier = modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+    ) {
+        Text(
+            text = stringResource(R.string.exercise_french_to_hanzi_prompt),
+            style = MaterialTheme.typography.titleLarge,
+        )
+
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(20.dp),
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+            elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 20.dp, vertical = 18.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(6.dp),
+            ) {
+                Text(
+                    text = exercise.word.french,
+                    style = MaterialTheme.typography.headlineMedium,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    textAlign = TextAlign.Center,
+                )
+                TextButton(onClick = onTogglePinyin) {
+                    Text(
+                        text = stringResource(
+                            if (showPinyin) R.string.pinyin_hide else R.string.pinyin_show,
+                        ),
+                    )
+                }
+            }
+        }
+
+        Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            exercise.options.chunked(2).forEach { rowOptions ->
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(10.dp),
+                ) {
+                    rowOptions.forEach { option ->
+                        ChoiceCard(
+                            text = option,
+                            subText = if (showPinyin) exercise.optionPinyins[option] else null,
+                            isSelected = selectedOption == option,
+                            isCjk = true,
+                            enabled = !locked,
+                            onClick = { onSelectOption(option) },
+                            modifier = Modifier.weight(1f),
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun SentenceOrderView(
     exercise: Exercise.SentenceOrder,
     selectedTokens: List<TokenChip>,
+    showPinyin: Boolean,
     locked: Boolean,
+    onTogglePinyin: () -> Unit,
     onToggleToken: (TokenChip) -> Unit,
     onClearTokens: () -> Unit,
     modifier: Modifier = Modifier,
@@ -219,9 +365,10 @@ fun SentenceOrderView(
                                 enabled = !locked,
                                 onClick = { onToggleToken(chip) },
                                 label = {
-                                    Text(
-                                        text = chip.text,
-                                        style = CjkTextStyles.HanziListItem,
+                                    TokenChipLabel(
+                                        chip = chip,
+                                        showPinyin = showPinyin,
+                                        isSelected = true,
                                     )
                                 },
                             )
@@ -231,17 +378,23 @@ fun SentenceOrderView(
             }
         }
 
-        if (selectedTokens.isNotEmpty() && !locked) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.End,
-            ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            TextButton(onClick = onTogglePinyin) {
+                Text(
+                    text = stringResource(
+                        if (showPinyin) R.string.pinyin_hide else R.string.pinyin_show,
+                    ),
+                )
+            }
+            if (selectedTokens.isNotEmpty() && !locked) {
                 TextButton(onClick = onClearTokens) {
                     Text(text = stringResource(R.string.exercise_sentence_clear))
                 }
             }
-        } else {
-            Spacer(modifier = Modifier.height(4.dp))
         }
 
         FlowRow(
@@ -259,14 +412,43 @@ fun SentenceOrderView(
                         disabledContainerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
                     ),
                     label = {
-                        Text(
-                            text = chip.text,
-                            style = CjkTextStyles.HanziListItem,
-                            modifier = Modifier.padding(vertical = 4.dp, horizontal = 4.dp),
+                        TokenChipLabel(
+                            chip = chip,
+                            showPinyin = showPinyin,
+                            isSelected = false,
                         )
                     },
                 )
             }
+        }
+    }
+}
+
+@Composable
+private fun TokenChipLabel(
+    chip: TokenChip,
+    showPinyin: Boolean,
+    isSelected: Boolean,
+) {
+    Column(
+        modifier = Modifier.padding(vertical = 4.dp, horizontal = 4.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Text(
+            text = chip.text,
+            style = CjkTextStyles.HanziListItem,
+        )
+        if (showPinyin && chip.pinyin.isNotBlank()) {
+            Spacer(modifier = Modifier.height(1.dp))
+            Text(
+                text = chip.pinyin,
+                style = MaterialTheme.typography.labelSmall,
+                color = if (isSelected) {
+                    MaterialTheme.colorScheme.onSecondaryContainer
+                } else {
+                    MaterialTheme.colorScheme.primary
+                },
+            )
         }
     }
 }
@@ -279,6 +461,7 @@ private fun ChoiceCard(
     enabled: Boolean,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    subText: String? = null,
 ) {
     val borderColor = if (isSelected) {
         MaterialTheme.colorScheme.primary
@@ -299,14 +482,27 @@ private fun ChoiceCard(
         border = BorderStroke(if (isSelected) 2.dp else 1.dp, borderColor),
         colors = CardDefaults.outlinedCardColors(containerColor = containerColor),
     ) {
-        Text(
-            text = text,
-            style = if (isCjk) CjkTextStyles.HanziChoice else MaterialTheme.typography.bodyLarge,
-            fontWeight = FontWeight.Medium,
-            textAlign = if (isCjk) TextAlign.Center else TextAlign.Start,
+        Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 16.dp),
-        )
+                .padding(horizontal = 16.dp, vertical = 14.dp),
+            horizontalAlignment = if (isCjk) Alignment.CenterHorizontally else Alignment.Start,
+        ) {
+            Text(
+                text = text,
+                style = if (isCjk) CjkTextStyles.HanziChoice else MaterialTheme.typography.bodyLarge,
+                fontWeight = FontWeight.Medium,
+                textAlign = if (isCjk) TextAlign.Center else TextAlign.Start,
+            )
+            if (!subText.isNullOrBlank()) {
+                Spacer(modifier = Modifier.height(2.dp))
+                Text(
+                    text = subText,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.primary,
+                    textAlign = if (isCjk) TextAlign.Center else TextAlign.Start,
+                )
+            }
+        }
     }
 }

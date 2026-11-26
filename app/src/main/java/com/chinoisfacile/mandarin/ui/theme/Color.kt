@@ -18,6 +18,7 @@ val DueLightContainer = Color(0xFFFFE4D6)
 val OnDueLightContainer = Color(0xFF4E1700)
 
 val SkyAudio = Color(0xFF0288D1)
+val SkyAudioShadow = Color(0xFF015F92)
 val SkyAudioContainer = Color(0xFFD8F3FF)
 val OnSkyAudioContainer = Color(0xFF00344D)
 
@@ -50,6 +51,7 @@ val DarkJadeContainer = Color(0xFF1B3323)
 val DarkOnJadeContainer = Color(0xFFD5F5DC)
 
 val DarkSkyAudio = Color(0xFF64C4F5)
+val DarkSkyAudioShadow = Color(0xFF2B7CA8)
 val DarkSkyAudioContainer = Color(0xFF163042)
 val DarkOnSkyAudioContainer = Color(0xFFD2EEFF)
 
