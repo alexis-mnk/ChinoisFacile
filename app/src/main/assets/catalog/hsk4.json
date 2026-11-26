@@ -1,6 +1,6 @@
 {
   "hskLevel": 4,
-  "catalogVersion": 16,
+  "catalogVersion": 17,
   "units": [
     {
       "id": "hsk4_u1",
@@ -10675,7 +10675,7 @@
       "lessonId": "hsk4_u5_l65",
       "hanzi": "咸",
       "pinyin": "xián",
-      "english": "All / everyone",
+      "english": "Salty",
       "example": {
         "hanzi": "今天的汤有点咸。",
         "pinyin": "Jīn tiān de tāng yǒu diǎn xián.",
@@ -10828,7 +10828,7 @@
       "lessonId": "hsk4_u6_l66",
       "hanzi": "打印",
       "pinyin": "dǎ yìn",
-      "english": "To affix a seal / to stamp",
+      "english": "To print",
       "example": {
         "hanzi": "请给我打印两份材料。",
         "pinyin": "Qǐng gěi wǒ dǎ yìn liǎng fèn cái liào.",
@@ -11719,7 +11719,7 @@
       "lessonId": "hsk4_u6_l72",
       "hanzi": "填空",
       "pinyin": "tián kòng",
-      "english": "To fill a job vacancy / to fill in a blank",
+      "english": "To fill in the blank",
       "example": {
         "hanzi": "这几个填空题不难。",
         "pinyin": "Zhè jǐ gè tián kòng tí bù nán.",
