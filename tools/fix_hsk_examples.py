@@ -10,8 +10,11 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import html
 import json
 import re
+import urllib.request
+import zipfile
 from collections import defaultdict
 from pathlib import Path
 from typing import Any
@@ -24,6 +27,7 @@ CATALOG_DIR = REPO_ROOT / "app" / "src" / "main" / "assets" / "catalog"
 CACHE_DIR = Path(__file__).resolve().parent / ".cache"
 
 DIGITS_RE = re.compile(r"^[零一二两三四五六七八九十百千万0-9]+$")
+CJK_ONLY_RE = re.compile(r"^[\u4e00-\u9fff]+$")
 TRAILING_PUNCT = "。？！，、；：.,?!"
 ALLOWED_SIMPLE_PROPER_NOUNS = {"中国", "北京", "上海", "小明", "小王", "小李", "法国", "巴黎", "天", "黄河"}
 VULGAR_OR_SLANG_RE = re.compile(
@@ -33,6 +37,51 @@ VULGAR_OR_SLANG_RE = re.compile(
     r"\bdickhead\w*\b|\bcock\b|\bpiss\w*\b|\bcrap\b|\bboobs\b|\btits\b|\bscrotum\b)",
     re.IGNORECASE,
 )
+FRENCH_LOANWORDS_IN_EN = {"café", "cafés", "cliché", "naïve", "résumé", "fiancé", "fiancée", "façade", "entrée", "protégé", "sauté", "sautéed"}
+RESIDUAL_FRENCH_WORDS_RE = re.compile(
+    r"\b(Unité|Leçon|Terme HSK|nom de famille|patronyme|c'est|aujourd'hui|bonjour|merci|au revoir|s'il vous plaît)\b",
+    re.IGNORECASE,
+)
+FRENCH_DIACRITICS_RE = re.compile(r"[éèêëàâçùûôîœæÉÈÊËÀÂÇÙÛÔÎŒÆ]")
+
+OPUS_SOURCES: list[tuple[str, str, str]] = [
+    ("TED2020", "https://object.pouta.csc.fi/OPUS-TED2020/v1/moses/en-zh_cn.txt.zip", "opus_ted2020_en_zh_cn.txt.zip"),
+    ("QED", "https://object.pouta.csc.fi/OPUS-QED/v2.0a/moses/en-zh.txt.zip", "opus_qed_en_zh.txt.zip"),
+    ("News-Commentary", "https://object.pouta.csc.fi/OPUS-News-Commentary/v16/moses/en-zh.txt.zip", "opus_news_commentary_en_zh.txt.zip"),
+]
+SOURCE_PRIORITY = {"Tatoeba": 0, "TED2020": 1, "QED": 2, "News-Commentary": 3}
+
+BUILD_EN_PATTERNS: list[re.Pattern[str]] = [
+    re.compile(p)
+    for p in (
+        r"^We are currently practicing: .+\.$",
+        r"^Please carefully practice: .+\.$",
+        r"^Every day he practices: .+\.$",
+        r"^I want to learn how to: .+\.$",
+        r"^Let's all do this together: .+!$",
+        r"^Shall we continue tomorrow with: .+\?$",
+        r"^She often acts this way: .+\.$",
+        r'^This concept ".*" is very important\.$',
+        r"^We have already discussed: .+\.$",
+        r"^Everyone knows a lot about: .+\.$",
+        r"^Please remember this term: .+\.$",
+        r"^The book mentions: .+\.$",
+        r"^Here we need something new: .+\.$",
+        r"^Today's situation is very: .+\.$",
+        r"^This place is particularly: .+\.$",
+        r"^He feels this way is even more: .+\.$",
+        r"^Everyone's attitude is very: .+\.$",
+        r"^The environment here is really: .+!$",
+        r"^Everyone completes the task \(.+\)\.$",
+        r"^She expressed her idea \(.+\)\.$",
+        r"^Let us keep moving forward \(.+\)\.$",
+        r"^Please get ready \(.+\)\.$",
+        r"^In what we do, remember: .+\.$",
+        r"^The teacher often emphasizes: .+\.$",
+        r"^We should uphold: .+\.$",
+        r"^Practice this word today: .+\.$",
+    )
+]
 MECHANICAL_TEMPLATE_RE = re.compile(
     r"( : |: |\([^)]+\)|"
     r"currently practicing:|carefully practice:|practices:|want to learn how to:|"
@@ -864,8 +913,583 @@ def generate_level_safe_example(
     raise RuntimeError(f"Unable to generate compliant example for ({level}, {hanzi})")
 
 
+def has_residual_french(text: str) -> bool:
+    if RESIDUAL_FRENCH_WORDS_RE.search(text):
+        return True
+    cleaned = text
+    for loan in FRENCH_LOANWORDS_IN_EN:
+        cleaned = re.sub(rf"\b{re.escape(loan)}\b", "", cleaned, flags=re.IGNORECASE)
+    return bool(FRENCH_DIACRITICS_RE.search(cleaned))
+
+
+def _make_exact_en_regex(en_tpl: str) -> re.Pattern[str]:
+    parts = en_tpl.split("{en}")
+    return re.compile("^" + ".+".join(re.escape(p) for p in parts) + "$")
+
+
+FIX_SKELETON_SPECS: list[tuple[tuple[str, ...] | None, re.Pattern[str]]] = [
+    (tuple(toks), _make_exact_en_regex(en_tpl))
+    for pool in (VERB_TEMPLATES, NOUN_TEMPLATES, ADJ_TEMPLATES, ADV_TEMPLATES, IDIOM_TEMPLATES)
+    for _lv, toks, _punct, en_tpl in pool
+] + [
+    (None, re.compile(p))
+    for p in (
+        r"^Today I am learning: .+\.$",
+        r"^Please look at: .+\.$",
+        r"^We studied: .+\.$",
+        r"^Mom and dad see: .+\.$",
+    )
+]
+
+
+def is_mechanical_example(word: dict[str, Any]) -> bool:
+    ex = word.get("example", {})
+    en = ex.get("english", "")
+    if any(p.match(en) for p in BUILD_EN_PATTERNS):
+        return True
+    hz = word.get("hanzi", "")
+    toks = tuple("{w}" if t == hz else t for t in ex.get("tokens", []))
+    return any(en_re.match(en) and (s_toks is None or s_toks == toks) for s_toks, en_re in FIX_SKELETON_SPECS)
+
+
+TED_BAD_EN_START_RE = re.compile(r'^"?(And|But|So|Or|Because|Which|That)\s')
+TED_BAD_ZH_START_RE = re.compile(r"^(还有|以及|但是|不过|而且|所以)")
+TED_BAD_ZH_NP_RE = re.compile(r"^对.+的[^。？！]+。$")
+TED_FINITE_VERB_RE = re.compile(
+    r"(\b(am|is|are|was|were|be|been|have|has|had|do|does|did|will|would|can|could|shall|should|may|might|must|"
+    r"go|goes|went|make|makes|made|take|takes|took|get|gets|got|give|gives|gave|know|knows|knew|think|thinks|thought|"
+    r"see|sees|saw|come|comes|came|want|wants|use|uses|find|finds|found|tell|tells|told|ask|asks|work|works|"
+    r"seem|seems|feel|feels|felt|try|tries|leave|leaves|left|call|calls|need|needs|become|becomes|became|mean|means|meant|"
+    r"keep|keeps|kept|let|lets|begin|begins|began|help|helps|talk|talks|turn|turns|start|starts|show|shows|"
+    r"hear|hears|heard|play|plays|run|runs|ran|move|moves|live|lives|believe|believes|hold|holds|held|bring|brings|brought|"
+    r"happen|happens|write|writes|wrote|provide|provides|sit|sits|sat|stand|stands|stood|lose|loses|lost|pay|pays|paid|"
+    r"meet|meets|met|include|includes|continue|continues|set|sets|learn|learns|change|changes|lead|leads|led|"
+    r"understand|understands|understood|watch|watches|follow|follows|stop|stops|create|creates|speak|speaks|spoke|"
+    r"read|reads|allow|allows|add|adds|spend|spends|spent|grow|grows|grew|open|opens|walk|walks|win|wins|won|offer|offers|"
+    r"remember|remembers|love|loves|like|likes|consider|considers|appear|appears|buy|buys|bought|wait|waits|serve|serves|"
+    r"die|dies|send|sends|sent|expect|expects|build|builds|built|stay|stays|fall|falls|fell|cut|cuts|reach|reaches|"
+    r"remain|remains|suggest|suggests|raise|raises|pass|passes|sell|sells|sold|require|requires|report|reports|"
+    r"decide|decides|affect|affects|cause|causes|produce|produces|exist|exists|explain|explains|protect|protects|"
+    r"prevent|prevents|achieve|achieves|improve|improves|reduce|reduces|increase|increases|develop|develops|"
+    r"support|supports|avoid|avoids|solve|solves|control|controls|save|saves|share|shares|enjoy|enjoys|hope|hopes|"
+    r"eat|eats|ate|drink|drinks|drank|sleep|sleeps|slept|drive|drives|drove|wear|wears|wore|sing|sings|sang|"
+    r"fly|flies|flew|draw|draws|drew|break|breaks|broke|choose|chooses|chose|forget|forgets|forgot|teach|teaches|taught|"
+    r"catch|catches|caught|check|checks|finish|finishes|accept|accepts|refuse|refuses|agree|agrees|promise|promises|"
+    r"trust|trusts|respect|respects|depend|depends|belong|belongs|matter|matters|cost|costs|look|looks|sound|sounds)\b"
+    r"|'(m|re|s|ve|ll|d)\b|n't\b|\b[a-z]{3,}ed\b)",
+    re.IGNORECASE,
+)
+
+EN_STOPWORDS = {
+    "the", "and", "for", "are", "was", "were", "been", "being", "have", "has", "had",
+    "this", "that", "these", "those", "with", "from", "not", "but", "they", "their",
+    "them", "you", "your", "his", "her", "hers", "she", "our", "ours", "its", "can",
+    "could", "will", "would", "shall", "should", "may", "might", "must", "just",
+    "into", "over", "under", "also", "more", "most", "some", "such", "what", "when",
+    "where", "which", "who", "whom", "why", "how", "one", "two", "three", "very",
+    "too", "out", "off", "about", "after", "before", "between", "through", "during",
+    "without", "within", "against", "than", "then", "there", "here", "all", "any",
+    "each", "every", "both", "few", "many", "much", "other", "another", "only",
+    "own", "same", "now", "well", "way", "even", "still", "yet", "already",
+    "classifier", "measure", "word", "particle", "marker", "variant", "used",
+    "etc", "sth", "sb", "lit", "fig", "coll", "abbr", "esp", "derog",
+}
+
+IRREGULAR_EN_STEMS = {
+    "went": "go", "gone": "go", "goes": "go", "going": "go",
+    "came": "come", "comes": "come", "coming": "come",
+    "saw": "see", "seen": "see", "sees": "see",
+    "made": "make", "makes": "make", "making": "make",
+    "took": "take", "taken": "take", "takes": "take",
+    "gave": "give", "given": "give", "gives": "give",
+    "knew": "know", "known": "know", "knows": "know",
+    "thought": "think", "thinks": "think", "thinking": "think",
+    "found": "find", "finds": "find",
+    "told": "tell", "tells": "tell",
+    "became": "become", "becomes": "become",
+    "kept": "keep", "keeps": "keep",
+    "began": "begin", "begun": "begin", "begins": "begin",
+    "held": "hold", "holds": "hold",
+    "brought": "bring", "brings": "bring",
+    "wrote": "write", "written": "write", "writes": "write",
+    "stood": "stand", "stands": "stand",
+    "lost": "lose", "loses": "lose",
+    "paid": "pay", "pays": "pay",
+    "met": "meet", "meets": "meet",
+    "led": "lead", "leads": "lead",
+    "understood": "understand", "understands": "understand",
+    "spoke": "speak", "spoken": "speak", "speaks": "speak",
+    "ran": "run", "runs": "run", "running": "run",
+    "grew": "grow", "grown": "grow", "grows": "grow",
+    "won": "win", "wins": "win",
+    "bought": "buy", "buys": "buy",
+    "sent": "send", "sends": "send",
+    "built": "build", "builds": "build",
+    "fell": "fall", "fallen": "fall", "falls": "fall",
+    "sold": "sell", "sells": "sell",
+    "ate": "eat", "eaten": "eat", "eats": "eat",
+    "drank": "drink", "drunk": "drink", "drinks": "drink",
+    "slept": "sleep", "sleeps": "sleep",
+    "drove": "drive", "driven": "drive", "drives": "drive",
+    "wore": "wear", "worn": "wear", "wears": "wear",
+    "sang": "sing", "sung": "sing", "sings": "sing",
+    "flew": "fly", "flown": "fly", "flies": "fly",
+    "drew": "draw", "drawn": "draw", "draws": "draw",
+    "broke": "break", "broken": "break", "breaks": "break",
+    "chose": "choose", "chosen": "choose", "chooses": "choose",
+    "forgot": "forget", "forgotten": "forget", "forgets": "forget",
+    "taught": "teach", "teaches": "teach",
+    "caught": "catch", "catches": "catch",
+    "better": "good", "best": "good",
+    "worse": "bad", "worst": "bad",
+    "children": "child", "people": "person", "persons": "person",
+    "men": "man", "women": "woman", "feet": "foot", "teeth": "tooth",
+    "lives": "life", "living": "live", "lived": "live",
+    "kids": "kid", "kid": "child", "development": "grow",
+}
+
+TRIVIAL_ZH_TOKENS = {
+    "我", "你", "您", "他", "她", "它", "我们", "你们", "他们", "她们", "它们",
+    "自己", "大家", "别人", "人家", "这", "那", "哪", "哪儿", "这里", "那里",
+    "谁", "什么", "怎么", "怎么样", "为什么", "几", "多少", "吗", "呢", "吧", "啊", "呀",
+    "的", "了", "着", "过", "得", "地", "很", "太", "真", "都", "也", "就", "才", "再",
+    "又", "还", "更", "最", "不", "没", "没有", "在", "是", "有", "和", "跟", "对",
+    "把", "被", "给", "让", "向", "往", "从", "离", "比", "为", "因为", "所以",
+    "虽然", "但是", "如果", "而且", "或者", "并", "却", "而", "之", "可以", "能", "会", "要",
+    "个", "位", "件", "条", "张", "本", "次", "种", "点", "些", "一下", "一点儿",
+    "一", "二", "两", "三", "四", "五", "六", "七", "八", "九", "十", "百", "千", "万",
+}
+
+
+def extract_en_stems(text: str) -> set[str]:
+    stems: set[str] = set()
+    for word in re.findall(r"[a-z]{3,}", text.lower()):
+        if word in EN_STOPWORDS:
+            continue
+        mapped = IRREGULAR_EN_STEMS.get(word, word)
+        stems.add(mapped)
+        if word != mapped:
+            stems.add(word)
+        stem = mapped
+        if len(stem) > 5 and stem.endswith(("ies", "ied")):
+            stem = stem[:-3] + "y"
+        else:
+            for suf in ("ation", "ition", "ment", "ness", "able", "ible", "ical", "tion", "sion", "ing", "ous", "ful", "less", "ive", "ity", "ize", "ise", "al", "ly", "ed", "es", "er", "or"):
+                if len(stem) - len(suf) >= 4 and stem.endswith(suf):
+                    stem = stem[: -len(suf)]
+                    break
+            else:
+                if len(stem) >= 5 and stem.endswith("s") and not stem.endswith("ss"):
+                    stem = stem[:-1]
+        stems.add(stem)
+    return stems
+
+
+def build_cedict_stems(
+    complete_entries: list[dict[str, Any]],
+    catalogs: dict[int, dict[str, Any]],
+) -> dict[str, set[str]]:
+    cedict_stems: dict[str, set[str]] = defaultdict(set)
+    for entry in complete_entries:
+        hz = entry.get("s", "")
+        if not hz:
+            continue
+        for form in entry.get("f", []):
+            for raw_gloss in form.get("m", []):
+                low = raw_gloss.strip().lower()
+                if (
+                    not low
+                    or low.startswith(("surname ", "variant of ", "old variant ", "cl:", "see ", "abbr. "))
+                ):
+                    continue
+                cleaned = re.sub(r"\([^)]*\)", " ", raw_gloss)
+                cedict_stems[hz].update(extract_en_stems(cleaned))
+    for lv in range(1, 7):
+        for w in catalogs[lv]["words"]:
+            cedict_stems[w["hanzi"]].update(extract_en_stems(w["english"]))
+    return cedict_stems
+
+
+def ted_alignment_score(
+    target_hz: str,
+    tokens: list[str],
+    eng_text: str,
+    cedict_stems: dict[str, set[str]],
+) -> float | None:
+    eng_stems = extract_en_stems(eng_text)
+    if not eng_stems:
+        return None
+
+    def _matches(zh_tok: str) -> bool:
+        t_stems = cedict_stems.get(zh_tok)
+        if not t_stems:
+            return False
+        if t_stems & eng_stems:
+            return True
+        return any(
+            len(s) >= 5 and len(e) >= 5 and s[:5] == e[:5]
+            for s in t_stems
+            for e in eng_stems
+        )
+
+    if not _matches(target_hz):
+        return None
+
+    other_content = [
+        t
+        for t in tokens
+        if t != target_hz and t not in TRIVIAL_ZH_TOKENS and cedict_stems.get(t)
+    ]
+    if not other_content:
+        return 1.0
+    aligned = sum(1 for t in other_content if _matches(t))
+    ratio = aligned / len(other_content)
+    if aligned < 1 or ratio < 0.35:
+        return None
+    return ratio
+
+
+def clean_opus_pair(
+    source_name: str,
+    zh_raw: str,
+    en_raw: str,
+    traditional_only_chars: set[str],
+) -> tuple[str, str] | None:
+    if re.search(r"[A-Za-z0-9]", zh_raw):
+        return None
+    cmn = re.sub(r"\s+", "", html.unescape(zh_raw)).strip()
+    if not (6 <= len(cmn) <= 26) or cmn[-1] not in "。？！":
+        return None
+    body = cmn[:-1]
+    if not CJK_ONLY_RE.match(body):
+        return None
+    if any(ch in traditional_only_chars for ch in body):
+        return None
+
+    eng = html.unescape(en_raw)
+    eng = eng.replace("“", '"').replace("”", '"').replace("’", "'").replace("‘", "'")
+    eng = re.sub(r"\s+", " ", eng).strip()
+    if not (10 <= len(eng) <= 130):
+        return None
+    words = eng.split()
+    if not (3 <= len(words) <= 26):
+        return None
+    if "..." in eng or "…" in eng:
+        return None
+    if any(ch in eng for ch in "()[]{}<>|★♪•\t\r"):
+        return None
+    if ": " in eng or " : " in eng:
+        return None
+    if re.search(r"(https?://|www\.|\.[a-z]{2,4}/)", eng, re.IGNORECASE):
+        return None
+    if re.search(r"\s+[.,?!;:]", eng):
+        return None
+    if eng.count('"') not in (0, 2):
+        return None
+    if eng.startswith("'") or re.search(r"(^|\s)'", eng):
+        return None
+    if not re.match(r'^"?[A-Z]', eng):
+        return None
+    if not (re.search(r"[.?!]$", eng) or (eng.startswith('"') and re.search(r'[.?!]"$', eng))):
+        return None
+    if (cmn[-1] == "？") != eng.rstrip('"').endswith("?"):
+        return None
+    ratio = len(eng) / len(body)
+    if not (1.5 <= ratio <= 8.5):
+        return None
+    if source_name == "TED2020":
+        if (
+            TED_BAD_EN_START_RE.match(eng)
+            or TED_BAD_ZH_START_RE.match(cmn)
+            or TED_BAD_ZH_NP_RE.match(cmn)
+            or not TED_FINITE_VERB_RE.search(eng)
+            or not (2.2 <= ratio <= 6.8)
+            or len(words) < max(4, round(len(body) * 0.45))
+        ):
+            return None
+    if VULGAR_OR_SLANG_RE.search(eng) or has_residual_french(eng) or MECHANICAL_TEMPLATE_RE.search(eng):
+        return None
+    return cmn, eng
+
+
+def load_opus_pairs(complete_entries: list[dict[str, Any]]) -> list[tuple[str, str, str]]:
+    """Loads clean Simplified Chinese -> English pairs from OPUS corpora (cached locally)."""
+    cached_path = CACHE_DIR / "opus_zh_en_clean_v2.tsv"
+    if cached_path.exists() and cached_path.stat().st_size > 0:
+        pairs: list[tuple[str, str, str]] = []
+        with cached_path.open("r", encoding="utf-8") as f:
+            for line in f:
+                parts = line.rstrip("\n").split("\t")
+                if len(parts) == 3:
+                    src, cmn, eng = parts
+                    if not VULGAR_OR_SLANG_RE.search(eng) and not has_residual_french(eng):
+                        pairs.append((src, cmn, eng))
+        return pairs
+
+    CACHE_DIR.mkdir(parents=True, exist_ok=True)
+    simp_chars: set[str] = set()
+    trad_chars: set[str] = set()
+    for entry in complete_entries:
+        s = entry.get("s", "")
+        simp_chars.update(s)
+        for form in entry.get("f", []):
+            trad_chars.update(form.get("t", ""))
+    traditional_only_chars = {
+        ch for ch in (trad_chars - simp_chars) if "\u4e00" <= ch <= "\u9fff"
+    }
+
+    dedup_by_cmn: dict[str, tuple[str, str, str]] = {}
+    source_counts: dict[str, int] = defaultdict(int)
+
+    for source_name, url, zip_name in OPUS_SOURCES:
+        zip_path = CACHE_DIR / zip_name
+        if not zip_path.exists() or zip_path.stat().st_size == 0:
+            print(f"Downloading OPUS {source_name} ({url})...")
+            req = urllib.request.Request(url, headers={"User-Agent": "EasyMandarin/1.0"})
+            with urllib.request.urlopen(req, timeout=120) as resp:
+                zip_path.write_bytes(resp.read())
+
+        print(f"Filtering OPUS {source_name} from {zip_path.name}...")
+        with zipfile.ZipFile(zip_path, "r") as zf:
+            names = [n for n in zf.namelist() if not n.endswith("/") and ".ids" not in n]
+            en_name = next(n for n in names if n.endswith(".en"))
+            zh_name = next(n for n in names if n.endswith(".zh_cn") or n.endswith(".zh"))
+            with zf.open(en_name, "r") as fen, zf.open(zh_name, "r") as fzh:
+                for raw_en_b, raw_zh_b in zip(fen, fzh):
+                    en_raw = raw_en_b.decode("utf-8", errors="ignore").strip()
+                    zh_raw = raw_zh_b.decode("utf-8", errors="ignore").strip()
+                    cleaned = clean_opus_pair(source_name, zh_raw, en_raw, traditional_only_chars)
+                    if cleaned is None:
+                        continue
+                    cmn, eng = cleaned
+                    if cmn not in dedup_by_cmn:
+                        dedup_by_cmn[cmn] = (source_name, cmn, eng)
+                        source_counts[source_name] += 1
+
+    pairs = list(dedup_by_cmn.values())
+    with cached_path.open("w", encoding="utf-8") as out:
+        for src, cmn, eng in pairs:
+            out.write(f"{src}\t{cmn}\t{eng}\n")
+    print(f"Cached {len(pairs)} clean OPUS pairs (v2): {dict(source_counts)}")
+    return pairs
+
+
+def enrich_hsk5_and_hsk6(
+    catalogs: dict[int, dict[str, Any]],
+    word_to_level: dict[str, int],
+    word_to_pinyin: dict[str, str],
+    tatoeba_pairs: list[tuple[str, str]],
+    complete_entries: list[dict[str, Any]],
+    no_bump_version: bool,
+) -> None:
+    """Enriches mechanical templates in HSK 5 and HSK 6 using Tatoeba + OPUS pairs."""
+    opus_pairs = load_opus_pairs(complete_entries)
+    cedict_stems = build_cedict_stems(complete_entries, catalogs)
+    all_pairs: list[tuple[str, str, str]] = [
+        ("Tatoeba", cmn, eng) for cmn, eng in tatoeba_pairs
+    ] + opus_pairs
+
+    hsk5_data = catalogs[5]
+    hsk6_data = catalogs[6]
+    hsk5_allowed = {hz for hz, lv in word_to_level.items() if lv <= 5} | ALLOWED_SIMPLE_PROPER_NOUNS
+
+    hsk5_needed: set[str] = set()
+    for w in hsk5_data["words"]:
+        hz = w["hanzi"]
+        if (5, hz) in HANDCRAFTED_EXAMPLES:
+            continue
+        toks = w["example"]["tokens"]
+        compliant = (
+            not is_mechanical_example(w)
+            and not VULGAR_OR_SLANG_RE.search(w["example"]["english"])
+            and not has_residual_french(w["example"]["english"])
+            and hz in toks
+            and all(is_token_allowed(t, 5, hsk5_allowed, word_to_level) for t in toks)
+            and is_example_pinyin_consistent(hz, w["pinyin"], w["example"]["pinyin"])
+        )
+        if not compliant:
+            hsk5_needed.add(hz)
+
+    # Apply handcrafted overrides on HSK 6 first (e.g. 屁股)
+    hsk6_modified = False
+    hsk6_needed: set[str] = set()
+    for w in hsk6_data["words"]:
+        hz = w["hanzi"]
+        if (6, hz) in HANDCRAFTED_EXAMPLES:
+            hc_tokens, hc_punct, hc_en = HANDCRAFTED_EXAMPLES[(6, hz)]
+            new_ex = {
+                "hanzi": "".join(hc_tokens) + hc_punct,
+                "pinyin": tokens_to_pinyin(hc_tokens, hc_punct, word_to_pinyin),
+                "english": hc_en,
+                "tokens": hc_tokens,
+            }
+            if w["example"] != new_ex:
+                w["example"] = new_ex
+                hsk6_modified = True
+            continue
+        toks = w["example"]["tokens"]
+        compliant = (
+            not is_mechanical_example(w)
+            and not VULGAR_OR_SLANG_RE.search(w["example"]["english"])
+            and not has_residual_french(w["example"]["english"])
+            and hz in toks
+            and len(toks) >= 3
+            and len(toks) == len(set(toks))
+            and is_example_pinyin_consistent(hz, w["pinyin"], w["example"]["pinyin"])
+        )
+        if not compliant:
+            hsk6_needed.add(hz)
+
+    print(f"Indexing {len(all_pairs)} sentences for HSK 5 ({len(hsk5_needed)} needed) and HSK 6 ({len(hsk6_needed)} needed)...")
+    cands_5: dict[str, list[tuple[tuple[int, int, int, int], str, str, str, list[str], str]]] = defaultdict(list)
+    cands_6: dict[str, list[tuple[tuple[int, int, int, int], str, str, str, list[str], str]]] = defaultdict(list)
+
+    for src, cmn_text, eng_text in all_pairs:
+        if has_residual_french(eng_text) or VULGAR_OR_SLANG_RE.search(eng_text):
+            continue
+        body = cmn_text.rstrip("。？！")
+        punct = cmn_text[len(body) :] or "。"
+        if not CJK_ONLY_RE.match(body) or not (6 <= len(cmn_text) <= 26 or src == "Tatoeba"):
+            continue
+        j_toks = jieba.lcut(body)
+        if not j_toks or "".join(j_toks) != body:
+            continue
+        j_set = set(j_toks)
+
+        # Match HSK 5 candidates under strict HSK 1..5 ceiling
+        hits_5 = j_set & hsk5_needed
+        if hits_5 and not any(word_to_level.get(t, 0) > 5 for t in j_toks):
+            for hz in hits_5:
+                if len(cands_5[hz]) >= 60:
+                    continue
+                seg = strict_segment(body, 5, hsk5_allowed, word_to_level, target=hz)
+                if (
+                    seg
+                    and hz in seg
+                    and 3 <= len(seg) <= 11
+                    and len(seg) == len(set(seg))
+                    and "".join(seg) == body
+                    and all(is_token_allowed(t, 5, hsk5_allowed, word_to_level) for t in seg)
+                ):
+                    align_bonus = 0
+                    if src == "TED2020":
+                        align = ted_alignment_score(hz, seg, eng_text, cedict_stems)
+                        if align is None:
+                            continue
+                        align_bonus = -round(align * 10)
+                    py = tokens_to_pinyin(seg, punct, word_to_pinyin)
+                    if is_example_pinyin_consistent(hz, word_to_pinyin[hz], py):
+                        score = (
+                            SOURCE_PRIORITY[src],
+                            align_bonus,
+                            abs(len(seg) - 6) * 2 + abs(len(body) - 12),
+                            len(eng_text),
+                        )
+                        cands_5[hz].append((score, src, cmn_text, eng_text, seg, py))
+
+        # Match HSK 6 candidates (preferring HSK-known coverage, no OOV cutoff)
+        hits_6 = j_set & hsk6_needed
+        if hits_6 and 3 <= len(j_toks) <= 11 and len(j_toks) == len(set(j_toks)):
+            if all(CJK_ONLY_RE.match(t) for t in j_toks):
+                py6 = tokens_to_pinyin(j_toks, punct, word_to_pinyin)
+                known_ratio = sum(
+                    1
+                    for t in j_toks
+                    if t in word_to_level or t in ALLOWED_SIMPLE_PROPER_NOUNS or DIGITS_RE.match(t)
+                ) / len(j_toks)
+                for hz in hits_6:
+                    if len(cands_6[hz]) >= 60:
+                        continue
+                    align_bonus = 0
+                    if src == "TED2020":
+                        align = ted_alignment_score(hz, j_toks, eng_text, cedict_stems)
+                        if align is None:
+                            continue
+                        align_bonus = -round(align * 10)
+                    if is_example_pinyin_consistent(hz, word_to_pinyin[hz], py6):
+                        score = (
+                            SOURCE_PRIORITY[src],
+                            align_bonus,
+                            round((1.0 - known_ratio) * 20) + abs(len(j_toks) - 6) * 2 + abs(len(body) - 13),
+                            len(eng_text),
+                        )
+                        cands_6[hz].append((score, src, cmn_text, eng_text, list(j_toks), py6))
+
+    report: dict[str, Any] = {"hsk5": [], "hsk6": []}
+
+    for lv, data, needed, cands_map, init_mod in (
+        (5, hsk5_data, hsk5_needed, cands_5, False),
+        (6, hsk6_data, hsk6_needed, cands_6, hsk6_modified),
+    ):
+        words_by_hz = {w["hanzi"]: w for w in data["words"]}
+        used_cmn = {
+            w["example"]["hanzi"]
+            for w in data["words"]
+            if w["hanzi"] not in needed
+        }
+        src_stats: dict[str, int] = defaultdict(int)
+        for w in data["words"]:
+            if w["hanzi"] not in needed:
+                src_stats["handcrafted" if (lv, w["hanzi"]) in HANDCRAFTED_EXAMPLES else "kept"] += 1
+
+        modified = init_mod
+        # Assign rarest candidates first to minimize duplicate sentences across words
+        for hz in sorted(needed, key=lambda item: (len(cands_map.get(item, [])), item)):
+            cands = sorted(cands_map.get(hz, []), key=lambda x: x[0])
+            if not cands:
+                src_stats["remaining_template"] += 1
+                continue
+            chosen = next((c for c in cands if c[2] not in used_cmn), cands[0])
+            _score, src, cmn_text, eng_text, tokens, py = chosen
+            used_cmn.add(cmn_text)
+            w = words_by_hz[hz]
+            w["example"] = {
+                "hanzi": cmn_text,
+                "pinyin": py,
+                "english": eng_text,
+                "tokens": tokens,
+            }
+            modified = True
+            src_stats[src] += 1
+            report[f"hsk{lv}"].append(
+                {
+                    "id": w["id"],
+                    "hanzi": hz,
+                    "pinyin": w["pinyin"],
+                    "english": w["english"],
+                    "source": src,
+                    "example": w["example"],
+                }
+            )
+
+        if modified:
+            if not no_bump_version:
+                data["catalogVersion"] = int(data["catalogVersion"]) + 1
+            out_path = CATALOG_DIR / f"hsk{lv}.json"
+            out_path.write_text(
+                json.dumps(data, ensure_ascii=False, indent=2) + "\n",
+                encoding="utf-8",
+            )
+
+        print(
+            f"HSK {lv} (v{data['catalogVersion']}) — "
+            f"kept: {src_stats['kept']}, "
+            f"handcrafted: {src_stats['handcrafted']}, "
+            f"Tatoeba: {src_stats['Tatoeba']}, "
+            f"TED2020: {src_stats['TED2020']}, "
+            f"QED: {src_stats['QED']}, "
+            f"News-Commentary: {src_stats['News-Commentary']}, "
+            f"remaining templates: {src_stats['remaining_template']}"
+        )
+
+    (CACHE_DIR / "opus_enrichment_report.json").write_text(
+        json.dumps(report, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Fix and verify HSK 1 to 5 example sentences.")
+    parser = argparse.ArgumentParser(description="Fix and verify HSK 1 to 6 example sentences.")
     parser.add_argument(
         "--no-bump-version",
         action="store_true",
@@ -900,9 +1524,11 @@ def main() -> int:
     verify_static_templates(word_to_level)
 
     pos_map: dict[str, list[str]] = {}
+    complete_entries: list[dict[str, Any]] = []
     comp_path = CACHE_DIR / "complete.min.json"
     if comp_path.exists():
-        for entry in json.loads(comp_path.read_text(encoding="utf-8")):
+        complete_entries = json.loads(comp_path.read_text(encoding="utf-8"))
+        for entry in complete_entries:
             pos_map[entry["s"]] = entry.get("p", [])
 
     tatoeba_pairs: list[tuple[str, str]] = []
@@ -914,33 +1540,8 @@ def main() -> int:
                 if len(parts) == 2 and not VULGAR_OR_SLANG_RE.search(parts[1]):
                     tatoeba_pairs.append((parts[0], parts[1]))
 
-    for level in range(1, 7):
+    for level in range(1, 5):
         data = catalogs[level]
-        # Apply handcrafted overrides on all levels where defined (e.g., HSK 4 屁股)
-        if level == 6:
-            modified = False
-            for w in data["words"]:
-                hz = w["hanzi"]
-                if (level, hz) in HANDCRAFTED_EXAMPLES:
-                    hc_tokens, hc_punct, hc_en = HANDCRAFTED_EXAMPLES[(level, hz)]
-                    new_ex = {
-                        "hanzi": "".join(hc_tokens) + hc_punct,
-                        "pinyin": tokens_to_pinyin(hc_tokens, hc_punct, word_to_pinyin),
-                        "english": hc_en,
-                        "tokens": hc_tokens,
-                    }
-                    if w["example"] != new_ex:
-                        w["example"] = new_ex
-                        modified = True
-            if modified:
-                if not args.no_bump_version:
-                    data["catalogVersion"] = int(data["catalogVersion"]) + 1
-                (CATALOG_DIR / f"hsk{level}.json").write_text(
-                    json.dumps(data, ensure_ascii=False, indent=2) + "\n",
-                    encoding="utf-8",
-                )
-            continue
-
         allowed_vocab = {hz for hz, lv in word_to_level.items() if lv <= level} | ALLOWED_SIMPLE_PROPER_NOUNS
         level_words_set = {w["hanzi"] for w in data["words"]}
         lesson_order_map = {
@@ -989,8 +1590,8 @@ def main() -> int:
                 stats["handcrafted"] += 1
                 continue
 
-            is_tpl_or_vulgar = bool(VULGAR_OR_SLANG_RE.search(ex["english"])) or (
-                level in (1, 2, 3, 4) and bool(MECHANICAL_TEMPLATE_RE.search(ex["english"]))
+            is_tpl_or_vulgar = bool(VULGAR_OR_SLANG_RE.search(ex["english"])) or bool(
+                MECHANICAL_TEMPLATE_RE.search(ex["english"])
             )
             already_valid = (
                 not is_tpl_or_vulgar
@@ -1088,6 +1689,14 @@ def main() -> int:
             f"safe templates: {stats['template']}"
         )
 
+    enrich_hsk5_and_hsk6(
+        catalogs=catalogs,
+        word_to_level=word_to_level,
+        word_to_pinyin=word_to_pinyin,
+        tatoeba_pairs=tatoeba_pairs,
+        complete_entries=complete_entries,
+        no_bump_version=args.no_bump_version,
+    )
     return 0
 
 

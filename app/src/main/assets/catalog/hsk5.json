@@ -1,6 +1,6 @@
 {
   "hskLevel": 5,
-  "catalogVersion": 14,
+  "catalogVersion": 15,
   "units": [
     {
       "id": "hsk5_u1",
@@ -845,13 +845,17 @@
       "pinyin": "biǎo xiàn",
       "english": "To show / to show off",
       "example": {
-        "hanzi": "我们正在表现。",
-        "pinyin": "Wǒ men zhèng zài biǎo xiàn.",
-        "english": "We are currently practicing: to show.",
+        "hanzi": "有时候成人表现得像儿童。",
+        "pinyin": "Yǒu shí hou chéng rén biǎo xiàn de xiàng ér tóng.",
+        "english": "Sometimes adults behave like children.",
         "tokens": [
-          "我们",
-          "正在",
-          "表现"
+          "有",
+          "时候",
+          "成人",
+          "表现",
+          "得",
+          "像",
+          "儿童"
         ]
       }
     },
@@ -901,14 +905,17 @@
       "pinyin": "zhèng fǔ",
       "english": "Government",
       "example": {
-        "hanzi": "她很喜欢政府。",
-        "pinyin": "Tā hěn xǐ huan zhèng fǔ.",
-        "english": "She really likes (government).",
+        "hanzi": "我也检查了政府的建筑。",
+        "pinyin": "Wǒ yě jiǎn chá le zhèng fǔ de jiàn zhù.",
+        "english": "We inspected government buildings.",
         "tokens": [
-          "她",
-          "很",
-          "喜欢",
-          "政府"
+          "我",
+          "也",
+          "检查",
+          "了",
+          "政府",
+          "的",
+          "建筑"
         ]
       }
     },
@@ -919,14 +926,16 @@
       "pinyin": "xì tǒng",
       "english": "System",
       "example": {
-        "hanzi": "我们的环境真系统！",
-        "pinyin": "Wǒ men de huán jìng zhēn xì tǒng!",
-        "english": "Our environment is truly system!",
+        "hanzi": "我们需要多个独立的系统。",
+        "pinyin": "Wǒ men xū yào duō gè dú lì de xì tǒng.",
+        "english": "We need multiple independent systems.",
         "tokens": [
           "我们",
+          "需要",
+          "多",
+          "个",
+          "独立",
           "的",
-          "环境",
-          "真",
           "系统"
         ]
       }
@@ -1053,15 +1062,16 @@
       "pinyin": "zǔ",
       "english": "To form / to organize",
       "example": {
-        "hanzi": "明天再组好吗？",
-        "pinyin": "Míng tiān zài zǔ hǎo ma?",
-        "english": "Shall we continue tomorrow with: to form?",
+        "hanzi": "他是我们运输组的。",
+        "pinyin": "Tā shì wǒ men yùn shū zǔ de.",
+        "english": "He was with our transportation team.",
         "tokens": [
-          "明天",
-          "再",
+          "他",
+          "是",
+          "我们",
+          "运输",
           "组",
-          "好",
-          "吗"
+          "的"
         ]
       }
     },
@@ -1072,15 +1082,16 @@
       "pinyin": "zǔ zhī",
       "english": "To organize / organization",
       "example": {
-        "hanzi": "明天再组织好吗？",
-        "pinyin": "Míng tiān zài zǔ zhī hǎo ma?",
-        "english": "Shall we continue tomorrow with: to organize?",
+        "hanzi": "谁组织了这次会议？",
+        "pinyin": "Shéi zǔ zhī le zhè cì huì yì?",
+        "english": "Who organized that meeting?",
         "tokens": [
-          "明天",
-          "再",
+          "谁",
           "组织",
-          "好",
-          "吗"
+          "了",
+          "这",
+          "次",
+          "会议"
         ]
       }
     },
@@ -1420,14 +1431,19 @@
       "pinyin": "zhì liáo",
       "english": "To treat (an illness) / medical treatment",
       "example": {
-        "hanzi": "大家一起治疗吧！",
-        "pinyin": "Dà jiā yī qǐ zhì liáo ba!",
-        "english": "Let's all do this together: to treat (an illness)!",
+        "hanzi": "这是一种好棒的治疗方法。",
+        "pinyin": "Zhè shì yī zhǒng hǎo bàng de zhì liáo fāng fǎ.",
+        "english": "This is a great type of cure.",
         "tokens": [
-          "大家",
-          "一起",
+          "这",
+          "是",
+          "一",
+          "种",
+          "好",
+          "棒",
+          "的",
           "治疗",
-          "吧"
+          "方法"
         ]
       }
     },
@@ -1649,13 +1665,18 @@
       "pinyin": "shè jì",
       "english": "To design; to plan / design; plan",
       "example": {
-        "hanzi": "我们正在设计。",
-        "pinyin": "Wǒ men zhèng zài shè jì.",
-        "english": "We are currently practicing: to design; to plan.",
+        "hanzi": "而设计就可以解决这个问题。",
+        "pinyin": "Ér shè jì jiù kě yǐ jiě jué zhè gè wèn tí.",
+        "english": "Design can fix this problem.",
         "tokens": [
-          "我们",
-          "正在",
-          "设计"
+          "而",
+          "设计",
+          "就",
+          "可以",
+          "解决",
+          "这",
+          "个",
+          "问题"
         ]
       }
     },
@@ -1686,14 +1707,18 @@
       "pinyin": "bāo kuò",
       "english": "To comprise / to include",
       "example": {
-        "hanzi": "请你多包括。",
-        "pinyin": "Qǐng nǐ duō bāo kuò.",
-        "english": "Please to comprise more often.",
+        "hanzi": "这些人包括有手机的移民。",
+        "pinyin": "Zhè xiē rén bāo kuò yǒu shǒu jī de yí mín.",
+        "english": "These include immigrant populations -- who have phones.",
         "tokens": [
-          "请",
-          "你",
-          "多",
-          "包括"
+          "这",
+          "些",
+          "人",
+          "包括",
+          "有",
+          "手机",
+          "的",
+          "移民"
         ]
       }
     },
@@ -1781,12 +1806,16 @@
       "pinyin": "shù",
       "english": "Number / Figure",
       "example": {
-        "hanzi": "我们正在数。",
-        "pinyin": "Wǒ men zhèng zài shù.",
-        "english": "We are currently practicing: number.",
+        "hanzi": "想出比它大的数。",
+        "pinyin": "Xiǎng chū bǐ tā dà de shù.",
+        "english": "I can think of one higher than that.",
         "tokens": [
-          "我们",
-          "正在",
+          "想",
+          "出",
+          "比",
+          "它",
+          "大",
+          "的",
           "数"
         ]
       }
@@ -1817,15 +1846,17 @@
       "pinyin": "lì liang",
       "english": "Power / force",
       "example": {
-        "hanzi": "这个力量很重要。",
-        "pinyin": "Zhè gè lì liang hěn zhòng yào.",
-        "english": "This concept \"power\" is very important.",
+        "hanzi": "不要小看我的力量。",
+        "pinyin": "Bù yào xiǎo kàn wǒ de lì liang.",
+        "english": "Don't underestimate my power.",
         "tokens": [
-          "这",
-          "个",
-          "力量",
-          "很",
-          "重要"
+          "不",
+          "要",
+          "小",
+          "看",
+          "我",
+          "的",
+          "力量"
         ]
       }
     },
@@ -1857,13 +1888,16 @@
       "pinyin": "zào chéng",
       "english": "To bring about / to create",
       "example": {
-        "hanzi": "请认真造成。",
-        "pinyin": "Qǐng rèn zhēn zào chéng.",
-        "english": "Please carefully practice: to bring about.",
+        "hanzi": "这种行为可能造成意外。",
+        "pinyin": "Zhè zhǒng xíng wéi kě néng zào chéng yì wài.",
+        "english": "Such behavior can cause an accident.",
         "tokens": [
-          "请",
-          "认真",
-          "造成"
+          "这",
+          "种",
+          "行为",
+          "可能",
+          "造成",
+          "意外"
         ]
       }
     },
@@ -1994,13 +2028,20 @@
       "pinyin": "miàn duì",
       "english": "To face; to confront",
       "example": {
-        "hanzi": "请认真面对。",
-        "pinyin": "Qǐng rèn zhēn miàn duì.",
-        "english": "Please carefully practice: to face; to confront.",
+        "hanzi": "试着用积极的态度去面对任何事情。",
+        "pinyin": "Shì zhe yòng jī jí de tài du qù miàn duì rèn hé shì qing.",
+        "english": "Try to have a positive attitude about everything.",
         "tokens": [
-          "请",
-          "认真",
-          "面对"
+          "试",
+          "着",
+          "用",
+          "积极",
+          "的",
+          "态度",
+          "去",
+          "面对",
+          "任何",
+          "事情"
         ]
       }
     },
@@ -2028,16 +2069,16 @@
       "pinyin": "zǒng tǒng",
       "english": "President (of a country)",
       "example": {
-        "hanzi": "这里需要新的总统。",
-        "pinyin": "Zhè lǐ xū yào xīn de zǒng tǒng.",
-        "english": "Here we need something new: president (of a country).",
+        "hanzi": "总统拒绝回答那个问题。",
+        "pinyin": "Zǒng tǒng jù jué huí dá nà gè wèn tí.",
+        "english": "The President refused to answer the question.",
         "tokens": [
-          "这",
-          "里",
-          "需要",
-          "新",
-          "的",
-          "总统"
+          "总统",
+          "拒绝",
+          "回答",
+          "那",
+          "个",
+          "问题"
         ]
       }
     },
@@ -2123,16 +2164,20 @@
       "pinyin": "fāng",
       "english": "Square / power or involution (math.)",
       "example": {
-        "hanzi": "这里的环境真方！",
-        "pinyin": "Zhè lǐ de huán jìng zhēn fāng!",
-        "english": "The environment here is really: square!",
+        "hanzi": "可是第一方却从没有获得这些信息！",
+        "pinyin": "Kě shì dì yī fāng què cóng méi yǒu huò dé zhè xiē xìn xī!",
+        "english": "The only party that never gets access to this information is the first party!",
         "tokens": [
+          "可是",
+          "第一",
+          "方",
+          "却",
+          "从",
+          "没有",
+          "获得",
           "这",
-          "里",
-          "的",
-          "环境",
-          "真",
-          "方"
+          "些",
+          "信息"
         ]
       }
     },
@@ -2183,15 +2228,15 @@
       "pinyin": "shǔ yú",
       "english": "To be classified as / to belong to",
       "example": {
-        "hanzi": "明天再属于好吗？",
-        "pinyin": "Míng tiān zài shǔ yú hǎo ma?",
-        "english": "Shall we continue tomorrow with: to be classified as?",
+        "hanzi": "这辆自行车属于我。",
+        "pinyin": "Zhè liàng zì xíng chē shǔ yú wǒ.",
+        "english": "This bicycle belongs to me.",
         "tokens": [
-          "明天",
-          "再",
+          "这",
+          "辆",
+          "自行车",
           "属于",
-          "好",
-          "吗"
+          "我"
         ]
       }
     },
@@ -2337,14 +2382,17 @@
       "pinyin": "jū rán",
       "english": "Unexpectedly / to one's surprise",
       "example": {
-        "hanzi": "请居然准备一下。",
-        "pinyin": "Qǐng jū rán zhǔn bèi yíxià.",
-        "english": "Please get ready (unexpectedly).",
+        "hanzi": "我居然忘记了今天有课！",
+        "pinyin": "Wǒ jū rán wàng jì le jīn tiān yǒu kè!",
+        "english": "I completely forgot that there was class today!",
         "tokens": [
-          "请",
+          "我",
           "居然",
-          "准备",
-          "一下"
+          "忘记",
+          "了",
+          "今天",
+          "有",
+          "课"
         ]
       }
     },
@@ -2375,15 +2423,19 @@
       "pinyin": "chēng",
       "english": "To weigh / to state",
       "example": {
-        "hanzi": "明天再称好吗？",
-        "pinyin": "Míng tiān zài chēng hǎo ma?",
-        "english": "Shall we continue tomorrow with: to weigh?",
+        "hanzi": "这个产品称它能帮助你减肥。",
+        "pinyin": "Zhè gè chǎn pǐn chēng tā néng bāng zhù nǐ jiǎn féi.",
+        "english": "This product claims to help you lose weight.",
         "tokens": [
-          "明天",
-          "再",
+          "这",
+          "个",
+          "产品",
           "称",
-          "好",
-          "吗"
+          "它",
+          "能",
+          "帮助",
+          "你",
+          "减肥"
         ]
       }
     },
@@ -2394,14 +2446,15 @@
       "pinyin": "fēn xī",
       "english": "To analyze / analysis",
       "example": {
-        "hanzi": "大家一起分析吧！",
-        "pinyin": "Dà jiā yī qǐ fēn xī ba!",
-        "english": "Let's all do this together: to analyze!",
+        "hanzi": "我想要分析它。",
+        "pinyin": "Wǒ xiǎng yào fēn xī tā.",
+        "english": "I wanted to analyze it.",
         "tokens": [
-          "大家",
-          "一起",
+          "我",
+          "想",
+          "要",
           "分析",
-          "吧"
+          "它"
         ]
       }
     },
@@ -2452,14 +2505,16 @@
       "pinyin": "fǎn yìng",
       "english": "To react / to respond",
       "example": {
-        "hanzi": "我很想反应。",
-        "pinyin": "Wǒ hěn xiǎng fǎn yìng.",
-        "english": "I really want to to react.",
+        "hanzi": "反应的时间会很慢。",
+        "pinyin": "Fǎn yìng de shí jiān huì hěn màn.",
+        "english": "The response time would simply be too slow.",
         "tokens": [
-          "我",
+          "反应",
+          "的",
+          "时间",
+          "会",
           "很",
-          "想",
-          "反应"
+          "慢"
         ]
       }
     },
@@ -2470,15 +2525,18 @@
       "pinyin": "dì qū",
       "english": "Local / regional",
       "example": {
-        "hanzi": "这个地区很重要。",
-        "pinyin": "Zhè gè dì qū hěn zhòng yào.",
-        "english": "This concept \"local\" is very important.",
+        "hanzi": "这个地区的人工作很勤奋。",
+        "pinyin": "Zhè gè dì qū de rén gōng zuò hěn qín fèn.",
+        "english": "Everyone around the area works hard.",
         "tokens": [
           "这",
           "个",
           "地区",
+          "的",
+          "人",
+          "工作",
           "很",
-          "重要"
+          "勤奋"
         ]
       }
     },
@@ -2489,15 +2547,17 @@
       "pinyin": "zī liào",
       "english": "Material / resources",
       "example": {
-        "hanzi": "这个资料很好。",
-        "pinyin": "Zhè gè zī liào hěn hǎo.",
-        "english": "This (material) is very good.",
+        "hanzi": "没有这些岛屿的任何资料。",
+        "pinyin": "Méi yǒu zhè xiē dǎo yǔ de rèn hé zī liào.",
+        "english": "They'd never had any information from the Phoenix Islands.",
         "tokens": [
+          "没有",
           "这",
-          "个",
-          "资料",
-          "很",
-          "好"
+          "些",
+          "岛屿",
+          "的",
+          "任何",
+          "资料"
         ]
       }
     },
@@ -2526,15 +2586,15 @@
       "pinyin": "jià zhí",
       "english": "Value / worth",
       "example": {
-        "hanzi": "这个价值很重要。",
-        "pinyin": "Zhè gè jià zhí hěn zhòng yào.",
-        "english": "This concept \"value\" is very important.",
+        "hanzi": "这篇文章没有价值。",
+        "pinyin": "Zhè piān wén zhāng méi yǒu jià zhí.",
+        "english": "This article is of no value.",
         "tokens": [
           "这",
-          "个",
-          "价值",
-          "很",
-          "重要"
+          "篇",
+          "文章",
+          "没有",
+          "价值"
         ]
       }
     },
@@ -2583,14 +2643,20 @@
       "pinyin": "chǎn shēng",
       "english": "To arise; to come into being; to come about",
       "example": {
-        "hanzi": "大家一起产生吧！",
-        "pinyin": "Dà jiā yī qǐ chǎn shēng ba!",
-        "english": "Let's all do this together: to arise; to come into being; to come about!",
+        "hanzi": "也就是这些新技术产生的原因。",
+        "pinyin": "Yě jiù shì zhè xiē xīn jì shù chǎn shēng de yuán yīn.",
+        "english": "And, again, that's where these new technologies can come in.",
         "tokens": [
-          "大家",
-          "一起",
+          "也",
+          "就",
+          "是",
+          "这",
+          "些",
+          "新",
+          "技术",
           "产生",
-          "吧"
+          "的",
+          "原因"
         ]
       }
     },
@@ -2950,15 +3016,15 @@
       "pinyin": "xiàn shí",
       "english": "Reality / actuality",
       "example": {
-        "hanzi": "这个地方非常现实。",
-        "pinyin": "Zhè gè dì fang fēi cháng xiàn shí.",
-        "english": "This place is particularly: reality.",
+        "hanzi": "现实经常只有一个。",
+        "pinyin": "Xiàn shí jīng cháng zhǐ yǒu yī gè.",
+        "english": "There is always only one reality.",
         "tokens": [
-          "这",
-          "个",
-          "地方",
-          "非常",
-          "现实"
+          "现实",
+          "经常",
+          "只有",
+          "一",
+          "个"
         ]
       }
     },
@@ -2969,16 +3035,20 @@
       "pinyin": "bù duàn",
       "english": "Unceasing / uninterrupted",
       "example": {
-        "hanzi": "大家不断看这本书。",
-        "pinyin": "Dà jiā bù duàn kàn zhè běn shū.",
-        "english": "Everyone reads this book (unceasing).",
+        "hanzi": "我们总是在不断地玩着零和游戏。",
+        "pinyin": "Wǒ men zǒng shì zài bù duàn de wán zhe líng hé yóu xì.",
+        "english": "We are always, constantly playing the zero sum game.",
         "tokens": [
-          "大家",
+          "我们",
+          "总是",
+          "在",
           "不断",
-          "看",
-          "这",
-          "本",
-          "书"
+          "地",
+          "玩",
+          "着",
+          "零",
+          "和",
+          "游戏"
         ]
       }
     },
@@ -2989,15 +3059,17 @@
       "pinyin": "méi tǐ",
       "english": "Media, esp. news media",
       "example": {
-        "hanzi": "大家都很了解媒体。",
-        "pinyin": "Dà jiā dōu hěn liǎo jiě méi tǐ.",
-        "english": "Everyone knows a lot about: media, esp. news media.",
+        "hanzi": "我相信这是媒体的未来。",
+        "pinyin": "Wǒ xiāng xìn zhè shì méi tǐ de wèi lái.",
+        "english": "I believe this is the future of media.",
         "tokens": [
-          "大家",
-          "都",
-          "很",
-          "了解",
-          "媒体"
+          "我",
+          "相信",
+          "这",
+          "是",
+          "媒体",
+          "的",
+          "未来"
         ]
       }
     },
@@ -3025,13 +3097,21 @@
       "pinyin": "dǎo zhì",
       "english": "To lead to / to create",
       "example": {
-        "hanzi": "请认真导致。",
-        "pinyin": "Qǐng rèn zhēn dǎo zhì.",
-        "english": "Please carefully practice: to lead to.",
+        "hanzi": "看来有几个原因导致了他的失败。",
+        "pinyin": "Kàn lái yǒu jǐ gè yuán yīn dǎo zhì le tā de shī bài.",
+        "english": "There seem to be several reasons for his failure.",
         "tokens": [
-          "请",
-          "认真",
-          "导致"
+          "看",
+          "来",
+          "有",
+          "几",
+          "个",
+          "原因",
+          "导致",
+          "了",
+          "他",
+          "的",
+          "失败"
         ]
       }
     },
@@ -3157,15 +3237,18 @@
       "pinyin": "zhēn shí",
       "english": "True; real",
       "example": {
-        "hanzi": "今天的情况很真实。",
-        "pinyin": "Jīn tiān de qíng kuàng hěn zhēn shí.",
-        "english": "Today's situation is very: true; real.",
+        "hanzi": "请把真实的情况说出来。",
+        "pinyin": "Qǐng bǎ zhēn shí de qíng kuàng shuō chū lái.",
+        "english": "Please tell the truth.",
         "tokens": [
-          "今天",
+          "请",
+          "把",
+          "真实",
           "的",
           "情况",
-          "很",
-          "真实"
+          "说",
+          "出",
+          "来"
         ]
       }
     },
@@ -3199,14 +3282,15 @@
       "pinyin": "kōng jiān",
       "english": "Space; room / (fig.) scope; leeway",
       "example": {
-        "hanzi": "这里需要新的空间。",
-        "pinyin": "Zhè lǐ xū yào xīn de kōng jiān.",
-        "english": "Here we need something new: space; room.",
+        "hanzi": "你需要一个安全的空间。",
+        "pinyin": "Nǐ xū yào yī gè ān quán de kōng jiān.",
+        "english": "You need a safe space.",
         "tokens": [
-          "这",
-          "里",
+          "你",
           "需要",
-          "新",
+          "一",
+          "个",
+          "安全",
           "的",
           "空间"
         ]
@@ -3314,15 +3398,18 @@
       "pinyin": "fàn wéi",
       "english": "Range / scope",
       "example": {
-        "hanzi": "大家都很了解范围。",
-        "pinyin": "Dà jiā dōu hěn liǎo jiě fàn wéi.",
-        "english": "Everyone knows a lot about: range.",
+        "hanzi": "这个问题的实际范围是什么？",
+        "pinyin": "Zhè gè wèn tí de shí jì fàn wéi shì shén me?",
+        "english": "What's actually the scope of the problem?",
         "tokens": [
-          "大家",
-          "都",
-          "很",
-          "了解",
-          "范围"
+          "这",
+          "个",
+          "问题",
+          "的",
+          "实际",
+          "范围",
+          "是",
+          "什么"
         ]
       }
     },
@@ -3579,14 +3666,16 @@
       "pinyin": "dí què",
       "english": "Really / indeed",
       "example": {
-        "hanzi": "大家的确完成任务。",
-        "pinyin": "Dà jiā dí què wán chéng rèn wu.",
-        "english": "Everyone completes the task (really).",
+        "hanzi": "电视的确有一些缺点。",
+        "pinyin": "Diàn shì dí què yǒu yī xiē quē diǎn.",
+        "english": "It is true that television also has some disadvantages.",
         "tokens": [
-          "大家",
+          "电视",
           "的确",
-          "完成",
-          "任务"
+          "有",
+          "一",
+          "些",
+          "缺点"
         ]
       }
     },
@@ -3597,15 +3686,18 @@
       "pinyin": "shēn fèn",
       "english": "Identity / aspect of one's identity",
       "example": {
-        "hanzi": "这个身份很重要。",
-        "pinyin": "Zhè gè shēn fèn hěn zhòng yào.",
-        "english": "This concept \"identity\" is very important.",
+        "hanzi": "建立身份所需要的是改变世界。",
+        "pinyin": "Jiàn lì shēn fèn suǒ xū yào de shì gǎi biàn shì jiè.",
+        "english": "Building identity is about changing the world.",
         "tokens": [
-          "这",
-          "个",
+          "建立",
           "身份",
-          "很",
-          "重要"
+          "所",
+          "需要",
+          "的",
+          "是",
+          "改变",
+          "世界"
         ]
       }
     },
@@ -3689,14 +3781,17 @@
       "pinyin": "chǎn pǐn",
       "english": "Goods / merchandise",
       "example": {
-        "hanzi": "我们讨论过产品。",
-        "pinyin": "Wǒ men tǎo lùn guo chǎn pǐn.",
-        "english": "We have already discussed: goods.",
+        "hanzi": "这个产品是中国制造的。",
+        "pinyin": "Zhè gè chǎn pǐn shì Zhōng guó zhì zào de.",
+        "english": "This product was made in China.",
         "tokens": [
-          "我们",
-          "讨论",
-          "过",
-          "产品"
+          "这",
+          "个",
+          "产品",
+          "是",
+          "中国",
+          "制造",
+          "的"
         ]
       }
     },
@@ -3764,14 +3859,17 @@
       "pinyin": "lǐng dǎo",
       "english": "Lead / leading",
       "example": {
-        "hanzi": "我们开始领导了。",
-        "pinyin": "Wǒ men kāi shǐ lǐng dǎo le.",
-        "english": "We have started to lead.",
+        "hanzi": "我们仍然还有时间去领导。",
+        "pinyin": "Wǒ men réng rán hái yǒu shí jiān qù lǐng dǎo.",
+        "english": "There's still time to lead.",
         "tokens": [
           "我们",
-          "开始",
-          "领导",
-          "了"
+          "仍然",
+          "还",
+          "有",
+          "时间",
+          "去",
+          "领导"
         ]
       }
     },
@@ -3876,15 +3974,20 @@
       "pinyin": "chéng dù",
       "english": "Degree; level; extent",
       "example": {
-        "hanzi": "这个程度很重要。",
-        "pinyin": "Zhè gè chéng dù hěn zhòng yào.",
-        "english": "This concept \"degree; level; extent\" is very important.",
+        "hanzi": "现在的人教育程度比以前高得多。",
+        "pinyin": "Xiàn zài de rén jiào yù chéng dù bǐ yǐ qián gāo de duō.",
+        "english": "People are more educated now than they used to be.",
         "tokens": [
-          "这",
-          "个",
+          "现在",
+          "的",
+          "人",
+          "教育",
           "程度",
-          "很",
-          "重要"
+          "比",
+          "以前",
+          "高",
+          "得",
+          "多"
         ]
       }
     },
@@ -3932,14 +4035,14 @@
       "pinyin": "xuān bù",
       "english": "To declare / to announce",
       "example": {
-        "hanzi": "大家一起宣布吧！",
-        "pinyin": "Dà jiā yī qǐ xuān bù ba!",
-        "english": "Let's all do this together: to declare!",
+        "hanzi": "宣布停火了。",
+        "pinyin": "Xuān bù tíng huǒ le.",
+        "english": "A ceasefire was declared.",
         "tokens": [
-          "大家",
-          "一起",
           "宣布",
-          "吧"
+          "停",
+          "火",
+          "了"
         ]
       }
     },
@@ -3969,15 +4072,17 @@
       "pinyin": "chuàng zào",
       "english": "To create / to bring about",
       "example": {
-        "hanzi": "他每天都创造。",
-        "pinyin": "Tā měi tiān dōu chuàng zào.",
-        "english": "Every day he practices: to create.",
+        "hanzi": "九十件是你自己创造的。",
+        "pinyin": "Jiǔshí jiàn shì nǐ zì jǐ chuàng zào de.",
+        "english": "Out of 100, 90 are your creation.",
         "tokens": [
-          "他",
-          "每",
-          "天",
-          "都",
-          "创造"
+          "九十",
+          "件",
+          "是",
+          "你",
+          "自己",
+          "创造",
+          "的"
         ]
       }
     },
@@ -4024,13 +4129,15 @@
       "pinyin": "shù jù",
       "english": "Data",
       "example": {
-        "hanzi": "我们讨论过数据。",
-        "pinyin": "Wǒ men tǎo lùn guo shù jù.",
-        "english": "We have already discussed: data.",
+        "hanzi": "让我们看一些数据。",
+        "pinyin": "Ràng wǒ men kàn yī xiē shù jù.",
+        "english": "Let's look at some data.",
         "tokens": [
+          "让",
           "我们",
-          "讨论",
-          "过",
+          "看",
+          "一",
+          "些",
           "数据"
         ]
       }
@@ -4062,13 +4169,14 @@
       "pinyin": "sī xiǎng",
       "english": "Thought / thinking",
       "example": {
-        "hanzi": "我们讨论过思想。",
-        "pinyin": "Wǒ men tǎo lùn guo sī xiǎng.",
-        "english": "We have already discussed: thought.",
+        "hanzi": "借用他的思想。",
+        "pinyin": "Jiè yòng tā de sī xiǎng.",
+        "english": "Borrow his thoughts.",
         "tokens": [
-          "我们",
-          "讨论",
-          "过",
+          "借",
+          "用",
+          "他",
+          "的",
           "思想"
         ]
       }
@@ -4116,13 +4224,19 @@
       "pinyin": "wěn dìng",
       "english": "Steady / stable",
       "example": {
-        "hanzi": "我们正在稳定。",
-        "pinyin": "Wǒ men zhèng zài wěn dìng.",
-        "english": "We are currently practicing: steady.",
+        "hanzi": "那是一个稳定而健康的状态。",
+        "pinyin": "Nà shì yī gè wěn dìng ér jiàn kāng de zhuàng tài.",
+        "english": "That's a stable and healthy condition.",
         "tokens": [
-          "我们",
-          "正在",
-          "稳定"
+          "那",
+          "是",
+          "一",
+          "个",
+          "稳定",
+          "而",
+          "健康",
+          "的",
+          "状态"
         ]
       }
     },
@@ -4212,13 +4326,12 @@
       "pinyin": "tǔ dì",
       "english": "Land / soil",
       "example": {
-        "hanzi": "大家都知道土地。",
-        "pinyin": "Dà jiā dōu zhī dào tǔ dì.",
-        "english": "Everyone knows about (land).",
+        "hanzi": "首先需要土地。",
+        "pinyin": "Shǒu xiān xū yào tǔ dì.",
+        "english": "First you need access to land.",
         "tokens": [
-          "大家",
-          "都",
-          "知道",
+          "首先",
+          "需要",
           "土地"
         ]
       }
@@ -4440,14 +4553,15 @@
       "pinyin": "duì shǒu",
       "english": "Opponent / rival",
       "example": {
-        "hanzi": "大家都很了解对手。",
-        "pinyin": "Dà jiā dōu hěn liǎo jiě duì shǒu.",
-        "english": "Everyone knows a lot about: opponent.",
+        "hanzi": "你不是他的对手。",
+        "pinyin": "Nǐ bù shì tā de duì shǒu.",
+        "english": "You're no match for him.",
         "tokens": [
-          "大家",
-          "都",
-          "很",
-          "了解",
+          "你",
+          "不",
+          "是",
+          "他",
+          "的",
           "对手"
         ]
       }
@@ -4481,14 +4595,19 @@
       "pinyin": "dāng dì",
       "english": "Local",
       "example": {
-        "hanzi": "我们今天看当地。",
-        "pinyin": "Wǒ men jīn tiān kàn dāng dì.",
-        "english": "Today we are looking at (local).",
+        "hanzi": "你不会相信这是当地产品的。",
+        "pinyin": "Nǐ bù huì xiāng xìn zhè shì dāng dì chǎn pǐn de.",
+        "english": "You wouldn't believe it's a local product.",
         "tokens": [
-          "我们",
-          "今天",
-          "看",
-          "当地"
+          "你",
+          "不",
+          "会",
+          "相信",
+          "这",
+          "是",
+          "当地",
+          "产品",
+          "的"
         ]
       }
     },
@@ -4517,13 +4636,14 @@
       "pinyin": "bèi",
       "english": "Back / Carry on one's back",
       "example": {
-        "hanzi": "我们正在背。",
-        "pinyin": "Wǒ men zhèng zài bèi.",
-        "english": "We are currently practicing: back.",
+        "hanzi": "我背不好。",
+        "pinyin": "Wǒ bèi bù hǎo.",
+        "english": "I have back problems.",
         "tokens": [
-          "我们",
-          "正在",
-          "背"
+          "我",
+          "背",
+          "不",
+          "好"
         ]
       }
     },
@@ -4552,14 +4672,17 @@
       "pinyin": "tè shū",
       "english": "Special / particular",
       "example": {
-        "hanzi": "他现在很特殊。",
-        "pinyin": "Tā xiàn zài hěn tè shū.",
-        "english": "He is very special right now.",
+        "hanzi": "发生了一件特殊的事情。",
+        "pinyin": "Fā shēng le yī jiàn tè shū de shì qing.",
+        "english": "A very specific thing happened.",
         "tokens": [
-          "他",
-          "现在",
-          "很",
-          "特殊"
+          "发生",
+          "了",
+          "一",
+          "件",
+          "特殊",
+          "的",
+          "事情"
         ]
       }
     },
@@ -4631,13 +4754,14 @@
       "pinyin": "jué sè",
       "english": "Role / character in a novel",
       "example": {
-        "hanzi": "我们讨论过角色。",
-        "pinyin": "Wǒ men tǎo lùn guo jué sè.",
-        "english": "We have already discussed: role.",
+        "hanzi": "国家能承担什么角色？",
+        "pinyin": "Guó jiā néng chéng dān shén me jué sè?",
+        "english": "What Role for the State?",
         "tokens": [
-          "我们",
-          "讨论",
-          "过",
+          "国家",
+          "能",
+          "承担",
+          "什么",
           "角色"
         ]
       }
@@ -4707,14 +4831,21 @@
       "pinyin": "tóu rù",
       "english": "To throw into / to put into",
       "example": {
-        "hanzi": "我们应该认真投入。",
-        "pinyin": "Wǒ men yīng gāi rèn zhēn tóu rù.",
-        "english": "We should seriously to throw into.",
+        "hanzi": "增加教育投入需要在两大关键领域采取行动。",
+        "pinyin": "Zēng jiā jiào yù tóu rù xū yào zài liǎng dà guān jiàn lǐng yù cǎi qǔ xíng dòng.",
+        "english": "Fixing education investment requires action in two key areas.",
         "tokens": [
-          "我们",
-          "应该",
-          "认真",
-          "投入"
+          "增加",
+          "教育",
+          "投入",
+          "需要",
+          "在",
+          "两",
+          "大",
+          "关键",
+          "领域",
+          "采取",
+          "行动"
         ]
       }
     },
@@ -4762,15 +4893,15 @@
       "pinyin": "chū kǒu",
       "english": "An exit / to speak",
       "example": {
-        "hanzi": "他每天都出口。",
-        "pinyin": "Tā měi tiān dōu chū kǒu.",
-        "english": "Every day he practices: an exit.",
+        "hanzi": "就要说出口了。",
+        "pinyin": "Jiù yào shuō chū kǒu le.",
+        "english": "It's on the tip of my tongue.",
         "tokens": [
-          "他",
-          "每",
-          "天",
-          "都",
-          "出口"
+          "就",
+          "要",
+          "说",
+          "出口",
+          "了"
         ]
       }
     },
@@ -4823,15 +4954,17 @@
       "pinyin": "cǎi qǔ",
       "english": "To adopt or carry out / to take",
       "example": {
-        "hanzi": "他每天都采取。",
-        "pinyin": "Tā měi tiān dōu cǎi qǔ.",
-        "english": "Every day he practices: to adopt or carry out.",
+        "hanzi": "我采取了一个直接方法。",
+        "pinyin": "Wǒ cǎi qǔ le yī gè zhí jiē fāng fǎ.",
+        "english": "I took a direct approach.",
         "tokens": [
-          "他",
-          "每",
-          "天",
-          "都",
-          "采取"
+          "我",
+          "采取",
+          "了",
+          "一",
+          "个",
+          "直接",
+          "方法"
         ]
       }
     },
@@ -4842,13 +4975,13 @@
       "pinyin": "yì wài",
       "english": "Unexpected / accident",
       "example": {
-        "hanzi": "今天的情况很意外。",
-        "pinyin": "Jīn tiān de qíng kuàng hěn yì wài.",
-        "english": "Today's situation is very: unexpected.",
+        "hanzi": "这真是很意外。",
+        "pinyin": "Zhè zhēn shì hěn yì wài.",
+        "english": "That is rather unexpected.",
         "tokens": [
-          "今天",
-          "的",
-          "情况",
+          "这",
+          "真",
+          "是",
           "很",
           "意外"
         ]
@@ -4920,14 +5053,15 @@
       "pinyin": "píng",
       "english": "Flat / level",
       "example": {
-        "hanzi": "明天再平吧。",
-        "pinyin": "Míng tiān zài píng ba.",
-        "english": "Let's flat tomorrow instead.",
+        "hanzi": "地球不是平的。",
+        "pinyin": "Dì qiú bù shì píng de.",
+        "english": "The Earth is not flat.",
         "tokens": [
-          "明天",
-          "再",
+          "地球",
+          "不",
+          "是",
           "平",
-          "吧"
+          "的"
         ]
       }
     },
@@ -4959,12 +5093,15 @@
       "pinyin": "guān chá",
       "english": "To observe; to watch; to survey",
       "example": {
-        "hanzi": "我们正在观察。",
-        "pinyin": "Wǒ men zhèng zài guān chá.",
-        "english": "We are currently practicing: to observe; to watch; to survey.",
+        "hanzi": "你做了一个观察。",
+        "pinyin": "Nǐ zuò le yī gè guān chá.",
+        "english": "You've made one observation.",
         "tokens": [
-          "我们",
-          "正在",
+          "你",
+          "做",
+          "了",
+          "一",
+          "个",
           "观察"
         ]
       }
@@ -5032,15 +5169,15 @@
       "pinyin": "zhòng dà",
       "english": "Great / important",
       "example": {
-        "hanzi": "这里的环境真重大！",
-        "pinyin": "Zhè lǐ de huán jìng zhēn zhòng dà!",
-        "english": "The environment here is really: great!",
+        "hanzi": "不只是钱关系重大。",
+        "pinyin": "Bù zhǐ shì qián guān xi zhòng dà.",
+        "english": "Money isn't the only thing that matters.",
         "tokens": [
-          "这",
-          "里",
-          "的",
-          "环境",
-          "真",
+          "不",
+          "只",
+          "是",
+          "钱",
+          "关系",
           "重大"
         ]
       }
@@ -5094,15 +5231,18 @@
       "pinyin": "shí shàng",
       "english": "Fashion / fad",
       "example": {
-        "hanzi": "大家都很了解时尚。",
-        "pinyin": "Dà jiā dōu hěn liǎo jiě shí shàng.",
-        "english": "Everyone knows a lot about: fashion.",
+        "hanzi": "我喜欢时尚杂志和漂亮的东西。",
+        "pinyin": "Wǒ xǐ huan shí shàng zá zhì hé piào liang de dōng xi.",
+        "english": "I enjoy fashion magazines and pretty things.",
         "tokens": [
-          "大家",
-          "都",
-          "很",
-          "了解",
-          "时尚"
+          "我",
+          "喜欢",
+          "时尚",
+          "杂志",
+          "和",
+          "漂亮",
+          "的",
+          "东西"
         ]
       }
     },
@@ -5113,15 +5253,16 @@
       "pinyin": "chéng xù",
       "english": "Procedures / sequence",
       "example": {
-        "hanzi": "这里需要新的程序。",
-        "pinyin": "Zhè lǐ xū yào xīn de chéng xù.",
-        "english": "Here we need something new: procedures.",
+        "hanzi": "我们现在关掉这个程序。",
+        "pinyin": "Wǒ men xiàn zài guān diào zhè gè chéng xù.",
+        "english": "We'd like to actually turn that program off.",
         "tokens": [
+          "我们",
+          "现在",
+          "关",
+          "掉",
           "这",
-          "里",
-          "需要",
-          "新",
-          "的",
+          "个",
           "程序"
         ]
       }
@@ -5191,15 +5332,19 @@
       "pinyin": "hé tong",
       "english": "(business) contract",
       "example": {
-        "hanzi": "书上提到了合同。",
-        "pinyin": "Shū shàng tí dào le hé tong.",
-        "english": "The book mentions: (business) contract.",
+        "hanzi": "我和这家公司签了三年合同。",
+        "pinyin": "Wǒ hé zhè jiā gōng sī qiān le sān nián hé tong.",
+        "english": "This company and I have signed a contract of three years.",
         "tokens": [
-          "书",
-          "上",
-          "提",
-          "到",
+          "我",
+          "和",
+          "这",
+          "家",
+          "公司",
+          "签",
           "了",
+          "三",
+          "年",
           "合同"
         ]
       }
@@ -5350,14 +5495,19 @@
       "pinyin": "xìn hào",
       "english": "Signal",
       "example": {
-        "hanzi": "这里需要新的信号。",
-        "pinyin": "Zhè lǐ xū yào xīn de xìn hào.",
-        "english": "Here we need something new: signal.",
+        "hanzi": "它让我们可以解释其中复杂和矛盾的信号。",
+        "pinyin": "Tā ràng wǒ men kě yǐ jiě shì qí zhōng fù zá hé máo dùn de xìn hào.",
+        "english": "They allow us to interpret its complex and contradictory signals.",
         "tokens": [
-          "这",
-          "里",
-          "需要",
-          "新",
+          "它",
+          "让",
+          "我们",
+          "可以",
+          "解释",
+          "其中",
+          "复杂",
+          "和",
+          "矛盾",
           "的",
           "信号"
         ]
@@ -5407,15 +5557,13 @@
       "pinyin": "zhèng jù",
       "english": "Evidence / proof",
       "example": {
-        "hanzi": "书上提到了证据。",
-        "pinyin": "Shū shàng tí dào le zhèng jù.",
-        "english": "The book mentions: evidence.",
+        "hanzi": "这是科学证据。",
+        "pinyin": "Zhè shì kē xué zhèng jù.",
+        "english": "So, there is scientific evidence.",
         "tokens": [
-          "书",
-          "上",
-          "提",
-          "到",
-          "了",
+          "这",
+          "是",
+          "科学",
           "证据"
         ]
       }
@@ -5448,15 +5596,17 @@
       "pinyin": "zhì zuò",
       "english": "To make; to manufacture",
       "example": {
-        "hanzi": "明天再制作好吗？",
-        "pinyin": "Míng tiān zài zhì zuò hǎo ma?",
-        "english": "Shall we continue tomorrow with: to make; to manufacture?",
+        "hanzi": "我们经常制作这种小电影。",
+        "pinyin": "Wǒ men jīng cháng zhì zuò zhè zhǒng xiǎo diàn yǐng.",
+        "english": "We quite often make little movies.",
         "tokens": [
-          "明天",
-          "再",
+          "我们",
+          "经常",
           "制作",
-          "好",
-          "吗"
+          "这",
+          "种",
+          "小",
+          "电影"
         ]
       }
     },
@@ -5467,14 +5617,16 @@
       "pinyin": "jiào liàn",
       "english": "Instructor / sports coach",
       "example": {
-        "hanzi": "我很喜欢新教练。",
-        "pinyin": "Wǒ hěn xǐ huan xīn jiào liàn.",
-        "english": "I really like the new (instructor).",
+        "hanzi": "去找到一个声音教练。",
+        "pinyin": "Qù zhǎo dào yī gè shēng yīn jiào liàn.",
+        "english": "Go and get a voice coach.",
         "tokens": [
-          "我",
-          "很",
-          "喜欢",
-          "新",
+          "去",
+          "找",
+          "到",
+          "一",
+          "个",
+          "声音",
           "教练"
         ]
       }
@@ -5486,14 +5638,21 @@
       "pinyin": "jì yì",
       "english": "To remember / to recall",
       "example": {
-        "hanzi": "大家一起记忆吧！",
-        "pinyin": "Dà jiā yī qǐ jì yì ba!",
-        "english": "Let's all do this together: to remember!",
+        "hanzi": "我们和家人一起创造的记忆最为重要。",
+        "pinyin": "Wǒ men hé jiā rén yī qǐ chuàng zào de jì yì zuì wèi zhòng yào.",
+        "english": "The memories we make with our family are everything.",
         "tokens": [
-          "大家",
+          "我们",
+          "和",
+          "家",
+          "人",
           "一起",
+          "创造",
+          "的",
           "记忆",
-          "吧"
+          "最",
+          "为",
+          "重要"
         ]
       }
     },
@@ -5636,14 +5795,18 @@
       "pinyin": "nèi bù",
       "english": "Interior / inside (part, section)",
       "example": {
-        "hanzi": "大家都很了解内部。",
-        "pinyin": "Dà jiā dōu hěn liǎo jiě nèi bù.",
-        "english": "Everyone knows a lot about: interior.",
+        "hanzi": "我们现在知道它可能是来自地球内部。",
+        "pinyin": "Wǒ men xiàn zài zhī dào tā kě néng shì lái zì dì qiú nèi bù.",
+        "english": "What we find out now is that it's probably coming from inside the Earth.",
         "tokens": [
-          "大家",
-          "都",
-          "很",
-          "了解",
+          "我们",
+          "现在",
+          "知道",
+          "它",
+          "可能",
+          "是",
+          "来自",
+          "地球",
           "内部"
         ]
       }
@@ -5769,13 +5932,17 @@
       "pinyin": "chuī",
       "english": "To blow / to play a wind instrument",
       "example": {
-        "hanzi": "我们正在吹。",
-        "pinyin": "Wǒ men zhèng zài chuī.",
-        "english": "We are currently practicing: to blow.",
+        "hanzi": "我会吹干她的头发。",
+        "pinyin": "Wǒ huì chuī gàn tā de tóu fa.",
+        "english": "I'd blow-dry her hair.",
         "tokens": [
-          "我们",
-          "正在",
-          "吹"
+          "我",
+          "会",
+          "吹",
+          "干",
+          "她",
+          "的",
+          "头发"
         ]
       }
     },
@@ -6055,16 +6222,15 @@
       "pinyin": "jiē duàn",
       "english": "Stage / section",
       "example": {
-        "hanzi": "书上提到了阶段。",
-        "pinyin": "Shū shàng tí dào le jiē duàn.",
-        "english": "The book mentions: stage.",
+        "hanzi": "我们从第一阶段开始。",
+        "pinyin": "Wǒ men cóng dì yī jiē duàn kāi shǐ.",
+        "english": "Okay, we're going to start with the first stage.",
         "tokens": [
-          "书",
-          "上",
-          "提",
-          "到",
-          "了",
-          "阶段"
+          "我们",
+          "从",
+          "第一",
+          "阶段",
+          "开始"
         ]
       }
     },
@@ -6094,15 +6260,19 @@
       "pinyin": "yī zhì",
       "english": "Unanimous / identical (views or opinions)",
       "example": {
-        "hanzi": "我觉得这很一致。",
-        "pinyin": "Wǒ jué de zhè hěn yī zhì.",
-        "english": "I find this very unanimous.",
+        "hanzi": "你的精神和行为能完全一致吗？",
+        "pinyin": "Nǐ de jīng shén hé xíng wéi néng wán quán yī zhì ma?",
+        "english": "Your mental states are identical with your behavior?",
         "tokens": [
-          "我",
-          "觉得",
-          "这",
-          "很",
-          "一致"
+          "你",
+          "的",
+          "精神",
+          "和",
+          "行为",
+          "能",
+          "完全",
+          "一致",
+          "吗"
         ]
       }
     },
@@ -6151,15 +6321,21 @@
       "pinyin": "cì jī",
       "english": "To provoke; to irritate; to upset; to stimulate; to excite / irritant",
       "example": {
-        "hanzi": "明天再刺激好吗？",
-        "pinyin": "Míng tiān zài cì jī hǎo ma?",
-        "english": "Shall we continue tomorrow with: to provoke; to irritate; to upset; to stimulate; to excite?",
+        "hanzi": "我不想要有太多的外来刺激。",
+        "pinyin": "Wǒ bù xiǎng yào yǒu tài duō de wài lái cì jī.",
+        "english": "I want to not have external stimulation.",
         "tokens": [
-          "明天",
-          "再",
-          "刺激",
-          "好",
-          "吗"
+          "我",
+          "不",
+          "想",
+          "要",
+          "有",
+          "太",
+          "多",
+          "的",
+          "外",
+          "来",
+          "刺激"
         ]
       }
     },
@@ -6170,14 +6346,21 @@
       "pinyin": "fǎn zhèng",
       "english": "Anyway / in any case",
       "example": {
-        "hanzi": "他一直反正工作。",
-        "pinyin": "Tā yī zhí fǎn zhèng gōng zuò.",
-        "english": "He keeps working (anyway).",
+        "hanzi": "反正很有可能别的东西也会坏掉。",
+        "pinyin": "Fǎn zhèng hěn yǒu kě néng bié de dōng xi yě huì huài diào.",
+        "english": "Probably something else will break anyway.",
         "tokens": [
-          "他",
-          "一直",
           "反正",
-          "工作"
+          "很",
+          "有",
+          "可能",
+          "别",
+          "的",
+          "东西",
+          "也",
+          "会",
+          "坏",
+          "掉"
         ]
       }
     },
@@ -6299,13 +6482,19 @@
       "pinyin": "què rèn",
       "english": "To confirm / to verify",
       "example": {
-        "hanzi": "请你多确认。",
-        "pinyin": "Qǐng nǐ duō què rèn.",
-        "english": "Please to confirm more often.",
+        "hanzi": "但是所有这些数据都没有得到确认。",
+        "pinyin": "Dàn shì suǒ yǒu zhè xiē shù jù dōu méi yǒu de dào què rèn.",
+        "english": "However, all these data were not confirmed.",
         "tokens": [
-          "请",
-          "你",
-          "多",
+          "但是",
+          "所有",
+          "这",
+          "些",
+          "数据",
+          "都",
+          "没有",
+          "得",
+          "到",
           "确认"
         ]
       }
@@ -6432,14 +6621,16 @@
       "pinyin": "hǎn",
       "english": "To yell / to shout",
       "example": {
-        "hanzi": "大家一起喊吧！",
-        "pinyin": "Dà jiā yī qǐ hǎn ba!",
-        "english": "Let's all do this together: to yell!",
+        "hanzi": "有人喊我的名字。",
+        "pinyin": "Yǒu rén hǎn wǒ de míng zi.",
+        "english": "Someone's shouted my name.",
         "tokens": [
-          "大家",
-          "一起",
+          "有",
+          "人",
           "喊",
-          "吧"
+          "我",
+          "的",
+          "名字"
         ]
       }
     },
@@ -6469,15 +6660,19 @@
       "pinyin": "jǐn jí",
       "english": "Urgent / emergency",
       "example": {
-        "hanzi": "今天的情况很紧急。",
-        "pinyin": "Jīn tiān de qíng kuàng hěn jǐn jí.",
-        "english": "Today's situation is very: urgent.",
+        "hanzi": "这部分是所有重要的紧急开关。",
+        "pinyin": "Zhè bù fen shì suǒ yǒu zhòng yào de jǐn jí kāi guān.",
+        "english": "Here's the section on the all-important emergency stop switch.",
         "tokens": [
-          "今天",
+          "这",
+          "部分",
+          "是",
+          "所有",
+          "重要",
           "的",
-          "情况",
-          "很",
-          "紧急"
+          "紧急",
+          "开",
+          "关"
         ]
       }
     },
@@ -6509,15 +6704,16 @@
       "pinyin": "yōu shì",
       "english": "Superiority / dominance",
       "example": {
-        "hanzi": "这个优势很重要。",
-        "pinyin": "Zhè gè yōu shì hěn zhòng yào.",
-        "english": "This concept \"superiority\" is very important.",
+        "hanzi": "这往往是时间的优势。",
+        "pinyin": "Zhè wǎng wǎng shì shí jiān de yōu shì.",
+        "english": "That's often the advantage of time.",
         "tokens": [
           "这",
-          "个",
-          "优势",
-          "很",
-          "重要"
+          "往往",
+          "是",
+          "时间",
+          "的",
+          "优势"
         ]
       }
     },
@@ -6744,15 +6940,19 @@
       "pinyin": "shāng yè",
       "english": "Business / trade",
       "example": {
-        "hanzi": "大家都很了解商业。",
-        "pinyin": "Dà jiā dōu hěn liǎo jiě shāng yè.",
-        "english": "Everyone knows a lot about: business.",
+        "hanzi": "当然它也有很好的商业意义。",
+        "pinyin": "Dāng rán tā yě yǒu hěn hǎo de shāng yè yì yì.",
+        "english": "Bonus, it also makes good business sense.",
         "tokens": [
-          "大家",
-          "都",
+          "当然",
+          "它",
+          "也",
+          "有",
           "很",
-          "了解",
-          "商业"
+          "好",
+          "的",
+          "商业",
+          "意义"
         ]
       }
     },
@@ -6854,15 +7054,17 @@
       "pinyin": "shēng chǎn",
       "english": "To produce; to manufacture / to give birth to a child",
       "example": {
-        "hanzi": "明天再生产好吗？",
-        "pinyin": "Míng tiān zài shēng chǎn hǎo ma?",
-        "english": "Shall we continue tomorrow with: to produce; to manufacture?",
+        "hanzi": "有多少玉米被生产出来？",
+        "pinyin": "Yǒu duō shao yù mǐ bèi shēng chǎn chū lái?",
+        "english": "How much corn is being produced?",
         "tokens": [
-          "明天",
-          "再",
+          "有",
+          "多少",
+          "玉米",
+          "被",
           "生产",
-          "好",
-          "吗"
+          "出",
+          "来"
         ]
       }
     },
@@ -6891,15 +7093,16 @@
       "pinyin": "chéng zhǎng",
       "english": "To mature / to grow",
       "example": {
-        "hanzi": "我相信她能成长。",
-        "pinyin": "Wǒ xiāng xìn tā néng chéng zhǎng.",
-        "english": "I believe she can to mature.",
+        "hanzi": "角色应该有成长和变化。",
+        "pinyin": "Jué sè yīng gāi yǒu chéng zhǎng hé biàn huà.",
+        "english": "Characters are supposed to grow and change.",
         "tokens": [
-          "我",
-          "相信",
-          "她",
-          "能",
-          "成长"
+          "角色",
+          "应该",
+          "有",
+          "成长",
+          "和",
+          "变化"
         ]
       }
     },
@@ -6969,13 +7172,18 @@
       "pinyin": "gài",
       "english": "To cover / Lid",
       "example": {
-        "hanzi": "请认真盖。",
-        "pinyin": "Qǐng rèn zhēn gài.",
-        "english": "Please carefully practice: to cover.",
+        "hanzi": "新买的被子盖起来非常暖和。",
+        "pinyin": "Xīn mǎi de bèi zi gài qǐ lai fēi cháng nuǎn huo.",
+        "english": "The newly bought quilt is very warm when covered.",
         "tokens": [
-          "请",
-          "认真",
-          "盖"
+          "新",
+          "买",
+          "的",
+          "被子",
+          "盖",
+          "起来",
+          "非常",
+          "暖和"
         ]
       }
     },
@@ -6986,15 +7194,16 @@
       "pinyin": "yuán zé",
       "english": "Principle / doctrine",
       "example": {
-        "hanzi": "这个原则非常好。",
-        "pinyin": "Zhè gè yuán zé fēi cháng hǎo.",
-        "english": "This (principle) is extremely good.",
+        "hanzi": "下一条原则是理解。",
+        "pinyin": "Xià yī tiáo yuán zé shì lǐ jiě.",
+        "english": "The next principle is understand.",
         "tokens": [
-          "这",
-          "个",
+          "下",
+          "一",
+          "条",
           "原则",
-          "非常",
-          "好"
+          "是",
+          "理解"
         ]
       }
     },
@@ -7063,12 +7272,19 @@
       "pinyin": "zǔ hé",
       "english": "To assemble / to combine",
       "example": {
-        "hanzi": "她喜欢组合。",
-        "pinyin": "Tā xǐ huan zǔ hé.",
-        "english": "She likes to to assemble.",
+        "hanzi": "这里你可以看到漂亮的颜色组合。",
+        "pinyin": "Zhè lǐ nǐ kě yǐ kàn dào piào liang de yán sè zǔ hé.",
+        "english": "Here you can see beautiful colour combinations.",
         "tokens": [
-          "她",
-          "喜欢",
+          "这",
+          "里",
+          "你",
+          "可以",
+          "看",
+          "到",
+          "漂亮",
+          "的",
+          "颜色",
           "组合"
         ]
       }
@@ -7195,15 +7411,19 @@
       "pinyin": "bìng dú",
       "english": "Virus",
       "example": {
-        "hanzi": "这个病毒很重要。",
-        "pinyin": "Zhè gè bìng dú hěn zhòng yào.",
-        "english": "This concept \"virus\" is very important.",
+        "hanzi": "这些点都是病毒集中的地方。",
+        "pinyin": "Zhè xiē diǎn dōu shì bìng dú jí zhōng de dì fang.",
+        "english": "All those dots are viral focuses.",
         "tokens": [
           "这",
-          "个",
+          "些",
+          "点",
+          "都",
+          "是",
           "病毒",
-          "很",
-          "重要"
+          "集中",
+          "的",
+          "地方"
         ]
       }
     },
@@ -7214,16 +7434,18 @@
       "pinyin": "liáng hǎo",
       "english": "Good / favorable",
       "example": {
-        "hanzi": "这里的环境真良好！",
-        "pinyin": "Zhè lǐ de huán jìng zhēn liáng hǎo!",
-        "english": "The environment here is really: good!",
+        "hanzi": "这明显不是个良好的形势。",
+        "pinyin": "Zhè míng xiǎn bù shì gè liáng hǎo de xíng shì.",
+        "english": "This is clearly not a good arrangement.",
         "tokens": [
           "这",
-          "里",
+          "明显",
+          "不",
+          "是",
+          "个",
+          "良好",
           "的",
-          "环境",
-          "真",
-          "良好"
+          "形势"
         ]
       }
     },
@@ -7253,14 +7475,17 @@
       "pinyin": "sī kǎo",
       "english": "To reflect on / to ponder over",
       "example": {
-        "hanzi": "大家一起思考吧！",
-        "pinyin": "Dà jiā yī qǐ sī kǎo ba!",
-        "english": "Let's all do this together: to reflect on!",
+        "hanzi": "我现在几乎不能够思考。",
+        "pinyin": "Wǒ xiàn zài jī hū bù néng gòu sī kǎo.",
+        "english": "I can barely think right now.",
         "tokens": [
-          "大家",
-          "一起",
-          "思考",
-          "吧"
+          "我",
+          "现在",
+          "几乎",
+          "不",
+          "能",
+          "够",
+          "思考"
         ]
       }
     },
@@ -7271,14 +7496,15 @@
       "pinyin": "qiān",
       "english": "To sign one's name / to write brief comments on a document",
       "example": {
-        "hanzi": "大家一起签吧！",
-        "pinyin": "Dà jiā yī qǐ qiān ba!",
-        "english": "Let's all do this together: to sign one's name!",
+        "hanzi": "别用铅笔签合同。",
+        "pinyin": "Bié yòng qiān bǐ qiān hé tong.",
+        "english": "Don't sign the contract in pencil.",
         "tokens": [
-          "大家",
-          "一起",
+          "别",
+          "用",
+          "铅笔",
           "签",
-          "吧"
+          "合同"
         ]
       }
     },
@@ -7364,13 +7590,15 @@
       "pinyin": "yú lè",
       "english": "To entertain / to amuse",
       "example": {
-        "hanzi": "他明天去娱乐。",
-        "pinyin": "Tā míng tiān qù yú lè.",
-        "english": "He will go to to entertain tomorrow.",
+        "hanzi": "幽默也是一种娱乐。",
+        "pinyin": "Yōu mò yě shì yī zhǒng yú lè.",
+        "english": "Humor is a type of entertainment.",
         "tokens": [
-          "他",
-          "明天",
-          "去",
+          "幽默",
+          "也",
+          "是",
+          "一",
+          "种",
           "娱乐"
         ]
       }
@@ -7417,15 +7645,15 @@
       "pinyin": "xiōng",
       "english": "Chest / bosom",
       "example": {
-        "hanzi": "这个胸很重要。",
-        "pinyin": "Zhè gè xiōng hěn zhòng yào.",
-        "english": "This concept \"chest\" is very important.",
+        "hanzi": "她的胸很大。",
+        "pinyin": "Tā de xiōng hěn dà.",
+        "english": "She has large breasts.",
         "tokens": [
-          "这",
-          "个",
+          "她",
+          "的",
           "胸",
           "很",
-          "重要"
+          "大"
         ]
       }
     },
@@ -7436,13 +7664,16 @@
       "pinyin": "qǐ yè",
       "english": "Company; firm; enterprise; corporation",
       "example": {
-        "hanzi": "我们讨论过企业。",
-        "pinyin": "Wǒ men tǎo lùn guo qǐ yè.",
-        "english": "We have already discussed: company; firm; enterprise; corporation.",
+        "hanzi": "让我们说一下这些企业。",
+        "pinyin": "Ràng wǒ men shuō yíxià zhè xiē qǐ yè.",
+        "english": "Let's talk for a minute about these companies.",
         "tokens": [
+          "让",
           "我们",
-          "讨论",
-          "过",
+          "说",
+          "一下",
+          "这",
+          "些",
           "企业"
         ]
       }
@@ -7552,13 +7783,17 @@
       "pinyin": "suì",
       "english": "To break into pieces; to shatter; to crumble",
       "example": {
-        "hanzi": "我们正在碎。",
-        "pinyin": "Wǒ men zhèng zài suì.",
-        "english": "We are currently practicing: to break into pieces; to shatter; to crumble.",
+        "hanzi": "不要踩在碎玻璃上。",
+        "pinyin": "Bù yào cǎi zài suì bō li shàng.",
+        "english": "Don't step on the broken glass.",
         "tokens": [
-          "我们",
-          "正在",
-          "碎"
+          "不",
+          "要",
+          "踩",
+          "在",
+          "碎",
+          "玻璃",
+          "上"
         ]
       }
     },
@@ -7607,14 +7842,15 @@
       "pinyin": "zī yuán",
       "english": "Natural resource (such as water or minerals) / resource",
       "example": {
-        "hanzi": "老师有一个资源。",
-        "pinyin": "Lǎo shī yǒu yī gè zī yuán.",
-        "english": "The teacher has one (natural resource (such as water or minerals)).",
+        "hanzi": "我们看到的只有资源。",
+        "pinyin": "Wǒ men kàn dào de zhǐ yǒu zī yuán.",
+        "english": "All we're looking to is resources.",
         "tokens": [
-          "老师",
-          "有",
-          "一",
-          "个",
+          "我们",
+          "看",
+          "到",
+          "的",
+          "只有",
           "资源"
         ]
       }
@@ -7662,12 +7898,13 @@
       "pinyin": "xíng chéng",
       "english": "To form / to take shape",
       "example": {
-        "hanzi": "我们正在形成。",
-        "pinyin": "Wǒ men zhèng zài xíng chéng.",
-        "english": "We are currently practicing: to form.",
+        "hanzi": "代表政府开始形成。",
+        "pinyin": "Dài biǎo zhèng fǔ kāi shǐ xíng chéng.",
+        "english": "Representative government began to form.",
         "tokens": [
-          "我们",
-          "正在",
+          "代表",
+          "政府",
+          "开始",
           "形成"
         ]
       }
@@ -7679,14 +7916,16 @@
       "pinyin": "háng yè",
       "english": "Trade; profession; industry; business",
       "example": {
-        "hanzi": "大家需要明白行业。",
-        "pinyin": "Dà jiā xū yào míng bai háng yè.",
-        "english": "Everyone needs to understand (trade; profession; industry; business).",
+        "hanzi": "我们需要与整个行业合作。",
+        "pinyin": "Wǒ men xū yào yǔ zhěng gè háng yè hé zuò.",
+        "english": "We need to begin to work with industries.",
         "tokens": [
-          "大家",
+          "我们",
           "需要",
-          "明白",
-          "行业"
+          "与",
+          "整个",
+          "行业",
+          "合作"
         ]
       }
     },
@@ -7795,14 +8034,18 @@
       "pinyin": "wù zhì",
       "english": "Matter / substance",
       "example": {
-        "hanzi": "她很喜欢物质。",
-        "pinyin": "Tā hěn xǐ huan wù zhì.",
-        "english": "She really likes (matter).",
+        "hanzi": "它是一个物质运输的网络。",
+        "pinyin": "Tā shì yī gè wù zhì yùn shū de wǎng luò.",
+        "english": "It's a network for a transportation of matter.",
         "tokens": [
-          "她",
-          "很",
-          "喜欢",
-          "物质"
+          "它",
+          "是",
+          "一",
+          "个",
+          "物质",
+          "运输",
+          "的",
+          "网络"
         ]
       }
     },
@@ -7833,15 +8076,20 @@
       "pinyin": "miàn lín",
       "english": "To face sth; to be confronted with",
       "example": {
-        "hanzi": "明天再面临好吗？",
-        "pinyin": "Míng tiān zài miàn lín hǎo ma?",
-        "english": "Shall we continue tomorrow with: to face sth; to be confronted with?",
+        "hanzi": "我们面临需要找到工作和生活的平衡。",
+        "pinyin": "Wǒ men miàn lín xū yào zhǎo dào gōng zuò hé shēng huó de píng héng.",
+        "english": "Where we face that scale of finding that work-life balance.",
         "tokens": [
-          "明天",
-          "再",
+          "我们",
           "面临",
-          "好",
-          "吗"
+          "需要",
+          "找",
+          "到",
+          "工作",
+          "和",
+          "生活",
+          "的",
+          "平衡"
         ]
       }
     },
@@ -7870,14 +8118,17 @@
       "pinyin": "zì dòng",
       "english": "Automatic / voluntarily",
       "example": {
-        "hanzi": "大家自动完成任务。",
-        "pinyin": "Dà jiā zì dòng wán chéng rèn wu.",
-        "english": "Everyone completes the task (automatic).",
+        "hanzi": "这是一个自动夜灯。",
+        "pinyin": "Zhè shì yī gè zì dòng yè dēng.",
+        "english": "This is an automatic night light.",
         "tokens": [
-          "大家",
+          "这",
+          "是",
+          "一",
+          "个",
           "自动",
-          "完成",
-          "任务"
+          "夜",
+          "灯"
         ]
       }
     },
@@ -7910,15 +8161,18 @@
       "pinyin": "jié hé",
       "english": "To combine / to link",
       "example": {
-        "hanzi": "明天再结合好吗？",
-        "pinyin": "Míng tiān zài jié hé hǎo ma?",
-        "english": "Shall we continue tomorrow with: to combine?",
+        "hanzi": "这可能是多重因素的结合。",
+        "pinyin": "Zhè kě néng shì duō zhòng yīn sù de jié hé.",
+        "english": "It's probably going to be a combination of factors.",
         "tokens": [
-          "明天",
-          "再",
-          "结合",
-          "好",
-          "吗"
+          "这",
+          "可能",
+          "是",
+          "多",
+          "重",
+          "因素",
+          "的",
+          "结合"
         ]
       }
     },
@@ -8104,14 +8358,15 @@
       "pinyin": "niàn",
       "english": "To read / to study (a subject)",
       "example": {
-        "hanzi": "大家一起念吧！",
-        "pinyin": "Dà jiā yī qǐ niàn ba!",
-        "english": "Let's all do this together: to read!",
+        "hanzi": "这个字怎么念？",
+        "pinyin": "Zhè gè zì zěn me niàn?",
+        "english": "How do you read this character?",
         "tokens": [
-          "大家",
-          "一起",
-          "念",
-          "吧"
+          "这",
+          "个",
+          "字",
+          "怎么",
+          "念"
         ]
       }
     },
@@ -8122,13 +8377,15 @@
       "pinyin": "bèi jǐng",
       "english": "Background; backdrop; context / (fig.) powerful backer",
       "example": {
-        "hanzi": "我们讨论过背景。",
-        "pinyin": "Wǒ men tǎo lùn guo bèi jǐng.",
-        "english": "We have already discussed: background; backdrop; context.",
+        "hanzi": "因为这是我的背景。",
+        "pinyin": "Yīn wèi zhè shì wǒ de bèi jǐng.",
+        "english": "Why I said this, is the background.",
         "tokens": [
-          "我们",
-          "讨论",
-          "过",
+          "因为",
+          "这",
+          "是",
+          "我",
+          "的",
           "背景"
         ]
       }
@@ -8158,13 +8415,20 @@
       "pinyin": "wén",
       "english": "To hear / news",
       "example": {
-        "hanzi": "请认真闻。",
-        "pinyin": "Qǐng rèn zhēn wén.",
-        "english": "Please carefully practice: to hear.",
+        "hanzi": "那朵闻起来很香的花叫什么？",
+        "pinyin": "Nà duǒ wén qǐ lai hěn xiāng de huā jiào shén me?",
+        "english": "What's the name of that flower that smells great?",
         "tokens": [
-          "请",
-          "认真",
-          "闻"
+          "那",
+          "朵",
+          "闻",
+          "起来",
+          "很",
+          "香",
+          "的",
+          "花",
+          "叫",
+          "什么"
         ]
       }
     },
@@ -8198,14 +8462,15 @@
       "pinyin": "xiàn xiàng",
       "english": "Phenomenon / appearance",
       "example": {
-        "hanzi": "大家都很了解现象。",
-        "pinyin": "Dà jiā dōu hěn liǎo jiě xiàn xiàng.",
-        "english": "Everyone knows a lot about: phenomenon.",
+        "hanzi": "这是一个物理现象。",
+        "pinyin": "Zhè shì yī gè wù lǐ xiàn xiàng.",
+        "english": "It is a physics phenomenon.",
         "tokens": [
-          "大家",
-          "都",
-          "很",
-          "了解",
+          "这",
+          "是",
+          "一",
+          "个",
+          "物理",
           "现象"
         ]
       }
@@ -8217,15 +8482,21 @@
       "pinyin": "dào dé",
       "english": "Virtue / morality",
       "example": {
-        "hanzi": "大家的态度很道德。",
-        "pinyin": "Dà jiā de tài du hěn dào dé.",
-        "english": "Everyone's attitude is very: virtue.",
+        "hanzi": "这个学校对学生的道德标准要求很高。",
+        "pinyin": "Zhè gè xué xiào duì xué sheng de dào dé biāo zhǔn yāo qiú hěn gāo.",
+        "english": "This school sets high moral standards for pupils.",
         "tokens": [
-          "大家",
+          "这",
+          "个",
+          "学校",
+          "对",
+          "学生",
           "的",
-          "态度",
+          "道德",
+          "标准",
+          "要求",
           "很",
-          "道德"
+          "高"
         ]
       }
     },
@@ -8236,14 +8507,15 @@
       "pinyin": "biān jí",
       "english": "To edit / to compile",
       "example": {
-        "hanzi": "大家一起编辑吧！",
-        "pinyin": "Dà jiā yī qǐ biān jí ba!",
-        "english": "Let's all do this together: to edit!",
+        "hanzi": "你不想做编辑？",
+        "pinyin": "Nǐ bù xiǎng zuò biān jí?",
+        "english": "You don't want to be an editor?",
         "tokens": [
-          "大家",
-          "一起",
-          "编辑",
-          "吧"
+          "你",
+          "不",
+          "想",
+          "做",
+          "编辑"
         ]
       }
     },
@@ -8272,16 +8544,16 @@
       "pinyin": "lǐng yù",
       "english": "Domain / sphere",
       "example": {
-        "hanzi": "书上提到了领域。",
-        "pinyin": "Shū shàng tí dào le lǐng yù.",
-        "english": "The book mentions: domain.",
+        "hanzi": "你熟悉这个领域吗？",
+        "pinyin": "Nǐ shú xī zhè gè lǐng yù ma?",
+        "english": "Is that an area you are familiar with?",
         "tokens": [
-          "书",
-          "上",
-          "提",
-          "到",
-          "了",
-          "领域"
+          "你",
+          "熟悉",
+          "这",
+          "个",
+          "领域",
+          "吗"
         ]
       }
     },
@@ -8310,16 +8582,18 @@
       "pinyin": "fú zhuāng",
       "english": "Dress / clothing",
       "example": {
-        "hanzi": "这里需要新的服装。",
-        "pinyin": "Zhè lǐ xū yào xīn de fú zhuāng.",
-        "english": "Here we need something new: dress.",
+        "hanzi": "不能根据服装来判断一个人。",
+        "pinyin": "Bù néng gēn jù fú zhuāng lái pàn duàn yī gè rén.",
+        "english": "You can't judge a person based on clothing.",
         "tokens": [
-          "这",
-          "里",
-          "需要",
-          "新",
-          "的",
-          "服装"
+          "不",
+          "能",
+          "根据",
+          "服装",
+          "来",
+          "判断",
+          "一",
+          "个人"
         ]
       }
     },
@@ -8409,13 +8683,14 @@
       "pinyin": "gōng xǐ",
       "english": "To congratulate / (interj.) congratulations!",
       "example": {
-        "hanzi": "我们正在恭喜。",
-        "pinyin": "Wǒ men zhèng zài gōng xǐ.",
-        "english": "We are currently practicing: to congratulate.",
+        "hanzi": "我要恭喜你。",
+        "pinyin": "Wǒ yào gōng xǐ nǐ.",
+        "english": "I should congratulate you.",
         "tokens": [
-          "我们",
-          "正在",
-          "恭喜"
+          "我",
+          "要",
+          "恭喜",
+          "你"
         ]
       }
     },
@@ -8711,15 +8986,20 @@
       "pinyin": "quán miàn",
       "english": "All-around / comprehensive",
       "example": {
-        "hanzi": "大家的态度很全面。",
-        "pinyin": "Dà jiā de tài du hěn quán miàn.",
-        "english": "Everyone's attitude is very: all-around.",
+        "hanzi": "我想去医院做一个全面的检查。",
+        "pinyin": "Wǒ xiǎng qù yī yuàn zuò yī gè quán miàn de jiǎn chá.",
+        "english": "I want to go to the hospital to get a complete check-up.",
         "tokens": [
-          "大家",
+          "我",
+          "想",
+          "去",
+          "医院",
+          "做",
+          "一",
+          "个",
+          "全面",
           "的",
-          "态度",
-          "很",
-          "全面"
+          "检查"
         ]
       }
     },
@@ -8730,13 +9010,16 @@
       "pinyin": "tǐ yàn",
       "english": "To experience for oneself",
       "example": {
-        "hanzi": "请认真体验。",
-        "pinyin": "Qǐng rèn zhēn tǐ yàn.",
-        "english": "Please carefully practice: to experience for oneself.",
+        "hanzi": "记得这种阅读体验吧？",
+        "pinyin": "Jì de zhè zhǒng yuè dú tǐ yàn ba?",
+        "english": "Remember this reading experience?",
         "tokens": [
-          "请",
-          "认真",
-          "体验"
+          "记得",
+          "这",
+          "种",
+          "阅读",
+          "体验",
+          "吧"
         ]
       }
     },
@@ -8747,16 +9030,15 @@
       "pinyin": "cái chǎn",
       "english": "Property / assets",
       "example": {
-        "hanzi": "这里需要新的财产。",
-        "pinyin": "Zhè lǐ xū yào xīn de cái chǎn.",
-        "english": "Here we need something new: property.",
+        "hanzi": "一百万财产被退还。",
+        "pinyin": "Yìbǎiwàn cái chǎn bèi tuì hái.",
+        "english": "A million properties have been returned.",
         "tokens": [
-          "这",
-          "里",
-          "需要",
-          "新",
-          "的",
-          "财产"
+          "一百万",
+          "财产",
+          "被",
+          "退",
+          "还"
         ]
       }
     },
@@ -8767,14 +9049,13 @@
       "pinyin": "jiān qiáng",
       "english": "Staunch / strong",
       "example": {
-        "hanzi": "今天的情况很坚强。",
-        "pinyin": "Jīn tiān de qíng kuàng hěn jiān qiáng.",
-        "english": "Today's situation is very: staunch.",
+        "hanzi": "我不够坚强。",
+        "pinyin": "Wǒ bù gòu jiān qiáng.",
+        "english": "I wasn't strong enough.",
         "tokens": [
-          "今天",
-          "的",
-          "情况",
-          "很",
+          "我",
+          "不",
+          "够",
           "坚强"
         ]
       }
@@ -8823,15 +9104,17 @@
       "pinyin": "jūn shì",
       "english": "Military affairs / (attributive) military",
       "example": {
-        "hanzi": "大家都很了解军事。",
-        "pinyin": "Dà jiā dōu hěn liǎo jiě jūn shì.",
-        "english": "Everyone knows a lot about: military affairs.",
+        "hanzi": "我们需要军事力量的综合应用。",
+        "pinyin": "Wǒ men xū yào jūn shì lì liang de zōng hé yìng yòng.",
+        "english": "We will need the application of military force.",
         "tokens": [
-          "大家",
-          "都",
-          "很",
-          "了解",
-          "军事"
+          "我们",
+          "需要",
+          "军事",
+          "力量",
+          "的",
+          "综合",
+          "应用"
         ]
       }
     },
@@ -8957,13 +9240,11 @@
       "pinyin": "àn",
       "english": "Dark / to turn dark",
       "example": {
-        "hanzi": "这个地方非常暗。",
-        "pinyin": "Zhè gè dì fang fēi cháng àn.",
-        "english": "This place is particularly: dark.",
+        "hanzi": "天非常暗。",
+        "pinyin": "Tiān fēi cháng àn.",
+        "english": "The sky is very dark.",
         "tokens": [
-          "这",
-          "个",
-          "地方",
+          "天",
           "非常",
           "暗"
         ]
@@ -9151,14 +9432,14 @@
       "pinyin": "biāo zhì",
       "english": "Sign / mark",
       "example": {
-        "hanzi": "他每天都标志。",
-        "pinyin": "Tā měi tiān dōu biāo zhì.",
-        "english": "Every day he practices: sign.",
+        "hanzi": "这是我们的标志。",
+        "pinyin": "Zhè shì wǒ men de biāo zhì.",
+        "english": "This is our logo here.",
         "tokens": [
-          "他",
-          "每",
-          "天",
-          "都",
+          "这",
+          "是",
+          "我们",
+          "的",
           "标志"
         ]
       }
@@ -9265,15 +9546,14 @@
       "pinyin": "mèi lì",
       "english": "Charm / fascination",
       "example": {
-        "hanzi": "书上提到了魅力。",
-        "pinyin": "Shū shàng tí dào le mèi lì.",
-        "english": "The book mentions: charm.",
+        "hanzi": "他有一种魅力。",
+        "pinyin": "Tā yǒu yī zhǒng mèi lì.",
+        "english": "He had a certain charm.",
         "tokens": [
-          "书",
-          "上",
-          "提",
-          "到",
-          "了",
+          "他",
+          "有",
+          "一",
+          "种",
           "魅力"
         ]
       }
@@ -9324,14 +9604,17 @@
       "pinyin": "huǒ bàn",
       "english": "Partner / companion",
       "example": {
-        "hanzi": "这里需要新的伙伴。",
-        "pinyin": "Zhè lǐ xū yào xīn de huǒ bàn.",
-        "english": "Here we need something new: partner.",
+        "hanzi": "我恐怕不是个很好的伙伴。",
+        "pinyin": "Wǒ kǒng pà bù shì gè hěn hǎo de huǒ bàn.",
+        "english": "I'm afraid I wouldn't be very good company.",
         "tokens": [
-          "这",
-          "里",
-          "需要",
-          "新",
+          "我",
+          "恐怕",
+          "不",
+          "是",
+          "个",
+          "很",
+          "好",
           "的",
           "伙伴"
         ]
@@ -9344,15 +9627,19 @@
       "pinyin": "yīn sù",
       "english": "Element / factor",
       "example": {
-        "hanzi": "我很喜欢新因素。",
-        "pinyin": "Wǒ hěn xǐ huan xīn yīn sù.",
-        "english": "I really like the new (element).",
+        "hanzi": "我们暂时假设这些因素就是原因。",
+        "pinyin": "Wǒ men zàn shí jiǎ shè zhè xiē yīn sù jiù shì yuán yīn.",
+        "english": "For now, we assume that several factors are the cause.",
         "tokens": [
-          "我",
-          "很",
-          "喜欢",
-          "新",
-          "因素"
+          "我们",
+          "暂时",
+          "假设",
+          "这",
+          "些",
+          "因素",
+          "就",
+          "是",
+          "原因"
         ]
       }
     },
@@ -9363,15 +9650,17 @@
       "pinyin": "shuāng fāng",
       "english": "Bilateral / both sides",
       "example": {
-        "hanzi": "这个双方很重要。",
-        "pinyin": "Zhè gè shuāng fāng hěn zhòng yào.",
-        "english": "This concept \"bilateral\" is very important.",
+        "hanzi": "双方都有几千人受伤。",
+        "pinyin": "Shuāng fāng dōu yǒu jǐ qiān rén shòu shāng.",
+        "english": "Many thousands on both sides had been wounded.",
         "tokens": [
-          "这",
-          "个",
           "双方",
-          "很",
-          "重要"
+          "都",
+          "有",
+          "几",
+          "千",
+          "人",
+          "受伤"
         ]
       }
     },
@@ -9400,14 +9689,17 @@
       "pinyin": "zǔ chéng",
       "english": "To form / to make up",
       "example": {
-        "hanzi": "大家一起组成吧！",
-        "pinyin": "Dà jiā yī qǐ zǔ chéng ba!",
-        "english": "Let's all do this together: to form!",
+        "hanzi": "是什么组成了一个故事？",
+        "pinyin": "Shì shén me zǔ chéng le yī gè gù shi?",
+        "english": "What are the things that make up a story?",
         "tokens": [
-          "大家",
-          "一起",
+          "是",
+          "什么",
           "组成",
-          "吧"
+          "了",
+          "一",
+          "个",
+          "故事"
         ]
       }
     },
@@ -9512,12 +9804,14 @@
       "pinyin": "wēn nuǎn",
       "english": "Warm",
       "example": {
-        "hanzi": "请认真温暖。",
-        "pinyin": "Qǐng rèn zhēn wēn nuǎn.",
-        "english": "Please carefully practice: warm.",
+        "hanzi": "我会给你温暖。",
+        "pinyin": "Wǒ huì gěi nǐ wēn nuǎn.",
+        "english": "I will keep you warm.",
         "tokens": [
-          "请",
-          "认真",
+          "我",
+          "会",
+          "给",
+          "你",
           "温暖"
         ]
       }
@@ -9566,15 +9860,15 @@
       "pinyin": "gōng zhǔ",
       "english": "Princess",
       "example": {
-        "hanzi": "书上提到了公主。",
-        "pinyin": "Shū shàng tí dào le gōng zhǔ.",
-        "english": "The book mentions: princess.",
+        "hanzi": "从前有个美丽的公主。",
+        "pinyin": "Cóng qián yǒu gè měi lì de gōng zhǔ.",
+        "english": "Once upon a time, there was a beautiful princess.",
         "tokens": [
-          "书",
-          "上",
-          "提",
-          "到",
-          "了",
+          "从前",
+          "有",
+          "个",
+          "美丽",
+          "的",
           "公主"
         ]
       }
@@ -9624,15 +9918,18 @@
       "pinyin": "dì wèi",
       "english": "Position / status",
       "example": {
-        "hanzi": "大家都很了解地位。",
-        "pinyin": "Dà jiā dōu hěn liǎo jiě dì wèi.",
-        "english": "Everyone knows a lot about: position.",
+        "hanzi": "高等教育是一种地位象征。",
+        "pinyin": "Gāo děng jiào yù shì yī zhǒng dì wèi xiàng zhēng.",
+        "english": "Higher education is also marketed as a status object.",
         "tokens": [
-          "大家",
-          "都",
-          "很",
-          "了解",
-          "地位"
+          "高",
+          "等",
+          "教育",
+          "是",
+          "一",
+          "种",
+          "地位",
+          "象征"
         ]
       }
     },
@@ -9643,15 +9940,19 @@
       "pinyin": "biǎo miàn",
       "english": "Surface / face",
       "example": {
-        "hanzi": "这个表面很重要。",
-        "pinyin": "Zhè gè biǎo miàn hěn zhòng yào.",
-        "english": "This concept \"surface\" is very important.",
+        "hanzi": "地球表面的三分之一是沙漠。",
+        "pinyin": "Dì qiú biǎo miàn de sān fēn zhī yī shì shā mò.",
+        "english": "A third of the earth's surface is desert.",
         "tokens": [
-          "这",
-          "个",
+          "地球",
           "表面",
-          "很",
-          "重要"
+          "的",
+          "三",
+          "分",
+          "之",
+          "一",
+          "是",
+          "沙漠"
         ]
       }
     },
@@ -9682,13 +9983,15 @@
       "pinyin": "jié gòu",
       "english": "Structure / composition",
       "example": {
-        "hanzi": "学校里有结构。",
-        "pinyin": "Xué xiào lǐ yǒu jié gòu.",
-        "english": "The school has (structure).",
+        "hanzi": "这是完整的飞机结构。",
+        "pinyin": "Zhè shì wán zhěng de fēi jī jié gòu.",
+        "english": "This is the complete structure of the airplane.",
         "tokens": [
-          "学校",
-          "里",
-          "有",
+          "这",
+          "是",
+          "完整",
+          "的",
+          "飞机",
           "结构"
         ]
       }
@@ -9719,15 +10022,12 @@
       "pinyin": "máo dùn",
       "english": "Contradiction / conflicting views",
       "example": {
-        "hanzi": "这里的环境真矛盾！",
-        "pinyin": "Zhè lǐ de huán jìng zhēn máo dùn!",
-        "english": "The environment here is really: contradiction!",
+        "hanzi": "充满了矛盾。",
+        "pinyin": "Chōng mǎn le máo dùn.",
+        "english": "I am full of contradictions.",
         "tokens": [
-          "这",
-          "里",
-          "的",
-          "环境",
-          "真",
+          "充满",
+          "了",
           "矛盾"
         ]
       }
@@ -9758,15 +10058,16 @@
       "pinyin": "wán zhěng",
       "english": "Complete / intact",
       "example": {
-        "hanzi": "这个地方非常完整。",
-        "pinyin": "Zhè gè dì fang fēi cháng wán zhěng.",
-        "english": "This place is particularly: complete.",
+        "hanzi": "我们想要完整的句子。",
+        "pinyin": "Wǒ men xiǎng yào wán zhěng de jù zi.",
+        "english": "We want complete sentences.",
         "tokens": [
-          "这",
-          "个",
-          "地方",
-          "非常",
-          "完整"
+          "我们",
+          "想",
+          "要",
+          "完整",
+          "的",
+          "句子"
         ]
       }
     },
@@ -9923,16 +10224,17 @@
       "pinyin": "yuàn wàng",
       "english": "Desire / wish",
       "example": {
-        "hanzi": "这里需要新的愿望。",
-        "pinyin": "Zhè lǐ xū yào xīn de yuàn wàng.",
-        "english": "Here we need something new: desire.",
+        "hanzi": "希望我的愿望能够实现。",
+        "pinyin": "Xī wàng wǒ de yuàn wàng néng gòu shí xiàn.",
+        "english": "I hope I can get my wish fulfilled.",
         "tokens": [
-          "这",
-          "里",
-          "需要",
-          "新",
+          "希望",
+          "我",
           "的",
-          "愿望"
+          "愿望",
+          "能",
+          "够",
+          "实现"
         ]
       }
     },
@@ -10152,15 +10454,17 @@
       "pinyin": "bù zú",
       "english": "Insufficient / lacking",
       "example": {
-        "hanzi": "明天再不足好吗？",
-        "pinyin": "Míng tiān zài bù zú hǎo ma?",
-        "english": "Shall we continue tomorrow with: insufficient?",
+        "hanzi": "它的质量其实不足够大。",
+        "pinyin": "Tā de zhì liàng qí shí bù zú gòu dà.",
+        "english": "It's actually not massive enough.",
         "tokens": [
-          "明天",
-          "再",
+          "它",
+          "的",
+          "质量",
+          "其实",
           "不足",
-          "好",
-          "吗"
+          "够",
+          "大"
         ]
       }
     },
@@ -10208,14 +10512,14 @@
       "pinyin": "jì suàn",
       "english": "To count / to calculate",
       "example": {
-        "hanzi": "大家一起计算吧！",
-        "pinyin": "Dà jiā yī qǐ jì suàn ba!",
-        "english": "Let's all do this together: to count!",
+        "hanzi": "不是关于计算。",
+        "pinyin": "Bù shì guān yú jì suàn.",
+        "english": "It's not a matter of calculation.",
         "tokens": [
-          "大家",
-          "一起",
-          "计算",
-          "吧"
+          "不",
+          "是",
+          "关于",
+          "计算"
         ]
       }
     },
@@ -10226,14 +10530,16 @@
       "pinyin": "kāi fā",
       "english": "To exploit (a resource) / to open up (for development)",
       "example": {
-        "hanzi": "我们开始开发了。",
-        "pinyin": "Wǒ men kāi shǐ kāi fā le.",
-        "english": "We have started to to exploit (a resource).",
+        "hanzi": "我是做玩具开发的。",
+        "pinyin": "Wǒ shì zuò wán jù kāi fā de.",
+        "english": "I'm a toy developer.",
         "tokens": [
-          "我们",
-          "开始",
+          "我",
+          "是",
+          "做",
+          "玩具",
           "开发",
-          "了"
+          "的"
         ]
       }
     },
@@ -10305,15 +10611,18 @@
       "pinyin": "gòng xiàn",
       "english": "To contribute / to dedicate",
       "example": {
-        "hanzi": "明天再贡献好吗？",
-        "pinyin": "Míng tiān zài gòng xiàn hǎo ma?",
-        "english": "Shall we continue tomorrow with: to contribute?",
+        "hanzi": "能为国家和家庭做出贡献。",
+        "pinyin": "Néng wèi guó jiā hé jiā tíng zuò chū gòng xiàn.",
+        "english": "To our countries, to our families.",
         "tokens": [
-          "明天",
-          "再",
-          "贡献",
-          "好",
-          "吗"
+          "能",
+          "为",
+          "国家",
+          "和",
+          "家庭",
+          "做",
+          "出",
+          "贡献"
         ]
       }
     },
@@ -10361,14 +10670,17 @@
       "pinyin": "zhěn duàn",
       "english": "To diagnose",
       "example": {
-        "hanzi": "我们开始诊断了。",
-        "pinyin": "Wǒ men kāi shǐ zhěn duàn le.",
-        "english": "We have started to to diagnose.",
+        "hanzi": "我们可以下载新的诊断方法。",
+        "pinyin": "Wǒ men kě yǐ xià zǎi xīn de zhěn duàn fāng fǎ.",
+        "english": "We can download new diagnostics.",
         "tokens": [
           "我们",
-          "开始",
+          "可以",
+          "下载",
+          "新",
+          "的",
           "诊断",
-          "了"
+          "方法"
         ]
       }
     },
@@ -10418,14 +10730,14 @@
       "pinyin": "píng héng",
       "english": "Balance / equilibrium",
       "example": {
-        "hanzi": "朋友也会平衡。",
-        "pinyin": "Péng you yě huì píng héng.",
-        "english": "My friend can also balance.",
+        "hanzi": "保持平衡很重要。",
+        "pinyin": "Bǎo chí píng héng hěn zhòng yào.",
+        "english": "Keeping balances is important.",
         "tokens": [
-          "朋友",
-          "也",
-          "会",
-          "平衡"
+          "保持",
+          "平衡",
+          "很",
+          "重要"
         ]
       }
     },
@@ -10540,15 +10852,18 @@
       "pinyin": "jiǔ bā",
       "english": "Bar / pub",
       "example": {
-        "hanzi": "这个酒吧很重要。",
-        "pinyin": "Zhè gè jiǔ bā hěn zhòng yào.",
-        "english": "This concept \"bar\" is very important.",
+        "hanzi": "这个酒吧的女服务员很漂亮。",
+        "pinyin": "Zhè gè jiǔ bā de nǚ fú wù yuán hěn piào liang.",
+        "english": "This pub has very beautiful waitresses.",
         "tokens": [
           "这",
           "个",
           "酒吧",
+          "的",
+          "女",
+          "服务员",
           "很",
-          "重要"
+          "漂亮"
         ]
       }
     },
@@ -10576,15 +10891,19 @@
       "pinyin": "chéng jiù",
       "english": "Accomplishment / success",
       "example": {
-        "hanzi": "明天再成就好吗？",
-        "pinyin": "Míng tiān zài chéng jiù hǎo ma?",
-        "english": "Shall we continue tomorrow with: accomplishment?",
+        "hanzi": "我们认为这是一个了不起的成就。",
+        "pinyin": "Wǒ men rèn wéi zhè shì yī gè liǎo bu qǐ de chéng jiù.",
+        "english": "We think it was this amazing accomplishment.",
         "tokens": [
-          "明天",
-          "再",
-          "成就",
-          "好",
-          "吗"
+          "我们",
+          "认为",
+          "这",
+          "是",
+          "一",
+          "个",
+          "了不起",
+          "的",
+          "成就"
         ]
       }
     },
@@ -10690,15 +11009,17 @@
       "pinyin": "gù dìng",
       "english": "To fix / to fasten",
       "example": {
-        "hanzi": "他每天都固定。",
-        "pinyin": "Tā měi tiān dōu gù dìng.",
-        "english": "Every day he practices: to fix.",
+        "hanzi": "我在找一些固定工作。",
+        "pinyin": "Wǒ zài zhǎo yī xiē gù dìng gōng zuò.",
+        "english": "I'm looking for some regular work.",
         "tokens": [
-          "他",
-          "每",
-          "天",
-          "都",
-          "固定"
+          "我",
+          "在",
+          "找",
+          "一",
+          "些",
+          "固定",
+          "工作"
         ]
       }
     },
@@ -10784,15 +11105,18 @@
       "pinyin": "péi yǎng",
       "english": "To cultivate / to breed",
       "example": {
-        "hanzi": "他每天都培养。",
-        "pinyin": "Tā měi tiān dōu péi yǎng.",
-        "english": "Every day he practices: to cultivate.",
+        "hanzi": "我们只需要共同培养这些条件。",
+        "pinyin": "Wǒ men zhǐ xū yào gòng tóng péi yǎng zhè xiē tiáo jiàn.",
+        "english": "We just need to cultivate the conditions together.",
         "tokens": [
-          "他",
-          "每",
-          "天",
-          "都",
-          "培养"
+          "我们",
+          "只",
+          "需要",
+          "共同",
+          "培养",
+          "这",
+          "些",
+          "条件"
         ]
       }
     },
@@ -10936,16 +11260,17 @@
       "pinyin": "qì fēn",
       "english": "Atmosphere; mood",
       "example": {
-        "hanzi": "这里需要新的气氛。",
-        "pinyin": "Zhè lǐ xū yào xīn de qì fēn.",
-        "english": "Here we need something new: atmosphere; mood.",
+        "hanzi": "这个地方的气氛很神秘。",
+        "pinyin": "Zhè gè dì fang de qì fēn hěn shén mì.",
+        "english": "This place has a mysterious atmosphere to it.",
         "tokens": [
           "这",
-          "里",
-          "需要",
-          "新",
+          "个",
+          "地方",
           "的",
-          "气氛"
+          "气氛",
+          "很",
+          "神秘"
         ]
       }
     },
@@ -11083,16 +11408,20 @@
       "pinyin": "wén míng",
       "english": "Civilized / civilization",
       "example": {
-        "hanzi": "这里的环境真文明！",
-        "pinyin": "Zhè lǐ de huán jìng zhēn wén míng!",
-        "english": "The environment here is really: civilized!",
+        "hanzi": "你知道人类文明有多少年的历史吗？",
+        "pinyin": "Nǐ zhī dào rén lèi wén míng yǒu duō shao nián de lì shǐ ma?",
+        "english": "Do you know how many years old human civilization is?",
         "tokens": [
-          "这",
-          "里",
+          "你",
+          "知道",
+          "人类",
+          "文明",
+          "有",
+          "多少",
+          "年",
           "的",
-          "环境",
-          "真",
-          "文明"
+          "历史",
+          "吗"
         ]
       }
     },
@@ -11140,15 +11469,18 @@
       "pinyin": "yì",
       "english": "100 million",
       "example": {
-        "hanzi": "大家都很了解亿。",
-        "pinyin": "Dà jiā dōu hěn liǎo jiě yì.",
-        "english": "Everyone knows a lot about: 100 million.",
+        "hanzi": "世界上有两亿三千二百万国际移民。",
+        "pinyin": "Shì jiè shàng yǒu liǎng yì sānqiānèrbǎiwàn guó jì yí mín.",
+        "english": "There are 232 million international migrants in the world.",
         "tokens": [
-          "大家",
-          "都",
-          "很",
-          "了解",
-          "亿"
+          "世界",
+          "上",
+          "有",
+          "两",
+          "亿",
+          "三千二百万",
+          "国际",
+          "移民"
         ]
       }
     },
@@ -11388,15 +11720,15 @@
       "pinyin": "tiān kōng",
       "english": "Sky",
       "example": {
-        "hanzi": "大家都很了解天空。",
-        "pinyin": "Dà jiā dōu hěn liǎo jiě tiān kōng.",
-        "english": "Everyone knows a lot about: sky.",
+        "hanzi": "天空是浅蓝的。",
+        "pinyin": "Tiān kōng shì qiǎn lán de.",
+        "english": "The sky is light blue.",
         "tokens": [
-          "大家",
-          "都",
-          "很",
-          "了解",
-          "天空"
+          "天空",
+          "是",
+          "浅",
+          "蓝",
+          "的"
         ]
       }
     },
@@ -11425,13 +11757,16 @@
       "pinyin": "tǒng yī",
       "english": "To unify; to integrate / unified; integrated",
       "example": {
-        "hanzi": "我们正在统一。",
-        "pinyin": "Wǒ men zhèng zài tǒng yī.",
-        "english": "We are currently practicing: to unify; to integrate.",
+        "hanzi": "欧洲人统一有可能吗？",
+        "pinyin": "Oū zhōu rén tǒng yī yǒu kě néng ma?",
+        "english": "Is a common European identity possible?",
         "tokens": [
-          "我们",
-          "正在",
-          "统一"
+          "欧洲",
+          "人",
+          "统一",
+          "有",
+          "可能",
+          "吗"
         ]
       }
     },
@@ -11481,15 +11816,17 @@
       "pinyin": "yù mǐ",
       "english": "Corn / maize",
       "example": {
-        "hanzi": "大家都很了解玉米。",
-        "pinyin": "Dà jiā dōu hěn liǎo jiě yù mǐ.",
-        "english": "Everyone knows a lot about: corn.",
+        "hanzi": "整个就只有玉米的结构价值。",
+        "pinyin": "Zhěng gè jiù zhǐ yǒu yù mǐ de jié gòu jià zhí.",
+        "english": "The whole thing has the structural value of corn.",
         "tokens": [
-          "大家",
-          "都",
-          "很",
-          "了解",
-          "玉米"
+          "整个",
+          "就",
+          "只有",
+          "玉米",
+          "的",
+          "结构",
+          "价值"
         ]
       }
     },
@@ -11597,13 +11934,16 @@
       "pinyin": "cóng shì",
       "english": "To go for / to engage in",
       "example": {
-        "hanzi": "请认真从事。",
-        "pinyin": "Qǐng rèn zhēn cóng shì.",
-        "english": "Please carefully practice: to go for.",
+        "hanzi": "她从事律师职业多年。",
+        "pinyin": "Tā cóng shì lǜ shī zhí yè duō nián.",
+        "english": "She practised as a barrister for many years.",
         "tokens": [
-          "请",
-          "认真",
-          "从事"
+          "她",
+          "从事",
+          "律师",
+          "职业",
+          "多",
+          "年"
         ]
       }
     },
@@ -11652,13 +11992,16 @@
       "pinyin": "yùn yòng",
       "english": "To use / to put to use",
       "example": {
-        "hanzi": "我们正在运用。",
-        "pinyin": "Wǒ men zhèng zài yùn yòng.",
-        "english": "We are currently practicing: to use.",
+        "hanzi": "我们可以运用所有的材料。",
+        "pinyin": "Wǒ men kě yǐ yùn yòng suǒ yǒu de cái liào.",
+        "english": "All materials are available for use.",
         "tokens": [
           "我们",
-          "正在",
-          "运用"
+          "可以",
+          "运用",
+          "所有",
+          "的",
+          "材料"
         ]
       }
     },
@@ -11723,16 +12066,18 @@
       "pinyin": "dú tè",
       "english": "Unique; distinctive",
       "example": {
-        "hanzi": "这里的环境真独特！",
-        "pinyin": "Zhè lǐ de huán jìng zhēn dú tè!",
-        "english": "The environment here is really: unique; distinctive!",
+        "hanzi": "这次小碰撞是独特的。",
+        "pinyin": "Zhè cì xiǎo pèng zhuàng shì dú tè de.",
+        "english": "This little bump was unique.",
         "tokens": [
           "这",
-          "里",
-          "的",
-          "环境",
-          "真",
-          "独特"
+          "次",
+          "小",
+          "碰",
+          "撞",
+          "是",
+          "独特",
+          "的"
         ]
       }
     },
@@ -11799,14 +12144,16 @@
       "pinyin": "kǎn",
       "english": "To chop / to cut down",
       "example": {
-        "hanzi": "大家一起砍吧！",
-        "pinyin": "Dà jiā yī qǐ kǎn ba!",
-        "english": "Let's all do this together: to chop!",
+        "hanzi": "很多树被砍倒。",
+        "pinyin": "Hěn duō shù bèi kǎn dǎo.",
+        "english": "A lot of trees were cut down.",
         "tokens": [
-          "大家",
-          "一起",
+          "很",
+          "多",
+          "树",
+          "被",
           "砍",
-          "吧"
+          "倒"
         ]
       }
     },
@@ -11892,13 +12239,19 @@
       "pinyin": "jīng lì",
       "english": "Energy",
       "example": {
-        "hanzi": "我们讨论过精力。",
-        "pinyin": "Wǒ men tǎo lùn guo jīng lì.",
-        "english": "We have already discussed: energy.",
+        "hanzi": "我在这项计划上投入了所有精力。",
+        "pinyin": "Wǒ zài zhè xiàng jì huà shàng tóu rù le suǒ yǒu jīng lì.",
+        "english": "I've put all of my energy into this plan.",
         "tokens": [
-          "我们",
-          "讨论",
-          "过",
+          "我",
+          "在",
+          "这",
+          "项",
+          "计划",
+          "上",
+          "投入",
+          "了",
+          "所有",
           "精力"
         ]
       }
@@ -11947,16 +12300,17 @@
       "pinyin": "néng yuán",
       "english": "Energy / power source",
       "example": {
-        "hanzi": "书上提到了能源。",
-        "pinyin": "Shū shàng tí dào le néng yuán.",
-        "english": "The book mentions: energy.",
+        "hanzi": "能源一直是一个道德问题。",
+        "pinyin": "Néng yuán yī zhí shì yī gè dào dé wèn tí.",
+        "english": "Energy is always a moral issue.",
         "tokens": [
-          "书",
-          "上",
-          "提",
-          "到",
-          "了",
-          "能源"
+          "能源",
+          "一直",
+          "是",
+          "一",
+          "个",
+          "道德",
+          "问题"
         ]
       }
     },
@@ -11984,14 +12338,17 @@
       "pinyin": "hé xīn",
       "english": "Core; nucleus",
       "example": {
-        "hanzi": "我们讨论过核心。",
-        "pinyin": "Wǒ men tǎo lùn guo hé xīn.",
-        "english": "We have already discussed: core; nucleus.",
+        "hanzi": "如何才能取得核心证据？",
+        "pinyin": "Rú hé cái néng qǔ de hé xīn zhèng jù?",
+        "english": "How can you obtain the hard core evidence?",
         "tokens": [
-          "我们",
-          "讨论",
-          "过",
-          "核心"
+          "如何",
+          "才",
+          "能",
+          "取",
+          "得",
+          "核心",
+          "证据"
         ]
       }
     },
@@ -12002,13 +12359,16 @@
       "pinyin": "jù shuō",
       "english": "It is said that; reportedly",
       "example": {
-        "hanzi": "我们正在据说。",
-        "pinyin": "Wǒ men zhèng zài jù shuō.",
-        "english": "We are currently practicing: it is said that; reportedly.",
+        "hanzi": "据说战争快要结束了。",
+        "pinyin": "Jù shuō zhàn zhēng kuài yào jié shù le.",
+        "english": "It is said that the war will end soon.",
         "tokens": [
-          "我们",
-          "正在",
-          "据说"
+          "据说",
+          "战争",
+          "快",
+          "要",
+          "结束",
+          "了"
         ]
       }
     },
@@ -12019,15 +12379,16 @@
       "pinyin": "tè zhēng",
       "english": "Characteristic / diagnostic property",
       "example": {
-        "hanzi": "这里需要新的特征。",
-        "pinyin": "Zhè lǐ xū yào xīn de tè zhēng.",
-        "english": "Here we need something new: characteristic.",
+        "hanzi": "我们能够控制那些特征？",
+        "pinyin": "Wǒ men néng gòu kòng zhì nà xiē tè zhēng?",
+        "english": "What are the characteristics we can control for?",
         "tokens": [
-          "这",
-          "里",
-          "需要",
-          "新",
-          "的",
+          "我们",
+          "能",
+          "够",
+          "控制",
+          "那",
+          "些",
           "特征"
         ]
       }
@@ -12401,12 +12762,15 @@
       "pinyin": "péi xùn",
       "english": "To cultivate / to train",
       "example": {
-        "hanzi": "请认真培训。",
-        "pinyin": "Qǐng rèn zhēn péi xùn.",
-        "english": "Please carefully practice: to cultivate.",
+        "hanzi": "这需要很多的培训。",
+        "pinyin": "Zhè xū yào hěn duō de péi xùn.",
+        "english": "It requires a lot of training.",
         "tokens": [
-          "请",
-          "认真",
+          "这",
+          "需要",
+          "很",
+          "多",
+          "的",
           "培训"
         ]
       }
@@ -12438,16 +12802,20 @@
       "pinyin": "wáng zǐ",
       "english": "Prince / son of a king",
       "example": {
-        "hanzi": "这里需要新的王子。",
-        "pinyin": "Zhè lǐ xū yào xīn de wáng zǐ.",
-        "english": "Here we need something new: prince.",
+        "hanzi": "一位王子骑着白马到来了。",
+        "pinyin": "Yī wèi wáng zǐ qí zhe bái mǎ dào lái le.",
+        "english": "A prince arrived, riding a white horse.",
         "tokens": [
-          "这",
-          "里",
-          "需要",
-          "新",
-          "的",
-          "王子"
+          "一",
+          "位",
+          "王子",
+          "骑",
+          "着",
+          "白",
+          "马",
+          "到",
+          "来",
+          "了"
         ]
       }
     },
@@ -12458,14 +12826,13 @@
       "pinyin": "kuò dà",
       "english": "To expand / to enlarge",
       "example": {
-        "hanzi": "他明天去扩大。",
-        "pinyin": "Tā míng tiān qù kuò dà.",
-        "english": "He will go to to expand tomorrow.",
+        "hanzi": "不扩大政府。",
+        "pinyin": "Bù kuò dà zhèng fǔ.",
+        "english": "Does not enlarge government.",
         "tokens": [
-          "他",
-          "明天",
-          "去",
-          "扩大"
+          "不",
+          "扩大",
+          "政府"
         ]
       }
     },
@@ -12588,13 +12955,19 @@
       "pinyin": "xiāng duì",
       "english": "Relatively / opposite",
       "example": {
-        "hanzi": "我们正在相对。",
-        "pinyin": "Wǒ men zhèng zài xiāng duì.",
-        "english": "We are currently practicing: relatively.",
+        "hanzi": "让我来讲些相对小的数字。",
+        "pinyin": "Ràng wǒ lái jiǎng xiē xiāng duì xiǎo de shù zì.",
+        "english": "Let me talk about a relatively small number.",
         "tokens": [
-          "我们",
-          "正在",
-          "相对"
+          "让",
+          "我",
+          "来",
+          "讲",
+          "些",
+          "相对",
+          "小",
+          "的",
+          "数字"
         ]
       }
     },
@@ -12623,13 +12996,15 @@
       "pinyin": "yōng bào",
       "english": "To embrace / to hug",
       "example": {
-        "hanzi": "我们正在拥抱。",
-        "pinyin": "Wǒ men zhèng zài yōng bào.",
-        "english": "We are currently practicing: to embrace.",
+        "hanzi": "让我们共同拥抱它。",
+        "pinyin": "Ràng wǒ men gòng tóng yōng bào tā.",
+        "english": "Let's embrace it together.",
         "tokens": [
+          "让",
           "我们",
-          "正在",
-          "拥抱"
+          "共同",
+          "拥抱",
+          "它"
         ]
       }
     },
@@ -12675,13 +13050,16 @@
       "pinyin": "jì lù",
       "english": "Record / Minutes / Notes",
       "example": {
-        "hanzi": "请认真纪录。",
-        "pinyin": "Qǐng rèn zhēn jì lù.",
-        "english": "Please carefully practice: record.",
+        "hanzi": "其实就是在纪录历史。",
+        "pinyin": "Qí shí jiù shì zài jì lù lì shǐ.",
+        "english": "We were actually recording history.",
         "tokens": [
-          "请",
-          "认真",
-          "纪录"
+          "其实",
+          "就",
+          "是",
+          "在",
+          "纪录",
+          "历史"
         ]
       }
     },
@@ -12731,15 +13109,19 @@
       "pinyin": "shāng pǐn",
       "english": "Commodity / goods",
       "example": {
-        "hanzi": "这个商品很好。",
-        "pinyin": "Zhè gè shāng pǐn hěn hǎo.",
-        "english": "This (commodity) is very good.",
+        "hanzi": "特别是运动商品公司已经提前完成了。",
+        "pinyin": "Tè bié shì yùn dòng shāng pǐn gōng sī yǐ jīng tí qián wán chéng le.",
+        "english": "The sporting goods industry, in particular, stepped up to the plate and have done it.",
         "tokens": [
-          "这",
-          "个",
+          "特别",
+          "是",
+          "运动",
           "商品",
-          "很",
-          "好"
+          "公司",
+          "已经",
+          "提前",
+          "完成",
+          "了"
         ]
       }
     },
@@ -12750,15 +13132,15 @@
       "pinyin": "xíng shì",
       "english": "Circumstances / situation",
       "example": {
-        "hanzi": "这个形势很重要。",
-        "pinyin": "Zhè gè xíng shì hěn zhòng yào.",
-        "english": "This (circumstances) is very important.",
+        "hanzi": "形势不是很好。",
+        "pinyin": "Xíng shì bù shì hěn hǎo.",
+        "english": "This is not a good situation.",
         "tokens": [
-          "这",
-          "个",
           "形势",
+          "不",
+          "是",
           "很",
-          "重要"
+          "好"
         ]
       }
     },
@@ -12769,13 +13151,16 @@
       "pinyin": "quàn",
       "english": "To advise / to urge",
       "example": {
-        "hanzi": "我们正在劝。",
-        "pinyin": "Wǒ men zhèng zài quàn.",
-        "english": "We are currently practicing: to advise.",
+        "hanzi": "我们试着劝了他。",
+        "pinyin": "Wǒ men shì zhe quàn le tā.",
+        "english": "We tried to persuade him.",
         "tokens": [
           "我们",
-          "正在",
-          "劝"
+          "试",
+          "着",
+          "劝",
+          "了",
+          "他"
         ]
       }
     },
@@ -12806,14 +13191,16 @@
       "pinyin": "yùn shū",
       "english": "To transport / to carry",
       "example": {
-        "hanzi": "大家一起运输吧！",
-        "pinyin": "Dà jiā yī qǐ yùn shū ba!",
-        "english": "Let's all to transport together!",
+        "hanzi": "他是我们运输组的。",
+        "pinyin": "Tā shì wǒ men yùn shū zǔ de.",
+        "english": "He was with our transportation team.",
         "tokens": [
-          "大家",
-          "一起",
+          "他",
+          "是",
+          "我们",
           "运输",
-          "吧"
+          "组",
+          "的"
         ]
       }
     },
@@ -12842,15 +13229,17 @@
       "pinyin": "zhēn xī",
       "english": "To treasure / to value",
       "example": {
-        "hanzi": "明天再珍惜好吗？",
-        "pinyin": "Míng tiān zài zhēn xī hǎo ma?",
-        "english": "Shall we continue tomorrow with: to treasure?",
+        "hanzi": "我们不珍惜自己的传统知识。",
+        "pinyin": "Wǒ men bù zhēn xī zì jǐ de chuán tǒng zhī shi.",
+        "english": "We don't value our own traditional knowledge.",
         "tokens": [
-          "明天",
-          "再",
+          "我们",
+          "不",
           "珍惜",
-          "好",
-          "吗"
+          "自己",
+          "的",
+          "传统",
+          "知识"
         ]
       }
     },
@@ -12861,15 +13250,17 @@
       "pinyin": "chuán bō",
       "english": "To disseminate; to propagate; to spread",
       "example": {
-        "hanzi": "明天再传播好吗？",
-        "pinyin": "Míng tiān zài chuán bō hǎo ma?",
-        "english": "Shall we continue tomorrow with: to disseminate; to propagate; to spread?",
+        "hanzi": "用它来传播优秀的思想。",
+        "pinyin": "Yòng tā lái chuán bō yōu xiù de sī xiǎng.",
+        "english": "Use it to spread great ideas.",
         "tokens": [
-          "明天",
-          "再",
+          "用",
+          "它",
+          "来",
           "传播",
-          "好",
-          "吗"
+          "优秀",
+          "的",
+          "思想"
         ]
       }
     },
@@ -12939,14 +13330,16 @@
       "pinyin": "shōu huò",
       "english": "To harvest / to reap",
       "example": {
-        "hanzi": "明天再收获吧。",
-        "pinyin": "Míng tiān zài shōu huò ba.",
-        "english": "Let's to harvest tomorrow instead.",
+        "hanzi": "这就是我的收获。",
+        "pinyin": "Zhè jiù shì wǒ de shōu huò.",
+        "english": "This is my harvest, people.",
         "tokens": [
-          "明天",
-          "再",
-          "收获",
-          "吧"
+          "这",
+          "就",
+          "是",
+          "我",
+          "的",
+          "收获"
         ]
       }
     },
@@ -12976,14 +13369,18 @@
       "pinyin": "guō",
       "english": "Pot; pan; wok; cauldron / pot-shaped thing",
       "example": {
-        "hanzi": "我们讨论过锅。",
-        "pinyin": "Wǒ men tǎo lùn guo guō.",
-        "english": "We have already discussed: pot; pan; wok; cauldron.",
+        "hanzi": "只是我们的锅太小了！",
+        "pinyin": "Zhǐ shì wǒ men de guō tài xiǎo le!",
+        "english": "We have a pan that's too small!",
         "tokens": [
+          "只",
+          "是",
           "我们",
-          "讨论",
-          "过",
-          "锅"
+          "的",
+          "锅",
+          "太",
+          "小",
+          "了"
         ]
       }
     },
@@ -13070,13 +13467,17 @@
       "pinyin": "qiáng diào",
       "english": "To emphasize (a statement) / to stress",
       "example": {
-        "hanzi": "请认真强调。",
-        "pinyin": "Qǐng rèn zhēn qiáng diào.",
-        "english": "Please carefully practice: to emphasize (a statement).",
+        "hanzi": "我想特别强调这一点。",
+        "pinyin": "Wǒ xiǎng tè bié qiáng diào zhè yī diǎn.",
+        "english": "I want to emphasize this point in particular.",
         "tokens": [
-          "请",
-          "认真",
-          "强调"
+          "我",
+          "想",
+          "特别",
+          "强调",
+          "这",
+          "一",
+          "点"
         ]
       }
     },
@@ -13087,15 +13488,20 @@
       "pinyin": "chǒu",
       "english": "Clown / 2nd earthly branch: 1-3 a.m., 12th solar month , year of the Ox",
       "example": {
-        "hanzi": "今天的情况很丑。",
-        "pinyin": "Jīn tiān de qíng kuàng hěn chǒu.",
-        "english": "Today's situation is very: clown.",
+        "hanzi": "一个丑男人敲了我的门。",
+        "pinyin": "Yī gè chǒu nán rén qiāo le wǒ de mén.",
+        "english": "An ugly man knocked on my door.",
         "tokens": [
-          "今天",
+          "一",
+          "个",
+          "丑",
+          "男",
+          "人",
+          "敲",
+          "了",
+          "我",
           "的",
-          "情况",
-          "很",
-          "丑"
+          "门"
         ]
       }
     },
@@ -13143,15 +13549,20 @@
       "pinyin": "zhàng hù",
       "english": "Bank account / online account",
       "example": {
-        "hanzi": "这个账户非常好。",
-        "pinyin": "Zhè gè zhàng hù fēi cháng hǎo.",
-        "english": "This (bank account) is extremely good.",
+        "hanzi": "我认为你应该在这里开个账户。",
+        "pinyin": "Wǒ rèn wéi nǐ yīng gāi zài zhè lǐ kāi gè zhàng hù.",
+        "english": "I think you should open an account here.",
         "tokens": [
+          "我",
+          "认为",
+          "你",
+          "应该",
+          "在",
           "这",
+          "里",
+          "开",
           "个",
-          "账户",
-          "非常",
-          "好"
+          "账户"
         ]
       }
     },
@@ -13529,16 +13940,17 @@
       "pinyin": "diàn chí",
       "english": "Battery",
       "example": {
-        "hanzi": "这里需要新的电池。",
-        "pinyin": "Zhè lǐ xū yào xīn de diàn chí.",
-        "english": "Here we need something new: battery.",
+        "hanzi": "你现在有几块电池呀？",
+        "pinyin": "Nǐ xiàn zài yǒu jǐ kuài diàn chí ya?",
+        "english": "How many batteries do you have right now?",
         "tokens": [
-          "这",
-          "里",
-          "需要",
-          "新",
-          "的",
-          "电池"
+          "你",
+          "现在",
+          "有",
+          "几",
+          "块",
+          "电池",
+          "呀"
         ]
       }
     },
@@ -13549,15 +13961,16 @@
       "pinyin": "lè guān",
       "english": "Optimistic / hopeful",
       "example": {
-        "hanzi": "大家的态度很乐观。",
-        "pinyin": "Dà jiā de tài du hěn lè guān.",
-        "english": "Everyone's attitude is very: optimistic.",
+        "hanzi": "乐观是留给观众的。",
+        "pinyin": "Lè guān shì liú gěi guān zhòng de.",
+        "english": "Optimism is for spectators.",
         "tokens": [
-          "大家",
-          "的",
-          "态度",
-          "很",
-          "乐观"
+          "乐观",
+          "是",
+          "留",
+          "给",
+          "观众",
+          "的"
         ]
       }
     },
@@ -13607,13 +14020,16 @@
       "pinyin": "zhǎng",
       "english": "To rise (of prices, rivers)",
       "example": {
-        "hanzi": "我们正在涨。",
-        "pinyin": "Wǒ men zhèng zài zhǎng.",
-        "english": "We are currently practicing: to rise (of prices, rivers).",
+        "hanzi": "价格还会继续涨吗？",
+        "pinyin": "Jià gé hái huì jì xù zhǎng ma?",
+        "english": "Will the price keep going up?",
         "tokens": [
-          "我们",
-          "正在",
-          "涨"
+          "价格",
+          "还",
+          "会",
+          "继续",
+          "涨",
+          "吗"
         ]
       }
     },
@@ -13682,12 +14098,13 @@
       "pinyin": "yí mín",
       "english": "To immigrate / to migrate",
       "example": {
-        "hanzi": "我们正在移民。",
-        "pinyin": "Wǒ men zhèng zài yí mín.",
-        "english": "We are currently practicing: to immigrate.",
+        "hanzi": "我们如何利用移民？",
+        "pinyin": "Wǒ men rú hé lì yòng yí mín?",
+        "english": "How can we use immigrants?",
         "tokens": [
           "我们",
-          "正在",
+          "如何",
+          "利用",
           "移民"
         ]
       }
@@ -13717,15 +14134,17 @@
       "pinyin": "chèn",
       "english": "To avail oneself of / to take advantage of",
       "example": {
-        "hanzi": "明天再趁好吗？",
-        "pinyin": "Míng tiān zài chèn hǎo ma?",
-        "english": "Shall we continue tomorrow with: to avail oneself of?",
+        "hanzi": "应该趁年轻多读点书。",
+        "pinyin": "Yīng gāi chèn nián qīng duō dú diǎn shū.",
+        "english": "You should read many books when you are young.",
         "tokens": [
-          "明天",
-          "再",
+          "应该",
           "趁",
-          "好",
-          "吗"
+          "年轻",
+          "多",
+          "读",
+          "点",
+          "书"
         ]
       }
     },
@@ -13754,13 +14173,14 @@
       "pinyin": "zhì xù",
       "english": "Order (orderly) / order (sequence)",
       "example": {
-        "hanzi": "我们讨论过秩序。",
-        "pinyin": "Wǒ men tǎo lùn guo zhì xù.",
-        "english": "We have already discussed: order (orderly).",
+        "hanzi": "我相信法律和秩序。",
+        "pinyin": "Wǒ xiāng xìn fǎ lǜ hé zhì xù.",
+        "english": "I believe in law and order.",
         "tokens": [
-          "我们",
-          "讨论",
-          "过",
+          "我",
+          "相信",
+          "法律",
+          "和",
           "秩序"
         ]
       }
@@ -13772,16 +14192,18 @@
       "pinyin": "fēng jǐng",
       "english": "Scenery; landscape",
       "example": {
-        "hanzi": "这里需要新的风景。",
-        "pinyin": "Zhè lǐ xū yào xīn de fēng jǐng.",
-        "english": "Here we need something new: scenery; landscape.",
+        "hanzi": "减少农业对风景的破坏很好。",
+        "pinyin": "Jiǎn shǎo nóng yè duì fēng jǐng de pò huài hěn hǎo.",
+        "english": "Making agriculture less of a destruction of the landscape is good.",
         "tokens": [
-          "这",
-          "里",
-          "需要",
-          "新",
+          "减少",
+          "农业",
+          "对",
+          "风景",
           "的",
-          "风景"
+          "破坏",
+          "很",
+          "好"
         ]
       }
     },
@@ -13792,15 +14214,19 @@
       "pinyin": "shàn liáng",
       "english": "Good and honest / kindhearted",
       "example": {
-        "hanzi": "今天的情况很善良。",
-        "pinyin": "Jīn tiān de qíng kuàng hěn shàn liáng.",
-        "english": "Today's situation is very: good and honest.",
+        "hanzi": "这真是一个很善良的愿望。",
+        "pinyin": "Zhè zhēn shì yī gè hěn shàn liáng de yuàn wàng.",
+        "english": "This is a really kind wish.",
         "tokens": [
-          "今天",
-          "的",
-          "情况",
+          "这",
+          "真",
+          "是",
+          "一",
+          "个",
           "很",
-          "善良"
+          "善良",
+          "的",
+          "愿望"
         ]
       }
     },
@@ -13892,15 +14318,18 @@
       "pinyin": "qiú mí",
       "english": "Fan (ball sports)",
       "example": {
-        "hanzi": "书上提到了球迷。",
-        "pinyin": "Shū shàng tí dào le qiú mí.",
-        "english": "The book mentions: fan (ball sports).",
+        "hanzi": "体育场里有很多兴奋的球迷。",
+        "pinyin": "Tǐ yù chǎng lǐ yǒu hěn duō xīng fèn de qiú mí.",
+        "english": "There were a lot of excited fans in the stadium.",
         "tokens": [
-          "书",
-          "上",
-          "提",
-          "到",
-          "了",
+          "体育",
+          "场",
+          "里",
+          "有",
+          "很",
+          "多",
+          "兴奋",
+          "的",
           "球迷"
         ]
       }
@@ -14280,15 +14709,16 @@
       "pinyin": "zǒng cái",
       "english": "Chairman / director-general (of a company etc)",
       "example": {
-        "hanzi": "这个总裁很重要。",
-        "pinyin": "Zhè gè zǒng cái hěn zhòng yào.",
-        "english": "This concept \"chairman\" is very important.",
+        "hanzi": "鼠标公司的总裁不知道。",
+        "pinyin": "Shǔ biāo gōng sī de zǒng cái bù zhī dào.",
+        "english": "The president of the computer mouse company doesn't know.",
         "tokens": [
-          "这",
-          "个",
+          "鼠标",
+          "公司",
+          "的",
           "总裁",
-          "很",
-          "重要"
+          "不",
+          "知道"
         ]
       }
     },
@@ -14411,16 +14841,14 @@
       "pinyin": "qīng chūn",
       "english": "Youth / youthfulness",
       "example": {
-        "hanzi": "书上提到了青春。",
-        "pinyin": "Shū shàng tí dào le qīng chūn.",
-        "english": "The book mentions: youth.",
+        "hanzi": "青春只有一次。",
+        "pinyin": "Qīng chūn zhǐ yǒu yī cì.",
+        "english": "You're only young once.",
         "tokens": [
-          "书",
-          "上",
-          "提",
-          "到",
-          "了",
-          "青春"
+          "青春",
+          "只有",
+          "一",
+          "次"
         ]
       }
     },
@@ -14615,13 +15043,18 @@
       "pinyin": "shī zi",
       "english": "Lion",
       "example": {
-        "hanzi": "我们讨论过狮子。",
-        "pinyin": "Wǒ men tǎo lùn guo shī zi.",
-        "english": "We have already discussed: lion.",
+        "hanzi": "每条狗在自己家就是狮子。",
+        "pinyin": "Měi tiáo gǒu zài zì jǐ jiā jiù shì shī zi.",
+        "english": "Every dog is a lion at home.",
         "tokens": [
-          "我们",
-          "讨论",
-          "过",
+          "每",
+          "条",
+          "狗",
+          "在",
+          "自己",
+          "家",
+          "就",
+          "是",
           "狮子"
         ]
       }
@@ -14924,13 +15357,15 @@
       "pinyin": "mò shēng",
       "english": "Strange / unfamiliar",
       "example": {
-        "hanzi": "今天的情况很陌生。",
-        "pinyin": "Jīn tiān de qíng kuàng hěn mò shēng.",
-        "english": "Today's situation is very: strange.",
+        "hanzi": "风景对我来说很陌生。",
+        "pinyin": "Fēng jǐng duì wǒ lái shuō hěn mò shēng.",
+        "english": "The landscape is unfamiliar to me.",
         "tokens": [
-          "今天",
-          "的",
-          "情况",
+          "风景",
+          "对",
+          "我",
+          "来",
+          "说",
           "很",
           "陌生"
         ]
@@ -14962,14 +15397,17 @@
       "pinyin": "xià zǎi",
       "english": "To download",
       "example": {
-        "hanzi": "我们开始下载了。",
-        "pinyin": "Wǒ men kāi shǐ xià zǎi le.",
-        "english": "We have started to to download.",
+        "hanzi": "我们可以下载新的诊断方法。",
+        "pinyin": "Wǒ men kě yǐ xià zǎi xīn de zhěn duàn fāng fǎ.",
+        "english": "We can download new diagnostics.",
         "tokens": [
           "我们",
-          "开始",
+          "可以",
           "下载",
-          "了"
+          "新",
+          "的",
+          "诊断",
+          "方法"
         ]
       }
     },
@@ -14998,15 +15436,19 @@
       "pinyin": "gòu chéng",
       "english": "To constitute / to form",
       "example": {
-        "hanzi": "明天再构成好吗？",
-        "pinyin": "Míng tiān zài gòu chéng hǎo ma?",
-        "english": "Shall we continue tomorrow with: to constitute?",
+        "hanzi": "云层的构成方式有好几种。",
+        "pinyin": "Yún céng de gòu chéng fāng shì yǒu hǎo jǐ zhǒng.",
+        "english": "There are several kinds of cloud formations.",
         "tokens": [
-          "明天",
-          "再",
+          "云",
+          "层",
+          "的",
           "构成",
+          "方式",
+          "有",
           "好",
-          "吗"
+          "几",
+          "种"
         ]
       }
     },
@@ -15092,14 +15534,19 @@
       "pinyin": "guān niàn",
       "english": "Notion / thought",
       "example": {
-        "hanzi": "我们讨论过观念。",
-        "pinyin": "Wǒ men tǎo lùn guo guān niàn.",
-        "english": "We have already discussed: notion.",
+        "hanzi": "我们得有现代观念来理解这数据。",
+        "pinyin": "Wǒ men de yǒu xiàn dài guān niàn lái lǐ jiě zhè shù jù.",
+        "english": "We have to have a modern concept, which fits to the data.",
         "tokens": [
           "我们",
-          "讨论",
-          "过",
-          "观念"
+          "得",
+          "有",
+          "现代",
+          "观念",
+          "来",
+          "理解",
+          "这",
+          "数据"
         ]
       }
     },
@@ -15181,13 +15628,16 @@
       "pinyin": "juān",
       "english": "To relinquish; to abandon / to contribute; to donate",
       "example": {
-        "hanzi": "我们正在捐。",
-        "pinyin": "Wǒ men zhèng zài juān.",
-        "english": "We are currently practicing: to relinquish; to abandon.",
+        "hanzi": "你每年捐多少钱？",
+        "pinyin": "Nǐ měi nián juān duō shao qián?",
+        "english": "How much money do you donate every year?",
         "tokens": [
-          "我们",
-          "正在",
-          "捐"
+          "你",
+          "每",
+          "年",
+          "捐",
+          "多少",
+          "钱"
         ]
       }
     },
@@ -15452,14 +15902,14 @@
       "pinyin": "jiè zhi",
       "english": "(finger) ring",
       "example": {
-        "hanzi": "我们讨论过戒指。",
-        "pinyin": "Wǒ men tǎo lùn guo jiè zhi.",
-        "english": "We have already discussed: (finger) ring.",
+        "hanzi": "你有戒指吗？",
+        "pinyin": "Nǐ yǒu jiè zhi ma?",
+        "english": "Do you have a ring as well?",
         "tokens": [
-          "我们",
-          "讨论",
-          "过",
-          "戒指"
+          "你",
+          "有",
+          "戒指",
+          "吗"
         ]
       }
     },
@@ -15509,13 +15959,17 @@
       "pinyin": "shū rù",
       "english": "To import / to input",
       "example": {
-        "hanzi": "她喜欢输入。",
-        "pinyin": "Tā xǐ huan shū rù.",
-        "english": "She likes to to import.",
+        "hanzi": "它需要护士输入一些数据。",
+        "pinyin": "Tā xū yào hù shi shū rù yī xiē shù jù.",
+        "english": "They'll ask the nurses to input data.",
         "tokens": [
-          "她",
-          "喜欢",
-          "输入"
+          "它",
+          "需要",
+          "护士",
+          "输入",
+          "一",
+          "些",
+          "数据"
         ]
       }
     },
@@ -15544,14 +15998,12 @@
       "pinyin": "sè cǎi",
       "english": "Tint; coloring; coloration / (fig.) flavor; character",
       "example": {
-        "hanzi": "大家都很了解色彩。",
-        "pinyin": "Dà jiā dōu hěn liǎo jiě sè cǎi.",
-        "english": "Everyone knows a lot about: tint; coloring; coloration.",
+        "hanzi": "我热爱色彩。",
+        "pinyin": "Wǒ rè ài sè cǎi.",
+        "english": "I really love color.",
         "tokens": [
-          "大家",
-          "都",
-          "很",
-          "了解",
+          "我",
+          "热爱",
           "色彩"
         ]
       }
@@ -15563,14 +16015,17 @@
       "pinyin": "táo bì",
       "english": "To escape / to evade",
       "example": {
-        "hanzi": "大家一起逃避吧！",
-        "pinyin": "Dà jiā yī qǐ táo bì ba!",
-        "english": "Let's all do this together: to escape!",
+        "hanzi": "你为什么总是逃避这个话题？",
+        "pinyin": "Nǐ wèi shén me zǒng shì táo bì zhè gè huà tí?",
+        "english": "Why do you always avoid that topic?",
         "tokens": [
-          "大家",
-          "一起",
+          "你",
+          "为什么",
+          "总是",
           "逃避",
-          "吧"
+          "这",
+          "个",
+          "话题"
         ]
       }
     },
@@ -15651,15 +16106,12 @@
       "pinyin": "guī lǜ",
       "english": "Rule (e.g. of science) / law of behavior",
       "example": {
-        "hanzi": "这里需要新的规律。",
-        "pinyin": "Zhè lǐ xū yào xīn de guī lǜ.",
-        "english": "Here we need something new: rule (e.g. of science).",
+        "hanzi": "首先是规律。",
+        "pinyin": "Shǒu xiān shì guī lǜ.",
+        "english": "The first is regularity.",
         "tokens": [
-          "这",
-          "里",
-          "需要",
-          "新",
-          "的",
+          "首先",
+          "是",
           "规律"
         ]
       }
@@ -15728,12 +16180,18 @@
       "pinyin": "piāo",
       "english": "To float",
       "example": {
-        "hanzi": "我们正在飘。",
-        "pinyin": "Wǒ men zhèng zài piāo.",
-        "english": "We are currently practicing: to float.",
+        "hanzi": "一朵白云在蓝天上飘。",
+        "pinyin": "Yī duǒ bái yún zài lán tiān shàng piāo.",
+        "english": "A white cloud floats in the blue sky.",
         "tokens": [
-          "我们",
-          "正在",
+          "一",
+          "朵",
+          "白",
+          "云",
+          "在",
+          "蓝",
+          "天",
+          "上",
           "飘"
         ]
       }
@@ -15764,14 +16222,18 @@
       "pinyin": "qián tú",
       "english": "Prospects / future outlook",
       "example": {
-        "hanzi": "我们讨论过前途。",
-        "pinyin": "Wǒ men tǎo lùn guo qián tú.",
-        "english": "We have already discussed: prospects.",
+        "hanzi": "他是一位有前途的学生。",
+        "pinyin": "Tā shì yī wèi yǒu qián tú de xué sheng.",
+        "english": "He is a promising student.",
         "tokens": [
-          "我们",
-          "讨论",
-          "过",
-          "前途"
+          "他",
+          "是",
+          "一",
+          "位",
+          "有",
+          "前途",
+          "的",
+          "学生"
         ]
       }
     },
@@ -15821,15 +16283,18 @@
       "pinyin": "shuō fú",
       "english": "To persuade / to convince",
       "example": {
-        "hanzi": "明天再说服好吗？",
-        "pinyin": "Míng tiān zài shuō fú hǎo ma?",
-        "english": "Shall we continue tomorrow with: to persuade?",
+        "hanzi": "我说服他放弃了这个主意。",
+        "pinyin": "Wǒ shuō fú tā fàng qì le zhè gè zhǔ yi.",
+        "english": "I talked him out of the idea.",
         "tokens": [
-          "明天",
-          "再",
+          "我",
           "说服",
-          "好",
-          "吗"
+          "他",
+          "放弃",
+          "了",
+          "这",
+          "个",
+          "主意"
         ]
       }
     },
@@ -15915,15 +16380,15 @@
       "pinyin": "zǒng suàn",
       "english": "At long last / finally",
       "example": {
-        "hanzi": "明天再总算好吗？",
-        "pinyin": "Míng tiān zài zǒng suàn hǎo ma?",
-        "english": "Shall we continue tomorrow with: at long last?",
+        "hanzi": "总算到星期五了。",
+        "pinyin": "Zǒng suàn dào xīng qī wǔ le.",
+        "english": "Finally, it's Friday.",
         "tokens": [
-          "明天",
-          "再",
           "总算",
-          "好",
-          "吗"
+          "到",
+          "星期",
+          "五",
+          "了"
         ]
       }
     },
@@ -16048,14 +16513,18 @@
       "pinyin": "hū shì",
       "english": "To neglect; to overlook; to disregard; to ignore",
       "example": {
-        "hanzi": "大家一起忽视吧！",
-        "pinyin": "Dà jiā yī qǐ hū shì ba!",
-        "english": "Let's all do this together: to neglect; to overlook; to disregard; to ignore!",
+        "hanzi": "这种错误很容易被人忽视。",
+        "pinyin": "Zhè zhǒng cuò wù hěn róng yì bèi rén hū shì.",
+        "english": "This kind of mistake is easy to overlook.",
         "tokens": [
-          "大家",
-          "一起",
-          "忽视",
-          "吧"
+          "这",
+          "种",
+          "错误",
+          "很",
+          "容易",
+          "被",
+          "人",
+          "忽视"
         ]
       }
     },
@@ -16138,15 +16607,15 @@
       "pinyin": "kǎ chē",
       "english": "Truck",
       "example": {
-        "hanzi": "书上提到了卡车。",
-        "pinyin": "Shū shàng tí dào le kǎ chē.",
-        "english": "The book mentions: truck.",
+        "hanzi": "路中间有一辆卡车。",
+        "pinyin": "Lù zhōng jiān yǒu yī liàng kǎ chē.",
+        "english": "A truck was standing in the middle of the road.",
         "tokens": [
-          "书",
-          "上",
-          "提",
-          "到",
-          "了",
+          "路",
+          "中间",
+          "有",
+          "一",
+          "辆",
           "卡车"
         ]
       }
@@ -16215,15 +16684,16 @@
       "pinyin": "běn zhì",
       "english": "Essence / nature",
       "example": {
-        "hanzi": "这个本质很重要。",
-        "pinyin": "Zhè gè běn zhì hěn zhòng yào.",
-        "english": "This concept \"essence\" is very important.",
+        "hanzi": "自由的本质就是数学。",
+        "pinyin": "Zì yóu de běn zhì jiù shì shù xué.",
+        "english": "The essence of liberty is mathematics.",
         "tokens": [
-          "这",
-          "个",
+          "自由",
+          "的",
           "本质",
-          "很",
-          "重要"
+          "就",
+          "是",
+          "数学"
         ]
       }
     },
@@ -16234,14 +16704,19 @@
       "pinyin": "tí wèn",
       "english": "To question; to quiz; to grill",
       "example": {
-        "hanzi": "明天再提问好吗？",
-        "pinyin": "Míng tiān zài tí wèn hǎo ma?",
-        "english": "Shall we continue tomorrow with: to question; to quiz; to grill?",
+        "hanzi": "你真的需要提问题来知道答案吗？",
+        "pinyin": "Nǐ zhēn de xū yào tí wèn tí lái zhī dào dá àn ma?",
+        "english": "Do you really need to ask the question to know the answer?",
         "tokens": [
-          "明天",
-          "再",
+          "你",
+          "真",
+          "的",
+          "需要",
           "提问",
-          "好",
+          "题",
+          "来",
+          "知道",
+          "答案",
           "吗"
         ]
       }
@@ -16310,14 +16785,15 @@
       "pinyin": "shí jiàn",
       "english": "Practice / to put into practice",
       "example": {
-        "hanzi": "大家一起实践吧！",
-        "pinyin": "Dà jiā yī qǐ shí jiàn ba!",
-        "english": "Let's all do this together: practice!",
+        "hanzi": "这个工作需要实践。",
+        "pinyin": "Zhè gè gōng zuò xū yào shí jiàn.",
+        "english": "This job calls for practice.",
         "tokens": [
-          "大家",
-          "一起",
-          "实践",
-          "吧"
+          "这",
+          "个",
+          "工作",
+          "需要",
+          "实践"
         ]
       }
     },
@@ -16347,16 +16823,20 @@
       "pinyin": "cóng qián",
       "english": "Previously / formerly",
       "example": {
-        "hanzi": "这里需要新的从前。",
-        "pinyin": "Zhè lǐ xū yào xīn de cóng qián.",
-        "english": "Here we need something new: previously.",
+        "hanzi": "我们再也不能一起回到从前了。",
+        "pinyin": "Wǒ men zài yě bù néng yī qǐ huí dào cóng qián le.",
+        "english": "We will never be able to return to the way things were in the past.",
         "tokens": [
-          "这",
-          "里",
-          "需要",
-          "新",
-          "的",
-          "从前"
+          "我们",
+          "再",
+          "也",
+          "不",
+          "能",
+          "一起",
+          "回",
+          "到",
+          "从前",
+          "了"
         ]
       }
     },
@@ -16367,16 +16847,16 @@
       "pinyin": "rì cháng",
       "english": "Day-to-day; daily; everyday",
       "example": {
-        "hanzi": "这里需要新的日常。",
-        "pinyin": "Zhè lǐ xū yào xīn de rì cháng.",
-        "english": "Here we need something new: day-to-day; daily; everyday.",
+        "hanzi": "我可以把玩日常经历。",
+        "pinyin": "Wǒ kě yǐ bǎ wán rì cháng jīng lì.",
+        "english": "So, I get to tinker with everyday experiences.",
         "tokens": [
-          "这",
-          "里",
-          "需要",
-          "新",
-          "的",
-          "日常"
+          "我",
+          "可以",
+          "把",
+          "玩",
+          "日常",
+          "经历"
         ]
       }
     },
@@ -16424,13 +16904,16 @@
       "pinyin": "yù fáng",
       "english": "To prevent / to take precautions against",
       "example": {
-        "hanzi": "请认真预防。",
-        "pinyin": "Qǐng rèn zhēn yù fáng.",
-        "english": "Please carefully practice: to prevent.",
+        "hanzi": "这完全是可以预防的。",
+        "pinyin": "Zhè wán quán shì kě yǐ yù fáng de.",
+        "english": "This is completely preventable.",
         "tokens": [
-          "请",
-          "认真",
-          "预防"
+          "这",
+          "完全",
+          "是",
+          "可以",
+          "预防",
+          "的"
         ]
       }
     },
@@ -16441,16 +16924,16 @@
       "pinyin": "xiào lǜ",
       "english": "Efficiency",
       "example": {
-        "hanzi": "书上提到了效率。",
-        "pinyin": "Shū shàng tí dào le xiào lǜ.",
-        "english": "The book mentions: efficiency.",
+        "hanzi": "有谁不爱效率呢？",
+        "pinyin": "Yǒu shéi bù ài xiào lǜ ne?",
+        "english": "Who doesn't love efficiency?",
         "tokens": [
-          "书",
-          "上",
-          "提",
-          "到",
-          "了",
-          "效率"
+          "有",
+          "谁",
+          "不",
+          "爱",
+          "效率",
+          "呢"
         ]
       }
     },
@@ -16561,15 +17044,14 @@
       "pinyin": "dǎo méi",
       "english": "To have bad luck / to be out of luck",
       "example": {
-        "hanzi": "这里的环境真倒霉！",
-        "pinyin": "Zhè lǐ de huán jìng zhēn dǎo méi!",
-        "english": "The environment here is really: to have bad luck!",
+        "hanzi": "我真的很倒霉！",
+        "pinyin": "Wǒ zhēn de hěn dǎo méi!",
+        "english": "How unlucky I am!",
         "tokens": [
-          "这",
-          "里",
-          "的",
-          "环境",
+          "我",
           "真",
+          "的",
+          "很",
           "倒霉"
         ]
       }
@@ -16791,15 +17273,17 @@
       "pinyin": "ǒu rán",
       "english": "Incidentally / occasional",
       "example": {
-        "hanzi": "大家的态度很偶然。",
-        "pinyin": "Dà jiā de tài du hěn ǒu rán.",
-        "english": "Everyone's attitude is very: incidentally.",
+        "hanzi": "我觉得这种事情偶然发生。",
+        "pinyin": "Wǒ jué de zhè zhǒng shì qing ǒu rán fā shēng.",
+        "english": "I think that things like this happen by chance.",
         "tokens": [
-          "大家",
-          "的",
-          "态度",
-          "很",
-          "偶然"
+          "我",
+          "觉得",
+          "这",
+          "种",
+          "事情",
+          "偶然",
+          "发生"
         ]
       }
     },
@@ -16828,14 +17312,15 @@
       "pinyin": "mó hu",
       "english": "Vague / indistinct",
       "example": {
-        "hanzi": "明天再模糊吧。",
-        "pinyin": "Míng tiān zài mó hu ba.",
-        "english": "Let's vague tomorrow instead.",
+        "hanzi": "是个模糊的世界。",
+        "pinyin": "Shì gè mó hu de shì jiè.",
+        "english": "It's a fuzzy world.",
         "tokens": [
-          "明天",
-          "再",
+          "是",
+          "个",
           "模糊",
-          "吧"
+          "的",
+          "世界"
         ]
       }
     },
@@ -16904,13 +17389,18 @@
       "pinyin": "lù yīn",
       "english": "To record (sound) / sound recording",
       "example": {
-        "hanzi": "请认真录音。",
-        "pinyin": "Qǐng rèn zhēn lù yīn.",
-        "english": "Please carefully practice: to record (sound).",
+        "hanzi": "这是历史上第一个录音设备。",
+        "pinyin": "Zhè shì lì shǐ shàng dì yī gè lù yīn shè bèi.",
+        "english": "It was one of the first sound recording devices in history.",
         "tokens": [
-          "请",
-          "认真",
-          "录音"
+          "这",
+          "是",
+          "历史",
+          "上",
+          "第一",
+          "个",
+          "录音",
+          "设备"
         ]
       }
     },
@@ -16921,14 +17411,18 @@
       "pinyin": "jiē dài",
       "english": "To receive (a visitor) / to admit (allow sb to enter)",
       "example": {
-        "hanzi": "大家一起接待吧！",
-        "pinyin": "Dà jiā yī qǐ jiē dài ba!",
-        "english": "Let's all do this together: to receive (a visitor)!",
+        "hanzi": "这个家庭热情地接待了我。",
+        "pinyin": "Zhè gè jiā tíng rè qíng de jiē dài le wǒ.",
+        "english": "The family received me very warmly.",
         "tokens": [
-          "大家",
-          "一起",
+          "这",
+          "个",
+          "家庭",
+          "热情",
+          "地",
           "接待",
-          "吧"
+          "了",
+          "我"
         ]
       }
     },
@@ -16976,15 +17470,14 @@
       "pinyin": "shàn yú",
       "english": "To be good at; to be adept at",
       "example": {
-        "hanzi": "他每天都善于。",
-        "pinyin": "Tā měi tiān dōu shàn yú.",
-        "english": "Every day he practices: to be good at; to be adept at.",
+        "hanzi": "我们善于制造战争。",
+        "pinyin": "Wǒ men shàn yú zhì zào zhàn zhēng.",
+        "english": "We are good at making war.",
         "tokens": [
-          "他",
-          "每",
-          "天",
-          "都",
-          "善于"
+          "我们",
+          "善于",
+          "制造",
+          "战争"
         ]
       }
     },
@@ -17104,15 +17597,16 @@
       "pinyin": "zǒng lǐ",
       "english": "Premier / prime minister",
       "example": {
-        "hanzi": "书上提到了总理。",
-        "pinyin": "Shū shàng tí dào le zǒng lǐ.",
-        "english": "The book mentions: premier.",
+        "hanzi": "他是这个国家的总理。",
+        "pinyin": "Tā shì zhè gè guó jiā de zǒng lǐ.",
+        "english": "He is the prime minister of this country.",
         "tokens": [
-          "书",
-          "上",
-          "提",
-          "到",
-          "了",
+          "他",
+          "是",
+          "这",
+          "个",
+          "国家",
+          "的",
           "总理"
         ]
       }
@@ -17124,14 +17618,19 @@
       "pinyin": "gǔ tou",
       "english": "Bone / moral character",
       "example": {
-        "hanzi": "我们讨论过骨头。",
-        "pinyin": "Wǒ men tǎo lùn guo gǔ tou.",
-        "english": "We have already discussed: bone.",
+        "hanzi": "会在骨头或者植物上有信号吗？",
+        "pinyin": "Huì zài gǔ tou huò zhě zhí wù shàng yǒu xìn hào ma?",
+        "english": "Does it leave a signal in bone or in plant?",
         "tokens": [
-          "我们",
-          "讨论",
-          "过",
-          "骨头"
+          "会",
+          "在",
+          "骨头",
+          "或者",
+          "植物",
+          "上",
+          "有",
+          "信号",
+          "吗"
         ]
       }
     },
@@ -17198,12 +17697,15 @@
       "pinyin": "jìn kǒu",
       "english": "To import / imported",
       "example": {
-        "hanzi": "我们正在进口。",
-        "pinyin": "Wǒ men zhèng zài jìn kǒu.",
-        "english": "We are currently practicing: to import.",
+        "hanzi": "日本米市场禁止进口。",
+        "pinyin": "Rì běn mǐ shì chǎng jìn zhǐ jìn kǒu.",
+        "english": "Japan's rice market is closed to imports.",
         "tokens": [
-          "我们",
-          "正在",
+          "日",
+          "本",
+          "米",
+          "市场",
+          "禁止",
           "进口"
         ]
       }
@@ -17290,13 +17792,16 @@
       "pinyin": "cān kǎo",
       "english": "Consultation / reference",
       "example": {
-        "hanzi": "大家需要参考。",
-        "pinyin": "Dà jiā xū yào cān kǎo.",
-        "english": "Everyone needs to consultation.",
+        "hanzi": "它能给你参考点。",
+        "pinyin": "Tā néng gěi nǐ cān kǎo diǎn.",
+        "english": "It gives you reference points.",
         "tokens": [
-          "大家",
-          "需要",
-          "参考"
+          "它",
+          "能",
+          "给",
+          "你",
+          "参考",
+          "点"
         ]
       }
     },
@@ -17542,15 +18047,16 @@
       "pinyin": "xíng zhuàng",
       "english": "Form; shape",
       "example": {
-        "hanzi": "书上提到了形状。",
-        "pinyin": "Shū shàng tí dào le xíng zhuàng.",
-        "english": "The book mentions: form; shape.",
+        "hanzi": "那片云是鱼的形状。",
+        "pinyin": "Nà piàn yún shì yú de xíng zhuàng.",
+        "english": "That cloud is in the shape of a fish.",
         "tokens": [
-          "书",
-          "上",
-          "提",
-          "到",
-          "了",
+          "那",
+          "片",
+          "云",
+          "是",
+          "鱼",
+          "的",
           "形状"
         ]
       }
@@ -17639,16 +18145,20 @@
       "pinyin": "dì dao",
       "english": "Authentic / Genuine",
       "example": {
-        "hanzi": "这里的环境真地道！",
-        "pinyin": "Zhè lǐ de huán jìng zhēn dì dao!",
-        "english": "The environment here is really: authentic!",
+        "hanzi": "我很希望可以说一口地道的中文。",
+        "pinyin": "Wǒ hěn xī wàng kě yǐ shuō yī kǒu dì dao de Zhōng wén.",
+        "english": "I really hope that I can speak authentic Chinese.",
         "tokens": [
-          "这",
-          "里",
+          "我",
+          "很",
+          "希望",
+          "可以",
+          "说",
+          "一",
+          "口",
+          "地道",
           "的",
-          "环境",
-          "真",
-          "地道"
+          "中文"
         ]
       }
     },
@@ -17716,14 +18226,16 @@
       "pinyin": "xìng zhì",
       "english": "Nature / characteristic",
       "example": {
-        "hanzi": "大家都知道性质。",
-        "pinyin": "Dà jiā dōu zhī dào xìng zhì.",
-        "english": "Everyone knows about (nature).",
+        "hanzi": "这是产品性质的变化。",
+        "pinyin": "Zhè shì chǎn pǐn xìng zhì de biàn huà.",
+        "english": "The nature of the product changes.",
         "tokens": [
-          "大家",
-          "都",
-          "知道",
-          "性质"
+          "这",
+          "是",
+          "产品",
+          "性质",
+          "的",
+          "变化"
         ]
       }
     },
@@ -17771,13 +18283,18 @@
       "pinyin": "chēng hu",
       "english": "To call; to address as / form of address; appellation",
       "example": {
-        "hanzi": "我们正在称呼。",
-        "pinyin": "Wǒ men zhèng zài chēng hu.",
-        "english": "We are currently practicing: to call; to address as.",
+        "hanzi": "第一次听到弟弟称呼我姐姐。",
+        "pinyin": "Dì yī cì tīng dào dì di chēng hu wǒ jiě jie.",
+        "english": "This is the first time I've heard my little brother call me \"big sister.\"",
         "tokens": [
-          "我们",
-          "正在",
-          "称呼"
+          "第一",
+          "次",
+          "听",
+          "到",
+          "弟弟",
+          "称呼",
+          "我",
+          "姐姐"
         ]
       }
     },
@@ -17879,15 +18396,16 @@
       "pinyin": "nóng yè",
       "english": "Agriculture / farming",
       "example": {
-        "hanzi": "这个农业很重要。",
-        "pinyin": "Zhè gè nóng yè hěn zhòng yào.",
-        "english": "This concept \"agriculture\" is very important.",
+        "hanzi": "我们有自己的农业学校。",
+        "pinyin": "Wǒ men yǒu zì jǐ de nóng yè xué xiào.",
+        "english": "We have our farmer schools.",
         "tokens": [
-          "这",
-          "个",
+          "我们",
+          "有",
+          "自己",
+          "的",
           "农业",
-          "很",
-          "重要"
+          "学校"
         ]
       }
     },
@@ -17952,14 +18470,15 @@
       "pinyin": "shǎn diàn",
       "english": "Lightning",
       "example": {
-        "hanzi": "大家一起闪电吧！",
-        "pinyin": "Dà jiā yī qǐ shǎn diàn ba!",
-        "english": "Let's all do this together: lightning!",
+        "hanzi": "闪电照亮了天空。",
+        "pinyin": "Shǎn diàn zhào liàng le tiān kōng.",
+        "english": "The lightning lit up the sky.",
         "tokens": [
-          "大家",
-          "一起",
           "闪电",
-          "吧"
+          "照",
+          "亮",
+          "了",
+          "天空"
         ]
       }
     },
@@ -17989,16 +18508,18 @@
       "pinyin": "guǎng fàn",
       "english": "Extensive / wide range",
       "example": {
-        "hanzi": "这里的环境真广泛！",
-        "pinyin": "Zhè lǐ de huán jìng zhēn guǎng fàn!",
-        "english": "The environment here is really: extensive!",
+        "hanzi": "我的爱好不但广泛而且有用。",
+        "pinyin": "Wǒ de ài hào bù dàn guǎng fàn ér qiě yǒu yòng.",
+        "english": "My hobbies are not only wide-ranging but also useful.",
         "tokens": [
-          "这",
-          "里",
+          "我",
           "的",
-          "环境",
-          "真",
-          "广泛"
+          "爱好",
+          "不但",
+          "广泛",
+          "而且",
+          "有",
+          "用"
         ]
       }
     },
@@ -18065,15 +18586,16 @@
       "pinyin": "chā jù",
       "english": "Disparity / gap",
       "example": {
-        "hanzi": "这个差距很重要。",
-        "pinyin": "Zhè gè chā jù hěn zhòng yào.",
-        "english": "This concept \"disparity\" is very important.",
+        "hanzi": "有对经济差距的讨论。",
+        "pinyin": "Yǒu duì jīng jì chā jù de tǎo lùn.",
+        "english": "There are conversations like economic disparity.",
         "tokens": [
-          "这",
-          "个",
+          "有",
+          "对",
+          "经济",
           "差距",
-          "很",
-          "重要"
+          "的",
+          "讨论"
         ]
       }
     },
@@ -18198,12 +18720,12 @@
       "pinyin": "yōu huì",
       "english": "Privilege / favorable (terms)",
       "example": {
-        "hanzi": "我们正在优惠。",
-        "pinyin": "Wǒ men zhèng zài yōu huì.",
-        "english": "We are currently practicing: privilege.",
+        "hanzi": "没有贸易优惠。",
+        "pinyin": "Méi yǒu mào yì yōu huì.",
+        "english": "There's no trade favors.",
         "tokens": [
-          "我们",
-          "正在",
+          "没有",
+          "贸易",
           "优惠"
         ]
       }
@@ -18234,16 +18756,17 @@
       "pinyin": "zì mǔ",
       "english": "Letter (of the alphabet)",
       "example": {
-        "hanzi": "这里需要新的字母。",
-        "pinyin": "Zhè lǐ xū yào xīn de zì mǔ.",
-        "english": "Here we need something new: letter (of the alphabet).",
+        "hanzi": "字母后面第一个数字是什么？",
+        "pinyin": "Zì mǔ hòu mian dì yī gè shù zì shì shén me?",
+        "english": "What is the first number after the letter?",
         "tokens": [
-          "这",
-          "里",
-          "需要",
-          "新",
-          "的",
-          "字母"
+          "字母",
+          "后面",
+          "第一",
+          "个",
+          "数字",
+          "是",
+          "什么"
         ]
       }
     },
@@ -18272,15 +18795,13 @@
       "pinyin": "fèi huà",
       "english": "Nonsense / rubbish",
       "example": {
-        "hanzi": "书上提到了废话。",
-        "pinyin": "Shū shàng tí dào le fèi huà.",
-        "english": "The book mentions: nonsense.",
+        "hanzi": "这是什么废话？",
+        "pinyin": "Zhè shì shén me fèi huà?",
+        "english": "What is this nonsense?",
         "tokens": [
-          "书",
-          "上",
-          "提",
-          "到",
-          "了",
+          "这",
+          "是",
+          "什么",
           "废话"
         ]
       }
@@ -18391,13 +18912,18 @@
       "pinyin": "zhǔ zhāng",
       "english": "To advocate / to stand for",
       "example": {
-        "hanzi": "他明天去主张。",
-        "pinyin": "Tā míng tiān qù zhǔ zhāng.",
-        "english": "He will go to to advocate tomorrow.",
+        "hanzi": "因为每个国家有自己独立的主张。",
+        "pinyin": "Yīn wèi měi gè guó jiā yǒu zì jǐ dú lì de zhǔ zhāng.",
+        "english": "Each country has a unique value proposition.",
         "tokens": [
-          "他",
-          "明天",
-          "去",
+          "因为",
+          "每",
+          "个",
+          "国家",
+          "有",
+          "自己",
+          "独立",
+          "的",
           "主张"
         ]
       }
@@ -18637,15 +19163,13 @@
       "pinyin": "xué shù",
       "english": "Learning / science",
       "example": {
-        "hanzi": "书上提到了学术。",
-        "pinyin": "Shū shàng tí dào le xué shù.",
-        "english": "The book mentions: learning.",
+        "hanzi": "这似乎非常学术。",
+        "pinyin": "Zhè sì hū fēi cháng xué shù.",
+        "english": "This seems very academic.",
         "tokens": [
-          "书",
-          "上",
-          "提",
-          "到",
-          "了",
+          "这",
+          "似乎",
+          "非常",
           "学术"
         ]
       }
@@ -18714,15 +19238,12 @@
       "pinyin": "chì bǎng",
       "english": "Wing",
       "example": {
-        "hanzi": "书上提到了翅膀。",
-        "pinyin": "Shū shàng tí dào le chì bǎng.",
-        "english": "The book mentions: wing.",
+        "hanzi": "鸟有翅膀。",
+        "pinyin": "Niǎo yǒu chì bǎng.",
+        "english": "A bird has wings.",
         "tokens": [
-          "书",
-          "上",
-          "提",
-          "到",
-          "了",
+          "鸟",
+          "有",
           "翅膀"
         ]
       }
@@ -19017,14 +19538,17 @@
       "pinyin": "shǒu gōng",
       "english": "Handwork / manual",
       "example": {
-        "hanzi": "大家手工完成任务。",
-        "pinyin": "Dà jiā shǒu gōng wán chéng rèn wu.",
-        "english": "Everyone completes the task (handwork).",
+        "hanzi": "这块地毯是手工制作的。",
+        "pinyin": "Zhè kuài dì tǎn shì shǒu gōng zhì zuò de.",
+        "english": "This rug is handmade.",
         "tokens": [
-          "大家",
+          "这",
+          "块",
+          "地毯",
+          "是",
           "手工",
-          "完成",
-          "任务"
+          "制作",
+          "的"
         ]
       }
     },
@@ -19109,15 +19633,16 @@
       "pinyin": "wéi jīn",
       "english": "Scarf / shawl",
       "example": {
-        "hanzi": "这个围巾很重要。",
-        "pinyin": "Zhè gè wéi jīn hěn zhòng yào.",
-        "english": "This concept \"scarf\" is very important.",
+        "hanzi": "你为什么戴那条围巾？",
+        "pinyin": "Nǐ wèi shén me dài nà tiáo wéi jīn?",
+        "english": "Why are you wearing that scarf?",
         "tokens": [
-          "这",
-          "个",
-          "围巾",
-          "很",
-          "重要"
+          "你",
+          "为什么",
+          "戴",
+          "那",
+          "条",
+          "围巾"
         ]
       }
     },
@@ -19204,15 +19729,15 @@
       "pinyin": "shéng zi",
       "english": "Cord; string; rope",
       "example": {
-        "hanzi": "这个绳子很重要。",
-        "pinyin": "Zhè gè shéng zi hěn zhòng yào.",
-        "english": "This concept \"cord; string; rope\" is very important.",
+        "hanzi": "他抓住了绳子。",
+        "pinyin": "Tā zhuā zhù le shéng zi.",
+        "english": "He caught the cord.",
         "tokens": [
-          "这",
-          "个",
-          "绳子",
-          "很",
-          "重要"
+          "他",
+          "抓",
+          "住",
+          "了",
+          "绳子"
         ]
       }
     },
@@ -19447,16 +19972,15 @@
       "pinyin": "cǎi hóng",
       "english": "Rainbow",
       "example": {
-        "hanzi": "这里需要新的彩虹。",
-        "pinyin": "Zhè lǐ xū yào xīn de cǎi hóng.",
-        "english": "Here we need something new: rainbow.",
+        "hanzi": "彩虹有七种颜色。",
+        "pinyin": "Cǎi hóng yǒu qī zhǒng yán sè.",
+        "english": "A rainbow has seven colors.",
         "tokens": [
-          "这",
-          "里",
-          "需要",
-          "新",
-          "的",
-          "彩虹"
+          "彩虹",
+          "有",
+          "七",
+          "种",
+          "颜色"
         ]
       }
     },
@@ -19563,15 +20087,18 @@
       "pinyin": "zhǒng lèi",
       "english": "Kind / genus",
       "example": {
-        "hanzi": "大家都很了解种类。",
-        "pinyin": "Dà jiā dōu hěn liǎo jiě zhǒng lèi.",
-        "english": "Everyone knows a lot about: kind.",
+        "hanzi": "他不想要任何种类的花。",
+        "pinyin": "Tā bù xiǎng yào rèn hé zhǒng lèi de huā.",
+        "english": "He wants no kind of flowers.",
         "tokens": [
-          "大家",
-          "都",
-          "很",
-          "了解",
-          "种类"
+          "他",
+          "不",
+          "想",
+          "要",
+          "任何",
+          "种类",
+          "的",
+          "花"
         ]
       }
     },
@@ -19803,15 +20330,15 @@
       "pinyin": "bù zhòu",
       "english": "Procedure / step",
       "example": {
-        "hanzi": "这个步骤很重要。",
-        "pinyin": "Zhè gè bù zhòu hěn zhòng yào.",
-        "english": "This concept \"procedure\" is very important.",
+        "hanzi": "它有五个步骤。",
+        "pinyin": "Tā yǒu wǔ gè bù zhòu.",
+        "english": "There are five steps.",
         "tokens": [
-          "这",
+          "它",
+          "有",
+          "五",
           "个",
-          "步骤",
-          "很",
-          "重要"
+          "步骤"
         ]
       }
     },
@@ -20094,15 +20621,16 @@
       "pinyin": "gān zào",
       "english": "To dry / desiccation",
       "example": {
-        "hanzi": "大家的态度很干燥。",
-        "pinyin": "Dà jiā de tài du hěn gān zào.",
-        "english": "Everyone's attitude is very: to dry.",
+        "hanzi": "大家看新的干燥森林。",
+        "pinyin": "Dà jiā kàn xīn de gān zào sēn lín.",
+        "english": "You can see the new dry forest.",
         "tokens": [
           "大家",
+          "看",
+          "新",
           "的",
-          "态度",
-          "很",
-          "干燥"
+          "干燥",
+          "森林"
         ]
       }
     },
@@ -20149,16 +20677,20 @@
       "pinyin": "zhōng jiè",
       "english": "To act as intermediary / to link",
       "example": {
-        "hanzi": "书上提到了中介。",
-        "pinyin": "Shū shàng tí dào le zhōng jiè.",
-        "english": "The book mentions: to act as intermediary.",
+        "hanzi": "听说您已经跟中介公司联系过了。",
+        "pinyin": "Tīng shuō nín yǐ jīng gēn zhōng jiè gōng sī lián xì guo le.",
+        "english": "I hear you've already contacted the broker.",
         "tokens": [
-          "书",
-          "上",
-          "提",
-          "到",
-          "了",
-          "中介"
+          "听",
+          "说",
+          "您",
+          "已经",
+          "跟",
+          "中介",
+          "公司",
+          "联系",
+          "过",
+          "了"
         ]
       }
     },
@@ -20169,14 +20701,16 @@
       "pinyin": "kàn wàng",
       "english": "To pay a visit to; to see (sb)",
       "example": {
-        "hanzi": "大家一起看望吧！",
-        "pinyin": "Dà jiā yī qǐ kàn wàng ba!",
-        "english": "Let's all do this together: to pay a visit to; to see (sb)!",
+        "hanzi": "我去那里看望她。",
+        "pinyin": "Wǒ qù nà lǐ kàn wàng tā.",
+        "english": "I went there to see her.",
         "tokens": [
-          "大家",
-          "一起",
+          "我",
+          "去",
+          "那",
+          "里",
           "看望",
-          "吧"
+          "她"
         ]
       }
     },
@@ -20262,14 +20796,15 @@
       "pinyin": "fán róng",
       "english": "Prosperous; booming (economy)",
       "example": {
-        "hanzi": "大家一起繁荣吧！",
-        "pinyin": "Dà jiā yī qǐ fán róng ba!",
-        "english": "Let's all prosperous; booming (economy) together!",
+        "hanzi": "中国为什么会经历繁荣？",
+        "pinyin": "Zhōng guó wèi shén me huì jīng lì fán róng?",
+        "english": "Why is China Booming?",
         "tokens": [
-          "大家",
-          "一起",
-          "繁荣",
-          "吧"
+          "中国",
+          "为什么",
+          "会",
+          "经历",
+          "繁荣"
         ]
       }
     },
@@ -20298,15 +20833,18 @@
       "pinyin": "bèi zi",
       "english": "Quilt",
       "example": {
-        "hanzi": "大家都很了解被子。",
-        "pinyin": "Dà jiā dōu hěn liǎo jiě bèi zi.",
-        "english": "Everyone knows a lot about: quilt.",
+        "hanzi": "新买的被子盖起来非常暖和。",
+        "pinyin": "Xīn mǎi de bèi zi gài qǐ lai fēi cháng nuǎn huo.",
+        "english": "The newly bought quilt is very warm when covered.",
         "tokens": [
-          "大家",
-          "都",
-          "很",
-          "了解",
-          "被子"
+          "新",
+          "买",
+          "的",
+          "被子",
+          "盖",
+          "起来",
+          "非常",
+          "暖和"
         ]
       }
     },
@@ -20354,15 +20892,19 @@
       "pinyin": "bào shè",
       "english": "Newspaper (i.e. a company)",
       "example": {
-        "hanzi": "这个报社很重要。",
-        "pinyin": "Zhè gè bào shè hěn zhòng yào.",
-        "english": "This concept \"newspaper (i.e. a company)\" is very important.",
+        "hanzi": "我为这家报社工作四年了。",
+        "pinyin": "Wǒ wèi zhè jiā bào shè gōng zuò sì nián le.",
+        "english": "I have been working for this newspaper for 4 years.",
         "tokens": [
+          "我",
+          "为",
           "这",
-          "个",
+          "家",
           "报社",
-          "很",
-          "重要"
+          "工作",
+          "四",
+          "年",
+          "了"
         ]
       }
     },
@@ -20373,14 +20915,16 @@
       "pinyin": "nóng cūn",
       "english": "Rural area / village",
       "example": {
-        "hanzi": "大家都很了解农村。",
-        "pinyin": "Dà jiā dōu hěn liǎo jiě nóng cūn.",
-        "english": "Everyone knows a lot about: rural area.",
+        "hanzi": "我第一次去这个农村。",
+        "pinyin": "Wǒ dì yī cì qù zhè gè nóng cūn.",
+        "english": "I went to this village for the first time.",
         "tokens": [
-          "大家",
-          "都",
-          "很",
-          "了解",
+          "我",
+          "第一",
+          "次",
+          "去",
+          "这",
+          "个",
           "农村"
         ]
       }
@@ -20620,16 +21164,17 @@
       "pinyin": "diǎn xin",
       "english": "Light refreshments / pastry",
       "example": {
-        "hanzi": "这里需要新的点心。",
-        "pinyin": "Zhè lǐ xū yào xīn de diǎn xin.",
-        "english": "Here we need something new: light refreshments.",
+        "hanzi": "吃点点心你看好吗？",
+        "pinyin": "Chī diǎn diǎn xin nǐ kàn hǎo ma?",
+        "english": "Let's eat some dessert, alright?",
         "tokens": [
-          "这",
-          "里",
-          "需要",
-          "新",
-          "的",
-          "点心"
+          "吃",
+          "点",
+          "点心",
+          "你",
+          "看",
+          "好",
+          "吗"
         ]
       }
     },
@@ -20842,15 +21387,15 @@
       "pinyin": "jiǎng zuò",
       "english": "A course of lectures",
       "example": {
-        "hanzi": "这个讲座很重要。",
-        "pinyin": "Zhè gè jiǎng zuò hěn zhòng yào.",
-        "english": "This concept \"a course of lectures\" is very important.",
+        "hanzi": "做一次文学讲座。",
+        "pinyin": "Zuò yī cì wén xué jiǎng zuò.",
+        "english": "Give a lecture on literature.",
         "tokens": [
-          "这",
-          "个",
-          "讲座",
-          "很",
-          "重要"
+          "做",
+          "一",
+          "次",
+          "文学",
+          "讲座"
         ]
       }
     },
@@ -20934,15 +21479,18 @@
       "pinyin": "líng shí",
       "english": "Between-meal nibbles / snacks",
       "example": {
-        "hanzi": "书上提到了零食。",
-        "pinyin": "Shū shàng tí dào le líng shí.",
-        "english": "The book mentions: between-meal nibbles.",
+        "hanzi": "当然我就直接买了那包零食。",
+        "pinyin": "Dāng rán wǒ jiù zhí jiē mǎi le nà bāo líng shí.",
+        "english": "Of course I bought that pack of snack.",
         "tokens": [
-          "书",
-          "上",
-          "提",
-          "到",
+          "当然",
+          "我",
+          "就",
+          "直接",
+          "买",
           "了",
+          "那",
+          "包",
           "零食"
         ]
       }
@@ -21068,14 +21616,15 @@
       "pinyin": "jiā wù",
       "english": "Household duties / housework",
       "example": {
-        "hanzi": "我很喜欢新家务。",
-        "pinyin": "Wǒ hěn xǐ huan xīn jiā wù.",
-        "english": "I really like the new (household duties).",
+        "hanzi": "自己开始做各种家务。",
+        "pinyin": "Zì jǐ kāi shǐ zuò gè zhǒng jiā wù.",
+        "english": "I began doing tasks around the house.",
         "tokens": [
-          "我",
-          "很",
-          "喜欢",
-          "新",
+          "自己",
+          "开始",
+          "做",
+          "各",
+          "种",
           "家务"
         ]
       }
@@ -21123,16 +21672,18 @@
       "pinyin": "chuāng lián",
       "english": "Window curtains",
       "example": {
-        "hanzi": "书上提到了窗帘。",
-        "pinyin": "Shū shàng tí dào le chuāng lián.",
-        "english": "The book mentions: window curtains.",
+        "hanzi": "窗帘和地毯都重新换过了。",
+        "pinyin": "Chuāng lián hé dì tǎn dōu chóng xīn huàn guo le.",
+        "english": "Curtains and carpets were renewed.",
         "tokens": [
-          "书",
-          "上",
-          "提",
-          "到",
-          "了",
-          "窗帘"
+          "窗帘",
+          "和",
+          "地毯",
+          "都",
+          "重新",
+          "换",
+          "过",
+          "了"
         ]
       }
     },
@@ -21240,15 +21791,17 @@
       "pinyin": "yuè qì",
       "english": "Musical instrument",
       "example": {
-        "hanzi": "这个乐器很重要。",
-        "pinyin": "Zhè gè yuè qì hěn zhòng yào.",
-        "english": "This concept \"musical instrument\" is very important.",
+        "hanzi": "我小时候曾经玩过乐器。",
+        "pinyin": "Wǒ xiǎo shí hou céng jīng wán guo yuè qì.",
+        "english": "I used to play musical instruments myself when I was younger.",
         "tokens": [
-          "这",
-          "个",
-          "乐器",
-          "很",
-          "重要"
+          "我",
+          "小",
+          "时候",
+          "曾经",
+          "玩",
+          "过",
+          "乐器"
         ]
       }
     },
@@ -21390,15 +21943,16 @@
       "pinyin": "shú liàn",
       "english": "Practiced / proficient",
       "example": {
-        "hanzi": "我们的环境真熟练！",
-        "pinyin": "Wǒ men de huán jìng zhēn shú liàn!",
-        "english": "Our environment is truly practiced!",
+        "hanzi": "意思是熟练自信的妇女。",
+        "pinyin": "Yì si shì shú liàn zì xìn de fù nǚ.",
+        "english": "It means skilled and confident women.",
         "tokens": [
-          "我们",
+          "意思",
+          "是",
+          "熟练",
+          "自信",
           "的",
-          "环境",
-          "真",
-          "熟练"
+          "妇女"
         ]
       }
     },
@@ -21581,12 +22135,15 @@
       "pinyin": "xù shù",
       "english": "To relate (a story or information) / to tell or talk about",
       "example": {
-        "hanzi": "请认真叙述。",
-        "pinyin": "Qǐng rèn zhēn xù shù.",
-        "english": "Please carefully practice: to relate (a story or information).",
+        "hanzi": "我们有很多故事叙述。",
+        "pinyin": "Wǒ men yǒu hěn duō gù shi xù shù.",
+        "english": "We have so many stories to tell.",
         "tokens": [
-          "请",
-          "认真",
+          "我们",
+          "有",
+          "很",
+          "多",
+          "故事",
           "叙述"
         ]
       }
@@ -21617,14 +22174,15 @@
       "pinyin": "bàng wǎn",
       "english": "In the evening / when night falls",
       "example": {
-        "hanzi": "我们讨论过傍晚。",
-        "pinyin": "Wǒ men tǎo lùn guo bàng wǎn.",
-        "english": "We have already discussed: in the evening.",
+        "hanzi": "我们傍晚通常在家。",
+        "pinyin": "Wǒ men bàng wǎn tōng cháng zài jiā.",
+        "english": "We're usually at home in the evening.",
         "tokens": [
           "我们",
-          "讨论",
-          "过",
-          "傍晚"
+          "傍晚",
+          "通常",
+          "在",
+          "家"
         ]
       }
     },
@@ -21857,16 +22415,14 @@
       "pinyin": "yìng jiàn",
       "english": "Hardware",
       "example": {
-        "hanzi": "这里需要新的硬件。",
-        "pinyin": "Zhè lǐ xū yào xīn de yìng jiàn.",
-        "english": "Here we need something new: hardware.",
+        "hanzi": "包括硬件和软件。",
+        "pinyin": "Bāo kuò yìng jiàn hé ruǎn jiàn.",
+        "english": "We built the hardware and the software.",
         "tokens": [
-          "这",
-          "里",
-          "需要",
-          "新",
-          "的",
-          "硬件"
+          "包括",
+          "硬件",
+          "和",
+          "软件"
         ]
       }
     },
@@ -21952,14 +22508,17 @@
       "pinyin": "gū gu",
       "english": "Paternal aunt",
       "example": {
-        "hanzi": "我们讨论过姑姑。",
-        "pinyin": "Wǒ men tǎo lùn guo gū gu.",
-        "english": "We have already discussed: paternal aunt.",
+        "hanzi": "我的姑姑和叔叔是教授。",
+        "pinyin": "Wǒ de gū gu hé shū shu shì jiào shòu.",
+        "english": "My aunt and uncle were professors.",
         "tokens": [
-          "我们",
-          "讨论",
-          "过",
-          "姑姑"
+          "我",
+          "的",
+          "姑姑",
+          "和",
+          "叔叔",
+          "是",
+          "教授"
         ]
       }
     },
@@ -21989,16 +22548,19 @@
       "pinyin": "féi zào",
       "english": "Soap",
       "example": {
-        "hanzi": "书上提到了肥皂。",
-        "pinyin": "Shū shàng tí dào le féi zào.",
-        "english": "The book mentions: soap.",
+        "hanzi": "我们是个卖肥皂和汤的公司。",
+        "pinyin": "Wǒ men shì gè mài féi zào hé tāng de gōng sī.",
+        "english": "We are a company that sells soap and soup.",
         "tokens": [
-          "书",
-          "上",
-          "提",
-          "到",
-          "了",
-          "肥皂"
+          "我们",
+          "是",
+          "个",
+          "卖",
+          "肥皂",
+          "和",
+          "汤",
+          "的",
+          "公司"
         ]
       }
     },
@@ -22027,15 +22589,21 @@
       "pinyin": "zuò wén",
       "english": "To write an essay / composition (student essay)",
       "example": {
-        "hanzi": "这个作文很重要。",
-        "pinyin": "Zhè gè zuò wén hěn zhòng yào.",
-        "english": "This concept \"to write an essay\" is very important.",
+        "hanzi": "这篇作文花了我两个小时来完成。",
+        "pinyin": "Zhè piān zuò wén huā le wǒ liǎng gè xiǎo shí lái wán chéng.",
+        "english": "It took me 2 hours to finish the essay.",
         "tokens": [
           "这",
-          "个",
+          "篇",
           "作文",
-          "很",
-          "重要"
+          "花",
+          "了",
+          "我",
+          "两",
+          "个",
+          "小时",
+          "来",
+          "完成"
         ]
       }
     },
@@ -22179,16 +22747,16 @@
       "pinyin": "jí zhěn",
       "english": "To give or receive urgent medical treatment / emergency treatment",
       "example": {
-        "hanzi": "这里需要新的急诊。",
-        "pinyin": "Zhè lǐ xū yào xīn de jí zhěn.",
-        "english": "Here we need something new: to give or receive urgent medical treatment.",
+        "hanzi": "我是一个急诊医生。",
+        "pinyin": "Wǒ shì yī gè jí zhěn yī shēng.",
+        "english": "I'm an emergency medicine doctor.",
         "tokens": [
-          "这",
-          "里",
-          "需要",
-          "新",
-          "的",
-          "急诊"
+          "我",
+          "是",
+          "一",
+          "个",
+          "急诊",
+          "医生"
         ]
       }
     },
@@ -22503,15 +23071,14 @@
       "pinyin": "shōu jù",
       "english": "Receipt",
       "example": {
-        "hanzi": "这个收据很重要。",
-        "pinyin": "Zhè gè shōu jù hěn zhòng yào.",
-        "english": "This concept \"receipt\" is very important.",
+        "hanzi": "你有没有收据？",
+        "pinyin": "Nǐ yǒu méi yǒu shōu jù?",
+        "english": "Have you a receipt?",
         "tokens": [
-          "这",
-          "个",
-          "收据",
-          "很",
-          "重要"
+          "你",
+          "有",
+          "没有",
+          "收据"
         ]
       }
     },
@@ -22745,15 +23312,16 @@
       "pinyin": "chōu xiàng",
       "english": "Abstract / abstraction",
       "example": {
-        "hanzi": "今天的情况很抽象。",
-        "pinyin": "Jīn tiān de qíng kuàng hěn chōu xiàng.",
-        "english": "Today's situation is very: abstract.",
+        "hanzi": "这不是抽象的辩论。",
+        "pinyin": "Zhè bù shì chōu xiàng de biàn lùn.",
+        "english": "This is not an abstract debate.",
         "tokens": [
-          "今天",
+          "这",
+          "不",
+          "是",
+          "抽象",
           "的",
-          "情况",
-          "很",
-          "抽象"
+          "辩论"
         ]
       }
     },
@@ -22912,14 +23480,17 @@
       "pinyin": "dǎo yǔ",
       "english": "Island",
       "example": {
-        "hanzi": "我们讨论过岛屿。",
-        "pinyin": "Wǒ men tǎo lùn guo dǎo yǔ.",
-        "english": "We have already discussed: island.",
+        "hanzi": "没有这些岛屿的任何资料。",
+        "pinyin": "Méi yǒu zhè xiē dǎo yǔ de rèn hé zī liào.",
+        "english": "They'd never had any information from the Phoenix Islands.",
         "tokens": [
-          "我们",
-          "讨论",
-          "过",
-          "岛屿"
+          "没有",
+          "这",
+          "些",
+          "岛屿",
+          "的",
+          "任何",
+          "资料"
         ]
       }
     },
@@ -23025,14 +23596,15 @@
       "pinyin": "rì lì",
       "english": "Calendar",
       "example": {
-        "hanzi": "大家都很了解日历。",
-        "pinyin": "Dà jiā dōu hěn liǎo jiě rì lì.",
-        "english": "Everyone knows a lot about: calendar.",
+        "hanzi": "我带了一个日历。",
+        "pinyin": "Wǒ dài le yī gè rì lì.",
+        "english": "I brought with me a book of calendars.",
         "tokens": [
-          "大家",
-          "都",
-          "很",
-          "了解",
+          "我",
+          "带",
+          "了",
+          "一",
+          "个",
           "日历"
         ]
       }
@@ -23064,16 +23636,18 @@
       "pinyin": "zāi hài",
       "english": "Calamity / disaster",
       "example": {
-        "hanzi": "这里需要新的灾害。",
-        "pinyin": "Zhè lǐ xū yào xīn de zāi hài.",
-        "english": "Here we need something new: calamity.",
+        "hanzi": "我们必须始终为灾害做好准备。",
+        "pinyin": "Wǒ men bì xū shǐ zhōng wèi zāi hài zuò hǎo zhǔn bèi.",
+        "english": "We must always be prepared for disasters.",
         "tokens": [
-          "这",
-          "里",
-          "需要",
-          "新",
-          "的",
-          "灾害"
+          "我们",
+          "必须",
+          "始终",
+          "为",
+          "灾害",
+          "做",
+          "好",
+          "准备"
         ]
       }
     },
@@ -23103,15 +23677,15 @@
       "pinyin": "qīng shì",
       "english": "Contempt / contemptuous",
       "example": {
-        "hanzi": "明天再轻视好吗？",
-        "pinyin": "Míng tiān zài qīng shì hǎo ma?",
-        "english": "Shall we continue tomorrow with: contempt?",
+        "hanzi": "不要轻视了对手。",
+        "pinyin": "Bù yào qīng shì le duì shǒu.",
+        "english": "Don't hold your rival cheap.",
         "tokens": [
-          "明天",
-          "再",
+          "不",
+          "要",
           "轻视",
-          "好",
-          "吗"
+          "了",
+          "对手"
         ]
       }
     },
@@ -23252,15 +23826,14 @@
       "pinyin": "xué wèn",
       "english": "Learning / knowledge",
       "example": {
-        "hanzi": "书上提到了学问。",
-        "pinyin": "Shū shàng tí dào le xué wèn.",
-        "english": "The book mentions: learning.",
+        "hanzi": "翻译是一门学问。",
+        "pinyin": "Fān yì shì yī mén xué wèn.",
+        "english": "Translation is a scholarly discipline.",
         "tokens": [
-          "书",
-          "上",
-          "提",
-          "到",
-          "了",
+          "翻译",
+          "是",
+          "一",
+          "门",
           "学问"
         ]
       }
@@ -23636,16 +24209,17 @@
       "pinyin": "méi tàn",
       "english": "Coal",
       "example": {
-        "hanzi": "书上提到了煤炭。",
-        "pinyin": "Shū shàng tí dào le méi tàn.",
-        "english": "The book mentions: coal.",
+        "hanzi": "煤炭是造成气候问题的原因。",
+        "pinyin": "Méi tàn shì zào chéng qì hòu wèn tí de yuán yīn.",
+        "english": "Coal is what is causing the climate problems.",
         "tokens": [
-          "书",
-          "上",
-          "提",
-          "到",
-          "了",
-          "煤炭"
+          "煤炭",
+          "是",
+          "造成",
+          "气候",
+          "问题",
+          "的",
+          "原因"
         ]
       }
     },
@@ -23867,15 +24441,16 @@
       "pinyin": "shǔ biāo",
       "english": "Mouse (computing)",
       "example": {
-        "hanzi": "这个鼠标很重要。",
-        "pinyin": "Zhè gè shǔ biāo hěn zhòng yào.",
-        "english": "This concept \"mouse (computing)\" is very important.",
+        "hanzi": "这个鼠标突然毛病了。",
+        "pinyin": "Zhè gè shǔ biāo tū rán máo bìng le.",
+        "english": "Suddenly, this mouse stopped working.",
         "tokens": [
           "这",
           "个",
           "鼠标",
-          "很",
-          "重要"
+          "突然",
+          "毛病",
+          "了"
         ]
       }
     },
@@ -24124,14 +24699,17 @@
       "pinyin": "shū zi",
       "english": "Comb",
       "example": {
-        "hanzi": "我们讨论过梳子。",
-        "pinyin": "Wǒ men tǎo lùn guo shū zi.",
-        "english": "We have already discussed: comb.",
+        "hanzi": "我的梳子在哪里呢？",
+        "pinyin": "Wǒ de shū zi zài nǎ lǐ ne?",
+        "english": "Where's my comb?",
         "tokens": [
-          "我们",
-          "讨论",
-          "过",
-          "梳子"
+          "我",
+          "的",
+          "梳子",
+          "在",
+          "哪",
+          "里",
+          "呢"
         ]
       }
     },
@@ -24200,15 +24778,19 @@
       "pinyin": "lí mǐ",
       "english": "Centimeter",
       "example": {
-        "hanzi": "大家都很了解厘米。",
-        "pinyin": "Dà jiā dōu hěn liǎo jiě lí mǐ.",
-        "english": "Everyone knows a lot about: centimeter.",
+        "hanzi": "它每长一厘米需要一百年时间。",
+        "pinyin": "Tā měi cháng yī lí mǐ xū yào yìbǎi nián shí jiān.",
+        "english": "These lichens grow only one centimeter every hundred years.",
         "tokens": [
-          "大家",
-          "都",
-          "很",
-          "了解",
-          "厘米"
+          "它",
+          "每",
+          "长",
+          "一",
+          "厘米",
+          "需要",
+          "一百",
+          "年",
+          "时间"
         ]
       }
     },
@@ -24219,15 +24801,16 @@
       "pinyin": "wén jù",
       "english": "Stationery / item of stationery",
       "example": {
-        "hanzi": "这个文具很重要。",
-        "pinyin": "Zhè gè wén jù hěn zhòng yào.",
-        "english": "This concept \"stationery\" is very important.",
+        "hanzi": "哪些文具不值得买？",
+        "pinyin": "Nǎ xiē wén jù bù zhí de mǎi?",
+        "english": "What stationery isn't worth buying?",
         "tokens": [
-          "这",
-          "个",
+          "哪",
+          "些",
           "文具",
-          "很",
-          "重要"
+          "不",
+          "值得",
+          "买"
         ]
       }
     },
@@ -24258,14 +24841,18 @@
       "pinyin": "chéng yǔ",
       "english": "Chinese set expression",
       "example": {
-        "hanzi": "我们讨论过成语。",
-        "pinyin": "Wǒ men tǎo lùn guo chéng yǔ.",
-        "english": "We have already discussed: chinese set expression.",
+        "hanzi": "我把成语全部还给老师了。",
+        "pinyin": "Wǒ bǎ chéng yǔ quán bù hái gěi lǎo shī le.",
+        "english": "I gave all of the Chinese proverbs back to the teacher.",
         "tokens": [
-          "我们",
-          "讨论",
-          "过",
-          "成语"
+          "我",
+          "把",
+          "成语",
+          "全部",
+          "还",
+          "给",
+          "老师",
+          "了"
         ]
       }
     },
@@ -24691,12 +25278,17 @@
       "pinyin": "shuō bu dìng",
       "english": "Can't say for sure / maybe",
       "example": {
-        "hanzi": "请认真说不定。",
-        "pinyin": "Qǐng rèn zhēn shuō bu dìng.",
-        "english": "Please carefully practice: can't say for sure.",
+        "hanzi": "谁能赢这场比赛还说不定。",
+        "pinyin": "Shéi néng yíng zhè chǎng bǐ sài hái shuō bu dìng.",
+        "english": "It's still not certain who's going to win this match.",
         "tokens": [
-          "请",
-          "认真",
+          "谁",
+          "能",
+          "赢",
+          "这",
+          "场",
+          "比赛",
+          "还",
           "说不定"
         ]
       }
@@ -24727,15 +25319,14 @@
       "pinyin": "zhì yuàn zhě",
       "english": "Volunteer",
       "example": {
-        "hanzi": "书上提到了志愿者。",
-        "pinyin": "Shū shàng tí dào le zhì yuàn zhě.",
-        "english": "The book mentions: volunteer.",
+        "hanzi": "其他组织送来志愿者。",
+        "pinyin": "Qí tā zǔ zhī sòng lái zhì yuàn zhě.",
+        "english": "Other organizations send volunteers.",
         "tokens": [
-          "书",
-          "上",
-          "提",
-          "到",
-          "了",
+          "其他",
+          "组织",
+          "送",
+          "来",
           "志愿者"
         ]
       }
@@ -24747,15 +25338,17 @@
       "pinyin": "liǎo bu qǐ",
       "english": "Amazing / terrific",
       "example": {
-        "hanzi": "这个地方非常了不起。",
-        "pinyin": "Zhè gè dì fang fēi cháng liǎo bu qǐ.",
-        "english": "This place is particularly: amazing.",
+        "hanzi": "这是一个了不起的经验。",
+        "pinyin": "Zhè shì yī gè liǎo bu qǐ de jīng yàn.",
+        "english": "It was an amazing experience for me.",
         "tokens": [
           "这",
+          "是",
+          "一",
           "个",
-          "地方",
-          "非常",
-          "了不起"
+          "了不起",
+          "的",
+          "经验"
         ]
       }
     },
@@ -24819,14 +25412,15 @@
       "pinyin": "niú zǎi kù",
       "english": "Jeans",
       "example": {
-        "hanzi": "大家都很了解牛仔裤。",
-        "pinyin": "Dà jiā dōu hěn liǎo jiě niú zǎi kù.",
-        "english": "Everyone knows a lot about: jeans.",
+        "hanzi": "他穿了一条牛仔裤。",
+        "pinyin": "Tā chuān le yī tiáo niú zǎi kù.",
+        "english": "He had jeans on.",
         "tokens": [
-          "大家",
-          "都",
-          "很",
-          "了解",
+          "他",
+          "穿",
+          "了",
+          "一",
+          "条",
           "牛仔裤"
         ]
       }
@@ -24838,15 +25432,15 @@
       "pinyin": "jiù hù chē",
       "english": "Ambulance",
       "example": {
-        "hanzi": "这个救护车很重要。",
-        "pinyin": "Zhè gè jiù hù chē hěn zhòng yào.",
-        "english": "This concept \"ambulance\" is very important.",
+        "hanzi": "我们需要一辆救护车。",
+        "pinyin": "Wǒ men xū yào yī liàng jiù hù chē.",
+        "english": "We need an ambulance.",
         "tokens": [
-          "这",
-          "个",
-          "救护车",
-          "很",
-          "重要"
+          "我们",
+          "需要",
+          "一",
+          "辆",
+          "救护车"
         ]
       }
     },
@@ -25243,14 +25837,16 @@
       "pinyin": "xì lǐng dài",
       "english": "To wear a tie",
       "example": {
-        "hanzi": "我们讨论过系领带。",
-        "pinyin": "Wǒ men tǎo lùn guo xì lǐng dài.",
-        "english": "We have already discussed: to wear a tie.",
+        "hanzi": "我是不会系领带的。",
+        "pinyin": "Wǒ shì bù huì xì lǐng dài de.",
+        "english": "I won't be wearing a tie.",
         "tokens": [
-          "我们",
-          "讨论",
-          "过",
-          "系领带"
+          "我",
+          "是",
+          "不",
+          "会",
+          "系领带",
+          "的"
         ]
       }
     },
@@ -25261,14 +25857,15 @@
       "pinyin": "tǎo jià huán jià",
       "english": "To haggle over price / to bargain",
       "example": {
-        "hanzi": "大家都知道讨价还价。",
-        "pinyin": "Dà jiā dōu zhī dào tǎo jià huán jià.",
-        "english": "Everyone knows: to haggle over price.",
+        "hanzi": "这是讨价还价的刺激。",
+        "pinyin": "Zhè shì tǎo jià huán jià de cì jī.",
+        "english": "They're the bargain stimuli.",
         "tokens": [
-          "大家",
-          "都",
-          "知道",
-          "讨价还价"
+          "这",
+          "是",
+          "讨价还价",
+          "的",
+          "刺激"
         ]
       }
     },
