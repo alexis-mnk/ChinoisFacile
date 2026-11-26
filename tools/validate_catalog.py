@@ -28,11 +28,20 @@ VULGAR_OR_SLANG_RE = re.compile(
     re.IGNORECASE,
 )
 MECHANICAL_TEMPLATE_RE = re.compile(
-    r"( : |: |currently practicing:|carefully practice:|practices:|want to learn how to:|"
-    r"This concept \"|already discussed:|knows a lot about:|remember this term:|"
+    r"( : |: |\([^)]+\)|"
+    r"currently practicing:|carefully practice:|practices:|want to learn how to:|"
+    r"do this together:|continue tomorrow with:|acts this way:|"
+    r'This concept "|already discussed:|knows a lot about:|remember this term:|'
     r"The book mentions:|something new:|Today's situation is very:|This place is particularly:|"
     r"even more:|Everyone's attitude is very:|environment here is really:|"
-    r"In what we do, remember:|The teacher often emphasizes:|We should uphold:|Practice this word today:)"
+    r"In what we do, remember:|The teacher often emphasizes:|We should uphold:|Practice this word today:|"
+    r"Everyone completes the task|She expressed her idea|Let us keep moving forward|Please get ready|"
+    r"Our environment is truly |Everyone needs to |Let's all .+ together!|"
+    r"We are going to |He will go to |She is currently doing this:|We have started to |"
+    r"I think we can |Let's .+ tomorrow instead\.|We should seriously |I believe she can |"
+    r"The teacher is introducing |Everyone knows about |I really like the new |"
+    r"Today we are looking at |The school has |This matter is extremely |I find this very |"
+    r"This morning is really |This place is very |He keeps working |She prepares to go to Beijing )"
 )
 # Detects accidental leftover French strings or French diacritics (ignoring legitimate English loanwords)
 FRENCH_LOANWORDS_IN_EN = {"café", "cafés", "cliché", "naïve", "résumé", "fiancé", "fiancée", "façade", "entrée", "protégé", "sauté", "sautéed"}
@@ -246,7 +255,7 @@ def validate_catalog_files(catalog_dir: Path, repo_root: Path) -> int:
                 errors.append(f"[{path.name}] {wid} ({hanzi}) has vulgar/slang example: {ex_english!r}")
             elif has_residual_french(ex_english):
                 errors.append(f"[{path.name}] {wid} ({hanzi}) has residual French example: {ex_english!r}")
-            elif isinstance(hsk_level, int) and hsk_level in (1, 2) and MECHANICAL_TEMPLATE_RE.search(ex_english):
+            elif isinstance(hsk_level, int) and hsk_level in (1, 2, 3) and MECHANICAL_TEMPLATE_RE.search(ex_english):
                 errors.append(f"[{path.name}] {wid} ({hanzi}) still uses mechanical template: {ex_english!r}")
 
             if not isinstance(tokens, list) or len(tokens) < 3:

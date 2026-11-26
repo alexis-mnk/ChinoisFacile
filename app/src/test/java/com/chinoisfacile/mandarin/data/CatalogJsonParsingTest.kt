@@ -177,6 +177,18 @@ class CatalogJsonParsingTest {
         fun stripTones(norm: String): String =
             Normalizer.normalize(norm, Normalizer.Form.NFD).replace(combiningMarks, "")
 
+        val mechanicalTemplateRegex = Regex(
+            """(: |\([^)]+\)|This concept "|Everyone completes the task|She expressed her idea|""" +
+                """Let us keep moving forward|Please get ready|Our environment is truly |""" +
+                """Everyone needs to |Let's all .+ together!|We are going to |He will go to |""" +
+                """We have started to |I think we can |Let's .+ tomorrow instead\.|""" +
+                """We should seriously |I believe she can |The teacher is introducing |""" +
+                """Everyone knows about |I really like the new |Today we are looking at |""" +
+                """The school has |This matter is extremely |I find this very |""" +
+                """This morning is really |This place is very |He keeps working |""" +
+                """She prepares to go to Beijing )""",
+        )
+
         val issues = mutableListOf<String>()
         for (level in 1..6) {
             val candidates = listOf(
@@ -200,7 +212,7 @@ class CatalogJsonParsingTest {
                 if (vulgarOrSlangRegex.containsMatchIn(word.example.english)) {
                     issues += "HSK$level ${word.id} (${word.hanzi}): vulgar/slang example '${word.example.english}'"
                 }
-                if (level in 1..2 && word.example.english.contains(": ")) {
+                if (level in 1..3 && mechanicalTemplateRegex.containsMatchIn(word.example.english)) {
                     issues += "HSK$level ${word.id} (${word.hanzi}): mechanical template '${word.example.english}'"
                 }
                 if (word.hanzi !in word.example.tokens) {

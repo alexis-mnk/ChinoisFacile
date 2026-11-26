@@ -3,7 +3,7 @@
 Audits and enforces pedagogical compliance for example sentences (HSK 1 to HSK 5):
 ensures every token in `example.tokens` of `hskN.json` belongs exclusively to the
 cumulative HSK 1..N vocabulary (plus numerals and simple allowed proper nouns),
-with natural idiomatic English examples (zero mechanical templates on HSK 1-2).
+with natural idiomatic English examples (zero mechanical templates on HSK 1-3).
 """
 
 from __future__ import annotations
@@ -34,11 +34,20 @@ VULGAR_OR_SLANG_RE = re.compile(
     re.IGNORECASE,
 )
 MECHANICAL_TEMPLATE_RE = re.compile(
-    r"( : |: |currently practicing:|carefully practice:|practices:|want to learn how to:|"
-    r"This concept \"|already discussed:|knows a lot about:|remember this term:|"
+    r"( : |: |\([^)]+\)|"
+    r"currently practicing:|carefully practice:|practices:|want to learn how to:|"
+    r"do this together:|continue tomorrow with:|acts this way:|"
+    r'This concept "|already discussed:|knows a lot about:|remember this term:|'
     r"The book mentions:|something new:|Today's situation is very:|This place is particularly:|"
     r"even more:|Everyone's attitude is very:|environment here is really:|"
-    r"In what we do, remember:|The teacher often emphasizes:|We should uphold:|Practice this word today:)"
+    r"In what we do, remember:|The teacher often emphasizes:|We should uphold:|Practice this word today:|"
+    r"Everyone completes the task|She expressed her idea|Let us keep moving forward|Please get ready|"
+    r"Our environment is truly |Everyone needs to |Let's all .+ together!|"
+    r"We are going to |He will go to |She is currently doing this:|We have started to |"
+    r"I think we can |Let's .+ tomorrow instead\.|We should seriously |I believe she can |"
+    r"The teacher is introducing |Everyone knows about |I really like the new |"
+    r"Today we are looking at |The school has |This matter is extremely |I find this very |"
+    r"This morning is really |This place is very |He keeps working |She prepares to go to Beijing )"
 )
 
 HANDCRAFTED_EXAMPLES: dict[tuple[int, str], tuple[list[str], str, str]] = {
@@ -267,6 +276,110 @@ HANDCRAFTED_EXAMPLES: dict[tuple[int, str], tuple[list[str], str, str]] = {
     (2, "走"): (["我们", "走", "着", "去", "学校"], "。", "We are walking to school."),
     # --- HSK 3 ---
     (3, "刷牙"): (["我", "早上", "起床", "刷牙"], "。", "I get up in the morning and brush my teeth."),
+    # Replaced mechanical templates (56)
+    (3, "而且"): (["这", "个", "房间", "干净", "而且", "安静"], "。", "This room is clean and also quiet."),
+    (3, "其实"): (["其实", "这", "个", "问题", "很", "简单"], "。", "Actually, this question is very simple."),
+    (3, "接"): (["我", "去", "机场", "接", "朋友"], "。", "I am going to the airport to pick up a friend."),
+    (3, "越"): (["飞机", "越", "过", "了", "黄河"], "。", "The airplane crossed over the Yellow River."),
+    (3, "口"): (["我", "家", "有", "四", "口", "人"], "。", "There are four people in my family."),
+    (3, "除了"): (["除了", "茶", "我", "还", "喜欢", "咖啡"], "。", "Besides tea, I also like coffee."),
+    (3, "米"): (["我", "家", "离", "学校", "两", "百", "米"], "。", "My home is two hundred meters from the school."),
+    (3, "根据"): (["请", "根据", "这", "个", "故事", "回答"], "。", "Please answer based on this story."),
+    (3, "元"): (["这", "本", "书", "三十", "元"], "。", "This book costs thirty yuan."),
+    (3, "新闻"): (["爸爸", "每", "天", "晚上", "看", "新闻"], "。", "Dad watches the news every evening."),
+    (3, "经过"): (["我", "每", "天", "上班", "都", "经过", "公园"], "。", "I pass by the park every day on my way to work."),
+    (3, "西"): (["请", "往", "西", "走"], "。", "Please walk west."),
+    (3, "差"): (["现在", "差", "五", "分", "八", "点"], "。", "It is five minutes to eight now."),
+    (3, "主要"): (["这", "是", "我们", "主要", "的", "问题"], "。", "This is our main problem."),
+    (3, "后来"): (["后来", "她", "去", "北京", "工作", "了"], "。", "Later, she went to Beijing to work."),
+    (3, "画"): (["妹妹", "喜欢", "画", "小", "猫"], "。", "My younger sister likes drawing little cats."),
+    (3, "环境"): (["这", "个", "公园", "的", "环境", "很", "干净"], "。", "The environment of this park is very clean."),
+    (3, "腿"): (["我", "昨天", "爬山", "今天", "腿", "很", "疼"], "。", "I climbed a mountain yesterday, and my legs hurt a lot today."),
+    (3, "变化"): (["这", "个", "城市", "变化", "很", "大"], "。", "This city has changed a lot."),
+    (3, "极"): (["今天", "天气", "热", "极", "了"], "！", "The weather is extremely hot today!"),
+    (3, "树"): (["公园", "里", "有", "很", "多", "大", "树"], "。", "There are many big trees in the park."),
+    (3, "水平"): (["他", "的", "汉语", "水平", "很", "高"], "。", "His Chinese level is very high."),
+    (3, "东"): (["请", "往", "东", "走", "两", "百", "米"], "。", "Please walk two hundred meters east."),
+    (3, "南"): (["我", "家", "在", "北京", "南", "站", "附近"], "。", "My home is near Beijing South Station."),
+    (3, "提高"): (["我", "想", "提高", "汉语", "水平"], "。", "I want to improve my Chinese level."),
+    (3, "中间"): (["我", "坐", "在", "爸爸", "和", "妈妈", "中间"], "。", "I sit between Dad and Mom."),
+    (3, "多么"): (["今天", "的", "天气", "多么", "好", "啊"], "！", "How nice the weather is today!"),
+    (3, "灯"): (["晚上", "了", "请", "开", "灯"], "。", "It's evening now, please turn on the light."),
+    (3, "太阳"): (["早上", "太阳", "出", "来", "了"], "。", "The sun came out in the morning."),
+    (3, "热情"): (["那", "位", "老师", "非常", "热情"], "。", "That teacher is very warm and enthusiastic."),
+    (3, "同事"): (["他", "是", "我", "的", "新", "同事"], "。", "He is my new colleague."),
+    (3, "角"): (["这", "张", "桌子", "有", "四", "个", "角"], "。", "This table has four corners."),
+    (3, "放心"): (["请", "放心", "我", "会", "照顾", "好", "自己"], "。", "Please don't worry, I will take good care of myself."),
+    (3, "草"): (["公园", "里", "的", "草", "很", "绿"], "。", "The grass in the park is very green."),
+    (3, "地铁"): (["我", "每", "天", "坐", "地铁", "去", "上班"], "。", "I take the subway to work every day."),
+    (3, "校长"): (["我们", "的", "校长", "非常", "热情"], "。", "Our school principal is very welcoming."),
+    (3, "鼻子"): (["她", "的", "鼻子", "很", "小"], "。", "Her nose is very small."),
+    (3, "夏"): (["夏", "天", "的", "西瓜", "很", "甜"], "。", "Watermelons in summer are very sweet."),
+    (3, "电梯"): (["我们", "坐", "电梯", "上", "五", "楼", "吧"], "。", "Let's take the elevator up to the fifth floor."),
+    (3, "不但"): (["她", "不但", "聪明", "而且", "很", "努力"], "。", "She is not only clever, but also very hard-working."),
+    (3, "阿姨"): (["阿姨", "做", "的", "中国", "菜", "真", "好吃"], "！", "The Chinese food Auntie cooks is really delicious!"),
+    (3, "季节"): (["你", "最", "喜欢", "哪", "个", "季节"], "？", "Which season do you like the most?"),
+    (3, "月亮"): (["今天", "晚上", "的", "月亮", "真", "漂亮"], "！", "Tonight's moon is really beautiful!"),
+    (3, "北方"): (["中国", "北方", "冬", "天", "很", "冷"], "。", "Winter in northern China is very cold."),
+    (3, "冬"): (["北京", "冬", "天", "经常", "下", "雪"], "。", "It often snows in Beijing in winter."),
+    (3, "秋"): (["秋", "天", "去", "爬山", "很", "舒服"], "。", "Going hiking in autumn is very pleasant."),
+    (3, "瓶子"): (["这", "个", "瓶子", "里", "有", "牛奶"], "。", "There is milk in this bottle."),
+    (3, "复习"): (["明天", "有", "考试", "我", "要", "复习"], "。", "There is an exam tomorrow, so I need to review."),
+    (3, "请假"): (["我", "生病", "了", "今天", "想", "请假"], "。", "I am sick and want to ask for leave today."),
+    (3, "皮鞋"): (["爸爸", "买", "了", "一", "双", "黑", "皮鞋"], "。", "Dad bought a pair of black leather shoes."),
+    (3, "黑板"): (["老师", "在", "黑板", "上", "写", "字"], "。", "The teacher is writing characters on the blackboard."),
+    (3, "留学"): (["我", "哥哥", "打算", "去", "中国", "留学"], "。", "My older brother plans to study abroad in China."),
+    (3, "刮风"): (["今天", "刮风", "了", "多", "穿", "衣服"], "。", "It's windy today, put on more clothes."),
+    (3, "黄河"): (["黄河", "在", "中国", "北方", "很", "有名"], "。", "The Yellow River is very famous in northern China."),
+    (3, "行李箱"): (["这", "个", "红", "行李箱", "是", "我", "的"], "。", "This red suitcase is mine."),
+    (3, "电子邮件"): (["我", "刚才", "给", "经理", "发", "了", "电子邮件"], "。", "I just sent an email to the manager."),
+    # Replaced awkward / mistranslated / polyphone-mismatched Tatoeba sentences (46)
+    (3, "自己"): (["他", "自己", "去", "机场", "了"], "。", "He went to the airport by himself."),
+    (3, "只"): (["我", "只", "有", "一", "个", "苹果"], "。", "I only have one apple."),
+    (3, "地"): (["她", "高兴", "地", "笑", "了"], "。", "She smiled happily."),
+    (3, "才"): (["他", "晚上", "十", "点", "才", "回", "家"], "。", "He didn't come home until ten at night."),
+    (3, "还是"): (["你", "是", "学生", "还是", "老师"], "？", "Are you a student or a teacher?"),
+    (3, "应该"): (["我们", "应该", "多", "喝", "水"], "。", "We should drink more water."),
+    (3, "位"): (["这", "位", "老师", "教", "中文"], "。", "This teacher teaches Chinese."),
+    (3, "最后"): (["最后", "她", "没有", "来"], "。", "In the end, she did not come."),
+    (3, "比赛"): (["我们", "去", "看", "了", "比赛"], "。", "We went to watch the match."),
+    (3, "张"): (["桌子", "上", "有", "一", "张", "地图"], "。", "There is a map on the table."),
+    (3, "过去"): (["过去", "我", "住", "在", "北京"], "。", "In the past, I lived in Beijing."),
+    (3, "参加"): (["我们", "一起", "参加", "比赛", "吧"], "！", "Let's join the competition together!"),
+    (3, "只有"): (["教室", "里", "只有", "三", "个", "学生"], "。", "There are only three students in the classroom."),
+    (3, "发"): (["请", "给", "我", "发", "电子邮件"], "。", "Please send me an email."),
+    (3, "花"): (["公园", "里", "有", "很", "多", "花"], "。", "There are many flowers in the park."),
+    (3, "以前"): (["以前", "我", "住", "在", "上海"], "。", "I used to live in Shanghai."),
+    (3, "特别"): (["她", "特别", "喜欢", "吃", "水果"], "。", "She especially likes eating fruit."),
+    (3, "万"): (["他", "有", "一", "万", "块", "钱"], "。", "He has ten thousand yuan."),
+    (3, "比较"): (["这", "个", "房间", "比较", "安静"], "。", "This room is relatively quiet."),
+    (3, "段"): (["请", "读", "这", "一", "段"], "。", "Please read this paragraph."),
+    (3, "检查"): (["你", "应该", "检查", "一下", "作业"], "。", "You should check your homework."),
+    (3, "辆"): (["请", "叫", "一", "辆", "出租车"], "。", "Please call a taxi."),
+    (3, "包"): (["那", "是", "我", "的", "包"], "。", "That is my bag."),
+    (3, "历史"): (["他", "特别", "喜欢", "中国", "历史"], "。", "He especially likes Chinese history."),
+    (3, "教"): (["她", "在", "学校", "教", "数学"], "。", "She teaches math at school."),
+    (3, "脚"): (["我", "的", "脚", "很", "疼"], "。", "My foot hurts a lot."),
+    (3, "遇到"): (["我", "在", "公园", "遇到", "了", "朋友"], "。", "I ran into a friend at the park."),
+    (3, "一边"): (["请", "在", "一边", "等", "我"], "。", "Please wait for me on the side."),
+    (3, "周末"): (["你", "周末", "打算", "做", "什么"], "？", "What do you plan to do this weekend?"),
+    (3, "饿"): (["我", "现在", "很", "饿"], "。", "I am very hungry right now."),
+    (3, "鸟"): (["树", "上", "的", "小", "鸟", "在", "唱歌"], "。", "The little bird in the tree is singing."),
+    (3, "奇怪"): (["这", "件", "事情", "很", "奇怪"], "。", "This matter is very strange."),
+    (3, "体育"): (["我", "很", "喜欢", "上", "体育", "课"], "。", "I really like having PE class."),
+    (3, "胖"): (["我", "的", "小", "猫", "很", "胖"], "。", "My little cat is very chubby."),
+    (3, "练习"): (["我", "每", "天", "练习", "说", "汉语"], "。", "I practice speaking Chinese every day."),
+    (3, "春"): (["春", "天", "的", "天气", "很", "舒服"], "。", "Spring weather is very comfortable."),
+    (3, "超市"): (["妈妈", "去", "超市", "买", "东西", "了"], "。", "Mom went to the supermarket to buy things."),
+    (3, "空调"): (["房间", "里", "的", "空调", "坏", "了"], "。", "The air conditioner in the room is broken."),
+    (3, "衬衫"): (["这", "件", "衬衫", "多少", "钱"], "？", "How much is this shirt?"),
+    (3, "起飞"): (["你", "的", "飞机", "什么", "时候", "起飞"], "？", "When does your plane take off?"),
+    (3, "香蕉"): (["我", "喜欢", "吃", "香蕉"], "。", "I like eating bananas."),
+    (3, "有名"): (["这", "个", "公园", "很", "有名"], "。", "This park is very famous."),
+    (3, "盘子"): (["桌子", "上", "有", "两", "个", "盘子"], "。", "There are two plates on the table."),
+    (3, "句子"): (["请", "读", "这", "个", "句子"], "。", "Please read this sentence."),
+    (3, "图书馆"): (["我", "去", "图书馆", "看", "书"], "。", "I am going to the library to read."),
+    (3, "洗手间"): (["请", "问", "洗手间", "在", "哪儿"], "？", "Excuse me, where is the restroom?"),
     # --- HSK 4 ---
     (6, "屁股"): (["小", "孩子", "摔", "到", "了", "屁股"], "。", "The little child fell on their bottom."),
 }
@@ -659,7 +772,7 @@ def main() -> int:
                 continue
 
             is_tpl_or_vulgar = bool(VULGAR_OR_SLANG_RE.search(ex["english"])) or (
-                level in (1, 2) and bool(MECHANICAL_TEMPLATE_RE.search(ex["english"]))
+                level in (1, 2, 3) and bool(MECHANICAL_TEMPLATE_RE.search(ex["english"]))
             )
             already_valid = (
                 not is_tpl_or_vulgar
