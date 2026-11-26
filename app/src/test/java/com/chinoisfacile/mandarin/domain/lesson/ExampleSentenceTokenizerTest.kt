@@ -114,4 +114,41 @@ class ExampleSentenceTokenizerTest {
             mismatchResult,
         )
     }
+
+    @Test
+    fun `handles conjunction sentence with internal comma without creating orphan comma segment`() {
+        val sentence = "虽然很累，但是我非常高兴。"
+        val segments = ExampleSentenceTokenizer.tokenize(
+            exampleHanzi = sentence,
+            exampleTokens = listOf("虽然", "很", "累", "但是", "我", "非常", "高兴"),
+            targetHanzi = "但是",
+            knownTokenKeys = setOf("虽然", "很", "累", "我", "非常", "高兴"),
+        )
+
+        assertEquals(7, segments.size)
+        assertEquals(
+            ExampleSentenceSegment(
+                text = "累",
+                trailingPunctuation = "，",
+                kind = ExampleSegmentKind.CLICKABLE,
+            ),
+            segments[2],
+        )
+        assertEquals(
+            ExampleSentenceSegment(text = "但是", kind = ExampleSegmentKind.TARGET),
+            segments[3],
+        )
+        assertEquals(
+            ExampleSentenceSegment(
+                text = "高兴",
+                trailingPunctuation = "。",
+                kind = ExampleSegmentKind.CLICKABLE,
+            ),
+            segments[6],
+        )
+        assertEquals(
+            sentence,
+            segments.joinToString("") { it.leadingPunctuation + it.text + it.trailingPunctuation },
+        )
+    }
 }

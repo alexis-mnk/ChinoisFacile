@@ -262,11 +262,13 @@ def validate_catalog_files(catalog_dir: Path, repo_root: Path) -> int:
             if not isinstance(tokens, list) or len(tokens) < 3:
                 errors.append(f"[{path.name}] {wid} must have at least 3 tokens: {tokens!r}")
             else:
+                if any("，" in t for t in tokens):
+                    errors.append(f"[{path.name}] {wid} has comma inside example.tokens: {tokens!r}")
                 if len(tokens) != len(set(tokens)):
                     errors.append(f"[{path.name}] {wid} has duplicate tokens: {tokens!r}")
                 if hanzi not in tokens:
                     errors.append(f"[{path.name}] {wid} ({hanzi}) not present in example.tokens: {tokens!r}")
-                cleaned_hanzi = ex_hanzi.rstrip(TRAILING_PUNCT)
+                cleaned_hanzi = ex_hanzi.rstrip(TRAILING_PUNCT).replace("，", "")
                 joined = "".join(tokens)
                 if joined != cleaned_hanzi:
                     errors.append(f"[{path.name}] {wid} mismatched tokens: {joined!r} != {cleaned_hanzi!r}")

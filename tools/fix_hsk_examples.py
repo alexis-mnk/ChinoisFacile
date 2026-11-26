@@ -100,25 +100,36 @@ MECHANICAL_TEMPLATE_RE = re.compile(
     r"This morning is really |This place is very |He keeps working |She prepares to go to Beijing )"
 )
 
-HANDCRAFTED_EXAMPLES: dict[tuple[int, str], tuple[list[str], str, str]] = {
+HandcraftedEntry = tuple[list[str], str, str] | tuple[list[str], str, str, dict[str, str]]
+
+HANDCRAFTED_EXAMPLES: dict[tuple[int, str], HandcraftedEntry] = {
     # --- HSK 1 ---
     (1, "好"): (["你", "好", "吗"], "？", "How are you?"),
-    (1, "喂"): (["喂", "你", "好", "在", "家", "吗"], "？", "Hello, are you at home?"),
-    (1, "谢谢"): (["老师", "谢谢", "你"], "！", "Thank you, teacher!"),
-    (1, "再见"): (["朋友", "明天", "再见"], "！", "Goodbye my friend, see you tomorrow!"),
-    (1, "你"): (["你", "好", "我", "很", "高兴"], "。", "Hello, I am very happy."),
-    (1, "不客气"): (["不客气", "我们", "是", "朋友"], "。", "You're welcome, we are friends."),
+    (1, "喂"): (["喂", "你", "在", "家", "吗"], "？", "Hello? Are you at home?", {"hanzi": "喂，你在家吗？", "pinyin": "Wèi, nǐ zài jiā ma?"}),
+    (1, "谢谢"): (["谢谢", "你", "的", "茶"], "！", "Thank you for your tea!"),
+    (1, "再见"): (["我们", "明天", "再见"], "！", "See you tomorrow!"),
+    (1, "你"): (["你", "今天", "很", "高兴", "吗"], "？", "Are you happy today?"),
+    (1, "她"): (["她", "是", "我", "的", "同学"], "。", "She is my classmate."),
+    (1, "爸爸"): (["我", "爸爸", "是", "医生"], "。", "My dad is a doctor."),
+    (1, "不客气"): (["朋友", "说", "不客气"], "。", "My friend said you're welcome."),
     (1, "请"): (["请", "你", "喝", "茶"], "。", "Please have some tea."),
-    (1, "对不起"): (["对不起", "我", "今天", "不", "去"], "。", "Sorry, I am not going today."),
-    (1, "没关系"): (["没关系", "明天", "来", "我", "家"], "。", "No problem, come to my house tomorrow."),
+    (1, "对不起"): (["太", "对不起", "你", "了"], "！", "I am so sorry!"),
+    (1, "没关系"): (["老师", "说", "没关系"], "。", "The teacher said it doesn't matter."),
     (1, "没有"): (["我", "没有", "钱"], "。", "I don't have money."),
     (1, "喝"): (["我", "喜欢", "喝", "茶"], "。", "I like drinking tea."),
+    (1, "吃"): (["我", "在", "吃", "一", "个", "苹果"], "。", "I am eating an apple."),
+    (1, "买"): (["我", "买", "了", "一", "本", "书"], "。", "I bought a book."),
+    (1, "开"): (["他", "会", "开", "出租车"], "。", "He can drive a taxi."),
+    (1, "去"): (["昨天", "你", "没有", "去", "学校"], "。", "You didn't go to school yesterday."),
+    (1, "工作"): (["她", "在", "学校", "工作"], "。", "She works at a school."),
+    (1, "高兴"): (["我", "今天", "很", "高兴"], "。", "I am very happy today."),
+    (1, "下午"): (["星期", "三", "下午", "我", "在", "家"], "。", "I will be at home Wednesday afternoon."),
     (1, "先生"): (["那", "个", "先生", "是", "医生"], "。", "That gentleman is a doctor."),
-    (1, "小姐"): (["这", "个", "小姐", "是", "中国", "人"], "。", "That young lady is Chinese."),
+    (1, "小姐"): (["那", "个", "小姐", "是", "中国", "人"], "。", "That young lady is Chinese."),
     (1, "菜"): (["我", "很", "喜欢", "中国", "菜"], "。", "I really like Chinese food."),
     (1, "苹果"): (["我", "喜欢", "吃", "苹果"], "。", "I like eating apples."),
-    (1, "猫"): (["我", "喜欢", "这", "个", "小", "猫"], "。", "I like this little cat."),
-    (1, "狗"): (["那", "个", "狗", "很", "大"], "。", "That dog is very big."),
+    (1, "猫"): (["我", "很", "喜欢", "小", "猫"], "。", "I really like kittens."),
+    (1, "狗"): (["他", "的", "狗", "很", "大"], "。", "His dog is very big."),
     (1, "八"): (["我", "八", "点", "去", "学校"], "。", "I go to school at eight o'clock."),
     (1, "二"): (["我", "有", "二", "十", "块", "钱"], "。", "I have twenty yuan."),
     (1, "号"): (["今天", "是", "五", "月", "三", "号"], "。", "Today is May 3rd."),
@@ -148,28 +159,28 @@ HANDCRAFTED_EXAMPLES: dict[tuple[int, str], tuple[list[str], str, str]] = {
     (1, "水果"): (["她", "很", "喜欢", "吃", "水果"], "。", "She really likes eating fruit."),
     (1, "太"): (["今天", "天气", "太", "热", "了"], "！", "Today's weather is so hot!"),
     (1, "四"): (["桌子", "上", "有", "四", "个", "苹果"], "。", "There are four apples on the table."),
-    (1, "五"): (["我", "学习", "汉语", "五", "年"], "。", "I studied Chinese for five years."),
+    (1, "五"): (["我", "学习", "汉语", "五", "年", "了"], "。", "I have been studying Chinese for five years."),
     (1, "七"): (["她", "七", "点", "去", "医院"], "。", "She goes to the hospital at seven o'clock."),
     (1, "岁"): (["她", "女儿", "五", "岁", "了"], "。", "Her daughter is five years old."),
     (1, "星期"): (["明天", "是", "星期", "五"], "。", "Tomorrow is Friday."),
     (1, "月"): (["现在", "是", "五", "月"], "。", "It is May now."),
     (1, "明天"): (["我", "明天", "去", "学校"], "。", "I am going to school tomorrow."),
-    (1, "分钟"): (["我", "学习", "汉语", "十", "分钟"], "。", "I study Chinese for ten minutes."),
+    (1, "分钟"): (["我", "看", "了", "十", "分钟", "书"], "。", "I read for ten minutes."),
     (1, "飞机"): (["我", "坐", "飞机", "去", "中国"], "。", "I am taking a plane to China."),
     (1, "出租车"): (["我们", "坐", "出租车", "去", "饭店"], "。", "We are taking a taxi to the restaurant."),
     (1, "电影"): (["她", "喜欢", "看", "中国", "电影"], "。", "She likes watching Chinese movies."),
     (1, "前面"): (["学校", "前面", "有", "个", "商店"], "。", "There is a shop in front of the school."),
     (1, "桌子"): (["桌子", "上", "有", "一", "本", "书"], "。", "There is a book on the table."),
     (1, "椅子"): (["小", "猫", "在", "椅子", "下"], "。", "The little cat is under the chair."),
-    (1, "坐"): (["请", "坐", "我", "去", "喝", "水"], "。", "Please sit down, I'll get some water."),
+    (1, "坐"): (["请", "坐", "在", "椅子", "上"], "。", "Please sit on the chair."),
     (1, "学习"): (["她", "在", "学校", "学习", "汉语"], "。", "She studies Chinese at school."),
     (1, "老师"): (["我", "妈妈", "是", "汉语", "老师"], "。", "My mom is a Chinese teacher."),
     (1, "读"): (["我", "在", "读", "这", "本", "书"], "。", "I am reading this book."),
     (1, "写"): (["她", "会", "写", "很", "多", "汉字" if False else "字"], "。", "She can write many characters."),
-    (1, "睡觉"): (["现在", "十", "点", "了", "睡觉", "吧" if False else "去"], "。", "It's ten o'clock now, time to sleep."),
-    (1, "电脑"): (["桌子", "上", "有", "一", "个", "电脑"], "。", "There is a computer on the table."),
+    (1, "睡觉"): (["我", "现在", "想", "去", "睡觉"], "。", "I want to go to sleep now."),
+    (1, "电脑"): (["桌子", "上", "有", "我", "的", "电脑"], "。", "My computer is on the table."),
     (1, "电视"): (["爸爸", "在", "家", "看", "电视"], "。", "Dad is watching TV at home."),
-    (1, "漂亮"): (["这", "个", "衣服", "很", "漂亮"], "。", "These clothes are very pretty."),
+    (1, "漂亮"): (["她", "的", "衣服", "很", "漂亮"], "。", "Her clothes are very pretty."),
     (1, "热"): (["今天", "天气", "很", "热"], "。", "Today's weather is very hot."),
     (1, "冷"): (["今天", "比" if False else "天气", "很", "冷"], "。", "Today's weather is very cold."),
     (1, "汉语"): (["我", "很", "喜欢", "学" if False else "学习", "汉语"], "。", "I really like studying Chinese."),
@@ -179,7 +190,8 @@ HANDCRAFTED_EXAMPLES: dict[tuple[int, str], tuple[list[str], str, str]] = {
     (2, "大家"): (["大家", "都", "在", "学校", "里"], "。", "Everyone is at school."),
     (2, "男"): (["那", "个", "男", "同学", "很", "高"], "。", "That male classmate is very tall."),
     (2, "女"): (["这", "个", "女", "医生", "很", "好"], "。", "This female doctor is very kind."),
-    (2, "也"): (["我", "很", "高兴", "他", "也", "是"], "。", "I am very happy, and he is too."),
+    (2, "也"): (["我", "也", "喜欢", "喝", "茶"], "。", "I also like drinking tea."),
+    (2, "着"): (["门", "现在", "开", "着", "呢"], "。", "The door is open right now."),
     (2, "真"): (["我", "真", "的", "不", "知道"], "。", "I really don't know."),
     (2, "希望"): (["她", "希望", "有", "个", "孩子"], "。", "She hopes to have a child."),
     (2, "妻子"): (["我", "的", "妻子", "是", "老师"], "。", "My wife is a teacher."),
@@ -187,9 +199,9 @@ HANDCRAFTED_EXAMPLES: dict[tuple[int, str], tuple[list[str], str, str]] = {
     (2, "零"): (["现在", "零", "点", "了"], "。", "It is midnight now."),
     (2, "日"): (["今天", "是", "十", "月", "一", "日"], "。", "Today is October 1st."),
     (2, "百"): (["学校", "里", "有", "两", "百", "个", "学生"], "。", "There are two hundred students at the school."),
-    (2, "千"): (["这", "个", "电脑", "三", "千", "块"], "。", "This computer costs three thousand yuan."),
+    (2, "千"): (["我", "的", "手机", "三", "千", "块"], "。", "My phone costs three thousand yuan."),
     (2, "第一"): (["这", "是", "我", "第一", "次", "来", "中国"], "。", "This is my first time coming to China."),
-    (2, "每"): (["他", "每", "星期", "去", "一", "次", "北京"], "。", "He goes to Beijing once a week."),
+    (2, "每"): (["他", "每", "个", "星期", "去", "一", "次", "北京"], "。", "He goes to Beijing once a week."),
     (2, "外"): (["爸爸", "在", "门", "外", "说话"], "。", "Dad is talking outside the door."),
     (2, "左边"): (["医院", "在", "学校", "左边"], "。", "The hospital is to the left of the school."),
     (2, "右边"): (["商店", "在", "医院", "右边"], "。", "The shop is to the right of the hospital."),
@@ -199,7 +211,7 @@ HANDCRAFTED_EXAMPLES: dict[tuple[int, str], tuple[list[str], str, str]] = {
     (2, "羊肉"): (["爸爸", "喜欢", "吃", "羊肉"], "。", "Dad likes eating lamb."),
     (2, "西瓜"): (["这", "个", "大", "西瓜", "很", "好吃"], "。", "This big watermelon is delicious."),
     (2, "好吃"): (["中国", "菜", "真", "好吃"], "！", "Chinese food is really delicious!"),
-    (2, "服务员"): (["服务员", "请", "给", "我", "一", "个", "杯子"], "。", "Waiter, please give me a cup."),
+    (2, "服务员"): (["饭店", "里", "的", "服务员", "很", "好"], "。", "The waiters at the restaurant are very nice."),
     (2, "贵"): (["这", "件", "新", "衣服", "很", "贵"], "。", "This new piece of clothing is expensive."),
     (2, "手机"): (["我", "的", "新", "手机", "很", "贵"], "。", "My new phone is very expensive."),
     (2, "铅笔"): (["我", "想", "买", "新", "铅笔"], "。", "I want to buy a new pencil."),
@@ -227,8 +239,8 @@ HANDCRAFTED_EXAMPLES: dict[tuple[int, str], tuple[list[str], str, str]] = {
     (2, "考试"): (["明天", "上午", "有", "汉语", "考试"], "。", "Tomorrow morning there is a Chinese exam."),
     (2, "题"): (["今天", "的", "考试", "题", "不", "多"], "。", "There aren't many questions in today's exam."),
     (2, "说话"): (["我", "能", "和", "老师", "说话", "吗"], "？", "May I speak with the teacher?"),
-    (2, "问"): (["我", "想", "问", "你", "一", "个", "问题"], "。", "I want to ask you a question."),
-    (2, "对"): (["你", "说", "的", "很", "对"], "。", "What you said is quite right."),
+    (2, "问"): (["我", "去", "问", "一下", "服务员"], "。", "I'll go ask the waiter."),
+    (2, "对"): (["你", "说", "得", "很", "对"], "。", "What you said is quite right."),
     (2, "等"): (["请", "在", "门", "外", "等", "我"], "。", "Please wait for me outside the door."),
     (2, "过"): (["我", "去", "过", "北京"], "。", "I have been to Beijing before."),
     (2, "一下"): (["请", "等", "我", "一下"], "。", "Please wait for me a moment."),
@@ -240,17 +252,17 @@ HANDCRAFTED_EXAMPLES: dict[tuple[int, str], tuple[list[str], str, str]] = {
     (2, "吧"): (["我们", "一起", "去", "喝", "茶", "吧"], "。", "Let's go drink tea together!"),
     (2, "介绍"): (["请", "给", "大家", "介绍", "你", "朋友"], "。", "Please introduce your friend to everyone."),
     (2, "为什么"): (["你", "为什么", "喜欢", "学习", "汉语"], "？", "Why do you like studying Chinese?"),
-    (2, "因为"): (["因为", "下雨", "我", "不", "去", "了"], "。", "Because it is raining, I am not going."),
-    (2, "所以"): (["今天", "下雨", "所以", "我", "在", "家"], "。", "It's raining today, so I am staying at home."),
-    (2, "虽然"): (["虽然", "很", "累", "但是", "我", "高兴"], "。", "Although I am tired, I am happy."),
-    (2, "但是"): (["今天", "冷", "但是", "我", "很", "高兴"], "。", "It's cold today, but I am very happy."),
-    (2, "您"): (["您", "好", "请", "进"], "！", "Hello, please come in!"),
+    (2, "因为"): (["他", "因为", "生病", "没有", "来"], "。", "He didn't come because he was sick."),
+    (2, "所以"): (["今天", "下雨", "所以", "我", "在", "家"], "。", "It's raining today, so I am staying at home.", {"hanzi": "今天下雨，所以我在家。", "pinyin": "Jīn tiān xià yǔ, suǒ yǐ wǒ zài jiā."}),
+    (2, "虽然"): (["虽然", "很", "累", "但是", "我", "非常", "高兴"], "。", "Although I am tired, I am very happy.", {"hanzi": "虽然很累，但是我非常高兴。", "pinyin": "Suī rán hěn lèi, dàn shì wǒ fēi cháng gāo xìng."}),
+    (2, "但是"): (["今天", "冷", "但是", "我", "很", "高兴"], "。", "It's cold today, but I am very happy.", {"hanzi": "今天冷，但是我很高兴。", "pinyin": "Jīn tiān lěng, dàn shì wǒ hěn gāo xìng."}),
+    (2, "您"): (["您", "是", "汉语", "老师", "吗"], "？", "Are you a Chinese teacher?"),
     (2, "哥哥"): (["我", "哥哥", "在", "北京", "工作"], "。", "My older brother works in Beijing."),
     (2, "姐姐"): (["我", "姐姐", "是", "医生"], "。", "My older sister is a doctor."),
     (2, "弟弟"): (["我", "弟弟", "十", "岁", "了"], "。", "My younger brother is ten years old."),
     (2, "妹妹"): (["我", "妹妹", "很", "漂亮"], "。", "My younger sister is very pretty."),
     (2, "丈夫"): (["她", "丈夫", "在", "医院", "工作"], "。", "Her husband works at the hospital."),
-    (2, "它"): (["我", "有", "个", "小", "猫", "它", "很", "白"], "。", "I have a little cat, and it is very white."),
+    (2, "它"): (["它", "很", "喜欢", "喝", "牛奶"], "。", "It really likes drinking milk."),
     (2, "快乐"): (["希望", "大家", "都", "快乐"], "！", "I hope everyone is happy!"),
     (2, "去年"): (["我", "去年", "去", "过", "上海"], "。", "I went to Shanghai last year."),
     (2, "生日"): (["今天", "是", "我", "的", "生日"], "。", "Today is my birthday."),
@@ -268,31 +280,31 @@ HANDCRAFTED_EXAMPLES: dict[tuple[int, str], tuple[list[str], str, str]] = {
     (2, "便宜"): (["这", "个", "苹果", "很", "便宜"], "。", "These apples are very cheap."),
     (2, "卖"): (["这", "个", "商店", "卖", "水果"], "。", "This shop sells fruit."),
     (2, "件"): (["我", "买", "了", "一", "件", "衣服"], "。", "I bought a piece of clothing."),
-    (2, "穿"): (["今天", "冷", "多", "穿", "点", "衣服"], "。", "It's cold today, wear more clothes."),
+    (2, "穿"): (["她", "今天", "穿", "着", "白", "衣服"], "。", "She is wearing white clothes today."),
     (2, "洗"): (["我", "去", "洗", "苹果"], "。", "I am going to wash the apples."),
     (2, "手表"): (["爸爸", "买", "了", "新", "手表"], "。", "Dad bought a new watch."),
     (2, "报纸"): (["爷爷" if False else "爸爸", "正在", "看", "报纸"], "。", "Dad is reading the newspaper."),
-    (2, "票"): (["我", "买", "了", "两", "张" if False else "个", "火车" if False else "电影", "票"], "。", "I bought two movie tickets."),
+    (2, "票"): (["你", "的", "电影", "票", "在", "哪儿"], "？", "Where is your movie ticket?"),
     (2, "雪"): (["今天", "下", "雪", "了"], "。", "It snowed today."),
     (2, "眼睛"): (["她", "的", "眼睛", "很", "大"], "。", "Her eyes are very big."),
-    (2, "生病"): (["他", "生病", "了", "在", "医院"], "。", "He is sick and in the hospital."),
-    (2, "药"): (["生病", "了", "要", "吃", "药"], "。", "When you're sick you should take medicine."),
+    (2, "生病"): (["他", "今天", "生病", "去", "医院", "了"], "。", "He got sick and went to the hospital today."),
+    (2, "药"): (["你", "今天", "吃", "药", "了", "吗"], "？", "Did you take your medicine today?"),
     (2, "累"): (["今天", "工作", "很", "累"], "。", "Work was very tiring today."),
-    (2, "休息"): (["你", "累", "了", "休息", "一下", "吧"], "。", "You're tired, take a little rest."),
+    (2, "休息"): (["我们", "休息", "一下", "吧"], "。", "Let's take a short rest."),
     (2, "笑"): (["大家", "都", "在", "笑"], "。", "Everyone is smiling."),
-    (2, "玩"): (["孩子", "们" if False else "都", "喜欢", "在", "外", "玩"], "。", "Children all love playing outside."),
+    (2, "玩"): (["弟弟", "喜欢", "去", "朋友", "家", "玩"], "。", "My younger brother likes going to his friend's house to play."),
     (2, "运动"): (["我", "每", "天", "都", "运动"], "。", "I exercise every single day."),
-    (2, "游泳"): (["夏天" if False else "热", "的", "时候", "喜欢", "去", "游泳"], "。", "When it's hot I like to go swimming."),
+    (2, "游泳"): (["哥哥", "很", "喜欢", "去", "游泳"], "。", "My older brother really likes going swimming."),
     (2, "课"): (["今天", "上午", "有", "汉语", "课"], "。", "There is a Chinese class this morning."),
     (2, "帮助"): (["谢谢", "你", "帮助", "我"], "！", "Thank you for helping me!"),
     (2, "意思"): (["这", "个", "字", "什么", "意思"], "？", "What does this character mean?"),
     (2, "事情"): (["今天", "有", "很", "多", "事情"], "。", "There are many things to do today."),
     (2, "已经"): (["她", "已经", "回", "家", "了"], "。", "She has already gone home."),
     (2, "慢"): (["请", "慢", "走"], "。", "Please walk slowly / Take care."),
-    (2, "错"): (["对不起", "我", "错", "了"], "。", "Sorry, I was wrong."),
+    (2, "错"): (["这", "个", "字", "写", "错", "了"], "。", "This character is written wrong."),
     (2, "给"): (["请", "给", "我", "一", "杯" if False else "个", "苹果"], "。", "Please give me an apple."),
     (2, "让"): (["妈妈", "不", "让", "我", "看", "电视"], "。", "Mom won't let me watch TV."),
-    (2, "别"): (["太", "晚" if False else "累", "了", "别", "工作"], "。", "You're too tired, don't work."),
+    (2, "别"): (["今天", "别", "工作", "了"], "。", "Don't work today."),
     (2, "可能"): (["明天", "可能", "下雨"], "。", "It might rain tomorrow."),
     (2, "再"): (["明天", "再", "来", "吧"], "。", "Come again tomorrow."),
     (2, "一起"): (["我们", "一起", "学习", "汉语", "吧"], "。", "Let's study Chinese together."),
@@ -307,9 +319,9 @@ HANDCRAFTED_EXAMPLES: dict[tuple[int, str], tuple[list[str], str, str]] = {
     (2, "忙"): (["老师", "今天", "很", "忙"], "。", "The teacher is very busy today."),
     (2, "问题"): (["这", "个", "问题", "很", "大"], "。", "This problem is very big."),
     (2, "告诉"): (["请", "告诉", "我", "你", "的", "名字"], "。", "Please tell me your name."),
-    (2, "懂"): (["我", "不", "懂", "这", "个", "意思"], "。", "I don't understand this meaning."),
+    (2, "懂"): (["我", "懂", "你", "的", "意思"], "。", "I understand what you mean."),
     (2, "要"): (["我", "要", "一", "杯" if False else "个", "水" if False else "西瓜"], "。", "I want a watermelon."),
-    (2, "可以"): (["我", "可以", "坐", "这里" if False else "这", "吗"], "？", "Can I sit here?"),
+    (2, "可以"): (["我", "可以", "喝", "点", "水", "吗"], "？", "May I have some water?"),
     (2, "知道"): (["我", "不", "知道", "他", "在", "哪儿"], "。", "I don't know where he is."),
     (2, "觉得"): (["我", "觉得", "这", "个", "很", "好"], "。", "I think this is very good."),
     (2, "非常"): (["今天", "天气", "非常", "好"], "。", "The weather is extremely nice today."),
@@ -317,15 +329,25 @@ HANDCRAFTED_EXAMPLES: dict[tuple[int, str], tuple[list[str], str, str]] = {
     (2, "两"): (["我", "有", "两", "个", "好", "朋友"], "。", "I have two good friends."),
     (2, "孩子"): (["这", "个", "孩子", "很", "聪明" if False else "高兴"], "。", "This child is very happy."),
     (2, "新"): (["我", "穿", "了", "新", "衣服"], "。", "I put on new clothes."),
-    (2, "路"): (["去", "学校", "的", "路", "很", "近"], "。", "The road to school is very close."),
-    (2, "进"): (["请", "进", "坐", "吧"], "！", "Please come in and sit down!"),
+    (2, "路"): (["去", "火车站", "的", "路", "很", "长"], "。", "The road to the train station is very long."),
+    (2, "进"): (["我们", "进", "教室", "吧"], "！", "Let's go into the classroom!"),
     (2, "到"): (["我们", "到", "机场", "了"], "。", "We have arrived at the airport."),
     (2, "近"): (["学校", "离", "我", "家", "很", "近"], "。", "The school is very close to my home."),
     (2, "远"): (["医院", "离", "这里" if False else "学校", "很", "远"], "。", "The hospital is far from the school."),
     (2, "离"): (["宾馆", "离", "火车站", "很", "近"], "。", "The hotel is very close to the train station."),
     (2, "走"): (["我们", "走", "着", "去", "学校"], "。", "We are walking to school."),
     # --- HSK 3 ---
-    (3, "刷牙"): (["我", "早上", "起床", "刷牙"], "。", "I get up in the morning and brush my teeth."),
+    (3, "刷牙"): (["我", "每", "天", "早上", "都", "刷牙"], "。", "I brush my teeth every morning."),
+    (3, "感冒"): (["我", "最近", "感冒", "了"], "。", "I caught a cold recently."),
+    (3, "发烧"): (["弟弟", "今天", "发烧", "了"], "。", "My younger brother has a fever today."),
+    (3, "关系"): (["她", "和", "这", "个", "问题", "没有", "关系"], "。", "She has nothing to do with this problem."),
+    (3, "爷爷"): (["爷爷", "每", "天", "早上", "都", "去", "公园"], "。", "Grandpa goes to the park every morning."),
+    (3, "奶奶"): (["我们", "周末", "去", "看", "奶奶"], "。", "We will visit Grandma this weekend."),
+    (3, "起来"): (["她", "高兴", "得", "笑", "了", "起来"], "。", "She was so happy that she started laughing."),
+    (3, "明白"): (["我", "明白", "你", "的", "意思", "了"], "。", "I understand what you mean now."),
+    (3, "船"): (["我们", "坐", "船", "去", "那", "个", "城市"], "。", "We are taking a boat to that city."),
+    (3, "被"): (["蛋糕", "被", "小", "猫", "吃", "了"], "。", "The cake was eaten by the little cat."),
+    (3, "然后"): (["我", "把", "书", "放", "下", "来", "然后", "开", "灯"], "。", "I put the book down and then turned on the light.", {"hanzi": "我把书放下来，然后开灯。", "pinyin": "Wǒ bǎ shū fàng xià lái, rán hòu kāi dēng."}),
     # Replaced mechanical templates (56)
     (3, "而且"): (["这", "个", "房间", "干净", "而且", "安静"], "。", "This room is clean and also quiet."),
     (3, "其实"): (["其实", "这", "个", "问题", "很", "简单"], "。", "Actually, this question is very simple."),
@@ -344,7 +366,7 @@ HANDCRAFTED_EXAMPLES: dict[tuple[int, str], tuple[list[str], str, str]] = {
     (3, "后来"): (["后来", "她", "去", "北京", "工作", "了"], "。", "Later, she went to Beijing to work."),
     (3, "画"): (["妹妹", "喜欢", "画", "小", "猫"], "。", "My younger sister likes drawing little cats."),
     (3, "环境"): (["这", "个", "公园", "的", "环境", "很", "干净"], "。", "The environment of this park is very clean."),
-    (3, "腿"): (["我", "昨天", "爬山", "今天", "腿", "很", "疼"], "。", "I climbed a mountain yesterday, and my legs hurt a lot today."),
+    (3, "腿"): (["今天", "我", "的", "腿", "很", "疼"], "。", "My legs hurt a lot today."),
     (3, "变化"): (["这", "个", "城市", "变化", "很", "大"], "。", "This city has changed a lot."),
     (3, "极"): (["今天", "天气", "热", "极", "了"], "！", "The weather is extremely hot today!"),
     (3, "树"): (["公园", "里", "有", "很", "多", "大", "树"], "。", "There are many big trees in the park."),
@@ -354,12 +376,12 @@ HANDCRAFTED_EXAMPLES: dict[tuple[int, str], tuple[list[str], str, str]] = {
     (3, "提高"): (["我", "想", "提高", "汉语", "水平"], "。", "I want to improve my Chinese level."),
     (3, "中间"): (["我", "坐", "在", "爸爸", "和", "妈妈", "中间"], "。", "I sit between Dad and Mom."),
     (3, "多么"): (["今天", "的", "天气", "多么", "好", "啊"], "！", "How nice the weather is today!"),
-    (3, "灯"): (["晚上", "了", "请", "开", "灯"], "。", "It's evening now, please turn on the light."),
+    (3, "灯"): (["请", "把", "房间", "里", "的", "灯", "关", "了"], "。", "Please turn off the light in the room."),
     (3, "太阳"): (["早上", "太阳", "出", "来", "了"], "。", "The sun came out in the morning."),
     (3, "热情"): (["那", "位", "老师", "非常", "热情"], "。", "That teacher is very warm and enthusiastic."),
     (3, "同事"): (["他", "是", "我", "的", "新", "同事"], "。", "He is my new colleague."),
     (3, "角"): (["这", "张", "桌子", "有", "四", "个", "角"], "。", "This table has four corners."),
-    (3, "放心"): (["请", "放心", "我", "会", "照顾", "好", "自己"], "。", "Please don't worry, I will take good care of myself."),
+    (3, "放心"): (["妈妈", "对", "我", "很", "放心"], "。", "Mom feels reassured about me."),
     (3, "草"): (["公园", "里", "的", "草", "很", "绿"], "。", "The grass in the park is very green."),
     (3, "地铁"): (["我", "每", "天", "坐", "地铁", "去", "上班"], "。", "I take the subway to work every day."),
     (3, "校长"): (["我们", "的", "校长", "非常", "热情"], "。", "Our school principal is very welcoming."),
@@ -374,12 +396,12 @@ HANDCRAFTED_EXAMPLES: dict[tuple[int, str], tuple[list[str], str, str]] = {
     (3, "冬"): (["北京", "冬", "天", "经常", "下", "雪"], "。", "It often snows in Beijing in winter."),
     (3, "秋"): (["秋", "天", "去", "爬山", "很", "舒服"], "。", "Going hiking in autumn is very pleasant."),
     (3, "瓶子"): (["这", "个", "瓶子", "里", "有", "牛奶"], "。", "There is milk in this bottle."),
-    (3, "复习"): (["明天", "有", "考试", "我", "要", "复习"], "。", "There is an exam tomorrow, so I need to review."),
-    (3, "请假"): (["我", "生病", "了", "今天", "想", "请假"], "。", "I am sick and want to ask for leave today."),
+    (3, "复习"): (["我", "晚上", "要", "复习", "汉语"], "。", "I need to review Chinese tonight."),
+    (3, "请假"): (["我", "今天", "想", "向", "老师", "请假"], "。", "I want to ask the teacher for leave today."),
     (3, "皮鞋"): (["爸爸", "买", "了", "一", "双", "黑", "皮鞋"], "。", "Dad bought a pair of black leather shoes."),
     (3, "黑板"): (["老师", "在", "黑板", "上", "写", "字"], "。", "The teacher is writing characters on the blackboard."),
     (3, "留学"): (["我", "哥哥", "打算", "去", "中国", "留学"], "。", "My older brother plans to study abroad in China."),
-    (3, "刮风"): (["今天", "刮风", "了", "多", "穿", "衣服"], "。", "It's windy today, put on more clothes."),
+    (3, "刮风"): (["今天", "下午", "刮风", "了"], "。", "It got windy this afternoon."),
     (3, "黄河"): (["黄河", "在", "中国", "北方", "很", "有名"], "。", "The Yellow River is very famous in northern China."),
     (3, "行李箱"): (["这", "个", "红", "行李箱", "是", "我", "的"], "。", "This red suitcase is mine."),
     (3, "电子邮件"): (["我", "刚才", "给", "经理", "发", "了", "电子邮件"], "。", "I just sent an email to the manager."),
@@ -434,12 +456,12 @@ HANDCRAFTED_EXAMPLES: dict[tuple[int, str], tuple[list[str], str, str]] = {
     (4, "而"): (["这", "个", "房间", "小", "而", "干净"], "。", "This room is small yet clean."),
     (4, "之"): (["三", "分", "之", "一", "的", "学生", "来", "了"], "。", "One third of the students came."),
     (4, "以"): (["他", "以", "跑步", "来", "锻炼", "身体"], "。", "He exercises his body by jogging."),
-    (4, "却"): (["太阳", "出", "来", "了", "天气", "却", "很", "冷"], "。", "The sun came out, yet the weather is very cold."),
+    (4, "却"): (["太阳", "出", "来", "了", "天气", "却", "很", "冷"], "。", "The sun came out, yet the weather is very cold.", {"hanzi": "太阳出来了，天气却很冷。", "pinyin": "Tài yang chū lái le, tiān qì què hěn lěng."}),
     (4, "进行"): (["比赛", "正在", "顺利", "地", "进行"], "。", "The match is proceeding smoothly."),
     (4, "无"): (["教室", "里", "空", "无", "一", "人"], "。", "There isn't a single person in the classroom."),
-    (4, "可是"): (["我", "想", "去", "旅游", "可是", "没有", "时间"], "。", "I want to travel, but I don't have time."),
+    (4, "可是"): (["我", "想", "去", "旅游", "可是", "没有", "时间"], "。", "I want to travel, but I don't have time.", {"hanzi": "我想去旅游，可是没有时间。", "pinyin": "Wǒ xiǎng qù lǚ yóu, kě shì méi yǒu shí jiān."}),
     (4, "连"): (["连", "小", "孩子", "都", "知道", "这", "件", "事情"], "。", "Even little children know about this matter."),
-    (4, "其中"): (["这", "些", "苹果", "其中", "三", "个", "坏", "了"], "。", "Among these apples, three have gone bad."),
+    (4, "其中"): (["我", "最", "喜欢", "其中", "那", "本", "小说"], "。", "Among them, I like that novel the most."),
     (4, "甚至"): (["他", "甚至", "连", "自己", "的", "生日", "都", "忘记", "了"], "。", "He even forgot his own birthday."),
     (4, "对于"): (["对于", "这", "个", "计划", "大家", "都", "同意"], "。", "Everyone agrees on this plan."),
     (4, "部分"): (["我", "只", "看", "完", "了", "一", "部分"], "。", "I only finished reading a part of it."),
@@ -447,9 +469,9 @@ HANDCRAFTED_EXAMPLES: dict[tuple[int, str], tuple[list[str], str, str]] = {
     (4, "同时"): (["两", "个", "会议", "同时", "开始", "了"], "。", "The two meetings started at the same time."),
     (4, "活动"): (["周末", "学校", "有", "一", "次", "文化", "活动"], "。", "There is a cultural event at school this weekend."),
     (4, "份"): (["我", "找", "到", "了", "一", "份", "新", "工作"], "。", "I found a new job."),
-    (4, "因此"): (["路", "上", "堵车", "因此", "我", "迟到", "了"], "。", "There was a traffic jam on the road, so I arrived late."),
+    (4, "因此"): (["路", "上", "堵车", "因此", "我", "迟到", "了"], "。", "There was a traffic jam on the road, so I arrived late.", {"hanzi": "路上堵车，因此我迟到了。", "pinyin": "Lù shàng dǔ chē, yīn cǐ wǒ chí dào le."}),
     (4, "获得"): (["她", "努力", "工作", "获得", "了", "成功"], "。", "She worked hard and achieved success."),
-    (4, "另外"): (["除了", "跑步", "她", "另外", "还", "喜欢", "游泳"], "。", "Besides jogging, she also likes swimming."),
+    (4, "另外"): (["除了", "跑步", "她", "另外", "还", "喜欢", "游泳"], "。", "Besides jogging, she also likes swimming.", {"hanzi": "除了跑步，她另外还喜欢游泳。", "pinyin": "Chú le pǎo bù, tā lìng wài hái xǐ huan yóu yǒng."}),
     (4, "技术"): (["电脑", "技术", "发展", "得", "非常", "快"], "。", "Computer technology is developing very fast."),
     (4, "停"): (["公共汽车", "在", "超市", "前面", "停", "下", "了"], "。", "The bus stopped in front of the supermarket."),
     (4, "并且"): (["他", "聪明", "并且", "非常", "认真"], "。", "He is clever and also very conscientious."),
@@ -464,17 +486,17 @@ HANDCRAFTED_EXAMPLES: dict[tuple[int, str], tuple[list[str], str, str]] = {
     (4, "低"): (["这", "家", "商店", "价格", "很", "低"], "。", "The prices at this shop are very low."),
     (4, "作用"): (["这", "种", "药", "对", "感冒", "很", "有", "作用"], "。", "This medicine is very effective against colds."),
     (4, "满"): (["杯子", "里", "的", "茶", "满", "了"], "。", "The tea in the cup is full."),
-    (4, "由于"): (["由于", "下雨", "比赛", "推迟", "了"], "。", "Due to the rain, the match was postponed."),
+    (4, "由于"): (["由于", "下雨", "比赛", "推迟", "了"], "。", "Due to the rain, the match was postponed.", {"hanzi": "由于下雨，比赛推迟了。", "pinyin": "Yóu yú xià yǔ, bǐ sài tuī chí le."}),
     (4, "过程"): (["学习", "汉语", "的", "过程", "很", "有趣"], "。", "The process of learning Chinese is very interesting."),
-    (4, "即使"): (["即使", "明天", "下雨", "我", "也", "要", "去", "跑步"], "。", "Even if it rains tomorrow, I will still go jogging."),
+    (4, "即使"): (["即使", "明天", "下雨", "我", "也", "要", "去", "跑步"], "。", "Even if it rains tomorrow, I will still go jogging.", {"hanzi": "即使明天下雨，我也要去跑步。", "pinyin": "Jí shǐ míng tiān xià yǔ, wǒ yě yào qù pǎo bù."}),
     (4, "秒"): (["请", "等", "我", "十", "秒"], "。", "Please wait ten seconds for me."),
-    (4, "比如"): (["我", "喜欢", "吃", "水果", "比如", "苹果", "和", "香蕉"], "。", "I like eating fruit, for example apples and bananas."),
-    (4, "无论"): (["无论", "天气", "怎么样", "他", "都", "坚持", "锻炼"], "。", "No matter what the weather is like, he keeps exercising."),
+    (4, "比如"): (["我", "喜欢", "吃", "水果", "比如", "苹果", "和", "香蕉"], "。", "I like eating fruit, for example apples and bananas.", {"hanzi": "我喜欢吃水果，比如苹果和香蕉。", "pinyin": "Wǒ xǐ huan chī shuǐ guǒ, bǐ rú píng guǒ hé xiāng jiāo."}),
+    (4, "无论"): (["无论", "天气", "怎么样", "他", "都", "坚持", "锻炼"], "。", "No matter what the weather is like, he keeps exercising.", {"hanzi": "无论天气怎么样，他都坚持锻炼。", "pinyin": "Wú lùn tiān qì zěn me yàng, tā dōu jiān chí duàn liàn."}),
     (4, "省"): (["坐", "地铁", "上班", "可以", "省", "很", "多", "时间"], "。", "Taking the subway to work can save a lot of time."),
     (4, "挂"): (["教室", "前面", "挂", "着", "一", "张", "世界", "地图"], "。", "A world map is hanging at the front of the classroom."),
     (4, "广告"): (["电视", "上", "的", "广告", "太", "多", "了"], "。", "There are too many commercials on TV."),
     (4, "难道"): (["难道", "你", "忘记", "今天", "的", "会议", "了", "吗"], "？", "Don't tell me you forgot today's meeting?"),
-    (4, "于是"): (["下雨", "了", "于是", "我们", "坐", "出租车", "回", "家"], "。", "It started raining, so we took a taxi home."),
+    (4, "于是"): (["下雨", "了", "于是", "我们", "坐", "出租车", "回", "家"], "。", "It started raining, so we took a taxi home.", {"hanzi": "下雨了，于是我们坐出租车回家。", "pinyin": "Xià yǔ le, yú shì wǒ men zuò chū zū chē huí jiā."}),
     (4, "规定"): (["学校", "规定", "学生", "不", "能", "迟到"], "。", "The school stipulates that students cannot be late."),
     (4, "够"): (["我", "带", "的", "钱", "不", "够"], "。", "The money I brought is not enough."),
     (4, "方向"): (["我们", "好像", "走", "错", "方向", "了"], "。", "It seems we walked in the wrong direction."),
@@ -487,29 +509,29 @@ HANDCRAFTED_EXAMPLES: dict[tuple[int, str], tuple[list[str], str, str]] = {
     (4, "破"): (["我", "的", "裤子", "不", "小心", "弄", "破", "了"], "。", "I accidentally tore my pants."),
     (4, "推"): (["请", "往", "里", "推", "门"], "。", "Please push the door inward."),
     (4, "标准"): (["她", "说", "的", "普通话", "非常", "标准"], "。", "Her Mandarin pronunciation is very standard."),
-    (4, "毛"): (["这", "个", "小", "猫", "的", "毛", "很", "白"], "。", "This little cat's fur is very white."),
+    (4, "毛"): (["这", "只", "小", "猫", "的", "毛", "很", "白"], "。", "This little cat's fur is very white.", {"pinyin": "Zhè zhī xiǎo māo de máo hěn bái."}),
     (4, "接着"): (["我们", "休息", "一会儿", "再", "接着", "学习"], "。", "Let's rest a bit and then continue studying."),
     (4, "速度"): (["地铁", "的", "速度", "比", "公共汽车", "快"], "。", "The subway is faster than the bus."),
     (4, "左右"): (["我", "晚上", "十", "点", "左右", "睡觉"], "。", "I go to bed around ten at night."),
     (4, "经济"): (["中国", "的", "经济", "发展", "非常", "快"], "。", "China's economy is developing very fast."),
     (4, "按照"): (["我们", "按照", "计划", "开始", "工作"], "。", "We are starting work according to the plan."),
-    (4, "竟然"): (["五", "月", "了", "今天", "竟然", "下", "雪"], "！", "It's already May, and it unexpectedly snowed today!"),
+    (4, "竟然"): (["他", "竟然", "忘记", "了", "自己", "的", "生日"], "！", "He actually forgot his own birthday!"),
     (4, "重点"): (["这", "次", "考试", "的", "重点", "是", "历史"], "。", "The focus of this exam is history."),
-    (4, "否则"): (["快", "出发", "吧", "否则", "会", "迟到"], "！", "Let's set off quickly, otherwise we will be late!"),
+    (4, "否则"): (["快", "出发", "吧", "否则", "会", "迟到"], "！", "Let's set off quickly, otherwise we will be late!", {"hanzi": "快出发吧，否则会迟到！", "pinyin": "Kuài chū fā ba, fǒu zé huì chí dào!"}),
     (4, "动作"): (["他", "打篮球", "的", "动作", "很", "帅"], "。", "His basketball moves are very cool."),
     (4, "增加"): (["最近", "来", "中国", "旅游", "的", "人", "增加", "了"], "。", "The number of people traveling to China has increased recently."),
     (4, "举行"): (["学校", "明天", "下午", "举行", "比赛"], "。", "The school is holding a competition tomorrow afternoon."),
     (4, "著名"): (["长城", "是", "中国", "著名", "的", "地方"], "。", "The Great Wall is a famous place in China."),
     (4, "竞争"): (["这", "份", "工作", "的", "竞争", "很", "大"], "。", "The competition for this job is very intense."),
     (4, "估计"): (["我", "估计", "他", "今天", "不", "会", "来", "了"], "。", "I reckon he won't come today."),
-    (4, "吸引"): (["这", "个", "电影", "吸引", "了", "很", "多", "观众"], "。", "This movie attracted many viewers."),
+    (4, "吸引"): (["他", "的", "表演", "吸引", "了", "很", "多", "观众"], "。", "His performance attracted many viewers."),
     (4, "共同"): (["我们", "有", "很", "多", "共同", "的", "爱好"], "。", "We have many hobbies in common."),
-    (4, "既然"): (["既然", "你", "累", "了", "就", "先", "休息", "吧"], "。", "Since you're tired, take a rest first."),
+    (4, "既然"): (["既然", "你", "累", "了", "就", "先", "休息", "吧"], "。", "Since you're tired, take a rest first.", {"hanzi": "既然你累了，就先休息吧。", "pinyin": "Jì rán nǐ lèi le, jiù xiān xiū xi ba."}),
     (4, "提醒"): (["谢谢", "你", "提醒", "我", "带", "伞"], "！", "Thank you for reminding me to bring an umbrella!"),
     (4, "周围"): (["公园", "周围", "有", "很", "多", "饭店"], "。", "There are many restaurants around the park."),
     (4, "距离"): (["这", "里", "距离", "火车站", "不", "远"], "。", "It is not far from here to the train station."),
     (4, "价格"): (["超市", "里", "面包", "的", "价格", "很", "便宜"], "。", "The price of bread at the supermarket is very cheap."),
-    (4, "然而"): (["他", "很", "努力", "然而", "结果", "不", "理想"], "。", "He worked very hard; however, the result was not ideal."),
+    (4, "然而"): (["他", "很", "努力", "然而", "结果", "不", "理想"], "。", "He worked very hard; however, the result was not ideal.", {"hanzi": "他很努力，然而结果不理想。", "pinyin": "Tā hěn nǔ lì, rán ér jié guǒ bù lǐ xiǎng."}),
     (4, "交流"): (["我", "喜欢", "和", "其他", "国家", "的", "朋友", "交流"], "。", "I like communicating with friends from other countries."),
     (4, "地点"): (["明天", "会议", "的", "地点", "在", "三", "楼"], "。", "The venue for tomorrow's meeting is on the third floor."),
     (4, "皮肤"): (["多", "喝", "水", "对", "皮肤", "很", "好"], "。", "Drinking more water is very good for your skin."),
@@ -518,7 +540,7 @@ HANDCRAFTED_EXAMPLES: dict[tuple[int, str], tuple[list[str], str, str]] = {
     (4, "回忆"): (["那", "次", "旅游", "是", "我", "最", "好", "的", "回忆"], "。", "That trip is my fondest memory."),
     (4, "材料"): (["做", "蛋糕", "的", "材料", "都", "准备", "好", "了"], "。", "All the ingredients for making the cake are ready."),
     (4, "相同"): (["我们", "对", "这", "件", "事情", "的", "看法", "完全", "相同"], "。", "Our views on this matter are completely identical."),
-    (4, "赶"): (["快", "点", "吧", "我们", "要", "赶", "飞机"], "！", "Hurry up, we have to catch our flight!"),
+    (4, "赶"): (["我们", "要", "快", "点", "去", "机场", "赶", "飞机"], "。", "We need to hurry to the airport to catch the flight."),
     (4, "赚"): (["他", "每", "个", "月", "赚", "不", "少", "钱"], "。", "He earns quite a bit of money every month."),
     (4, "大约"): (["从", "学校", "到", "机场", "大约", "半", "小时"], "。", "It takes about half an hour from school to the airport."),
     (4, "暂时"): (["他", "暂时", "住", "在", "朋友", "家"], "。", "He is temporarily staying at a friend's place."),
@@ -529,7 +551,7 @@ HANDCRAFTED_EXAMPLES: dict[tuple[int, str], tuple[list[str], str, str]] = {
     (4, "租"): (["我", "在", "公司", "附近", "租", "了", "个", "房间"], "。", "I rented a room near the company."),
     (4, "信心"): (["她", "对", "明天", "的", "考试", "很", "有", "信心"], "。", "She is very confident about tomorrow's exam."),
     (4, "博士"): (["我", "姐姐", "正在", "读", "博士"], "。", "My older sister is currently studying for a PhD."),
-    (4, "正好"): (["你", "来", "得", "正好", "我们", "刚", "开始"], "。", "You arrived at just the right time; we just started."),
+    (4, "正好"): (["这", "件", "衣服", "我", "穿", "着", "正好"], "。", "This piece of clothing fits me just right."),
     (4, "理想"): (["当", "老师", "是", "她", "从", "小", "的", "理想"], "。", "Becoming a teacher has been her dream since childhood."),
     (4, "举办"): (["北京", "成功", "举办", "了", "这", "次", "活动"], "。", "Beijing successfully hosted this event."),
     (4, "流行"): (["现在", "骑", "自行车", "上班", "很", "流行"], "。", "Cycling to work is very popular nowadays."),
@@ -538,19 +560,19 @@ HANDCRAFTED_EXAMPLES: dict[tuple[int, str], tuple[list[str], str, str]] = {
     (4, "准确"): (["这", "个", "手表", "的", "时间", "很", "准确"], "。", "This watch keeps very accurate time."),
     (4, "禁止"): (["公园", "里", "禁止", "抽烟"], "。", "Smoking is prohibited in the park."),
     (4, "数量"): (["请", "检查", "一下", "苹果", "的", "数量"], "。", "Please check the quantity of apples."),
-    (4, "富"): (["他", "虽然", "不", "富", "但是", "很", "快乐"], "。", "Although he is not rich, he is very happy."),
+    (4, "富"): (["他", "虽然", "不", "富", "但是", "很", "快乐"], "。", "Although he is not rich, he is very happy.", {"hanzi": "他虽然不富，但是很快乐。", "pinyin": "Tā suī rán bù fù, dàn shì hěn kuài lè."}),
     (4, "性格"): (["我", "新", "同事", "的", "性格", "非常", "热情"], "。", "My new colleague has a very warm personality."),
     (4, "降低"): (["商店", "降低", "了", "这", "件", "衣服", "的", "价格"], "。", "The store lowered the price of this piece of clothing."),
     # --- HSK 4 (Lot 2/2: 105 entries) ---
-    (4, "随着"): (["随着", "经济", "的", "发展", "生活", "更", "方便", "了"], "。", "Along with economic development, life has become more convenient."),
-    (4, "只好"): (["下雨", "了", "我们", "只好", "在", "家", "看", "电影"], "。", "It rained, so we had no choice but to watch a movie at home."),
+    (4, "随着"): (["随着", "经济", "的", "发展", "生活", "更", "方便", "了"], "。", "Along with economic development, life has become more convenient.", {"hanzi": "随着经济的发展，生活更方便了。", "pinyin": "Suí zhe jīng jì de fā zhǎn, shēng huó gèng fāng biàn le."}),
+    (4, "只好"): (["下雨", "了", "我们", "只好", "在", "家", "看", "电影"], "。", "It rained, so we had no choice but to watch a movie at home.", {"hanzi": "下雨了，我们只好在家看电影。", "pinyin": "Xià yǔ le, wǒ men zhǐ hǎo zài jiā kàn diàn yǐng."}),
     (4, "趟"): (["下", "星期", "我", "要", "去", "一", "趟", "上海"], "。", "Next week I need to make a trip to Shanghai."),
     (4, "尝"): (["请", "尝", "一下", "妈妈", "做", "的", "饺子"], "。", "Please taste the dumplings Mom made."),
     (4, "对话"): (["请", "大家", "听", "这", "段", "中文", "对话"], "。", "Everyone, please listen to this Chinese dialogue."),
     (4, "广播"): (["爷爷", "每", "天", "早上", "喜欢", "听", "广播"], "。", "Grandpa likes listening to the radio every morning."),
-    (4, "污染"): (["我们", "应该", "保护", "环境", "减少", "污染"], "。", "We should protect the environment and reduce pollution."),
+    (4, "污染"): (["这", "个", "地方", "几乎", "没有", "空气", "污染"], "。", "There is almost no air pollution in this place."),
     (4, "温度"): (["今天", "晚上", "的", "温度", "很", "低"], "。", "The temperature tonight is very low."),
-    (4, "例如"): (["他", "会", "很", "多", "运动", "例如", "游泳", "和", "跑步"], "。", "He can do many sports, for example swimming and jogging."),
+    (4, "例如"): (["他", "会", "很", "多", "运动", "例如", "游泳", "和", "跑步"], "。", "He can do many sports, for example swimming and jogging.", {"hanzi": "他会很多运动，例如游泳和跑步。", "pinyin": "Tā huì hěn duō yùn dòng, lì rú yóu yǒng hé pǎo bù."}),
     (4, "祝贺"): (["祝贺", "你", "找", "到", "了", "新", "工作"], "！", "Congratulations on finding a new job!"),
     (4, "重视"): (["老师", "非常", "重视", "学生", "的", "健康"], "。", "The teacher attaches great importance to students' health."),
     (4, "抬"): (["请", "和", "我", "一起", "抬", "这", "张", "桌子"], "。", "Please lift this table together with me."),
@@ -563,7 +585,7 @@ HANDCRAFTED_EXAMPLES: dict[tuple[int, str], tuple[list[str], str, str]] = {
     (4, "友谊"): (["这", "份", "友谊", "对", "我", "很", "重要"], "。", "This friendship is very important to me."),
     (4, "植物"): (["公园", "里", "有", "各", "种", "漂亮", "的", "植物"], "。", "There are all kinds of pretty plants in the park."),
     (4, "对面"): (["银行", "就", "在", "医院", "对面"], "。", "The bank is right across from the hospital."),
-    (4, "其次"): (["首先", "检查", "质量", "其次", "比较", "价格"], "。", "First check the quality, and secondly compare the price."),
+    (4, "其次"): (["首先", "检查", "质量", "其次", "比较", "价格"], "。", "First check the quality, and secondly compare the price.", {"hanzi": "首先检查质量，其次比较价格。", "pinyin": "Shǒu xiān jiǎn chá zhì liàng, qí cì bǐ jiào jià gé."}),
     (4, "敲"): (["进", "办公室", "以前", "请", "先", "敲", "门"], "。", "Please knock on the door first before entering the office."),
     (4, "特点"): (["每", "个", "季节", "都", "有", "自己", "的", "特点"], "。", "Every season has its own characteristics."),
     (4, "往往"): (["周末", "超市", "里", "往往", "人", "很", "多"], "。", "Supermarkets are usually very crowded on weekends."),
@@ -578,10 +600,10 @@ HANDCRAFTED_EXAMPLES: dict[tuple[int, str], tuple[list[str], str, str]] = {
     (4, "日记"): (["妹妹", "每", "天", "晚上", "都", "写", "日记"], "。", "My younger sister writes in her diary every night."),
     (4, "总结"): (["经理", "在", "会议", "最后", "总结", "了", "计划"], "。", "The manager summarized the plan at the end of the meeting."),
     (4, "幽默"): (["我们", "的", "历史", "老师", "非常", "幽默"], "。", "Our history teacher is very humorous."),
-    (4, "师傅"): (["师傅", "请", "问", "去", "火车站", "怎么", "走"], "？", "Excuse me, sir, how do I get to the train station?"),
+    (4, "师傅"): (["这", "位", "师傅", "的", "普通话", "很", "标准"], "。", "This master's Mandarin is very standard."),
     (4, "镜子"): (["她", "在", "镜子", "前面", "整理", "头发"], "。", "She is fixing her hair in front of the mirror."),
     (4, "亲戚"): (["周末", "爸爸", "妈妈", "去", "看", "亲戚", "了"], "。", "Dad and Mom went to visit relatives over the weekend."),
-    (4, "力气"): (["哥哥", "力气", "很", "大", "能", "搬", "桌子"], "。", "My older brother is very strong and can move the table."),
+    (4, "力气"): (["哥哥", "的", "力气", "非常", "大"], "。", "My older brother is very strong."),
     (4, "胳膊"): (["他", "的", "胳膊", "比", "我", "长"], "。", "His arms are longer than mine."),
     (4, "乘坐"): (["请", "大家", "排队", "乘坐", "电梯"], "。", "Everyone, please line up to take the elevator."),
     (4, "孙子"): (["奶奶", "非常", "喜欢", "她", "的", "小", "孙子"], "。", "Grandma loves her little grandson very much."),
@@ -589,10 +611,10 @@ HANDCRAFTED_EXAMPLES: dict[tuple[int, str], tuple[list[str], str, str]] = {
     (4, "普遍"): (["现在", "上网", "购物", "已经", "很", "普遍", "了"], "。", "Shopping online is already very common nowadays."),
     (4, "热闹"): (["节日", "的", "街道", "非常", "热闹"], "。", "The streets during the festival are very lively."),
     (4, "顺序"): (["请", "按照", "顺序", "回答", "问题"], "。", "Please answer the questions in order."),
-    (4, "得意"): (["比赛", "赢", "了", "他", "非常", "得意"], "。", "Having won the match, he felt very proud of himself."),
+    (4, "得意"): (["他", "对", "自己", "的", "成绩", "非常", "得意"], "。", "He is very proud of his grades."),
     (4, "葡萄"): (["这", "些", "新鲜", "的", "葡萄", "真", "甜"], "！", "These fresh grapes are really sweet!"),
     (4, "性别"): (["请", "在", "表格", "里", "写", "上", "性别"], "。", "Please write your gender on the form."),
-    (4, "毛巾"): (["洗", "完", "脸", "用", "干净", "的", "毛巾", "擦"], "。", "After washing your face, wipe it with a clean towel."),
+    (4, "毛巾"): (["请", "给", "我", "一", "条", "干净", "的", "毛巾"], "。", "Please give me a clean towel."),
     (4, "降落"): (["飞机", "马上", "就", "要", "降落", "了"], "。", "The plane is about to land right away."),
     (4, "咸"): (["今天", "的", "汤", "有", "点", "咸"], "。", "Today's soup is a bit salty."),
     (4, "节约"): (["我们", "都", "应该", "节约", "用", "水"], "。", "We should all conserve water."),
@@ -624,12 +646,12 @@ HANDCRAFTED_EXAMPLES: dict[tuple[int, str], tuple[list[str], str, str]] = {
     (4, "流利"): (["他", "的", "中文", "说", "得", "非常", "流利"], "。", "He speaks Chinese very fluently."),
     (4, "橡皮"): (["我", "可以", "借", "你", "的", "橡皮", "用", "一下", "吗"], "？", "May I borrow your eraser for a moment?"),
     (4, "长江"): (["长江", "在", "中国", "非常", "有名"], "。", "The Yangtze River is very famous in China."),
-    (4, "马虎"): (["写", "作业", "要", "认真", "不", "能", "马虎"], "。", "You must do your homework carefully and not be sloppy."),
+    (4, "马虎"): (["做", "事情", "一定", "不", "能", "马虎"], "。", "You must never be careless when doing things."),
     (4, "寒假"): (["寒假", "我", "打算", "和", "朋友", "去", "上海", "玩"], "。", "During winter vacation, I plan to go visit Shanghai with friends."),
-    (4, "粗心"): (["他", "太", "粗心", "了", "又", "忘记", "带", "钥匙"], "。", "He is so careless; he forgot to bring his keys again."),
+    (4, "粗心"): (["他", "工作", "的", "时候", "太", "粗心", "了"], "。", "He is too careless when he works."),
     (4, "烤鸭"): (["来", "北京", "旅游", "一定", "要", "尝", "烤鸭"], "。", "When traveling to Beijing, you must try roast duck."),
-    (4, "预习"): (["明天", "有", "汉语", "课", "我", "先", "预习", "一下"], "。", "There is a Chinese class tomorrow, so I will preview the lesson first."),
-    (4, "占线"): (["我", "给", "他", "打电话", "但是", "一直", "占线"], "。", "I called him, but the line has been busy the whole time."),
+    (4, "预习"): (["我", "每", "天", "晚上", "都", "会", "预习", "明天", "的", "课"], "。", "I preview tomorrow's lesson every evening."),
+    (4, "占线"): (["我", "给", "他", "打电话", "但是", "一直", "占线"], "。", "I called him, but the line has been busy the whole time.", {"hanzi": "我给他打电话，但是一直占线。", "pinyin": "Wǒ gěi tā dǎ diàn huà, dàn shì yī zhí zhàn xiàn."}),
     (4, "京剧"): (["爷爷", "最", "喜欢", "在", "电视", "上", "看", "京剧"], "。", "Grandpa likes watching Beijing opera on TV the most."),
     (4, "填空"): (["这", "几", "个", "填空", "题", "不", "难"], "。", "These fill-in-the-blank questions are not hard."),
     (4, "小伙子"): (["这", "个", "小伙子", "工作", "非常", "努力"], "。", "This young man works very hard."),
@@ -647,8 +669,56 @@ HANDCRAFTED_EXAMPLES: dict[tuple[int, str], tuple[list[str], str, str]] = {
     (4, "礼拜天"): (["礼拜天", "我", "打算", "在", "家", "休息"], "。", "On Sunday, I plan to rest at home."),
     (4, "百分之"): (["我们", "班", "百分之", "八十", "的", "学生", "喜欢", "音乐"], "。", "Eighty percent of the students in our class like music."),
     (4, "高速公路"): (["这", "条", "高速公路", "直接", "到", "机场"], "。", "This highway goes directly to the airport."),
+    (4, "不仅"): (["她", "不仅", "友好", "还", "很", "诚实"], "。", "She is not only kind, but also very honest.", {"hanzi": "她不仅友好，还很诚实。", "pinyin": "Tā bù jǐn yǒu hǎo, hái hěn chéng shí."}),
+    (4, "厕所"): (["餐厅", "旁边", "有", "个", "厕所"], "。", "There is a restroom next to the restaurant."),
+    (4, "扔"): (["不", "要", "往", "地", "上", "扔", "任何", "东西"], "。", "Don't throw anything on the floor.", {"pinyin": "Bù yào wǎng dì shàng rēng rèn hé dōng xi."}),
+    (4, "重"): (["我", "得", "了", "重", "感冒"], "。", "I caught a bad cold.", {"pinyin": "Wǒ dé le zhòng gǎn mào."}),
+    (4, "商量"): (["我", "得", "找", "人", "商量", "一下"], "。", "I need to find someone to talk it over with.", {"pinyin": "Wǒ děi zhǎo rén shāng liang yíxià."}),
+    (4, "眼镜"): (["他", "每", "天", "都", "戴", "着", "眼镜"], "。", "He wears glasses every day."),
+    (4, "熟悉"): (["他", "非常", "熟悉", "中国", "文化"], "。", "He is very familiar with Chinese culture."),
+    (4, "内"): (["一", "个", "小时", "内", "就", "能", "到", "机场"], "。", "We can arrive at the airport within an hour."),
+    (4, "作者"): (["这", "本", "书", "的", "作者", "非常", "有名"], "。", "The author of this book is very famous."),
+    (4, "通知"): (["请", "通知", "大家", "明天", "不", "上班"], "。", "Please inform everyone that there is no work tomorrow."),
+    (4, "感觉"): (["我", "今天", "感觉", "很", "舒服"], "。", "I feel very comfortable today."),
+    (4, "好像"): (["他", "今天", "好像", "生病", "了"], "。", "It seems he got sick today."),
+    (4, "死"): (["公园", "里", "的", "那", "棵", "树", "死", "了"], "。", "That tree in the park died."),
+    (4, "调查"): (["警察", "正在", "调查", "这", "件", "事情"], "。", "The police are investigating this matter."),
+    (4, "台"): (["我", "买", "了", "一", "台", "新", "电脑"], "。", "I bought a new computer."),
+    (4, "打招呼"): (["邻居", "每", "次", "见面", "都", "和", "我", "打招呼"], "。", "My neighbor greets me every time we meet."),
+    (4, "出现"): (["问题", "是", "怎么", "出现", "的"], "？", "How did the problem occur?"),
+    (4, "警察"): (["这", "位", "警察", "在", "做", "什么"], "？", "What is this police officer doing?"),
+    (4, "笨"): (["这", "只", "小", "狗", "一点儿", "也", "不", "笨"], "。", "This little dog is not stupid at all.", {"pinyin": "Zhè zhī xiǎo gǒu yī diǎnr yě bù bèn."}),
+    (4, "躺"): (["小", "猫", "躺", "在", "沙发", "上"], "。", "The little cat is lying on the sofa."),
+    (4, "顾客"): (["最近", "他", "的", "顾客", "减少", "了"], "。", "Recently his customers have decreased."),
+    (4, "减少"): (["这", "个", "城市", "的", "空气", "污染", "减少", "了", "很", "多"], "。", "Air pollution in this city has decreased a lot."),
+    (4, "散步"): (["爷爷", "每", "天", "晚上", "去", "公园", "散步"], "。", "Grandpa goes for a walk in the park every evening."),
+    (4, "提供"): (["这", "家", "宾馆", "提供", "免费", "饮料"], "。", "This hotel provides free drinks."),
+    # --- HSK 5 ---
+    (5, "滑"): (["小心", "地", "滑"], "！", "Watch out, slippery floor!", {"pinyin": "Xiǎo xīn dì huá!"}),
+    (5, "踩"): (["不", "要", "踩", "草", "地"], "。", "Don't step on the grass.", {"pinyin": "Bù yào cǎi cǎo dì."}),
+    (5, "抓"): (["这", "只", "猫", "不", "抓", "老鼠"], "。", "This cat doesn't catch mice.", {"pinyin": "Zhè zhī māo bù zhuā lǎo shǔ."}),
+    (5, "老鼠"): (["这", "只", "猫", "不", "抓", "老鼠"], "。", "This cat doesn't catch mice.", {"pinyin": "Zhè zhī māo bù zhuā lǎo shǔ."}),
+    (5, "确认"): (["但是", "所有", "这", "些", "数据", "都", "没有", "得", "到", "确认"], "。", "However, none of this data has been confirmed.", {"pinyin": "Dàn shì suǒ yǒu zhè xiē shù jù dōu méi yǒu dé dào què rèn."}),
+    (5, "奋斗"): (["我们", "要", "为", "梦想", "努力", "奋斗"], "。", "We must strive hard for our dreams."),
+    (5, "观念"): (["我们", "得", "有", "现代", "观念", "来", "理解", "这", "数据"], "。", "We must have a modern mindset to understand this data.", {"pinyin": "Wǒ men děi yǒu xiàn dài guān niàn lái lǐ jiě zhè shù jù."}),
+    (5, "成语"): (["我", "把", "成语", "全部", "还", "给", "老师", "了"], "。", "I forgot all the idioms I learned from the teacher.", {"pinyin": "Wǒ bǎ chéng yǔ quán bù huán gěi lǎo shī le."}),
+    (5, "鼠标"): (["这", "个", "鼠标", "突然", "坏", "了"], "。", "This mouse suddenly broke."),
+    (5, "点心"): (["我", "买", "了", "一", "些", "中国", "点心"], "。", "I bought some Chinese pastries."),
     # --- HSK 6 ---
     (6, "屁股"): (["小", "孩子", "摔", "到", "了", "屁股"], "。", "The little child fell on their bottom."),
+    (6, "把手"): (["这", "个", "门", "的", "把手", "坏", "了"], "。", "The handle of this door is broken."),
+    (6, "部位"): (["医生", "仔细", "检查", "了", "受伤", "的", "部位"], "。", "The doctor carefully examined the injured area."),
+    (6, "处境"): (["我", "完全", "理解", "你", "的", "处境"], "。", "I completely understand your situation."),
+    (6, "熬"): (["妈妈", "正在", "厨房", "熬", "汤"], "。", "Mom is simmering soup in the kitchen."),
+    (6, "愈"): (["天气", "愈", "加", "寒冷", "了"], "。", "The weather has grown increasingly cold.", {"pinyin": "Tiān qì yù jiā hán lěng le."}),
+    (6, "委员"): (["他", "是", "这", "个", "组织", "的", "委员"], "。", "He is a committee member of this organization."),
+    (6, "挪"): (["请", "把", "这", "张", "桌子", "往", "旁边", "挪", "一下"], "。", "Please move this table aside a bit."),
+    (6, "依靠"): (["我们", "得", "依靠", "自己"], "。", "We're on our own.", {"pinyin": "Wǒ men děi yī kào zì jǐ."}),
+    (6, "过渡"): (["它", "得", "是", "一个", "过渡"], "。", "It has to be about transition.", {"pinyin": "Tā děi shì yígè guò dù."}),
+    (6, "效益"): (["我", "得", "有", "成本", "效益", "和", "文化", "敏感性"], "。", "I have to be cost-effective and culturally sensitive.", {"pinyin": "Wǒ děi yǒu chéng běn xiào yì hé wén huà mǐngǎnxìng."}),
+    (6, "抚摸"): (["他", "在", "抚摸", "那", "只", "狗"], "。", "He was petting the dog.", {"pinyin": "Tā zài fǔ mō nà zhī gǒu."}),
+    (6, "体积"): (["那", "只", "鸟", "的", "体积", "有", "半只", "老鹰", "那么", "大"], "。", "The bird was half the size of a hawk.", {"pinyin": "Nà zhī niǎo de tǐ jī yǒu bàn zhī lǎoyīng nàme dà."}),
+    (6, "公认"): (["鲸", "是", "被", "公认", "为", "最大", "的", "哺乳动物"], "。", "The whale is well known to be the largest mammal.", {"pinyin": "Jīng shì bèi gōng rèn wéi zuìdà de bǔrǔdòngwù."}),
 }
 
 VERB_TEMPLATES: list[tuple[int, list[str], str, str]] = [
@@ -816,14 +886,42 @@ def short_english_gloss(english: str) -> str:
     return head[0].lower() + head[1:]
 
 
+def build_handcrafted_example(
+    entry: HandcraftedEntry,
+    word_to_pinyin: dict[str, str],
+) -> dict[str, Any]:
+    if len(entry) == 4:
+        tokens, punct, english, overrides = entry
+    else:
+        tokens, punct, english = entry
+        overrides = {}
+    hanzi = overrides.get("hanzi") or ("".join(tokens) + punct)
+    pinyin = overrides.get("pinyin") or tokens_to_pinyin(tokens, punct, word_to_pinyin)
+    return {
+        "hanzi": hanzi,
+        "pinyin": pinyin,
+        "english": english,
+        "tokens": tokens,
+    }
+
+
 def verify_static_templates(word_to_level: dict[str, int]) -> None:
-    for (lv, hanzi), (tokens, punct, english) in HANDCRAFTED_EXAMPLES.items():
+    for (lv, hanzi), entry in HANDCRAFTED_EXAMPLES.items():
+        if len(entry) == 4:
+            tokens, punct, english, overrides = entry
+        else:
+            tokens, punct, english = entry
+            overrides = {}
         allowed = {w for w, l in word_to_level.items() if l <= lv} | ALLOWED_SIMPLE_PROPER_NOUNS
         assert len(tokens) >= 3, f"HANDCRAFTED ({lv}, {hanzi}) < 3 tokens: {tokens}"
+        assert all("，" not in t for t in tokens), f"HANDCRAFTED ({lv}, {hanzi}) comma in tokens: {tokens}"
         assert len(tokens) == len(set(tokens)), f"HANDCRAFTED ({lv}, {hanzi}) duplicate token: {tokens}"
-        assert hanzi in tokens or "".join(tokens).find(hanzi) >= 0, (
-            f"HANDCRAFTED ({lv}, {hanzi}) missing target: {tokens}"
+        assert hanzi in tokens, f"HANDCRAFTED ({lv}, {hanzi}) missing target: {tokens}"
+        ex_hanzi = overrides.get("hanzi") or ("".join(tokens) + punct)
+        assert "".join(tokens) == ex_hanzi.rstrip(TRAILING_PUNCT).replace("，", ""), (
+            f"HANDCRAFTED ({lv}, {hanzi}) mismatched hanzi {ex_hanzi!r} vs {tokens}"
         )
+        assert ex_hanzi.count(hanzi) == 1, f"HANDCRAFTED ({lv}, {hanzi}) Cloze count != 1 in {ex_hanzi!r}"
         if lv <= 5:
             for t in tokens:
                 assert t in allowed or DIGITS_RE.match(t), (
@@ -1274,6 +1372,128 @@ def load_opus_pairs(complete_entries: list[dict[str, Any]]) -> list[tuple[str, s
     return pairs
 
 
+def build_trad_to_simp_maps(
+    complete_entries: list[dict[str, Any]],
+) -> tuple[set[str], dict[str, str], dict[str, str]]:
+    """Builds word-first and char-fallback Traditional->Simplified maps from CC-CEDICT."""
+    simp_chars: set[str] = set()
+    trad_chars: set[str] = set()
+    t2s_word: dict[str, str] = {}
+    t2s_char_counts: dict[str, dict[str, int]] = defaultdict(lambda: defaultdict(int))
+
+    for entry in complete_entries:
+        s = entry.get("s", "")
+        if not s:
+            continue
+        simp_chars.update(s)
+        for form in entry.get("f", []):
+            t = form.get("t", "")
+            if not t:
+                continue
+            trad_chars.update(t)
+            if len(t) == len(s):
+                if len(t) >= 2 and t not in t2s_word:
+                    t2s_word[t] = s
+                for tc, sc in zip(t, s):
+                    if tc != sc:
+                        t2s_char_counts[tc][sc] += 1
+
+    # Preserve multi-character simplified words where traditional text shares characters
+    for entry in complete_entries:
+        s = entry.get("s", "")
+        if len(s) >= 2 and s not in t2s_word:
+            t2s_word[s] = s
+
+    trad_only_chars = {
+        ch for ch in (trad_chars - simp_chars) if "\u4e00" <= ch <= "\u9fff"
+    }
+    t2s_char: dict[str, str] = {
+        tc: max(sc_map.items(), key=lambda item: item[1])[0]
+        for tc, sc_map in t2s_char_counts.items()
+        if tc in trad_only_chars
+    }
+    # Disambiguated single-char fallbacks for shared-codepoint Traditional forms
+    t2s_char.update(
+        {
+            "著": "着",
+            "汙": "污",
+            "裡": "里",
+            "裏": "里",
+            "為": "为",
+            "後": "后",
+            "麼": "么",
+            "髒": "脏",
+            "臟": "脏",
+            "發": "发",
+            "髮": "发",
+            "鐘": "钟",
+            "鍾": "钟",
+            "製": "制",
+            "臺": "台",
+            "隻": "只",
+            "乾": "干",
+            "覆": "复",
+            "範": "范",
+            "鬆": "松",
+            "餘": "余",
+            "衝": "冲",
+            "採": "采",
+            "夥": "伙",
+            "颳": "刮",
+            "穀": "谷",
+            "醜": "丑",
+            "鬥": "斗",
+            "薑": "姜",
+            "儘": "尽",
+            "漣": "涟",
+            "瑪": "玛",
+            "鮑": "鲍",
+            "驢": "驴",
+        }
+    )
+    return trad_only_chars, t2s_word, t2s_char
+
+
+def convert_trad_example_to_simp(
+    ex_hanzi: str,
+    tokens: list[str],
+    t2s_word: dict[str, str],
+    t2s_char: dict[str, str],
+) -> tuple[str, list[str]]:
+    """Converts a Traditional Chinese sentence and its tokens via CC-CEDICT word-first longest match."""
+    n = len(ex_hanzi)
+    simp_chars = list(ex_hanzi)
+    i = 0
+    while i < n:
+        matched = False
+        for length in range(min(8, n - i), 1, -1):
+            chunk = ex_hanzi[i : i + length]
+            repl = t2s_word.get(chunk)
+            if repl is not None and len(repl) == length:
+                simp_chars[i : i + length] = list(repl)
+                i += length
+                matched = True
+                break
+        if not matched:
+            ch = ex_hanzi[i]
+            simp_chars[i] = t2s_char.get(ch, ch)
+            i += 1
+
+    new_hanzi = "".join(simp_chars)
+    new_tokens: list[str] = []
+    cursor = 0
+    for tok in tokens:
+        idx = ex_hanzi.find(tok, cursor)
+        if idx == -1:
+            # Fallback direct conversion if token offset cannot be located
+            conv_tok, _ = convert_trad_example_to_simp(tok, [], t2s_word, t2s_char) if tok else (tok, [])
+            new_tokens.append(conv_tok)
+        else:
+            new_tokens.append("".join(simp_chars[idx : idx + len(tok)]))
+            cursor = idx + len(tok)
+    return new_hanzi, new_tokens
+
+
 def enrich_hsk5_and_hsk6(
     catalogs: dict[int, dict[str, Any]],
     word_to_level: dict[str, int],
@@ -1285,6 +1505,7 @@ def enrich_hsk5_and_hsk6(
     """Enriches mechanical templates in HSK 5 and HSK 6 using Tatoeba + OPUS pairs."""
     opus_pairs = load_opus_pairs(complete_entries)
     cedict_stems = build_cedict_stems(complete_entries, catalogs)
+    trad_only_chars, t2s_word, t2s_char = build_trad_to_simp_maps(complete_entries)
     all_pairs: list[tuple[str, str, str]] = [
         ("Tatoeba", cmn, eng) for cmn, eng in tatoeba_pairs
     ] + opus_pairs
@@ -1293,11 +1514,21 @@ def enrich_hsk5_and_hsk6(
     hsk6_data = catalogs[6]
     hsk5_allowed = {hz for hz, lv in word_to_level.items() if lv <= 5} | ALLOWED_SIMPLE_PROPER_NOUNS
 
+    hsk5_modified = False
     hsk5_needed: set[str] = set()
     for w in hsk5_data["words"]:
         hz = w["hanzi"]
         if (5, hz) in HANDCRAFTED_EXAMPLES:
+            new_ex = build_handcrafted_example(HANDCRAFTED_EXAMPLES[(5, hz)], word_to_pinyin)
+            if w["example"] != new_ex:
+                w["example"] = new_ex
+                hsk5_modified = True
             continue
+        if "to to " in w["example"]["english"].lower():
+            fixed_en = re.sub(r"\bto to ", "to ", w["example"]["english"], flags=re.IGNORECASE)
+            if fixed_en != w["example"]["english"]:
+                w["example"]["english"] = fixed_en
+                hsk5_modified = True
         toks = w["example"]["tokens"]
         compliant = (
             not is_mechanical_example(w)
@@ -1310,23 +1541,32 @@ def enrich_hsk5_and_hsk6(
         if not compliant:
             hsk5_needed.add(hz)
 
-    # Apply handcrafted overrides on HSK 6 first (e.g. 屁股)
+    # Apply handcrafted overrides + Traditional->Simplified conversion on HSK 6 first
     hsk6_modified = False
     hsk6_needed: set[str] = set()
     for w in hsk6_data["words"]:
         hz = w["hanzi"]
         if (6, hz) in HANDCRAFTED_EXAMPLES:
-            hc_tokens, hc_punct, hc_en = HANDCRAFTED_EXAMPLES[(6, hz)]
-            new_ex = {
-                "hanzi": "".join(hc_tokens) + hc_punct,
-                "pinyin": tokens_to_pinyin(hc_tokens, hc_punct, word_to_pinyin),
-                "english": hc_en,
-                "tokens": hc_tokens,
-            }
+            new_ex = build_handcrafted_example(HANDCRAFTED_EXAMPLES[(6, hz)], word_to_pinyin)
             if w["example"] != new_ex:
                 w["example"] = new_ex
                 hsk6_modified = True
             continue
+        ex_hz = w["example"]["hanzi"]
+        if (
+            any(ch in trad_only_chars or ch in {"漣", "瑪", "鮑", "驢"} for ch in ex_hz)
+            or "穿著" in ex_hz
+        ):
+            new_hz, new_toks = convert_trad_example_to_simp(
+                ex_hz,
+                w["example"]["tokens"],
+                t2s_word,
+                t2s_char,
+            )
+            if new_hz != ex_hz or new_toks != w["example"]["tokens"]:
+                w["example"]["hanzi"] = new_hz
+                w["example"]["tokens"] = new_toks
+                hsk6_modified = True
         toks = w["example"]["tokens"]
         compliant = (
             not is_mechanical_example(w)
@@ -1418,7 +1658,7 @@ def enrich_hsk5_and_hsk6(
     report: dict[str, Any] = {"hsk5": [], "hsk6": []}
 
     for lv, data, needed, cands_map, init_mod in (
-        (5, hsk5_data, hsk5_needed, cands_5, False),
+        (5, hsk5_data, hsk5_needed, cands_5, hsk5_modified),
         (6, hsk6_data, hsk6_needed, cands_6, hsk6_modified),
     ):
         words_by_hz = {w["hanzi"]: w for w in data["words"]}
@@ -1577,13 +1817,7 @@ def main() -> int:
             old_punct = old_hanzi[len(old_body) :] or "。"
 
             if (level, hz) in HANDCRAFTED_EXAMPLES:
-                hc_tokens, hc_punct, hc_en = HANDCRAFTED_EXAMPLES[(level, hz)]
-                new_ex = {
-                    "hanzi": "".join(hc_tokens) + hc_punct,
-                    "pinyin": tokens_to_pinyin(hc_tokens, hc_punct, word_to_pinyin),
-                    "english": hc_en,
-                    "tokens": hc_tokens,
-                }
+                new_ex = build_handcrafted_example(HANDCRAFTED_EXAMPLES[(level, hz)], word_to_pinyin)
                 if ex != new_ex:
                     w["example"] = new_ex
                     modified = True

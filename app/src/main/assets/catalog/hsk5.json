@@ -1,6 +1,6 @@
 {
   "hskLevel": 5,
-  "catalogVersion": 15,
+  "catalogVersion": 16,
   "units": [
     {
       "id": "hsk5_u1",
@@ -1730,8 +1730,8 @@
       "english": "To grab / to catch",
       "example": {
         "hanzi": "这只猫不抓老鼠。",
-        "pinyin": "Zhè zhǐ māo bù zhuā lǎo shǔ.",
-        "english": "This cat doesn't chase mice.",
+        "pinyin": "Zhè zhī māo bù zhuā lǎo shǔ.",
+        "english": "This cat doesn't catch mice.",
         "tokens": [
           "这",
           "只",
@@ -2825,7 +2825,7 @@
       "example": {
         "hanzi": "他明天去抢。",
         "pinyin": "Tā míng tiān qù qiǎng.",
-        "english": "He will go to to fight over tomorrow.",
+        "english": "He will go to fight over tomorrow.",
         "tokens": [
           "他",
           "明天",
@@ -6483,8 +6483,8 @@
       "english": "To confirm / to verify",
       "example": {
         "hanzi": "但是所有这些数据都没有得到确认。",
-        "pinyin": "Dàn shì suǒ yǒu zhè xiē shù jù dōu méi yǒu de dào què rèn.",
-        "english": "However, all these data were not confirmed.",
+        "pinyin": "Dàn shì suǒ yǒu zhè xiē shù jù dōu méi yǒu dé dào què rèn.",
+        "english": "However, none of this data has been confirmed.",
         "tokens": [
           "但是",
           "所有",
@@ -7216,7 +7216,7 @@
       "example": {
         "hanzi": "她喜欢联合。",
         "pinyin": "Tā xǐ huan lián hé.",
-        "english": "She likes to to combine.",
+        "english": "She likes to combine.",
         "tokens": [
           "她",
           "喜欢",
@@ -9416,8 +9416,8 @@
       "english": "To slip; to slide / slippery; smooth",
       "example": {
         "hanzi": "小心地滑！",
-        "pinyin": "Xiǎo xīn de huá!",
-        "english": "Caution! Wet floor.",
+        "pinyin": "Xiǎo xīn dì huá!",
+        "english": "Watch out, slippery floor!",
         "tokens": [
           "小心",
           "地",
@@ -10380,7 +10380,7 @@
       "example": {
         "hanzi": "我很想保留。",
         "pinyin": "Wǒ hěn xiǎng bǎo liú.",
-        "english": "I really want to to keep.",
+        "english": "I really want to keep.",
         "tokens": [
           "我",
           "很",
@@ -10497,7 +10497,7 @@
       "example": {
         "hanzi": "大家需要驾驶。",
         "pinyin": "Dà jiā xū yào jià shǐ.",
-        "english": "Everyone needs to to pilot (ship, airplane etc).",
+        "english": "Everyone needs to pilot (ship, airplane etc).",
         "tokens": [
           "大家",
           "需要",
@@ -10837,7 +10837,7 @@
       "example": {
         "hanzi": "大家需要把握。",
         "pinyin": "Dà jiā xū yào bǎ wò.",
-        "english": "Everyone needs to to grasp (also fig.).",
+        "english": "Everyone needs to grasp (also fig.).",
         "tokens": [
           "大家",
           "需要",
@@ -10934,8 +10934,8 @@
       "english": "To step on / to tread",
       "example": {
         "hanzi": "不要踩草地。",
-        "pinyin": "Bù yào cǎi cǎo de.",
-        "english": "Keep off the grass.",
+        "pinyin": "Bù yào cǎi cǎo dì.",
+        "english": "Don't step on the grass.",
         "tokens": [
           "不",
           "要",
@@ -13700,7 +13700,7 @@
       "example": {
         "hanzi": "大家需要戒。",
         "pinyin": "Dà jiā xū yào jiè.",
-        "english": "Everyone needs to to guard against.",
+        "english": "Everyone needs to guard against.",
         "tokens": [
           "大家",
           "需要",
@@ -14001,8 +14001,8 @@
       "english": "Rat / mouse",
       "example": {
         "hanzi": "这只猫不抓老鼠。",
-        "pinyin": "Zhè zhǐ māo bù zhuā lǎo shǔ.",
-        "english": "This cat doesn't chase mice.",
+        "pinyin": "Zhè zhī māo bù zhuā lǎo shǔ.",
+        "english": "This cat doesn't catch mice.",
         "tokens": [
           "这",
           "只",
@@ -14826,7 +14826,7 @@
       "example": {
         "hanzi": "她喜欢形容。",
         "pinyin": "Tā xǐ huan xíng róng.",
-        "english": "She likes to to describe.",
+        "english": "She likes to describe.",
         "tokens": [
           "她",
           "喜欢",
@@ -15027,7 +15027,7 @@
       "example": {
         "hanzi": "我很想漏。",
         "pinyin": "Wǒ hěn xiǎng lòu.",
-        "english": "I really want to to leak.",
+        "english": "I really want to leak.",
         "tokens": [
           "我",
           "很",
@@ -15163,12 +15163,15 @@
       "pinyin": "fèn dòu",
       "english": "To strive; to struggle",
       "example": {
-        "hanzi": "我得奋斗。",
-        "pinyin": "Wǒ de fèn dòu.",
-        "english": "I have to fight.",
+        "hanzi": "我们要为梦想努力奋斗。",
+        "pinyin": "Wǒ men yào wèi mèng xiǎng nǔ lì fèn dòu.",
+        "english": "We must strive hard for our dreams.",
         "tokens": [
-          "我",
-          "得",
+          "我们",
+          "要",
+          "为",
+          "梦想",
+          "努力",
           "奋斗"
         ]
       }
@@ -15535,8 +15538,8 @@
       "english": "Notion / thought",
       "example": {
         "hanzi": "我们得有现代观念来理解这数据。",
-        "pinyin": "Wǒ men de yǒu xiàn dài guān niàn lái lǐ jiě zhè shù jù.",
-        "english": "We have to have a modern concept, which fits to the data.",
+        "pinyin": "Wǒ men děi yǒu xiàn dài guān niàn lái lǐ jiě zhè shù jù.",
+        "english": "We must have a modern mindset to understand this data.",
         "tokens": [
           "我们",
           "得",
@@ -16038,7 +16041,7 @@
       "example": {
         "hanzi": "大家需要健身。",
         "pinyin": "Dà jiā xū yào jiàn shēn.",
-        "english": "Everyone needs to to exercise.",
+        "english": "Everyone needs to exercise.",
         "tokens": [
           "大家",
           "需要",
@@ -18070,7 +18073,7 @@
       "example": {
         "hanzi": "大家需要披。",
         "pinyin": "Dà jiā xū yào pī.",
-        "english": "Everyone needs to to drape over one's shoulders.",
+        "english": "Everyone needs to drape over one's shoulders.",
         "tokens": [
           "大家",
           "需要",
@@ -19957,7 +19960,7 @@
       "example": {
         "hanzi": "大家需要耽误。",
         "pinyin": "Dà jiā xū yào dān wu.",
-        "english": "Everyone needs to to delay.",
+        "english": "Everyone needs to delay.",
         "tokens": [
           "大家",
           "需要",
@@ -20111,7 +20114,7 @@
       "example": {
         "hanzi": "他明天去辅导。",
         "pinyin": "Tā míng tiān qù fǔ dǎo.",
-        "english": "He will go to to give guidance tomorrow.",
+        "english": "He will go to give guidance tomorrow.",
         "tokens": [
           "他",
           "明天",
@@ -21164,17 +21167,17 @@
       "pinyin": "diǎn xin",
       "english": "Light refreshments / pastry",
       "example": {
-        "hanzi": "吃点点心你看好吗？",
-        "pinyin": "Chī diǎn diǎn xin nǐ kàn hǎo ma?",
-        "english": "Let's eat some dessert, alright?",
+        "hanzi": "我买了一些中国点心。",
+        "pinyin": "Wǒ mǎi le yī xiē Zhōng guó diǎn xin.",
+        "english": "I bought some Chinese pastries.",
         "tokens": [
-          "吃",
-          "点",
-          "点心",
-          "你",
-          "看",
-          "好",
-          "吗"
+          "我",
+          "买",
+          "了",
+          "一",
+          "些",
+          "中国",
+          "点心"
         ]
       }
     },
@@ -21463,7 +21466,7 @@
       "example": {
         "hanzi": "我很想报到。",
         "pinyin": "Wǒ hěn xiǎng bào dào.",
-        "english": "I really want to to report for duty.",
+        "english": "I really want to report for duty.",
         "tokens": [
           "我",
           "很",
@@ -21657,7 +21660,7 @@
       "example": {
         "hanzi": "她喜欢描写。",
         "pinyin": "Tā xǐ huan miáo xiě.",
-        "english": "She likes to to describe.",
+        "english": "She likes to describe.",
         "tokens": [
           "她",
           "喜欢",
@@ -21872,7 +21875,7 @@
       "example": {
         "hanzi": "我很想合影。",
         "pinyin": "Wǒ hěn xiǎng hé yǐng.",
-        "english": "I really want to to take a joint photo.",
+        "english": "I really want to take a joint photo.",
         "tokens": [
           "我",
           "很",
@@ -22492,7 +22495,7 @@
       "example": {
         "hanzi": "我们开始爱护了。",
         "pinyin": "Wǒ men kāi shǐ ài hù le.",
-        "english": "We have started to to cherish.",
+        "english": "We have started to cherish.",
         "tokens": [
           "我们",
           "开始",
@@ -24441,15 +24444,15 @@
       "pinyin": "shǔ biāo",
       "english": "Mouse (computing)",
       "example": {
-        "hanzi": "这个鼠标突然毛病了。",
-        "pinyin": "Zhè gè shǔ biāo tū rán máo bìng le.",
-        "english": "Suddenly, this mouse stopped working.",
+        "hanzi": "这个鼠标突然坏了。",
+        "pinyin": "Zhè gè shǔ biāo tū rán huài le.",
+        "english": "This mouse suddenly broke.",
         "tokens": [
           "这",
           "个",
           "鼠标",
           "突然",
-          "毛病",
+          "坏",
           "了"
         ]
       }
@@ -24683,7 +24686,7 @@
       "example": {
         "hanzi": "我们开始退步了。",
         "pinyin": "Wǒ men kāi shǐ tuì bù le.",
-        "english": "We have started to to do less well than before.",
+        "english": "We have started to do less well than before.",
         "tokens": [
           "我们",
           "开始",
@@ -24842,8 +24845,8 @@
       "english": "Chinese set expression",
       "example": {
         "hanzi": "我把成语全部还给老师了。",
-        "pinyin": "Wǒ bǎ chéng yǔ quán bù hái gěi lǎo shī le.",
-        "english": "I gave all of the Chinese proverbs back to the teacher.",
+        "pinyin": "Wǒ bǎ chéng yǔ quán bù huán gěi lǎo shī le.",
+        "english": "I forgot all the idioms I learned from the teacher.",
         "tokens": [
           "我",
           "把",

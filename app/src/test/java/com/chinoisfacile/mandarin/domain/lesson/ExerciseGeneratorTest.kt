@@ -457,4 +457,84 @@ class ExerciseGeneratorTest {
         )
         assertEquals(listOf("fǎ guó", "rén", "shì", "wǒ men", "de", "péng you"), joined)
     }
+
+    @Test
+    fun `Cloze and SentenceOrder handle internal commas cleanly`() {
+        val commaWord = VocabWord(
+            id = "h2_comma",
+            lessonId = "hsk2_u6_l2",
+            hskLevel = 2,
+            hanzi = "但是",
+            pinyin = "dàn shì",
+            english = "But",
+            exampleHanzi = "虽然很累，但是我非常高兴。",
+            examplePinyin = "Suī rán hěn lèi, dàn shì wǒ fēi cháng gāo xìng.",
+            exampleEnglish = "Although I am tired, I am very happy.",
+            exampleTokens = listOf("虽然", "很", "累", "但是", "我", "非常", "高兴"),
+        )
+        val distractorWords = listOf(
+            commaWord,
+            VocabWord(
+                id = "h2_d1",
+                lessonId = "hsk2_u6_l2",
+                hskLevel = 2,
+                hanzi = "虽然",
+                pinyin = "suī rán",
+                english = "Although",
+                exampleHanzi = "虽然冷，我还是去了。",
+                examplePinyin = "Suī rán lěng, wǒ hái shì qù le.",
+                exampleEnglish = "Although it was cold, I still went.",
+                exampleTokens = listOf("虽然", "冷", "我", "还是", "去", "了"),
+            ),
+            VocabWord(
+                id = "h2_d2",
+                lessonId = "hsk2_u6_l2",
+                hskLevel = 2,
+                hanzi = "所以",
+                pinyin = "suǒ yǐ",
+                english = "So",
+                exampleHanzi = "今天下雨，所以我在家。",
+                examplePinyin = "Jīn tiān xià yǔ, suǒ yǐ wǒ zài jiā.",
+                exampleEnglish = "It's raining today, so I am staying at home.",
+                exampleTokens = listOf("今天", "下雨", "所以", "我", "在", "家"),
+            ),
+            VocabWord(
+                id = "h2_d3",
+                lessonId = "hsk2_u6_l2",
+                hskLevel = 2,
+                hanzi = "因为",
+                pinyin = "yīn wèi",
+                english = "Because",
+                exampleHanzi = "他因为生病没有来。",
+                examplePinyin = "Tā yīn wèi shēng bìng méi yǒu lái.",
+                exampleEnglish = "He didn't come because he was sick.",
+                exampleTokens = listOf("他", "因为", "生病", "没有", "来"),
+            ),
+        )
+        val knownTokens = commaWord.exampleTokens.toSet()
+
+        assertTrue(generator.isClozeEligible(commaWord))
+        assertTrue(generator.isSentenceOrderEligible(commaWord, knownTokens))
+
+        val exercises = generator.generateSession(
+            targetWords = listOf(commaWord),
+            distractorPool = distractorWords,
+            knownTokens = knownTokens,
+            sessionSize = 6,
+            random = Random(11),
+        )
+
+        val cloze = exercises.filterIsInstance<Exercise.Cloze>().first()
+        assertTrue(cloze.sentencePrefix.endsWith("，"))
+        assertEquals("虽然很累，", cloze.sentencePrefix)
+        assertEquals("我非常高兴。", cloze.sentenceSuffix)
+        assertEquals(
+            commaWord.exampleHanzi,
+            cloze.sentencePrefix + cloze.correctOption + cloze.sentenceSuffix,
+        )
+
+        val sentenceOrder = exercises.filterIsInstance<Exercise.SentenceOrder>().first()
+        assertEquals(commaWord.exampleTokens, sentenceOrder.expectedTokens)
+        assertTrue(sentenceOrder.shuffledChips.none { '，' in it.text })
+    }
 }

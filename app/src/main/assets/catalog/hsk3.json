@@ -1,6 +1,6 @@
 {
   "hskLevel": 3,
-  "catalogVersion": 15,
+  "catalogVersion": 16,
   "units": [
     {
       "id": "hsk3_u1",
@@ -394,15 +394,16 @@
       "pinyin": "bèi",
       "english": "Passive marker (bei)",
       "example": {
-        "hanzi": "你被人爱着。",
-        "pinyin": "Nǐ bèi rén ài zhe.",
-        "english": "You are loved.",
+        "hanzi": "蛋糕被小猫吃了。",
+        "pinyin": "Dàn gāo bèi xiǎo māo chī le.",
+        "english": "The cake was eaten by the little cat.",
         "tokens": [
-          "你",
+          "蛋糕",
           "被",
-          "人",
-          "爱",
-          "着"
+          "小",
+          "猫",
+          "吃",
+          "了"
         ]
       }
     },
@@ -707,15 +708,16 @@
       "pinyin": "qǐ lai",
       "english": "To stand up / to get up",
       "example": {
-        "hanzi": "你什么时候起来了？",
-        "pinyin": "Nǐ shén me shí hou qǐ lai le?",
-        "english": "When did you get up?",
+        "hanzi": "她高兴得笑了起来。",
+        "pinyin": "Tā gāo xìng de xiào le qǐ lai.",
+        "english": "She was so happy that she started laughing.",
         "tokens": [
-          "你",
-          "什么",
-          "时候",
-          "起来",
-          "了"
+          "她",
+          "高兴",
+          "得",
+          "笑",
+          "了",
+          "起来"
         ]
       }
     },
@@ -1069,9 +1071,9 @@
       "pinyin": "rán hòu",
       "english": "Then; after that; afterwards",
       "example": {
-        "hanzi": "我把书放下来然后开灯。",
-        "pinyin": "Wǒ bǎ shū fàng xià lái rán hòu kāi dēng.",
-        "english": "I put the book down and turned on the light.",
+        "hanzi": "我把书放下来，然后开灯。",
+        "pinyin": "Wǒ bǎ shū fàng xià lái, rán hòu kāi dēng.",
+        "english": "I put the book down and then turned on the light.",
         "tokens": [
           "我",
           "把",
@@ -1211,13 +1213,14 @@
       "pinyin": "guān xi",
       "english": "Relation / relationship",
       "example": {
-        "hanzi": "她和这问题没有关系。",
-        "pinyin": "Tā hé zhè wèn tí méi yǒu guān xi.",
-        "english": "She doesn't have anything to do with this question.",
+        "hanzi": "她和这个问题没有关系。",
+        "pinyin": "Tā hé zhè gè wèn tí méi yǒu guān xi.",
+        "english": "She has nothing to do with this problem.",
         "tokens": [
           "她",
           "和",
           "这",
+          "个",
           "问题",
           "没有",
           "关系"
@@ -2225,15 +2228,16 @@
       "pinyin": "míng bai",
       "english": "Clear / obvious",
       "example": {
-        "hanzi": "你明白我什么意思。",
-        "pinyin": "Nǐ míng bai wǒ shén me yì si.",
-        "english": "You know what I mean.",
+        "hanzi": "我明白你的意思了。",
+        "pinyin": "Wǒ míng bai nǐ de yì si le.",
+        "english": "I understand what you mean now.",
         "tokens": [
-          "你",
-          "明白",
           "我",
-          "什么",
-          "意思"
+          "明白",
+          "你",
+          "的",
+          "意思",
+          "了"
         ]
       }
     },
@@ -3229,14 +3233,13 @@
       "pinyin": "tuǐ",
       "english": "Leg",
       "example": {
-        "hanzi": "我昨天爬山今天腿很疼。",
-        "pinyin": "Wǒ zuó tiān pá shān jīn tiān tuǐ hěn téng.",
-        "english": "I climbed a mountain yesterday, and my legs hurt a lot today.",
+        "hanzi": "今天我的腿很疼。",
+        "pinyin": "Jīn tiān wǒ de tuǐ hěn téng.",
+        "english": "My legs hurt a lot today.",
         "tokens": [
-          "我",
-          "昨天",
-          "爬山",
           "今天",
+          "我",
+          "的",
           "腿",
           "很",
           "疼"
@@ -3388,15 +3391,17 @@
       "pinyin": "chuán",
       "english": "Boat / vessel",
       "example": {
-        "hanzi": "他买我的船。",
-        "pinyin": "Tā mǎi wǒ de chuán.",
-        "english": "He's buying my boat.",
+        "hanzi": "我们坐船去那个城市。",
+        "pinyin": "Wǒ men zuò chuán qù nà gè chéng shì.",
+        "english": "We are taking a boat to that city.",
         "tokens": [
-          "他",
-          "买",
-          "我",
-          "的",
-          "船"
+          "我们",
+          "坐",
+          "船",
+          "去",
+          "那",
+          "个",
+          "城市"
         ]
       }
     },
@@ -3990,15 +3995,18 @@
       "pinyin": "dēng",
       "english": "Lamp / light",
       "example": {
-        "hanzi": "晚上了请开灯。",
-        "pinyin": "Wǎn shang le qǐng kāi dēng.",
-        "english": "It's evening now, please turn on the light.",
+        "hanzi": "请把房间里的灯关了。",
+        "pinyin": "Qǐng bǎ fáng jiān lǐ de dēng guān le.",
+        "english": "Please turn off the light in the room.",
         "tokens": [
-          "晚上",
-          "了",
           "请",
-          "开",
-          "灯"
+          "把",
+          "房间",
+          "里",
+          "的",
+          "灯",
+          "关",
+          "了"
         ]
       }
     },
@@ -4261,17 +4269,15 @@
       "pinyin": "fàng xīn",
       "english": "To feel relieved / to feel reassured",
       "example": {
-        "hanzi": "请放心我会照顾好自己。",
-        "pinyin": "Qǐng fàng xīn wǒ huì zhào gu hǎo zì jǐ.",
-        "english": "Please don't worry, I will take good care of myself.",
+        "hanzi": "妈妈对我很放心。",
+        "pinyin": "Mā ma duì wǒ hěn fàng xīn.",
+        "english": "Mom feels reassured about me.",
         "tokens": [
-          "请",
-          "放心",
+          "妈妈",
+          "对",
           "我",
-          "会",
-          "照顾",
-          "好",
-          "自己"
+          "很",
+          "放心"
         ]
       }
     },
@@ -4510,15 +4516,14 @@
       "pinyin": "nǎi nai",
       "english": "Paternal grandmother",
       "example": {
-        "hanzi": "我们担心着爷爷和奶奶。",
-        "pinyin": "Wǒ men dān xīn zhe yé ye hé nǎi nai.",
-        "english": "We're worried about Grandma and Grandpa.",
+        "hanzi": "我们周末去看奶奶。",
+        "pinyin": "Wǒ men zhōu mò qù kàn nǎi nai.",
+        "english": "We will visit Grandma this weekend.",
         "tokens": [
           "我们",
-          "担心",
-          "着",
-          "爷爷",
-          "和",
+          "周末",
+          "去",
+          "看",
           "奶奶"
         ]
       }
@@ -4610,16 +4615,17 @@
       "pinyin": "yé ye",
       "english": "(coll.) father's father / paternal grandfather",
       "example": {
-        "hanzi": "我们担心着爷爷和奶奶。",
-        "pinyin": "Wǒ men dān xīn zhe yé ye hé nǎi nai.",
-        "english": "We're worried about Grandma and Grandpa.",
+        "hanzi": "爷爷每天早上都去公园。",
+        "pinyin": "Yé ye měi tiān zǎo shang dōu qù gōng yuán.",
+        "english": "Grandpa goes to the park every morning.",
         "tokens": [
-          "我们",
-          "担心",
-          "着",
           "爷爷",
-          "和",
-          "奶奶"
+          "每",
+          "天",
+          "早上",
+          "都",
+          "去",
+          "公园"
         ]
       }
     },
@@ -4849,15 +4855,14 @@
       "pinyin": "gǎn mào",
       "english": "To catch cold / (common) cold",
       "example": {
-        "hanzi": "我感冒了还发烧。",
-        "pinyin": "Wǒ gǎn mào le hái fā shāo.",
-        "english": "I caught a cold, and I have a fever.",
+        "hanzi": "我最近感冒了。",
+        "pinyin": "Wǒ zuì jìn gǎn mào le.",
+        "english": "I caught a cold recently.",
         "tokens": [
           "我",
+          "最近",
           "感冒",
-          "了",
-          "还",
-          "发烧"
+          "了"
         ]
       }
     },
@@ -5433,15 +5438,14 @@
       "pinyin": "fā shāo",
       "english": "To have a high temperature (from illness) / to have a fever",
       "example": {
-        "hanzi": "我感冒了还发烧。",
-        "pinyin": "Wǒ gǎn mào le hái fā shāo.",
-        "english": "I caught a cold, and I have a fever.",
+        "hanzi": "弟弟今天发烧了。",
+        "pinyin": "Dì di jīn tiān fā shāo le.",
+        "english": "My younger brother has a fever today.",
         "tokens": [
-          "我",
-          "感冒",
-          "了",
-          "还",
-          "发烧"
+          "弟弟",
+          "今天",
+          "发烧",
+          "了"
         ]
       }
     },
@@ -5549,16 +5553,15 @@
       "pinyin": "fù xí",
       "english": "To review / revision",
       "example": {
-        "hanzi": "明天有考试我要复习。",
-        "pinyin": "Míng tiān yǒu kǎo shì wǒ yào fù xí.",
-        "english": "There is an exam tomorrow, so I need to review.",
+        "hanzi": "我晚上要复习汉语。",
+        "pinyin": "Wǒ wǎn shang yào fù xí Hàn yǔ.",
+        "english": "I need to review Chinese tonight.",
         "tokens": [
-          "明天",
-          "有",
-          "考试",
           "我",
+          "晚上",
           "要",
-          "复习"
+          "复习",
+          "汉语"
         ]
       }
     },
@@ -5684,13 +5687,15 @@
       "pinyin": "shuā yá",
       "english": "To brush teeth",
       "example": {
-        "hanzi": "我早上起床刷牙。",
-        "pinyin": "Wǒ zǎo shang qǐ chuáng shuā yá.",
-        "english": "I get up in the morning and brush my teeth.",
+        "hanzi": "我每天早上都刷牙。",
+        "pinyin": "Wǒ měi tiān zǎo shang dōu shuā yá.",
+        "english": "I brush my teeth every morning.",
         "tokens": [
           "我",
+          "每",
+          "天",
           "早上",
-          "起床",
+          "都",
           "刷牙"
         ]
       }
@@ -5702,15 +5707,15 @@
       "pinyin": "qǐng jià",
       "english": "To request leave of absence",
       "example": {
-        "hanzi": "我生病了今天想请假。",
-        "pinyin": "Wǒ shēng bìng le jīn tiān xiǎng qǐng jià.",
-        "english": "I am sick and want to ask for leave today.",
+        "hanzi": "我今天想向老师请假。",
+        "pinyin": "Wǒ jīn tiān xiǎng xiàng lǎo shī qǐng jià.",
+        "english": "I want to ask the teacher for leave today.",
         "tokens": [
           "我",
-          "生病",
-          "了",
           "今天",
           "想",
+          "向",
+          "老师",
           "请假"
         ]
       }
@@ -5879,16 +5884,14 @@
       "pinyin": "guā fēng",
       "english": "To be windy",
       "example": {
-        "hanzi": "今天刮风了多穿衣服。",
-        "pinyin": "Jīn tiān guā fēng le duō chuān yī fu.",
-        "english": "It's windy today, put on more clothes.",
+        "hanzi": "今天下午刮风了。",
+        "pinyin": "Jīn tiān xià wǔ guā fēng le.",
+        "english": "It got windy this afternoon.",
         "tokens": [
           "今天",
+          "下午",
           "刮风",
-          "了",
-          "多",
-          "穿",
-          "衣服"
+          "了"
         ]
       }
     },

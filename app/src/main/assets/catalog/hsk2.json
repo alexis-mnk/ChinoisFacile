@@ -1,6 +1,6 @@
 {
   "hskLevel": 2,
-  "catalogVersion": 14,
+  "catalogVersion": 15,
   "units": [
     {
       "id": "hsk2_u1",
@@ -209,14 +209,15 @@
       "pinyin": "nín",
       "english": "You (polite)",
       "example": {
-        "hanzi": "您好请进！",
-        "pinyin": "Nín hǎo qǐng jìn!",
-        "english": "Hello, please come in!",
+        "hanzi": "您是汉语老师吗？",
+        "pinyin": "Nín shì Hàn yǔ lǎo shī ma?",
+        "english": "Are you a Chinese teacher?",
         "tokens": [
           "您",
-          "好",
-          "请",
-          "进"
+          "是",
+          "汉语",
+          "老师",
+          "吗"
         ]
       }
     },
@@ -324,14 +325,15 @@
       "pinyin": "kě yǐ",
       "english": "Can / May",
       "example": {
-        "hanzi": "我可以坐这吗？",
-        "pinyin": "Wǒ kě yǐ zuò zhè ma?",
-        "english": "Can I sit here?",
+        "hanzi": "我可以喝点水吗？",
+        "pinyin": "Wǒ kě yǐ hē diǎn shuǐ ma?",
+        "english": "May I have some water?",
         "tokens": [
           "我",
           "可以",
-          "坐",
-          "这",
+          "喝",
+          "点",
+          "水",
           "吗"
         ]
       }
@@ -402,16 +404,15 @@
       "pinyin": "yě",
       "english": "(adverb) also; both ... and ... (before predicates only)",
       "example": {
-        "hanzi": "我很高兴他也是。",
-        "pinyin": "Wǒ hěn gāo xìng tā yě shì.",
-        "english": "I am very happy, and he is too.",
+        "hanzi": "我也喜欢喝茶。",
+        "pinyin": "Wǒ yě xǐ huan hē chá.",
+        "english": "I also like drinking tea.",
         "tokens": [
           "我",
-          "很",
-          "高兴",
-          "他",
           "也",
-          "是"
+          "喜欢",
+          "喝",
+          "茶"
         ]
       }
     },
@@ -647,18 +648,15 @@
       "pinyin": "tā",
       "english": "It",
       "example": {
-        "hanzi": "我有个小猫它很白。",
-        "pinyin": "Wǒ yǒu gè xiǎo māo tā hěn bái.",
-        "english": "I have a little cat, and it is very white.",
+        "hanzi": "它很喜欢喝牛奶。",
+        "pinyin": "Tā hěn xǐ huan hē niú nǎi.",
+        "english": "It really likes drinking milk.",
         "tokens": [
-          "我",
-          "有",
-          "个",
-          "小",
-          "猫",
           "它",
           "很",
-          "白"
+          "喜欢",
+          "喝",
+          "牛奶"
         ]
       }
     },
@@ -726,13 +724,13 @@
       "pinyin": "qiān",
       "english": "Thousand",
       "example": {
-        "hanzi": "这个电脑三千块。",
-        "pinyin": "Zhè gè diàn nǎo sān qiān kuài.",
-        "english": "This computer costs three thousand yuan.",
+        "hanzi": "我的手机三千块。",
+        "pinyin": "Wǒ de shǒu jī sān qiān kuài.",
+        "english": "My phone costs three thousand yuan.",
         "tokens": [
-          "这",
-          "个",
-          "电脑",
+          "我",
+          "的",
+          "手机",
           "三",
           "千",
           "块"
@@ -922,12 +920,13 @@
       "pinyin": "měi",
       "english": "Every / Each",
       "example": {
-        "hanzi": "他每星期去一次北京。",
-        "pinyin": "Tā měi xīng qī qù yī cì Běi jīng.",
+        "hanzi": "他每个星期去一次北京。",
+        "pinyin": "Tā měi gè xīng qī qù yī cì Běi jīng.",
         "english": "He goes to Beijing once a week.",
         "tokens": [
           "他",
           "每",
+          "个",
           "星期",
           "去",
           "一",
@@ -1167,13 +1166,13 @@
       "pinyin": "jìn",
       "english": "To enter",
       "example": {
-        "hanzi": "请进坐吧！",
-        "pinyin": "Qǐng jìn zuò ba!",
-        "english": "Please come in and sit down!",
+        "hanzi": "我们进教室吧！",
+        "pinyin": "Wǒ men jìn jiào shì ba!",
+        "english": "Let's go into the classroom!",
         "tokens": [
-          "请",
+          "我们",
           "进",
-          "坐",
+          "教室",
           "吧"
         ]
       }
@@ -1337,17 +1336,16 @@
       "pinyin": "fú wù yuán",
       "english": "Waiter / Attendant",
       "example": {
-        "hanzi": "服务员请给我一个杯子。",
-        "pinyin": "Fú wù yuán qǐng gěi wǒ yī gè bēi zi.",
-        "english": "Waiter, please give me a cup.",
+        "hanzi": "饭店里的服务员很好。",
+        "pinyin": "Fàn diàn lǐ de fú wù yuán hěn hǎo.",
+        "english": "The waiters at the restaurant are very nice.",
         "tokens": [
+          "饭店",
+          "里",
+          "的",
           "服务员",
-          "请",
-          "给",
-          "我",
-          "一",
-          "个",
-          "杯子"
+          "很",
+          "好"
         ]
       }
     },
@@ -1436,15 +1434,15 @@
       "pinyin": "chuān",
       "english": "To wear / Put on",
       "example": {
-        "hanzi": "今天冷多穿点衣服。",
-        "pinyin": "Jīn tiān lěng duō chuān diǎn yī fu.",
-        "english": "It's cold today, wear more clothes.",
+        "hanzi": "她今天穿着白衣服。",
+        "pinyin": "Tā jīn tiān chuān zhe bái yī fu.",
+        "english": "She is wearing white clothes today.",
         "tokens": [
+          "她",
           "今天",
-          "冷",
-          "多",
           "穿",
-          "点",
+          "着",
+          "白",
           "衣服"
         ]
       }
@@ -1818,16 +1816,16 @@
       "pinyin": "lù",
       "english": "Road / Way",
       "example": {
-        "hanzi": "去学校的路很近。",
-        "pinyin": "Qù xué xiào de lù hěn jìn.",
-        "english": "The road to school is very close.",
+        "hanzi": "去火车站的路很长。",
+        "pinyin": "Qù huǒ chē zhàn de lù hěn cháng.",
+        "english": "The road to the train station is very long.",
         "tokens": [
           "去",
-          "学校",
+          "火车站",
           "的",
           "路",
           "很",
-          "近"
+          "长"
         ]
       }
     },
@@ -1838,17 +1836,16 @@
       "pinyin": "piào",
       "english": "Ticket",
       "example": {
-        "hanzi": "我买了两个电影票。",
-        "pinyin": "Wǒ mǎi le liǎng gè diàn yǐng piào.",
-        "english": "I bought two movie tickets.",
+        "hanzi": "你的电影票在哪儿？",
+        "pinyin": "Nǐ de diàn yǐng piào zài nǎ r?",
+        "english": "Where is your movie ticket?",
         "tokens": [
-          "我",
-          "买",
-          "了",
-          "两",
-          "个",
+          "你",
+          "的",
           "电影",
-          "票"
+          "票",
+          "在",
+          "哪儿"
         ]
       }
     },
@@ -2065,15 +2062,16 @@
       "pinyin": "shēng bìng",
       "english": "To get sick",
       "example": {
-        "hanzi": "他生病了在医院。",
-        "pinyin": "Tā shēng bìng le zài yī yuàn.",
-        "english": "He is sick and in the hospital.",
+        "hanzi": "他今天生病去医院了。",
+        "pinyin": "Tā jīn tiān shēng bìng qù yī yuàn le.",
+        "english": "He got sick and went to the hospital today.",
         "tokens": [
           "他",
+          "今天",
           "生病",
-          "了",
-          "在",
-          "医院"
+          "去",
+          "医院",
+          "了"
         ]
       }
     },
@@ -2084,15 +2082,16 @@
       "pinyin": "yào",
       "english": "Medicine",
       "example": {
-        "hanzi": "生病了要吃药。",
-        "pinyin": "Shēng bìng le yào chī yào.",
-        "english": "When you're sick you should take medicine.",
+        "hanzi": "你今天吃药了吗？",
+        "pinyin": "Nǐ jīn tiān chī yào le ma?",
+        "english": "Did you take your medicine today?",
         "tokens": [
-          "生病",
-          "了",
-          "要",
+          "你",
+          "今天",
           "吃",
-          "药"
+          "药",
+          "了",
+          "吗"
         ]
       }
     },
@@ -2121,13 +2120,11 @@
       "pinyin": "xiū xi",
       "english": "To rest",
       "example": {
-        "hanzi": "你累了休息一下吧。",
-        "pinyin": "Nǐ lèi le xiū xi yíxià ba.",
-        "english": "You're tired, take a little rest.",
+        "hanzi": "我们休息一下吧。",
+        "pinyin": "Wǒ men xiū xi yíxià ba.",
+        "english": "Let's take a short rest.",
         "tokens": [
-          "你",
-          "累",
-          "了",
+          "我们",
           "休息",
           "一下",
           "吧"
@@ -2214,15 +2211,15 @@
       "pinyin": "wán",
       "english": "To play / Have fun",
       "example": {
-        "hanzi": "孩子都喜欢在外玩。",
-        "pinyin": "Hái zi dōu xǐ huan zài wài wán.",
-        "english": "Children all love playing outside.",
+        "hanzi": "弟弟喜欢去朋友家玩。",
+        "pinyin": "Dì di xǐ huan qù péng you jiā wán.",
+        "english": "My younger brother likes going to his friend's house to play.",
         "tokens": [
-          "孩子",
-          "都",
+          "弟弟",
           "喜欢",
-          "在",
-          "外",
+          "去",
+          "朋友",
+          "家",
           "玩"
         ]
       }
@@ -2271,13 +2268,12 @@
       "pinyin": "yóu yǒng",
       "english": "To swim",
       "example": {
-        "hanzi": "热的时候喜欢去游泳。",
-        "pinyin": "Rè de shí hou xǐ huan qù yóu yǒng.",
-        "english": "When it's hot I like to go swimming.",
+        "hanzi": "哥哥很喜欢去游泳。",
+        "pinyin": "Gē ge hěn xǐ huan qù yóu yǒng.",
+        "english": "My older brother really likes going swimming.",
         "tokens": [
-          "热",
-          "的",
-          "时候",
+          "哥哥",
+          "很",
           "喜欢",
           "去",
           "游泳"
@@ -2441,17 +2437,15 @@
       "pinyin": "wèn",
       "english": "To ask",
       "example": {
-        "hanzi": "我想问你一个问题。",
-        "pinyin": "Wǒ xiǎng wèn nǐ yī gè wèn tí.",
-        "english": "I want to ask you a question.",
+        "hanzi": "我去问一下服务员。",
+        "pinyin": "Wǒ qù wèn yíxià fú wù yuán.",
+        "english": "I'll go ask the waiter.",
         "tokens": [
           "我",
-          "想",
+          "去",
           "问",
-          "你",
-          "一",
-          "个",
-          "问题"
+          "一下",
+          "服务员"
         ]
       }
     },
@@ -2501,15 +2495,14 @@
       "pinyin": "dǒng",
       "english": "To understand",
       "example": {
-        "hanzi": "我不懂这个意思。",
-        "pinyin": "Wǒ bù dǒng zhè gè yì si.",
-        "english": "I don't understand this meaning.",
+        "hanzi": "我懂你的意思。",
+        "pinyin": "Wǒ dǒng nǐ de yì si.",
+        "english": "I understand what you mean.",
         "tokens": [
           "我",
-          "不",
           "懂",
-          "这",
-          "个",
+          "你",
+          "的",
           "意思"
         ]
       }
@@ -2577,13 +2570,13 @@
       "pinyin": "duì",
       "english": "Correct / Right / Toward",
       "example": {
-        "hanzi": "你说的很对。",
+        "hanzi": "你说得很对。",
         "pinyin": "Nǐ shuō de hěn duì.",
         "english": "What you said is quite right.",
         "tokens": [
           "你",
           "说",
-          "的",
+          "得",
           "很",
           "对"
         ]
@@ -2670,14 +2663,15 @@
       "pinyin": "zhe",
       "english": "Continuous aspect particle",
       "example": {
-        "hanzi": "我等着出租车。",
-        "pinyin": "Wǒ děng zhe chū zū chē.",
-        "english": "I was waiting for a taxi.",
+        "hanzi": "门现在开着呢。",
+        "pinyin": "Mén xiàn zài kāi zhe ne.",
+        "english": "The door is open right now.",
         "tokens": [
-          "我",
-          "等",
+          "门",
+          "现在",
+          "开",
           "着",
-          "出租车"
+          "呢"
         ]
       }
     },
@@ -2874,12 +2868,14 @@
       "pinyin": "cuò",
       "english": "Wrong / Mistake",
       "example": {
-        "hanzi": "对不起我错了。",
-        "pinyin": "Duì bu qǐ wǒ cuò le.",
-        "english": "Sorry, I was wrong.",
+        "hanzi": "这个字写错了。",
+        "pinyin": "Zhè gè zì xiě cuò le.",
+        "english": "This character is written wrong.",
         "tokens": [
-          "对不起",
-          "我",
+          "这",
+          "个",
+          "字",
+          "写",
           "错",
           "了"
         ]
@@ -2932,15 +2928,14 @@
       "pinyin": "bié",
       "english": "Don't (imperative) / Other",
       "example": {
-        "hanzi": "太累了别工作。",
-        "pinyin": "Tài lèi le bié gōng zuò.",
-        "english": "You're too tired, don't work.",
+        "hanzi": "今天别工作了。",
+        "pinyin": "Jīn tiān bié gōng zuò le.",
+        "english": "Don't work today.",
         "tokens": [
-          "太",
-          "累",
-          "了",
+          "今天",
           "别",
-          "工作"
+          "工作",
+          "了"
         ]
       }
     },
@@ -3007,16 +3002,15 @@
       "pinyin": "yīn wèi",
       "english": "Because",
       "example": {
-        "hanzi": "因为下雨我不去了。",
-        "pinyin": "Yīn wèi xià yǔ wǒ bù qù le.",
-        "english": "Because it is raining, I am not going.",
+        "hanzi": "他因为生病没有来。",
+        "pinyin": "Tā yīn wèi shēng bìng méi yǒu lái.",
+        "english": "He didn't come because he was sick.",
         "tokens": [
+          "他",
           "因为",
-          "下雨",
-          "我",
-          "不",
-          "去",
-          "了"
+          "生病",
+          "没有",
+          "来"
         ]
       }
     },
@@ -3027,8 +3021,8 @@
       "pinyin": "suǒ yǐ",
       "english": "Therefore / So",
       "example": {
-        "hanzi": "今天下雨所以我在家。",
-        "pinyin": "Jīn tiān xià yǔ suǒ yǐ wǒ zài jiā.",
+        "hanzi": "今天下雨，所以我在家。",
+        "pinyin": "Jīn tiān xià yǔ, suǒ yǐ wǒ zài jiā.",
         "english": "It's raining today, so I am staying at home.",
         "tokens": [
           "今天",
@@ -3047,15 +3041,16 @@
       "pinyin": "suī rán",
       "english": "Although",
       "example": {
-        "hanzi": "虽然很累但是我高兴。",
-        "pinyin": "Suī rán hěn lèi dàn shì wǒ gāo xìng.",
-        "english": "Although I am tired, I am happy.",
+        "hanzi": "虽然很累，但是我非常高兴。",
+        "pinyin": "Suī rán hěn lèi, dàn shì wǒ fēi cháng gāo xìng.",
+        "english": "Although I am tired, I am very happy.",
         "tokens": [
           "虽然",
           "很",
           "累",
           "但是",
           "我",
+          "非常",
           "高兴"
         ]
       }
@@ -3067,8 +3062,8 @@
       "pinyin": "dàn shì",
       "english": "But / However",
       "example": {
-        "hanzi": "今天冷但是我很高兴。",
-        "pinyin": "Jīn tiān lěng dàn shì wǒ hěn gāo xìng.",
+        "hanzi": "今天冷，但是我很高兴。",
+        "pinyin": "Jīn tiān lěng, dàn shì wǒ hěn gāo xìng.",
         "english": "It's cold today, but I am very happy.",
         "tokens": [
           "今天",

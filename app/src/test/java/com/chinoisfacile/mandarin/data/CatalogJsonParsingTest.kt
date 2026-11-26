@@ -91,7 +91,14 @@ class CatalogJsonParsingTest {
                     word.example.tokens.distinct().size,
                 )
 
-                val expectedJoined = word.example.hanzi.trimEnd('。', '？', '！', '，', '、', '；', '：')
+                assertTrue(
+                    "Comma found inside example.tokens for ${word.id}",
+                    word.example.tokens.none { '，' in it },
+                )
+
+                val expectedJoined = word.example.hanzi
+                    .trimEnd('。', '？', '！', '，', '、', '；', '：')
+                    .replace("，", "")
                 assertEquals(
                     "Inconsistent tokens for ${word.id}",
                     expectedJoined,

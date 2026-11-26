@@ -1,6 +1,6 @@
 {
   "hskLevel": 4,
-  "catalogVersion": 17,
+  "catalogVersion": 18,
   "units": [
     {
       "id": "hsk4_u1",
@@ -535,16 +535,18 @@
       "pinyin": "sǐ",
       "english": "To die / impassable",
       "example": {
-        "hanzi": "我感觉好像死了一样。",
-        "pinyin": "Wǒ gǎn jué hǎo xiàng sǐ le yī yàng.",
-        "english": "I feel dead.",
+        "hanzi": "公园里的那棵树死了。",
+        "pinyin": "Gōng yuán lǐ de nà kē shù sǐ le.",
+        "english": "That tree in the park died.",
         "tokens": [
-          "我",
-          "感觉",
-          "好像",
+          "公园",
+          "里",
+          "的",
+          "那",
+          "棵",
+          "树",
           "死",
-          "了",
-          "一样"
+          "了"
         ]
       }
     },
@@ -555,8 +557,8 @@
       "pinyin": "què",
       "english": "But / yet",
       "example": {
-        "hanzi": "太阳出来了天气却很冷。",
-        "pinyin": "Tài yang chū lái le tiān qì què hěn lěng.",
+        "hanzi": "太阳出来了，天气却很冷。",
+        "pinyin": "Tài yang chū lái le, tiān qì què hěn lěng.",
         "english": "The sun came out, yet the weather is very cold.",
         "tokens": [
           "太阳",
@@ -712,16 +714,15 @@
       "pinyin": "gǎn jué",
       "english": "Feeling; impression; sensation / to feel; to perceive",
       "example": {
-        "hanzi": "我感觉好像死了一样。",
-        "pinyin": "Wǒ gǎn jué hǎo xiàng sǐ le yī yàng.",
-        "english": "I feel dead.",
+        "hanzi": "我今天感觉很舒服。",
+        "pinyin": "Wǒ jīn tiān gǎn jué hěn shū fu.",
+        "english": "I feel very comfortable today.",
         "tokens": [
           "我",
+          "今天",
           "感觉",
-          "好像",
-          "死",
-          "了",
-          "一样"
+          "很",
+          "舒服"
         ]
       }
     },
@@ -790,16 +791,18 @@
       "pinyin": "nèi",
       "english": "Inside / inner",
       "example": {
-        "hanzi": "她是个内八字。",
-        "pinyin": "Tā shì gè nèi bā zì.",
-        "english": "She is pigeon-toed.",
+        "hanzi": "一个小时内就能到机场。",
+        "pinyin": "Yī gè xiǎo shí nèi jiù néng dào jī chǎng.",
+        "english": "We can arrive at the airport within an hour.",
         "tokens": [
-          "她",
-          "是",
+          "一",
           "个",
+          "小时",
           "内",
-          "八",
-          "字"
+          "就",
+          "能",
+          "到",
+          "机场"
         ]
       }
     },
@@ -812,7 +815,7 @@
       "example": {
         "hanzi": "问题是怎么出现的？",
         "pinyin": "Wèn tí shì zěn me chū xiàn de?",
-        "english": "When did the error occur?",
+        "english": "How did the problem occur?",
         "tokens": [
           "问题",
           "是",
@@ -1022,8 +1025,8 @@
       "pinyin": "kě shì",
       "english": "But; however / (used for emphasis) indeed",
       "example": {
-        "hanzi": "我想去旅游可是没有时间。",
-        "pinyin": "Wǒ xiǎng qù lǚ yóu kě shì méi yǒu shí jiān.",
+        "hanzi": "我想去旅游，可是没有时间。",
+        "pinyin": "Wǒ xiǎng qù lǚ yóu, kě shì méi yǒu shí jiān.",
         "english": "I want to travel, but I don't have time.",
         "tokens": [
           "我",
@@ -1203,18 +1206,17 @@
       "pinyin": "qí zhōng",
       "english": "Among / in",
       "example": {
-        "hanzi": "这些苹果其中三个坏了。",
-        "pinyin": "Zhè xiē píng guǒ qí zhōng sān gè huài le.",
-        "english": "Among these apples, three have gone bad.",
+        "hanzi": "我最喜欢其中那本小说。",
+        "pinyin": "Wǒ zuì xǐ huan qí zhōng nà běn xiǎo shuō.",
+        "english": "Among them, I like that novel the most.",
         "tokens": [
-          "这",
-          "些",
-          "苹果",
+          "我",
+          "最",
+          "喜欢",
           "其中",
-          "三",
-          "个",
-          "坏",
-          "了"
+          "那",
+          "本",
+          "小说"
         ]
       }
     },
@@ -1365,14 +1367,16 @@
       "pinyin": "diào chá",
       "english": "Investigation / inquiry",
       "example": {
-        "hanzi": "调查下这个。",
-        "pinyin": "Diào chá xià zhè gè.",
-        "english": "Examine this.",
+        "hanzi": "警察正在调查这件事情。",
+        "pinyin": "Jǐng chá zhèng zài diào chá zhè jiàn shì qing.",
+        "english": "The police are investigating this matter.",
         "tokens": [
+          "警察",
+          "正在",
           "调查",
-          "下",
           "这",
-          "个"
+          "件",
+          "事情"
         ]
       }
     },
@@ -1780,8 +1784,8 @@
       "english": "Heavy / Important",
       "example": {
         "hanzi": "我得了重感冒。",
-        "pinyin": "Wǒ de le zhòng gǎn mào.",
-        "english": "I've caught a bad cold.",
+        "pinyin": "Wǒ dé le zhòng gǎn mào.",
+        "english": "I caught a bad cold.",
         "tokens": [
           "我",
           "得",
@@ -1818,14 +1822,16 @@
       "pinyin": "tí gōng",
       "english": "To offer / to supply",
       "example": {
-        "hanzi": "谢谢提供新消息。",
-        "pinyin": "Xiè xie tí gōng xīn xiāo xi.",
-        "english": "Thanks for the updates.",
+        "hanzi": "这家宾馆提供免费饮料。",
+        "pinyin": "Zhè jiā bīn guǎn tí gōng miǎn fèi yǐn liào.",
+        "english": "This hotel provides free drinks.",
         "tokens": [
-          "谢谢",
+          "这",
+          "家",
+          "宾馆",
           "提供",
-          "新",
-          "消息"
+          "免费",
+          "饮料"
         ]
       }
     },
@@ -1952,8 +1958,8 @@
       "pinyin": "yīn cǐ",
       "english": "Thus; consequently; as a result",
       "example": {
-        "hanzi": "路上堵车因此我迟到了。",
-        "pinyin": "Lù shàng dǔ chē yīn cǐ wǒ chí dào le.",
+        "hanzi": "路上堵车，因此我迟到了。",
+        "pinyin": "Lù shàng dǔ chē, yīn cǐ wǒ chí dào le.",
         "english": "There was a traffic jam on the road, so I arrived late.",
         "tokens": [
           "路",
@@ -1973,13 +1979,14 @@
       "pinyin": "tái",
       "english": "Platform / stage",
       "example": {
-        "hanzi": "我需要有台新电脑。",
-        "pinyin": "Wǒ xū yào yǒu tái xīn diàn nǎo.",
-        "english": "I need a new computer.",
+        "hanzi": "我买了一台新电脑。",
+        "pinyin": "Wǒ mǎi le yī tái xīn diàn nǎo.",
+        "english": "I bought a new computer.",
         "tokens": [
           "我",
-          "需要",
-          "有",
+          "买",
+          "了",
+          "一",
           "台",
           "新",
           "电脑"
@@ -2109,8 +2116,8 @@
       "pinyin": "lìng wài",
       "english": "Additional / in addition",
       "example": {
-        "hanzi": "除了跑步她另外还喜欢游泳。",
-        "pinyin": "Chú le pǎo bù tā lìng wài hái xǐ huan yóu yǒng.",
+        "hanzi": "除了跑步，她另外还喜欢游泳。",
+        "pinyin": "Chú le pǎo bù, tā lìng wài hái xǐ huan yóu yǒng.",
         "english": "Besides jogging, she also likes swimming.",
         "tokens": [
           "除了",
@@ -2149,16 +2156,15 @@
       "pinyin": "hǎo xiàng",
       "english": "As if / to seem like",
       "example": {
-        "hanzi": "我感觉好像死了一样。",
-        "pinyin": "Wǒ gǎn jué hǎo xiàng sǐ le yī yàng.",
-        "english": "I feel dead.",
+        "hanzi": "他今天好像生病了。",
+        "pinyin": "Tā jīn tiān hǎo xiàng shēng bìng le.",
+        "english": "It seems he got sick today.",
         "tokens": [
-          "我",
-          "感觉",
+          "他",
+          "今天",
           "好像",
-          "死",
-          "了",
-          "一样"
+          "生病",
+          "了"
         ]
       }
     },
@@ -3080,8 +3086,8 @@
       "pinyin": "yóu yú",
       "english": "Due to / as a result of",
       "example": {
-        "hanzi": "由于下雨比赛推迟了。",
-        "pinyin": "Yóu yú xià yǔ bǐ sài tuī chí le.",
+        "hanzi": "由于下雨，比赛推迟了。",
+        "pinyin": "Yóu yú xià yǔ, bǐ sài tuī chí le.",
         "english": "Due to the rain, the match was postponed.",
         "tokens": [
           "由于",
@@ -3176,8 +3182,8 @@
       "pinyin": "jí shǐ",
       "english": "Even if; even though",
       "example": {
-        "hanzi": "即使明天下雨我也要去跑步。",
-        "pinyin": "Jí shǐ míng tiān xià yǔ wǒ yě yào qù pǎo bù.",
+        "hanzi": "即使明天下雨，我也要去跑步。",
+        "pinyin": "Jí shǐ míng tiān xià yǔ, wǒ yě yào qù pǎo bù.",
         "english": "Even if it rains tomorrow, I will still go jogging.",
         "tokens": [
           "即使",
@@ -3375,8 +3381,8 @@
       "pinyin": "bǐ rú",
       "english": "For example / for instance",
       "example": {
-        "hanzi": "我喜欢吃水果比如苹果和香蕉。",
-        "pinyin": "Wǒ xǐ huan chī shuǐ guǒ bǐ rú píng guǒ hé xiāng jiāo.",
+        "hanzi": "我喜欢吃水果，比如苹果和香蕉。",
+        "pinyin": "Wǒ xǐ huan chī shuǐ guǒ, bǐ rú píng guǒ hé xiāng jiāo.",
         "english": "I like eating fruit, for example apples and bananas.",
         "tokens": [
           "我",
@@ -3436,8 +3442,8 @@
       "pinyin": "wú lùn",
       "english": "No matter what or how / regardless of whether",
       "example": {
-        "hanzi": "无论天气怎么样他都坚持锻炼。",
-        "pinyin": "Wú lùn tiān qì zěn me yàng tā dōu jiān chí duàn liàn.",
+        "hanzi": "无论天气怎么样，他都坚持锻炼。",
+        "pinyin": "Wú lùn tiān qì zěn me yàng, tā dōu jiān chí duàn liàn.",
         "english": "No matter what the weather is like, he keeps exercising.",
         "tokens": [
           "无论",
@@ -3641,7 +3647,7 @@
       "example": {
         "hanzi": "这位警察在做什么？",
         "pinyin": "Zhè wèi jǐng chá zài zuò shén me?",
-        "english": "What does the police officer do?",
+        "english": "What is this police officer doing?",
         "tokens": [
           "这",
           "位",
@@ -3758,8 +3764,8 @@
       "pinyin": "yú shì",
       "english": "Thereupon; as a result; consequently; thus; hence",
       "example": {
-        "hanzi": "下雨了于是我们坐出租车回家。",
-        "pinyin": "Xià yǔ le yú shì wǒ men zuò chū zū chē huí jiā.",
+        "hanzi": "下雨了，于是我们坐出租车回家。",
+        "pinyin": "Xià yǔ le, yú shì wǒ men zuò chū zū chē huí jiā.",
         "english": "It started raining, so we took a taxi home.",
         "tokens": [
           "下雨",
@@ -4191,18 +4197,16 @@
       "pinyin": "tōng zhī",
       "english": "To notify / to inform",
       "example": {
-        "hanzi": "我认为这个消息应该通知大家。",
-        "pinyin": "Wǒ rèn wéi zhè gè xiāo xi yīng gāi tōng zhī dà jiā.",
-        "english": "I think this news should be noticed by everyone.",
+        "hanzi": "请通知大家明天不上班。",
+        "pinyin": "Qǐng tōng zhī dà jiā míng tiān bù shàng bān.",
+        "english": "Please inform everyone that there is no work tomorrow.",
         "tokens": [
-          "我",
-          "认为",
-          "这",
-          "个",
-          "消息",
-          "应该",
+          "请",
           "通知",
-          "大家"
+          "大家",
+          "明天",
+          "不",
+          "上班"
         ]
       }
     },
@@ -4491,12 +4495,12 @@
       "pinyin": "máo",
       "english": "Hair / feather",
       "example": {
-        "hanzi": "这个小猫的毛很白。",
-        "pinyin": "Zhè gè xiǎo māo de máo hěn bái.",
+        "hanzi": "这只小猫的毛很白。",
+        "pinyin": "Zhè zhī xiǎo māo de máo hěn bái.",
         "english": "This little cat's fur is very white.",
         "tokens": [
           "这",
-          "个",
+          "只",
           "小",
           "猫",
           "的",
@@ -4725,17 +4729,17 @@
       "pinyin": "jìng rán",
       "english": "Unexpectedly / to one's surprise",
       "example": {
-        "hanzi": "五月了今天竟然下雪！",
-        "pinyin": "Wǔ yuè le jīn tiān jìng rán xià xuě!",
-        "english": "It's already May, and it unexpectedly snowed today!",
+        "hanzi": "他竟然忘记了自己的生日！",
+        "pinyin": "Tā jìng rán wàng jì le zì jǐ de shēng rì!",
+        "english": "He actually forgot his own birthday!",
         "tokens": [
-          "五",
-          "月",
-          "了",
-          "今天",
+          "他",
           "竟然",
-          "下",
-          "雪"
+          "忘记",
+          "了",
+          "自己",
+          "的",
+          "生日"
         ]
       }
     },
@@ -4899,8 +4903,8 @@
       "pinyin": "fǒu zé",
       "english": "Otherwise; if not; or (else)",
       "example": {
-        "hanzi": "快出发吧否则会迟到！",
-        "pinyin": "Kuài chū fā ba fǒu zé huì chí dào!",
+        "hanzi": "快出发吧，否则会迟到！",
+        "pinyin": "Kuài chū fā ba, fǒu zé huì chí dào!",
         "english": "Let's set off quickly, otherwise we will be late!",
         "tokens": [
           "快",
@@ -5056,14 +5060,15 @@
       "pinyin": "bù jǐn",
       "english": "Not just; not limited to / not only (..., but also ...)",
       "example": {
-        "hanzi": "她不仅友好还诚实。",
-        "pinyin": "Tā bù jǐn yǒu hǎo hái chéng shí.",
-        "english": "She is not only kind, but also honest.",
+        "hanzi": "她不仅友好，还很诚实。",
+        "pinyin": "Tā bù jǐn yǒu hǎo, hái hěn chéng shí.",
+        "english": "She is not only kind, but also very honest.",
         "tokens": [
           "她",
           "不仅",
           "友好",
           "还",
+          "很",
           "诚实"
         ]
       }
@@ -5305,13 +5310,13 @@
       "pinyin": "xī yǐn",
       "english": "To attract; to appeal to; to fascinate",
       "example": {
-        "hanzi": "这个电影吸引了很多观众。",
-        "pinyin": "Zhè gè diàn yǐng xī yǐn le hěn duō guān zhòng.",
-        "english": "This movie attracted many viewers.",
+        "hanzi": "他的表演吸引了很多观众。",
+        "pinyin": "Tā de biǎo yǎn xī yǐn le hěn duō guān zhòng.",
+        "english": "His performance attracted many viewers.",
         "tokens": [
-          "这",
-          "个",
-          "电影",
+          "他",
+          "的",
+          "表演",
           "吸引",
           "了",
           "很",
@@ -5367,8 +5372,8 @@
       "pinyin": "jì rán",
       "english": "Since / as",
       "example": {
-        "hanzi": "既然你累了就先休息吧。",
-        "pinyin": "Jì rán nǐ lèi le jiù xiān xiū xi ba.",
+        "hanzi": "既然你累了，就先休息吧。",
+        "pinyin": "Jì rán nǐ lèi le, jiù xiān xiū xi ba.",
         "english": "Since you're tired, take a rest first.",
         "tokens": [
           "既然",
@@ -5860,8 +5865,8 @@
       "pinyin": "rán ér",
       "english": "However; yet; but",
       "example": {
-        "hanzi": "他很努力然而结果不理想。",
-        "pinyin": "Tā hěn nǔ lì rán ér jié guǒ bù lǐ xiǎng.",
+        "hanzi": "他很努力，然而结果不理想。",
+        "pinyin": "Tā hěn nǔ lì, rán ér jié guǒ bù lǐ xiǎng.",
         "english": "He worked very hard; however, the result was not ideal.",
         "tokens": [
           "他",
@@ -5963,14 +5968,15 @@
       "pinyin": "tǎng",
       "english": "To recline / to lie down",
       "example": {
-        "hanzi": "她躺在桌子上。",
-        "pinyin": "Tā tǎng zài zhuō zi shàng.",
-        "english": "She is lying on the table.",
+        "hanzi": "小猫躺在沙发上。",
+        "pinyin": "Xiǎo māo tǎng zài shā fā shàng.",
+        "english": "The little cat is lying on the sofa.",
         "tokens": [
-          "她",
+          "小",
+          "猫",
           "躺",
           "在",
-          "桌子",
+          "沙发",
           "上"
         ]
       }
@@ -6469,14 +6475,14 @@
       "pinyin": "shú xī",
       "english": "To be familiar with; to know well",
       "example": {
-        "hanzi": "他熟悉日本文化。",
-        "pinyin": "Tā shú xī rì běn wén huà.",
-        "english": "He is familiar with Japanese culture.",
+        "hanzi": "他非常熟悉中国文化。",
+        "pinyin": "Tā fēi cháng shú xī Zhōng guó wén huà.",
+        "english": "He is very familiar with Chinese culture.",
         "tokens": [
           "他",
+          "非常",
           "熟悉",
-          "日",
-          "本",
+          "中国",
           "文化"
         ]
       }
@@ -6665,15 +6671,16 @@
       "pinyin": "gǎn",
       "english": "To overtake; to catch up with / to hurry; to rush",
       "example": {
-        "hanzi": "快点吧我们要赶飞机！",
-        "pinyin": "Kuài diǎn ba wǒ men yào gǎn fēi jī!",
-        "english": "Hurry up, we have to catch our flight!",
+        "hanzi": "我们要快点去机场赶飞机。",
+        "pinyin": "Wǒ men yào kuài diǎn qù jī chǎng gǎn fēi jī.",
+        "english": "We need to hurry to the airport to catch the flight.",
         "tokens": [
-          "快",
-          "点",
-          "吧",
           "我们",
           "要",
+          "快",
+          "点",
+          "去",
+          "机场",
           "赶",
           "飞机"
         ]
@@ -7248,8 +7255,8 @@
       "english": "To throw / to throw away",
       "example": {
         "hanzi": "不要往地上扔任何东西。",
-        "pinyin": "Bù yào wǎng de shàng rēng rèn hé dōng xi.",
-        "english": "Don't throw anything onto the floor.",
+        "pinyin": "Bù yào wǎng dì shàng rēng rèn hé dōng xi.",
+        "english": "Don't throw anything on the floor.",
         "tokens": [
           "不",
           "要",
@@ -7366,16 +7373,20 @@
       "pinyin": "jiǎn shǎo",
       "english": "To lessen; to decrease; to reduce; to lower",
       "example": {
-        "hanzi": "最近他的顾客减少了。",
-        "pinyin": "Zuì jìn tā de gù kè jiǎn shǎo le.",
-        "english": "His audience is falling off these days.",
+        "hanzi": "这个城市的空气污染减少了很多。",
+        "pinyin": "Zhè gè chéng shì de kōng qì wū rǎn jiǎn shǎo le hěn duō.",
+        "english": "Air pollution in this city has decreased a lot.",
         "tokens": [
-          "最近",
-          "他",
+          "这",
+          "个",
+          "城市",
           "的",
-          "顾客",
+          "空气",
+          "污染",
           "减少",
-          "了"
+          "了",
+          "很",
+          "多"
         ]
       }
     },
@@ -7421,17 +7432,17 @@
       "pinyin": "zhèng hǎo",
       "english": "Just (in time) / just right",
       "example": {
-        "hanzi": "你来得正好我们刚开始。",
-        "pinyin": "Nǐ lái de zhèng hǎo wǒ men gāng kāi shǐ.",
-        "english": "You arrived at just the right time; we just started.",
+        "hanzi": "这件衣服我穿着正好。",
+        "pinyin": "Zhè jiàn yī fu wǒ chuān zhe zhèng hǎo.",
+        "english": "This piece of clothing fits me just right.",
         "tokens": [
-          "你",
-          "来",
-          "得",
-          "正好",
-          "我们",
-          "刚",
-          "开始"
+          "这",
+          "件",
+          "衣服",
+          "我",
+          "穿",
+          "着",
+          "正好"
         ]
       }
     },
@@ -7742,7 +7753,7 @@
       "example": {
         "hanzi": "最近他的顾客减少了。",
         "pinyin": "Zuì jìn tā de gù kè jiǎn shǎo le.",
-        "english": "His audience is falling off these days.",
+        "english": "Recently his customers have decreased.",
         "tokens": [
           "最近",
           "他",
@@ -7894,13 +7905,17 @@
       "pinyin": "zuò zhě",
       "english": "Author; writer",
       "example": {
-        "hanzi": "他是作者。",
-        "pinyin": "Tā shì zuò zhě.",
-        "english": "He writes books.",
+        "hanzi": "这本书的作者非常有名。",
+        "pinyin": "Zhè běn shū de zuò zhě fēi cháng yǒu míng.",
+        "english": "The author of this book is very famous.",
         "tokens": [
-          "他",
-          "是",
-          "作者"
+          "这",
+          "本",
+          "书",
+          "的",
+          "作者",
+          "非常",
+          "有名"
         ]
       }
     },
@@ -8108,8 +8123,8 @@
       "pinyin": "fù",
       "english": "Rich / abundant",
       "example": {
-        "hanzi": "他虽然不富但是很快乐。",
-        "pinyin": "Tā suī rán bù fù dàn shì hěn kuài lè.",
+        "hanzi": "他虽然不富，但是很快乐。",
+        "pinyin": "Tā suī rán bù fù, dàn shì hěn kuài lè.",
         "english": "Although he is not rich, he is very happy.",
         "tokens": [
           "他",
@@ -8229,8 +8244,8 @@
       "pinyin": "suí zhe",
       "english": "Along with / in the wake of",
       "example": {
-        "hanzi": "随着经济的发展生活更方便了。",
-        "pinyin": "Suí zhe jīng jì de fā zhǎn shēng huó gèng fāng biàn le.",
+        "hanzi": "随着经济的发展，生活更方便了。",
+        "pinyin": "Suí zhe jīng jì de fā zhǎn, shēng huó gèng fāng biàn le.",
         "english": "Along with economic development, life has become more convenient.",
         "tokens": [
           "随着",
@@ -8251,8 +8266,8 @@
       "pinyin": "zhǐ hǎo",
       "english": "To have no other option but to ...; to have to; to be forced to",
       "example": {
-        "hanzi": "下雨了我们只好在家看电影。",
-        "pinyin": "Xià yǔ le wǒ men zhǐ hǎo zài jiā kàn diàn yǐng.",
+        "hanzi": "下雨了，我们只好在家看电影。",
+        "pinyin": "Xià yǔ le, wǒ men zhǐ hǎo zài jiā kàn diàn yǐng.",
         "english": "It rained, so we had no choice but to watch a movie at home.",
         "tokens": [
           "下雨",
@@ -8567,15 +8582,16 @@
       "pinyin": "wū rǎn",
       "english": "To pollute; to contaminate (lit. and fig.)",
       "example": {
-        "hanzi": "我们应该保护环境减少污染。",
-        "pinyin": "Wǒ men yīng gāi bǎo hù huán jìng jiǎn shǎo wū rǎn.",
-        "english": "We should protect the environment and reduce pollution.",
+        "hanzi": "这个地方几乎没有空气污染。",
+        "pinyin": "Zhè gè dì fang jī hū méi yǒu kōng qì wū rǎn.",
+        "english": "There is almost no air pollution in this place.",
         "tokens": [
-          "我们",
-          "应该",
-          "保护",
-          "环境",
-          "减少",
+          "这",
+          "个",
+          "地方",
+          "几乎",
+          "没有",
+          "空气",
           "污染"
         ]
       }
@@ -8587,12 +8603,13 @@
       "pinyin": "cè suǒ",
       "english": "Toilet / lavatory",
       "example": {
-        "hanzi": "你是个厕所！",
-        "pinyin": "Nǐ shì gè cè suǒ!",
-        "english": "You are a toilet!",
+        "hanzi": "餐厅旁边有个厕所。",
+        "pinyin": "Cān tīng páng biān yǒu gè cè suǒ.",
+        "english": "There is a restroom next to the restaurant.",
         "tokens": [
-          "你",
-          "是",
+          "餐厅",
+          "旁边",
+          "有",
           "个",
           "厕所"
         ]
@@ -8625,8 +8642,8 @@
       "pinyin": "lì rú",
       "english": "For example; for instance; such as",
       "example": {
-        "hanzi": "他会很多运动例如游泳和跑步。",
-        "pinyin": "Tā huì hěn duō yùn dòng lì rú yóu yǒng hé pǎo bù.",
+        "hanzi": "他会很多运动，例如游泳和跑步。",
+        "pinyin": "Tā huì hěn duō yùn dòng, lì rú yóu yǒng hé pǎo bù.",
         "english": "He can do many sports, for example swimming and jogging.",
         "tokens": [
           "他",
@@ -9029,13 +9046,17 @@
       "pinyin": "bèn",
       "english": "Stupid / foolish",
       "example": {
-        "hanzi": "他比你笨。",
-        "pinyin": "Tā bǐ nǐ bèn.",
-        "english": "He's dumber than you.",
+        "hanzi": "这只小狗一点儿也不笨。",
+        "pinyin": "Zhè zhī xiǎo gǒu yī diǎnr yě bù bèn.",
+        "english": "This little dog is not stupid at all.",
         "tokens": [
-          "他",
-          "比",
-          "你",
+          "这",
+          "只",
+          "小",
+          "狗",
+          "一点儿",
+          "也",
+          "不",
           "笨"
         ]
       }
@@ -9145,8 +9166,8 @@
       "pinyin": "qí cì",
       "english": "Next / secondly",
       "example": {
-        "hanzi": "首先检查质量其次比较价格。",
-        "pinyin": "Shǒu xiān jiǎn chá zhì liàng qí cì bǐ jiào jià gé.",
+        "hanzi": "首先检查质量，其次比较价格。",
+        "pinyin": "Shǒu xiān jiǎn chá zhì liàng, qí cì bǐ jiào jià gé.",
         "english": "First check the quality, and secondly compare the price.",
         "tokens": [
           "首先",
@@ -9165,16 +9186,16 @@
       "pinyin": "yǎn jìng",
       "english": "Spectacles / eyeglasses",
       "example": {
-        "hanzi": "他不知道自己需要带眼镜。",
-        "pinyin": "Tā bù zhī dào zì jǐ xū yào dài yǎn jìng.",
-        "english": "He didn't know he needed glasses.",
+        "hanzi": "他每天都戴着眼镜。",
+        "pinyin": "Tā měi tiān dōu dài zhe yǎn jìng.",
+        "english": "He wears glasses every day.",
         "tokens": [
           "他",
-          "不",
-          "知道",
-          "自己",
-          "需要",
-          "带",
+          "每",
+          "天",
+          "都",
+          "戴",
+          "着",
           "眼镜"
         ]
       }
@@ -9412,8 +9433,8 @@
       "english": "To consult / to talk over",
       "example": {
         "hanzi": "我得找人商量一下。",
-        "pinyin": "Wǒ de zhǎo rén shāng liang yíxià.",
-        "english": "I need to find someone to discuss this with.",
+        "pinyin": "Wǒ děi zhǎo rén shāng liang yíxià.",
+        "english": "I need to find someone to talk it over with.",
         "tokens": [
           "我",
           "得",
@@ -9849,17 +9870,17 @@
       "pinyin": "shī fu",
       "english": "Master / qualified worker",
       "example": {
-        "hanzi": "师傅请问去火车站怎么走？",
-        "pinyin": "Shī fu qǐng wèn qù huǒ chē zhàn zěn me zǒu?",
-        "english": "Excuse me, sir, how do I get to the train station?",
+        "hanzi": "这位师傅的普通话很标准。",
+        "pinyin": "Zhè wèi shī fu de pǔ tōng huà hěn biāo zhǔn.",
+        "english": "This master's Mandarin is very standard.",
         "tokens": [
+          "这",
+          "位",
           "师傅",
-          "请",
-          "问",
-          "去",
-          "火车站",
-          "怎么",
-          "走"
+          "的",
+          "普通话",
+          "很",
+          "标准"
         ]
       }
     },
@@ -9931,17 +9952,15 @@
       "pinyin": "lì qi",
       "english": "Strength",
       "example": {
-        "hanzi": "哥哥力气很大能搬桌子。",
-        "pinyin": "Gē ge lì qi hěn dà néng bān zhuō zi.",
-        "english": "My older brother is very strong and can move the table.",
+        "hanzi": "哥哥的力气非常大。",
+        "pinyin": "Gē ge de lì qi fēi cháng dà.",
+        "english": "My older brother is very strong.",
         "tokens": [
           "哥哥",
+          "的",
           "力气",
-          "很",
-          "大",
-          "能",
-          "搬",
-          "桌子"
+          "非常",
+          "大"
         ]
       }
     },
@@ -10272,16 +10291,17 @@
       "pinyin": "sàn bù",
       "english": "To take a walk; to go for a walk",
       "example": {
-        "hanzi": "去公园散步你觉得怎么样？",
-        "pinyin": "Qù gōng yuán sàn bù nǐ jué de zěn me yàng?",
-        "english": "What do you say to taking a walk in the park?",
+        "hanzi": "爷爷每天晚上去公园散步。",
+        "pinyin": "Yé ye měi tiān wǎn shang qù gōng yuán sàn bù.",
+        "english": "Grandpa goes for a walk in the park every evening.",
         "tokens": [
+          "爷爷",
+          "每",
+          "天",
+          "晚上",
           "去",
           "公园",
-          "散步",
-          "你",
-          "觉得",
-          "怎么样"
+          "散步"
         ]
       }
     },
@@ -10384,14 +10404,15 @@
       "pinyin": "dé yì",
       "english": "Proud of oneself / pleased with oneself",
       "example": {
-        "hanzi": "比赛赢了他非常得意。",
-        "pinyin": "Bǐ sài yíng le tā fēi cháng dé yì.",
-        "english": "Having won the match, he felt very proud of himself.",
+        "hanzi": "他对自己的成绩非常得意。",
+        "pinyin": "Tā duì zì jǐ de chéng jì fēi cháng dé yì.",
+        "english": "He is very proud of his grades.",
         "tokens": [
-          "比赛",
-          "赢",
-          "了",
           "他",
+          "对",
+          "自己",
+          "的",
+          "成绩",
           "非常",
           "得意"
         ]
@@ -10541,18 +10562,18 @@
       "pinyin": "máo jīn",
       "english": "Towel",
       "example": {
-        "hanzi": "洗完脸用干净的毛巾擦。",
-        "pinyin": "Xǐ wán liǎn yòng gān jìng de máo jīn cā.",
-        "english": "After washing your face, wipe it with a clean towel.",
+        "hanzi": "请给我一条干净的毛巾。",
+        "pinyin": "Qǐng gěi wǒ yī tiáo gān jìng de máo jīn.",
+        "english": "Please give me a clean towel.",
         "tokens": [
-          "洗",
-          "完",
-          "脸",
-          "用",
+          "请",
+          "给",
+          "我",
+          "一",
+          "条",
           "干净",
           "的",
-          "毛巾",
-          "擦"
+          "毛巾"
         ]
       }
     },
@@ -11570,14 +11591,13 @@
       "pinyin": "mǎ hu",
       "english": "Careless / sloppy",
       "example": {
-        "hanzi": "写作业要认真不能马虎。",
-        "pinyin": "Xiě zuò yè yào rèn zhēn bù néng mǎ hu.",
-        "english": "You must do your homework carefully and not be sloppy.",
+        "hanzi": "做事情一定不能马虎。",
+        "pinyin": "Zuò shì qing yī dìng bù néng mǎ hu.",
+        "english": "You must never be careless when doing things.",
         "tokens": [
-          "写",
-          "作业",
-          "要",
-          "认真",
+          "做",
+          "事情",
+          "一定",
           "不",
           "能",
           "马虎"
@@ -11613,18 +11633,17 @@
       "pinyin": "cū xīn",
       "english": "Careless / thoughtless",
       "example": {
-        "hanzi": "他太粗心了又忘记带钥匙。",
-        "pinyin": "Tā tài cū xīn le yòu wàng jì dài yào shi.",
-        "english": "He is so careless; he forgot to bring his keys again.",
+        "hanzi": "他工作的时候太粗心了。",
+        "pinyin": "Tā gōng zuò de shí hou tài cū xīn le.",
+        "english": "He is too careless when he works.",
         "tokens": [
           "他",
+          "工作",
+          "的",
+          "时候",
           "太",
           "粗心",
-          "了",
-          "又",
-          "忘记",
-          "带",
-          "钥匙"
+          "了"
         ]
       }
     },
@@ -11656,18 +11675,20 @@
       "pinyin": "yù xí",
       "english": "To prepare a lesson",
       "example": {
-        "hanzi": "明天有汉语课我先预习一下。",
-        "pinyin": "Míng tiān yǒu Hàn yǔ kè wǒ xiān yù xí yíxià.",
-        "english": "There is a Chinese class tomorrow, so I will preview the lesson first.",
+        "hanzi": "我每天晚上都会预习明天的课。",
+        "pinyin": "Wǒ měi tiān wǎn shang dōu huì yù xí míng tiān de kè.",
+        "english": "I preview tomorrow's lesson every evening.",
         "tokens": [
-          "明天",
-          "有",
-          "汉语",
-          "课",
           "我",
-          "先",
+          "每",
+          "天",
+          "晚上",
+          "都",
+          "会",
           "预习",
-          "一下"
+          "明天",
+          "的",
+          "课"
         ]
       }
     },
@@ -11678,8 +11699,8 @@
       "pinyin": "zhàn xiàn",
       "english": "Busy (telephone line)",
       "example": {
-        "hanzi": "我给他打电话但是一直占线。",
-        "pinyin": "Wǒ gěi tā dǎ diàn huà dàn shì yī zhí zhàn xiàn.",
+        "hanzi": "我给他打电话，但是一直占线。",
+        "pinyin": "Wǒ gěi tā dǎ diàn huà, dàn shì yī zhí zhàn xiàn.",
         "english": "I called him, but the line has been busy the whole time.",
         "tokens": [
           "我",
@@ -11973,14 +11994,17 @@
       "pinyin": "dǎ zhāo hu",
       "english": "To greet sb by word or action / to give prior notice",
       "example": {
-        "hanzi": "每次见面都打招呼。",
-        "pinyin": "Měi cì jiàn miàn dōu dǎ zhāo hu.",
-        "english": "Greet someone every time you meet them.",
+        "hanzi": "邻居每次见面都和我打招呼。",
+        "pinyin": "Lín jū měi cì jiàn miàn dōu hé wǒ dǎ zhāo hu.",
+        "english": "My neighbor greets me every time we meet.",
         "tokens": [
+          "邻居",
           "每",
           "次",
           "见面",
           "都",
+          "和",
+          "我",
           "打招呼"
         ]
       }
