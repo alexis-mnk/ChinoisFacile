@@ -10,6 +10,7 @@ import com.chinoisfacile.mandarin.domain.lesson.ExerciseGenerator
 import com.chinoisfacile.mandarin.domain.lesson.LessonSessionEngine
 import com.chinoisfacile.mandarin.domain.lesson.SessionAdvanceResult
 import com.chinoisfacile.mandarin.domain.lesson.SessionCompletionData
+import com.chinoisfacile.mandarin.domain.lesson.SessionPhase
 import com.chinoisfacile.mandarin.domain.lesson.TokenChip
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -47,6 +48,12 @@ class LessonViewModel(
         repository.observeSoundEffectsEnabled()
             .onEach { enabled ->
                 soundEffectsEnabled = enabled
+            }
+            .launchIn(viewModelScope)
+
+        repository.observeToneColorsEnabled()
+            .onEach { enabled ->
+                _uiState.update { it.copy(toneColorsEnabled = enabled) }
             }
             .launchIn(viewModelScope)
 
@@ -91,6 +98,9 @@ class LessonViewModel(
                     totalCount = sessionEngine.totalCount,
                     showPinyin = defaultShowPinyin,
                     showAudioPinyinHint = false,
+                    sessionPhase = SessionPhase.MAIN,
+                    mistakeReviewCurrent = 0,
+                    mistakeReviewTotal = 0,
                 )
             }
         }
@@ -152,12 +162,17 @@ class LessonViewModel(
             is Exercise.AudioToEnglish -> state.selectedOption == exercise.correctOption
             is Exercise.AudioToHanzi -> state.selectedOption == exercise.correctOption
             is Exercise.EnglishToHanzi -> state.selectedOption == exercise.correctOption
+            is Exercise.Cloze -> state.selectedOption == exercise.correctOption
             is Exercise.SentenceOrder ->
                 state.selectedTokens.map { it.text } == exercise.expectedTokens
         }
 
         val answeredWithoutPinyin = isCorrect &&
-            (exercise is Exercise.HanziToEnglish || exercise is Exercise.EnglishToHanzi) &&
+            (
+                exercise is Exercise.HanziToEnglish ||
+                    exercise is Exercise.EnglishToHanzi ||
+                    exercise is Exercise.Cloze
+                ) &&
             !state.showPinyin
         sessionEngine.recordAnswer(
             exercise = exercise,
@@ -208,6 +223,9 @@ class LessonViewModel(
                         selectedOption = null,
                         selectedTokens = emptyList(),
                         showAudioPinyinHint = false,
+                        sessionPhase = result.phase,
+                        mistakeReviewCurrent = result.mistakeReviewCurrent,
+                        mistakeReviewTotal = result.mistakeReviewTotal,
                         feedback = null,
                     )
                 }
@@ -239,6 +257,9 @@ class LessonViewModel(
                     selectedOption = null,
                     selectedTokens = emptyList(),
                     showAudioPinyinHint = false,
+                    sessionPhase = SessionPhase.MAIN,
+                    mistakeReviewCurrent = 0,
+                    mistakeReviewTotal = 0,
                     feedback = null,
                     summary = summary,
                 )

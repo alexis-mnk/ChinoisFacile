@@ -1,6 +1,6 @@
 {
   "hskLevel": 1,
-  "catalogVersion": 14,
+  "catalogVersion": 15,
   "units": [
     {
       "id": "hsk1_u1",
@@ -228,15 +228,13 @@
       "pinyin": "hǎo",
       "english": "Good / Well",
       "example": {
-        "hanzi": "你好认识很高兴！",
-        "pinyin": "Nǐ hǎo rèn shi hěn gāo xìng!",
-        "english": "Hello, nice to meet you!",
+        "hanzi": "你好吗？",
+        "pinyin": "Nǐ hǎo ma?",
+        "english": "How are you?",
         "tokens": [
           "你",
           "好",
-          "认识",
-          "很",
-          "高兴"
+          "吗"
         ]
       }
     },

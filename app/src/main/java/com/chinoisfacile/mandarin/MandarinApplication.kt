@@ -11,4 +11,9 @@ class MandarinApplication : Application() {
         super.onCreate()
         container = AppContainer(this)
     }
+
+    override fun onTerminate() {
+        container.release()
+        super.onTerminate()
+    }
 }

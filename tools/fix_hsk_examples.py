@@ -102,7 +102,7 @@ MECHANICAL_TEMPLATE_RE = re.compile(
 
 HANDCRAFTED_EXAMPLES: dict[tuple[int, str], tuple[list[str], str, str]] = {
     # --- HSK 1 ---
-    (1, "好"): (["你", "好", "认识", "很", "高兴"], "！", "Hello, nice to meet you!"),
+    (1, "好"): (["你", "好", "吗"], "？", "How are you?"),
     (1, "喂"): (["喂", "你", "好", "在", "家", "吗"], "？", "Hello, are you at home?"),
     (1, "谢谢"): (["老师", "谢谢", "你"], "！", "Thank you, teacher!"),
     (1, "再见"): (["朋友", "明天", "再见"], "！", "Goodbye my friend, see you tomorrow!"),

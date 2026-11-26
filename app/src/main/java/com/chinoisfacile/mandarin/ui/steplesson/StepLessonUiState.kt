@@ -1,5 +1,6 @@
 package com.chinoisfacile.mandarin.ui.steplesson
 
+import androidx.compose.runtime.Immutable
 import com.chinoisfacile.mandarin.data.model.GrammarNote
 import com.chinoisfacile.mandarin.data.model.VocabWord
 import com.chinoisfacile.mandarin.domain.audio.TtsStatus
@@ -10,6 +11,7 @@ enum class StepLessonDisplayMode {
     LIST,
 }
 
+@Immutable
 data class StepLessonUiState(
     val isLoading: Boolean = true,
     val isError: Boolean = false,
@@ -26,6 +28,8 @@ data class StepLessonUiState(
     val isLessonCompleted: Boolean = false,
     val isQuizUnlocked: Boolean = false,
     val justCompletedBannerVisible: Boolean = false,
+    val toneColorsEnabled: Boolean = true,
+    val exampleTokenLookup: Map<String, VocabWord> = emptyMap(),
     val ttsStatus: TtsStatus = TtsStatus.INITIALIZING,
 ) {
     val safeCardIndex: Int

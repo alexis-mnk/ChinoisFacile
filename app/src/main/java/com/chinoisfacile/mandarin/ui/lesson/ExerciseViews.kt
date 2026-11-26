@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -22,6 +23,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Icon
+import androidx.compose.material3.LocalMinimumInteractiveComponentSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.SuggestionChip
@@ -30,17 +32,23 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import com.chinoisfacile.mandarin.R
 import com.chinoisfacile.mandarin.domain.lesson.Exercise
 import com.chinoisfacile.mandarin.domain.lesson.TokenChip
 import com.chinoisfacile.mandarin.ui.components.AudioControlButtons
 import com.chinoisfacile.mandarin.ui.components.HanziCard
+import com.chinoisfacile.mandarin.ui.components.ToneColoredPinyinText
 import com.chinoisfacile.mandarin.ui.theme.CjkTextStyles
 import com.chinoisfacile.mandarin.ui.theme.MandarinTheme
 
@@ -49,6 +57,7 @@ fun HanziToEnglishView(
     exercise: Exercise.HanziToEnglish,
     selectedOption: String?,
     showPinyin: Boolean,
+    toneColorsEnabled: Boolean,
     audioEnabled: Boolean,
     locked: Boolean,
     onTogglePinyin: () -> Unit,
@@ -72,6 +81,7 @@ fun HanziToEnglishView(
             onTogglePinyin = onTogglePinyin,
             onPlayAudio = onPlayAudio,
             audioEnabled = audioEnabled,
+            toneColorsEnabled = toneColorsEnabled,
         )
 
         Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
@@ -93,6 +103,7 @@ fun AudioToEnglishView(
     exercise: Exercise.AudioToEnglish,
     selectedOption: String?,
     showPinyinHint: Boolean,
+    toneColorsEnabled: Boolean,
     audioEnabled: Boolean,
     locked: Boolean,
     onTogglePinyinHint: () -> Unit,
@@ -105,7 +116,7 @@ fun AudioToEnglishView(
 
     Column(
         modifier = modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(16.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         Text(
             text = stringResource(R.string.exercise_audio_to_english_prompt),
@@ -121,9 +132,9 @@ fun AudioToEnglishView(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 20.dp, vertical = 20.dp),
+                    .padding(horizontal = 16.dp, vertical = 14.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(14.dp),
+                verticalArrangement = Arrangement.spacedBy(10.dp),
             ) {
                 Surface(
                     onClick = onPlayNormal,
@@ -132,13 +143,13 @@ fun AudioToEnglishView(
                     color = if (audioEnabled) extended.lessonNode else extended.neutralContainer,
                     contentColor = if (audioEnabled) extended.onLessonNode else extended.neutral,
                     shadowElevation = if (audioEnabled) 3.dp else 0.dp,
-                    modifier = Modifier.size(72.dp),
+                    modifier = Modifier.size(56.dp),
                 ) {
                     Box(contentAlignment = Alignment.Center) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.VolumeUp,
                             contentDescription = stringResource(R.string.audio_tap_to_listen_cd),
-                            modifier = Modifier.size(36.dp),
+                            modifier = Modifier.size(28.dp),
                         )
                     }
                 }
@@ -152,7 +163,7 @@ fun AudioToEnglishView(
                 if (locked) {
                     Surface(
                         shape = RoundedCornerShape(12.dp),
-                        color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.55f),
+                        color = MaterialTheme.colorScheme.surfaceVariant,
                     ) {
                         Row(
                             modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
@@ -162,47 +173,54 @@ fun AudioToEnglishView(
                             Text(
                                 text = exercise.word.hanzi,
                                 style = CjkTextStyles.HanziChoice,
-                                color = MaterialTheme.colorScheme.onPrimaryContainer,
+                                color = MaterialTheme.colorScheme.onSurface,
                             )
                             Text(
                                 text = "•",
                                 style = MaterialTheme.typography.titleMedium,
-                                color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.7f),
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
                             )
-                            Text(
-                                text = exercise.word.pinyin,
+                            ToneColoredPinyinText(
+                                pinyin = exercise.word.pinyin,
+                                toneColorsEnabled = toneColorsEnabled,
                                 style = CjkTextStyles.Pinyin,
-                                color = MaterialTheme.colorScheme.primary,
+                                fallbackColor = MaterialTheme.colorScheme.primary,
                             )
                         }
                     }
                 } else {
                     AnimatedVisibility(visible = !audioEnabled || showPinyinHint) {
-                        Text(
-                            text = exercise.word.pinyin,
+                        ToneColoredPinyinText(
+                            pinyin = exercise.word.pinyin,
+                            toneColorsEnabled = toneColorsEnabled,
                             style = CjkTextStyles.Pinyin,
-                            color = MaterialTheme.colorScheme.primary,
+                            fallbackColor = MaterialTheme.colorScheme.primary,
                         )
                     }
 
                     if (audioEnabled) {
-                        TextButton(onClick = onTogglePinyinHint) {
-                            Text(
-                                text = stringResource(
-                                    if (showPinyinHint) {
-                                        R.string.audio_hide_pinyin_hint
-                                    } else {
-                                        R.string.audio_show_pinyin_hint
-                                    },
-                                ),
-                            )
+                        CompositionLocalProvider(LocalMinimumInteractiveComponentSize provides 36.dp) {
+                            TextButton(
+                                onClick = onTogglePinyinHint,
+                                contentPadding = PaddingValues(horizontal = 12.dp, vertical = 4.dp),
+                            ) {
+                                Text(
+                                    text = stringResource(
+                                        if (showPinyinHint) {
+                                            R.string.audio_hide_pinyin_hint
+                                        } else {
+                                            R.string.audio_show_pinyin_hint
+                                        },
+                                    ),
+                                )
+                            }
                         }
                     }
                 }
             }
         }
 
-        Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
             exercise.options.forEach { option ->
                 ChoiceCard(
                     text = option,
@@ -221,6 +239,7 @@ fun AudioToHanziView(
     exercise: Exercise.AudioToHanzi,
     selectedOption: String?,
     showPinyin: Boolean,
+    toneColorsEnabled: Boolean,
     audioEnabled: Boolean,
     locked: Boolean,
     onPlayNormal: () -> Unit,
@@ -257,10 +276,11 @@ fun AudioToHanziView(
                 )
 
                 AnimatedVisibility(visible = !audioEnabled || showPinyin) {
-                    Text(
-                        text = exercise.word.pinyin,
+                    ToneColoredPinyinText(
+                        pinyin = exercise.word.pinyin,
+                        toneColorsEnabled = toneColorsEnabled,
                         style = CjkTextStyles.Pinyin,
-                        color = MaterialTheme.colorScheme.primary,
+                        fallbackColor = MaterialTheme.colorScheme.primary,
                     )
                 }
             }
@@ -293,6 +313,7 @@ fun EnglishToHanziView(
     exercise: Exercise.EnglishToHanzi,
     selectedOption: String?,
     showPinyin: Boolean,
+    toneColorsEnabled: Boolean,
     locked: Boolean,
     onTogglePinyin: () -> Unit,
     onSelectOption: (String) -> Unit,
@@ -349,6 +370,141 @@ fun EnglishToHanziView(
                             isSelected = selectedOption == option,
                             isCjk = true,
                             enabled = !locked,
+                            toneColorsEnabled = toneColorsEnabled,
+                            onClick = { onSelectOption(option) },
+                            modifier = Modifier.weight(1f),
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun ClozeView(
+    exercise: Exercise.Cloze,
+    selectedOption: String?,
+    isAnswerCorrect: Boolean?,
+    showPinyin: Boolean,
+    toneColorsEnabled: Boolean,
+    audioEnabled: Boolean,
+    locked: Boolean,
+    onTogglePinyin: () -> Unit,
+    onPlayNormal: () -> Unit,
+    onPlaySlow: () -> Unit,
+    onSelectOption: (String) -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    val extended = MandarinTheme.extendedColors
+
+    val blankDisplay = when {
+        locked -> " ${exercise.correctOption} "
+        !selectedOption.isNullOrBlank() -> " $selectedOption "
+        else -> "  ____  "
+    }
+    val blankBgColor = when {
+        locked && isAnswerCorrect == true -> extended.successContainer
+        locked && isAnswerCorrect == false -> extended.errorContainer
+        !selectedOption.isNullOrBlank() -> MaterialTheme.colorScheme.primaryContainer
+        else -> MaterialTheme.colorScheme.surfaceVariant
+    }
+    val blankTextColor = when {
+        locked && isAnswerCorrect == true -> extended.onSuccessContainer
+        locked && isAnswerCorrect == false -> extended.onErrorContainer
+        !selectedOption.isNullOrBlank() -> MaterialTheme.colorScheme.primary
+        else -> MaterialTheme.colorScheme.onSurfaceVariant
+    }
+
+    val annotatedSentence = buildAnnotatedString {
+        append(exercise.sentencePrefix)
+        withStyle(
+            SpanStyle(
+                color = blankTextColor,
+                background = blankBgColor,
+                fontWeight = FontWeight.Bold,
+            ),
+        ) {
+            append(blankDisplay)
+        }
+        append(exercise.sentenceSuffix)
+    }
+
+    Column(
+        modifier = modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+    ) {
+        Text(
+            text = stringResource(R.string.exercise_cloze_prompt),
+            style = MaterialTheme.typography.titleLarge,
+        )
+
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(20.dp),
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+            elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 20.dp, vertical = 18.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(10.dp),
+            ) {
+                Text(
+                    text = annotatedSentence,
+                    style = CjkTextStyles.HanziChoice,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    textAlign = TextAlign.Center,
+                )
+
+                Text(
+                    text = exercise.promptEnglish,
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    textAlign = TextAlign.Center,
+                )
+
+                if (locked) {
+                    ToneColoredPinyinText(
+                        pinyin = exercise.word.examplePinyin,
+                        toneColorsEnabled = toneColorsEnabled,
+                        style = MaterialTheme.typography.bodyMedium,
+                        fallbackColor = MaterialTheme.colorScheme.primary,
+                        textAlign = TextAlign.Center,
+                    )
+                    AudioControlButtons(
+                        enabled = audioEnabled,
+                        onPlayNormal = onPlayNormal,
+                        onPlaySlow = onPlaySlow,
+                    )
+                } else {
+                    TextButton(onClick = onTogglePinyin) {
+                        Text(
+                            text = stringResource(
+                                if (showPinyin) R.string.pinyin_hide else R.string.pinyin_show,
+                            ),
+                        )
+                    }
+                }
+            }
+        }
+
+        Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            exercise.options.chunked(2).forEach { rowOptions ->
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(10.dp),
+                ) {
+                    rowOptions.forEach { option ->
+                        ChoiceCard(
+                            text = option,
+                            subText = if (showPinyin) exercise.optionPinyins[option] else null,
+                            isSelected = selectedOption == option,
+                            isCjk = true,
+                            enabled = !locked,
+                            toneColorsEnabled = toneColorsEnabled,
                             onClick = { onSelectOption(option) },
                             modifier = Modifier.weight(1f),
                         )
@@ -365,6 +521,7 @@ fun SentenceOrderView(
     exercise: Exercise.SentenceOrder,
     selectedTokens: List<TokenChip>,
     showPinyin: Boolean,
+    toneColorsEnabled: Boolean,
     locked: Boolean,
     onTogglePinyin: () -> Unit,
     onToggleToken: (TokenChip) -> Unit,
@@ -430,6 +587,7 @@ fun SentenceOrderView(
                                     TokenChipLabel(
                                         chip = chip,
                                         showPinyin = showPinyin,
+                                        toneColorsEnabled = toneColorsEnabled,
                                         isSelected = true,
                                     )
                                 },
@@ -477,6 +635,7 @@ fun SentenceOrderView(
                         TokenChipLabel(
                             chip = chip,
                             showPinyin = showPinyin,
+                            toneColorsEnabled = toneColorsEnabled,
                             isSelected = false,
                         )
                     },
@@ -490,6 +649,7 @@ fun SentenceOrderView(
 private fun TokenChipLabel(
     chip: TokenChip,
     showPinyin: Boolean,
+    toneColorsEnabled: Boolean,
     isSelected: Boolean,
 ) {
     Column(
@@ -502,15 +662,24 @@ private fun TokenChipLabel(
         )
         if (showPinyin && chip.pinyin.isNotBlank()) {
             Spacer(modifier = Modifier.height(1.dp))
-            Text(
-                text = chip.pinyin,
-                style = MaterialTheme.typography.labelSmall,
-                color = if (isSelected) {
-                    MaterialTheme.colorScheme.onSecondaryContainer
-                } else {
-                    MaterialTheme.colorScheme.primary
-                },
-            )
+            if (toneColorsEnabled && !isSelected) {
+                ToneColoredPinyinText(
+                    pinyin = chip.pinyin,
+                    toneColorsEnabled = true,
+                    style = MaterialTheme.typography.labelSmall,
+                    fallbackColor = MaterialTheme.colorScheme.primary,
+                )
+            } else {
+                Text(
+                    text = chip.pinyin,
+                    style = MaterialTheme.typography.labelSmall,
+                    color = if (isSelected) {
+                        MaterialTheme.colorScheme.onSecondaryContainer
+                    } else {
+                        MaterialTheme.colorScheme.primary
+                    },
+                )
+            }
         }
     }
 }
@@ -524,6 +693,7 @@ private fun ChoiceCard(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     subText: String? = null,
+    toneColorsEnabled: Boolean = false,
 ) {
     val borderColor = if (isSelected) {
         MaterialTheme.colorScheme.primary
@@ -547,7 +717,7 @@ private fun ChoiceCard(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 14.dp),
+                .padding(horizontal = 16.dp, vertical = 12.dp),
             horizontalAlignment = if (isCjk) Alignment.CenterHorizontally else Alignment.Start,
         ) {
             Text(
@@ -555,15 +725,37 @@ private fun ChoiceCard(
                 style = if (isCjk) CjkTextStyles.HanziChoice else MaterialTheme.typography.bodyLarge,
                 fontWeight = FontWeight.Medium,
                 textAlign = if (isCjk) TextAlign.Center else TextAlign.Start,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis,
             )
             if (!subText.isNullOrBlank()) {
                 Spacer(modifier = Modifier.height(2.dp))
-                Text(
-                    text = subText,
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.primary,
-                    textAlign = if (isCjk) TextAlign.Center else TextAlign.Start,
-                )
+                val useToneColors = toneColorsEnabled && !isSelected && enabled
+                val monochromeColor = if (isSelected) {
+                    MaterialTheme.colorScheme.onPrimaryContainer
+                } else {
+                    MaterialTheme.colorScheme.primary
+                }
+                if (useToneColors) {
+                    ToneColoredPinyinText(
+                        pinyin = subText,
+                        toneColorsEnabled = true,
+                        style = MaterialTheme.typography.bodyMedium,
+                        fallbackColor = monochromeColor,
+                        textAlign = if (isCjk) TextAlign.Center else TextAlign.Start,
+                        maxLines = 2,
+                        overflow = TextOverflow.Ellipsis,
+                    )
+                } else {
+                    Text(
+                        text = subText,
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = monochromeColor,
+                        textAlign = if (isCjk) TextAlign.Center else TextAlign.Start,
+                        maxLines = 2,
+                        overflow = TextOverflow.Ellipsis,
+                    )
+                }
             }
         }
     }

@@ -1,8 +1,10 @@
 package com.chinoisfacile.mandarin.ui.stats
 
+import androidx.compose.runtime.Immutable
 import com.chinoisfacile.mandarin.data.model.HskLevelMastery
 import com.chinoisfacile.mandarin.data.model.UserStats
 
+@Immutable
 data class StatsUiState(
     val isLoading: Boolean = true,
     val stats: UserStats = UserStats(),

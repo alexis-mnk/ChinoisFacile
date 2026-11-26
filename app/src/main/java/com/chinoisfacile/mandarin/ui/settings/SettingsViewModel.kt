@@ -21,17 +21,30 @@ class SettingsViewModel(
     private val showResetDialog = MutableStateFlow(false)
     private val resetSuccessEvent = MutableStateFlow(0)
 
-    val uiState: StateFlow<SettingsUiState> = combine(
+    private val preferencesFlow = combine(
         repository.observeThemeMode(),
         repository.observeShowPinyinByDefault(),
+        repository.observeToneColorsEnabled(),
         repository.observeSoundEffectsEnabled(),
-        showResetDialog,
-        resetSuccessEvent,
-    ) { themeMode, showPinyin, soundEffectsEnabled, dialogVisible, resetCount ->
-        SettingsUiState(
+    ) { themeMode, showPinyin, toneColorsEnabled, soundEffectsEnabled ->
+        SettingsPreferences(
             themeMode = themeMode,
             showPinyinByDefault = showPinyin,
+            toneColorsEnabled = toneColorsEnabled,
             soundEffectsEnabled = soundEffectsEnabled,
+        )
+    }
+
+    val uiState: StateFlow<SettingsUiState> = combine(
+        preferencesFlow,
+        showResetDialog,
+        resetSuccessEvent,
+    ) { prefs, dialogVisible, resetCount ->
+        SettingsUiState(
+            themeMode = prefs.themeMode,
+            showPinyinByDefault = prefs.showPinyinByDefault,
+            toneColorsEnabled = prefs.toneColorsEnabled,
+            soundEffectsEnabled = prefs.soundEffectsEnabled,
             showResetDialog = dialogVisible,
             resetSuccessEvent = resetCount,
         )
@@ -50,6 +63,12 @@ class SettingsViewModel(
     fun onToggleShowPinyinByDefault(enabled: Boolean) {
         viewModelScope.launch {
             repository.setShowPinyinByDefault(enabled)
+        }
+    }
+
+    fun onToggleToneColors(enabled: Boolean) {
+        viewModelScope.launch {
+            repository.setToneColorsEnabled(enabled)
         }
     }
 
@@ -77,4 +96,11 @@ class SettingsViewModel(
             resetSuccessEvent.update { it + 1 }
         }
     }
+
+    private data class SettingsPreferences(
+        val themeMode: ThemeMode,
+        val showPinyinByDefault: Boolean,
+        val toneColorsEnabled: Boolean,
+        val soundEffectsEnabled: Boolean,
+    )
 }

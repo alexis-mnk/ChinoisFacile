@@ -1,6 +1,7 @@
 package com.chinoisfacile.mandarin.ui.steplesson
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -46,13 +47,18 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.chinoisfacile.mandarin.R
@@ -61,7 +67,11 @@ import com.chinoisfacile.mandarin.data.model.VocabWord
 import com.chinoisfacile.mandarin.domain.audio.TtsStatus
 import com.chinoisfacile.mandarin.domain.progression.StepLessonCardItem
 import com.chinoisfacile.mandarin.ui.components.AudioControlButtons
+import com.chinoisfacile.mandarin.ui.components.InteractiveExampleSentence
+import com.chinoisfacile.mandarin.ui.components.ToneColoredHanziText
+import com.chinoisfacile.mandarin.ui.components.ToneColoredPinyinText
 import com.chinoisfacile.mandarin.ui.components.TtsMissingBanner
+import com.chinoisfacile.mandarin.ui.components.buildToneColoredPinyinAnnotatedString
 import com.chinoisfacile.mandarin.ui.theme.CjkTextStyles
 import com.chinoisfacile.mandarin.ui.theme.MandarinTheme
 
@@ -78,6 +88,7 @@ fun StepLessonScreen(
     Surface(
         modifier = modifier
             .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
             .safeDrawingPadding(),
         color = MaterialTheme.colorScheme.background,
     ) {
@@ -313,6 +324,10 @@ private fun StepLessonCardsContent(
     val deckSize = uiState.deckItems.size
     val extended = MandarinTheme.extendedColors
     val isGrammarCard = item is StepLessonCardItem.GrammarCard
+    val scrollState = rememberScrollState()
+    LaunchedEffect(uiState.safeCardIndex) {
+        scrollState.scrollTo(0)
+    }
 
     Column(modifier = modifier.fillMaxWidth()) {
         Column(
@@ -384,14 +399,16 @@ private fun StepLessonCardsContent(
         Column(
             modifier = Modifier
                 .weight(1f)
-                .verticalScroll(rememberScrollState())
-                .padding(horizontal = 16.dp, vertical = 8.dp),
-            verticalArrangement = Arrangement.spacedBy(14.dp),
+                .verticalScroll(scrollState)
+                .padding(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             when (item) {
                 is StepLessonCardItem.WordCard -> {
                     WordDeckCards(
                         word = item.word,
+                        tokenLookup = uiState.exampleTokenLookup,
+                        toneColorsEnabled = uiState.toneColorsEnabled,
                         audioReady = audioReady,
                         onPlayNormal = onPlayNormal,
                         onPlaySlow = onPlaySlow,
@@ -401,6 +418,7 @@ private fun StepLessonCardsContent(
                 is StepLessonCardItem.GrammarCard -> {
                     GrammarPatternCard(
                         note = item.note,
+                        toneColorsEnabled = uiState.toneColorsEnabled,
                         audioReady = audioReady,
                         onPlayNormal = onPlayNormal,
                     )
@@ -510,6 +528,8 @@ private fun StepLessonCardsContent(
 @Composable
 private fun WordDeckCards(
     word: VocabWord,
+    tokenLookup: Map<String, VocabWord>,
+    toneColorsEnabled: Boolean,
     audioReady: Boolean,
     onPlayNormal: (String) -> Unit,
     onPlaySlow: (String) -> Unit,
@@ -523,30 +543,33 @@ private fun WordDeckCards(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 20.dp, vertical = 24.dp),
+                .padding(horizontal = 20.dp, vertical = 20.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Text(
-                text = word.hanzi,
+            ToneColoredHanziText(
+                hanzi = word.hanzi,
+                pinyin = word.pinyin,
+                toneColorsEnabled = toneColorsEnabled,
                 style = CjkTextStyles.HanziDisplay,
-                color = MaterialTheme.colorScheme.onSurface,
+                fallbackColor = MaterialTheme.colorScheme.onSurface,
                 textAlign = TextAlign.Center,
             )
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                text = word.pinyin,
+            Spacer(modifier = Modifier.height(6.dp))
+            ToneColoredPinyinText(
+                pinyin = word.pinyin,
+                toneColorsEnabled = toneColorsEnabled,
                 style = CjkTextStyles.Pinyin,
-                color = MaterialTheme.colorScheme.primary,
+                fallbackColor = MaterialTheme.colorScheme.primary,
                 textAlign = TextAlign.Center,
             )
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(6.dp))
             Text(
                 text = word.english,
                 style = MaterialTheme.typography.titleLarge,
                 color = MaterialTheme.colorScheme.onSurface,
                 textAlign = TextAlign.Center,
             )
-            Spacer(modifier = Modifier.height(18.dp))
+            Spacer(modifier = Modifier.height(14.dp))
             AudioControlButtons(
                 enabled = audioReady,
                 onPlayNormal = { onPlayNormal(word.hanzi) },
@@ -573,15 +596,21 @@ private fun WordDeckCards(
                 style = MaterialTheme.typography.labelLarge,
                 color = MaterialTheme.colorScheme.primary,
             )
-            Text(
-                text = word.exampleHanzi,
-                style = CjkTextStyles.HanziListItem,
-                color = MaterialTheme.colorScheme.onSurface,
+            InteractiveExampleSentence(
+                wordId = word.id,
+                exampleHanzi = word.exampleHanzi,
+                exampleTokens = word.exampleTokens,
+                targetHanzi = word.hanzi,
+                tokenLookup = tokenLookup,
+                toneColorsEnabled = toneColorsEnabled,
+                audioReady = audioReady,
+                onPlayWord = onPlayNormal,
             )
-            Text(
-                text = word.examplePinyin,
+            ToneColoredPinyinText(
+                pinyin = word.examplePinyin,
+                toneColorsEnabled = toneColorsEnabled,
                 style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.primary,
+                fallbackColor = MaterialTheme.colorScheme.primary,
             )
             Text(
                 text = word.exampleEnglish,
@@ -601,6 +630,7 @@ private fun WordDeckCards(
 @Composable
 private fun GrammarPatternCard(
     note: GrammarNote,
+    toneColorsEnabled: Boolean,
     audioReady: Boolean,
     onPlayNormal: (String) -> Unit,
     modifier: Modifier = Modifier,
@@ -702,11 +732,12 @@ private fun GrammarPatternCard(
                                 style = CjkTextStyles.HanziListItem,
                                 color = MaterialTheme.colorScheme.onSurface,
                             )
-                            Text(
-                                text = example.pinyin,
+                            ToneColoredPinyinText(
+                                pinyin = example.pinyin,
+                                toneColorsEnabled = toneColorsEnabled,
                                 style = MaterialTheme.typography.bodyMedium,
                                 fontWeight = FontWeight.Medium,
-                                color = MaterialTheme.colorScheme.primary,
+                                fallbackColor = MaterialTheme.colorScheme.primary,
                             )
                             Text(
                                 text = example.english,
@@ -767,6 +798,7 @@ private fun StepLessonListContent(
                 ) { note ->
                     GrammarPatternCard(
                         note = note,
+                        toneColorsEnabled = uiState.toneColorsEnabled,
                         audioReady = audioReady,
                         onPlayNormal = onPlayNormal,
                     )
@@ -788,6 +820,7 @@ private fun StepLessonListContent(
             ) { word ->
                 StepWordListCard(
                     word = word,
+                    toneColorsEnabled = uiState.toneColorsEnabled,
                     audioReady = audioReady,
                     onListenWord = { onPlayNormal(word.hanzi) },
                     onListenExample = { onPlayNormal(word.exampleHanzi) },
@@ -839,10 +872,13 @@ private fun StepLessonListContent(
 @Composable
 private fun StepWordListCard(
     word: VocabWord,
+    toneColorsEnabled: Boolean,
     audioReady: Boolean,
     onListenWord: () -> Unit,
     onListenExample: () -> Unit,
 ) {
+    val extended = MandarinTheme.extendedColors
+
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(14.dp),
@@ -869,11 +905,12 @@ private fun StepWordListCard(
                             style = CjkTextStyles.HanziListItem,
                             color = MaterialTheme.colorScheme.onSurface,
                         )
-                        Text(
-                            text = word.pinyin,
+                        ToneColoredPinyinText(
+                            pinyin = word.pinyin,
+                            toneColorsEnabled = toneColorsEnabled,
                             style = MaterialTheme.typography.bodyLarge,
                             fontWeight = FontWeight.Medium,
-                            color = MaterialTheme.colorScheme.primary,
+                            fallbackColor = MaterialTheme.colorScheme.primary,
                         )
                     }
                     Spacer(modifier = Modifier.height(2.dp))
@@ -912,12 +949,36 @@ private fun StepWordListCard(
                     horizontalArrangement = Arrangement.SpaceBetween,
                 ) {
                     Column(modifier = Modifier.weight(1f)) {
-                        Text(
-                            text = "${word.exampleHanzi}  •  ${word.examplePinyin}",
-                            style = MaterialTheme.typography.bodyMedium,
-                            fontWeight = FontWeight.Medium,
-                            color = MaterialTheme.colorScheme.onSurface,
-                        )
+                        val onSurfaceColor = MaterialTheme.colorScheme.onSurface
+                        if (toneColorsEnabled) {
+                            val exampleLine = remember(word.exampleHanzi, word.examplePinyin, extended, onSurfaceColor) {
+                                buildAnnotatedString {
+                                    withStyle(SpanStyle(color = onSurfaceColor)) {
+                                        append(word.exampleHanzi)
+                                        append("  •  ")
+                                    }
+                                    append(
+                                        buildToneColoredPinyinAnnotatedString(
+                                            pinyin = word.examplePinyin,
+                                            extendedColors = extended,
+                                            punctuationColor = onSurfaceColor,
+                                        ),
+                                    )
+                                }
+                            }
+                            Text(
+                                text = exampleLine,
+                                style = MaterialTheme.typography.bodyMedium,
+                                fontWeight = FontWeight.Medium,
+                            )
+                        } else {
+                            Text(
+                                text = "${word.exampleHanzi}  •  ${word.examplePinyin}",
+                                style = MaterialTheme.typography.bodyMedium,
+                                fontWeight = FontWeight.Medium,
+                                color = onSurfaceColor,
+                            )
+                        }
                         Text(
                             text = word.exampleEnglish,
                             style = MaterialTheme.typography.bodyMedium,

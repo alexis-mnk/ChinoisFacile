@@ -43,6 +43,8 @@
 
     <!-- Quiz Session (LessonScreen) -->
     <string name="lesson_quick_review_title">Quick Review</string>
+    <string name="lesson_mistake_review_badge">Mistake review • %1$d / %2$d</string>
+    <string name="lesson_mistake_review_subtitle">Reviewing your mistakes</string>
     <string name="lesson_progress_counter">%1$d / %2$d</string>
     <string name="lesson_close_cd">Quit quiz</string>
     <string name="lesson_quit_dialog_title">Quit quiz?</string>
@@ -85,6 +87,7 @@
     <string name="exercise_audio_to_english_prompt">Listen and choose the right meaning</string>
     <string name="exercise_audio_to_hanzi_prompt">Listen and choose the right character</string>
     <string name="exercise_english_to_hanzi_prompt">How do you say this in Chinese?</string>
+    <string name="exercise_cloze_prompt">Fill in the blank</string>
     <string name="exercise_sentence_order_prompt">Put the words in order to translate:</string>
     <string name="exercise_sentence_placeholder">Tap the words below to build the sentence</string>
     <string name="exercise_sentence_clear">Clear</string>
@@ -144,6 +147,16 @@
     <string name="stats_settings_title">Learning preferences</string>
     <string name="stats_pinyin_default_title">Show pinyin by default</string>
     <string name="stats_pinyin_default_desc">Displays pinyin transcription below characters during exercises.</string>
+    <string name="settings_tone_colors_title">Tone colors</string>
+    <string name="settings_tone_colors_desc">Color-codes pinyin syllables and characters by Mandarin tone.</string>
+    <string name="settings_tone_legend_1">1st mā</string>
+    <string name="settings_tone_legend_2">2nd má</string>
+    <string name="settings_tone_legend_3">3rd mǎ</string>
+    <string name="settings_tone_legend_4">4th mà</string>
+    <string name="settings_tone_legend_5">5th ma</string>
+    <string name="example_tap_word_hint">Tap any underlined word to see its meaning</string>
+    <string name="example_peek_close_cd">Close word preview</string>
+    <string name="example_peek_listen_cd">Listen to %1$s</string>
     <string name="stats_sound_effects_title">Sound effects</string>
     <string name="stats_sound_effects_desc">Plays a subtle chime for answers and completed sessions.</string>
     <string name="stats_vocabulary_title_hsk">HSK %1$d Lexicon (%2$d words)</string>

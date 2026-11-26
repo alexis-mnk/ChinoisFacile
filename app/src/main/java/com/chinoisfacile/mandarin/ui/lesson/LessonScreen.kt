@@ -4,15 +4,17 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
@@ -20,28 +22,35 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.VolumeOff
+import androidx.compose.material.icons.rounded.Replay
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
+import androidx.compose.material3.LocalMinimumInteractiveComponentSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.chinoisfacile.mandarin.R
 import com.chinoisfacile.mandarin.domain.audio.TtsStatus
 import com.chinoisfacile.mandarin.domain.lesson.Exercise
+import com.chinoisfacile.mandarin.domain.lesson.SessionPhase
 import com.chinoisfacile.mandarin.ui.components.FeedbackBanner
 import com.chinoisfacile.mandarin.ui.components.LessonProgressBar
 import com.chinoisfacile.mandarin.ui.components.TtsMissingBanner
+import com.chinoisfacile.mandarin.ui.theme.MandarinTheme
 
 @Composable
 fun LessonScreen(
@@ -90,7 +99,7 @@ fun LessonScreen(
     Surface(
         modifier = modifier
             .fillMaxSize()
-            .safeDrawingPadding(),
+            .background(MaterialTheme.colorScheme.background),
         color = MaterialTheme.colorScheme.background,
     ) {
         when {
@@ -139,20 +148,68 @@ fun LessonScreen(
 
             currentExercise != null -> {
                 val audioReady = uiState.ttsStatus == TtsStatus.READY
+                val scrollState = rememberScrollState()
+                LaunchedEffect(currentExercise.id) {
+                    scrollState.scrollTo(0)
+                }
 
                 Column(modifier = Modifier.fillMaxSize()) {
+                    val extended = MandarinTheme.extendedColors
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(horizontal = 16.dp, vertical = 8.dp),
+                            .padding(start = 16.dp, end = 16.dp, top = 6.dp, bottom = 2.dp),
                     ) {
-                        Text(
-                            text = uiState.sessionTitle
-                                ?: stringResource(R.string.lesson_quick_review_title),
-                            style = MaterialTheme.typography.labelLarge,
-                            color = MaterialTheme.colorScheme.primary,
-                            modifier = Modifier.padding(start = 12.dp, bottom = 4.dp),
-                        )
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(start = 12.dp, bottom = 2.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                        ) {
+                            Text(
+                                text = uiState.sessionTitle
+                                    ?: stringResource(R.string.lesson_quick_review_title),
+                                style = MaterialTheme.typography.labelLarge,
+                                color = MaterialTheme.colorScheme.primary,
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis,
+                                modifier = Modifier.weight(1f),
+                            )
+
+                            if (uiState.sessionPhase == SessionPhase.MISTAKE_REVIEW &&
+                                uiState.mistakeReviewTotal > 0
+                            ) {
+                                Spacer(modifier = Modifier.width(8.dp))
+                                Surface(
+                                    shape = RoundedCornerShape(10.dp),
+                                    color = extended.learningContainer,
+                                ) {
+                                    Row(
+                                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp),
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        horizontalArrangement = Arrangement.spacedBy(4.dp),
+                                    ) {
+                                        Icon(
+                                            imageVector = Icons.Rounded.Replay,
+                                            contentDescription = null,
+                                            tint = extended.onLearningContainer,
+                                            modifier = Modifier.size(14.dp),
+                                        )
+                                        Text(
+                                            text = stringResource(
+                                                R.string.lesson_mistake_review_badge,
+                                                uiState.mistakeReviewCurrent,
+                                                uiState.mistakeReviewTotal,
+                                            ),
+                                            style = MaterialTheme.typography.labelMedium,
+                                            fontWeight = FontWeight.SemiBold,
+                                            color = extended.onLearningContainer,
+                                        )
+                                    }
+                                }
+                            }
+                        }
 
                         LessonProgressBar(
                             completedSteps = uiState.completedCount,
@@ -174,8 +231,8 @@ fun LessonScreen(
                     Column(
                         modifier = Modifier
                             .weight(1f)
-                            .verticalScroll(rememberScrollState())
-                            .padding(horizontal = 16.dp, vertical = 12.dp),
+                            .verticalScroll(scrollState)
+                            .padding(horizontal = 16.dp, vertical = 6.dp),
                     ) {
                         val locked = uiState.feedback != null
                         when (currentExercise) {
@@ -183,6 +240,7 @@ fun LessonScreen(
                                 exercise = currentExercise,
                                 selectedOption = uiState.selectedOption,
                                 showPinyin = uiState.showPinyin,
+                                toneColorsEnabled = uiState.toneColorsEnabled,
                                 audioEnabled = audioReady,
                                 locked = locked,
                                 onTogglePinyin = viewModel::onTogglePinyin,
@@ -194,6 +252,7 @@ fun LessonScreen(
                                 exercise = currentExercise,
                                 selectedOption = uiState.selectedOption,
                                 showPinyinHint = uiState.showAudioPinyinHint,
+                                toneColorsEnabled = uiState.toneColorsEnabled,
                                 audioEnabled = audioReady,
                                 locked = locked,
                                 onTogglePinyinHint = viewModel::onToggleAudioPinyinHint,
@@ -206,6 +265,7 @@ fun LessonScreen(
                                 exercise = currentExercise,
                                 selectedOption = uiState.selectedOption,
                                 showPinyin = uiState.showPinyin,
+                                toneColorsEnabled = uiState.toneColorsEnabled,
                                 audioEnabled = audioReady,
                                 locked = locked,
                                 onPlayNormal = { viewModel.onPlayNormal(currentExercise.word.hanzi) },
@@ -217,8 +277,23 @@ fun LessonScreen(
                                 exercise = currentExercise,
                                 selectedOption = uiState.selectedOption,
                                 showPinyin = uiState.showPinyin,
+                                toneColorsEnabled = uiState.toneColorsEnabled,
                                 locked = locked,
                                 onTogglePinyin = viewModel::onTogglePinyin,
+                                onSelectOption = viewModel::onSelectOption,
+                            )
+
+                            is Exercise.Cloze -> ClozeView(
+                                exercise = currentExercise,
+                                selectedOption = uiState.selectedOption,
+                                isAnswerCorrect = uiState.feedback?.isCorrect,
+                                showPinyin = uiState.showPinyin,
+                                toneColorsEnabled = uiState.toneColorsEnabled,
+                                audioEnabled = audioReady,
+                                locked = locked,
+                                onTogglePinyin = viewModel::onTogglePinyin,
+                                onPlayNormal = { viewModel.onPlayNormal(currentExercise.word.exampleHanzi) },
+                                onPlaySlow = { viewModel.onPlaySlow(currentExercise.word.exampleHanzi) },
                                 onSelectOption = viewModel::onSelectOption,
                             )
 
@@ -226,6 +301,7 @@ fun LessonScreen(
                                 exercise = currentExercise,
                                 selectedTokens = uiState.selectedTokens,
                                 showPinyin = uiState.showPinyin,
+                                toneColorsEnabled = uiState.toneColorsEnabled,
                                 locked = locked,
                                 onTogglePinyin = viewModel::onTogglePinyin,
                                 onToggleToken = viewModel::onToggleSentenceToken,
@@ -242,8 +318,8 @@ fun LessonScreen(
                                 .padding(
                                     start = 16.dp,
                                     end = 16.dp,
-                                    top = 12.dp,
-                                    bottom = if (currentExercise is Exercise.AudioToEnglish) 8.dp else 16.dp,
+                                    top = 8.dp,
+                                    bottom = if (currentExercise is Exercise.AudioToEnglish) 6.dp else 12.dp,
                                 ),
                             horizontalAlignment = Alignment.CenterHorizontally,
                         ) {
@@ -260,15 +336,20 @@ fun LessonScreen(
                             }
 
                             if (currentExercise is Exercise.AudioToEnglish) {
-                                Spacer(modifier = Modifier.height(4.dp))
-                                TextButton(onClick = viewModel::skipListeningExercise) {
-                                    Icon(
-                                        imageVector = Icons.AutoMirrored.Rounded.VolumeOff,
-                                        contentDescription = null,
-                                        modifier = Modifier.size(18.dp),
-                                    )
-                                    Spacer(modifier = Modifier.width(6.dp))
-                                    Text(text = stringResource(R.string.audio_cant_listen_now))
+                                Spacer(modifier = Modifier.height(2.dp))
+                                CompositionLocalProvider(LocalMinimumInteractiveComponentSize provides 36.dp) {
+                                    TextButton(
+                                        onClick = viewModel::skipListeningExercise,
+                                        contentPadding = PaddingValues(horizontal = 12.dp, vertical = 4.dp),
+                                    ) {
+                                        Icon(
+                                            imageVector = Icons.AutoMirrored.Rounded.VolumeOff,
+                                            contentDescription = null,
+                                            modifier = Modifier.size(18.dp),
+                                        )
+                                        Spacer(modifier = Modifier.width(6.dp))
+                                        Text(text = stringResource(R.string.audio_cant_listen_now))
+                                    }
                                 }
                             }
                         }

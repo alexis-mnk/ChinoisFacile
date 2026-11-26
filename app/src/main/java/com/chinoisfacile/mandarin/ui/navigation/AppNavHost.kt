@@ -1,5 +1,14 @@
 package com.chinoisfacile.mandarin.ui.navigation
 
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.MenuBook
@@ -7,14 +16,17 @@ import androidx.compose.material.icons.filled.BarChart
 import androidx.compose.material.icons.filled.Explore
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavType
@@ -49,10 +61,15 @@ private object Routes {
     const val LESSON = "lesson/{lessonId}"
     const val QUICK_REVIEW = "quick_review/{hskLevel}"
 
+    val TOP_LEVEL_ROUTES = setOf(HOME, LEXICON, STATS, SETTINGS)
+
     fun stepLessonRoute(lessonId: String): String = "step_lesson/$lessonId"
     fun lessonRoute(lessonId: String): String = "lesson/$lessonId"
     fun quickReviewRoute(hskLevel: Int): String = "quick_review/$hskLevel"
 }
+
+private const val SECONDARY_ENTER_MS = 200
+private const val SECONDARY_EXIT_MS = 180
 
 @Composable
 fun AppNavHost(
@@ -62,16 +79,25 @@ fun AppNavHost(
     val navController = rememberNavController()
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = backStackEntry?.destination?.route
-    val topLevelRoutes = setOf(Routes.HOME, Routes.LEXICON, Routes.STATS, Routes.SETTINGS)
-    val showBottomBar = currentRoute in topLevelRoutes
+    val showBottomBar = currentRoute in Routes.TOP_LEVEL_ROUTES
 
-    val navigateToTab: (String) -> Unit = { targetRoute ->
-        navController.navigate(targetRoute) {
-            popUpTo(navController.graph.findStartDestination().id) {
-                saveState = true
+    val activityStoreOwner = checkNotNull(LocalViewModelStoreOwner.current)
+    val homeFactory = remember(container) { container.homeViewModelFactory() }
+    val lexiconFactory = remember(container) { container.lexiconViewModelFactory() }
+    val statsFactory = remember(container) { container.statsViewModelFactory() }
+    val settingsFactory = remember(container) { container.settingsViewModelFactory() }
+
+    val navigateToTab: (String) -> Unit = remember(navController) {
+        { targetRoute ->
+            if (navController.currentBackStackEntry?.destination?.route != targetRoute) {
+                navController.navigate(targetRoute) {
+                    popUpTo(navController.graph.findStartDestination().id) {
+                        saveState = true
+                    }
+                    launchSingleTop = true
+                    restoreState = true
+                }
             }
-            launchSingleTop = true
-            restoreState = true
         }
     }
 
@@ -131,11 +157,19 @@ fun AppNavHost(
         NavHost(
             navController = navController,
             startDestination = Routes.HOME,
-            modifier = Modifier.padding(innerPadding),
+            enterTransition = { EnterTransition.None },
+            exitTransition = { ExitTransition.None },
+            popEnterTransition = { EnterTransition.None },
+            popExitTransition = { ExitTransition.None },
+            modifier = Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.background)
+                .padding(innerPadding),
         ) {
             composable(Routes.HOME) {
                 val viewModel: HomeViewModel = viewModel(
-                    factory = container.homeViewModelFactory(),
+                    viewModelStoreOwner = activityStoreOwner,
+                    factory = homeFactory,
                 )
                 HomeScreen(
                     viewModel = viewModel,
@@ -153,14 +187,16 @@ fun AppNavHost(
 
             composable(Routes.LEXICON) {
                 val viewModel: LexiconViewModel = viewModel(
-                    factory = container.lexiconViewModelFactory(),
+                    viewModelStoreOwner = activityStoreOwner,
+                    factory = lexiconFactory,
                 )
                 LexiconScreen(viewModel = viewModel)
             }
 
             composable(Routes.STATS) {
                 val viewModel: StatsViewModel = viewModel(
-                    factory = container.statsViewModelFactory(),
+                    viewModelStoreOwner = activityStoreOwner,
+                    factory = statsFactory,
                 )
                 StatsScreen(
                     viewModel = viewModel,
@@ -170,7 +206,8 @@ fun AppNavHost(
 
             composable(Routes.SETTINGS) {
                 val viewModel: SettingsViewModel = viewModel(
-                    factory = container.settingsViewModelFactory(),
+                    viewModelStoreOwner = activityStoreOwner,
+                    factory = settingsFactory,
                 )
                 SettingsScreen(viewModel = viewModel)
             }
@@ -180,11 +217,22 @@ fun AppNavHost(
                 arguments = listOf(
                     navArgument(Routes.LESSON_ARG) { type = NavType.StringType },
                 ),
+                enterTransition = {
+                    fadeIn(tween(SECONDARY_ENTER_MS)) +
+                        slideInHorizontally(tween(SECONDARY_ENTER_MS)) { it / 12 }
+                },
+                exitTransition = { fadeOut(tween(SECONDARY_EXIT_MS)) },
+                popEnterTransition = { fadeIn(tween(SECONDARY_EXIT_MS)) },
+                popExitTransition = {
+                    fadeOut(tween(SECONDARY_EXIT_MS)) +
+                        slideOutHorizontally(tween(SECONDARY_EXIT_MS)) { it / 12 }
+                },
             ) { entry ->
                 val lessonId = entry.arguments?.getString(Routes.LESSON_ARG).orEmpty()
-                val viewModel: StepLessonViewModel = viewModel(
-                    factory = container.stepLessonViewModelFactory(lessonId = lessonId),
-                )
+                val factory = remember(container, lessonId) {
+                    container.stepLessonViewModelFactory(lessonId = lessonId)
+                }
+                val viewModel: StepLessonViewModel = viewModel(factory = factory)
                 StepLessonScreen(
                     viewModel = viewModel,
                     onBack = { navController.popBackStack() },
@@ -201,14 +249,25 @@ fun AppNavHost(
                 arguments = listOf(
                     navArgument(Routes.LESSON_ARG) { type = NavType.StringType },
                 ),
+                enterTransition = {
+                    fadeIn(tween(SECONDARY_ENTER_MS)) +
+                        slideInHorizontally(tween(SECONDARY_ENTER_MS)) { it / 12 }
+                },
+                exitTransition = { fadeOut(tween(SECONDARY_EXIT_MS)) },
+                popEnterTransition = { fadeIn(tween(SECONDARY_EXIT_MS)) },
+                popExitTransition = {
+                    fadeOut(tween(SECONDARY_EXIT_MS)) +
+                        slideOutHorizontally(tween(SECONDARY_EXIT_MS)) { it / 12 }
+                },
             ) { entry ->
                 val lessonId = entry.arguments?.getString(Routes.LESSON_ARG)
-                val viewModel: LessonViewModel = viewModel(
-                    factory = container.lessonViewModelFactory(
+                val factory = remember(container, lessonId) {
+                    container.lessonViewModelFactory(
                         lessonId = lessonId,
                         hskLevel = 1,
-                    ),
-                )
+                    )
+                }
+                val viewModel: LessonViewModel = viewModel(factory = factory)
                 LessonScreen(
                     viewModel = viewModel,
                     onExitSession = { navController.popBackStack() },
@@ -220,14 +279,25 @@ fun AppNavHost(
                 arguments = listOf(
                     navArgument(Routes.HSK_LEVEL_ARG) { type = NavType.IntType },
                 ),
+                enterTransition = {
+                    fadeIn(tween(SECONDARY_ENTER_MS)) +
+                        slideInHorizontally(tween(SECONDARY_ENTER_MS)) { it / 12 }
+                },
+                exitTransition = { fadeOut(tween(SECONDARY_EXIT_MS)) },
+                popEnterTransition = { fadeIn(tween(SECONDARY_EXIT_MS)) },
+                popExitTransition = {
+                    fadeOut(tween(SECONDARY_EXIT_MS)) +
+                        slideOutHorizontally(tween(SECONDARY_EXIT_MS)) { it / 12 }
+                },
             ) { entry ->
                 val hskLevel = entry.arguments?.getInt(Routes.HSK_LEVEL_ARG) ?: 1
-                val viewModel: LessonViewModel = viewModel(
-                    factory = container.lessonViewModelFactory(
+                val factory = remember(container, hskLevel) {
+                    container.lessonViewModelFactory(
                         lessonId = null,
                         hskLevel = hskLevel,
-                    ),
-                )
+                    )
+                }
+                val viewModel: LessonViewModel = viewModel(factory = factory)
                 LessonScreen(
                     viewModel = viewModel,
                     onExitSession = { navController.popBackStack() },

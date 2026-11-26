@@ -1,9 +1,11 @@
 package com.chinoisfacile.mandarin.ui.home
 
+import androidx.compose.runtime.Immutable
 import com.chinoisfacile.mandarin.data.model.LearningUnit
 import com.chinoisfacile.mandarin.data.model.UserStats
 import com.chinoisfacile.mandarin.domain.progression.QuickReviewEligibility
 
+@Immutable
 data class HomeUiState(
     val isLoading: Boolean = true,
     val isSeeding: Boolean = false,

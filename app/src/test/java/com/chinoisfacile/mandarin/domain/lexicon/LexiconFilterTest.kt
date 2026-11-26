@@ -83,6 +83,23 @@ class LexiconFilterTest {
         )
     }
 
+    @Test
+    fun `precomputed sortKey normalizes apostrophes, spaces and tones for sorting`() {
+        val entries = listOf(
+            word(id = "xiao", hanzi = "小", pinyin = "xiǎo", english = "Small", mastery = MasteryLevel.NEW, nextDay = 0L),
+            word(id = "xian_city", hanzi = "西安", pinyin = "Xī'ān", english = "Xi'an", mastery = MasteryLevel.LEARNING, nextDay = today),
+            word(id = "xian_first", hanzi = "先", pinyin = "xiān", english = "First", mastery = MasteryLevel.MASTERED, nextDay = today + 4),
+        )
+
+        val indexed = LexiconFilter.buildSortedIndex(entries)
+        assertEquals(listOf("xian_city", "xian_first", "xiao"), indexed.map { it.item.word.id })
+        assertEquals(listOf("xian", "xian", "xiao"), indexed.map { it.sortKey })
+        assertEquals(
+            listOf("xian_city"),
+            LexiconFilter.filterIndexed(indexed, LexiconStatusFilter.LEARNING, "xi'an", today).map { it.word.id },
+        )
+    }
+
     private fun word(
         id: String,
         hanzi: String,

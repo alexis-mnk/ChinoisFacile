@@ -1,5 +1,6 @@
 package com.chinoisfacile.mandarin.data.model
 
+import androidx.compose.runtime.Immutable
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -67,12 +68,14 @@ data class GrammarExampleDto(
     val english: String,
 )
 
+@Immutable
 data class GrammarExample(
     val chinese: String,
     val pinyin: String,
     val english: String,
 )
 
+@Immutable
 data class GrammarNote(
     val id: String,
     val hskLevel: Int,
@@ -100,6 +103,7 @@ enum class LexiconViewMode {
     COMPACT_LIST,
 }
 
+@Immutable
 data class HskLevelMastery(
     val hskLevel: Int,
     val totalCount: Int,
@@ -109,6 +113,7 @@ data class HskLevelMastery(
     val newCount: Int,
 )
 
+@Immutable
 data class GlobalStatsOverview(
     val stats: UserStats,
     val levels: List<HskLevelMastery>,
@@ -118,6 +123,7 @@ data class GlobalStatsOverview(
     val totalDueCount: Int,
 )
 
+@Immutable
 data class VocabWord(
     val id: String,
     val lessonId: String,
@@ -131,6 +137,7 @@ data class VocabWord(
     val exampleTokens: List<String>,
 )
 
+@Immutable
 data class LessonSummary(
     val id: String,
     val unitId: String,
@@ -148,6 +155,7 @@ data class LessonSummary(
     val previewHanzi: List<String> = emptyList(),
 )
 
+@Immutable
 data class LearningUnit(
     val id: String,
     val hskLevel: Int,
@@ -158,6 +166,7 @@ data class LearningUnit(
     val totalWordCount: Int = lessons.sumOf { it.wordCount },
 )
 
+@Immutable
 data class WordWithProgress(
     val word: VocabWord,
     val repetitions: Int,
@@ -169,6 +178,7 @@ data class WordWithProgress(
     val masteryLevel: MasteryLevel,
 )
 
+@Immutable
 data class UserStats(
     val totalXp: Int = 0,
     val currentStreak: Int = 0,
@@ -177,12 +187,14 @@ data class UserStats(
     val sessionsCompleted: Int = 0,
 )
 
+@Immutable
 data class WordReviewSummary(
     val word: VocabWord,
     val intervalDays: Int,
     val masteryLevel: MasteryLevel,
 )
 
+@Immutable
 data class SessionCompletionSummary(
     val earnedXp: Int,
     val accuracyPercent: Int,

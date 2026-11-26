@@ -22,6 +22,9 @@ interface WordDao {
     @Query("SELECT * FROM words WHERE lessonId = :lessonId ORDER BY id ASC")
     suspend fun getWordsForLesson(lessonId: String): List<WordEntity>
 
+    @Query("SELECT * FROM words WHERE hanzi IN (:hanziList)")
+    suspend fun getWordsByHanzi(hanziList: List<String>): List<WordEntity>
+
     @Query(
         """
         SELECT w.* FROM words w

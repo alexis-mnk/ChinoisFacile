@@ -6,7 +6,7 @@ import kotlin.random.Random
 /**
  * Generates a progressive 3-tier session:
  * 1. Simple recognition (Hanzi -> English, Audio -> English)
- * 2. Reverse recall (English -> Hanzi)
+ * 2. Reverse & contextual recall (English -> Hanzi, Cloze fill-in-the-blank)
  * 3. Sentence ordering (SentenceOrder), only when 100% of tokens are already known.
  */
 class ExerciseGenerator {
@@ -17,6 +17,15 @@ class ExerciseGenerator {
     ): Boolean {
         if (word.exampleTokens.size < MIN_SENTENCE_TOKENS) return false
         return word.exampleTokens.all { token -> isTokenAllowed(token, knownTokens) }
+    }
+
+    fun isClozeEligible(word: VocabWord): Boolean {
+        if (word.hanzi.isBlank() || word.exampleHanzi.isBlank() || word.exampleEnglish.isBlank()) {
+            return false
+        }
+        if (word.exampleHanzi.length <= word.hanzi.length) return false
+        if (word.exampleTokens.count { it == word.hanzi } != 1) return false
+        return countOccurrences(word.exampleHanzi, word.hanzi) == 1
     }
 
     fun generateSession(
@@ -54,11 +63,23 @@ class ExerciseGenerator {
         }
         val tier1Shuffled = tier1Raw.shuffled(random)
 
-        // Tier 2: reverse recall shuffled within tier
-        val tier2Targets = targetWords.shuffled(random)
-        val tier2Raw = List(tier2Count) { slot ->
-            tier2Targets[slot % tier2Targets.size]
-        }.shuffled(random)
+        // Tier 2: mix of Cloze (contextual recall) and EnglishToHanzi
+        val desiredClozeCount = tier2Count / 2
+        val eligibleClozeWords = targetWords.filter(::isClozeEligible)
+        val clozeTargets = eligibleClozeWords.shuffled(random).take(desiredClozeCount)
+        val clozeWordIds = clozeTargets.mapTo(HashSet()) { it.id }
+
+        val remainingTier2Count = tier2Count - clozeTargets.size
+        val englishToHanziPool = targetWords
+            .filter { it.id !in clozeWordIds }
+            .ifEmpty { targetWords }
+            .shuffled(random)
+        val englishToHanziTargets = List(remainingTier2Count) { slot ->
+            englishToHanziPool[slot % englishToHanziPool.size]
+        }
+
+        val tier2Items = (clozeTargets.map { true to it } + englishToHanziTargets.map { false to it })
+            .shuffled(random)
 
         // Tier 3: eligible sentence ordering at the end of session
         val tier3Raw = eligibleSentenceWords
@@ -77,8 +98,12 @@ class ExerciseGenerator {
             }
         }
 
-        for (word in tier2Raw) {
-            exercises += createEnglishToHanzi(exerciseIndex++, word, pool, random)
+        for ((isCloze, word) in tier2Items) {
+            exercises += if (isCloze) {
+                createCloze(exerciseIndex++, word, targetWords, pool, random)
+            } else {
+                createEnglishToHanzi(exerciseIndex++, word, targetWords, pool, random)
+            }
         }
 
         for (word in tier3Raw) {
@@ -92,6 +117,18 @@ class ExerciseGenerator {
         token in knownTokens ||
             token in ALLOWED_PROPER_NOUNS ||
             SIMPLE_DIGITS_REGEX.matches(token)
+
+    private fun countOccurrences(haystack: String, needle: String): Int {
+        var count = 0
+        var searchFrom = 0
+        while (searchFrom <= haystack.length - needle.length) {
+            val found = haystack.indexOf(needle, startIndex = searchFrom)
+            if (found < 0) break
+            count += 1
+            searchFrom = found + needle.length
+        }
+        return count
+    }
 
     private fun pickEnglishOptions(
         word: VocabWord,
@@ -107,6 +144,44 @@ class ExerciseGenerator {
             .take(OPTION_COUNT - 1)
             .toList()
         return (distractors + word.english).shuffled(random)
+    }
+
+    private fun pickHanziOptionWords(
+        word: VocabWord,
+        targetWords: List<VocabWord>,
+        pool: List<VocabWord>,
+        random: Random,
+    ): List<VocabWord> {
+        val needed = OPTION_COUNT - 1
+        val sameLessonDistractors = (targetWords + pool)
+            .asSequence()
+            .filter { it.id != word.id && it.hanzi != word.hanzi && it.lessonId == word.lessonId }
+            .distinctBy { it.hanzi }
+            .shuffled(random)
+            .take(needed)
+            .toList()
+
+        val selectedHanzi = sameLessonDistractors.mapTo(HashSet()) { it.hanzi }
+        selectedHanzi += word.hanzi
+
+        val fallbackDistractors = if (sameLessonDistractors.size < needed) {
+            val remaining = needed - sameLessonDistractors.size
+            val sameLevelPool = pool
+                .filter { it.hanzi !in selectedHanzi && it.hskLevel == word.hskLevel }
+                .distinctBy { it.hanzi }
+                .shuffled(random)
+            val lowerLevelPool = pool
+                .filter { it.hanzi !in selectedHanzi && it.hskLevel < word.hskLevel }
+                .distinctBy { it.hanzi }
+                .shuffled(random)
+            (sameLevelPool + lowerLevelPool)
+                .distinctBy { it.hanzi }
+                .take(remaining)
+        } else {
+            emptyList()
+        }
+
+        return (sameLessonDistractors + fallbackDistractors + word).shuffled(random)
     }
 
     private fun createHanziToEnglish(
@@ -136,26 +211,39 @@ class ExerciseGenerator {
     private fun createEnglishToHanzi(
         index: Int,
         word: VocabWord,
+        targetWords: List<VocabWord>,
         pool: List<VocabWord>,
         random: Random,
     ): Exercise.EnglishToHanzi {
-        val distractorWords = pool
-            .asSequence()
-            .filter { it.id != word.id && it.hanzi != word.hanzi }
-            .distinctBy { it.hanzi }
-            .shuffled(random)
-            .take(OPTION_COUNT - 1)
-            .toList()
-
-        val optionWords = (distractorWords + word).shuffled(random)
-        val options = optionWords.map { it.hanzi }
-        val optionPinyins = optionWords.associate { it.hanzi to it.pinyin }
-
+        val optionWords = pickHanziOptionWords(word, targetWords, pool, random)
         return Exercise.EnglishToHanzi(
             id = "ex_${index}_${word.id}_eth",
             word = word,
-            options = options,
-            optionPinyins = optionPinyins,
+            options = optionWords.map { it.hanzi },
+            optionPinyins = optionWords.associate { it.hanzi to it.pinyin },
+            correctOption = word.hanzi,
+        )
+    }
+
+    private fun createCloze(
+        index: Int,
+        word: VocabWord,
+        targetWords: List<VocabWord>,
+        pool: List<VocabWord>,
+        random: Random,
+    ): Exercise.Cloze {
+        val hitIndex = word.exampleHanzi.indexOf(word.hanzi)
+        val prefix = word.exampleHanzi.substring(0, hitIndex)
+        val suffix = word.exampleHanzi.substring(hitIndex + word.hanzi.length)
+        val optionWords = pickHanziOptionWords(word, targetWords, pool, random)
+        return Exercise.Cloze(
+            id = "ex_${index}_${word.id}_cloze",
+            word = word,
+            sentencePrefix = prefix,
+            sentenceSuffix = suffix,
+            promptEnglish = word.exampleEnglish,
+            options = optionWords.map { it.hanzi },
+            optionPinyins = optionWords.associate { it.hanzi to it.pinyin },
             correctOption = word.hanzi,
         )
     }

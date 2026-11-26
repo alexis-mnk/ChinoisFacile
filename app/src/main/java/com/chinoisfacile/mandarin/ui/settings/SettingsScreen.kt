@@ -2,10 +2,13 @@ package com.chinoisfacile.mandarin.ui.settings
 
 import android.content.Intent
 import android.provider.Settings
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -34,6 +37,7 @@ import androidx.compose.material3.SegmentedButtonDefaults
 import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -50,6 +54,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.chinoisfacile.mandarin.R
 import com.chinoisfacile.mandarin.data.model.ThemeMode
+import com.chinoisfacile.mandarin.ui.theme.MandarinTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -91,7 +96,11 @@ fun SettingsScreen(
         )
     }
 
-    Box(modifier = modifier.fillMaxSize()) {
+    Box(
+        modifier = modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background),
+    ) {
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
             contentPadding = PaddingValues(16.dp),
@@ -164,6 +173,18 @@ fun SettingsScreen(
                             checked = uiState.showPinyinByDefault,
                             onCheckedChange = viewModel::onToggleShowPinyinByDefault,
                         )
+                        HorizontalDivider(
+                            modifier = Modifier.padding(vertical = 12.dp),
+                            color = MaterialTheme.colorScheme.outline.copy(alpha = 0.4f),
+                        )
+                        SettingsSwitchRow(
+                            title = stringResource(R.string.settings_tone_colors_title),
+                            description = stringResource(R.string.settings_tone_colors_desc),
+                            checked = uiState.toneColorsEnabled,
+                            onCheckedChange = viewModel::onToggleToneColors,
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        ToneColorLegend()
                         HorizontalDivider(
                             modifier = Modifier.padding(vertical = 12.dp),
                             color = MaterialTheme.colorScheme.outline.copy(alpha = 0.4f),
@@ -295,5 +316,39 @@ private fun SettingsSwitchRow(
             checked = checked,
             onCheckedChange = onCheckedChange,
         )
+    }
+}
+
+@OptIn(ExperimentalLayoutApi::class)
+@Composable
+private fun ToneColorLegend() {
+    val extended = MandarinTheme.extendedColors
+    val legendItems = listOf(
+        1 to R.string.settings_tone_legend_1,
+        2 to R.string.settings_tone_legend_2,
+        3 to R.string.settings_tone_legend_3,
+        4 to R.string.settings_tone_legend_4,
+        5 to R.string.settings_tone_legend_5,
+    )
+
+    FlowRow(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        verticalArrangement = Arrangement.spacedBy(6.dp),
+    ) {
+        legendItems.forEach { (tone, labelRes) ->
+            Surface(
+                shape = RoundedCornerShape(8.dp),
+                color = MaterialTheme.colorScheme.surfaceVariant,
+            ) {
+                Text(
+                    text = stringResource(labelRes),
+                    style = MaterialTheme.typography.labelLarge,
+                    fontWeight = FontWeight.SemiBold,
+                    color = extended.toneColor(tone),
+                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
+                )
+            }
+        }
     }
 }

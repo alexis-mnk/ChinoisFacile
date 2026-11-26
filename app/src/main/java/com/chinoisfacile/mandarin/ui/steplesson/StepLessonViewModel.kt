@@ -40,6 +40,12 @@ class StepLessonViewModel(
             }
             .launchIn(viewModelScope)
 
+        repository.observeToneColorsEnabled()
+            .onEach { enabled ->
+                _uiState.update { it.copy(toneColorsEnabled = enabled) }
+            }
+            .launchIn(viewModelScope)
+
         loadStepLesson()
     }
 
@@ -69,6 +75,7 @@ class StepLessonViewModel(
                     words = payload.words,
                     grammarNotes = payload.grammarNotes,
                     deckItems = payload.deckItems,
+                    exampleTokenLookup = payload.exampleTokenLookup,
                     currentCardIndex = 0,
                     isLessonCompleted = payload.isLessonCompleted,
                     isQuizUnlocked = payload.isQuizUnlocked,

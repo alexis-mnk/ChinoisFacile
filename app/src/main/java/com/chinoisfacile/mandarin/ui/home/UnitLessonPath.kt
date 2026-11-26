@@ -48,7 +48,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -56,19 +55,19 @@ import com.chinoisfacile.mandarin.R
 import com.chinoisfacile.mandarin.data.model.LearningUnit
 import com.chinoisfacile.mandarin.data.model.LessonSummary
 import com.chinoisfacile.mandarin.domain.progression.ActivePathTarget
+import com.chinoisfacile.mandarin.domain.progression.HomePathItem
 import com.chinoisfacile.mandarin.ui.theme.MandarinTheme
 import kotlin.math.min
 import kotlin.math.roundToInt
 
-private val TOP_PATH_PADDING = 16.dp
-private val STEP_ROW_HEIGHT = 176.dp
-private val BOTTOM_PATH_PADDING = 12.dp
+private val STEP_ROW_HEIGHT = 180.dp
 private val HEADER_OFFSET_FROM_ROW_TOP = 26.dp
 private val NODE_CENTER_OFFSET_BELOW_HEADER = 64.dp
 private val NODE_DIAMETER = 70.dp
 private val SHADOW_DEPTH = 5.dp
 private val HALO_DIAMETER = 84.dp
 private val NODE_COLUMN_WIDTH = 148.dp
+private val PATH_DASH_EFFECT = PathEffect.dashPathEffect(floatArrayOf(18f, 14f), 0f)
 
 @Composable
 fun UnitBanner(
@@ -97,153 +96,171 @@ fun UnitBanner(
 }
 
 @Composable
-fun UnitLessonPath(
-    unit: LearningUnit,
+fun StepPathRow(
+    item: HomePathItem.StepRow,
     activeTarget: ActivePathTarget?,
     onStepLessonClick: (LessonSummary) -> Unit,
     onQuizClick: (LessonSummary) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val steps = unit.lessons
-    if (steps.isEmpty()) return
-
+    val step = item.step
     val extended = MandarinTheme.extendedColors
     val density = LocalDensity.current
-    val totalHeight: Dp = TOP_PATH_PADDING + (STEP_ROW_HEIGHT * steps.size) + BOTTOM_PATH_PADDING
 
     BoxWithConstraints(
         modifier = modifier
             .fillMaxWidth()
-            .height(totalHeight),
+            .height(STEP_ROW_HEIGHT),
     ) {
         val widthPx = with(density) { maxWidth.toPx() }
-        val topPaddingPx = with(density) { TOP_PATH_PADDING.toPx() }
         val rowHeightPx = with(density) { STEP_ROW_HEIGHT.toPx() }
         val headerOffsetPx = with(density) { HEADER_OFFSET_FROM_ROW_TOP.toPx() }
-        val nodeCenterBelowHeaderPx = with(density) { NODE_CENTER_OFFSET_BELOW_HEADER.toPx() }
         val pairHalfOffsetPx = min(with(density) { 80.dp.toPx() }, widthPx * 0.25f)
         val centerXPx = widthPx / 2f
         val leftXPx = centerXPx - pairHalfOffsetPx
         val rightXPx = centerXPx + pairHalfOffsetPx
+        val cy = rowHeightPx / 2f
         val nodeColumnWidthPx = with(density) { NODE_COLUMN_WIDTH.toPx() }
-
-        val rowCentersY = remember(steps.size, topPaddingPx, rowHeightPx, headerOffsetPx, nodeCenterBelowHeaderPx) {
-            List(steps.size) { idx ->
-                topPaddingPx + idx * rowHeightPx + headerOffsetPx + nodeCenterBelowHeaderPx
-            }
-        }
 
         Canvas(modifier = Modifier.fillMaxSize()) {
             val activeStrokePx = 6.dp.toPx()
             val lockedStrokePx = 5.dp.toPx()
-            val dashEffect = PathEffect.dashPathEffect(floatArrayOf(18f, 14f), 0f)
 
-            for (i in steps.indices) {
-                val step = steps[i]
-                val cy = rowCentersY[i]
-                val stepReady = step.isStepLessonCompleted && step.isUnlocked
-                if (stepReady) {
-                    drawLine(
-                        color = extended.lessonNode,
-                        start = Offset(leftXPx, cy),
-                        end = Offset(rightXPx, cy),
-                        strokeWidth = activeStrokePx,
-                        cap = StrokeCap.Round,
+            // Incoming top half of cubic Bézier from previous step's Quiz N-1 to this Lesson N (De Casteljau split at t = 0.5)
+            if (item.hasIncomingFromPreviousStep) {
+                val incomingPath = Path().apply {
+                    moveTo(leftXPx, cy)
+                    cubicTo(
+                        leftXPx,
+                        rowHeightPx * 0.25f,
+                        (centerXPx + leftXPx) / 2f,
+                        rowHeightPx * 0.125f,
+                        centerXPx,
+                        0f,
+                    )
+                }
+                if (item.isIncomingTransitionUnlocked) {
+                    drawPath(
+                        path = incomingPath,
+                        color = extended.success,
+                        style = Stroke(width = activeStrokePx, cap = StrokeCap.Round),
                     )
                 } else {
-                    drawLine(
+                    drawPath(
+                        path = incomingPath,
                         color = extended.pathLocked,
-                        start = Offset(leftXPx, cy),
-                        end = Offset(rightXPx, cy),
-                        strokeWidth = lockedStrokePx,
-                        cap = StrokeCap.Round,
-                        pathEffect = dashEffect,
+                        style = Stroke(
+                            width = lockedStrokePx,
+                            cap = StrokeCap.Round,
+                            pathEffect = PATH_DASH_EFFECT,
+                        ),
                     )
                 }
+            }
 
-                if (i < steps.lastIndex) {
-                    val nextStep = steps[i + 1]
-                    val nextY = rowCentersY[i + 1]
-                    val midY = (cy + nextY) / 2f
-                    val transitionPath = Path().apply {
-                        moveTo(rightXPx, cy)
-                        cubicTo(rightXPx, midY, leftXPx, midY, leftXPx, nextY)
-                    }
-                    val transitionUnlocked = step.isCompleted && nextStep.isStepLessonUnlocked
-                    if (transitionUnlocked) {
-                        drawPath(
-                            path = transitionPath,
-                            color = extended.success,
-                            style = Stroke(width = activeStrokePx, cap = StrokeCap.Round),
-                        )
-                    } else {
-                        drawPath(
-                            path = transitionPath,
-                            color = extended.pathLocked,
-                            style = Stroke(
-                                width = lockedStrokePx,
-                                cap = StrokeCap.Round,
-                                pathEffect = dashEffect,
-                            ),
-                        )
-                    }
+            // Outgoing bottom half of cubic Bézier from this Quiz N to next step's Lesson N+1 (De Casteljau split at t = 0.5)
+            if (item.hasOutgoingToNextStep) {
+                val outgoingPath = Path().apply {
+                    moveTo(rightXPx, cy)
+                    cubicTo(
+                        rightXPx,
+                        rowHeightPx * 0.75f,
+                        (rightXPx + centerXPx) / 2f,
+                        rowHeightPx * 0.875f,
+                        centerXPx,
+                        rowHeightPx,
+                    )
+                }
+                if (item.isOutgoingTransitionUnlocked) {
+                    drawPath(
+                        path = outgoingPath,
+                        color = extended.success,
+                        style = Stroke(width = activeStrokePx, cap = StrokeCap.Round),
+                    )
+                } else {
+                    drawPath(
+                        path = outgoingPath,
+                        color = extended.pathLocked,
+                        style = Stroke(
+                            width = lockedStrokePx,
+                            cap = StrokeCap.Round,
+                            pathEffect = PATH_DASH_EFFECT,
+                        ),
+                    )
                 }
             }
-        }
 
-        steps.forEachIndexed { idx, step ->
-            val rowTopPx = topPaddingPx + idx * rowHeightPx
-            val cy = rowCentersY[idx]
-            val headerText = if (step.stepTheme.isNotBlank()) {
-                stringResource(R.string.home_step_header, step.stepTheme, step.wordCount)
+            // Horizontal connector Lesson N -> Quiz N
+            val stepReady = step.isStepLessonCompleted && step.isUnlocked
+            if (stepReady) {
+                drawLine(
+                    color = extended.lessonNode,
+                    start = Offset(leftXPx, cy),
+                    end = Offset(rightXPx, cy),
+                    strokeWidth = activeStrokePx,
+                    cap = StrokeCap.Round,
+                )
             } else {
-                stringResource(R.string.home_lesson_word_count, step.wordCount)
+                drawLine(
+                    color = extended.pathLocked,
+                    start = Offset(leftXPx, cy),
+                    end = Offset(rightXPx, cy),
+                    strokeWidth = lockedStrokePx,
+                    cap = StrokeCap.Round,
+                    pathEffect = PATH_DASH_EFFECT,
+                )
             }
-
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .offset { IntOffset(x = 0, y = rowTopPx.roundToInt()) },
-                contentAlignment = Alignment.Center,
-            ) {
-                Surface(
-                    shape = RoundedCornerShape(10.dp),
-                    color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.72f),
-                ) {
-                    Text(
-                        text = headerText,
-                        style = MaterialTheme.typography.labelLarge,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier.padding(horizontal = 12.dp, vertical = 3.dp),
-                    )
-                }
-            }
-
-            val nodesTopY = (cy - nodeCenterBelowHeaderPx).roundToInt()
-            val leftNodeX = (leftXPx - nodeColumnWidthPx / 2f).roundToInt()
-            val rightNodeX = (rightXPx - nodeColumnWidthPx / 2f).roundToInt()
-
-            StepLessonPathNode(
-                lesson = step,
-                isActive = activeTarget == ActivePathTarget.StepLesson(unit.id, step.id, step.orderIndex),
-                onClick = { onStepLessonClick(step) },
-                modifier = Modifier
-                    .offset { IntOffset(x = leftNodeX, y = nodesTopY) }
-                    .width(NODE_COLUMN_WIDTH),
-            )
-
-            QuizPathNode(
-                lesson = step,
-                isActive = activeTarget == ActivePathTarget.Quiz(unit.id, step.id, step.orderIndex),
-                onClick = { onQuizClick(step) },
-                modifier = Modifier
-                    .offset { IntOffset(x = rightNodeX, y = nodesTopY) }
-                    .width(NODE_COLUMN_WIDTH),
-            )
         }
+
+        val headerText = if (step.stepTheme.isNotBlank()) {
+            stringResource(R.string.home_step_header, step.stepTheme, step.wordCount)
+        } else {
+            stringResource(R.string.home_lesson_word_count, step.wordCount)
+        }
+
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 2.dp),
+            contentAlignment = Alignment.Center,
+        ) {
+            Surface(
+                shape = RoundedCornerShape(10.dp),
+                color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.82f),
+            ) {
+                Text(
+                    text = headerText,
+                    style = MaterialTheme.typography.labelLarge,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.padding(horizontal = 12.dp, vertical = 3.dp),
+                )
+            }
+        }
+
+        val nodesTopY = headerOffsetPx.roundToInt()
+        val leftNodeX = (leftXPx - nodeColumnWidthPx / 2f).roundToInt()
+        val rightNodeX = (rightXPx - nodeColumnWidthPx / 2f).roundToInt()
+
+        StepLessonPathNode(
+            lesson = step,
+            isActive = activeTarget == ActivePathTarget.StepLesson(item.unitId, step.id, step.orderIndex),
+            onClick = { onStepLessonClick(step) },
+            modifier = Modifier
+                .offset { IntOffset(x = leftNodeX, y = nodesTopY) }
+                .width(NODE_COLUMN_WIDTH),
+        )
+
+        QuizPathNode(
+            lesson = step,
+            isActive = activeTarget == ActivePathTarget.Quiz(item.unitId, step.id, step.orderIndex),
+            onClick = { onQuizClick(step) },
+            modifier = Modifier
+                .offset { IntOffset(x = rightNodeX, y = nodesTopY) }
+                .width(NODE_COLUMN_WIDTH),
+        )
     }
 }
 

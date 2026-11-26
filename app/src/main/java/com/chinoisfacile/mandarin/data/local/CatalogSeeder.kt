@@ -25,9 +25,18 @@ class CatalogSeeder(
     private val _isSeeding = MutableStateFlow(false)
     val isSeeding: StateFlow<Boolean> = _isSeeding.asStateFlow()
 
+    @Volatile
+    private var verifiedInProcess = false
+
+    fun invalidateVerification() {
+        verifiedInProcess = false
+    }
+
     suspend fun seedIfNeeded() {
+        if (verifiedInProcess) return
         withContext(Dispatchers.IO) {
             mutex.withLock {
+                if (verifiedInProcess) return@withContext
                 val lessonDao = database.lessonDao()
                 val wordDao = database.wordDao()
                 val progressDao = database.progressDao()
@@ -107,6 +116,7 @@ class CatalogSeeder(
                     if (anyLevelUpdated) {
                         progressDao.deleteOrphanedProgress()
                     }
+                    verifiedInProcess = true
                 } finally {
                     _isSeeding.value = false
                 }

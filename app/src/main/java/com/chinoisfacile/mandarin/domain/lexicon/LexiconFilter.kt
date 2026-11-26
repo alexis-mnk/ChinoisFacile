@@ -1,5 +1,6 @@
 package com.chinoisfacile.mandarin.domain.lexicon
 
+import androidx.compose.runtime.Immutable
 import com.chinoisfacile.mandarin.data.model.MasteryLevel
 import com.chinoisfacile.mandarin.data.model.WordWithProgress
 import com.chinoisfacile.mandarin.domain.search.IndexedVocabWord
@@ -13,6 +14,7 @@ enum class LexiconStatusFilter {
     NEW,
 }
 
+@Immutable
 data class LexiconStatusCounts(
     val all: Int = 0,
     val due: Int = 0,
@@ -24,7 +26,7 @@ data class LexiconStatusCounts(
 object LexiconFilter {
 
     private val pinyinIndexedComparator: Comparator<IndexedVocabWord> = compareBy(
-        { it.compactPinyin.replace("'", "") },
+        { it.sortKey },
         { it.item.word.pinyin },
         { it.item.word.hanzi },
     )

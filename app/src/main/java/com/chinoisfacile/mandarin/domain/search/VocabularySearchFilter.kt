@@ -9,6 +9,7 @@ data class IndexedVocabWord(
     val normalizedPinyin: String,
     val compactPinyin: String,
     val normalizedEnglish: String,
+    val sortKey: String = compactPinyin.replace("'", ""),
 )
 
 /**
@@ -23,11 +24,13 @@ object VocabularySearchFilter {
     fun buildIndex(words: List<WordWithProgress>): List<IndexedVocabWord> =
         words.map { entry ->
             val normalizedPinyin = normalizeLatin(entry.word.pinyin)
+            val compactPinyin = normalizedPinyin.replace(whitespaceRegex, "")
             IndexedVocabWord(
                 item = entry,
                 normalizedPinyin = normalizedPinyin,
-                compactPinyin = normalizedPinyin.replace(whitespaceRegex, ""),
+                compactPinyin = compactPinyin,
                 normalizedEnglish = normalizeLatin(entry.word.english),
+                sortKey = compactPinyin.replace("'", ""),
             )
         }
 

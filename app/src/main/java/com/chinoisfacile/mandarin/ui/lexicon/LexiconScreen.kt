@@ -63,6 +63,7 @@ import com.chinoisfacile.mandarin.domain.lexicon.LexiconFilter
 import com.chinoisfacile.mandarin.domain.lexicon.LexiconStatusFilter
 import com.chinoisfacile.mandarin.ui.components.HskLevelSelector
 import com.chinoisfacile.mandarin.ui.components.SegmentedMasteryBar
+import com.chinoisfacile.mandarin.ui.components.ToneColoredPinyinText
 import com.chinoisfacile.mandarin.ui.theme.MandarinTheme
 import java.time.LocalDate
 
@@ -76,7 +77,9 @@ fun LexiconScreen(
 
     if (uiState.isLoading) {
         Box(
-            modifier = modifier.fillMaxSize(),
+            modifier = modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.background),
             contentAlignment = Alignment.Center,
         ) {
             CircularProgressIndicator()
@@ -90,6 +93,8 @@ fun LexiconScreen(
     uiState.selectedWord?.let { selected ->
         WordDetailBottomSheet(
             item = selected,
+            tokenLookup = uiState.selectedWordTokenLookup,
+            toneColorsEnabled = uiState.toneColorsEnabled,
             todayEpochDay = todayEpochDay,
             audioReady = audioReady,
             onPlayNormal = viewModel::onPlayNormal,
@@ -101,6 +106,7 @@ fun LexiconScreen(
     Column(
         modifier = modifier
             .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
             .padding(horizontal = 16.dp),
     ) {
         Spacer(modifier = Modifier.height(12.dp))
@@ -236,6 +242,7 @@ fun LexiconScreen(
                         ) { item ->
                             LexiconGridTile(
                                 item = item,
+                                toneColorsEnabled = uiState.toneColorsEnabled,
                                 todayEpochDay = todayEpochDay,
                                 onClick = { viewModel.onWordClick(item.word.id) },
                             )
@@ -255,6 +262,7 @@ fun LexiconScreen(
                         ) { item ->
                             LexiconCompactRow(
                                 item = item,
+                                toneColorsEnabled = uiState.toneColorsEnabled,
                                 todayEpochDay = todayEpochDay,
                                 audioReady = audioReady,
                                 onClick = { viewModel.onWordClick(item.word.id) },
@@ -333,6 +341,7 @@ private fun statusColorsFor(
 @Composable
 private fun LexiconGridTile(
     item: WordWithProgress,
+    toneColorsEnabled: Boolean,
     todayEpochDay: Long,
     onClick: () -> Unit,
 ) {
@@ -381,11 +390,12 @@ private fun LexiconGridTile(
                     textAlign = TextAlign.Center,
                 )
                 Spacer(modifier = Modifier.height(2.dp))
-                Text(
-                    text = item.word.pinyin,
+                ToneColoredPinyinText(
+                    pinyin = item.word.pinyin,
+                    toneColorsEnabled = toneColorsEnabled,
                     style = MaterialTheme.typography.bodyMedium,
                     fontSize = 12.sp,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    fallbackColor = MaterialTheme.colorScheme.onSurfaceVariant,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     textAlign = TextAlign.Center,
@@ -398,6 +408,7 @@ private fun LexiconGridTile(
 @Composable
 private fun LexiconCompactRow(
     item: WordWithProgress,
+    toneColorsEnabled: Boolean,
     todayEpochDay: Long,
     audioReady: Boolean,
     onClick: () -> Unit,
@@ -426,10 +437,11 @@ private fun LexiconCompactRow(
             color = MaterialTheme.colorScheme.onSurface,
         )
         Spacer(modifier = Modifier.width(8.dp))
-        Text(
-            text = item.word.pinyin,
+        ToneColoredPinyinText(
+            pinyin = item.word.pinyin,
+            toneColorsEnabled = toneColorsEnabled,
             style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.primary,
+            fallbackColor = MaterialTheme.colorScheme.primary,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
         )

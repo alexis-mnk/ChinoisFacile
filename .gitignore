@@ -14,5 +14,7 @@ captures/
 *.keystore
 *.apk
 tools/.cache/
+tools/.audio_cache/
+app/src/main/assets/audio/*.pack
 AGENTS.md
 implementation_plan.md

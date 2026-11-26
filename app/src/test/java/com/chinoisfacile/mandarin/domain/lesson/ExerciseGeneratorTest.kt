@@ -3,6 +3,7 @@ package com.chinoisfacile.mandarin.domain.lesson
 import com.chinoisfacile.mandarin.data.model.VocabWord
 import kotlin.random.Random
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -22,7 +23,7 @@ class ExerciseGeneratorTest {
             exampleHanzi = "你好吗？",
             examplePinyin = "Nǐ hǎo ma?",
             exampleEnglish = "How are you?",
-            exampleTokens = listOf("你", "好", "吗"),
+            exampleTokens = listOf("你好", "吗"),
         ),
         VocabWord(
             id = "w2",
@@ -94,10 +95,10 @@ class ExerciseGeneratorTest {
             hanzi = "好",
             pinyin = "hǎo",
             english = "Good / Well",
-            exampleHanzi = "你好认识很高兴！",
-            examplePinyin = "Nǐ hǎo rèn shi hěn gāo xìng!",
-            exampleEnglish = "Hello, nice to meet you!",
-            exampleTokens = listOf("你", "好", "认识", "很", "高兴"),
+            exampleHanzi = "你好吗？",
+            examplePinyin = "Nǐ hǎo ma?",
+            exampleEnglish = "How are you?",
+            exampleTokens = listOf("你", "好", "吗"),
         ),
         VocabWord(
             id = "h1_003",
@@ -143,12 +144,13 @@ class ExerciseGeneratorTest {
         -> 1
         is Exercise.AudioToHanzi,
         is Exercise.EnglishToHanzi,
+        is Exercise.Cloze,
         -> 2
         is Exercise.SentenceOrder -> 3
     }
 
     @Test
-    fun `generates 10 progressive exercises ordered in 3 tiers with pinyin on sentence tiles`() {
+    fun `generates 10 progressive exercises ordered in 3 tiers with Cloze in tier 2 and pinyin on sentence tiles`() {
         val allKnown = fullSentenceWords.flatMap { it.exampleTokens }.toSet() +
             fullSentenceWords.map { it.hanzi }
 
@@ -162,13 +164,15 @@ class ExerciseGeneratorTest {
 
         assertEquals(10, exercises.size)
         assertEquals(4, exercises.count { it is Exercise.HanziToEnglish || it is Exercise.AudioToEnglish })
-        assertEquals(3, exercises.count { it is Exercise.EnglishToHanzi })
+        assertEquals(3, exercises.count { it is Exercise.EnglishToHanzi || it is Exercise.Cloze })
+        assertEquals(1, exercises.count { it is Exercise.Cloze })
+        assertEquals(2, exercises.count { it is Exercise.EnglishToHanzi })
         assertEquals(3, exercises.count { it is Exercise.SentenceOrder })
 
         val ranks = exercises.map(::tierRank)
         assertEquals(ranks.sorted(), ranks)
         assertTrue(exercises.take(4).all { tierRank(it) == 1 })
-        assertTrue(exercises.subList(4, 7).all { it is Exercise.EnglishToHanzi })
+        assertTrue(exercises.subList(4, 7).all { tierRank(it) == 2 })
         assertTrue(exercises.takeLast(3).all { it is Exercise.SentenceOrder })
 
         exercises.forEach { exercise ->
@@ -195,6 +199,18 @@ class ExerciseGeneratorTest {
                     assertEquals(4, exercise.options.distinct().size)
                     assertTrue(exercise.correctOption in exercise.options)
                     assertTrue(exercise.options.all { !exercise.optionPinyins[it].isNullOrBlank() })
+                }
+
+                is Exercise.Cloze -> {
+                    assertEquals(4, exercise.options.size)
+                    assertEquals(4, exercise.options.distinct().size)
+                    assertTrue(exercise.correctOption in exercise.options)
+                    assertEquals(exercise.word.hanzi, exercise.correctOption)
+                    assertTrue(exercise.options.all { !exercise.optionPinyins[it].isNullOrBlank() })
+                    assertEquals(
+                        exercise.word.exampleHanzi,
+                        exercise.sentencePrefix + exercise.correctOption + exercise.sentenceSuffix,
+                    )
                 }
 
                 is Exercise.SentenceOrder -> {
@@ -234,6 +250,74 @@ class ExerciseGeneratorTest {
         val ranks = exercises.map(::tierRank)
         assertEquals(ranks.sorted(), ranks)
         assertEquals(6, exercises.count { it is Exercise.HanziToEnglish || it is Exercise.AudioToEnglish })
+        assertEquals(4, exercises.count { it is Exercise.EnglishToHanzi || it is Exercise.Cloze })
+        assertEquals(2, exercises.count { it is Exercise.Cloze })
+    }
+
+    @Test
+    fun `cloze eligibility rejects missing or duplicate occurrences and falls back cleanly to EnglishToHanzi`() {
+        val duplicateWord = VocabWord(
+            id = "dup1",
+            lessonId = "u1_l2",
+            hskLevel = 1,
+            hanzi = "不",
+            pinyin = "bù",
+            english = "Not",
+            exampleHanzi = "不大不小。",
+            examplePinyin = "Bú dà bù xiǎo.",
+            exampleEnglish = "Neither big nor small.",
+            exampleTokens = listOf("不", "大", "不", "小"),
+        )
+        val missingTokenWord = VocabWord(
+            id = "miss1",
+            lessonId = "u1_l2",
+            hskLevel = 1,
+            hanzi = "吗",
+            pinyin = "ma",
+            english = "Question particle",
+            exampleHanzi = "好吗？",
+            examplePinyin = "Hǎo ma?",
+            exampleEnglish = "Okay?",
+            exampleTokens = listOf("好吗"),
+        )
+        val duplicateSubstringWord = VocabWord(
+            id = "sub1",
+            lessonId = "u1_l2",
+            hskLevel = 1,
+            hanzi = "人",
+            pinyin = "rén",
+            english = "Person",
+            exampleHanzi = "那个人是中国人。",
+            examplePinyin = "Nà ge rén shì Zhōngguórén.",
+            exampleEnglish = "That person is Chinese.",
+            exampleTokens = listOf("那", "个", "人", "是", "中国人"),
+        )
+
+        assertFalse(generator.isClozeEligible(duplicateWord))
+        assertFalse(generator.isClozeEligible(missingTokenWord))
+        assertFalse(generator.isClozeEligible(duplicateSubstringWord))
+        assertTrue(generator.isClozeEligible(fullSentenceWords[1]))
+
+        val fallbackWords = listOf(
+            duplicateWord,
+            missingTokenWord,
+            duplicateSubstringWord,
+            fullSentenceWords[0].copy(
+                id = "no_dup_but_substring",
+                hanzi = "好",
+                exampleHanzi = "好好学习。",
+                exampleTokens = listOf("好好", "学习"),
+            ),
+        )
+        val exercises = generator.generateSession(
+            targetWords = fallbackWords,
+            distractorPool = fallbackWords + fullSentenceWords,
+            knownTokens = emptySet(),
+            sessionSize = 10,
+            random = Random(5),
+        )
+
+        assertEquals(0, exercises.count { it is Exercise.Cloze })
         assertEquals(4, exercises.count { it is Exercise.EnglishToHanzi })
     }
 
@@ -286,7 +370,7 @@ class ExerciseGeneratorTest {
     }
 
     @Test
-    fun `distractors never include words from a higher hsk level`() {
+    fun `distractors prioritize same lesson words and never include words from a higher hsk level`() {
         val higherLevelWords = listOf(
             VocabWord(
                 id = "h2_001",
@@ -313,13 +397,25 @@ class ExerciseGeneratorTest {
                 exampleTokens = listOf("她", "有", "丰富", "的", "教学", "经验"),
             ),
         )
+        val extraSameLevelOtherLesson = VocabWord(
+            id = "h1_other",
+            lessonId = "u1_l9",
+            hskLevel = 1,
+            hanzi = "书",
+            pinyin = "shū",
+            english = "Book",
+            exampleHanzi = "我看书。",
+            examplePinyin = "Wǒ kàn shū.",
+            exampleEnglish = "I read a book.",
+            exampleTokens = listOf("我", "看", "书"),
+        )
 
         val allKnown = fullSentenceWords.flatMap { it.exampleTokens }.toSet() +
             fullSentenceWords.map { it.hanzi }
 
         val exercises = generator.generateSession(
             targetWords = fullSentenceWords,
-            distractorPool = fullSentenceWords + higherLevelWords,
+            distractorPool = fullSentenceWords + extraSameLevelOtherLesson + higherLevelWords,
             knownTokens = allKnown,
             sessionSize = 10,
             random = Random(7),
@@ -327,13 +423,21 @@ class ExerciseGeneratorTest {
 
         val forbiddenHanzi = higherLevelWords.map { it.hanzi }.toSet()
         val forbiddenEnglish = higherLevelWords.map { it.english }.toSet()
+        val sameLessonHanzi = fullSentenceWords.map { it.hanzi }.toSet()
 
         exercises.forEach { exercise ->
             when (exercise) {
                 is Exercise.HanziToEnglish -> assertTrue(exercise.options.none { it in forbiddenEnglish })
                 is Exercise.AudioToEnglish -> assertTrue(exercise.options.none { it in forbiddenEnglish })
                 is Exercise.AudioToHanzi -> assertTrue(exercise.options.none { it in forbiddenHanzi })
-                is Exercise.EnglishToHanzi -> assertTrue(exercise.options.none { it in forbiddenHanzi })
+                is Exercise.EnglishToHanzi -> {
+                    assertTrue(exercise.options.none { it in forbiddenHanzi })
+                    assertTrue(exercise.options.all { it in sameLessonHanzi })
+                }
+                is Exercise.Cloze -> {
+                    assertTrue(exercise.options.none { it in forbiddenHanzi })
+                    assertTrue(exercise.options.all { it in sameLessonHanzi })
+                }
                 is Exercise.SentenceOrder -> Unit
             }
         }

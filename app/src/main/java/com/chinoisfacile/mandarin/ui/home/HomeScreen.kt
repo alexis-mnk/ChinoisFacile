@@ -4,6 +4,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -49,6 +50,8 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.chinoisfacile.mandarin.R
 import com.chinoisfacile.mandarin.data.model.LessonSummary
+import com.chinoisfacile.mandarin.domain.progression.HomePathFlattener
+import com.chinoisfacile.mandarin.domain.progression.HomePathItem
 import com.chinoisfacile.mandarin.domain.progression.UnitProgressionResolver
 import com.chinoisfacile.mandarin.ui.components.HskLevelSelector
 import com.chinoisfacile.mandarin.ui.theme.MandarinTheme
@@ -71,7 +74,9 @@ fun HomeScreen(
 
     if (uiState.isLoading || (uiState.isSeeding && uiState.units.isEmpty())) {
         Box(
-            modifier = modifier.fillMaxSize(),
+            modifier = modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.background),
             contentAlignment = Alignment.Center,
         ) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
@@ -88,20 +93,25 @@ fun HomeScreen(
     }
 
     val showQuickReview = uiState.isQuickReviewAvailable
+    val pathItems = remember(uiState.units) {
+        HomePathFlattener.flatten(uiState.units)
+    }
     val activeTarget = remember(uiState.units) {
         UnitProgressionResolver.findActiveTarget(uiState.units)
     }
-    val activeUnitKey = activeTarget?.unitId
-    val activeUnitItemIndex = remember(uiState.units, activeUnitKey, uiState.isSeeding, showQuickReview) {
+    val activeStepKey = HomePathFlattener.activeStepKey(activeTarget)
+    val activeStepItemIndex = remember(pathItems, activeTarget, uiState.isSeeding, showQuickReview) {
         val headerCount = (if (uiState.isSeeding) 1 else 0) + 2 + (if (showQuickReview) 1 else 0)
-        val unitIndex = uiState.units.indexOfFirst { it.id == activeUnitKey }
-        if (unitIndex >= 0) headerCount + unitIndex else -1
+        HomePathFlattener.findActiveItemIndex(
+            items = pathItems,
+            activeTarget = activeTarget,
+            headerItemCount = headerCount,
+        )
     }
-    val showResumeFab by remember(activeUnitItemIndex) {
+    val showResumeFab by remember(activeStepItemIndex, activeStepKey) {
         derivedStateOf {
-            if (activeUnitItemIndex < 0) return@derivedStateOf false
-            val visibleKeys = listState.layoutInfo.visibleItemsInfo.map { it.key }
-            activeUnitKey != null && activeUnitKey !in visibleKeys
+            if (activeStepItemIndex < 0 || activeStepKey == null) return@derivedStateOf false
+            listState.layoutInfo.visibleItemsInfo.none { it.key == activeStepKey }
         }
     }
 
@@ -114,17 +124,22 @@ fun HomeScreen(
         )
     }
 
-    Box(modifier = modifier.fillMaxSize()) {
+    Box(
+        modifier = modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background),
+    ) {
         LazyColumn(
             state = listState,
             modifier = Modifier.fillMaxSize(),
             contentPadding = PaddingValues(16.dp),
-            verticalArrangement = Arrangement.spacedBy(14.dp),
         ) {
             if (uiState.isSeeding) {
-                item(key = "seeding_banner") {
+                item(key = "seeding_banner", contentType = "seeding_banner") {
                     Surface(
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(bottom = 14.dp),
                         shape = RoundedCornerShape(12.dp),
                         color = MaterialTheme.colorScheme.secondaryContainer,
                     ) {
@@ -141,56 +156,70 @@ fun HomeScreen(
                 }
             }
 
-            item(key = "header_title") {
+            item(key = "header_title", contentType = "header_title") {
                 Text(
                     text = stringResource(R.string.home_title_hsk, uiState.selectedHskLevel),
                     style = MaterialTheme.typography.headlineMedium,
+                    modifier = Modifier.padding(bottom = 12.dp),
                 )
             }
 
-            item(key = "hsk_selector") {
+            item(key = "hsk_selector", contentType = "hsk_selector") {
                 HskLevelSelector(
                     selectedLevel = uiState.selectedHskLevel,
                     onSelectLevel = viewModel::onSelectHskLevel,
+                    modifier = Modifier.padding(bottom = 12.dp),
                 )
             }
 
             if (showQuickReview) {
-                item(key = "quick_review") {
+                item(key = "quick_review", contentType = "quick_review") {
                     QuickReviewButton(
                         dueWordsCount = uiState.dueWordsCount,
                         onClick = { onStartQuickReview(uiState.selectedHskLevel) },
+                        modifier = Modifier.padding(bottom = 12.dp),
                     )
                 }
             }
 
             items(
-                items = uiState.units,
-                key = { it.id },
-                contentType = { "unit_path" },
-            ) { unit ->
-                Column(modifier = Modifier.fillMaxWidth()) {
-                    UnitBanner(unit = unit)
-                    UnitLessonPath(
-                        unit = unit,
-                        activeTarget = activeTarget,
-                        onStepLessonClick = { clickedStep ->
-                            if (clickedStep.isStepLessonUnlocked || clickedStep.isStepLessonCompleted) {
-                                onOpenStepLesson(clickedStep.id)
-                            } else {
-                                val previousQuizOrder = (clickedStep.orderIndex - 1).coerceAtLeast(1)
-                                val message = context.getString(
-                                    R.string.home_step_lesson_locked,
-                                    previousQuizOrder,
-                                )
-                                coroutineScope.launch {
-                                    snackbarHostState.currentSnackbarData?.dismiss()
-                                    snackbarHostState.showSnackbar(message)
+                items = pathItems,
+                key = { it.key },
+                contentType = { it.contentType },
+            ) { pathItem ->
+                when (pathItem) {
+                    is HomePathItem.UnitHeader -> {
+                        UnitBanner(
+                            unit = pathItem.unit,
+                            modifier = Modifier.padding(
+                                top = if (pathItem.isFirstUnit) 2.dp else 20.dp,
+                                bottom = 14.dp,
+                            ),
+                        )
+                    }
+
+                    is HomePathItem.StepRow -> {
+                        StepPathRow(
+                            item = pathItem,
+                            activeTarget = activeTarget,
+                            onStepLessonClick = { clickedStep ->
+                                if (clickedStep.isStepLessonUnlocked || clickedStep.isStepLessonCompleted) {
+                                    onOpenStepLesson(clickedStep.id)
+                                } else {
+                                    val previousQuizOrder = (clickedStep.orderIndex - 1).coerceAtLeast(1)
+                                    val message = context.getString(
+                                        R.string.home_step_lesson_locked,
+                                        previousQuizOrder,
+                                    )
+                                    coroutineScope.launch {
+                                        snackbarHostState.currentSnackbarData?.dismiss()
+                                        snackbarHostState.showSnackbar(message)
+                                    }
                                 }
-                            }
-                        },
-                        onQuizClick = { lesson -> previewTarget = lesson },
-                    )
+                            },
+                            onQuizClick = { lesson -> previewTarget = lesson },
+                        )
+                    }
                 }
             }
         }
@@ -205,9 +234,9 @@ fun HomeScreen(
         ) {
             ExtendedFloatingActionButton(
                 onClick = {
-                    if (activeUnitItemIndex >= 0) {
+                    if (activeStepItemIndex >= 0) {
                         coroutineScope.launch {
-                            listState.animateScrollToItem(activeUnitItemIndex)
+                            listState.animateScrollToItem(activeStepItemIndex)
                         }
                     }
                 },

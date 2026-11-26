@@ -31,8 +31,11 @@ import com.chinoisfacile.mandarin.domain.srs.Sm2Scheduler
 import com.chinoisfacile.mandarin.domain.srs.Sm2State
 import com.chinoisfacile.mandarin.domain.srs.StreakCalculator
 import java.time.LocalDate
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.flowOn
 
 data class HomeData(
     val hskLevel: Int,
@@ -70,6 +73,7 @@ data class StepLessonPayload(
     val words: List<VocabWord>,
     val grammarNotes: List<GrammarNote>,
     val deckItems: List<StepLessonCardItem>,
+    val exampleTokenLookup: Map<String, VocabWord> = emptyMap(),
 )
 
 class MandarinRepository(
@@ -95,6 +99,12 @@ class MandarinRepository(
 
     suspend fun setShowPinyinByDefault(enabled: Boolean) {
         preferences.setShowPinyinByDefault(enabled)
+    }
+
+    fun observeToneColorsEnabled(): Flow<Boolean> = preferences.toneColorsEnabled
+
+    suspend fun setToneColorsEnabled(enabled: Boolean) {
+        preferences.setToneColorsEnabled(enabled)
     }
 
     fun observeSoundEffectsEnabled(): Flow<Boolean> = preferences.soundEffectsEnabled
@@ -196,6 +206,8 @@ class MandarinRepository(
                 seenWordsCount = seenWordsCount,
             )
         }
+            .distinctUntilChanged()
+            .flowOn(Dispatchers.Default)
     }
 
     fun observeLexiconWords(hskLevel: Int): Flow<List<WordWithProgress>> = combine(
@@ -217,6 +229,8 @@ class MandarinRepository(
             )
         }
     }
+        .distinctUntilChanged()
+        .flowOn(Dispatchers.Default)
 
     fun observeGlobalStatsOverview(
         todayEpochDay: Long = LocalDate.now().toEpochDay(),
@@ -273,6 +287,8 @@ class MandarinRepository(
             totalDueCount = levelSummaries.sumOf { it.dueCount },
         )
     }
+        .distinctUntilChanged()
+        .flowOn(Dispatchers.Default)
 
     suspend fun getLessonPayload(lessonId: String): SessionPayload {
         ensureSeeded()
@@ -313,6 +329,8 @@ class MandarinRepository(
             .map { it.note }
         val completedStepLessons = preferences.getCompletedStepLessons()
         val isLessonCompleted = lesson.id in completedStepLessons
+        val exampleTokens = words.flatMap { it.exampleTokens }.distinct()
+        val exampleTokenLookup = getWordsByHanzi(exampleTokens)
 
         return StepLessonPayload(
             lessonId = lesson.id,
@@ -326,7 +344,24 @@ class MandarinRepository(
             words = words,
             grammarNotes = grammarNotes,
             deckItems = deckItems,
+            exampleTokenLookup = exampleTokenLookup,
         )
+    }
+
+    suspend fun getWordsByHanzi(hanziList: Collection<String>): Map<String, VocabWord> {
+        val distinct = hanziList.asSequence()
+            .map { it.trim() }
+            .filter { it.isNotEmpty() }
+            .distinct()
+            .toList()
+        if (distinct.isEmpty()) return emptyMap()
+
+        val entities = distinct.chunked(500).flatMap { chunk ->
+            wordDao.getWordsByHanzi(chunk)
+        }
+        return entities
+            .sortedBy { it.hskLevel }
+            .associate { it.hanzi to it.toDomain() }
     }
 
     suspend fun completeStepLesson(lessonId: String) {
@@ -501,6 +536,7 @@ class MandarinRepository(
     }
 
     suspend fun resetAllProgress() {
+        seeder.invalidateVerification()
         ensureSeeded()
         database.withTransaction {
             progressDao.clearAllProgress()

@@ -36,7 +36,20 @@ data class MandarinExtendedColors(
     val lessonNodeShadow: Color,
     val lessonNodeContainer: Color,
     val onLessonNodeContainer: Color,
-)
+    val tone1: Color,
+    val tone2: Color,
+    val tone3: Color,
+    val tone4: Color,
+    val tone5: Color,
+) {
+    fun toneColor(tone: Int): Color = when (tone) {
+        1 -> tone1
+        2 -> tone2
+        3 -> tone3
+        4 -> tone4
+        else -> tone5
+    }
+}
 
 private val LightExtendedColors = MandarinExtendedColors(
     success = JadePrimary,
@@ -63,6 +76,11 @@ private val LightExtendedColors = MandarinExtendedColors(
     lessonNodeShadow = SkyAudioShadow,
     lessonNodeContainer = SkyAudioContainer,
     onLessonNodeContainer = OnSkyAudioContainer,
+    tone1 = Tone1Light,
+    tone2 = Tone2Light,
+    tone3 = Tone3Light,
+    tone4 = Tone4Light,
+    tone5 = Tone5Light,
 )
 
 private val DarkExtendedColors = MandarinExtendedColors(
@@ -90,6 +108,11 @@ private val DarkExtendedColors = MandarinExtendedColors(
     lessonNodeShadow = DarkSkyAudioShadow,
     lessonNodeContainer = DarkSkyAudioContainer,
     onLessonNodeContainer = DarkOnSkyAudioContainer,
+    tone1 = Tone1Dark,
+    tone2 = Tone2Dark,
+    tone3 = Tone3Dark,
+    tone4 = Tone4Dark,
+    tone5 = Tone5Dark,
 )
 
 private val LocalExtendedColors = staticCompositionLocalOf { LightExtendedColors }

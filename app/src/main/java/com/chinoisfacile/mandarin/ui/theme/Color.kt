@@ -66,3 +66,17 @@ val DarkOnDueContainer = Color(0xFFFFDBD0)
 val DarkErrorAccent = Color(0xFFFF8A80)
 val DarkErrorContainer = Color(0xFF3D1C1E)
 val DarkOnErrorContainer = Color(0xFFFFDAD6)
+
+// Tone colors (Light)
+val Tone1Light = Color(0xFF1565C0) // Blue
+val Tone2Light = Color(0xFF2E7D32) // Green
+val Tone3Light = Color(0xFFC66900) // Warm Amber / Orange
+val Tone4Light = Color(0xFFD32F2F) // Coral Red
+val Tone5Light = Color(0xFF6B7280) // Soft Gray
+
+// Tone colors (Dark)
+val Tone1Dark = Color(0xFF64B5F6) // Sky Blue
+val Tone2Dark = Color(0xFF73D681) // Mint Green
+val Tone3Dark = Color(0xFFFFB74D) // Warm Amber / Orange
+val Tone4Dark = Color(0xFFFF7A70) // Coral Red
+val Tone5Dark = Color(0xFF9AA4B2) // Soft Slate Gray

@@ -38,6 +38,7 @@ fun HanziCard(
     onTogglePinyin: () -> Unit,
     onPlayAudio: (() -> Unit)? = null,
     audioEnabled: Boolean = true,
+    toneColorsEnabled: Boolean = true,
     modifier: Modifier = Modifier,
 ) {
     Card(
@@ -62,10 +63,11 @@ fun HanziCard(
             )
 
             AnimatedVisibility(visible = showPinyin) {
-                Text(
-                    text = pinyin,
+                ToneColoredPinyinText(
+                    pinyin = pinyin,
+                    toneColorsEnabled = toneColorsEnabled,
                     style = CjkTextStyles.Pinyin,
-                    color = MaterialTheme.colorScheme.primary,
+                    fallbackColor = MaterialTheme.colorScheme.primary,
                     modifier = Modifier.padding(top = 8.dp),
                 )
             }

@@ -12,6 +12,7 @@ import androidx.datastore.preferences.preferencesDataStore
 import com.chinoisfacile.mandarin.data.model.LexiconViewMode
 import com.chinoisfacile.mandarin.data.model.ThemeMode
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 
@@ -21,31 +22,41 @@ class UserPreferencesDataStore(context: Context) {
 
     private val dataStore = context.applicationContext.dataStore
 
-    val showPinyinByDefault: Flow<Boolean> = dataStore.data.map { prefs ->
-        prefs[KEY_SHOW_PINYIN_BY_DEFAULT] ?: true
-    }
+    val showPinyinByDefault: Flow<Boolean> = dataStore.data
+        .map { prefs -> prefs[KEY_SHOW_PINYIN_BY_DEFAULT] ?: true }
+        .distinctUntilChanged()
 
-    val soundEffectsEnabled: Flow<Boolean> = dataStore.data.map { prefs ->
-        prefs[KEY_SOUND_EFFECTS_ENABLED] ?: true
-    }
+    val toneColorsEnabled: Flow<Boolean> = dataStore.data
+        .map { prefs -> prefs[KEY_TONE_COLORS_ENABLED] ?: true }
+        .distinctUntilChanged()
 
-    val selectedHskLevel: Flow<Int> = dataStore.data.map { prefs ->
-        (prefs[KEY_SELECTED_HSK_LEVEL] ?: DEFAULT_HSK_LEVEL).coerceIn(MIN_HSK_LEVEL, MAX_HSK_LEVEL)
-    }
+    val soundEffectsEnabled: Flow<Boolean> = dataStore.data
+        .map { prefs -> prefs[KEY_SOUND_EFFECTS_ENABLED] ?: true }
+        .distinctUntilChanged()
 
-    val themeMode: Flow<ThemeMode> = dataStore.data.map { prefs ->
-        val raw = prefs[KEY_THEME_MODE]
-        ThemeMode.entries.firstOrNull { it.name == raw } ?: ThemeMode.SYSTEM
-    }
+    val selectedHskLevel: Flow<Int> = dataStore.data
+        .map { prefs ->
+            (prefs[KEY_SELECTED_HSK_LEVEL] ?: DEFAULT_HSK_LEVEL).coerceIn(MIN_HSK_LEVEL, MAX_HSK_LEVEL)
+        }
+        .distinctUntilChanged()
 
-    val lexiconViewMode: Flow<LexiconViewMode> = dataStore.data.map { prefs ->
-        val raw = prefs[KEY_LEXICON_VIEW_MODE]
-        LexiconViewMode.entries.firstOrNull { it.name == raw } ?: LexiconViewMode.GRID
-    }
+    val themeMode: Flow<ThemeMode> = dataStore.data
+        .map { prefs ->
+            val raw = prefs[KEY_THEME_MODE]
+            ThemeMode.entries.firstOrNull { it.name == raw } ?: ThemeMode.SYSTEM
+        }
+        .distinctUntilChanged()
 
-    val completedStepLessons: Flow<Set<String>> = dataStore.data.map { prefs ->
-        prefs[KEY_COMPLETED_STEP_LESSONS] ?: emptySet()
-    }
+    val lexiconViewMode: Flow<LexiconViewMode> = dataStore.data
+        .map { prefs ->
+            val raw = prefs[KEY_LEXICON_VIEW_MODE]
+            LexiconViewMode.entries.firstOrNull { it.name == raw } ?: LexiconViewMode.GRID
+        }
+        .distinctUntilChanged()
+
+    val completedStepLessons: Flow<Set<String>> = dataStore.data
+        .map { prefs -> prefs[KEY_COMPLETED_STEP_LESSONS] ?: emptySet() }
+        .distinctUntilChanged()
 
     suspend fun getCompletedStepLessons(): Set<String> = completedStepLessons.first()
 
@@ -62,6 +73,12 @@ class UserPreferencesDataStore(context: Context) {
     suspend fun setShowPinyinByDefault(enabled: Boolean) {
         dataStore.edit { prefs ->
             prefs[KEY_SHOW_PINYIN_BY_DEFAULT] = enabled
+        }
+    }
+
+    suspend fun setToneColorsEnabled(enabled: Boolean) {
+        dataStore.edit { prefs ->
+            prefs[KEY_TONE_COLORS_ENABLED] = enabled
         }
     }
 
@@ -116,6 +133,7 @@ class UserPreferencesDataStore(context: Context) {
         const val DEFAULT_HSK_LEVEL = 1
 
         val KEY_SHOW_PINYIN_BY_DEFAULT = booleanPreferencesKey("show_pinyin_by_default")
+        val KEY_TONE_COLORS_ENABLED = booleanPreferencesKey("tone_colors_enabled")
         val KEY_SOUND_EFFECTS_ENABLED = booleanPreferencesKey("sound_effects_enabled")
         val KEY_SELECTED_HSK_LEVEL = intPreferencesKey("selected_hsk_level")
         val KEY_THEME_MODE = stringPreferencesKey("theme_mode")

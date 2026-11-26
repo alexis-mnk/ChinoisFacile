@@ -10,9 +10,9 @@ import com.chinoisfacile.mandarin.data.local.GrammarNotesLoader
 import com.chinoisfacile.mandarin.data.local.UserPreferencesDataStore
 import com.chinoisfacile.mandarin.data.repository.MandarinRepository
 import com.chinoisfacile.mandarin.domain.audio.AudioPlayer
+import com.chinoisfacile.mandarin.domain.audio.HybridAudioPlayer
 import com.chinoisfacile.mandarin.domain.audio.SoundEffectPlayer
 import com.chinoisfacile.mandarin.domain.audio.SoundEffects
-import com.chinoisfacile.mandarin.domain.audio.TtsAudioPlayer
 import com.chinoisfacile.mandarin.domain.lesson.ExerciseGenerator
 import com.chinoisfacile.mandarin.domain.srs.Sm2Scheduler
 import com.chinoisfacile.mandarin.domain.srs.StreakCalculator
@@ -68,12 +68,35 @@ class AppContainer(context: Context) {
         )
     }
 
+    @Volatile
+    private var audioInitialized = false
+
+    @Volatile
+    private var sfxInitialized = false
+
     val audioPlayer: AudioPlayer by lazy {
-        TtsAudioPlayer(appContext)
+        audioInitialized = true
+        HybridAudioPlayer(appContext)
     }
 
     val soundEffects: SoundEffects by lazy {
+        sfxInitialized = true
         SoundEffectPlayer(appContext)
+    }
+
+    fun stopAudio() {
+        if (audioInitialized) {
+            audioPlayer.stop()
+        }
+    }
+
+    fun release() {
+        if (audioInitialized) {
+            audioPlayer.release()
+        }
+        if (sfxInitialized) {
+            soundEffects.release()
+        }
     }
 
     fun homeViewModelFactory(): ViewModelProvider.Factory = object : ViewModelProvider.Factory {

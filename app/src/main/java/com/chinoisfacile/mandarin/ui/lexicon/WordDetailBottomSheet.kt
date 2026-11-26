@@ -9,7 +9,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.VolumeUp
 import androidx.compose.material3.Card
@@ -32,9 +34,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.chinoisfacile.mandarin.R
 import com.chinoisfacile.mandarin.data.model.MasteryLevel
+import com.chinoisfacile.mandarin.data.model.VocabWord
 import com.chinoisfacile.mandarin.data.model.WordWithProgress
 import com.chinoisfacile.mandarin.domain.lexicon.LexiconFilter
 import com.chinoisfacile.mandarin.ui.components.AudioControlButtons
+import com.chinoisfacile.mandarin.ui.components.InteractiveExampleSentence
+import com.chinoisfacile.mandarin.ui.components.ToneColoredHanziText
+import com.chinoisfacile.mandarin.ui.components.ToneColoredPinyinText
 import com.chinoisfacile.mandarin.ui.theme.CjkTextStyles
 import com.chinoisfacile.mandarin.ui.theme.MandarinTheme
 
@@ -42,6 +48,8 @@ import com.chinoisfacile.mandarin.ui.theme.MandarinTheme
 @Composable
 fun WordDetailBottomSheet(
     item: WordWithProgress,
+    tokenLookup: Map<String, VocabWord>,
+    toneColorsEnabled: Boolean,
     todayEpochDay: Long,
     audioReady: Boolean,
     onPlayNormal: (String) -> Unit,
@@ -83,6 +91,7 @@ fun WordDetailBottomSheet(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
+                .verticalScroll(rememberScrollState())
                 .padding(horizontal = 20.dp)
                 .padding(bottom = 28.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -112,19 +121,22 @@ fun WordDetailBottomSheet(
 
             Spacer(modifier = Modifier.height(10.dp))
 
-            Text(
-                text = item.word.hanzi,
+            ToneColoredHanziText(
+                hanzi = item.word.hanzi,
+                pinyin = item.word.pinyin,
+                toneColorsEnabled = toneColorsEnabled,
                 style = CjkTextStyles.HanziDisplay,
-                color = MaterialTheme.colorScheme.onSurface,
+                fallbackColor = MaterialTheme.colorScheme.onSurface,
                 textAlign = TextAlign.Center,
             )
 
             Spacer(modifier = Modifier.height(4.dp))
 
-            Text(
-                text = item.word.pinyin,
+            ToneColoredPinyinText(
+                pinyin = item.word.pinyin,
+                toneColorsEnabled = toneColorsEnabled,
                 style = CjkTextStyles.Pinyin,
-                color = MaterialTheme.colorScheme.primary,
+                fallbackColor = MaterialTheme.colorScheme.primary,
             )
 
             Spacer(modifier = Modifier.height(6.dp))
@@ -160,15 +172,22 @@ fun WordDetailBottomSheet(
                         color = MaterialTheme.colorScheme.primary,
                     )
                     Spacer(modifier = Modifier.height(6.dp))
-                    Text(
-                        text = item.word.exampleHanzi,
-                        style = CjkTextStyles.HanziListItem,
-                        color = MaterialTheme.colorScheme.onSurface,
+                    InteractiveExampleSentence(
+                        wordId = item.word.id,
+                        exampleHanzi = item.word.exampleHanzi,
+                        exampleTokens = item.word.exampleTokens,
+                        targetHanzi = item.word.hanzi,
+                        tokenLookup = tokenLookup,
+                        toneColorsEnabled = toneColorsEnabled,
+                        audioReady = audioReady,
+                        onPlayWord = onPlayNormal,
                     )
-                    Text(
-                        text = item.word.examplePinyin,
+                    Spacer(modifier = Modifier.height(4.dp))
+                    ToneColoredPinyinText(
+                        pinyin = item.word.examplePinyin,
+                        toneColorsEnabled = toneColorsEnabled,
                         style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.primary,
+                        fallbackColor = MaterialTheme.colorScheme.primary,
                     )
                     Spacer(modifier = Modifier.height(4.dp))
                     Text(
