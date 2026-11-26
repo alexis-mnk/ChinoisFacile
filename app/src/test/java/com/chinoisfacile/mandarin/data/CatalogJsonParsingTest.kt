@@ -182,7 +182,8 @@ class CatalogJsonParsingTest {
                 """Let us keep moving forward|Please get ready|Our environment is truly |""" +
                 """Everyone needs to |Let's all .+ together!|We are going to |He will go to |""" +
                 """We have started to |I think we can |Let's .+ tomorrow instead\.|""" +
-                """We should seriously |I believe she can |The teacher is introducing |""" +
+                """We should seriously |I believe she can |I really want to to |""" +
+                """My friend can also |to to |The teacher is introducing |""" +
                 """Everyone knows about |I really like the new |Today we are looking at |""" +
                 """The school has |This matter is extremely |I find this very |""" +
                 """This morning is really |This place is very |He keeps working |""" +
@@ -212,7 +213,7 @@ class CatalogJsonParsingTest {
                 if (vulgarOrSlangRegex.containsMatchIn(word.example.english)) {
                     issues += "HSK$level ${word.id} (${word.hanzi}): vulgar/slang example '${word.example.english}'"
                 }
-                if (level in 1..3 && mechanicalTemplateRegex.containsMatchIn(word.example.english)) {
+                if (level in 1..4 && mechanicalTemplateRegex.containsMatchIn(word.example.english)) {
                     issues += "HSK$level ${word.id} (${word.hanzi}): mechanical template '${word.example.english}'"
                 }
                 if (word.hanzi !in word.example.tokens) {
