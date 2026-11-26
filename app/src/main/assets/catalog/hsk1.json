@@ -1,6 +1,6 @@
 {
   "hskLevel": 1,
-  "catalogVersion": 8,
+  "catalogVersion": 11,
   "units": [
     {
       "id": "hsk1_u1",
@@ -77,17 +77,17 @@
         {
           "id": "hsk1_u3_l11",
           "orderIndex": 11,
-          "title": "Leçon 11 — Chiffres 0 à 4"
+          "title": "Leçon 11 — Chiffres 1 à 5"
         },
         {
           "id": "hsk1_u3_l12",
           "orderIndex": 12,
-          "title": "Leçon 12 — Chiffres 5 à 10"
+          "title": "Leçon 12 — Chiffres 6 à 10"
         },
         {
           "id": "hsk1_u3_l13",
           "orderIndex": 13,
-          "title": "Leçon 13 — Dizaines et âge"
+          "title": "Leçon 13 — Quantités et âge"
         },
         {
           "id": "hsk1_u3_l14",
@@ -120,7 +120,7 @@
         {
           "id": "hsk1_u4_l18",
           "orderIndex": 18,
-          "title": "Leçon 18 — Transports et déplacements"
+          "title": "Leçon 18 — Transports et logement"
         },
         {
           "id": "hsk1_u4_l19",
@@ -143,7 +143,7 @@
         {
           "id": "hsk1_u5_l21",
           "orderIndex": 21,
-          "title": "Leçon 21 — Déplacements et métiers"
+          "title": "Leçon 21 — Déplacements et regard"
         },
         {
           "id": "hsk1_u5_l22",
@@ -153,12 +153,12 @@
         {
           "id": "hsk1_u5_l23",
           "orderIndex": 23,
-          "title": "Leçon 23 — Perception et lecture"
+          "title": "Leçon 23 — Perception et langage"
         },
         {
           "id": "hsk1_u5_l24",
           "orderIndex": 24,
-          "title": "Leçon 24 — Écrire, dormir et appeler"
+          "title": "Leçon 24 — Livres, sommeil et appels"
         },
         {
           "id": "hsk1_u5_l25",
@@ -228,13 +228,15 @@
       "pinyin": "hǎo",
       "french": "Bon / Bien",
       "example": {
-        "hanzi": "你很好！",
-        "pinyin": "Nǐ hěn hǎo!",
-        "french": "Tu es très bien !",
+        "hanzi": "你好认识很高兴！",
+        "pinyin": "Nǐ hǎo rèn shi hěn gāo xìng!",
+        "french": "Bonjour, ravi de faire ta connaissance !",
         "tokens": [
           "你",
+          "好",
+          "认识",
           "很",
-          "好"
+          "高兴"
         ]
       }
     },
@@ -300,7 +302,7 @@
       "french": "Solliciter / inviter",
       "example": {
         "hanzi": "请你喝茶。",
-        "pinyin": "Qǐng nǐ hè chá.",
+        "pinyin": "Qǐng nǐ hē chá.",
         "french": "Je t'en prie, bois du thé.",
         "tokens": [
           "请",
@@ -353,7 +355,7 @@
       "lessonId": "hsk1_u1_l2",
       "hanzi": "不客气",
       "pinyin": "bù kè qi",
-      "french": "Impoli / rude",
+      "french": "De rien / Je vous en prie",
       "example": {
         "hanzi": "不客气我们是朋友。",
         "pinyin": "Bù kè qi wǒ men shì péng you.",
@@ -490,18 +492,17 @@
     {
       "id": "hsk1_017",
       "lessonId": "hsk1_u1_l4",
-      "hanzi": "没",
-      "pinyin": "méi",
-      "french": "Ne pas (avoir / passé)",
+      "hanzi": "没有",
+      "pinyin": "méi yǒu",
+      "french": "Ne pas avoir / Ne pas (passé)",
       "example": {
-        "hanzi": "他没去学校。",
-        "pinyin": "Tā méi qù xué xiào.",
-        "french": "Il n'est pas allé à l'école.",
+        "hanzi": "我没有钱。",
+        "pinyin": "Wǒ méi yǒu qián.",
+        "french": "Je n'ai pas d'argent.",
         "tokens": [
-          "他",
-          "没",
-          "去",
-          "学校"
+          "我",
+          "没有",
+          "钱"
         ]
       }
     },
@@ -510,7 +511,7 @@
       "lessonId": "hsk1_u1_l4",
       "hanzi": "吗",
       "pinyin": "ma",
-      "french": "Que / quoi",
+      "french": "Particule interrogative (est-ce que)",
       "example": {
         "hanzi": "你好吗？",
         "pinyin": "Nǐ hǎo ma?",
@@ -562,7 +563,7 @@
       "lessonId": "hsk1_u1_l5",
       "hanzi": "叫",
       "pinyin": "jiào",
-      "french": "Crier / appeler",
+      "french": "S'appeler / Appeler",
       "example": {
         "hanzi": "你叫什么？",
         "pinyin": "Nǐ jiào shén me?",
@@ -632,7 +633,7 @@
       "lessonId": "hsk1_u1_l5",
       "hanzi": "那",
       "pinyin": "nà",
-      "french": "Ce / cet",
+      "french": "Ce ...-là / Cela",
       "example": {
         "hanzi": "那不是我。",
         "pinyin": "Nà bù shì wǒ.",
@@ -671,7 +672,7 @@
       "french": "Papa",
       "example": {
         "hanzi": "我爸爸喜欢喝茶。",
-        "pinyin": "Wǒ bà ba xǐ huan hè chá.",
+        "pinyin": "Wǒ bà ba xǐ huan hē chá.",
         "french": "Mon papa aime boire du thé.",
         "tokens": [
           "我",
@@ -861,7 +862,7 @@
       "french": "Aimer / apprécier",
       "example": {
         "hanzi": "他喜欢喝水。",
-        "pinyin": "Tā xǐ huan hè shuǐ.",
+        "pinyin": "Tā xǐ huan hē shuǐ.",
         "french": "Il aime bien boire de l'eau.",
         "tokens": [
           "他",
@@ -893,18 +894,17 @@
       "id": "hsk1_039",
       "lessonId": "hsk1_u2_l8",
       "hanzi": "喝",
-      "pinyin": "hè",
-      "french": "Crier fort",
+      "pinyin": "hē",
+      "french": "Boire",
       "example": {
-        "hanzi": "有什么喝的吗？",
-        "pinyin": "Yǒu shén me hè de ma?",
-        "french": "Avez-vous des boissons ici ?",
+        "hanzi": "我喜欢喝茶。",
+        "pinyin": "Wǒ xǐ huan hē chá.",
+        "french": "J'aime boire du thé.",
         "tokens": [
-          "有",
-          "什么",
+          "我",
+          "喜欢",
           "喝",
-          "的",
-          "吗"
+          "茶"
         ]
       }
     },
@@ -916,7 +916,7 @@
       "french": "Eau / liquide",
       "example": {
         "hanzi": "我不喝水。",
-        "pinyin": "Wǒ bù hè shuǐ.",
+        "pinyin": "Wǒ bù hē shuǐ.",
         "french": "Je ne bois pas d'eau.",
         "tokens": [
           "我",
@@ -934,7 +934,7 @@
       "french": "Thé / infusion de thé ou d'autre chose",
       "example": {
         "hanzi": "我喜欢喝茶。",
-        "pinyin": "Wǒ xǐ huan hè chá.",
+        "pinyin": "Wǒ xǐ huan hē chá.",
         "french": "J'aime boire du thé.",
         "tokens": [
           "我",
@@ -1023,17 +1023,17 @@
       "lessonId": "hsk1_u2_l10",
       "hanzi": "猫",
       "pinyin": "māo",
-      "french": "Chat / modem (fam.)",
+      "french": "Chat",
       "example": {
-        "hanzi": "她很喜欢这个猫。",
-        "pinyin": "Tā hěn xǐ huan zhè gè māo.",
-        "french": "Elle aime beaucoup ce chat.",
+        "hanzi": "我喜欢这个小猫。",
+        "pinyin": "Wǒ xǐ huan zhè gè xiǎo māo.",
+        "french": "J'aime ce petit chat.",
         "tokens": [
-          "她",
-          "很",
+          "我",
           "喜欢",
           "这",
           "个",
+          "小",
           "猫"
         ]
       }
@@ -1043,7 +1043,7 @@
       "lessonId": "hsk1_u2_l10",
       "hanzi": "狗",
       "pinyin": "gǒu",
-      "french": "Chien / maudit",
+      "french": "Chien",
       "example": {
         "hanzi": "那个狗很大。",
         "pinyin": "Nà gè gǒu hěn dà.",
@@ -1115,24 +1115,6 @@
     {
       "id": "hsk1_051",
       "lessonId": "hsk1_u3_l11",
-      "hanzi": "零",
-      "pinyin": "líng",
-      "french": "Zéro",
-      "example": {
-        "hanzi": "现在零点了。",
-        "pinyin": "Xiàn zài líng diǎn le.",
-        "french": "Il est maintenant minuit.",
-        "tokens": [
-          "现在",
-          "零",
-          "点",
-          "了"
-        ]
-      }
-    },
-    {
-      "id": "hsk1_052",
-      "lessonId": "hsk1_u3_l11",
       "hanzi": "一",
       "pinyin": "yī",
       "french": "1 (nombre) / un",
@@ -1150,11 +1132,11 @@
       }
     },
     {
-      "id": "hsk1_053",
+      "id": "hsk1_052",
       "lessonId": "hsk1_u3_l11",
       "hanzi": "二",
       "pinyin": "èr",
-      "french": "Deux / stupide (dial.)",
+      "french": "Deux",
       "example": {
         "hanzi": "我有二十块钱。",
         "pinyin": "Wǒ yǒu èr shí kuài qián.",
@@ -1170,7 +1152,7 @@
       }
     },
     {
-      "id": "hsk1_054",
+      "id": "hsk1_053",
       "lessonId": "hsk1_u3_l11",
       "hanzi": "三",
       "pinyin": "sān",
@@ -1189,7 +1171,7 @@
       }
     },
     {
-      "id": "hsk1_055",
+      "id": "hsk1_054",
       "lessonId": "hsk1_u3_l11",
       "hanzi": "四",
       "pinyin": "sì",
@@ -1209,8 +1191,8 @@
       }
     },
     {
-      "id": "hsk1_056",
-      "lessonId": "hsk1_u3_l12",
+      "id": "hsk1_055",
+      "lessonId": "hsk1_u3_l11",
       "hanzi": "五",
       "pinyin": "wǔ",
       "french": "Cinq",
@@ -1228,7 +1210,7 @@
       }
     },
     {
-      "id": "hsk1_057",
+      "id": "hsk1_056",
       "lessonId": "hsk1_u3_l12",
       "hanzi": "六",
       "pinyin": "liù",
@@ -1247,14 +1229,14 @@
       }
     },
     {
-      "id": "hsk1_058",
+      "id": "hsk1_057",
       "lessonId": "hsk1_u3_l12",
       "hanzi": "七",
       "pinyin": "qī",
       "french": "Sept",
       "example": {
         "hanzi": "爸爸七点喝茶。",
-        "pinyin": "Bà ba qī diǎn hè chá.",
+        "pinyin": "Bà ba qī diǎn hē chá.",
         "french": "Papa boit du thé à sept heures.",
         "tokens": [
           "爸爸",
@@ -1266,7 +1248,7 @@
       }
     },
     {
-      "id": "hsk1_059",
+      "id": "hsk1_058",
       "lessonId": "hsk1_u3_l12",
       "hanzi": "八",
       "pinyin": "bā",
@@ -1285,7 +1267,7 @@
       }
     },
     {
-      "id": "hsk1_060",
+      "id": "hsk1_059",
       "lessonId": "hsk1_u3_l12",
       "hanzi": "九",
       "pinyin": "jiǔ",
@@ -1305,8 +1287,8 @@
       }
     },
     {
-      "id": "hsk1_061",
-      "lessonId": "hsk1_u3_l13",
+      "id": "hsk1_060",
+      "lessonId": "hsk1_u3_l12",
       "hanzi": "十",
       "pinyin": "shí",
       "french": "Dix / 10",
@@ -1324,7 +1306,7 @@
       }
     },
     {
-      "id": "hsk1_062",
+      "id": "hsk1_061",
       "lessonId": "hsk1_u3_l13",
       "hanzi": "几",
       "pinyin": "jǐ",
@@ -1345,7 +1327,7 @@
       }
     },
     {
-      "id": "hsk1_063",
+      "id": "hsk1_062",
       "lessonId": "hsk1_u3_l13",
       "hanzi": "多少",
       "pinyin": "duō shao",
@@ -1364,7 +1346,7 @@
       }
     },
     {
-      "id": "hsk1_064",
+      "id": "hsk1_063",
       "lessonId": "hsk1_u3_l13",
       "hanzi": "岁",
       "pinyin": "suì",
@@ -1384,11 +1366,11 @@
       }
     },
     {
-      "id": "hsk1_065",
+      "id": "hsk1_064",
       "lessonId": "hsk1_u3_l13",
       "hanzi": "个",
       "pinyin": "gè",
-      "french": "Individuel",
+      "french": "Classificateur général",
       "example": {
         "hanzi": "我上午去商店买了三个大苹果。",
         "pinyin": "Wǒ shàng wǔ qù shāng diàn mǎi le sān gè dà píng guǒ.",
@@ -1408,21 +1390,42 @@
       }
     },
     {
+      "id": "hsk1_065",
+      "lessonId": "hsk1_u3_l13",
+      "hanzi": "号",
+      "pinyin": "hào",
+      "french": "Numéro / Jour du mois",
+      "example": {
+        "hanzi": "今天是五月三号。",
+        "pinyin": "Jīn tiān shì wǔ yuè sān hào.",
+        "french": "Aujourd'hui nous sommes le 3 mai.",
+        "tokens": [
+          "今天",
+          "是",
+          "五",
+          "月",
+          "三",
+          "号"
+        ]
+      }
+    },
+    {
       "id": "hsk1_066",
       "lessonId": "hsk1_u3_l14",
       "hanzi": "年",
       "pinyin": "nián",
       "french": "Année / récolte",
       "example": {
-        "hanzi": "这是在两千年。",
-        "pinyin": "Zhè shì zài liǎngqiān nián.",
-        "french": "C'était en l'an deux mille.",
+        "hanzi": "我学习汉语一年了。",
+        "pinyin": "Wǒ xué xí Hàn yǔ yī nián le.",
+        "french": "J'étudie le chinois depuis un an.",
         "tokens": [
-          "这",
-          "是",
-          "在",
-          "两千",
-          "年"
+          "我",
+          "学习",
+          "汉语",
+          "一",
+          "年",
+          "了"
         ]
       }
     },
@@ -1447,26 +1450,6 @@
     {
       "id": "hsk1_068",
       "lessonId": "hsk1_u3_l14",
-      "hanzi": "日",
-      "pinyin": "rì",
-      "french": "Jour / (Soleil)",
-      "example": {
-        "hanzi": "今天是十月一日。",
-        "pinyin": "Jīn tiān shì shí yuè yī rì.",
-        "french": "Aujourd'hui est le 1er octobre.",
-        "tokens": [
-          "今天",
-          "是",
-          "十",
-          "月",
-          "一",
-          "日"
-        ]
-      }
-    },
-    {
-      "id": "hsk1_069",
-      "lessonId": "hsk1_u3_l14",
       "hanzi": "星期",
       "pinyin": "xīng qī",
       "french": "Semaine",
@@ -1483,7 +1466,7 @@
       }
     },
     {
-      "id": "hsk1_070",
+      "id": "hsk1_069",
       "lessonId": "hsk1_u3_l14",
       "hanzi": "今天",
       "pinyin": "jīn tiān",
@@ -1501,8 +1484,8 @@
       }
     },
     {
-      "id": "hsk1_071",
-      "lessonId": "hsk1_u3_l15",
+      "id": "hsk1_070",
+      "lessonId": "hsk1_u3_l14",
       "hanzi": "明天",
       "pinyin": "míng tiān",
       "french": "Demain / lendemain",
@@ -1519,7 +1502,7 @@
       }
     },
     {
-      "id": "hsk1_072",
+      "id": "hsk1_071",
       "lessonId": "hsk1_u3_l15",
       "hanzi": "昨天",
       "pinyin": "zuó tiān",
@@ -1537,14 +1520,14 @@
       }
     },
     {
-      "id": "hsk1_073",
+      "id": "hsk1_072",
       "lessonId": "hsk1_u3_l15",
       "hanzi": "现在",
       "pinyin": "xiàn zài",
       "french": "Maintenant / actuellement",
       "example": {
         "hanzi": "我们现在去喝茶。",
-        "pinyin": "Wǒ men xiàn zài qù hè chá.",
+        "pinyin": "Wǒ men xiàn zài qù hē chá.",
         "french": "Nous allons boire du thé maintenant.",
         "tokens": [
           "我们",
@@ -1556,11 +1539,11 @@
       }
     },
     {
-      "id": "hsk1_074",
+      "id": "hsk1_073",
       "lessonId": "hsk1_u3_l15",
       "hanzi": "点",
       "pinyin": "diǎn",
-      "french": "Un peu / un point",
+      "french": "Heure / Point / Un peu",
       "example": {
         "hanzi": "现在九点吗？",
         "pinyin": "Xiàn zài jiǔ diǎn ma?",
@@ -1574,7 +1557,7 @@
       }
     },
     {
-      "id": "hsk1_075",
+      "id": "hsk1_074",
       "lessonId": "hsk1_u3_l15",
       "hanzi": "分钟",
       "pinyin": "fēn zhōng",
@@ -1589,6 +1572,25 @@
           "汉语",
           "十",
           "分钟"
+        ]
+      }
+    },
+    {
+      "id": "hsk1_075",
+      "lessonId": "hsk1_u3_l15",
+      "hanzi": "一点儿",
+      "pinyin": "yī diǎn r",
+      "french": "Un peu",
+      "example": {
+        "hanzi": "我会说一点儿汉语。",
+        "pinyin": "Wǒ huì shuō yī diǎn r Hàn yǔ.",
+        "french": "Je sais parler un peu chinois.",
+        "tokens": [
+          "我",
+          "会",
+          "说",
+          "一点儿",
+          "汉语"
         ]
       }
     },
@@ -1729,19 +1731,19 @@
     {
       "id": "hsk1_083",
       "lessonId": "hsk1_u4_l17",
-      "hanzi": "饭馆",
-      "pinyin": "fàn guǎn",
-      "french": "Restaurant",
+      "hanzi": "饭店",
+      "pinyin": "fàn diàn",
+      "french": "Restaurant / Hôtel",
       "example": {
-        "hanzi": "我和朋友去饭馆。",
-        "pinyin": "Wǒ hé péng you qù fàn guǎn.",
+        "hanzi": "我和朋友去饭店。",
+        "pinyin": "Wǒ hé péng you qù fàn diàn.",
         "french": "Mon ami et moi allons au restaurant.",
         "tokens": [
           "我",
           "和",
           "朋友",
           "去",
-          "饭馆"
+          "饭店"
         ]
       }
     },
@@ -1802,27 +1804,9 @@
     {
       "id": "hsk1_087",
       "lessonId": "hsk1_u4_l18",
-      "hanzi": "火车站",
-      "pinyin": "huǒ chē zhàn",
-      "french": "Gare (de train)",
-      "example": {
-        "hanzi": "我现在去火车站。",
-        "pinyin": "Wǒ xiàn zài qù huǒ chē zhàn.",
-        "french": "Je vais maintenant à la gare.",
-        "tokens": [
-          "我",
-          "现在",
-          "去",
-          "火车站"
-        ]
-      }
-    },
-    {
-      "id": "hsk1_088",
-      "lessonId": "hsk1_u4_l18",
       "hanzi": "飞机",
       "pinyin": "fēi jī",
-      "french": "Avion / (argot) branlette",
+      "french": "Avion",
       "example": {
         "hanzi": "我们坐飞机去北京。",
         "pinyin": "Wǒ men zuò fēi jī qù Běi jīng.",
@@ -1837,7 +1821,7 @@
       }
     },
     {
-      "id": "hsk1_089",
+      "id": "hsk1_088",
       "lessonId": "hsk1_u4_l18",
       "hanzi": "出租车",
       "pinyin": "chū zū chē",
@@ -1856,7 +1840,7 @@
       }
     },
     {
-      "id": "hsk1_090",
+      "id": "hsk1_089",
       "lessonId": "hsk1_u4_l18",
       "hanzi": "电影",
       "pinyin": "diàn yǐng",
@@ -1871,6 +1855,26 @@
           "看",
           "中国",
           "电影"
+        ]
+      }
+    },
+    {
+      "id": "hsk1_090",
+      "lessonId": "hsk1_u4_l18",
+      "hanzi": "住",
+      "pinyin": "zhù",
+      "french": "Habiter / loger",
+      "example": {
+        "hanzi": "我的朋友住在北京。",
+        "pinyin": "Wǒ de péng you zhù zài Běi jīng.",
+        "french": "Mon ami habite à Pékin.",
+        "tokens": [
+          "我",
+          "的",
+          "朋友",
+          "住",
+          "在",
+          "北京"
         ]
       }
     },
@@ -1896,6 +1900,24 @@
     {
       "id": "hsk1_092",
       "lessonId": "hsk1_u4_l19",
+      "hanzi": "哪儿",
+      "pinyin": "nǎ r",
+      "french": "Où",
+      "example": {
+        "hanzi": "你明天去哪儿？",
+        "pinyin": "Nǐ míng tiān qù nǎ r?",
+        "french": "Où vas-tu demain ?",
+        "tokens": [
+          "你",
+          "明天",
+          "去",
+          "哪儿"
+        ]
+      }
+    },
+    {
+      "id": "hsk1_093",
+      "lessonId": "hsk1_u4_l19",
       "hanzi": "里",
       "pinyin": "lǐ",
       "french": "Dedans / À l'intérieur",
@@ -1912,7 +1934,7 @@
       }
     },
     {
-      "id": "hsk1_093",
+      "id": "hsk1_094",
       "lessonId": "hsk1_u4_l19",
       "hanzi": "前面",
       "pinyin": "qián miàn",
@@ -1930,29 +1952,29 @@
       }
     },
     {
-      "id": "hsk1_094",
+      "id": "hsk1_095",
       "lessonId": "hsk1_u4_l19",
       "hanzi": "后面",
       "pinyin": "hòu mian",
       "french": "Derrière / en arrière",
       "example": {
-        "hanzi": "她很喜欢后面。",
-        "pinyin": "Tā hěn xǐ huan hòu mian.",
-        "french": "Elle aime beaucoup : derrière.",
+        "hanzi": "他在我后面。",
+        "pinyin": "Tā zài wǒ hòu mian.",
+        "french": "Il est derrière moi.",
         "tokens": [
-          "她",
-          "很",
-          "喜欢",
+          "他",
+          "在",
+          "我",
           "后面"
         ]
       }
     },
     {
-      "id": "hsk1_095",
-      "lessonId": "hsk1_u4_l19",
+      "id": "hsk1_096",
+      "lessonId": "hsk1_u4_l20",
       "hanzi": "上",
       "pinyin": "shàng",
-      "french": "Monter / grimper",
+      "french": "Sur / Dessus / Monter",
       "example": {
         "hanzi": "苹果在桌子上。",
         "pinyin": "Píng guǒ zài zhuō zi shàng.",
@@ -1966,7 +1988,7 @@
       }
     },
     {
-      "id": "hsk1_096",
+      "id": "hsk1_097",
       "lessonId": "hsk1_u4_l20",
       "hanzi": "下",
       "pinyin": "xià",
@@ -1985,7 +2007,7 @@
       }
     },
     {
-      "id": "hsk1_097",
+      "id": "hsk1_098",
       "lessonId": "hsk1_u4_l20",
       "hanzi": "桌子",
       "pinyin": "zhuō zi",
@@ -2003,7 +2025,7 @@
       }
     },
     {
-      "id": "hsk1_098",
+      "id": "hsk1_099",
       "lessonId": "hsk1_u4_l20",
       "hanzi": "椅子",
       "pinyin": "yǐ zi",
@@ -2021,7 +2043,7 @@
       }
     },
     {
-      "id": "hsk1_099",
+      "id": "hsk1_100",
       "lessonId": "hsk1_u4_l20",
       "hanzi": "杯子",
       "pinyin": "bēi zi",
@@ -2037,25 +2059,6 @@
           "是",
           "我",
           "的"
-        ]
-      }
-    },
-    {
-      "id": "hsk1_100",
-      "lessonId": "hsk1_u4_l20",
-      "hanzi": "东西",
-      "pinyin": "dōng xi",
-      "french": "Chose / Objet",
-      "example": {
-        "hanzi": "我想吃点东西。",
-        "pinyin": "Wǒ xiǎng chī diǎn dōng xi.",
-        "french": "J'aimerais manger quelque chose.",
-        "tokens": [
-          "我",
-          "想",
-          "吃",
-          "点",
-          "东西"
         ]
       }
     },
@@ -2102,7 +2105,7 @@
       "lessonId": "hsk1_u5_l21",
       "hanzi": "回",
       "pinyin": "huí",
-      "french": "Fois / revenir",
+      "french": "Revenir / Rentrer",
       "example": {
         "hanzi": "他明天不回来。",
         "pinyin": "Tā míng tiān bù huí lái.",
@@ -2119,26 +2122,6 @@
     {
       "id": "hsk1_104",
       "lessonId": "hsk1_u5_l21",
-      "hanzi": "住",
-      "pinyin": "zhù",
-      "french": "Habiter / loger",
-      "example": {
-        "hanzi": "我的朋友住在北京。",
-        "pinyin": "Wǒ de péng you zhù zài Běi jīng.",
-        "french": "Mon ami habite à Pékin.",
-        "tokens": [
-          "我",
-          "的",
-          "朋友",
-          "住",
-          "在",
-          "北京"
-        ]
-      }
-    },
-    {
-      "id": "hsk1_105",
-      "lessonId": "hsk1_u5_l21",
       "hanzi": "坐",
       "pinyin": "zuò",
       "french": "S'assoir / s'asseoir",
@@ -2152,6 +2135,26 @@
           "在",
           "桌子",
           "上"
+        ]
+      }
+    },
+    {
+      "id": "hsk1_105",
+      "lessonId": "hsk1_u5_l21",
+      "hanzi": "看",
+      "pinyin": "kàn",
+      "french": "Regarder / Lire",
+      "example": {
+        "hanzi": "我喜欢在家看书。",
+        "pinyin": "Wǒ xǐ huan zài jiā kàn shū.",
+        "french": "J'aime lire à la maison.",
+        "tokens": [
+          "我",
+          "喜欢",
+          "在",
+          "家",
+          "看",
+          "书"
         ]
       }
     },
@@ -2253,26 +2256,6 @@
     {
       "id": "hsk1_111",
       "lessonId": "hsk1_u5_l23",
-      "hanzi": "看",
-      "pinyin": "kàn",
-      "french": "Regarder / Lire",
-      "example": {
-        "hanzi": "我喜欢在家看书。",
-        "pinyin": "Wǒ xǐ huan zài jiā kàn shū.",
-        "french": "J'aime lire à la maison.",
-        "tokens": [
-          "我",
-          "喜欢",
-          "在",
-          "家",
-          "看",
-          "书"
-        ]
-      }
-    },
-    {
-      "id": "hsk1_112",
-      "lessonId": "hsk1_u5_l23",
       "hanzi": "看见",
       "pinyin": "kàn jiàn",
       "french": "Voir / apercevoir",
@@ -2295,7 +2278,7 @@
       }
     },
     {
-      "id": "hsk1_113",
+      "id": "hsk1_112",
       "lessonId": "hsk1_u5_l23",
       "hanzi": "听",
       "pinyin": "tīng",
@@ -2313,27 +2296,25 @@
       }
     },
     {
-      "id": "hsk1_114",
+      "id": "hsk1_113",
       "lessonId": "hsk1_u5_l23",
-      "hanzi": "说话",
-      "pinyin": "shuō huà",
-      "french": "Parler / dire",
+      "hanzi": "说",
+      "pinyin": "shuō",
+      "french": "Dire / Parler",
       "example": {
-        "hanzi": "我能和老师说话吗？",
-        "pinyin": "Wǒ néng hé lǎo shī shuō huà ma?",
-        "french": "Puis-je parler au professeur ?",
+        "hanzi": "她会说汉语。",
+        "pinyin": "Tā huì shuō Hàn yǔ.",
+        "french": "Elle sait parler chinois.",
         "tokens": [
-          "我",
-          "能",
-          "和",
-          "老师",
-          "说话",
-          "吗"
+          "她",
+          "会",
+          "说",
+          "汉语"
         ]
       }
     },
     {
-      "id": "hsk1_115",
+      "id": "hsk1_114",
       "lessonId": "hsk1_u5_l23",
       "hanzi": "读",
       "pinyin": "dú",
@@ -2352,8 +2333,8 @@
       }
     },
     {
-      "id": "hsk1_116",
-      "lessonId": "hsk1_u5_l24",
+      "id": "hsk1_115",
+      "lessonId": "hsk1_u5_l23",
       "hanzi": "写",
       "pinyin": "xiě",
       "french": "Écrire / composer",
@@ -2372,7 +2353,7 @@
       }
     },
     {
-      "id": "hsk1_117",
+      "id": "hsk1_116",
       "lessonId": "hsk1_u5_l24",
       "hanzi": "字",
       "pinyin": "zì",
@@ -2391,7 +2372,7 @@
       }
     },
     {
-      "id": "hsk1_118",
+      "id": "hsk1_117",
       "lessonId": "hsk1_u5_l24",
       "hanzi": "书",
       "pinyin": "shū",
@@ -2410,7 +2391,7 @@
       }
     },
     {
-      "id": "hsk1_119",
+      "id": "hsk1_118",
       "lessonId": "hsk1_u5_l24",
       "hanzi": "睡觉",
       "pinyin": "shuì jiào",
@@ -2430,7 +2411,7 @@
       }
     },
     {
-      "id": "hsk1_120",
+      "id": "hsk1_119",
       "lessonId": "hsk1_u5_l24",
       "hanzi": "打电话",
       "pinyin": "dǎ diàn huà",
@@ -2443,6 +2424,25 @@
           "我",
           "在",
           "打电话"
+        ]
+      }
+    },
+    {
+      "id": "hsk1_120",
+      "lessonId": "hsk1_u5_l24",
+      "hanzi": "东西",
+      "pinyin": "dōng xi",
+      "french": "Chose / Objet",
+      "example": {
+        "hanzi": "我去商店买东西。",
+        "pinyin": "Wǒ qù shāng diàn mǎi dōng xi.",
+        "french": "Je vais au magasin acheter des choses.",
+        "tokens": [
+          "我",
+          "去",
+          "商店",
+          "买",
+          "东西"
         ]
       }
     },
@@ -2477,8 +2477,7 @@
         "french": "Il n'a pas beaucoup d'argent.",
         "tokens": [
           "他",
-          "没",
-          "有",
+          "没有",
           "很",
           "多",
           "钱"
@@ -2605,18 +2604,17 @@
       "lessonId": "hsk1_u6_l26",
       "hanzi": "本",
       "pinyin": "běn",
-      "french": "Racine / tige",
+      "french": "Classificateur des livres",
       "example": {
-        "hanzi": "我没有日本朋友。",
-        "pinyin": "Wǒ méi yǒu rì běn péng you.",
-        "french": "Je n'ai pas d'ami japonais.",
+        "hanzi": "我有三本书。",
+        "pinyin": "Wǒ yǒu sān běn shū.",
+        "french": "J'ai trois livres.",
         "tokens": [
           "我",
-          "没",
           "有",
-          "日",
+          "三",
           "本",
-          "朋友"
+          "书"
         ]
       }
     },
@@ -2629,7 +2627,7 @@
       "example": {
         "hanzi": "我买了些衣服。",
         "pinyin": "Wǒ mǎi le xiē yī fu.",
-        "french": "J'ai acheté des sapes.",
+        "french": "J'ai acheté quelques vêtements.",
         "tokens": [
           "我",
           "买",
@@ -2646,15 +2644,15 @@
       "pinyin": "dà",
       "french": "Grand / massif",
       "example": {
-        "hanzi": "你是大学生吗？",
-        "pinyin": "Nǐ shì dà xué sheng ma?",
-        "french": "T'es étudiant ?",
+        "hanzi": "这个苹果很大。",
+        "pinyin": "Zhè gè píng guǒ hěn dà.",
+        "french": "Cette pomme est très grosse.",
         "tokens": [
-          "你",
-          "是",
-          "大",
-          "学生",
-          "吗"
+          "这",
+          "个",
+          "苹果",
+          "很",
+          "大"
         ]
       }
     },
@@ -2763,7 +2761,7 @@
       "french": "Chaud / ardent",
       "example": {
         "hanzi": "我喜欢喝热中国茶。",
-        "pinyin": "Wǒ xǐ huan hè rè Zhōng guó chá.",
+        "pinyin": "Wǒ xǐ huan hē rè Zhōng guó chá.",
         "french": "J'aime boire du thé chinois chaud.",
         "tokens": [
           "我",
@@ -2860,7 +2858,7 @@
       "example": {
         "hanzi": "明天天气会好吗？",
         "pinyin": "Míng tiān tiān qì huì hǎo ma?",
-        "french": "Est-ce qu'il ferra beau demain ?",
+        "french": "Est-ce qu'il fera beau demain ?",
         "tokens": [
           "明天",
           "天气",
@@ -2875,7 +2873,7 @@
       "lessonId": "hsk1_u6_l29",
       "hanzi": "能",
       "pinyin": "néng",
-      "french": "Capacité / énergie",
+      "french": "Pouvoir / Être capable de",
       "example": {
         "hanzi": "你明天上午九点能来学校吗？",
         "pinyin": "Nǐ míng tiān shàng wǔ jiǔ diǎn néng lái xué xiào ma?",
@@ -2898,7 +2896,7 @@
       "lessonId": "hsk1_u6_l29",
       "hanzi": "想",
       "pinyin": "xiǎng",
-      "french": "Penser / réfléchir",
+      "french": "Vouloir / Penser",
       "example": {
         "hanzi": "我今天不想工作。",
         "pinyin": "Wǒ jīn tiān bù xiǎng gōng zuò.",
@@ -2956,16 +2954,15 @@
       "pinyin": "hé",
       "french": "Et / Avec",
       "example": {
-        "hanzi": "我能和老师说话吗？",
-        "pinyin": "Wǒ néng hé lǎo shī shuō huà ma?",
-        "french": "Puis-je parler au professeur ?",
+        "hanzi": "爸爸和妈妈在家。",
+        "pinyin": "Bà ba hé mā ma zài jiā.",
+        "french": "Papa et maman sont à la maison.",
         "tokens": [
-          "我",
-          "能",
+          "爸爸",
           "和",
-          "老师",
-          "说话",
-          "吗"
+          "妈妈",
+          "在",
+          "家"
         ]
       }
     },

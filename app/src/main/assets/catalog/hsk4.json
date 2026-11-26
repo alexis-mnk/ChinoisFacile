@@ -1,6 +1,6 @@
 {
   "hskLevel": 4,
-  "catalogVersion": 8,
+  "catalogVersion": 11,
   "units": [
     {
       "id": "hsk4_u1",
@@ -430,46 +430,6 @@
     {
       "id": "hsk4_001",
       "lessonId": "hsk4_u1_l1",
-      "hanzi": "对",
-      "pinyin": "duì",
-      "french": "Correct / juste",
-      "example": {
-        "hanzi": "这对他没有影响。",
-        "pinyin": "Zhè duì tā méi yǒu yǐng xiǎng.",
-        "french": "Cela n'a eu aucun effet sur lui.",
-        "tokens": [
-          "这",
-          "对",
-          "他",
-          "没",
-          "有",
-          "影响"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_002",
-      "lessonId": "hsk4_u1_l1",
-      "hanzi": "过",
-      "pinyin": "guo",
-      "french": "Particule d'expérience passée",
-      "example": {
-        "hanzi": "我也过得很愉快。",
-        "pinyin": "Wǒ yě guo de hěn yú kuài.",
-        "french": "J'ai aussi passé un très bon moment.",
-        "tokens": [
-          "我",
-          "也",
-          "过",
-          "得",
-          "很",
-          "愉快"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_003",
-      "lessonId": "hsk4_u1_l1",
       "hanzi": "而",
       "pinyin": "ér",
       "french": "Et / mais",
@@ -486,27 +446,7 @@
       }
     },
     {
-      "id": "hsk4_004",
-      "lessonId": "hsk4_u1_l1",
-      "hanzi": "等",
-      "pinyin": "děng",
-      "french": "Classe / échelon",
-      "example": {
-        "hanzi": "我们男人习惯等女人了。",
-        "pinyin": "Wǒ men nán rén xí guàn děng nǚ rén le.",
-        "french": "Nous, les hommes, sommes habitués à attendre les femmes.",
-        "tokens": [
-          "我们",
-          "男人",
-          "习惯",
-          "等",
-          "女人",
-          "了"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_005",
+      "id": "hsk4_002",
       "lessonId": "hsk4_u1_l1",
       "hanzi": "与",
       "pinyin": "yǔ",
@@ -526,7 +466,7 @@
       }
     },
     {
-      "id": "hsk4_006",
+      "id": "hsk4_003",
       "lessonId": "hsk4_u1_l1",
       "hanzi": "当",
       "pinyin": "dāng",
@@ -546,7 +486,7 @@
       }
     },
     {
-      "id": "hsk4_007",
+      "id": "hsk4_004",
       "lessonId": "hsk4_u1_l1",
       "hanzi": "之",
       "pinyin": "zhī",
@@ -564,7 +504,7 @@
       }
     },
     {
-      "id": "hsk4_008",
+      "id": "hsk4_005",
       "lessonId": "hsk4_u1_l1",
       "hanzi": "以",
       "pinyin": "yǐ",
@@ -587,27 +527,8 @@
       }
     },
     {
-      "id": "hsk4_009",
-      "lessonId": "hsk4_u1_l2",
-      "hanzi": "起来",
-      "pinyin": "qǐ lai",
-      "french": "Se relever / se lever",
-      "example": {
-        "hanzi": "你什么时候起来了？",
-        "pinyin": "Nǐ shén me shí hou qǐ lai le?",
-        "french": "Quand est-ce que tu t'es levé ?",
-        "tokens": [
-          "你",
-          "什么",
-          "时候",
-          "起来",
-          "了"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_010",
-      "lessonId": "hsk4_u1_l2",
+      "id": "hsk4_006",
+      "lessonId": "hsk4_u1_l1",
       "hanzi": "死",
       "pinyin": "sǐ",
       "french": "Mourir / à mort",
@@ -626,8 +547,8 @@
       }
     },
     {
-      "id": "hsk4_011",
-      "lessonId": "hsk4_u1_l2",
+      "id": "hsk4_007",
+      "lessonId": "hsk4_u1_l1",
       "hanzi": "却",
       "pinyin": "què",
       "french": "Mais / cependant",
@@ -644,8 +565,8 @@
       }
     },
     {
-      "id": "hsk4_012",
-      "lessonId": "hsk4_u1_l2",
+      "id": "hsk4_008",
+      "lessonId": "hsk4_u1_l1",
       "hanzi": "生活",
       "pinyin": "shēng huó",
       "french": "Vie / vivre",
@@ -664,7 +585,7 @@
       }
     },
     {
-      "id": "hsk4_013",
+      "id": "hsk4_009",
       "lessonId": "hsk4_u1_l2",
       "hanzi": "发生",
       "pinyin": "fā shēng",
@@ -683,7 +604,7 @@
       }
     },
     {
-      "id": "hsk4_014",
+      "id": "hsk4_010",
       "lessonId": "hsk4_u1_l2",
       "hanzi": "不过",
       "pinyin": "bù guò",
@@ -701,7 +622,7 @@
       }
     },
     {
-      "id": "hsk4_015",
+      "id": "hsk4_011",
       "lessonId": "hsk4_u1_l2",
       "hanzi": "所有",
       "pinyin": "suǒ yǒu",
@@ -720,7 +641,7 @@
       }
     },
     {
-      "id": "hsk4_016",
+      "id": "hsk4_012",
       "lessonId": "hsk4_u1_l2",
       "hanzi": "情况",
       "pinyin": "qíng kuàng",
@@ -738,28 +659,8 @@
       }
     },
     {
-      "id": "hsk4_017",
-      "lessonId": "hsk4_u1_l3",
-      "hanzi": "最后",
-      "pinyin": "zuì hòu",
-      "french": "Le dernier / final",
-      "example": {
-        "hanzi": "我希望最后一切都好。",
-        "pinyin": "Wǒ xī wàng zuì hòu yī qiè dōu hǎo.",
-        "french": "J'espère que tout ira bien à la fin.",
-        "tokens": [
-          "我",
-          "希望",
-          "最后",
-          "一切",
-          "都",
-          "好"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_018",
-      "lessonId": "hsk4_u1_l3",
+      "id": "hsk4_013",
+      "lessonId": "hsk4_u1_l2",
       "hanzi": "成为",
       "pinyin": "chéng wéi",
       "french": "Devenir",
@@ -777,8 +678,8 @@
       }
     },
     {
-      "id": "hsk4_019",
-      "lessonId": "hsk4_u1_l3",
+      "id": "hsk4_014",
+      "lessonId": "hsk4_u1_l2",
       "hanzi": "行",
       "pinyin": "xíng",
       "french": "D'accord / Marcher",
@@ -797,8 +698,8 @@
       }
     },
     {
-      "id": "hsk4_020",
-      "lessonId": "hsk4_u1_l3",
+      "id": "hsk4_015",
+      "lessonId": "hsk4_u1_l2",
       "hanzi": "感觉",
       "pinyin": "gǎn jué",
       "french": "Sensation / sentir",
@@ -817,8 +718,8 @@
       }
     },
     {
-      "id": "hsk4_021",
-      "lessonId": "hsk4_u1_l3",
+      "id": "hsk4_016",
+      "lessonId": "hsk4_u1_l2",
       "hanzi": "继续",
       "pinyin": "jì xù",
       "french": "Continuer / poursuivre",
@@ -835,7 +736,7 @@
       }
     },
     {
-      "id": "hsk4_022",
+      "id": "hsk4_017",
       "lessonId": "hsk4_u1_l3",
       "hanzi": "场",
       "pinyin": "chǎng",
@@ -857,7 +758,7 @@
       }
     },
     {
-      "id": "hsk4_023",
+      "id": "hsk4_018",
       "lessonId": "hsk4_u1_l3",
       "hanzi": "进行",
       "pinyin": "jìn xíng",
@@ -874,29 +775,47 @@
       }
     },
     {
-      "id": "hsk4_024",
+      "id": "hsk4_019",
       "lessonId": "hsk4_u1_l3",
       "hanzi": "内",
       "pinyin": "nèi",
       "french": "Intérieur / dans",
       "example": {
-        "hanzi": "河内是越南的首都。",
-        "pinyin": "Hé nèi shì yuè nán de shǒu dū.",
-        "french": "Hanoi est la capitale du Vietnam.",
+        "hanzi": "她是个内八字。",
+        "pinyin": "Tā shì gè nèi bā zì.",
+        "french": "Elle a les pieds en dedans.",
         "tokens": [
-          "河",
-          "内",
+          "她",
           "是",
-          "越",
-          "南",
-          "的",
-          "首都"
+          "个",
+          "内",
+          "八",
+          "字"
         ]
       }
     },
     {
-      "id": "hsk4_025",
-      "lessonId": "hsk4_u1_l4",
+      "id": "hsk4_020",
+      "lessonId": "hsk4_u1_l3",
+      "hanzi": "出现",
+      "pinyin": "chū xiàn",
+      "french": "Apparaître / se présenter",
+      "example": {
+        "hanzi": "问题是怎么出现的？",
+        "pinyin": "Wèn tí shì zěn me chū xiàn de?",
+        "french": "Dans quelles circonstances le défaut est-il apparu ?",
+        "tokens": [
+          "问题",
+          "是",
+          "怎么",
+          "出现",
+          "的"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_021",
+      "lessonId": "hsk4_u1_l3",
       "hanzi": "通过",
       "pinyin": "tōng guò",
       "french": "Traverser / approuver",
@@ -914,14 +833,14 @@
       }
     },
     {
-      "id": "hsk4_026",
-      "lessonId": "hsk4_u1_l4",
+      "id": "hsk4_022",
+      "lessonId": "hsk4_u1_l3",
       "hanzi": "无",
       "pinyin": "wú",
       "french": "Ne pas avoir / non",
       "example": {
         "hanzi": "我不习惯喝无糖咖啡。",
-        "pinyin": "Wǒ bù xí guàn hè wú táng kā fēi.",
+        "pinyin": "Wǒ bù xí guàn hē wú táng kā fēi.",
         "french": "Je n'ai pas l'habitude de boire du café sans sucre.",
         "tokens": [
           "我",
@@ -935,8 +854,8 @@
       }
     },
     {
-      "id": "hsk4_027",
-      "lessonId": "hsk4_u1_l4",
+      "id": "hsk4_023",
+      "lessonId": "hsk4_u1_l3",
       "hanzi": "一切",
       "pinyin": "yī qiè",
       "french": "Tout",
@@ -954,8 +873,8 @@
       }
     },
     {
-      "id": "hsk4_028",
-      "lessonId": "hsk4_u1_l4",
+      "id": "hsk4_024",
+      "lessonId": "hsk4_u1_l3",
       "hanzi": "由",
       "pinyin": "yóu",
       "french": "Cause / raison",
@@ -971,7 +890,7 @@
       }
     },
     {
-      "id": "hsk4_029",
+      "id": "hsk4_025",
       "lessonId": "hsk4_u1_l4",
       "hanzi": "任何",
       "pinyin": "rèn hé",
@@ -981,8 +900,7 @@
         "pinyin": "Méi yǒu rèn hé gān jìng de pán zi.",
         "french": "Il n'y a pas d'assiettes propres.",
         "tokens": [
-          "没",
-          "有",
+          "没有",
           "任何",
           "干净",
           "的",
@@ -991,7 +909,7 @@
       }
     },
     {
-      "id": "hsk4_030",
+      "id": "hsk4_026",
       "lessonId": "hsk4_u1_l4",
       "hanzi": "安全",
       "pinyin": "ān quán",
@@ -1010,7 +928,7 @@
       }
     },
     {
-      "id": "hsk4_031",
+      "id": "hsk4_027",
       "lessonId": "hsk4_u1_l4",
       "hanzi": "结果",
       "pinyin": "jié guǒ",
@@ -1029,7 +947,7 @@
       }
     },
     {
-      "id": "hsk4_032",
+      "id": "hsk4_028",
       "lessonId": "hsk4_u1_l4",
       "hanzi": "完全",
       "pinyin": "wán quán",
@@ -1049,27 +967,26 @@
       }
     },
     {
-      "id": "hsk4_033",
-      "lessonId": "hsk4_u1_l5",
-      "hanzi": "发",
-      "pinyin": "fā",
-      "french": "Envoyer / Émettre",
+      "id": "hsk4_029",
+      "lessonId": "hsk4_u1_l4",
+      "hanzi": "使",
+      "pinyin": "shǐ",
+      "french": "Envoyé / utiliser",
       "example": {
-        "hanzi": "为什么月亮晚上发光？",
-        "pinyin": "Wèi shén me yuè liang wǎn shang fā guāng?",
-        "french": "Pourquoi la lune brille-t-elle la nuit ?",
+        "hanzi": "大家一起使吧！",
+        "pinyin": "Dà jiā yī qǐ shǐ ba!",
+        "french": "Allons envoyé tous ensemble !",
         "tokens": [
-          "为什么",
-          "月亮",
-          "晚上",
-          "发",
-          "光"
+          "大家",
+          "一起",
+          "使",
+          "吧"
         ]
       }
     },
     {
-      "id": "hsk4_034",
-      "lessonId": "hsk4_u1_l5",
+      "id": "hsk4_030",
+      "lessonId": "hsk4_u1_l4",
       "hanzi": "计划",
       "pinyin": "jì huà",
       "french": "Plan / projet",
@@ -1088,8 +1005,8 @@
       }
     },
     {
-      "id": "hsk4_035",
-      "lessonId": "hsk4_u1_l5",
+      "id": "hsk4_031",
+      "lessonId": "hsk4_u1_l4",
       "hanzi": "可是",
       "pinyin": "kě shì",
       "french": "Mais / cependant",
@@ -1106,8 +1023,8 @@
       }
     },
     {
-      "id": "hsk4_036",
-      "lessonId": "hsk4_u1_l5",
+      "id": "hsk4_032",
+      "lessonId": "hsk4_u1_l4",
       "hanzi": "连",
       "pinyin": "lián",
       "french": "Relier / à la suite",
@@ -1123,27 +1040,45 @@
       }
     },
     {
-      "id": "hsk4_037",
+      "id": "hsk4_033",
       "lessonId": "hsk4_u1_l5",
       "hanzi": "呀",
       "pinyin": "ya",
       "french": "Ah / oh",
       "example": {
-        "hanzi": "这是在吵什么呀？",
-        "pinyin": "Zhè shì zài chǎo shén me ya?",
-        "french": "Qu'est-ce que c'est que ce barouf ?",
+        "hanzi": "时间过得多快呀。",
+        "pinyin": "Shí jiān guo de duō kuài ya.",
+        "french": "Comme le temps passe.",
         "tokens": [
-          "这",
-          "是",
-          "在",
-          "吵",
-          "什么",
+          "时间",
+          "过",
+          "得",
+          "多",
+          "快",
           "呀"
         ]
       }
     },
     {
-      "id": "hsk4_038",
+      "id": "hsk4_034",
+      "lessonId": "hsk4_u1_l5",
+      "hanzi": "刚",
+      "pinyin": "gāng",
+      "french": "À l'instant / tout à l'heure",
+      "example": {
+        "hanzi": "他刚离开家。",
+        "pinyin": "Tā gāng lí kāi jiā.",
+        "french": "Il vient de partir de chez lui.",
+        "tokens": [
+          "他",
+          "刚",
+          "离开",
+          "家"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_035",
       "lessonId": "hsk4_u1_l5",
       "hanzi": "原因",
       "pinyin": "yuán yīn",
@@ -1161,7 +1096,7 @@
       }
     },
     {
-      "id": "hsk4_039",
+      "id": "hsk4_036",
       "lessonId": "hsk4_u1_l5",
       "hanzi": "消息",
       "pinyin": "xiāo xi",
@@ -1181,7 +1116,7 @@
       }
     },
     {
-      "id": "hsk4_040",
+      "id": "hsk4_037",
       "lessonId": "hsk4_u1_l5",
       "hanzi": "只要",
       "pinyin": "zhǐ yào",
@@ -1201,8 +1136,8 @@
       }
     },
     {
-      "id": "hsk4_041",
-      "lessonId": "hsk4_u1_l6",
+      "id": "hsk4_038",
+      "lessonId": "hsk4_u1_l5",
       "hanzi": "干",
       "pinyin": "gàn",
       "french": "Faire / Travailler",
@@ -1219,8 +1154,8 @@
       }
     },
     {
-      "id": "hsk4_042",
-      "lessonId": "hsk4_u1_l6",
+      "id": "hsk4_039",
+      "lessonId": "hsk4_u1_l5",
       "hanzi": "接受",
       "pinyin": "jiē shòu",
       "french": "Accepter",
@@ -1238,8 +1173,8 @@
       }
     },
     {
-      "id": "hsk4_043",
-      "lessonId": "hsk4_u1_l6",
+      "id": "hsk4_040",
+      "lessonId": "hsk4_u1_l5",
       "hanzi": "其中",
       "pinyin": "qí zhōng",
       "french": "Parmi / dont",
@@ -1257,7 +1192,7 @@
       }
     },
     {
-      "id": "hsk4_044",
+      "id": "hsk4_041",
       "lessonId": "hsk4_u1_l6",
       "hanzi": "成功",
       "pinyin": "chéng gōng",
@@ -1277,7 +1212,7 @@
       }
     },
     {
-      "id": "hsk4_045",
+      "id": "hsk4_042",
       "lessonId": "hsk4_u1_l6",
       "hanzi": "甚至",
       "pinyin": "shèn zhì",
@@ -1295,7 +1230,7 @@
       }
     },
     {
-      "id": "hsk4_046",
+      "id": "hsk4_043",
       "lessonId": "hsk4_u1_l6",
       "hanzi": "拉",
       "pinyin": "lā",
@@ -1314,7 +1249,25 @@
       }
     },
     {
-      "id": "hsk4_047",
+      "id": "hsk4_044",
+      "lessonId": "hsk4_u1_l6",
+      "hanzi": "对于",
+      "pinyin": "duì yú",
+      "french": "À l'égard de / pour",
+      "example": {
+        "hanzi": "大家需要明白对于。",
+        "pinyin": "Dà jiā xū yào míng bai duì yú.",
+        "french": "Tout le monde doit comprendre : à l'égard de.",
+        "tokens": [
+          "大家",
+          "需要",
+          "明白",
+          "对于"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_045",
       "lessonId": "hsk4_u1_l6",
       "hanzi": "肯定",
       "pinyin": "kěn dìng",
@@ -1333,7 +1286,7 @@
       }
     },
     {
-      "id": "hsk4_048",
+      "id": "hsk4_046",
       "lessonId": "hsk4_u1_l6",
       "hanzi": "当时",
       "pinyin": "dāng shí",
@@ -1351,8 +1304,27 @@
       }
     },
     {
-      "id": "hsk4_049",
-      "lessonId": "hsk4_u1_l7",
+      "id": "hsk4_047",
+      "lessonId": "hsk4_u1_l6",
+      "hanzi": "转",
+      "pinyin": "zhuǎn",
+      "french": "Transformer / muter",
+      "example": {
+        "hanzi": "天突然转阴了。",
+        "pinyin": "Tiān tū rán zhuǎn yīn le.",
+        "french": "Tout à coup, le ciel se couvrit.",
+        "tokens": [
+          "天",
+          "突然",
+          "转",
+          "阴",
+          "了"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_048",
+      "lessonId": "hsk4_u1_l6",
       "hanzi": "调查",
       "pinyin": "diào chá",
       "french": "Faire une enquête / enquêter",
@@ -1368,7 +1340,7 @@
       }
     },
     {
-      "id": "hsk4_050",
+      "id": "hsk4_049",
       "lessonId": "hsk4_u1_l7",
       "hanzi": "部分",
       "pinyin": "bù fen",
@@ -1387,7 +1359,7 @@
       }
     },
     {
-      "id": "hsk4_051",
+      "id": "hsk4_050",
       "lessonId": "hsk4_u1_l7",
       "hanzi": "能力",
       "pinyin": "néng lì",
@@ -1410,30 +1382,25 @@
       }
     },
     {
-      "id": "hsk4_052",
+      "id": "hsk4_051",
       "lessonId": "hsk4_u1_l7",
       "hanzi": "保护",
       "pinyin": "bǎo hù",
       "french": "Protéger / défendre",
       "example": {
-        "hanzi": "自行车是保护城市环境的一种工具。",
-        "pinyin": "Zì xíng chē shì bǎo hù chéng shì huán jìng de yī zhǒng gōng jù.",
-        "french": "Les bicyclettes sont un outil pour la préservation de l'environnement urbain.",
+        "hanzi": "她正在保护呢。",
+        "pinyin": "Tā zhèng zài bǎo hù ne.",
+        "french": "Elle est en train de : protéger.",
         "tokens": [
-          "自行车",
-          "是",
+          "她",
+          "正在",
           "保护",
-          "城市",
-          "环境",
-          "的",
-          "一",
-          "种",
-          "工具"
+          "呢"
         ]
       }
     },
     {
-      "id": "hsk4_053",
+      "id": "hsk4_052",
       "lessonId": "hsk4_u1_l7",
       "hanzi": "真正",
       "pinyin": "zhēn zhèng",
@@ -1454,7 +1421,7 @@
       }
     },
     {
-      "id": "hsk4_054",
+      "id": "hsk4_053",
       "lessonId": "hsk4_u1_l7",
       "hanzi": "支持",
       "pinyin": "zhī chí",
@@ -1475,7 +1442,7 @@
       }
     },
     {
-      "id": "hsk4_055",
+      "id": "hsk4_054",
       "lessonId": "hsk4_u1_l7",
       "hanzi": "掉",
       "pinyin": "diào",
@@ -1494,7 +1461,7 @@
       }
     },
     {
-      "id": "hsk4_056",
+      "id": "hsk4_055",
       "lessonId": "hsk4_u1_l7",
       "hanzi": "改变",
       "pinyin": "gǎi biàn",
@@ -1515,7 +1482,65 @@
       }
     },
     {
+      "id": "hsk4_056",
+      "lessonId": "hsk4_u1_l7",
+      "hanzi": "是否",
+      "pinyin": "shì fǒu",
+      "french": "Oui ou non / si (condition)",
+      "example": {
+        "hanzi": "我怀疑他是否会来。",
+        "pinyin": "Wǒ huái yí tā shì fǒu huì lái.",
+        "french": "Je doute qu'il vienne.",
+        "tokens": [
+          "我",
+          "怀疑",
+          "他",
+          "是否",
+          "会",
+          "来"
+        ]
+      }
+    },
+    {
       "id": "hsk4_057",
+      "lessonId": "hsk4_u1_l8",
+      "hanzi": "同时",
+      "pinyin": "tóng shí",
+      "french": "En même temps / simultanément",
+      "example": {
+        "hanzi": "请同时准备一下。",
+        "pinyin": "Qǐng tóng shí zhǔn bèi yī xià.",
+        "french": "Veuillez vous préparer (en même temps).",
+        "tokens": [
+          "请",
+          "同时",
+          "准备",
+          "一",
+          "下"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_058",
+      "lessonId": "hsk4_u1_l8",
+      "hanzi": "以为",
+      "pinyin": "yǐ wéi",
+      "french": "Croire / penser",
+      "example": {
+        "hanzi": "他以为什么都知道。",
+        "pinyin": "Tā yǐ wéi shén me dōu zhī dào.",
+        "french": "Il croit tout savoir.",
+        "tokens": [
+          "他",
+          "以为",
+          "什么",
+          "都",
+          "知道"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_059",
       "lessonId": "hsk4_u1_l8",
       "hanzi": "方法",
       "pinyin": "fāng fǎ",
@@ -1534,7 +1559,25 @@
       }
     },
     {
-      "id": "hsk4_058",
+      "id": "hsk4_060",
+      "lessonId": "hsk4_u1_l8",
+      "hanzi": "研究",
+      "pinyin": "yán jiū",
+      "french": "Étudier / faire de la recherche",
+      "example": {
+        "hanzi": "大家一起研究吧！",
+        "pinyin": "Dà jiā yī qǐ yán jiū ba!",
+        "french": "Allons étudier tous ensemble !",
+        "tokens": [
+          "大家",
+          "一起",
+          "研究",
+          "吧"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_061",
       "lessonId": "hsk4_u1_l8",
       "hanzi": "保证",
       "pinyin": "bǎo zhèng",
@@ -1552,7 +1595,7 @@
       }
     },
     {
-      "id": "hsk4_059",
+      "id": "hsk4_062",
       "lessonId": "hsk4_u1_l8",
       "hanzi": "直接",
       "pinyin": "zhí jiē",
@@ -1572,27 +1615,7 @@
       }
     },
     {
-      "id": "hsk4_060",
-      "lessonId": "hsk4_u1_l8",
-      "hanzi": "组织",
-      "pinyin": "zǔ zhī",
-      "french": "Organisation / organiser",
-      "example": {
-        "hanzi": "谁组织了这次会议？",
-        "pinyin": "Shéi zǔ zhī le zhè cì huì yì?",
-        "french": "Qui a organisé cette réunion ?",
-        "tokens": [
-          "谁",
-          "组织",
-          "了",
-          "这",
-          "次",
-          "会议"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_061",
+      "id": "hsk4_063",
       "lessonId": "hsk4_u1_l8",
       "hanzi": "永远",
       "pinyin": "yǒng yuǎn",
@@ -1612,7 +1635,7 @@
       }
     },
     {
-      "id": "hsk4_062",
+      "id": "hsk4_064",
       "lessonId": "hsk4_u1_l8",
       "hanzi": "也许",
       "pinyin": "yě xǔ",
@@ -1633,8 +1656,8 @@
       }
     },
     {
-      "id": "hsk4_063",
-      "lessonId": "hsk4_u1_l8",
+      "id": "hsk4_065",
+      "lessonId": "hsk4_u1_l9",
       "hanzi": "方面",
       "pinyin": "fāng miàn",
       "french": "Côté / aspect",
@@ -1653,8 +1676,8 @@
       }
     },
     {
-      "id": "hsk4_064",
-      "lessonId": "hsk4_u1_l8",
+      "id": "hsk4_066",
+      "lessonId": "hsk4_u1_l9",
       "hanzi": "活动",
       "pinyin": "huó dòng",
       "french": "Activité / mobile",
@@ -1672,7 +1695,7 @@
       }
     },
     {
-      "id": "hsk4_065",
+      "id": "hsk4_067",
       "lessonId": "hsk4_u1_l9",
       "hanzi": "考虑",
       "pinyin": "kǎo lǜ",
@@ -1693,7 +1716,7 @@
       }
     },
     {
-      "id": "hsk4_066",
+      "id": "hsk4_068",
       "lessonId": "hsk4_u1_l9",
       "hanzi": "份",
       "pinyin": "fèn",
@@ -1713,7 +1736,46 @@
       }
     },
     {
-      "id": "hsk4_067",
+      "id": "hsk4_069",
+      "lessonId": "hsk4_u1_l9",
+      "hanzi": "重",
+      "pinyin": "zhòng",
+      "french": "Lourd / Important",
+      "example": {
+        "hanzi": "明天再重好吗？",
+        "pinyin": "Míng tiān zài zhòng hǎo ma?",
+        "french": "Et si on remettait à demain pour : lourd ?",
+        "tokens": [
+          "明天",
+          "再",
+          "重",
+          "好",
+          "吗"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_070",
+      "lessonId": "hsk4_u1_l9",
+      "hanzi": "信息",
+      "pinyin": "xìn xī",
+      "french": "Information / nouvelles",
+      "example": {
+        "hanzi": "这是条有趣的信息。",
+        "pinyin": "Zhè shì tiáo yǒu qù de xìn xī.",
+        "french": "Voilà une information intéressante.",
+        "tokens": [
+          "这",
+          "是",
+          "条",
+          "有趣",
+          "的",
+          "信息"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_071",
       "lessonId": "hsk4_u1_l9",
       "hanzi": "提供",
       "pinyin": "tí gōng",
@@ -1731,7 +1793,7 @@
       }
     },
     {
-      "id": "hsk4_068",
+      "id": "hsk4_072",
       "lessonId": "hsk4_u1_l9",
       "hanzi": "指",
       "pinyin": "zhǐ",
@@ -1754,27 +1816,8 @@
       }
     },
     {
-      "id": "hsk4_069",
-      "lessonId": "hsk4_u1_l9",
-      "hanzi": "精神",
-      "pinyin": "jīng shén",
-      "french": "(l') esprit / conscience",
-      "example": {
-        "hanzi": "这个精神很重要。",
-        "pinyin": "Zhè gè jīng shén hěn zhòng yào.",
-        "french": "Ce terme « vigueur » est très important.",
-        "tokens": [
-          "这",
-          "个",
-          "精神",
-          "很",
-          "重要"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_070",
-      "lessonId": "hsk4_u1_l9",
+      "id": "hsk4_073",
+      "lessonId": "hsk4_u1_l10",
       "hanzi": "使用",
       "pinyin": "shǐ yòng",
       "french": "Utiliser / employer",
@@ -1791,27 +1834,25 @@
       }
     },
     {
-      "id": "hsk4_071",
-      "lessonId": "hsk4_u1_l9",
-      "hanzi": "代表",
-      "pinyin": "dài biǎo",
-      "french": "Représentant / délégué",
+      "id": "hsk4_074",
+      "lessonId": "hsk4_u1_l10",
+      "hanzi": "来自",
+      "pinyin": "lái zì",
+      "french": "En provenance de",
       "example": {
-        "hanzi": "明天再代表好吗？",
-        "pinyin": "Míng tiān zài dài biǎo hǎo ma?",
-        "french": "Et si on remettait à demain pour représentant ?",
+        "hanzi": "我来自北京。",
+        "pinyin": "Wǒ lái zì Běi jīng.",
+        "french": "Je viens de Pékin.",
         "tokens": [
-          "明天",
-          "再",
-          "代表",
-          "好",
-          "吗"
+          "我",
+          "来自",
+          "北京"
         ]
       }
     },
     {
-      "id": "hsk4_072",
-      "lessonId": "hsk4_u1_l9",
+      "id": "hsk4_075",
+      "lessonId": "hsk4_u1_l10",
       "hanzi": "任务",
       "pinyin": "rèn wu",
       "french": "Tâche / mission",
@@ -1829,7 +1870,26 @@
       }
     },
     {
-      "id": "hsk4_073",
+      "id": "hsk4_076",
+      "lessonId": "hsk4_u1_l10",
+      "hanzi": "开心",
+      "pinyin": "kāi xīn",
+      "french": "Joyeux / Content",
+      "example": {
+        "hanzi": "他去医院很开心。",
+        "pinyin": "Tā qù yī yuàn hěn kāi xīn.",
+        "french": "Il est impatient d'aller à l'hôpital.",
+        "tokens": [
+          "他",
+          "去",
+          "医院",
+          "很",
+          "开心"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_077",
       "lessonId": "hsk4_u1_l10",
       "hanzi": "联系",
       "pinyin": "lián xì",
@@ -1847,7 +1907,7 @@
       }
     },
     {
-      "id": "hsk4_074",
+      "id": "hsk4_078",
       "lessonId": "hsk4_u1_l10",
       "hanzi": "因此",
       "pinyin": "yīn cǐ",
@@ -1866,7 +1926,7 @@
       }
     },
     {
-      "id": "hsk4_075",
+      "id": "hsk4_079",
       "lessonId": "hsk4_u1_l10",
       "hanzi": "台",
       "pinyin": "tái",
@@ -1886,24 +1946,7 @@
       }
     },
     {
-      "id": "hsk4_076",
-      "lessonId": "hsk4_u1_l10",
-      "hanzi": "算",
-      "pinyin": "suàn",
-      "french": "Compter / calculer",
-      "example": {
-        "hanzi": "请认真算。",
-        "pinyin": "Qǐng rèn zhēn suàn.",
-        "french": "Veuillez compter sérieusement.",
-        "tokens": [
-          "请",
-          "认真",
-          "算"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_077",
+      "id": "hsk4_080",
       "lessonId": "hsk4_u1_l10",
       "hanzi": "获得",
       "pinyin": "huò dé",
@@ -1922,8 +1965,8 @@
       }
     },
     {
-      "id": "hsk4_078",
-      "lessonId": "hsk4_u1_l10",
+      "id": "hsk4_081",
+      "lessonId": "hsk4_u1_l11",
       "hanzi": "留",
       "pinyin": "liú",
       "french": "Rester / séjourner",
@@ -1941,8 +1984,8 @@
       }
     },
     {
-      "id": "hsk4_079",
-      "lessonId": "hsk4_u1_l10",
+      "id": "hsk4_082",
+      "lessonId": "hsk4_u1_l11",
       "hanzi": "生命",
       "pinyin": "shēng mìng",
       "french": "Vie / vivant",
@@ -1960,8 +2003,8 @@
       }
     },
     {
-      "id": "hsk4_080",
-      "lessonId": "hsk4_u1_l10",
+      "id": "hsk4_083",
+      "lessonId": "hsk4_u1_l11",
       "hanzi": "交",
       "pinyin": "jiāo",
       "french": "Jonction / rencontre",
@@ -1977,7 +2020,7 @@
       }
     },
     {
-      "id": "hsk4_081",
+      "id": "hsk4_084",
       "lessonId": "hsk4_u1_l11",
       "hanzi": "全部",
       "pinyin": "quán bù",
@@ -1996,26 +2039,7 @@
       }
     },
     {
-      "id": "hsk4_082",
-      "lessonId": "hsk4_u1_l11",
-      "hanzi": "刚刚",
-      "pinyin": "gāng gang",
-      "french": "Tout juste / à peine",
-      "example": {
-        "hanzi": "请刚刚准备一下。",
-        "pinyin": "Qǐng gāng gang zhǔn bèi yī xià.",
-        "french": "Veuillez vous préparer (tout juste).",
-        "tokens": [
-          "请",
-          "刚刚",
-          "准备",
-          "一",
-          "下"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_083",
+      "id": "hsk4_085",
       "lessonId": "hsk4_u1_l11",
       "hanzi": "正常",
       "pinyin": "zhèng cháng",
@@ -2036,7 +2060,7 @@
       }
     },
     {
-      "id": "hsk4_084",
+      "id": "hsk4_086",
       "lessonId": "hsk4_u1_l11",
       "hanzi": "另外",
       "pinyin": "lìng wài",
@@ -2054,25 +2078,7 @@
       }
     },
     {
-      "id": "hsk4_085",
-      "lessonId": "hsk4_u1_l11",
-      "hanzi": "血",
-      "pinyin": "xuè",
-      "french": "Sang",
-      "example": {
-        "hanzi": "大家需要明白血。",
-        "pinyin": "Dà jiā xū yào míng bai xuè.",
-        "french": "Tout le monde doit comprendre : sang.",
-        "tokens": [
-          "大家",
-          "需要",
-          "明白",
-          "血"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_086",
+      "id": "hsk4_087",
       "lessonId": "hsk4_u1_l11",
       "hanzi": "挺",
       "pinyin": "tǐng",
@@ -2093,7 +2099,7 @@
       }
     },
     {
-      "id": "hsk4_087",
+      "id": "hsk4_088",
       "lessonId": "hsk4_u1_l11",
       "hanzi": "好像",
       "pinyin": "hǎo xiàng",
@@ -2113,8 +2119,8 @@
       }
     },
     {
-      "id": "hsk4_088",
-      "lessonId": "hsk4_u1_l11",
+      "id": "hsk4_089",
+      "lessonId": "hsk4_u1_l12",
       "hanzi": "到底",
       "pinyin": "dào dǐ",
       "french": "Au bout / à la fin",
@@ -2133,7 +2139,7 @@
       }
     },
     {
-      "id": "hsk4_089",
+      "id": "hsk4_090",
       "lessonId": "hsk4_u1_l12",
       "hanzi": "感谢",
       "pinyin": "gǎn xiè",
@@ -2150,7 +2156,7 @@
       }
     },
     {
-      "id": "hsk4_090",
+      "id": "hsk4_091",
       "lessonId": "hsk4_u1_l12",
       "hanzi": "座",
       "pinyin": "zuò",
@@ -2169,7 +2175,7 @@
       }
     },
     {
-      "id": "hsk4_091",
+      "id": "hsk4_092",
       "lessonId": "hsk4_u1_l12",
       "hanzi": "坚持",
       "pinyin": "jiān chí",
@@ -2190,7 +2196,7 @@
       }
     },
     {
-      "id": "hsk4_092",
+      "id": "hsk4_093",
       "lessonId": "hsk4_u1_l12",
       "hanzi": "技术",
       "pinyin": "jì shù",
@@ -2208,25 +2214,62 @@
       }
     },
     {
-      "id": "hsk4_093",
+      "id": "hsk4_094",
       "lessonId": "hsk4_u1_l12",
-      "hanzi": "往",
-      "pinyin": "wǎng",
-      "french": "Ancien / passé",
+      "hanzi": "停",
+      "pinyin": "tíng",
+      "french": "Arrêter / cesser",
       "example": {
-        "hanzi": "我们正在往。",
-        "pinyin": "Wǒ men zhèng zài wǎng.",
-        "french": "Nous sommes en train de ancien.",
+        "hanzi": "请认真停。",
+        "pinyin": "Qǐng rèn zhēn tíng.",
+        "french": "Veuillez sérieusement : arrêter.",
         "tokens": [
-          "我们",
-          "正在",
-          "往"
+          "请",
+          "认真",
+          "停"
         ]
       }
     },
     {
-      "id": "hsk4_094",
+      "id": "hsk4_095",
       "lessonId": "hsk4_u1_l12",
+      "hanzi": "倒",
+      "pinyin": "dǎo",
+      "french": "Tomber / S'effondrer",
+      "example": {
+        "hanzi": "请你多倒。",
+        "pinyin": "Qǐng nǐ duō dǎo.",
+        "french": "Veuillez souvent : tomber.",
+        "tokens": [
+          "请",
+          "你",
+          "多",
+          "倒"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_096",
+      "lessonId": "hsk4_u1_l12",
+      "hanzi": "建议",
+      "pinyin": "jiàn yì",
+      "french": "Proposer / proposition",
+      "example": {
+        "hanzi": "您建议我做什么？",
+        "pinyin": "Nín jiàn yì wǒ zuò shén me?",
+        "french": "Que me conseillez-vous de faire ?",
+        "tokens": [
+          "您",
+          "建议",
+          "我",
+          "做",
+          "什么"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_097",
+      "lessonId": "hsk4_u1_l13",
       "hanzi": "严重",
       "pinyin": "yán zhòng",
       "french": "Grave / sérieux",
@@ -2245,26 +2288,8 @@
       }
     },
     {
-      "id": "hsk4_095",
-      "lessonId": "hsk4_u1_l12",
-      "hanzi": "包括",
-      "pinyin": "bāo kuò",
-      "french": "Comprendre / contenir",
-      "example": {
-        "hanzi": "大家一起包括吧！",
-        "pinyin": "Dà jiā yī qǐ bāo kuò ba!",
-        "french": "Allons comprendre tous ensemble !",
-        "tokens": [
-          "大家",
-          "一起",
-          "包括",
-          "吧"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_096",
-      "lessonId": "hsk4_u1_l12",
+      "id": "hsk4_098",
+      "lessonId": "hsk4_u1_l13",
       "hanzi": "原来",
       "pinyin": "yuán lái",
       "french": "Initialement / à l'origine",
@@ -2283,7 +2308,7 @@
       }
     },
     {
-      "id": "hsk4_097",
+      "id": "hsk4_099",
       "lessonId": "hsk4_u1_l13",
       "hanzi": "光",
       "pinyin": "guāng",
@@ -2304,7 +2329,7 @@
       }
     },
     {
-      "id": "hsk4_098",
+      "id": "hsk4_100",
       "lessonId": "hsk4_u1_l13",
       "hanzi": "法律",
       "pinyin": "fǎ lǜ",
@@ -2322,7 +2347,7 @@
       }
     },
     {
-      "id": "hsk4_099",
+      "id": "hsk4_101",
       "lessonId": "hsk4_u1_l13",
       "hanzi": "父亲",
       "pinyin": "fù qīn",
@@ -2341,7 +2366,7 @@
       }
     },
     {
-      "id": "hsk4_100",
+      "id": "hsk4_102",
       "lessonId": "hsk4_u1_l13",
       "hanzi": "并且",
       "pinyin": "bìng qiě",
@@ -2359,28 +2384,30 @@
       }
     },
     {
-      "id": "hsk4_101",
+      "id": "hsk4_103",
       "lessonId": "hsk4_u1_l13",
       "hanzi": "收",
       "pinyin": "shōu",
       "french": "Recevoir / rassembler",
       "example": {
-        "hanzi": "我收到了您的信。",
-        "pinyin": "Wǒ shōu dào le nín de xìn.",
-        "french": "J'ai reçu votre lettre.",
+        "hanzi": "每个孩子都收到了份礼物。",
+        "pinyin": "Měi gè hái zi dōu shōu dào le fèn lǐ wù.",
+        "french": "Chaque enfant a reçu un cadeau.",
         "tokens": [
-          "我",
+          "每",
+          "个",
+          "孩子",
+          "都",
           "收",
           "到",
           "了",
-          "您",
-          "的",
-          "信"
+          "份",
+          "礼物"
         ]
       }
     },
     {
-      "id": "hsk4_102",
+      "id": "hsk4_104",
       "lessonId": "hsk4_u1_l13",
       "hanzi": "社会",
       "pinyin": "shè huì",
@@ -2398,8 +2425,8 @@
       }
     },
     {
-      "id": "hsk4_103",
-      "lessonId": "hsk4_u1_l13",
+      "id": "hsk4_105",
+      "lessonId": "hsk4_u2_l14",
       "hanzi": "证明",
       "pinyin": "zhèng míng",
       "french": "Prouver / preuve",
@@ -2417,8 +2444,8 @@
       }
     },
     {
-      "id": "hsk4_104",
-      "lessonId": "hsk4_u1_l13",
+      "id": "hsk4_106",
+      "lessonId": "hsk4_u2_l14",
       "hanzi": "记者",
       "pinyin": "jì zhě",
       "french": "Journaliste",
@@ -2436,7 +2463,7 @@
       }
     },
     {
-      "id": "hsk4_105",
+      "id": "hsk4_107",
       "lessonId": "hsk4_u2_l14",
       "hanzi": "底",
       "pinyin": "dǐ",
@@ -2455,7 +2482,7 @@
       }
     },
     {
-      "id": "hsk4_106",
+      "id": "hsk4_108",
       "lessonId": "hsk4_u2_l14",
       "hanzi": "确实",
       "pinyin": "què shí",
@@ -2475,7 +2502,7 @@
       }
     },
     {
-      "id": "hsk4_107",
+      "id": "hsk4_109",
       "lessonId": "hsk4_u2_l14",
       "hanzi": "不管",
       "pinyin": "bù guǎn",
@@ -2493,7 +2520,25 @@
       }
     },
     {
-      "id": "hsk4_108",
+      "id": "hsk4_110",
+      "lessonId": "hsk4_u2_l14",
+      "hanzi": "表示",
+      "pinyin": "biǎo shì",
+      "french": "Montrer / exprimer",
+      "example": {
+        "hanzi": "大家一起表示吧！",
+        "pinyin": "Dà jiā yī qǐ biǎo shì ba!",
+        "french": "Allons montrer tous ensemble !",
+        "tokens": [
+          "大家",
+          "一起",
+          "表示",
+          "吧"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_111",
       "lessonId": "hsk4_u2_l14",
       "hanzi": "受到",
       "pinyin": "shòu dào",
@@ -2510,7 +2555,7 @@
       }
     },
     {
-      "id": "hsk4_109",
+      "id": "hsk4_112",
       "lessonId": "hsk4_u2_l14",
       "hanzi": "发展",
       "pinyin": "fā zhǎn",
@@ -2530,8 +2575,8 @@
       }
     },
     {
-      "id": "hsk4_110",
-      "lessonId": "hsk4_u2_l14",
+      "id": "hsk4_113",
+      "lessonId": "hsk4_u2_l15",
       "hanzi": "谈",
       "pinyin": "tán",
       "french": "Parler / causer",
@@ -2551,8 +2596,8 @@
       }
     },
     {
-      "id": "hsk4_111",
-      "lessonId": "hsk4_u2_l14",
+      "id": "hsk4_114",
+      "lessonId": "hsk4_u2_l15",
       "hanzi": "至少",
       "pinyin": "zhì shǎo",
       "french": "Au moins",
@@ -2570,8 +2615,8 @@
       }
     },
     {
-      "id": "hsk4_112",
-      "lessonId": "hsk4_u2_l14",
+      "id": "hsk4_115",
+      "lessonId": "hsk4_u2_l15",
       "hanzi": "解释",
       "pinyin": "jiě shì",
       "french": "Explication / expliquer",
@@ -2591,7 +2636,7 @@
       }
     },
     {
-      "id": "hsk4_113",
+      "id": "hsk4_116",
       "lessonId": "hsk4_u2_l15",
       "hanzi": "负责",
       "pinyin": "fù zé",
@@ -2609,7 +2654,7 @@
       }
     },
     {
-      "id": "hsk4_114",
+      "id": "hsk4_117",
       "lessonId": "hsk4_u2_l15",
       "hanzi": "首先",
       "pinyin": "shǒu xiān",
@@ -2629,7 +2674,7 @@
       }
     },
     {
-      "id": "hsk4_115",
+      "id": "hsk4_118",
       "lessonId": "hsk4_u2_l15",
       "hanzi": "理解",
       "pinyin": "lǐ jiě",
@@ -2647,25 +2692,7 @@
       }
     },
     {
-      "id": "hsk4_116",
-      "lessonId": "hsk4_u2_l15",
-      "hanzi": "报道",
-      "pinyin": "bào dào",
-      "french": "S'inscrire / rejoindre son poste",
-      "example": {
-        "hanzi": "大家一起报道吧！",
-        "pinyin": "Dà jiā yī qǐ bào dào ba!",
-        "french": "Allons s'inscrire tous ensemble !",
-        "tokens": [
-          "大家",
-          "一起",
-          "报道",
-          "吧"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_117",
+      "id": "hsk4_119",
       "lessonId": "hsk4_u2_l15",
       "hanzi": "安排",
       "pinyin": "ān pái",
@@ -2682,8 +2709,27 @@
       }
     },
     {
-      "id": "hsk4_118",
+      "id": "hsk4_120",
       "lessonId": "hsk4_u2_l15",
+      "hanzi": "敢",
+      "pinyin": "gǎn",
+      "french": "Audacieux / courageux",
+      "example": {
+        "hanzi": "你怎么敢笑我？",
+        "pinyin": "Nǐ zěn me gǎn xiào wǒ?",
+        "french": "Comment oses-tu te moquer de moi ?",
+        "tokens": [
+          "你",
+          "怎么",
+          "敢",
+          "笑",
+          "我"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_121",
+      "lessonId": "hsk4_u2_l16",
       "hanzi": "梦",
       "pinyin": "mèng",
       "french": "Rêve / songe",
@@ -2703,8 +2749,8 @@
       }
     },
     {
-      "id": "hsk4_119",
-      "lessonId": "hsk4_u2_l15",
+      "id": "hsk4_122",
+      "lessonId": "hsk4_u2_l16",
       "hanzi": "重新",
       "pinyin": "chóng xīn",
       "french": "De nouveau / à nouveau",
@@ -2726,8 +2772,27 @@
       }
     },
     {
-      "id": "hsk4_120",
-      "lessonId": "hsk4_u2_l15",
+      "id": "hsk4_123",
+      "lessonId": "hsk4_u2_l16",
+      "hanzi": "提",
+      "pinyin": "tí",
+      "french": "Porter à la main / Mentionner / Lever",
+      "example": {
+        "hanzi": "她不想提了。",
+        "pinyin": "Tā bù xiǎng tí le.",
+        "french": "Elle ne veut pas en parler.",
+        "tokens": [
+          "她",
+          "不",
+          "想",
+          "提",
+          "了"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_124",
+      "lessonId": "hsk4_u2_l16",
       "hanzi": "幸福",
       "pinyin": "xìng fú",
       "french": "Heureux / bonheur",
@@ -2746,7 +2811,7 @@
       }
     },
     {
-      "id": "hsk4_121",
+      "id": "hsk4_125",
       "lessonId": "hsk4_u2_l16",
       "hanzi": "自然",
       "pinyin": "zì rán",
@@ -2765,7 +2830,7 @@
       }
     },
     {
-      "id": "hsk4_122",
+      "id": "hsk4_126",
       "lessonId": "hsk4_u2_l16",
       "hanzi": "责任",
       "pinyin": "zé rèn",
@@ -2784,26 +2849,24 @@
       }
     },
     {
-      "id": "hsk4_123",
+      "id": "hsk4_127",
       "lessonId": "hsk4_u2_l16",
-      "hanzi": "试",
-      "pinyin": "shì",
-      "french": "Essayer / éprouver",
+      "hanzi": "低",
+      "pinyin": "dī",
+      "french": "Bas / peu élevé",
       "example": {
-        "hanzi": "我觉得最好别试。",
-        "pinyin": "Wǒ jué de zuì hǎo bié shì.",
-        "french": "Je pense qu'il vaut mieux ne pas essayer.",
+        "hanzi": "我们正在低。",
+        "pinyin": "Wǒ men zhèng zài dī.",
+        "french": "Nous sommes en train de bas.",
         "tokens": [
-          "我",
-          "觉得",
-          "最好",
-          "别",
-          "试"
+          "我们",
+          "正在",
+          "低"
         ]
       }
     },
     {
-      "id": "hsk4_124",
+      "id": "hsk4_128",
       "lessonId": "hsk4_u2_l16",
       "hanzi": "弄",
       "pinyin": "nòng",
@@ -2824,8 +2887,8 @@
       }
     },
     {
-      "id": "hsk4_125",
-      "lessonId": "hsk4_u2_l16",
+      "id": "hsk4_129",
+      "lessonId": "hsk4_u2_l17",
       "hanzi": "赢",
       "pinyin": "yíng",
       "french": "Gagner / vaincre",
@@ -2843,8 +2906,25 @@
       }
     },
     {
-      "id": "hsk4_126",
-      "lessonId": "hsk4_u2_l16",
+      "id": "hsk4_130",
+      "lessonId": "hsk4_u2_l17",
+      "hanzi": "作用",
+      "pinyin": "zuò yòng",
+      "french": "Fonction / effet",
+      "example": {
+        "hanzi": "请认真作用。",
+        "pinyin": "Qǐng rèn zhēn zuò yòng.",
+        "french": "Veuillez fonction sérieusement.",
+        "tokens": [
+          "请",
+          "认真",
+          "作用"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_131",
+      "lessonId": "hsk4_u2_l17",
       "hanzi": "满",
       "pinyin": "mǎn",
       "french": "Plein / rempli",
@@ -2866,8 +2946,8 @@
       }
     },
     {
-      "id": "hsk4_127",
-      "lessonId": "hsk4_u2_l16",
+      "id": "hsk4_132",
+      "lessonId": "hsk4_u2_l17",
       "hanzi": "说明",
       "pinyin": "shuō míng",
       "french": "Expliquer / illustrer",
@@ -2887,8 +2967,8 @@
       }
     },
     {
-      "id": "hsk4_128",
-      "lessonId": "hsk4_u2_l16",
+      "id": "hsk4_133",
+      "lessonId": "hsk4_u2_l17",
       "hanzi": "许多",
       "pinyin": "xǔ duō",
       "french": "Nombreux / beaucoup",
@@ -2905,7 +2985,7 @@
       }
     },
     {
-      "id": "hsk4_129",
+      "id": "hsk4_134",
       "lessonId": "hsk4_u2_l17",
       "hanzi": "压力",
       "pinyin": "yā lì",
@@ -2923,7 +3003,7 @@
       }
     },
     {
-      "id": "hsk4_130",
+      "id": "hsk4_135",
       "lessonId": "hsk4_u2_l17",
       "hanzi": "由于",
       "pinyin": "yóu yú",
@@ -2942,7 +3022,7 @@
       }
     },
     {
-      "id": "hsk4_131",
+      "id": "hsk4_136",
       "lessonId": "hsk4_u2_l17",
       "hanzi": "母亲",
       "pinyin": "mǔ qīn",
@@ -2960,8 +3040,8 @@
       }
     },
     {
-      "id": "hsk4_132",
-      "lessonId": "hsk4_u2_l17",
+      "id": "hsk4_137",
+      "lessonId": "hsk4_u2_l18",
       "hanzi": "放弃",
       "pinyin": "fàng qì",
       "french": "Renoncer à / abandonner",
@@ -2979,8 +3059,8 @@
       }
     },
     {
-      "id": "hsk4_133",
-      "lessonId": "hsk4_u2_l17",
+      "id": "hsk4_138",
+      "lessonId": "hsk4_u2_l18",
       "hanzi": "意见",
       "pinyin": "yì jiàn",
       "french": "Avis / opinion",
@@ -2998,8 +3078,8 @@
       }
     },
     {
-      "id": "hsk4_134",
-      "lessonId": "hsk4_u2_l17",
+      "id": "hsk4_139",
+      "lessonId": "hsk4_u2_l18",
       "hanzi": "过程",
       "pinyin": "guò chéng",
       "french": "Processus / phase",
@@ -3016,8 +3096,8 @@
       }
     },
     {
-      "id": "hsk4_135",
-      "lessonId": "hsk4_u2_l17",
+      "id": "hsk4_140",
+      "lessonId": "hsk4_u2_l18",
       "hanzi": "即使",
       "pinyin": "jí shǐ",
       "french": "Même si",
@@ -3034,8 +3114,8 @@
       }
     },
     {
-      "id": "hsk4_136",
-      "lessonId": "hsk4_u2_l17",
+      "id": "hsk4_141",
+      "lessonId": "hsk4_u2_l18",
       "hanzi": "深",
       "pinyin": "shēn",
       "french": "Profond / intime",
@@ -3053,7 +3133,7 @@
       }
     },
     {
-      "id": "hsk4_137",
+      "id": "hsk4_142",
       "lessonId": "hsk4_u2_l18",
       "hanzi": "尽管",
       "pinyin": "jǐn guǎn",
@@ -3073,7 +3153,7 @@
       }
     },
     {
-      "id": "hsk4_138",
+      "id": "hsk4_143",
       "lessonId": "hsk4_u2_l18",
       "hanzi": "各",
       "pinyin": "gè",
@@ -3091,7 +3171,7 @@
       }
     },
     {
-      "id": "hsk4_139",
+      "id": "hsk4_144",
       "lessonId": "hsk4_u2_l18",
       "hanzi": "仍然",
       "pinyin": "réng rán",
@@ -3111,26 +3191,47 @@
       }
     },
     {
-      "id": "hsk4_140",
-      "lessonId": "hsk4_u2_l18",
-      "hanzi": "值得",
-      "pinyin": "zhí de",
-      "french": "Mériter / valoir (le coup)",
+      "id": "hsk4_145",
+      "lessonId": "hsk4_u2_l19",
+      "hanzi": "秒",
+      "pinyin": "miǎo",
+      "french": "Seconde (de temps) / barbe d'épi",
       "example": {
-        "hanzi": "他不值得信任。",
-        "pinyin": "Tā bù zhí de xìn rèn.",
-        "french": "On ne peut pas lui faire confiance.",
+        "hanzi": "这个秒很重要。",
+        "pinyin": "Zhè gè miǎo hěn zhòng yào.",
+        "french": "Ce terme « seconde (de temps) » est très important.",
         "tokens": [
-          "他",
-          "不",
-          "值得",
-          "信任"
+          "这",
+          "个",
+          "秒",
+          "很",
+          "重要"
         ]
       }
     },
     {
-      "id": "hsk4_141",
-      "lessonId": "hsk4_u2_l18",
+      "id": "hsk4_146",
+      "lessonId": "hsk4_u2_l19",
+      "hanzi": "值得",
+      "pinyin": "zhí de",
+      "french": "Mériter / valoir (le coup)",
+      "example": {
+        "hanzi": "我觉得这值得一问。",
+        "pinyin": "Wǒ jué de zhè zhí de yī wèn.",
+        "french": "Je pense que ça vaut le coup de demander.",
+        "tokens": [
+          "我",
+          "觉得",
+          "这",
+          "值得",
+          "一",
+          "问"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_147",
+      "lessonId": "hsk4_u2_l19",
       "hanzi": "经历",
       "pinyin": "jīng lì",
       "french": "Passer par / vivre qch",
@@ -3147,8 +3248,8 @@
       }
     },
     {
-      "id": "hsk4_142",
-      "lessonId": "hsk4_u2_l18",
+      "id": "hsk4_148",
+      "lessonId": "hsk4_u2_l19",
       "hanzi": "讨论",
       "pinyin": "tǎo lùn",
       "french": "Discuter / débattre",
@@ -3166,8 +3267,8 @@
       }
     },
     {
-      "id": "hsk4_143",
-      "lessonId": "hsk4_u2_l18",
+      "id": "hsk4_149",
+      "lessonId": "hsk4_u2_l19",
       "hanzi": "超过",
       "pinyin": "chāo guò",
       "french": "Dépasser / excéder",
@@ -3186,8 +3287,26 @@
       }
     },
     {
-      "id": "hsk4_144",
-      "lessonId": "hsk4_u2_l18",
+      "id": "hsk4_150",
+      "lessonId": "hsk4_u2_l19",
+      "hanzi": "比如",
+      "pinyin": "bǐ rú",
+      "french": "Par exemple / comme",
+      "example": {
+        "hanzi": "朋友也会比如。",
+        "pinyin": "Péng you yě huì bǐ rú.",
+        "french": "Mon ami sait aussi : par exemple.",
+        "tokens": [
+          "朋友",
+          "也",
+          "会",
+          "比如"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_151",
+      "lessonId": "hsk4_u2_l19",
       "hanzi": "假",
       "pinyin": "jiǎ",
       "french": "Faux / Artificiel",
@@ -3205,44 +3324,7 @@
       }
     },
     {
-      "id": "hsk4_145",
-      "lessonId": "hsk4_u2_l19",
-      "hanzi": "后来",
-      "pinyin": "hòu lái",
-      "french": "Ensuite / plus tard",
-      "example": {
-        "hanzi": "我很喜欢新后来。",
-        "pinyin": "Wǒ hěn xǐ huan xīn hòu lái.",
-        "french": "J'aime beaucoup ce nouveau / cette nouvelle : ensuite.",
-        "tokens": [
-          "我",
-          "很",
-          "喜欢",
-          "新",
-          "后来"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_146",
-      "lessonId": "hsk4_u2_l19",
-      "hanzi": "嘴",
-      "pinyin": "zuǐ",
-      "french": "Bouche / bec (d'oiseau, de théière)",
-      "example": {
-        "hanzi": "把嘴张开！",
-        "pinyin": "Bǎ zuǐ zhāng kāi!",
-        "french": "Ouvre la bouche !",
-        "tokens": [
-          "把",
-          "嘴",
-          "张",
-          "开"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_147",
+      "id": "hsk4_152",
       "lessonId": "hsk4_u2_l19",
       "hanzi": "地址",
       "pinyin": "dì zhǐ",
@@ -3262,8 +3344,8 @@
       }
     },
     {
-      "id": "hsk4_148",
-      "lessonId": "hsk4_u2_l19",
+      "id": "hsk4_153",
+      "lessonId": "hsk4_u2_l20",
       "hanzi": "无论",
       "pinyin": "wú lùn",
       "french": "N'importe / quoi que",
@@ -3281,8 +3363,8 @@
       }
     },
     {
-      "id": "hsk4_149",
-      "lessonId": "hsk4_u2_l19",
+      "id": "hsk4_154",
+      "lessonId": "hsk4_u2_l20",
       "hanzi": "紧张",
       "pinyin": "jǐn zhāng",
       "french": "Manquer / tendu",
@@ -3299,8 +3381,8 @@
       }
     },
     {
-      "id": "hsk4_150",
-      "lessonId": "hsk4_u2_l19",
+      "id": "hsk4_155",
+      "lessonId": "hsk4_u2_l20",
       "hanzi": "省",
       "pinyin": "shěng",
       "french": "Province / économiser",
@@ -3317,8 +3399,8 @@
       }
     },
     {
-      "id": "hsk4_151",
-      "lessonId": "hsk4_u2_l19",
+      "id": "hsk4_156",
+      "lessonId": "hsk4_u2_l20",
       "hanzi": "十分",
       "pinyin": "shí fēn",
       "french": "Cent pour cent / 100%",
@@ -3335,8 +3417,8 @@
       }
     },
     {
-      "id": "hsk4_152",
-      "lessonId": "hsk4_u2_l19",
+      "id": "hsk4_157",
+      "lessonId": "hsk4_u2_l20",
       "hanzi": "陪",
       "pinyin": "péi",
       "french": "Accompagner / tenir compagnie à qqn",
@@ -3355,7 +3437,7 @@
       }
     },
     {
-      "id": "hsk4_153",
+      "id": "hsk4_158",
       "lessonId": "hsk4_u2_l20",
       "hanzi": "挂",
       "pinyin": "guà",
@@ -3374,7 +3456,7 @@
       }
     },
     {
-      "id": "hsk4_154",
+      "id": "hsk4_159",
       "lessonId": "hsk4_u2_l20",
       "hanzi": "本来",
       "pinyin": "běn lái",
@@ -3397,7 +3479,7 @@
       }
     },
     {
-      "id": "hsk4_155",
+      "id": "hsk4_160",
       "lessonId": "hsk4_u2_l20",
       "hanzi": "条件",
       "pinyin": "tiáo jiàn",
@@ -3416,8 +3498,8 @@
       }
     },
     {
-      "id": "hsk4_156",
-      "lessonId": "hsk4_u2_l20",
+      "id": "hsk4_161",
+      "lessonId": "hsk4_u2_l21",
       "hanzi": "广告",
       "pinyin": "guǎng gào",
       "french": "Publicité / annonce publicitaire",
@@ -3434,8 +3516,26 @@
       }
     },
     {
-      "id": "hsk4_157",
-      "lessonId": "hsk4_u2_l20",
+      "id": "hsk4_162",
+      "lessonId": "hsk4_u2_l21",
+      "hanzi": "表演",
+      "pinyin": "biǎo yǎn",
+      "french": "Jouer (un rôle) / faire une démonstration",
+      "example": {
+        "hanzi": "他明天去表演。",
+        "pinyin": "Tā míng tiān qù biǎo yǎn.",
+        "french": "Il ira demain pour : jouer (un rôle).",
+        "tokens": [
+          "他",
+          "明天",
+          "去",
+          "表演"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_163",
+      "lessonId": "hsk4_u2_l21",
       "hanzi": "警察",
       "pinyin": "jǐng chá",
       "french": "Police / policier",
@@ -3452,8 +3552,8 @@
       }
     },
     {
-      "id": "hsk4_158",
-      "lessonId": "hsk4_u2_l20",
+      "id": "hsk4_164",
+      "lessonId": "hsk4_u2_l21",
       "hanzi": "关键",
       "pinyin": "guān jiàn",
       "french": "Crucial / décisif",
@@ -3471,8 +3571,8 @@
       }
     },
     {
-      "id": "hsk4_159",
-      "lessonId": "hsk4_u2_l20",
+      "id": "hsk4_165",
+      "lessonId": "hsk4_u2_l21",
       "hanzi": "样子",
       "pinyin": "yàng zi",
       "french": "Modèle / style",
@@ -3492,8 +3592,8 @@
       }
     },
     {
-      "id": "hsk4_160",
-      "lessonId": "hsk4_u2_l20",
+      "id": "hsk4_166",
+      "lessonId": "hsk4_u2_l21",
       "hanzi": "困难",
       "pinyin": "kùn nan",
       "french": "Difficile / difficulté",
@@ -3510,7 +3610,7 @@
       }
     },
     {
-      "id": "hsk4_161",
+      "id": "hsk4_167",
       "lessonId": "hsk4_u2_l21",
       "hanzi": "专业",
       "pinyin": "zhuān yè",
@@ -3528,7 +3628,7 @@
       }
     },
     {
-      "id": "hsk4_162",
+      "id": "hsk4_168",
       "lessonId": "hsk4_u2_l21",
       "hanzi": "难道",
       "pinyin": "nán dào",
@@ -3546,8 +3646,8 @@
       }
     },
     {
-      "id": "hsk4_163",
-      "lessonId": "hsk4_u2_l21",
+      "id": "hsk4_169",
+      "lessonId": "hsk4_u2_l22",
       "hanzi": "于是",
       "pinyin": "yú shì",
       "french": "Alors / par conséquent",
@@ -3565,8 +3665,8 @@
       }
     },
     {
-      "id": "hsk4_164",
-      "lessonId": "hsk4_u2_l21",
+      "id": "hsk4_170",
+      "lessonId": "hsk4_u2_l22",
       "hanzi": "规定",
       "pinyin": "guī dìng",
       "french": "Prescrire / fixer",
@@ -3583,8 +3683,8 @@
       }
     },
     {
-      "id": "hsk4_165",
-      "lessonId": "hsk4_u2_l21",
+      "id": "hsk4_171",
+      "lessonId": "hsk4_u2_l22",
       "hanzi": "正确",
       "pinyin": "zhèng què",
       "french": "Juste / correct",
@@ -3602,8 +3702,8 @@
       }
     },
     {
-      "id": "hsk4_166",
-      "lessonId": "hsk4_u2_l21",
+      "id": "hsk4_172",
+      "lessonId": "hsk4_u2_l22",
       "hanzi": "爱情",
       "pinyin": "ài qíng",
       "french": "Amour (romantique) / affection",
@@ -3621,27 +3721,27 @@
       }
     },
     {
-      "id": "hsk4_167",
-      "lessonId": "hsk4_u2_l21",
-      "hanzi": "群",
-      "pinyin": "qún",
-      "french": "Groupe / troupeau",
+      "id": "hsk4_173",
+      "lessonId": "hsk4_u2_l22",
+      "hanzi": "照",
+      "pinyin": "zhào",
+      "french": "Selon / suivant",
       "example": {
-        "hanzi": "我看见那个群。",
-        "pinyin": "Wǒ kàn jiàn nà gè qún.",
-        "french": "J'ai vu : groupe.",
+        "hanzi": "照他说的做。",
+        "pinyin": "Zhào tā shuō de zuò.",
+        "french": "Fais ce qu'il dit !",
         "tokens": [
-          "我",
-          "看见",
-          "那",
-          "个",
-          "群"
+          "照",
+          "他",
+          "说",
+          "的",
+          "做"
         ]
       }
     },
     {
-      "id": "hsk4_168",
-      "lessonId": "hsk4_u2_l21",
+      "id": "hsk4_174",
+      "lessonId": "hsk4_u2_l22",
       "hanzi": "够",
       "pinyin": "gòu",
       "french": "Atteindre / suffisant",
@@ -3657,7 +3757,7 @@
       }
     },
     {
-      "id": "hsk4_169",
+      "id": "hsk4_175",
       "lessonId": "hsk4_u2_l22",
       "hanzi": "火",
       "pinyin": "huǒ",
@@ -3674,7 +3774,7 @@
       }
     },
     {
-      "id": "hsk4_170",
+      "id": "hsk4_176",
       "lessonId": "hsk4_u2_l22",
       "hanzi": "方向",
       "pinyin": "fāng xiàng",
@@ -3697,27 +3797,27 @@
       }
     },
     {
-      "id": "hsk4_171",
-      "lessonId": "hsk4_u2_l22",
-      "hanzi": "市场",
-      "pinyin": "shì chǎng",
-      "french": "Marché",
+      "id": "hsk4_177",
+      "lessonId": "hsk4_u2_l23",
+      "hanzi": "节",
+      "pinyin": "jié",
+      "french": "Fête / festival",
       "example": {
-        "hanzi": "这个市场非常好。",
-        "pinyin": "Zhè gè shì chǎng fēi cháng hǎo.",
-        "french": "Ce/cette marché est extrêmement bien.",
+        "hanzi": "明天再节好吗？",
+        "pinyin": "Míng tiān zài jié hǎo ma?",
+        "french": "Et si on remettait à demain pour : fête ?",
         "tokens": [
-          "这",
-          "个",
-          "市场",
-          "非常",
-          "好"
+          "明天",
+          "再",
+          "节",
+          "好",
+          "吗"
         ]
       }
     },
     {
-      "id": "hsk4_172",
-      "lessonId": "hsk4_u2_l22",
+      "id": "hsk4_178",
+      "lessonId": "hsk4_u2_l23",
       "hanzi": "教育",
       "pinyin": "jiào yù",
       "french": "Éducation / éduquer",
@@ -3734,8 +3834,8 @@
       }
     },
     {
-      "id": "hsk4_173",
-      "lessonId": "hsk4_u2_l22",
+      "id": "hsk4_179",
+      "lessonId": "hsk4_u2_l23",
       "hanzi": "取",
       "pinyin": "qǔ",
       "french": "Prendre / retirer",
@@ -3755,8 +3855,8 @@
       }
     },
     {
-      "id": "hsk4_174",
-      "lessonId": "hsk4_u2_l22",
+      "id": "hsk4_180",
+      "lessonId": "hsk4_u2_l23",
       "hanzi": "危险",
       "pinyin": "wēi xiǎn",
       "french": "Dangereux / périlleux",
@@ -3774,8 +3874,8 @@
       }
     },
     {
-      "id": "hsk4_175",
-      "lessonId": "hsk4_u2_l22",
+      "id": "hsk4_181",
+      "lessonId": "hsk4_u2_l23",
       "hanzi": "管理",
       "pinyin": "guǎn lǐ",
       "french": "Gérer / administrer",
@@ -3792,8 +3892,8 @@
       }
     },
     {
-      "id": "hsk4_176",
-      "lessonId": "hsk4_u2_l22",
+      "id": "hsk4_182",
+      "lessonId": "hsk4_u2_l23",
       "hanzi": "乱",
       "pinyin": "luàn",
       "french": "Désordre / confusion",
@@ -3811,7 +3911,7 @@
       }
     },
     {
-      "id": "hsk4_177",
+      "id": "hsk4_183",
       "lessonId": "hsk4_u2_l23",
       "hanzi": "适合",
       "pinyin": "shì hé",
@@ -3830,7 +3930,7 @@
       }
     },
     {
-      "id": "hsk4_178",
+      "id": "hsk4_184",
       "lessonId": "hsk4_u2_l23",
       "hanzi": "正式",
       "pinyin": "zhèng shì",
@@ -3849,8 +3949,8 @@
       }
     },
     {
-      "id": "hsk4_179",
-      "lessonId": "hsk4_u2_l23",
+      "id": "hsk4_185",
+      "lessonId": "hsk4_u2_l24",
       "hanzi": "引起",
       "pinyin": "yǐn qǐ",
       "french": "Provoquer / susciter",
@@ -3867,8 +3967,8 @@
       }
     },
     {
-      "id": "hsk4_180",
-      "lessonId": "hsk4_u2_l23",
+      "id": "hsk4_186",
+      "lessonId": "hsk4_u2_l24",
       "hanzi": "从来",
       "pinyin": "cóng lái",
       "french": "Toujours / depuis toujours",
@@ -3879,16 +3979,38 @@
         "tokens": [
           "你",
           "从来",
-          "没",
-          "有",
+          "没有",
           "快乐",
           "过"
         ]
       }
     },
     {
-      "id": "hsk4_181",
-      "lessonId": "hsk4_u2_l23",
+      "id": "hsk4_187",
+      "lessonId": "hsk4_u2_l24",
+      "hanzi": "棒",
+      "pinyin": "bàng",
+      "french": "Bon / fort",
+      "example": {
+        "hanzi": "我觉得那是个很棒的故事。",
+        "pinyin": "Wǒ jué de nà shì gè hěn bàng de gù shi.",
+        "french": "J'ai trouvé que cette histoire était géniale.",
+        "tokens": [
+          "我",
+          "觉得",
+          "那",
+          "是",
+          "个",
+          "很",
+          "棒",
+          "的",
+          "故事"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_188",
+      "lessonId": "hsk4_u2_l24",
       "hanzi": "抱",
       "pinyin": "bào",
       "french": "Tenir / étreindre",
@@ -3905,8 +4027,8 @@
       }
     },
     {
-      "id": "hsk4_182",
-      "lessonId": "hsk4_u2_l23",
+      "id": "hsk4_189",
+      "lessonId": "hsk4_u2_l24",
       "hanzi": "内容",
       "pinyin": "nèi róng",
       "french": "Contenu",
@@ -3923,8 +4045,8 @@
       }
     },
     {
-      "id": "hsk4_183",
-      "lessonId": "hsk4_u2_l23",
+      "id": "hsk4_190",
+      "lessonId": "hsk4_u2_l24",
       "hanzi": "律师",
       "pinyin": "lǜ shī",
       "french": "Avocat (métier)",
@@ -3942,8 +4064,8 @@
       }
     },
     {
-      "id": "hsk4_184",
-      "lessonId": "hsk4_u2_l23",
+      "id": "hsk4_191",
+      "lessonId": "hsk4_u2_l24",
       "hanzi": "通知",
       "pinyin": "tōng zhī",
       "french": "Avis / annonce",
@@ -3960,7 +4082,7 @@
       }
     },
     {
-      "id": "hsk4_185",
+      "id": "hsk4_192",
       "lessonId": "hsk4_u2_l24",
       "hanzi": "感情",
       "pinyin": "gǎn qíng",
@@ -3979,8 +4101,8 @@
       }
     },
     {
-      "id": "hsk4_186",
-      "lessonId": "hsk4_u2_l24",
+      "id": "hsk4_193",
+      "lessonId": "hsk4_u2_l25",
       "hanzi": "目的",
       "pinyin": "mù dì",
       "french": "But / fin",
@@ -3999,29 +4121,27 @@
       }
     },
     {
-      "id": "hsk4_187",
-      "lessonId": "hsk4_u2_l24",
+      "id": "hsk4_194",
+      "lessonId": "hsk4_u2_l25",
       "hanzi": "观众",
       "pinyin": "guān zhòng",
       "french": "Spectateur / public",
       "example": {
-        "hanzi": "所有的观众都站起来鼓掌。",
-        "pinyin": "Suǒ yǒu de guān zhòng dōu zhàn qǐ lai gǔ zhǎng.",
-        "french": "La totalité de l'audience se leva et commença à applaudir.",
+        "hanzi": "我看见那个观众。",
+        "pinyin": "Wǒ kàn jiàn nà gè guān zhòng.",
+        "french": "J'ai vu : spectateur.",
         "tokens": [
-          "所有",
-          "的",
-          "观众",
-          "都",
-          "站",
-          "起来",
-          "鼓掌"
+          "我",
+          "看见",
+          "那",
+          "个",
+          "观众"
         ]
       }
     },
     {
-      "id": "hsk4_188",
-      "lessonId": "hsk4_u2_l24",
+      "id": "hsk4_195",
+      "lessonId": "hsk4_u2_l25",
       "hanzi": "国际",
       "pinyin": "guó jì",
       "french": "International",
@@ -4041,8 +4161,8 @@
       }
     },
     {
-      "id": "hsk4_189",
-      "lessonId": "hsk4_u2_l24",
+      "id": "hsk4_196",
+      "lessonId": "hsk4_u2_l25",
       "hanzi": "美丽",
       "pinyin": "měi lì",
       "french": "Beau / belle",
@@ -4060,8 +4180,8 @@
       }
     },
     {
-      "id": "hsk4_190",
-      "lessonId": "hsk4_u2_l24",
+      "id": "hsk4_197",
+      "lessonId": "hsk4_u2_l25",
       "hanzi": "经验",
       "pinyin": "jīng yàn",
       "french": "Expérience / expérimenter",
@@ -4079,8 +4199,8 @@
       }
     },
     {
-      "id": "hsk4_191",
-      "lessonId": "hsk4_u2_l24",
+      "id": "hsk4_198",
+      "lessonId": "hsk4_u2_l25",
       "hanzi": "破",
       "pinyin": "pò",
       "french": "Usé / cassé",
@@ -4096,8 +4216,8 @@
       }
     },
     {
-      "id": "hsk4_192",
-      "lessonId": "hsk4_u2_l24",
+      "id": "hsk4_199",
+      "lessonId": "hsk4_u2_l25",
       "hanzi": "推",
       "pinyin": "tuī",
       "french": "Pousser / étendre",
@@ -4116,7 +4236,7 @@
       }
     },
     {
-      "id": "hsk4_193",
+      "id": "hsk4_200",
       "lessonId": "hsk4_u2_l25",
       "hanzi": "刀",
       "pinyin": "dāo",
@@ -4135,8 +4255,8 @@
       }
     },
     {
-      "id": "hsk4_194",
-      "lessonId": "hsk4_u2_l25",
+      "id": "hsk4_201",
+      "lessonId": "hsk4_u2_l26",
       "hanzi": "科学",
       "pinyin": "kē xué",
       "french": "Science / scientifique (adj.)",
@@ -4154,8 +4274,8 @@
       }
     },
     {
-      "id": "hsk4_195",
-      "lessonId": "hsk4_u2_l25",
+      "id": "hsk4_202",
+      "lessonId": "hsk4_u2_l26",
       "hanzi": "心情",
       "pinyin": "xīn qíng",
       "french": "État d'esprit / humeur",
@@ -4172,8 +4292,26 @@
       }
     },
     {
-      "id": "hsk4_196",
-      "lessonId": "hsk4_u2_l25",
+      "id": "hsk4_203",
+      "lessonId": "hsk4_u2_l26",
+      "hanzi": "错误",
+      "pinyin": "cuò wù",
+      "french": "Erroné / faux",
+      "example": {
+        "hanzi": "今天天气很错误。",
+        "pinyin": "Jīn tiān tiān qì hěn cuò wù.",
+        "french": "Aujourd'hui c'est très : erroné.",
+        "tokens": [
+          "今天",
+          "天气",
+          "很",
+          "错误"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_204",
+      "lessonId": "hsk4_u2_l26",
       "hanzi": "标准",
       "pinyin": "biāo zhǔn",
       "french": "Norme / standard",
@@ -4191,8 +4329,8 @@
       }
     },
     {
-      "id": "hsk4_197",
-      "lessonId": "hsk4_u2_l25",
+      "id": "hsk4_205",
+      "lessonId": "hsk4_u2_l26",
       "hanzi": "职业",
       "pinyin": "zhí yè",
       "french": "Métier (activité) / profession",
@@ -4210,8 +4348,27 @@
       }
     },
     {
-      "id": "hsk4_198",
-      "lessonId": "hsk4_u2_l25",
+      "id": "hsk4_206",
+      "lessonId": "hsk4_u2_l26",
+      "hanzi": "毛",
+      "pinyin": "máo",
+      "french": "Poil / plume",
+      "example": {
+        "hanzi": "我看见那个毛。",
+        "pinyin": "Wǒ kàn jiàn nà gè máo.",
+        "french": "J'ai vu : poil.",
+        "tokens": [
+          "我",
+          "看见",
+          "那",
+          "个",
+          "毛"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_207",
+      "lessonId": "hsk4_u2_l26",
       "hanzi": "精彩",
       "pinyin": "jīng cǎi",
       "french": "Excellent / admirable",
@@ -4229,26 +4386,26 @@
       }
     },
     {
-      "id": "hsk4_199",
-      "lessonId": "hsk4_u2_l25",
-      "hanzi": "范围",
-      "pinyin": "fàn wéi",
-      "french": "Limite / domaine",
+      "id": "hsk4_208",
+      "lessonId": "hsk4_u2_l26",
+      "hanzi": "接着",
+      "pinyin": "jiē zhe",
+      "french": "Attraper / continuer",
       "example": {
-        "hanzi": "我们今天看范围。",
-        "pinyin": "Wǒ men jīn tiān kàn fàn wéi.",
-        "french": "Aujourd'hui nous voyons : limite.",
+        "hanzi": "大家一起接着吧！",
+        "pinyin": "Dà jiā yī qǐ jiē zhe ba!",
+        "french": "Allons attraper tous ensemble !",
         "tokens": [
-          "我们",
-          "今天",
-          "看",
-          "范围"
+          "大家",
+          "一起",
+          "接着",
+          "吧"
         ]
       }
     },
     {
-      "id": "hsk4_200",
-      "lessonId": "hsk4_u2_l25",
+      "id": "hsk4_209",
+      "lessonId": "hsk4_u3_l27",
       "hanzi": "速度",
       "pinyin": "sù dù",
       "french": "Vitesse",
@@ -4266,8 +4423,8 @@
       }
     },
     {
-      "id": "hsk4_201",
-      "lessonId": "hsk4_u2_l26",
+      "id": "hsk4_210",
+      "lessonId": "hsk4_u3_l27",
       "hanzi": "实在",
       "pinyin": "shí zài",
       "french": "Vraiment / réellement",
@@ -4285,8 +4442,46 @@
       }
     },
     {
-      "id": "hsk4_202",
-      "lessonId": "hsk4_u2_l26",
+      "id": "hsk4_211",
+      "lessonId": "hsk4_u3_l27",
+      "hanzi": "空",
+      "pinyin": "kōng",
+      "french": "Vide / Ciel",
+      "example": {
+        "hanzi": "盒子几乎是空的。",
+        "pinyin": "Hé zi jī hū shì kōng de.",
+        "french": "La boîte est presque vide.",
+        "tokens": [
+          "盒子",
+          "几乎",
+          "是",
+          "空",
+          "的"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_212",
+      "lessonId": "hsk4_u3_l27",
+      "hanzi": "左右",
+      "pinyin": "zuǒ yòu",
+      "french": "Environ / à peu près",
+      "example": {
+        "hanzi": "我相信她能左右。",
+        "pinyin": "Wǒ xiāng xìn tā néng zuǒ yòu.",
+        "french": "Je crois qu'elle peut : environ.",
+        "tokens": [
+          "我",
+          "相信",
+          "她",
+          "能",
+          "左右"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_213",
+      "lessonId": "hsk4_u3_l27",
       "hanzi": "效果",
       "pinyin": "xiào guǒ",
       "french": "Effet / résultat",
@@ -4304,8 +4499,8 @@
       }
     },
     {
-      "id": "hsk4_203",
-      "lessonId": "hsk4_u2_l26",
+      "id": "hsk4_214",
+      "lessonId": "hsk4_u3_l27",
       "hanzi": "遍",
       "pinyin": "biàn",
       "french": "Fois / partout",
@@ -4321,8 +4516,8 @@
       }
     },
     {
-      "id": "hsk4_204",
-      "lessonId": "hsk4_u2_l26",
+      "id": "hsk4_215",
+      "lessonId": "hsk4_u3_l27",
       "hanzi": "经济",
       "pinyin": "jīng jì",
       "french": "Économie / économique",
@@ -4341,8 +4536,8 @@
       }
     },
     {
-      "id": "hsk4_205",
-      "lessonId": "hsk4_u2_l26",
+      "id": "hsk4_216",
+      "lessonId": "hsk4_u3_l27",
       "hanzi": "按照",
       "pinyin": "àn zhào",
       "french": "Selon / conformément",
@@ -4358,8 +4553,8 @@
       }
     },
     {
-      "id": "hsk4_206",
-      "lessonId": "hsk4_u2_l26",
+      "id": "hsk4_217",
+      "lessonId": "hsk4_u3_l28",
       "hanzi": "反对",
       "pinyin": "fǎn duì",
       "french": "S'opposer à / combattre",
@@ -4375,8 +4570,8 @@
       }
     },
     {
-      "id": "hsk4_207",
-      "lessonId": "hsk4_u2_l26",
+      "id": "hsk4_218",
+      "lessonId": "hsk4_u3_l28",
       "hanzi": "竟然",
       "pinyin": "jìng rán",
       "french": "Contre toute attente / de manière inattendue",
@@ -4394,8 +4589,8 @@
       }
     },
     {
-      "id": "hsk4_208",
-      "lessonId": "hsk4_u2_l26",
+      "id": "hsk4_219",
+      "lessonId": "hsk4_u3_l28",
       "hanzi": "重点",
       "pinyin": "zhòng diǎn",
       "french": "Point clé / Essentiel",
@@ -4413,8 +4608,8 @@
       }
     },
     {
-      "id": "hsk4_209",
-      "lessonId": "hsk4_u3_l27",
+      "id": "hsk4_220",
+      "lessonId": "hsk4_u3_l28",
       "hanzi": "倍",
       "pinyin": "bèi",
       "french": "Fois / double",
@@ -4431,8 +4626,8 @@
       }
     },
     {
-      "id": "hsk4_210",
-      "lessonId": "hsk4_u3_l27",
+      "id": "hsk4_221",
+      "lessonId": "hsk4_u3_l28",
       "hanzi": "醒",
       "pinyin": "xǐng",
       "french": "Se réveiller / être réveillé",
@@ -4449,8 +4644,8 @@
       }
     },
     {
-      "id": "hsk4_211",
-      "lessonId": "hsk4_u3_l27",
+      "id": "hsk4_222",
+      "lessonId": "hsk4_u3_l28",
       "hanzi": "讨厌",
       "pinyin": "tǎo yàn",
       "french": "Ennuyeux / désagréable",
@@ -4468,8 +4663,8 @@
       }
     },
     {
-      "id": "hsk4_212",
-      "lessonId": "hsk4_u3_l27",
+      "id": "hsk4_223",
+      "lessonId": "hsk4_u3_l28",
       "hanzi": "输",
       "pinyin": "shū",
       "french": "Transporter / véhiculer",
@@ -4486,8 +4681,8 @@
       }
     },
     {
-      "id": "hsk4_213",
-      "lessonId": "hsk4_u3_l27",
+      "id": "hsk4_224",
+      "lessonId": "hsk4_u3_l28",
       "hanzi": "咱们",
       "pinyin": "zán men",
       "french": "Nous",
@@ -4505,8 +4700,29 @@
       }
     },
     {
-      "id": "hsk4_214",
-      "lessonId": "hsk4_u3_l27",
+      "id": "hsk4_225",
+      "lessonId": "hsk4_u3_l29",
+      "hanzi": "要是",
+      "pinyin": "yào shi",
+      "french": "Si / au cas où",
+      "example": {
+        "hanzi": "我要是知道就告诉你了。",
+        "pinyin": "Wǒ yào shi zhī dào jiù gào su nǐ le.",
+        "french": "Si je le savais, je te le dirais.",
+        "tokens": [
+          "我",
+          "要是",
+          "知道",
+          "就",
+          "告诉",
+          "你",
+          "了"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_226",
+      "lessonId": "hsk4_u3_l29",
       "hanzi": "免费",
       "pinyin": "miǎn fèi",
       "french": "Gratuit / gratis",
@@ -4524,8 +4740,8 @@
       }
     },
     {
-      "id": "hsk4_215",
-      "lessonId": "hsk4_u3_l27",
+      "id": "hsk4_227",
+      "lessonId": "hsk4_u3_l29",
       "hanzi": "否则",
       "pinyin": "fǒu zé",
       "french": "Sinon / autrement",
@@ -4542,8 +4758,8 @@
       }
     },
     {
-      "id": "hsk4_216",
-      "lessonId": "hsk4_u3_l27",
+      "id": "hsk4_228",
+      "lessonId": "hsk4_u3_l29",
       "hanzi": "动作",
       "pinyin": "dòng zuò",
       "french": "Mouvement / geste",
@@ -4559,8 +4775,8 @@
       }
     },
     {
-      "id": "hsk4_217",
-      "lessonId": "hsk4_u3_l28",
+      "id": "hsk4_229",
+      "lessonId": "hsk4_u3_l29",
       "hanzi": "俩",
       "pinyin": "liǎ",
       "french": "Deux / peu",
@@ -4578,8 +4794,8 @@
       }
     },
     {
-      "id": "hsk4_218",
-      "lessonId": "hsk4_u3_l28",
+      "id": "hsk4_230",
+      "lessonId": "hsk4_u3_l29",
       "hanzi": "增加",
       "pinyin": "zēng jiā",
       "french": "Augmenter / ajouter",
@@ -4597,8 +4813,26 @@
       }
     },
     {
-      "id": "hsk4_219",
-      "lessonId": "hsk4_u3_l28",
+      "id": "hsk4_231",
+      "lessonId": "hsk4_u3_l29",
+      "hanzi": "举行",
+      "pinyin": "jǔ xíng",
+      "french": "Tenir (une rencontre) / convoquer",
+      "example": {
+        "hanzi": "大家一起举行吧！",
+        "pinyin": "Dà jiā yī qǐ jǔ xíng ba!",
+        "french": "Allons tenir (une rencontre) tous ensemble !",
+        "tokens": [
+          "大家",
+          "一起",
+          "举行",
+          "吧"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_232",
+      "lessonId": "hsk4_u3_l29",
       "hanzi": "著名",
       "pinyin": "zhù míng",
       "french": "Célébre / connu",
@@ -4615,8 +4849,8 @@
       }
     },
     {
-      "id": "hsk4_220",
-      "lessonId": "hsk4_u3_l28",
+      "id": "hsk4_233",
+      "lessonId": "hsk4_u3_l30",
       "hanzi": "拒绝",
       "pinyin": "jù jué",
       "french": "Refuser / rejeter",
@@ -4635,8 +4869,8 @@
       }
     },
     {
-      "id": "hsk4_221",
-      "lessonId": "hsk4_u3_l28",
+      "id": "hsk4_234",
+      "lessonId": "hsk4_u3_l30",
       "hanzi": "帅",
       "pinyin": "shuài",
       "french": "Beau (pour un homme) / gracieux",
@@ -4653,8 +4887,8 @@
       }
     },
     {
-      "id": "hsk4_222",
-      "lessonId": "hsk4_u3_l28",
+      "id": "hsk4_235",
+      "lessonId": "hsk4_u3_l30",
       "hanzi": "不仅",
       "pinyin": "bù jǐn",
       "french": "Ne pas être le seul / non seulement",
@@ -4672,8 +4906,8 @@
       }
     },
     {
-      "id": "hsk4_223",
-      "lessonId": "hsk4_u3_l28",
+      "id": "hsk4_236",
+      "lessonId": "hsk4_u3_l30",
       "hanzi": "顺利",
       "pinyin": "shùn lì",
       "french": "Favorablement / sans obstacle",
@@ -4690,8 +4924,8 @@
       }
     },
     {
-      "id": "hsk4_224",
-      "lessonId": "hsk4_u3_l28",
+      "id": "hsk4_237",
+      "lessonId": "hsk4_u3_l30",
       "hanzi": "艺术",
       "pinyin": "yì shù",
       "french": "Art",
@@ -4709,8 +4943,8 @@
       }
     },
     {
-      "id": "hsk4_225",
-      "lessonId": "hsk4_u3_l29",
+      "id": "hsk4_238",
+      "lessonId": "hsk4_u3_l30",
       "hanzi": "麻烦",
       "pinyin": "má fan",
       "french": "Ennuyeux / gênant",
@@ -4726,8 +4960,8 @@
       }
     },
     {
-      "id": "hsk4_226",
-      "lessonId": "hsk4_u3_l29",
+      "id": "hsk4_239",
+      "lessonId": "hsk4_u3_l30",
       "hanzi": "申请",
       "pinyin": "shēn qǐng",
       "french": "Se porter candidat pour / présenter une demande de",
@@ -4746,8 +4980,8 @@
       }
     },
     {
-      "id": "hsk4_227",
-      "lessonId": "hsk4_u3_l29",
+      "id": "hsk4_240",
+      "lessonId": "hsk4_u3_l30",
       "hanzi": "演出",
       "pinyin": "yǎn chū",
       "french": "Jouer (un rôle) / représenter",
@@ -4766,27 +5000,8 @@
       }
     },
     {
-      "id": "hsk4_228",
-      "lessonId": "hsk4_u3_l29",
-      "hanzi": "猪",
-      "pinyin": "zhū",
-      "french": "Porc / cochon",
-      "example": {
-        "hanzi": "我看见那个猪。",
-        "pinyin": "Wǒ kàn jiàn nà gè zhū.",
-        "french": "J'ai vu : porc.",
-        "tokens": [
-          "我",
-          "看见",
-          "那",
-          "个",
-          "猪"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_229",
-      "lessonId": "hsk4_u3_l29",
+      "id": "hsk4_241",
+      "lessonId": "hsk4_u3_l31",
       "hanzi": "竞争",
       "pinyin": "jìng zhēng",
       "french": "Concurrence / concourir",
@@ -4803,8 +5018,8 @@
       }
     },
     {
-      "id": "hsk4_230",
-      "lessonId": "hsk4_u3_l29",
+      "id": "hsk4_242",
+      "lessonId": "hsk4_u3_l31",
       "hanzi": "估计",
       "pinyin": "gū jì",
       "french": "Évaluer / estimer",
@@ -4821,8 +5036,8 @@
       }
     },
     {
-      "id": "hsk4_231",
-      "lessonId": "hsk4_u3_l29",
+      "id": "hsk4_243",
+      "lessonId": "hsk4_u3_l31",
       "hanzi": "失败",
       "pinyin": "shī bài",
       "french": "Perdre (être battu) / échouer",
@@ -4840,8 +5055,8 @@
       }
     },
     {
-      "id": "hsk4_232",
-      "lessonId": "hsk4_u3_l29",
+      "id": "hsk4_244",
+      "lessonId": "hsk4_u3_l31",
       "hanzi": "世纪",
       "pinyin": "shì jì",
       "french": "Siècle",
@@ -4859,44 +5074,8 @@
       }
     },
     {
-      "id": "hsk4_233",
-      "lessonId": "hsk4_u3_l30",
-      "hanzi": "制造",
-      "pinyin": "zhì zào",
-      "french": "Fabriquer / manufacturer",
-      "example": {
-        "hanzi": "请你多制造。",
-        "pinyin": "Qǐng nǐ duō zhì zào.",
-        "french": "Veuillez souvent : fabriquer.",
-        "tokens": [
-          "请",
-          "你",
-          "多",
-          "制造"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_234",
-      "lessonId": "hsk4_u3_l30",
-      "hanzi": "当地",
-      "pinyin": "dāng dì",
-      "french": "Local / du pays",
-      "example": {
-        "hanzi": "我们讨论过当地。",
-        "pinyin": "Wǒ men tǎo lùn guo dāng dì.",
-        "french": "Nous avons déjà abordé : local.",
-        "tokens": [
-          "我们",
-          "讨论",
-          "过",
-          "当地"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_235",
-      "lessonId": "hsk4_u3_l30",
+      "id": "hsk4_245",
+      "lessonId": "hsk4_u3_l31",
       "hanzi": "允许",
       "pinyin": "yǔn xǔ",
       "french": "Permettre / admettre",
@@ -4914,8 +5093,8 @@
       }
     },
     {
-      "id": "hsk4_236",
-      "lessonId": "hsk4_u3_l30",
+      "id": "hsk4_246",
+      "lessonId": "hsk4_u3_l31",
       "hanzi": "大概",
       "pinyin": "dà gài",
       "french": "Environ / à peu près",
@@ -4932,8 +5111,8 @@
       }
     },
     {
-      "id": "hsk4_237",
-      "lessonId": "hsk4_u3_l30",
+      "id": "hsk4_247",
+      "lessonId": "hsk4_u3_l31",
       "hanzi": "教授",
       "pinyin": "jiào shòu",
       "french": "Professeur (d'université) / enseigner",
@@ -4954,27 +5133,8 @@
       }
     },
     {
-      "id": "hsk4_238",
-      "lessonId": "hsk4_u3_l30",
-      "hanzi": "顿",
-      "pinyin": "dùn",
-      "french": "Faire une pause / frapper du pied",
-      "example": {
-        "hanzi": "这个顿很重要。",
-        "pinyin": "Zhè gè dùn hěn zhòng yào.",
-        "french": "Ce terme « faire une pause » est très important.",
-        "tokens": [
-          "这",
-          "个",
-          "顿",
-          "很",
-          "重要"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_239",
-      "lessonId": "hsk4_u3_l30",
+      "id": "hsk4_248",
+      "lessonId": "hsk4_u3_l31",
       "hanzi": "吸引",
       "pinyin": "xī yǐn",
       "french": "Attirer / séduire",
@@ -4987,7 +5147,8 @@
           "被",
           "那",
           "个",
-          "女人",
+          "女",
+          "人",
           "吸引",
           "住",
           "了"
@@ -4995,8 +5156,8 @@
       }
     },
     {
-      "id": "hsk4_240",
-      "lessonId": "hsk4_u3_l30",
+      "id": "hsk4_249",
+      "lessonId": "hsk4_u3_l32",
       "hanzi": "共同",
       "pinyin": "gòng tóng",
       "french": "Commun / ensemble",
@@ -5013,8 +5174,8 @@
       }
     },
     {
-      "id": "hsk4_241",
-      "lessonId": "hsk4_u3_l31",
+      "id": "hsk4_250",
+      "lessonId": "hsk4_u3_l32",
       "hanzi": "杂志",
       "pinyin": "zá zhì",
       "french": "Magazine / revue",
@@ -5032,8 +5193,8 @@
       }
     },
     {
-      "id": "hsk4_242",
-      "lessonId": "hsk4_u3_l31",
+      "id": "hsk4_251",
+      "lessonId": "hsk4_u3_l32",
       "hanzi": "既然",
       "pinyin": "jì rán",
       "french": "Puisque / étant donné que",
@@ -5050,44 +5211,26 @@
       }
     },
     {
-      "id": "hsk4_243",
-      "lessonId": "hsk4_u3_l31",
-      "hanzi": "停止",
-      "pinyin": "tíng zhǐ",
-      "french": "Arrêter / suspendre",
-      "example": {
-        "hanzi": "我们应该停止。",
-        "pinyin": "Wǒ men yīng gāi tíng zhǐ.",
-        "french": "Nous devrions arrêter.",
-        "tokens": [
-          "我们",
-          "应该",
-          "停止"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_244",
-      "lessonId": "hsk4_u3_l31",
+      "id": "hsk4_252",
+      "lessonId": "hsk4_u3_l32",
       "hanzi": "提醒",
       "pinyin": "tí xǐng",
       "french": "Rappeler / faire remarquer",
       "example": {
-        "hanzi": "请提醒我寄信。",
-        "pinyin": "Qǐng tí xǐng wǒ jì xìn.",
-        "french": "Rappelez-moi, s'il vous plaît, de poster la lettre.",
+        "hanzi": "她正在提醒呢。",
+        "pinyin": "Tā zhèng zài tí xǐng ne.",
+        "french": "Elle est en train de : rappeler.",
         "tokens": [
-          "请",
+          "她",
+          "正在",
           "提醒",
-          "我",
-          "寄",
-          "信"
+          "呢"
         ]
       }
     },
     {
-      "id": "hsk4_245",
-      "lessonId": "hsk4_u3_l31",
+      "id": "hsk4_253",
+      "lessonId": "hsk4_u3_l32",
       "hanzi": "演员",
       "pinyin": "yǎn yuán",
       "french": "Acteur",
@@ -5106,8 +5249,8 @@
       }
     },
     {
-      "id": "hsk4_246",
-      "lessonId": "hsk4_u3_l31",
+      "id": "hsk4_254",
+      "lessonId": "hsk4_u3_l32",
       "hanzi": "态度",
       "pinyin": "tài du",
       "french": "Attitude / comportement",
@@ -5125,8 +5268,8 @@
       }
     },
     {
-      "id": "hsk4_247",
-      "lessonId": "hsk4_u3_l31",
+      "id": "hsk4_255",
+      "lessonId": "hsk4_u3_l32",
       "hanzi": "周围",
       "pinyin": "zhōu wéi",
       "french": "Alentours / environs",
@@ -5143,8 +5286,8 @@
       }
     },
     {
-      "id": "hsk4_248",
-      "lessonId": "hsk4_u3_l31",
+      "id": "hsk4_256",
+      "lessonId": "hsk4_u3_l32",
       "hanzi": "丢",
       "pinyin": "diū",
       "french": "Perdre / lancer",
@@ -5161,8 +5304,8 @@
       }
     },
     {
-      "id": "hsk4_249",
-      "lessonId": "hsk4_u3_l32",
+      "id": "hsk4_257",
+      "lessonId": "hsk4_u3_l33",
       "hanzi": "复杂",
       "pinyin": "fù zá",
       "french": "Complexe / compliqué",
@@ -5178,26 +5321,8 @@
       }
     },
     {
-      "id": "hsk4_250",
-      "lessonId": "hsk4_u3_l32",
-      "hanzi": "表达",
-      "pinyin": "biǎo dá",
-      "french": "Exprimer / manifester",
-      "example": {
-        "hanzi": "明天再表达吧。",
-        "pinyin": "Míng tiān zài biǎo dá ba.",
-        "french": "Remettons à demain pour : exprimer.",
-        "tokens": [
-          "明天",
-          "再",
-          "表达",
-          "吧"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_251",
-      "lessonId": "hsk4_u3_l32",
+      "id": "hsk4_258",
+      "lessonId": "hsk4_u3_l33",
       "hanzi": "数字",
       "pinyin": "shù zì",
       "french": "Chiffre / nombre",
@@ -5214,8 +5339,8 @@
       }
     },
     {
-      "id": "hsk4_252",
-      "lessonId": "hsk4_u3_l32",
+      "id": "hsk4_259",
+      "lessonId": "hsk4_u3_l33",
       "hanzi": "邀请",
       "pinyin": "yāo qǐng",
       "french": "Inviter / invitation",
@@ -5233,8 +5358,8 @@
       }
     },
     {
-      "id": "hsk4_253",
-      "lessonId": "hsk4_u3_l32",
+      "id": "hsk4_260",
+      "lessonId": "hsk4_u3_l33",
       "hanzi": "交通",
       "pinyin": "jiāo tōng",
       "french": "Circulation / communication",
@@ -5255,8 +5380,8 @@
       }
     },
     {
-      "id": "hsk4_254",
-      "lessonId": "hsk4_u3_l32",
+      "id": "hsk4_261",
+      "lessonId": "hsk4_u3_l33",
       "hanzi": "优秀",
       "pinyin": "yōu xiù",
       "french": "Remarquable / excellent",
@@ -5274,25 +5399,8 @@
       }
     },
     {
-      "id": "hsk4_255",
-      "lessonId": "hsk4_u3_l32",
-      "hanzi": "亮",
-      "pinyin": "liàng",
-      "french": "Brillant / clair",
-      "example": {
-        "hanzi": "大家需要亮。",
-        "pinyin": "Dà jiā xū yào liàng.",
-        "french": "Tout le monde doit : brillant.",
-        "tokens": [
-          "大家",
-          "需要",
-          "亮"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_256",
-      "lessonId": "hsk4_u3_l32",
+      "id": "hsk4_262",
+      "lessonId": "hsk4_u3_l33",
       "hanzi": "篇",
       "pinyin": "piān",
       "french": "Article / essai",
@@ -5309,7 +5417,7 @@
       }
     },
     {
-      "id": "hsk4_257",
+      "id": "hsk4_263",
       "lessonId": "hsk4_u3_l33",
       "hanzi": "儿童",
       "pinyin": "ér tóng",
@@ -5328,7 +5436,7 @@
       }
     },
     {
-      "id": "hsk4_258",
+      "id": "hsk4_264",
       "lessonId": "hsk4_u3_l33",
       "hanzi": "最好",
       "pinyin": "zuì hǎo",
@@ -5347,8 +5455,8 @@
       }
     },
     {
-      "id": "hsk4_259",
-      "lessonId": "hsk4_u3_l33",
+      "id": "hsk4_265",
+      "lessonId": "hsk4_u3_l34",
       "hanzi": "味道",
       "pinyin": "wèi dao",
       "french": "Gout / saveur",
@@ -5366,25 +5474,8 @@
       }
     },
     {
-      "id": "hsk4_260",
-      "lessonId": "hsk4_u3_l33",
-      "hanzi": "断",
-      "pinyin": "duàn",
-      "french": "Certainement / couper",
-      "example": {
-        "hanzi": "我们正在断。",
-        "pinyin": "Wǒ men zhèng zài duàn.",
-        "french": "Nous sommes en train de certainement.",
-        "tokens": [
-          "我们",
-          "正在",
-          "断"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_261",
-      "lessonId": "hsk4_u3_l33",
+      "id": "hsk4_266",
+      "lessonId": "hsk4_u3_l34",
       "hanzi": "千万",
       "pinyin": "qiān wàn",
       "french": "Dix millions / innombrable",
@@ -5402,8 +5493,8 @@
       }
     },
     {
-      "id": "hsk4_262",
-      "lessonId": "hsk4_u3_l33",
+      "id": "hsk4_267",
+      "lessonId": "hsk4_u3_l34",
       "hanzi": "出发",
       "pinyin": "chū fā",
       "french": "Prendre le départ / partir",
@@ -5421,8 +5512,8 @@
       }
     },
     {
-      "id": "hsk4_263",
-      "lessonId": "hsk4_u3_l33",
+      "id": "hsk4_268",
+      "lessonId": "hsk4_u3_l34",
       "hanzi": "距离",
       "pinyin": "jù lí",
       "french": "Distance",
@@ -5440,8 +5531,8 @@
       }
     },
     {
-      "id": "hsk4_264",
-      "lessonId": "hsk4_u3_l33",
+      "id": "hsk4_269",
+      "lessonId": "hsk4_u3_l34",
       "hanzi": "轻松",
       "pinyin": "qīng sōng",
       "french": "À l'aise / soulagé",
@@ -5458,26 +5549,7 @@
       }
     },
     {
-      "id": "hsk4_265",
-      "lessonId": "hsk4_u3_l34",
-      "hanzi": "墙",
-      "pinyin": "qiáng",
-      "french": "Mur",
-      "example": {
-        "hanzi": "墙上有张地图。",
-        "pinyin": "Qiáng shàng yǒu zhāng dì tú.",
-        "french": "Il y a une carte sur le mur.",
-        "tokens": [
-          "墙",
-          "上",
-          "有",
-          "张",
-          "地图"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_266",
+      "id": "hsk4_270",
       "lessonId": "hsk4_u3_l34",
       "hanzi": "毕业",
       "pinyin": "bì yè",
@@ -5496,7 +5568,7 @@
       }
     },
     {
-      "id": "hsk4_267",
+      "id": "hsk4_271",
       "lessonId": "hsk4_u3_l34",
       "hanzi": "怀疑",
       "pinyin": "huái yí",
@@ -5515,26 +5587,7 @@
       }
     },
     {
-      "id": "hsk4_268",
-      "lessonId": "hsk4_u3_l34",
-      "hanzi": "修",
-      "pinyin": "xiū",
-      "french": "Réparer / remettre en état",
-      "example": {
-        "hanzi": "我昨天修了自行车。",
-        "pinyin": "Wǒ zuó tiān xiū le zì xíng chē.",
-        "french": "J'ai réparé le vélo hier.",
-        "tokens": [
-          "我",
-          "昨天",
-          "修",
-          "了",
-          "自行车"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_269",
+      "id": "hsk4_272",
       "lessonId": "hsk4_u3_l34",
       "hanzi": "价格",
       "pinyin": "jià gé",
@@ -5552,8 +5605,8 @@
       }
     },
     {
-      "id": "hsk4_270",
-      "lessonId": "hsk4_u3_l34",
+      "id": "hsk4_273",
+      "lessonId": "hsk4_u3_l35",
       "hanzi": "戴",
       "pinyin": "dài",
       "french": "Mettre / porter",
@@ -5573,8 +5626,8 @@
       }
     },
     {
-      "id": "hsk4_271",
-      "lessonId": "hsk4_u3_l34",
+      "id": "hsk4_274",
+      "lessonId": "hsk4_u3_l35",
       "hanzi": "究竟",
       "pinyin": "jiū jìng",
       "french": "Finalement / enfin",
@@ -5591,8 +5644,8 @@
       }
     },
     {
-      "id": "hsk4_272",
-      "lessonId": "hsk4_u3_l34",
+      "id": "hsk4_275",
+      "lessonId": "hsk4_u3_l35",
       "hanzi": "轻",
       "pinyin": "qīng",
       "french": "Léger / jeune",
@@ -5608,7 +5661,7 @@
       }
     },
     {
-      "id": "hsk4_273",
+      "id": "hsk4_276",
       "lessonId": "hsk4_u3_l35",
       "hanzi": "然而",
       "pinyin": "rán ér",
@@ -5626,7 +5679,7 @@
       }
     },
     {
-      "id": "hsk4_274",
+      "id": "hsk4_277",
       "lessonId": "hsk4_u3_l35",
       "hanzi": "交流",
       "pinyin": "jiāo liú",
@@ -5644,7 +5697,7 @@
       }
     },
     {
-      "id": "hsk4_275",
+      "id": "hsk4_278",
       "lessonId": "hsk4_u3_l35",
       "hanzi": "兴奋",
       "pinyin": "xīng fèn",
@@ -5661,7 +5714,7 @@
       }
     },
     {
-      "id": "hsk4_276",
+      "id": "hsk4_279",
       "lessonId": "hsk4_u3_l35",
       "hanzi": "困",
       "pinyin": "kùn",
@@ -5678,7 +5731,7 @@
       }
     },
     {
-      "id": "hsk4_277",
+      "id": "hsk4_280",
       "lessonId": "hsk4_u3_l35",
       "hanzi": "符合",
       "pinyin": "fú hé",
@@ -5696,8 +5749,8 @@
       }
     },
     {
-      "id": "hsk4_278",
-      "lessonId": "hsk4_u3_l35",
+      "id": "hsk4_281",
+      "lessonId": "hsk4_u3_l36",
       "hanzi": "躺",
       "pinyin": "tǎng",
       "french": "Se coucher / s'allonger",
@@ -5714,8 +5767,8 @@
       }
     },
     {
-      "id": "hsk4_279",
-      "lessonId": "hsk4_u3_l35",
+      "id": "hsk4_282",
+      "lessonId": "hsk4_u3_l36",
       "hanzi": "答案",
       "pinyin": "dá àn",
       "french": "Solution / réponse",
@@ -5733,8 +5786,28 @@
       }
     },
     {
-      "id": "hsk4_280",
-      "lessonId": "hsk4_u3_l35",
+      "id": "hsk4_283",
+      "lessonId": "hsk4_u3_l36",
+      "hanzi": "地点",
+      "pinyin": "dì diǎn",
+      "french": "Lieu / endroit",
+      "example": {
+        "hanzi": "这里需要新的地点。",
+        "pinyin": "Zhè lǐ xū yào xīn de dì diǎn.",
+        "french": "Il faut un nouvel élément ici : lieu.",
+        "tokens": [
+          "这",
+          "里",
+          "需要",
+          "新",
+          "的",
+          "地点"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_284",
+      "lessonId": "hsk4_u3_l36",
       "hanzi": "皮肤",
       "pinyin": "pí fū",
       "french": "Peau",
@@ -5751,7 +5824,7 @@
       }
     },
     {
-      "id": "hsk4_281",
+      "id": "hsk4_285",
       "lessonId": "hsk4_u3_l36",
       "hanzi": "浪费",
       "pinyin": "làng fèi",
@@ -5770,7 +5843,7 @@
       }
     },
     {
-      "id": "hsk4_282",
+      "id": "hsk4_286",
       "lessonId": "hsk4_u3_l36",
       "hanzi": "厉害",
       "pinyin": "lì hai",
@@ -5789,7 +5862,7 @@
       }
     },
     {
-      "id": "hsk4_283",
+      "id": "hsk4_287",
       "lessonId": "hsk4_u3_l36",
       "hanzi": "尊重",
       "pinyin": "zūn zhòng",
@@ -5807,7 +5880,7 @@
       }
     },
     {
-      "id": "hsk4_284",
+      "id": "hsk4_288",
       "lessonId": "hsk4_u3_l36",
       "hanzi": "激动",
       "pinyin": "jī dòng",
@@ -5825,8 +5898,8 @@
       }
     },
     {
-      "id": "hsk4_285",
-      "lessonId": "hsk4_u3_l36",
+      "id": "hsk4_289",
+      "lessonId": "hsk4_u3_l37",
       "hanzi": "骗",
       "pinyin": "piàn",
       "french": "Tromper / duper",
@@ -5843,8 +5916,8 @@
       }
     },
     {
-      "id": "hsk4_286",
-      "lessonId": "hsk4_u3_l36",
+      "id": "hsk4_290",
+      "lessonId": "hsk4_u3_l37",
       "hanzi": "可怜",
       "pinyin": "kě lián",
       "french": "Avoir pitié de / pitoyable",
@@ -5864,8 +5937,8 @@
       }
     },
     {
-      "id": "hsk4_287",
-      "lessonId": "hsk4_u3_l36",
+      "id": "hsk4_291",
+      "lessonId": "hsk4_u3_l37",
       "hanzi": "语言",
       "pinyin": "yǔ yán",
       "french": "Langage humain / langage",
@@ -5882,8 +5955,8 @@
       }
     },
     {
-      "id": "hsk4_288",
-      "lessonId": "hsk4_u3_l36",
+      "id": "hsk4_292",
+      "lessonId": "hsk4_u3_l37",
       "hanzi": "擦",
       "pinyin": "cā",
       "french": "Enduire / poudrer",
@@ -5903,7 +5976,7 @@
       }
     },
     {
-      "id": "hsk4_289",
+      "id": "hsk4_293",
       "lessonId": "hsk4_u3_l37",
       "hanzi": "香",
       "pinyin": "xiāng",
@@ -5921,26 +5994,7 @@
       }
     },
     {
-      "id": "hsk4_290",
-      "lessonId": "hsk4_u3_l37",
-      "hanzi": "成熟",
-      "pinyin": "chéng shú",
-      "french": "Mûr / mûrir",
-      "example": {
-        "hanzi": "这件事情非常成熟。",
-        "pinyin": "Zhè jiàn shì qing fēi cháng chéng shú.",
-        "french": "Cette affaire est particulièrement : mûr.",
-        "tokens": [
-          "这",
-          "件",
-          "事情",
-          "非常",
-          "成熟"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_291",
+      "id": "hsk4_294",
       "lessonId": "hsk4_u3_l37",
       "hanzi": "无聊",
       "pinyin": "wú liáo",
@@ -5958,7 +6012,7 @@
       }
     },
     {
-      "id": "hsk4_292",
+      "id": "hsk4_295",
       "lessonId": "hsk4_u3_l37",
       "hanzi": "文章",
       "pinyin": "wén zhāng",
@@ -5977,27 +6031,7 @@
       }
     },
     {
-      "id": "hsk4_293",
-      "lessonId": "hsk4_u3_l37",
-      "hanzi": "信任",
-      "pinyin": "xìn rèn",
-      "french": "Faire confiance à / se fier à",
-      "example": {
-        "hanzi": "他非常信任这个医生。",
-        "pinyin": "Tā fēi cháng xìn rèn zhè gè yī shēng.",
-        "french": "Il a une grande confiance en ce médecin.",
-        "tokens": [
-          "他",
-          "非常",
-          "信任",
-          "这",
-          "个",
-          "医生"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_294",
+      "id": "hsk4_296",
       "lessonId": "hsk4_u3_l37",
       "hanzi": "网站",
       "pinyin": "wǎng zhàn",
@@ -6017,8 +6051,8 @@
       }
     },
     {
-      "id": "hsk4_295",
-      "lessonId": "hsk4_u3_l37",
+      "id": "hsk4_297",
+      "lessonId": "hsk4_u3_l38",
       "hanzi": "地球",
       "pinyin": "dì qiú",
       "french": "Terre / planète",
@@ -6035,8 +6069,8 @@
       }
     },
     {
-      "id": "hsk4_296",
-      "lessonId": "hsk4_u3_l37",
+      "id": "hsk4_298",
+      "lessonId": "hsk4_u3_l38",
       "hanzi": "实际",
       "pinyin": "shí jì",
       "french": "Réel / réalité",
@@ -6054,7 +6088,7 @@
       }
     },
     {
-      "id": "hsk4_297",
+      "id": "hsk4_299",
       "lessonId": "hsk4_u3_l38",
       "hanzi": "年龄",
       "pinyin": "nián líng",
@@ -6073,7 +6107,26 @@
       }
     },
     {
-      "id": "hsk4_298",
+      "id": "hsk4_300",
+      "lessonId": "hsk4_u3_l38",
+      "hanzi": "现金",
+      "pinyin": "xiàn jīn",
+      "french": "Argent comptant / argent liquide",
+      "example": {
+        "hanzi": "这个现金非常好。",
+        "pinyin": "Zhè gè xiàn jīn fēi cháng hǎo.",
+        "french": "Ce/cette argent comptant est extrêmement bien.",
+        "tokens": [
+          "这",
+          "个",
+          "现金",
+          "非常",
+          "好"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_301",
       "lessonId": "hsk4_u3_l38",
       "hanzi": "可惜",
       "pinyin": "kě xī",
@@ -6090,7 +6143,25 @@
       }
     },
     {
-      "id": "hsk4_299",
+      "id": "hsk4_302",
+      "lessonId": "hsk4_u3_l38",
+      "hanzi": "糖",
+      "pinyin": "táng",
+      "french": "Sucre / friandise",
+      "example": {
+        "hanzi": "你用多少糖？",
+        "pinyin": "Nǐ yòng duō shao táng?",
+        "french": "Quelle quantité de sucre utilises-tu ?",
+        "tokens": [
+          "你",
+          "用",
+          "多少",
+          "糖"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_303",
       "lessonId": "hsk4_u3_l38",
       "hanzi": "阳光",
       "pinyin": "yáng guāng",
@@ -6109,7 +6180,7 @@
       }
     },
     {
-      "id": "hsk4_300",
+      "id": "hsk4_304",
       "lessonId": "hsk4_u3_l38",
       "hanzi": "回忆",
       "pinyin": "huí yì",
@@ -6127,8 +6198,8 @@
       }
     },
     {
-      "id": "hsk4_301",
-      "lessonId": "hsk4_u3_l38",
+      "id": "hsk4_305",
+      "lessonId": "hsk4_u3_l39",
       "hanzi": "空气",
       "pinyin": "kōng qì",
       "french": "Air / atmosphère",
@@ -6148,8 +6219,8 @@
       }
     },
     {
-      "id": "hsk4_302",
-      "lessonId": "hsk4_u3_l38",
+      "id": "hsk4_306",
+      "lessonId": "hsk4_u3_l39",
       "hanzi": "材料",
       "pinyin": "cái liào",
       "french": "Matériau / document",
@@ -6167,8 +6238,8 @@
       }
     },
     {
-      "id": "hsk4_303",
-      "lessonId": "hsk4_u3_l38",
+      "id": "hsk4_307",
+      "lessonId": "hsk4_u3_l39",
       "hanzi": "熟悉",
       "pinyin": "shú xī",
       "french": "Bien connaitre / bien savoir",
@@ -6185,8 +6256,8 @@
       }
     },
     {
-      "id": "hsk4_304",
-      "lessonId": "hsk4_u3_l38",
+      "id": "hsk4_308",
+      "lessonId": "hsk4_u3_l39",
       "hanzi": "随便",
       "pinyin": "suí biàn",
       "french": "N'importe (quel, qui, quoi, où, quand) / à sa guise",
@@ -6203,25 +6274,7 @@
       }
     },
     {
-      "id": "hsk4_305",
-      "lessonId": "hsk4_u3_l39",
-      "hanzi": "撞",
-      "pinyin": "zhuàng",
-      "french": "Heurter / cogner",
-      "example": {
-        "hanzi": "朋友也会撞。",
-        "pinyin": "Péng you yě huì zhuàng.",
-        "french": "Mon ami sait aussi : heurter.",
-        "tokens": [
-          "朋友",
-          "也",
-          "会",
-          "撞"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_306",
+      "id": "hsk4_309",
       "lessonId": "hsk4_u3_l39",
       "hanzi": "互相",
       "pinyin": "hù xiāng",
@@ -6239,7 +6292,7 @@
       }
     },
     {
-      "id": "hsk4_307",
+      "id": "hsk4_310",
       "lessonId": "hsk4_u3_l39",
       "hanzi": "合适",
       "pinyin": "hé shì",
@@ -6260,7 +6313,7 @@
       }
     },
     {
-      "id": "hsk4_308",
+      "id": "hsk4_311",
       "lessonId": "hsk4_u3_l39",
       "hanzi": "失望",
       "pinyin": "shī wàng",
@@ -6279,7 +6332,7 @@
       }
     },
     {
-      "id": "hsk4_309",
+      "id": "hsk4_312",
       "lessonId": "hsk4_u3_l39",
       "hanzi": "印象",
       "pinyin": "yìn xiàng",
@@ -6301,8 +6354,8 @@
       }
     },
     {
-      "id": "hsk4_310",
-      "lessonId": "hsk4_u3_l39",
+      "id": "hsk4_313",
+      "lessonId": "hsk4_u4_l40",
       "hanzi": "号码",
       "pinyin": "hào mǎ",
       "french": "Numéro",
@@ -6321,8 +6374,26 @@
       }
     },
     {
-      "id": "hsk4_311",
-      "lessonId": "hsk4_u3_l39",
+      "id": "hsk4_314",
+      "lessonId": "hsk4_u4_l40",
+      "hanzi": "相同",
+      "pinyin": "xiāng tóng",
+      "french": "Identique / égal",
+      "example": {
+        "hanzi": "中国菜很相同。",
+        "pinyin": "Zhōng guó cài hěn xiāng tóng.",
+        "french": "La cuisine chinoise est très : identique.",
+        "tokens": [
+          "中国",
+          "菜",
+          "很",
+          "相同"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_315",
+      "lessonId": "hsk4_u4_l40",
       "hanzi": "出生",
       "pinyin": "chū shēng",
       "french": "Naitre / être né",
@@ -6341,8 +6412,65 @@
       }
     },
     {
-      "id": "hsk4_312",
-      "lessonId": "hsk4_u3_l39",
+      "id": "hsk4_316",
+      "lessonId": "hsk4_u4_l40",
+      "hanzi": "生意",
+      "pinyin": "shēng yì",
+      "french": "Force de vie / vitalité",
+      "example": {
+        "hanzi": "他开始了新的生意。",
+        "pinyin": "Tā kāi shǐ le xīn de shēng yì.",
+        "french": "Il a démarré un nouveau business.",
+        "tokens": [
+          "他",
+          "开始",
+          "了",
+          "新",
+          "的",
+          "生意"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_317",
+      "lessonId": "hsk4_u4_l40",
+      "hanzi": "赶",
+      "pinyin": "gǎn",
+      "french": "Rattraper / se presser",
+      "example": {
+        "hanzi": "大家一起赶吧！",
+        "pinyin": "Dà jiā yī qǐ gǎn ba!",
+        "french": "Allons rattraper tous ensemble !",
+        "tokens": [
+          "大家",
+          "一起",
+          "赶",
+          "吧"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_318",
+      "lessonId": "hsk4_u4_l40",
+      "hanzi": "存",
+      "pinyin": "cún",
+      "french": "Exister / subsister",
+      "example": {
+        "hanzi": "我内存不够。",
+        "pinyin": "Wǒ nèi cún bù gòu.",
+        "french": "Je n'ai pas assez de mémoire vive.",
+        "tokens": [
+          "我",
+          "内",
+          "存",
+          "不",
+          "够"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_319",
+      "lessonId": "hsk4_u4_l40",
       "hanzi": "桥",
       "pinyin": "qiáo",
       "french": "Pont",
@@ -6361,7 +6489,7 @@
       }
     },
     {
-      "id": "hsk4_313",
+      "id": "hsk4_320",
       "lessonId": "hsk4_u4_l40",
       "hanzi": "基础",
       "pinyin": "jī chǔ",
@@ -6381,8 +6509,8 @@
       }
     },
     {
-      "id": "hsk4_314",
-      "lessonId": "hsk4_u4_l40",
+      "id": "hsk4_321",
+      "lessonId": "hsk4_u4_l41",
       "hanzi": "适应",
       "pinyin": "shì yìng",
       "french": "S'adapter à / s'habituer à",
@@ -6401,8 +6529,8 @@
       }
     },
     {
-      "id": "hsk4_315",
-      "lessonId": "hsk4_u4_l40",
+      "id": "hsk4_322",
+      "lessonId": "hsk4_u4_l41",
       "hanzi": "赚",
       "pinyin": "zhuàn",
       "french": "Gagner de l'argent / bénéfice",
@@ -6421,8 +6549,8 @@
       }
     },
     {
-      "id": "hsk4_316",
-      "lessonId": "hsk4_u4_l40",
+      "id": "hsk4_323",
+      "lessonId": "hsk4_u4_l41",
       "hanzi": "猜",
       "pinyin": "cāi",
       "french": "Deviner / supposer",
@@ -6443,8 +6571,8 @@
       }
     },
     {
-      "id": "hsk4_317",
-      "lessonId": "hsk4_u4_l40",
+      "id": "hsk4_324",
+      "lessonId": "hsk4_u4_l41",
       "hanzi": "到处",
       "pinyin": "dào chù",
       "french": "Partout / n'importe où",
@@ -6463,27 +6591,8 @@
       }
     },
     {
-      "id": "hsk4_318",
-      "lessonId": "hsk4_u4_l40",
-      "hanzi": "食品",
-      "pinyin": "shí pǐn",
-      "french": "Aliment / denrée",
-      "example": {
-        "hanzi": "这个食品很重要。",
-        "pinyin": "Zhè gè shí pǐn hěn zhòng yào.",
-        "french": "Ce terme « aliment » est très important.",
-        "tokens": [
-          "这",
-          "个",
-          "食品",
-          "很",
-          "重要"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_319",
-      "lessonId": "hsk4_u4_l40",
+      "id": "hsk4_325",
+      "lessonId": "hsk4_u4_l41",
       "hanzi": "大约",
       "pinyin": "dà yuē",
       "french": "Approximativement / environ",
@@ -6500,8 +6609,8 @@
       }
     },
     {
-      "id": "hsk4_320",
-      "lessonId": "hsk4_u4_l40",
+      "id": "hsk4_326",
+      "lessonId": "hsk4_u4_l41",
       "hanzi": "提前",
       "pinyin": "tí qián",
       "french": "À l'avance / avancer",
@@ -6521,7 +6630,7 @@
       }
     },
     {
-      "id": "hsk4_321",
+      "id": "hsk4_327",
       "lessonId": "hsk4_u4_l41",
       "hanzi": "暂时",
       "pinyin": "zàn shí",
@@ -6539,7 +6648,7 @@
       }
     },
     {
-      "id": "hsk4_322",
+      "id": "hsk4_328",
       "lessonId": "hsk4_u4_l41",
       "hanzi": "积极",
       "pinyin": "jī jí",
@@ -6557,27 +6666,8 @@
       }
     },
     {
-      "id": "hsk4_323",
-      "lessonId": "hsk4_u4_l41",
-      "hanzi": "高级",
-      "pinyin": "gāo jí",
-      "french": "Supérieur / haut",
-      "example": {
-        "hanzi": "今天的情况很高级。",
-        "pinyin": "Jīn tiān de qíng kuàng hěn gāo jí.",
-        "french": "La situation d'aujourd'hui est très : supérieur.",
-        "tokens": [
-          "今天",
-          "的",
-          "情况",
-          "很",
-          "高级"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_324",
-      "lessonId": "hsk4_u4_l41",
+      "id": "hsk4_329",
+      "lessonId": "hsk4_u4_l42",
       "hanzi": "响",
       "pinyin": "xiǎng",
       "french": "Sonner / retentir",
@@ -6594,14 +6684,14 @@
       }
     },
     {
-      "id": "hsk4_325",
-      "lessonId": "hsk4_u4_l41",
+      "id": "hsk4_330",
+      "lessonId": "hsk4_u4_l42",
       "hanzi": "汤",
       "pinyin": "tāng",
       "french": "Bouillon / eau chaude",
       "example": {
         "hanzi": "我喝汤。",
-        "pinyin": "Wǒ hè tāng.",
+        "pinyin": "Wǒ hē tāng.",
         "french": "Je mange de la soupe.",
         "tokens": [
           "我",
@@ -6611,8 +6701,8 @@
       }
     },
     {
-      "id": "hsk4_326",
-      "lessonId": "hsk4_u4_l41",
+      "id": "hsk4_331",
+      "lessonId": "hsk4_u4_l42",
       "hanzi": "收入",
       "pinyin": "shōu rù",
       "french": "Revenus / chiffre d'affaires",
@@ -6633,8 +6723,8 @@
       }
     },
     {
-      "id": "hsk4_327",
-      "lessonId": "hsk4_u4_l41",
+      "id": "hsk4_332",
+      "lessonId": "hsk4_u4_l42",
       "hanzi": "恐怕",
       "pinyin": "kǒng pà",
       "french": "Peut-être / craindre",
@@ -6653,8 +6743,8 @@
       }
     },
     {
-      "id": "hsk4_328",
-      "lessonId": "hsk4_u4_l41",
+      "id": "hsk4_333",
+      "lessonId": "hsk4_u4_l42",
       "hanzi": "仔细",
       "pinyin": "zǐ xì",
       "french": "Soigneux / méticuleux",
@@ -6672,7 +6762,7 @@
       }
     },
     {
-      "id": "hsk4_329",
+      "id": "hsk4_334",
       "lessonId": "hsk4_u4_l42",
       "hanzi": "严格",
       "pinyin": "yán gé",
@@ -6693,7 +6783,7 @@
       }
     },
     {
-      "id": "hsk4_330",
+      "id": "hsk4_335",
       "lessonId": "hsk4_u4_l42",
       "hanzi": "及时",
       "pinyin": "jí shí",
@@ -6712,7 +6802,7 @@
       }
     },
     {
-      "id": "hsk4_331",
+      "id": "hsk4_336",
       "lessonId": "hsk4_u4_l42",
       "hanzi": "知识",
       "pinyin": "zhī shi",
@@ -6731,8 +6821,8 @@
       }
     },
     {
-      "id": "hsk4_332",
-      "lessonId": "hsk4_u4_l42",
+      "id": "hsk4_337",
+      "lessonId": "hsk4_u4_l43",
       "hanzi": "专门",
       "pinyin": "zhuān mén",
       "french": "Spécial / spécialisé",
@@ -6750,31 +6840,8 @@
       }
     },
     {
-      "id": "hsk4_333",
-      "lessonId": "hsk4_u4_l42",
-      "hanzi": "工具",
-      "pinyin": "gōng jù",
-      "french": "Outil",
-      "example": {
-        "hanzi": "自行车是保护城市环境的一种工具。",
-        "pinyin": "Zì xíng chē shì bǎo hù chéng shì huán jìng de yī zhǒng gōng jù.",
-        "french": "Les bicyclettes sont un outil pour la préservation de l'environnement urbain.",
-        "tokens": [
-          "自行车",
-          "是",
-          "保护",
-          "城市",
-          "环境",
-          "的",
-          "一",
-          "种",
-          "工具"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_334",
-      "lessonId": "hsk4_u4_l42",
+      "id": "hsk4_338",
+      "lessonId": "hsk4_u4_l43",
       "hanzi": "脱",
       "pinyin": "tuō",
       "french": "Enlever / ôter",
@@ -6792,8 +6859,44 @@
       }
     },
     {
-      "id": "hsk4_335",
-      "lessonId": "hsk4_u4_l42",
+      "id": "hsk4_339",
+      "lessonId": "hsk4_u4_l43",
+      "hanzi": "举",
+      "pinyin": "jǔ",
+      "french": "Lever / soulever",
+      "example": {
+        "hanzi": "朋友也会举。",
+        "pinyin": "Péng you yě huì jǔ.",
+        "french": "Mon ami sait aussi : lever.",
+        "tokens": [
+          "朋友",
+          "也",
+          "会",
+          "举"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_340",
+      "lessonId": "hsk4_u4_l43",
+      "hanzi": "放松",
+      "pinyin": "fàng sōng",
+      "french": "Relâcher / détendre",
+      "example": {
+        "hanzi": "大家一起放松吧！",
+        "pinyin": "Dà jiā yī qǐ fàng sōng ba!",
+        "french": "Allons relâcher tous ensemble !",
+        "tokens": [
+          "大家",
+          "一起",
+          "放松",
+          "吧"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_341",
+      "lessonId": "hsk4_u4_l43",
       "hanzi": "苦",
       "pinyin": "kǔ",
       "french": "Amer / pénible",
@@ -6811,8 +6914,8 @@
       }
     },
     {
-      "id": "hsk4_336",
-      "lessonId": "hsk4_u4_l42",
+      "id": "hsk4_342",
+      "lessonId": "hsk4_u4_l43",
       "hanzi": "租",
       "pinyin": "zū",
       "french": "Louer (qch) / loyer",
@@ -6833,7 +6936,26 @@
       }
     },
     {
-      "id": "hsk4_337",
+      "id": "hsk4_343",
+      "lessonId": "hsk4_u4_l43",
+      "hanzi": "旅行",
+      "pinyin": "lǚ xíng",
+      "french": "Faire du tourisme / voyager",
+      "example": {
+        "hanzi": "他讨厌坐飞机旅行。",
+        "pinyin": "Tā tǎo yàn zuò fēi jī lǚ xíng.",
+        "french": "Il déteste les voyages en avion.",
+        "tokens": [
+          "他",
+          "讨厌",
+          "坐",
+          "飞机",
+          "旅行"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_344",
       "lessonId": "hsk4_u4_l43",
       "hanzi": "尤其",
       "pinyin": "yóu qí",
@@ -6852,8 +6974,8 @@
       }
     },
     {
-      "id": "hsk4_338",
-      "lessonId": "hsk4_u4_l43",
+      "id": "hsk4_345",
+      "lessonId": "hsk4_u4_l44",
       "hanzi": "页",
       "pinyin": "yè",
       "french": "Page / feuille",
@@ -6871,8 +6993,8 @@
       }
     },
     {
-      "id": "hsk4_339",
-      "lessonId": "hsk4_u4_l43",
+      "id": "hsk4_346",
+      "lessonId": "hsk4_u4_l44",
       "hanzi": "扔",
       "pinyin": "rēng",
       "french": "Lancer / jeter",
@@ -6888,8 +7010,8 @@
       }
     },
     {
-      "id": "hsk4_340",
-      "lessonId": "hsk4_u4_l43",
+      "id": "hsk4_347",
+      "lessonId": "hsk4_u4_l44",
       "hanzi": "信心",
       "pinyin": "xìn xīn",
       "french": "Confiance en soi",
@@ -6906,8 +7028,8 @@
       }
     },
     {
-      "id": "hsk4_341",
-      "lessonId": "hsk4_u4_l43",
+      "id": "hsk4_348",
+      "lessonId": "hsk4_u4_l44",
       "hanzi": "博士",
       "pinyin": "bó shì",
       "french": "Docteur / doctorat",
@@ -6924,8 +7046,8 @@
       }
     },
     {
-      "id": "hsk4_342",
-      "lessonId": "hsk4_u4_l43",
+      "id": "hsk4_349",
+      "lessonId": "hsk4_u4_l44",
       "hanzi": "故意",
       "pinyin": "gù yì",
       "french": "Exprès / volontairement",
@@ -6943,8 +7065,8 @@
       }
     },
     {
-      "id": "hsk4_343",
-      "lessonId": "hsk4_u4_l43",
+      "id": "hsk4_350",
+      "lessonId": "hsk4_u4_l44",
       "hanzi": "看法",
       "pinyin": "kàn fǎ",
       "french": "Vue / opinion",
@@ -6961,8 +7083,8 @@
       }
     },
     {
-      "id": "hsk4_344",
-      "lessonId": "hsk4_u4_l43",
+      "id": "hsk4_351",
+      "lessonId": "hsk4_u4_l44",
       "hanzi": "浪漫",
       "pinyin": "làng màn",
       "french": "Romantique",
@@ -6978,7 +7100,7 @@
       }
     },
     {
-      "id": "hsk4_345",
+      "id": "hsk4_352",
       "lessonId": "hsk4_u4_l44",
       "hanzi": "减少",
       "pinyin": "jiǎn shǎo",
@@ -6996,8 +7118,8 @@
       }
     },
     {
-      "id": "hsk4_346",
-      "lessonId": "hsk4_u4_l44",
+      "id": "hsk4_353",
+      "lessonId": "hsk4_u4_l45",
       "hanzi": "辛苦",
       "pinyin": "xīn kǔ",
       "french": "Pénible / dur",
@@ -7013,8 +7135,8 @@
       }
     },
     {
-      "id": "hsk4_347",
-      "lessonId": "hsk4_u4_l44",
+      "id": "hsk4_354",
+      "lessonId": "hsk4_u4_l45",
       "hanzi": "剩",
       "pinyin": "shèng",
       "french": "Surplus / excédent",
@@ -7030,8 +7152,8 @@
       }
     },
     {
-      "id": "hsk4_348",
-      "lessonId": "hsk4_u4_l44",
+      "id": "hsk4_355",
+      "lessonId": "hsk4_u4_l45",
       "hanzi": "正好",
       "pinyin": "zhèng hǎo",
       "french": "Juste / précisément",
@@ -7048,64 +7170,8 @@
       }
     },
     {
-      "id": "hsk4_349",
-      "lessonId": "hsk4_u4_l44",
-      "hanzi": "主动",
-      "pinyin": "zhǔ dòng",
-      "french": "Prendre l'initiative / spontané",
-      "example": {
-        "hanzi": "这个地方非常主动。",
-        "pinyin": "Zhè gè dì fang fēi cháng zhǔ dòng.",
-        "french": "Cet endroit est particulièrement : prendre l'initiative.",
-        "tokens": [
-          "这",
-          "个",
-          "地方",
-          "非常",
-          "主动"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_350",
-      "lessonId": "hsk4_u4_l44",
-      "hanzi": "硬",
-      "pinyin": "yìng",
-      "french": "Dur / ferme",
-      "example": {
-        "hanzi": "这个地方非常硬。",
-        "pinyin": "Zhè gè dì fang fēi cháng yìng.",
-        "french": "Cet endroit est particulièrement : dur.",
-        "tokens": [
-          "这",
-          "个",
-          "地方",
-          "非常",
-          "硬"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_351",
-      "lessonId": "hsk4_u4_l44",
-      "hanzi": "限制",
-      "pinyin": "xiàn zhì",
-      "french": "Limiter / restreindre",
-      "example": {
-        "hanzi": "请你多限制。",
-        "pinyin": "Qǐng nǐ duō xiàn zhì.",
-        "french": "Veuillez souvent : limiter.",
-        "tokens": [
-          "请",
-          "你",
-          "多",
-          "限制"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_352",
-      "lessonId": "hsk4_u4_l44",
+      "id": "hsk4_356",
+      "lessonId": "hsk4_u4_l45",
       "hanzi": "判断",
       "pinyin": "pàn duàn",
       "french": "Juger / décider",
@@ -7123,45 +7189,7 @@
       }
     },
     {
-      "id": "hsk4_353",
-      "lessonId": "hsk4_u4_l45",
-      "hanzi": "现代",
-      "pinyin": "xiàn dài",
-      "french": "Moderne / Contemporain",
-      "example": {
-        "hanzi": "老师正在介绍现代。",
-        "pinyin": "Lǎo shī zhèng zài jiè shào xiàn dài.",
-        "french": "Le professeur présente : contemporain.",
-        "tokens": [
-          "老师",
-          "正在",
-          "介绍",
-          "现代"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_354",
-      "lessonId": "hsk4_u4_l45",
-      "hanzi": "弹",
-      "pinyin": "tán",
-      "french": "Jouer d'un instrument / Pincer",
-      "example": {
-        "hanzi": "他弹得多好啊！",
-        "pinyin": "Tā tán de duō hǎo a!",
-        "french": "Comme il a bien joué !",
-        "tokens": [
-          "他",
-          "弹",
-          "得",
-          "多",
-          "好",
-          "啊"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_355",
+      "id": "hsk4_357",
       "lessonId": "hsk4_u4_l45",
       "hanzi": "有趣",
       "pinyin": "yǒu qù",
@@ -7178,7 +7206,7 @@
       }
     },
     {
-      "id": "hsk4_356",
+      "id": "hsk4_358",
       "lessonId": "hsk4_u4_l45",
       "hanzi": "公里",
       "pinyin": "gōng lǐ",
@@ -7197,7 +7225,7 @@
       }
     },
     {
-      "id": "hsk4_357",
+      "id": "hsk4_359",
       "lessonId": "hsk4_u4_l45",
       "hanzi": "工资",
       "pinyin": "gōng zī",
@@ -7216,7 +7244,7 @@
       }
     },
     {
-      "id": "hsk4_358",
+      "id": "hsk4_360",
       "lessonId": "hsk4_u4_l45",
       "hanzi": "好处",
       "pinyin": "hǎo chu",
@@ -7234,8 +7262,8 @@
       }
     },
     {
-      "id": "hsk4_359",
-      "lessonId": "hsk4_u4_l45",
+      "id": "hsk4_361",
+      "lessonId": "hsk4_u4_l46",
       "hanzi": "伤心",
       "pinyin": "shāng xīn",
       "french": "Avoir le cœur brisé",
@@ -7255,8 +7283,8 @@
       }
     },
     {
-      "id": "hsk4_360",
-      "lessonId": "hsk4_u4_l45",
+      "id": "hsk4_362",
+      "lessonId": "hsk4_u4_l46",
       "hanzi": "区别",
       "pinyin": "qū bié",
       "french": "Différence / distinguer",
@@ -7266,34 +7294,14 @@
         "french": "Ça ne fera aucune différence.",
         "tokens": [
           "这",
-          "没",
-          "有",
+          "没有",
           "任何",
           "区别"
         ]
       }
     },
     {
-      "id": "hsk4_361",
-      "lessonId": "hsk4_u4_l46",
-      "hanzi": "暗",
-      "pinyin": "àn",
-      "french": "Obscur / sombre",
-      "example": {
-        "hanzi": "今天的情况很暗。",
-        "pinyin": "Jīn tiān de qíng kuàng hěn àn.",
-        "french": "La situation d'aujourd'hui est très : obscur.",
-        "tokens": [
-          "今天",
-          "的",
-          "情况",
-          "很",
-          "暗"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_362",
+      "id": "hsk4_363",
       "lessonId": "hsk4_u4_l46",
       "hanzi": "将来",
       "pinyin": "jiāng lái",
@@ -7312,27 +7320,27 @@
       }
     },
     {
-      "id": "hsk4_363",
+      "id": "hsk4_364",
       "lessonId": "hsk4_u4_l46",
-      "hanzi": "聊天",
-      "pinyin": "liáo tiān",
-      "french": "Causer / bavarder",
+      "hanzi": "自信",
+      "pinyin": "zì xìn",
+      "french": "Avoir confiance en soi",
       "example": {
-        "hanzi": "我没有朋友可以聊天。",
-        "pinyin": "Wǒ méi yǒu péng you kě yǐ liáo tiān.",
-        "french": "Je n'ai pas d'amis à qui parler.",
+        "hanzi": "他对自己很有自信。",
+        "pinyin": "Tā duì zì jǐ hěn yǒu zì xìn.",
+        "french": "Il a beaucoup de confiance en lui-même.",
         "tokens": [
-          "我",
-          "没",
+          "他",
+          "对",
+          "自己",
+          "很",
           "有",
-          "朋友",
-          "可以",
-          "聊天"
+          "自信"
         ]
       }
     },
     {
-      "id": "hsk4_364",
+      "id": "hsk4_365",
       "lessonId": "hsk4_u4_l46",
       "hanzi": "小说",
       "pinyin": "xiǎo shuō",
@@ -7352,7 +7360,7 @@
       }
     },
     {
-      "id": "hsk4_365",
+      "id": "hsk4_366",
       "lessonId": "hsk4_u4_l46",
       "hanzi": "鼓励",
       "pinyin": "gǔ lì",
@@ -7372,7 +7380,7 @@
       }
     },
     {
-      "id": "hsk4_366",
+      "id": "hsk4_367",
       "lessonId": "hsk4_u4_l46",
       "hanzi": "理想",
       "pinyin": "lǐ xiǎng",
@@ -7391,7 +7399,7 @@
       }
     },
     {
-      "id": "hsk4_367",
+      "id": "hsk4_368",
       "lessonId": "hsk4_u4_l46",
       "hanzi": "后悔",
       "pinyin": "hòu huǐ",
@@ -7410,8 +7418,8 @@
       }
     },
     {
-      "id": "hsk4_368",
-      "lessonId": "hsk4_u4_l46",
+      "id": "hsk4_369",
+      "lessonId": "hsk4_u4_l47",
       "hanzi": "举办",
       "pinyin": "jǔ bàn",
       "french": "Organiser",
@@ -7429,7 +7437,7 @@
       }
     },
     {
-      "id": "hsk4_369",
+      "id": "hsk4_370",
       "lessonId": "hsk4_u4_l47",
       "hanzi": "感动",
       "pinyin": "gǎn dòng",
@@ -7449,7 +7457,7 @@
       }
     },
     {
-      "id": "hsk4_370",
+      "id": "hsk4_371",
       "lessonId": "hsk4_u4_l47",
       "hanzi": "顾客",
       "pinyin": "gù kè",
@@ -7463,23 +7471,6 @@
           "顾客",
           "比较",
           "少"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_371",
-      "lessonId": "hsk4_u4_l47",
-      "hanzi": "组成",
-      "pinyin": "zǔ chéng",
-      "french": "Former / composer",
-      "example": {
-        "hanzi": "我们正在组成。",
-        "pinyin": "Wǒ men zhèng zài zǔ chéng.",
-        "french": "Nous sommes en train de former.",
-        "tokens": [
-          "我们",
-          "正在",
-          "组成"
         ]
       }
     },
@@ -7522,26 +7513,6 @@
     {
       "id": "hsk4_374",
       "lessonId": "hsk4_u4_l47",
-      "hanzi": "吵",
-      "pinyin": "chǎo",
-      "french": "Faire du bruit / se disputer",
-      "example": {
-        "hanzi": "这是在吵什么呀？",
-        "pinyin": "Zhè shì zài chǎo shén me ya?",
-        "french": "Qu'est-ce que c'est que ce barouf ?",
-        "tokens": [
-          "这",
-          "是",
-          "在",
-          "吵",
-          "什么",
-          "呀"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_375",
-      "lessonId": "hsk4_u4_l47",
       "hanzi": "丰富",
       "pinyin": "fēng fù",
       "french": "Riche / abondant",
@@ -7558,7 +7529,7 @@
       }
     },
     {
-      "id": "hsk4_376",
+      "id": "hsk4_375",
       "lessonId": "hsk4_u4_l47",
       "hanzi": "原谅",
       "pinyin": "yuán liàng",
@@ -7577,8 +7548,8 @@
       }
     },
     {
-      "id": "hsk4_377",
-      "lessonId": "hsk4_u4_l48",
+      "id": "hsk4_376",
+      "lessonId": "hsk4_u4_l47",
       "hanzi": "肚子",
       "pinyin": "dù zi",
       "french": "Ventre / abdomen",
@@ -7595,7 +7566,7 @@
       }
     },
     {
-      "id": "hsk4_378",
+      "id": "hsk4_377",
       "lessonId": "hsk4_u4_l48",
       "hanzi": "平时",
       "pinyin": "píng shí",
@@ -7614,7 +7585,7 @@
       }
     },
     {
-      "id": "hsk4_379",
+      "id": "hsk4_378",
       "lessonId": "hsk4_u4_l48",
       "hanzi": "辣",
       "pinyin": "là",
@@ -7634,7 +7605,7 @@
       }
     },
     {
-      "id": "hsk4_380",
+      "id": "hsk4_379",
       "lessonId": "hsk4_u4_l48",
       "hanzi": "作者",
       "pinyin": "zuò zhě",
@@ -7657,7 +7628,7 @@
       }
     },
     {
-      "id": "hsk4_381",
+      "id": "hsk4_380",
       "lessonId": "hsk4_u4_l48",
       "hanzi": "质量",
       "pinyin": "zhì liàng",
@@ -7676,7 +7647,7 @@
       }
     },
     {
-      "id": "hsk4_382",
+      "id": "hsk4_381",
       "lessonId": "hsk4_u4_l48",
       "hanzi": "愉快",
       "pinyin": "yú kuài",
@@ -7696,7 +7667,7 @@
       }
     },
     {
-      "id": "hsk4_383",
+      "id": "hsk4_382",
       "lessonId": "hsk4_u4_l48",
       "hanzi": "寄",
       "pinyin": "jì",
@@ -7718,7 +7689,7 @@
       }
     },
     {
-      "id": "hsk4_384",
+      "id": "hsk4_383",
       "lessonId": "hsk4_u4_l48",
       "hanzi": "准确",
       "pinyin": "zhǔn què",
@@ -7737,8 +7708,8 @@
       }
     },
     {
-      "id": "hsk4_385",
-      "lessonId": "hsk4_u4_l49",
+      "id": "hsk4_384",
+      "lessonId": "hsk4_u4_l48",
       "hanzi": "详细",
       "pinyin": "xiáng xì",
       "french": "Détaillé / précis",
@@ -7757,7 +7728,7 @@
       }
     },
     {
-      "id": "hsk4_386",
+      "id": "hsk4_385",
       "lessonId": "hsk4_u4_l49",
       "hanzi": "禁止",
       "pinyin": "jìn zhǐ",
@@ -7775,24 +7746,7 @@
       }
     },
     {
-      "id": "hsk4_387",
-      "lessonId": "hsk4_u4_l49",
-      "hanzi": "圆",
-      "pinyin": "yuán",
-      "french": "Cercle / rond",
-      "example": {
-        "hanzi": "请认真圆。",
-        "pinyin": "Qǐng rèn zhēn yuán.",
-        "french": "Veuillez cercle sérieusement.",
-        "tokens": [
-          "请",
-          "认真",
-          "圆"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_388",
+      "id": "hsk4_386",
       "lessonId": "hsk4_u4_l49",
       "hanzi": "冷静",
       "pinyin": "lěng jìng",
@@ -7811,7 +7765,7 @@
       }
     },
     {
-      "id": "hsk4_389",
+      "id": "hsk4_387",
       "lessonId": "hsk4_u4_l49",
       "hanzi": "购物",
       "pinyin": "gòu wù",
@@ -7830,7 +7784,7 @@
       }
     },
     {
-      "id": "hsk4_390",
+      "id": "hsk4_388",
       "lessonId": "hsk4_u4_l49",
       "hanzi": "数量",
       "pinyin": "shù liàng",
@@ -7848,7 +7802,7 @@
       }
     },
     {
-      "id": "hsk4_391",
+      "id": "hsk4_389",
       "lessonId": "hsk4_u4_l49",
       "hanzi": "勇敢",
       "pinyin": "yǒng gǎn",
@@ -7865,7 +7819,7 @@
       }
     },
     {
-      "id": "hsk4_392",
+      "id": "hsk4_390",
       "lessonId": "hsk4_u4_l49",
       "hanzi": "富",
       "pinyin": "fù",
@@ -7884,8 +7838,8 @@
       }
     },
     {
-      "id": "hsk4_393",
-      "lessonId": "hsk4_u4_l50",
+      "id": "hsk4_391",
+      "lessonId": "hsk4_u4_l49",
       "hanzi": "骄傲",
       "pinyin": "jiāo ào",
       "french": "Fier / orgueilleux",
@@ -7903,7 +7857,28 @@
       }
     },
     {
-      "id": "hsk4_394",
+      "id": "hsk4_392",
+      "lessonId": "hsk4_u4_l49",
+      "hanzi": "作家",
+      "pinyin": "zuò jiā",
+      "french": "Écrivain / auteur",
+      "example": {
+        "hanzi": "你最喜欢的作家是谁？",
+        "pinyin": "Nǐ zuì xǐ huan de zuò jiā shì shéi?",
+        "french": "Quel est ton auteur préféré ?",
+        "tokens": [
+          "你",
+          "最",
+          "喜欢",
+          "的",
+          "作家",
+          "是",
+          "谁"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_393",
       "lessonId": "hsk4_u4_l50",
       "hanzi": "性格",
       "pinyin": "xìng gé",
@@ -7922,7 +7897,7 @@
       }
     },
     {
-      "id": "hsk4_395",
+      "id": "hsk4_394",
       "lessonId": "hsk4_u4_l50",
       "hanzi": "降低",
       "pinyin": "jiàng dī",
@@ -7940,26 +7915,24 @@
       }
     },
     {
-      "id": "hsk4_396",
+      "id": "hsk4_395",
       "lessonId": "hsk4_u4_l50",
-      "hanzi": "果然",
-      "pinyin": "guǒ rán",
-      "french": "Effectivement / comme prévu",
+      "hanzi": "厨房",
+      "pinyin": "chú fáng",
+      "french": "Cuisine (pièce)",
       "example": {
-        "hanzi": "请果然准备一下。",
-        "pinyin": "Qǐng guǒ rán zhǔn bèi yī xià.",
-        "french": "Veuillez vous préparer (effectivement).",
+        "hanzi": "她在厨房。",
+        "pinyin": "Tā zài chú fáng.",
+        "french": "Elle est dans la cuisine.",
         "tokens": [
-          "请",
-          "果然",
-          "准备",
-          "一",
-          "下"
+          "她",
+          "在",
+          "厨房"
         ]
       }
     },
     {
-      "id": "hsk4_397",
+      "id": "hsk4_396",
       "lessonId": "hsk4_u4_l50",
       "hanzi": "随着",
       "pinyin": "suí zhe",
@@ -7977,7 +7950,7 @@
       }
     },
     {
-      "id": "hsk4_398",
+      "id": "hsk4_397",
       "lessonId": "hsk4_u4_l50",
       "hanzi": "只好",
       "pinyin": "zhǐ hǎo",
@@ -7995,7 +7968,7 @@
       }
     },
     {
-      "id": "hsk4_399",
+      "id": "hsk4_398",
       "lessonId": "hsk4_u4_l50",
       "hanzi": "密码",
       "pinyin": "mì mǎ",
@@ -8010,6 +7983,25 @@
           "密码",
           "很",
           "好"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_399",
+      "lessonId": "hsk4_u4_l50",
+      "hanzi": "餐厅",
+      "pinyin": "cān tīng",
+      "french": "Salle à manger / cantine",
+      "example": {
+        "hanzi": "欢迎会在餐厅举行。",
+        "pinyin": "Huān yíng huì zài cān tīng jǔ xíng.",
+        "french": "Une fête de bienvenue a eu lieu au restaurant.",
+        "tokens": [
+          "欢迎",
+          "会",
+          "在",
+          "餐厅",
+          "举行"
         ]
       }
     },
@@ -8075,46 +8067,6 @@
     {
       "id": "hsk4_403",
       "lessonId": "hsk4_u4_l51",
-      "hanzi": "软",
-      "pinyin": "ruǎn",
-      "french": "Mou / tendre",
-      "example": {
-        "hanzi": "大家的态度很软。",
-        "pinyin": "Dà jiā de tài du hěn ruǎn.",
-        "french": "L'attitude de chacun est très : mou.",
-        "tokens": [
-          "大家",
-          "的",
-          "态度",
-          "很",
-          "软"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_404",
-      "lessonId": "hsk4_u4_l51",
-      "hanzi": "访问",
-      "pinyin": "fǎng wèn",
-      "french": "Visiter / rendre visite",
-      "example": {
-        "hanzi": "你会去访问其他国家吗？",
-        "pinyin": "Nǐ huì qù fǎng wèn qí tā guó jiā ma?",
-        "french": "Vas-tu visiter d'autres pays ?",
-        "tokens": [
-          "你",
-          "会",
-          "去",
-          "访问",
-          "其他",
-          "国家",
-          "吗"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_405",
-      "lessonId": "hsk4_u4_l51",
       "hanzi": "森林",
       "pinyin": "sēn lín",
       "french": "Forêt",
@@ -8132,7 +8084,25 @@
       }
     },
     {
-      "id": "hsk4_406",
+      "id": "hsk4_404",
+      "lessonId": "hsk4_u4_l51",
+      "hanzi": "聚会",
+      "pinyin": "jù huì",
+      "french": "Fête / réunion",
+      "example": {
+        "hanzi": "请你多聚会。",
+        "pinyin": "Qǐng nǐ duō jù huì.",
+        "french": "Veuillez souvent : fête.",
+        "tokens": [
+          "请",
+          "你",
+          "多",
+          "聚会"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_405",
       "lessonId": "hsk4_u4_l51",
       "hanzi": "友好",
       "pinyin": "yǒu hǎo",
@@ -8151,7 +8121,7 @@
       }
     },
     {
-      "id": "hsk4_407",
+      "id": "hsk4_406",
       "lessonId": "hsk4_u4_l51",
       "hanzi": "尝",
       "pinyin": "cháng",
@@ -8169,26 +8139,8 @@
       }
     },
     {
-      "id": "hsk4_408",
+      "id": "hsk4_407",
       "lessonId": "hsk4_u4_l51",
-      "hanzi": "亿",
-      "pinyin": "yì",
-      "french": "Cent millions",
-      "example": {
-        "hanzi": "我们讨论过亿。",
-        "pinyin": "Wǒ men tǎo lùn guo yì.",
-        "french": "Nous avons déjà abordé : cent millions.",
-        "tokens": [
-          "我们",
-          "讨论",
-          "过",
-          "亿"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_409",
-      "lessonId": "hsk4_u4_l52",
       "hanzi": "对话",
       "pinyin": "duì huà",
       "french": "Dialogue / dialoguer",
@@ -8205,8 +8157,8 @@
       }
     },
     {
-      "id": "hsk4_410",
-      "lessonId": "hsk4_u4_l52",
+      "id": "hsk4_408",
+      "lessonId": "hsk4_u4_l51",
       "hanzi": "收拾",
       "pinyin": "shōu shi",
       "french": "Ranger / mettre en ordre",
@@ -8222,7 +8174,7 @@
       }
     },
     {
-      "id": "hsk4_411",
+      "id": "hsk4_409",
       "lessonId": "hsk4_u4_l52",
       "hanzi": "广播",
       "pinyin": "guǎng bō",
@@ -8240,26 +8192,26 @@
       }
     },
     {
-      "id": "hsk4_412",
+      "id": "hsk4_410",
       "lessonId": "hsk4_u4_l52",
-      "hanzi": "逐渐",
-      "pinyin": "zhú jiàn",
-      "french": "Graduellement / progressivement",
+      "hanzi": "云",
+      "pinyin": "yún",
+      "french": "Nuage",
       "example": {
-        "hanzi": "她逐渐在家学习。",
-        "pinyin": "Tā zhú jiàn zài jiā xué xí.",
-        "french": "Elle étudie à la maison (graduellement).",
+        "hanzi": "我很喜欢新云。",
+        "pinyin": "Wǒ hěn xǐ huan xīn yún.",
+        "french": "J'aime beaucoup ce nouveau / cette nouvelle : nuage.",
         "tokens": [
-          "她",
-          "逐渐",
-          "在",
-          "家",
-          "学习"
+          "我",
+          "很",
+          "喜欢",
+          "新",
+          "云"
         ]
       }
     },
     {
-      "id": "hsk4_413",
+      "id": "hsk4_411",
       "lessonId": "hsk4_u4_l52",
       "hanzi": "钥匙",
       "pinyin": "yào shi",
@@ -8278,7 +8230,7 @@
       }
     },
     {
-      "id": "hsk4_414",
+      "id": "hsk4_412",
       "lessonId": "hsk4_u4_l52",
       "hanzi": "酸",
       "pinyin": "suān",
@@ -8297,7 +8249,7 @@
       }
     },
     {
-      "id": "hsk4_415",
+      "id": "hsk4_413",
       "lessonId": "hsk4_u4_l52",
       "hanzi": "污染",
       "pinyin": "wū rǎn",
@@ -8314,7 +8266,24 @@
       }
     },
     {
-      "id": "hsk4_416",
+      "id": "hsk4_414",
+      "lessonId": "hsk4_u4_l52",
+      "hanzi": "厕所",
+      "pinyin": "cè suǒ",
+      "french": "Toilettes / WC",
+      "example": {
+        "hanzi": "我在厕所。",
+        "pinyin": "Wǒ zài cè suǒ.",
+        "french": "Je suis aux toilettes.",
+        "tokens": [
+          "我",
+          "在",
+          "厕所"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_415",
       "lessonId": "hsk4_u4_l52",
       "hanzi": "温度",
       "pinyin": "wēn dù",
@@ -8333,65 +8302,8 @@
       }
     },
     {
-      "id": "hsk4_417",
-      "lessonId": "hsk4_u5_l53",
-      "hanzi": "孤单",
-      "pinyin": "gū dān",
-      "french": "Solitaire / délaissé",
-      "example": {
-        "hanzi": "您永远不会孤单的。",
-        "pinyin": "Nín yǒng yuǎn bù huì gū dān de.",
-        "french": "Vous ne serez jamais seul.",
-        "tokens": [
-          "您",
-          "永远",
-          "不",
-          "会",
-          "孤单",
-          "的"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_418",
-      "lessonId": "hsk4_u5_l53",
-      "hanzi": "饮料",
-      "pinyin": "yǐn liào",
-      "french": "Boisson / breuvage",
-      "example": {
-        "hanzi": "我们讨论过饮料。",
-        "pinyin": "Wǒ men tǎo lùn guo yǐn liào.",
-        "french": "Nous avons déjà abordé : boisson.",
-        "tokens": [
-          "我们",
-          "讨论",
-          "过",
-          "饮料"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_419",
-      "lessonId": "hsk4_u5_l53",
-      "hanzi": "宽",
-      "pinyin": "kuān",
-      "french": "Large",
-      "example": {
-        "hanzi": "大家的态度很宽。",
-        "pinyin": "Dà jiā de tài du hěn kuān.",
-        "french": "L'attitude de chacun est très : large.",
-        "tokens": [
-          "大家",
-          "的",
-          "态度",
-          "很",
-          "宽"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_420",
-      "lessonId": "hsk4_u5_l53",
+      "id": "hsk4_416",
+      "lessonId": "hsk4_u4_l52",
       "hanzi": "例如",
       "pinyin": "lì rú",
       "french": "Par exemple",
@@ -8408,7 +8320,7 @@
       }
     },
     {
-      "id": "hsk4_421",
+      "id": "hsk4_417",
       "lessonId": "hsk4_u5_l53",
       "hanzi": "祝贺",
       "pinyin": "zhù hè",
@@ -8426,7 +8338,7 @@
       }
     },
     {
-      "id": "hsk4_422",
+      "id": "hsk4_418",
       "lessonId": "hsk4_u5_l53",
       "hanzi": "批评",
       "pinyin": "pī píng",
@@ -8444,7 +8356,7 @@
       }
     },
     {
-      "id": "hsk4_423",
+      "id": "hsk4_419",
       "lessonId": "hsk4_u5_l53",
       "hanzi": "重视",
       "pinyin": "zhòng shì",
@@ -8462,26 +8374,8 @@
       }
     },
     {
-      "id": "hsk4_424",
+      "id": "hsk4_420",
       "lessonId": "hsk4_u5_l53",
-      "hanzi": "增长",
-      "pinyin": "zēng zhǎng",
-      "french": "Accroitre / augmenter",
-      "example": {
-        "hanzi": "我很想增长。",
-        "pinyin": "Wǒ hěn xiǎng zēng zhǎng.",
-        "french": "J'ai très envie de : accroitre.",
-        "tokens": [
-          "我",
-          "很",
-          "想",
-          "增长"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_425",
-      "lessonId": "hsk4_u5_l54",
       "hanzi": "相反",
       "pinyin": "xiāng fǎn",
       "french": "Contraire / opposé",
@@ -8498,8 +8392,8 @@
       }
     },
     {
-      "id": "hsk4_426",
-      "lessonId": "hsk4_u5_l54",
+      "id": "hsk4_421",
+      "lessonId": "hsk4_u5_l53",
       "hanzi": "抬",
       "pinyin": "tái",
       "french": "Lever / soulever",
@@ -8516,8 +8410,8 @@
       }
     },
     {
-      "id": "hsk4_427",
-      "lessonId": "hsk4_u5_l54",
+      "id": "hsk4_422",
+      "lessonId": "hsk4_u5_l53",
       "hanzi": "主意",
       "pinyin": "zhǔ yi",
       "french": "Plan / idée",
@@ -8535,26 +8429,8 @@
       }
     },
     {
-      "id": "hsk4_428",
-      "lessonId": "hsk4_u5_l54",
-      "hanzi": "扩大",
-      "pinyin": "kuò dà",
-      "french": "Élargir / amplifier",
-      "example": {
-        "hanzi": "他明天去扩大。",
-        "pinyin": "Tā míng tiān qù kuò dà.",
-        "french": "Il ira demain pour : élargir.",
-        "tokens": [
-          "他",
-          "明天",
-          "去",
-          "扩大"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_429",
-      "lessonId": "hsk4_u5_l54",
+      "id": "hsk4_423",
+      "lessonId": "hsk4_u5_l53",
       "hanzi": "奖金",
       "pinyin": "jiǎng jīn",
       "french": "Prime / gratification",
@@ -8572,8 +8448,8 @@
       }
     },
     {
-      "id": "hsk4_430",
-      "lessonId": "hsk4_u5_l54",
+      "id": "hsk4_424",
+      "lessonId": "hsk4_u5_l53",
       "hanzi": "盐",
       "pinyin": "yán",
       "french": "Sel / salé",
@@ -8582,15 +8458,32 @@
         "pinyin": "Méi yǒu yán le.",
         "french": "Il n'y a plus de sel.",
         "tokens": [
-          "没",
-          "有",
+          "没有",
           "盐",
           "了"
         ]
       }
     },
     {
-      "id": "hsk4_431",
+      "id": "hsk4_425",
+      "lessonId": "hsk4_u5_l54",
+      "hanzi": "功夫",
+      "pinyin": "gōng fu",
+      "french": "Temps / art",
+      "example": {
+        "hanzi": "大家需要明白功夫。",
+        "pinyin": "Dà jiā xū yào míng bai gōng fu.",
+        "french": "Tout le monde doit comprendre : temps.",
+        "tokens": [
+          "大家",
+          "需要",
+          "明白",
+          "功夫"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_426",
       "lessonId": "hsk4_u5_l54",
       "hanzi": "难受",
       "pinyin": "nán shòu",
@@ -8609,7 +8502,7 @@
       }
     },
     {
-      "id": "hsk4_432",
+      "id": "hsk4_427",
       "lessonId": "hsk4_u5_l54",
       "hanzi": "民族",
       "pinyin": "mín zú",
@@ -8628,8 +8521,8 @@
       }
     },
     {
-      "id": "hsk4_433",
-      "lessonId": "hsk4_u5_l55",
+      "id": "hsk4_428",
+      "lessonId": "hsk4_u5_l54",
       "hanzi": "航班",
       "pinyin": "háng bān",
       "french": "Vol régulier",
@@ -8647,8 +8540,8 @@
       }
     },
     {
-      "id": "hsk4_434",
-      "lessonId": "hsk4_u5_l55",
+      "id": "hsk4_429",
+      "lessonId": "hsk4_u5_l54",
       "hanzi": "偶尔",
       "pinyin": "ǒu ěr",
       "french": "De temps en temps / rarement",
@@ -8665,8 +8558,8 @@
       }
     },
     {
-      "id": "hsk4_435",
-      "lessonId": "hsk4_u5_l55",
+      "id": "hsk4_430",
+      "lessonId": "hsk4_u5_l54",
       "hanzi": "约会",
       "pinyin": "yuē huì",
       "french": "Rendez-vous / donner un rendez-vous",
@@ -8683,8 +8576,8 @@
       }
     },
     {
-      "id": "hsk4_436",
-      "lessonId": "hsk4_u5_l55",
+      "id": "hsk4_431",
+      "lessonId": "hsk4_u5_l54",
       "hanzi": "厚",
       "pinyin": "hòu",
       "french": "Épais / important",
@@ -8702,8 +8595,8 @@
       }
     },
     {
-      "id": "hsk4_437",
-      "lessonId": "hsk4_u5_l55",
+      "id": "hsk4_432",
+      "lessonId": "hsk4_u5_l54",
       "hanzi": "护士",
       "pinyin": "hù shi",
       "french": "Infirmière / infirmier",
@@ -8722,7 +8615,7 @@
       }
     },
     {
-      "id": "hsk4_438",
+      "id": "hsk4_433",
       "lessonId": "hsk4_u5_l55",
       "hanzi": "参观",
       "pinyin": "cān guān",
@@ -8739,7 +8632,7 @@
       }
     },
     {
-      "id": "hsk4_439",
+      "id": "hsk4_434",
       "lessonId": "hsk4_u5_l55",
       "hanzi": "顺便",
       "pinyin": "shùn biàn",
@@ -8758,7 +8651,7 @@
       }
     },
     {
-      "id": "hsk4_440",
+      "id": "hsk4_435",
       "lessonId": "hsk4_u5_l55",
       "hanzi": "友谊",
       "pinyin": "yǒu yì",
@@ -8776,8 +8669,8 @@
       }
     },
     {
-      "id": "hsk4_441",
-      "lessonId": "hsk4_u5_l56",
+      "id": "hsk4_436",
+      "lessonId": "hsk4_u5_l55",
       "hanzi": "笨",
       "pinyin": "bèn",
       "french": "Idiot / bête",
@@ -8795,8 +8688,8 @@
       }
     },
     {
-      "id": "hsk4_442",
-      "lessonId": "hsk4_u5_l56",
+      "id": "hsk4_437",
+      "lessonId": "hsk4_u5_l55",
       "hanzi": "沙发",
       "pinyin": "shā fā",
       "french": "Sofa / canapé",
@@ -8814,8 +8707,8 @@
       }
     },
     {
-      "id": "hsk4_443",
-      "lessonId": "hsk4_u5_l56",
+      "id": "hsk4_438",
+      "lessonId": "hsk4_u5_l55",
       "hanzi": "耐心",
       "pinyin": "nài xīn",
       "french": "Patience",
@@ -8833,25 +8726,8 @@
       }
     },
     {
-      "id": "hsk4_444",
-      "lessonId": "hsk4_u5_l56",
-      "hanzi": "反映",
-      "pinyin": "fǎn yìng",
-      "french": "Reflet / réflexion",
-      "example": {
-        "hanzi": "请认真反映。",
-        "pinyin": "Qǐng rèn zhēn fǎn yìng.",
-        "french": "Veuillez reflet sérieusement.",
-        "tokens": [
-          "请",
-          "认真",
-          "反映"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_445",
-      "lessonId": "hsk4_u5_l56",
+      "id": "hsk4_439",
+      "lessonId": "hsk4_u5_l55",
       "hanzi": "植物",
       "pinyin": "zhí wù",
       "french": "Plante / végétation",
@@ -8868,8 +8744,8 @@
       }
     },
     {
-      "id": "hsk4_446",
-      "lessonId": "hsk4_u5_l56",
+      "id": "hsk4_440",
+      "lessonId": "hsk4_u5_l55",
       "hanzi": "对面",
       "pinyin": "duì miàn",
       "french": "En face / de front",
@@ -8885,7 +8761,7 @@
       }
     },
     {
-      "id": "hsk4_447",
+      "id": "hsk4_441",
       "lessonId": "hsk4_u5_l56",
       "hanzi": "减肥",
       "pinyin": "jiǎn féi",
@@ -8902,7 +8778,7 @@
       }
     },
     {
-      "id": "hsk4_448",
+      "id": "hsk4_442",
       "lessonId": "hsk4_u5_l56",
       "hanzi": "其次",
       "pinyin": "qí cì",
@@ -8920,8 +8796,28 @@
       }
     },
     {
-      "id": "hsk4_449",
-      "lessonId": "hsk4_u5_l57",
+      "id": "hsk4_443",
+      "lessonId": "hsk4_u5_l56",
+      "hanzi": "眼镜",
+      "pinyin": "yǎn jìng",
+      "french": "Lunettes (de vue) / barniques",
+      "example": {
+        "hanzi": "我已经不带眼镜了。",
+        "pinyin": "Wǒ yǐ jīng bù dài yǎn jìng le.",
+        "french": "Je ne porte plus de lunettes.",
+        "tokens": [
+          "我",
+          "已经",
+          "不",
+          "带",
+          "眼镜",
+          "了"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_444",
+      "lessonId": "hsk4_u5_l56",
       "hanzi": "敲",
       "pinyin": "qiāo",
       "french": "Battre / frapper",
@@ -8938,8 +8834,8 @@
       }
     },
     {
-      "id": "hsk4_450",
-      "lessonId": "hsk4_u5_l57",
+      "id": "hsk4_445",
+      "lessonId": "hsk4_u5_l56",
       "hanzi": "脾气",
       "pinyin": "pí qi",
       "french": "Humeur / tempérament",
@@ -8959,8 +8855,8 @@
       }
     },
     {
-      "id": "hsk4_451",
-      "lessonId": "hsk4_u5_l57",
+      "id": "hsk4_446",
+      "lessonId": "hsk4_u5_l56",
       "hanzi": "翻译",
       "pinyin": "fān yì",
       "french": "Traduire / interprète",
@@ -8978,8 +8874,8 @@
       }
     },
     {
-      "id": "hsk4_452",
-      "lessonId": "hsk4_u5_l57",
+      "id": "hsk4_447",
+      "lessonId": "hsk4_u5_l56",
       "hanzi": "烦恼",
       "pinyin": "fán nǎo",
       "french": "S'ennuyer / se tracasser",
@@ -8996,8 +8892,8 @@
       }
     },
     {
-      "id": "hsk4_453",
-      "lessonId": "hsk4_u5_l57",
+      "id": "hsk4_448",
+      "lessonId": "hsk4_u5_l56",
       "hanzi": "特点",
       "pinyin": "tè diǎn",
       "french": "Caractéristique / particularité",
@@ -9014,7 +8910,7 @@
       }
     },
     {
-      "id": "hsk4_454",
+      "id": "hsk4_449",
       "lessonId": "hsk4_u5_l57",
       "hanzi": "往往",
       "pinyin": "wǎng wǎng",
@@ -9032,25 +8928,7 @@
       }
     },
     {
-      "id": "hsk4_455",
-      "lessonId": "hsk4_u5_l57",
-      "hanzi": "风景",
-      "pinyin": "fēng jǐng",
-      "french": "Paysage",
-      "example": {
-        "hanzi": "大家都知道风景。",
-        "pinyin": "Dà jiā dōu zhī dào fēng jǐng.",
-        "french": "Tout le monde connaît : paysage.",
-        "tokens": [
-          "大家",
-          "都",
-          "知道",
-          "风景"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_456",
+      "id": "hsk4_450",
       "lessonId": "hsk4_u5_l57",
       "hanzi": "笑话",
       "pinyin": "xiào hua",
@@ -9068,8 +8946,8 @@
       }
     },
     {
-      "id": "hsk4_457",
-      "lessonId": "hsk4_u5_l58",
+      "id": "hsk4_451",
+      "lessonId": "hsk4_u5_l57",
       "hanzi": "海洋",
       "pinyin": "hǎi yáng",
       "french": "Océan",
@@ -9087,8 +8965,8 @@
       }
     },
     {
-      "id": "hsk4_458",
-      "lessonId": "hsk4_u5_l58",
+      "id": "hsk4_452",
+      "lessonId": "hsk4_u5_l57",
       "hanzi": "窗户",
       "pinyin": "chuāng hu",
       "french": "Fenêtre",
@@ -9107,46 +8985,8 @@
       }
     },
     {
-      "id": "hsk4_459",
-      "lessonId": "hsk4_u5_l58",
-      "hanzi": "不但",
-      "pinyin": "bù dàn",
-      "french": "Non seulement",
-      "example": {
-        "hanzi": "我们讨论过不但。",
-        "pinyin": "Wǒ men tǎo lùn guo bù dàn.",
-        "french": "Nous avons déjà abordé : non seulement.",
-        "tokens": [
-          "我们",
-          "讨论",
-          "过",
-          "不但"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_460",
-      "lessonId": "hsk4_u5_l58",
-      "hanzi": "代替",
-      "pinyin": "dài tì",
-      "french": "Remplacer / substituer",
-      "example": {
-        "hanzi": "他代替我去了会议。",
-        "pinyin": "Tā dài tì wǒ qù le huì yì.",
-        "french": "Il ira à la réunion à ma place.",
-        "tokens": [
-          "他",
-          "代替",
-          "我",
-          "去",
-          "了",
-          "会议"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_461",
-      "lessonId": "hsk4_u5_l58",
+      "id": "hsk4_453",
+      "lessonId": "hsk4_u5_l57",
       "hanzi": "家具",
       "pinyin": "jiā jù",
       "french": "Meuble (n.m.)",
@@ -9164,8 +9004,8 @@
       }
     },
     {
-      "id": "hsk4_462",
-      "lessonId": "hsk4_u5_l58",
+      "id": "hsk4_454",
+      "lessonId": "hsk4_u5_l57",
       "hanzi": "棵",
       "pinyin": "kē",
       "french": "Classificateur des arbres et plantes",
@@ -9186,8 +9026,8 @@
       }
     },
     {
-      "id": "hsk4_463",
-      "lessonId": "hsk4_u5_l58",
+      "id": "hsk4_455",
+      "lessonId": "hsk4_u5_l57",
       "hanzi": "商量",
       "pinyin": "shāng liang",
       "french": "Discuter / consulter",
@@ -9204,27 +9044,25 @@
       }
     },
     {
-      "id": "hsk4_464",
-      "lessonId": "hsk4_u5_l58",
-      "hanzi": "狮子",
-      "pinyin": "shī zi",
-      "french": "Lion",
+      "id": "hsk4_456",
+      "lessonId": "hsk4_u5_l57",
+      "hanzi": "排队",
+      "pinyin": "pái duì",
+      "french": "S'aligner / se mettre en rang",
       "example": {
-        "hanzi": "大家都很了解狮子。",
-        "pinyin": "Dà jiā dōu hěn liǎo jiě shī zi.",
-        "french": "Tout le monde connaît bien : lion.",
+        "hanzi": "您必须排队。",
+        "pinyin": "Nín bì xū pái duì.",
+        "french": "Il faut que vous fassiez la queue.",
         "tokens": [
-          "大家",
-          "都",
-          "很",
-          "了解",
-          "狮子"
+          "您",
+          "必须",
+          "排队"
         ]
       }
     },
     {
-      "id": "hsk4_465",
-      "lessonId": "hsk4_u5_l59",
+      "id": "hsk4_457",
+      "lessonId": "hsk4_u5_l58",
       "hanzi": "稍微",
       "pinyin": "shāo wēi",
       "french": "Un peu / légèrement",
@@ -9242,8 +9080,8 @@
       }
     },
     {
-      "id": "hsk4_466",
-      "lessonId": "hsk4_u5_l59",
+      "id": "hsk4_458",
+      "lessonId": "hsk4_u5_l58",
       "hanzi": "汗",
       "pinyin": "hàn",
       "french": "Sueur / transpiration",
@@ -9262,8 +9100,8 @@
       }
     },
     {
-      "id": "hsk4_467",
-      "lessonId": "hsk4_u5_l59",
+      "id": "hsk4_459",
+      "lessonId": "hsk4_u5_l58",
       "hanzi": "缺少",
       "pinyin": "quē shǎo",
       "french": "Manquer de",
@@ -9279,8 +9117,8 @@
       }
     },
     {
-      "id": "hsk4_468",
-      "lessonId": "hsk4_u5_l59",
+      "id": "hsk4_460",
+      "lessonId": "hsk4_u5_l58",
       "hanzi": "阅读",
       "pinyin": "yuè dú",
       "french": "Lire / lecture",
@@ -9296,8 +9134,8 @@
       }
     },
     {
-      "id": "hsk4_469",
-      "lessonId": "hsk4_u5_l59",
+      "id": "hsk4_461",
+      "lessonId": "hsk4_u5_l58",
       "hanzi": "穷",
       "pinyin": "qióng",
       "french": "Pauvre / fin",
@@ -9313,8 +9151,8 @@
       }
     },
     {
-      "id": "hsk4_470",
-      "lessonId": "hsk4_u5_l59",
+      "id": "hsk4_462",
+      "lessonId": "hsk4_u5_l58",
       "hanzi": "打扮",
       "pinyin": "dǎ ban",
       "french": "Se maquiller / se parer",
@@ -9331,8 +9169,8 @@
       }
     },
     {
-      "id": "hsk4_471",
-      "lessonId": "hsk4_u5_l59",
+      "id": "hsk4_463",
+      "lessonId": "hsk4_u5_l58",
       "hanzi": "座位",
       "pinyin": "zuò wèi",
       "french": "Siège / place assise",
@@ -9352,8 +9190,8 @@
       }
     },
     {
-      "id": "hsk4_472",
-      "lessonId": "hsk4_u5_l59",
+      "id": "hsk4_464",
+      "lessonId": "hsk4_u5_l58",
       "hanzi": "首都",
       "pinyin": "shǒu dū",
       "french": "Capitale",
@@ -9371,8 +9209,8 @@
       }
     },
     {
-      "id": "hsk4_473",
-      "lessonId": "hsk4_u5_l60",
+      "id": "hsk4_465",
+      "lessonId": "hsk4_u5_l59",
       "hanzi": "吃惊",
       "pinyin": "chī jīng",
       "french": "S'étonner / être surpris",
@@ -9390,27 +9228,8 @@
       }
     },
     {
-      "id": "hsk4_474",
-      "lessonId": "hsk4_u5_l60",
-      "hanzi": "忽然",
-      "pinyin": "hū rán",
-      "french": "Soudain / tout à coup",
-      "example": {
-        "hanzi": "请忽然准备一下。",
-        "pinyin": "Qǐng hū rán zhǔn bèi yī xià.",
-        "french": "Veuillez vous préparer (soudain).",
-        "tokens": [
-          "请",
-          "忽然",
-          "准备",
-          "一",
-          "下"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_475",
-      "lessonId": "hsk4_u5_l60",
+      "id": "hsk4_466",
+      "lessonId": "hsk4_u5_l59",
       "hanzi": "羡慕",
       "pinyin": "xiàn mù",
       "french": "Envier / jalouser",
@@ -9430,8 +9249,8 @@
       }
     },
     {
-      "id": "hsk4_476",
-      "lessonId": "hsk4_u5_l60",
+      "id": "hsk4_467",
+      "lessonId": "hsk4_u5_l59",
       "hanzi": "报名",
       "pinyin": "bào míng",
       "french": "S'inscrire / s'enregistrer",
@@ -9448,8 +9267,8 @@
       }
     },
     {
-      "id": "hsk4_477",
-      "lessonId": "hsk4_u5_l60",
+      "id": "hsk4_468",
+      "lessonId": "hsk4_u5_l59",
       "hanzi": "脏",
       "pinyin": "zāng",
       "french": "Sale",
@@ -9466,27 +9285,8 @@
       }
     },
     {
-      "id": "hsk4_478",
-      "lessonId": "hsk4_u5_l60",
-      "hanzi": "极其",
-      "pinyin": "jí qí",
-      "french": "Extrêmement / très",
-      "example": {
-        "hanzi": "请极其准备一下。",
-        "pinyin": "Qǐng jí qí zhǔn bèi yī xià.",
-        "french": "Veuillez vous préparer (extrêmement).",
-        "tokens": [
-          "请",
-          "极其",
-          "准备",
-          "一",
-          "下"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_479",
-      "lessonId": "hsk4_u5_l60",
+      "id": "hsk4_469",
+      "lessonId": "hsk4_u5_l59",
       "hanzi": "日记",
       "pinyin": "rì jì",
       "french": "Journal intime",
@@ -9503,8 +9303,8 @@
       }
     },
     {
-      "id": "hsk4_480",
-      "lessonId": "hsk4_u5_l60",
+      "id": "hsk4_470",
+      "lessonId": "hsk4_u5_l59",
       "hanzi": "同情",
       "pinyin": "tóng qíng",
       "french": "Compassion / sympathie",
@@ -9524,8 +9324,8 @@
       }
     },
     {
-      "id": "hsk4_481",
-      "lessonId": "hsk4_u5_l61",
+      "id": "hsk4_471",
+      "lessonId": "hsk4_u5_l59",
       "hanzi": "逛",
       "pinyin": "guàng",
       "french": "Se promener / flâner",
@@ -9542,8 +9342,8 @@
       }
     },
     {
-      "id": "hsk4_482",
-      "lessonId": "hsk4_u5_l61",
+      "id": "hsk4_472",
+      "lessonId": "hsk4_u5_l59",
       "hanzi": "总结",
       "pinyin": "zǒng jié",
       "french": "Résumer / faire le bilan",
@@ -9560,8 +9360,8 @@
       }
     },
     {
-      "id": "hsk4_483",
-      "lessonId": "hsk4_u5_l61",
+      "id": "hsk4_473",
+      "lessonId": "hsk4_u5_l60",
       "hanzi": "打扰",
       "pinyin": "dǎ rǎo",
       "french": "Déranger / embêter",
@@ -9578,8 +9378,8 @@
       }
     },
     {
-      "id": "hsk4_484",
-      "lessonId": "hsk4_u5_l61",
+      "id": "hsk4_474",
+      "lessonId": "hsk4_u5_l60",
       "hanzi": "幽默",
       "pinyin": "yōu mò",
       "french": "Humour",
@@ -9597,8 +9397,8 @@
       }
     },
     {
-      "id": "hsk4_485",
-      "lessonId": "hsk4_u5_l61",
+      "id": "hsk4_475",
+      "lessonId": "hsk4_u5_l60",
       "hanzi": "误会",
       "pinyin": "wù huì",
       "french": "Mal comprendre / se méprendre",
@@ -9617,8 +9417,8 @@
       }
     },
     {
-      "id": "hsk4_486",
-      "lessonId": "hsk4_u5_l61",
+      "id": "hsk4_476",
+      "lessonId": "hsk4_u5_l60",
       "hanzi": "抱歉",
       "pinyin": "bào qiàn",
       "french": "Excuse / regret",
@@ -9637,8 +9437,8 @@
       }
     },
     {
-      "id": "hsk4_487",
-      "lessonId": "hsk4_u5_l61",
+      "id": "hsk4_477",
+      "lessonId": "hsk4_u5_l60",
       "hanzi": "师傅",
       "pinyin": "shī fu",
       "french": "Maitre",
@@ -9656,26 +9456,8 @@
       }
     },
     {
-      "id": "hsk4_488",
-      "lessonId": "hsk4_u5_l61",
-      "hanzi": "朵",
-      "pinyin": "duǒ",
-      "french": "Grappe / bouton (fleur)",
-      "example": {
-        "hanzi": "老师正在介绍朵。",
-        "pinyin": "Lǎo shī zhèng zài jiè shào duǒ.",
-        "french": "Le professeur présente : grappe.",
-        "tokens": [
-          "老师",
-          "正在",
-          "介绍",
-          "朵"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_489",
-      "lessonId": "hsk4_u5_l62",
+      "id": "hsk4_478",
+      "lessonId": "hsk4_u5_l60",
       "hanzi": "镜子",
       "pinyin": "jìng zi",
       "french": "Miroir",
@@ -9693,8 +9475,8 @@
       }
     },
     {
-      "id": "hsk4_490",
-      "lessonId": "hsk4_u5_l62",
+      "id": "hsk4_479",
+      "lessonId": "hsk4_u5_l60",
       "hanzi": "合格",
       "pinyin": "hé gé",
       "french": "Qualifié / conforme aux normes",
@@ -9713,8 +9495,8 @@
       }
     },
     {
-      "id": "hsk4_491",
-      "lessonId": "hsk4_u5_l62",
+      "id": "hsk4_480",
+      "lessonId": "hsk4_u5_l60",
       "hanzi": "亲戚",
       "pinyin": "qīn qi",
       "french": "Membre de la famille / parent (n.m.)",
@@ -9731,8 +9513,8 @@
       }
     },
     {
-      "id": "hsk4_492",
-      "lessonId": "hsk4_u5_l62",
+      "id": "hsk4_481",
+      "lessonId": "hsk4_u5_l61",
       "hanzi": "力气",
       "pinyin": "lì qi",
       "french": "Force / énergie",
@@ -9749,8 +9531,8 @@
       }
     },
     {
-      "id": "hsk4_493",
-      "lessonId": "hsk4_u5_l62",
+      "id": "hsk4_482",
+      "lessonId": "hsk4_u5_l61",
       "hanzi": "缺点",
       "pinyin": "quē diǎn",
       "french": "Défaut / insuffisance",
@@ -9768,8 +9550,26 @@
       }
     },
     {
-      "id": "hsk4_494",
-      "lessonId": "hsk4_u5_l62",
+      "id": "hsk4_483",
+      "lessonId": "hsk4_u5_l61",
+      "hanzi": "胳膊",
+      "pinyin": "gē bo",
+      "french": "Bras",
+      "example": {
+        "hanzi": "大家都知道胳膊。",
+        "pinyin": "Dà jiā dōu zhī dào gē bo.",
+        "french": "Tout le monde connaît : bras.",
+        "tokens": [
+          "大家",
+          "都",
+          "知道",
+          "胳膊"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_484",
+      "lessonId": "hsk4_u5_l61",
       "hanzi": "抽烟",
       "pinyin": "chōu yān",
       "french": "Fumer",
@@ -9781,37 +9581,15 @@
           "我",
           "很",
           "久",
-          "没",
-          "有",
+          "没有",
           "抽烟",
           "了"
         ]
       }
     },
     {
-      "id": "hsk4_495",
-      "lessonId": "hsk4_u5_l62",
-      "hanzi": "起飞",
-      "pinyin": "qǐ fēi",
-      "french": "Décoller (avec des ailes)",
-      "example": {
-        "hanzi": "飞机起飞的时候紧张很正常。",
-        "pinyin": "Fēi jī qǐ fēi de shí hou jǐn zhāng hěn zhèng cháng.",
-        "french": "C'est naturel d'être nerveux quand l'avion décolle.",
-        "tokens": [
-          "飞机",
-          "起飞",
-          "的",
-          "时候",
-          "紧张",
-          "很",
-          "正常"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_496",
-      "lessonId": "hsk4_u5_l62",
+      "id": "hsk4_485",
+      "lessonId": "hsk4_u5_l61",
       "hanzi": "网球",
       "pinyin": "wǎng qiú",
       "french": "Tennis",
@@ -9828,8 +9606,8 @@
       }
     },
     {
-      "id": "hsk4_497",
-      "lessonId": "hsk4_u5_l63",
+      "id": "hsk4_486",
+      "lessonId": "hsk4_u5_l61",
       "hanzi": "老虎",
       "pinyin": "lǎo hǔ",
       "french": "Tigre",
@@ -9847,8 +9625,8 @@
       }
     },
     {
-      "id": "hsk4_498",
-      "lessonId": "hsk4_u5_l63",
+      "id": "hsk4_487",
+      "lessonId": "hsk4_u5_l61",
       "hanzi": "乘坐",
       "pinyin": "chéng zuò",
       "french": "Prendre (un transport) / monter dans",
@@ -9866,8 +9644,8 @@
       }
     },
     {
-      "id": "hsk4_499",
-      "lessonId": "hsk4_u5_l63",
+      "id": "hsk4_488",
+      "lessonId": "hsk4_u5_l61",
       "hanzi": "诚实",
       "pinyin": "chéng shí",
       "french": "Véracité / véridicté",
@@ -9887,25 +9665,8 @@
       }
     },
     {
-      "id": "hsk4_500",
-      "lessonId": "hsk4_u5_l63",
-      "hanzi": "集合",
-      "pinyin": "jí hé",
-      "french": "Se réunir / réunion",
-      "example": {
-        "hanzi": "请认真集合。",
-        "pinyin": "Qǐng rèn zhēn jí hé.",
-        "french": "Veuillez se réunir sérieusement.",
-        "tokens": [
-          "请",
-          "认真",
-          "集合"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_501",
-      "lessonId": "hsk4_u5_l63",
+      "id": "hsk4_489",
+      "lessonId": "hsk4_u5_l62",
       "hanzi": "孙子",
       "pinyin": "sūn zi",
       "french": "Petit-fils",
@@ -9923,8 +9684,8 @@
       }
     },
     {
-      "id": "hsk4_502",
-      "lessonId": "hsk4_u5_l63",
+      "id": "hsk4_490",
+      "lessonId": "hsk4_u5_l62",
       "hanzi": "优点",
       "pinyin": "yōu diǎn",
       "french": "Point fort / qualité",
@@ -9942,26 +9703,26 @@
       }
     },
     {
-      "id": "hsk4_503",
-      "lessonId": "hsk4_u5_l63",
-      "hanzi": "猴子",
-      "pinyin": "hóu zi",
-      "french": "Singe",
+      "id": "hsk4_491",
+      "lessonId": "hsk4_u5_l62",
+      "hanzi": "客厅",
+      "pinyin": "kè tīng",
+      "french": "(salle de) séjour",
       "example": {
-        "hanzi": "她很喜欢猴子。",
-        "pinyin": "Tā hěn xǐ huan hóu zi.",
-        "french": "Elle aime beaucoup : singe.",
+        "hanzi": "我们讨论过客厅。",
+        "pinyin": "Wǒ men tǎo lùn guo kè tīng.",
+        "french": "Nous avons déjà abordé : (salle de) séjour.",
         "tokens": [
-          "她",
-          "很",
-          "喜欢",
-          "猴子"
+          "我们",
+          "讨论",
+          "过",
+          "客厅"
         ]
       }
     },
     {
-      "id": "hsk4_504",
-      "lessonId": "hsk4_u5_l63",
+      "id": "hsk4_492",
+      "lessonId": "hsk4_u5_l62",
       "hanzi": "普遍",
       "pinyin": "pǔ biàn",
       "french": "Universel / général",
@@ -9979,8 +9740,47 @@
       }
     },
     {
-      "id": "hsk4_505",
-      "lessonId": "hsk4_u5_l64",
+      "id": "hsk4_493",
+      "lessonId": "hsk4_u5_l62",
+      "hanzi": "学期",
+      "pinyin": "xué qī",
+      "french": "Semestre scolaire",
+      "example": {
+        "hanzi": "书上提到了学期。",
+        "pinyin": "Shū shàng tí dào le xué qī.",
+        "french": "Le livre mentionne : semestre scolaire.",
+        "tokens": [
+          "书",
+          "上",
+          "提",
+          "到",
+          "了",
+          "学期"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_494",
+      "lessonId": "hsk4_u5_l62",
+      "hanzi": "修理",
+      "pinyin": "xiū lǐ",
+      "french": "Réparer",
+      "example": {
+        "hanzi": "我的手表需要修理。",
+        "pinyin": "Wǒ de shǒu biǎo xū yào xiū lǐ.",
+        "french": "Ma montre a besoin d'être réparée.",
+        "tokens": [
+          "我",
+          "的",
+          "手表",
+          "需要",
+          "修理"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_495",
+      "lessonId": "hsk4_u5_l62",
       "hanzi": "入口",
       "pinyin": "rù kǒu",
       "french": "Entrée / accès",
@@ -9997,8 +9797,8 @@
       }
     },
     {
-      "id": "hsk4_506",
-      "lessonId": "hsk4_u5_l64",
+      "id": "hsk4_496",
+      "lessonId": "hsk4_u5_l62",
       "hanzi": "加班",
       "pinyin": "jiā bān",
       "french": "Heures supplémentaires / faire des heures sup",
@@ -10014,8 +9814,8 @@
       }
     },
     {
-      "id": "hsk4_507",
-      "lessonId": "hsk4_u5_l64",
+      "id": "hsk4_497",
+      "lessonId": "hsk4_u5_l63",
       "hanzi": "热闹",
       "pinyin": "rè nao",
       "french": "Animé / en pleine effervescence",
@@ -10033,8 +9833,8 @@
       }
     },
     {
-      "id": "hsk4_508",
-      "lessonId": "hsk4_u5_l64",
+      "id": "hsk4_498",
+      "lessonId": "hsk4_u5_l63",
       "hanzi": "散步",
       "pinyin": "sàn bù",
       "french": "Se promener / faire une promenade",
@@ -10053,8 +9853,8 @@
       }
     },
     {
-      "id": "hsk4_509",
-      "lessonId": "hsk4_u5_l64",
+      "id": "hsk4_499",
+      "lessonId": "hsk4_u5_l63",
       "hanzi": "顺序",
       "pinyin": "shùn xù",
       "french": "Séquence / ordre",
@@ -10072,8 +9872,8 @@
       }
     },
     {
-      "id": "hsk4_510",
-      "lessonId": "hsk4_u5_l64",
+      "id": "hsk4_500",
+      "lessonId": "hsk4_u5_l63",
       "hanzi": "懒",
       "pinyin": "lǎn",
       "french": "Paresseux / feignant",
@@ -10089,8 +9889,8 @@
       }
     },
     {
-      "id": "hsk4_511",
-      "lessonId": "hsk4_u5_l64",
+      "id": "hsk4_501",
+      "lessonId": "hsk4_u5_l63",
       "hanzi": "准时",
       "pinyin": "zhǔn shí",
       "french": "À l'heure / ponctuel",
@@ -10109,8 +9909,8 @@
       }
     },
     {
-      "id": "hsk4_512",
-      "lessonId": "hsk4_u5_l64",
+      "id": "hsk4_502",
+      "lessonId": "hsk4_u5_l63",
       "hanzi": "大夫",
       "pinyin": "dài fu",
       "french": "Médecin / Docteur",
@@ -10128,8 +9928,8 @@
       }
     },
     {
-      "id": "hsk4_513",
-      "lessonId": "hsk4_u5_l65",
+      "id": "hsk4_503",
+      "lessonId": "hsk4_u5_l63",
       "hanzi": "盒子",
       "pinyin": "hé zi",
       "french": "Boite",
@@ -10146,8 +9946,8 @@
       }
     },
     {
-      "id": "hsk4_514",
-      "lessonId": "hsk4_u5_l65",
+      "id": "hsk4_504",
+      "lessonId": "hsk4_u5_l63",
       "hanzi": "得意",
       "pinyin": "dé yì",
       "french": "Infatué / transporté de joie",
@@ -10165,8 +9965,8 @@
       }
     },
     {
-      "id": "hsk4_515",
-      "lessonId": "hsk4_u5_l65",
+      "id": "hsk4_505",
+      "lessonId": "hsk4_u5_l64",
       "hanzi": "礼貌",
       "pinyin": "lǐ mào",
       "french": "Politesse / courtoisie",
@@ -10183,8 +9983,8 @@
       }
     },
     {
-      "id": "hsk4_516",
-      "lessonId": "hsk4_u5_l65",
+      "id": "hsk4_506",
+      "lessonId": "hsk4_u5_l64",
       "hanzi": "推迟",
       "pinyin": "tuī chí",
       "french": "Remettre / ajourner",
@@ -10201,8 +10001,8 @@
       }
     },
     {
-      "id": "hsk4_517",
-      "lessonId": "hsk4_u5_l65",
+      "id": "hsk4_507",
+      "lessonId": "hsk4_u5_l64",
       "hanzi": "饼干",
       "pinyin": "bǐng gān",
       "french": "Biscuit",
@@ -10219,27 +10019,27 @@
       }
     },
     {
-      "id": "hsk4_518",
-      "lessonId": "hsk4_u5_l65",
-      "hanzi": "中文",
-      "pinyin": "Zhōng wén",
-      "french": "Chinois / langue chinoise",
+      "id": "hsk4_508",
+      "lessonId": "hsk4_u5_l64",
+      "hanzi": "葡萄",
+      "pinyin": "pú tao",
+      "french": "Raisin",
       "example": {
-        "hanzi": "我很喜欢学习中文。",
-        "pinyin": "Wǒ hěn xǐ huan xué xí Zhōng wén.",
-        "french": "Je suis très intéressée par l'apprentissage du chinois.",
+        "hanzi": "这个葡萄非常好。",
+        "pinyin": "Zhè gè pú tao fēi cháng hǎo.",
+        "french": "Ce/cette raisin est extrêmement bien.",
         "tokens": [
-          "我",
-          "很",
-          "喜欢",
-          "学习",
-          "中文"
+          "这",
+          "个",
+          "葡萄",
+          "非常",
+          "好"
         ]
       }
     },
     {
-      "id": "hsk4_519",
-      "lessonId": "hsk4_u5_l65",
+      "id": "hsk4_509",
+      "lessonId": "hsk4_u5_l64",
       "hanzi": "性别",
       "pinyin": "xìng bié",
       "french": "Sexe (masculin ou féminin) / genre",
@@ -10257,8 +10057,8 @@
       }
     },
     {
-      "id": "hsk4_520",
-      "lessonId": "hsk4_u5_l65",
+      "id": "hsk4_510",
+      "lessonId": "hsk4_u5_l64",
       "hanzi": "袜子",
       "pinyin": "wà zi",
       "french": "Chaussette / bas",
@@ -10275,8 +10075,8 @@
       }
     },
     {
-      "id": "hsk4_521",
-      "lessonId": "hsk4_u6_l66",
+      "id": "hsk4_511",
+      "lessonId": "hsk4_u5_l64",
       "hanzi": "气候",
       "pinyin": "qì hòu",
       "french": "Climat / atmosphère",
@@ -10294,8 +10094,8 @@
       }
     },
     {
-      "id": "hsk4_522",
-      "lessonId": "hsk4_u6_l66",
+      "id": "hsk4_512",
+      "lessonId": "hsk4_u5_l64",
       "hanzi": "毛巾",
       "pinyin": "máo jīn",
       "french": "Serviette de bain",
@@ -10313,48 +10113,8 @@
       }
     },
     {
-      "id": "hsk4_523",
-      "lessonId": "hsk4_u6_l66",
-      "hanzi": "鼓掌",
-      "pinyin": "gǔ zhǎng",
-      "french": "Applaudir / applaudissement",
-      "example": {
-        "hanzi": "所有的观众都站起来鼓掌。",
-        "pinyin": "Suǒ yǒu de guān zhòng dōu zhàn qǐ lai gǔ zhǎng.",
-        "french": "La totalité de l'audience se leva et commença à applaudir.",
-        "tokens": [
-          "所有",
-          "的",
-          "观众",
-          "都",
-          "站",
-          "起来",
-          "鼓掌"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_524",
-      "lessonId": "hsk4_u6_l66",
-      "hanzi": "瓶子",
-      "pinyin": "píng zi",
-      "french": "Bouteille",
-      "example": {
-        "hanzi": "这个瓶子很好。",
-        "pinyin": "Zhè gè píng zi hěn hǎo.",
-        "french": "Ce terme « bouteille » est très bien.",
-        "tokens": [
-          "这",
-          "个",
-          "瓶子",
-          "很",
-          "好"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_525",
-      "lessonId": "hsk4_u6_l66",
+      "id": "hsk4_513",
+      "lessonId": "hsk4_u5_l65",
       "hanzi": "传真",
       "pinyin": "chuán zhēn",
       "french": "Fax / facsimilé",
@@ -10375,8 +10135,8 @@
       }
     },
     {
-      "id": "hsk4_526",
-      "lessonId": "hsk4_u6_l66",
+      "id": "hsk4_514",
+      "lessonId": "hsk4_u5_l65",
       "hanzi": "害羞",
       "pinyin": "hài xiū",
       "french": "Être timide / avoir honte",
@@ -10393,27 +10153,27 @@
       }
     },
     {
-      "id": "hsk4_527",
-      "lessonId": "hsk4_u6_l66",
-      "hanzi": "握手",
-      "pinyin": "wò shǒu",
-      "french": "Se serrer la main",
+      "id": "hsk4_515",
+      "lessonId": "hsk4_u5_l65",
+      "hanzi": "降落",
+      "pinyin": "jiàng luò",
+      "french": "Atterrir",
       "example": {
-        "hanzi": "他拒绝跟我握手。",
-        "pinyin": "Tā jù jué gēn wǒ wò shǒu.",
-        "french": "Il refusa de me serrer la main.",
+        "hanzi": "明天再降落好吗？",
+        "pinyin": "Míng tiān zài jiàng luò hǎo ma?",
+        "french": "Et si on remettait à demain pour atterrir ?",
         "tokens": [
-          "他",
-          "拒绝",
-          "跟",
-          "我",
-          "握手"
+          "明天",
+          "再",
+          "降落",
+          "好",
+          "吗"
         ]
       }
     },
     {
-      "id": "hsk4_528",
-      "lessonId": "hsk4_u6_l66",
+      "id": "hsk4_516",
+      "lessonId": "hsk4_u5_l65",
       "hanzi": "咳嗽",
       "pinyin": "ké sou",
       "french": "Tousser / toux",
@@ -10430,8 +10190,8 @@
       }
     },
     {
-      "id": "hsk4_529",
-      "lessonId": "hsk4_u6_l67",
+      "id": "hsk4_517",
+      "lessonId": "hsk4_u5_l65",
       "hanzi": "出差",
       "pinyin": "chū chāi",
       "french": "Partir en mission / sortir en service commandé",
@@ -10449,8 +10209,8 @@
       }
     },
     {
-      "id": "hsk4_530",
-      "lessonId": "hsk4_u6_l67",
+      "id": "hsk4_518",
+      "lessonId": "hsk4_u5_l65",
       "hanzi": "按时",
       "pinyin": "àn shí",
       "french": "À temps / à l'heure",
@@ -10468,27 +10228,8 @@
       }
     },
     {
-      "id": "hsk4_531",
-      "lessonId": "hsk4_u6_l67",
-      "hanzi": "流泪",
-      "pinyin": "liú lèi",
-      "french": "Pleurer / larmoyer",
-      "example": {
-        "hanzi": "她流泪看着信。",
-        "pinyin": "Tā liú lèi kàn zhe xìn.",
-        "french": "Elle pleura en lisant la lettre.",
-        "tokens": [
-          "她",
-          "流泪",
-          "看",
-          "着",
-          "信"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_532",
-      "lessonId": "hsk4_u6_l67",
+      "id": "hsk4_519",
+      "lessonId": "hsk4_u5_l65",
       "hanzi": "咸",
       "pinyin": "xián",
       "french": "Salé",
@@ -10506,8 +10247,45 @@
       }
     },
     {
-      "id": "hsk4_533",
-      "lessonId": "hsk4_u6_l67",
+      "id": "hsk4_520",
+      "lessonId": "hsk4_u5_l65",
+      "hanzi": "果汁",
+      "pinyin": "guǒ zhī",
+      "french": "Jus de fruit / suc",
+      "example": {
+        "hanzi": "这个果汁很重要。",
+        "pinyin": "Zhè gè guǒ zhī hěn zhòng yào.",
+        "french": "Ce terme « jus de fruit » est très important.",
+        "tokens": [
+          "这",
+          "个",
+          "果汁",
+          "很",
+          "重要"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_521",
+      "lessonId": "hsk4_u6_l66",
+      "hanzi": "郊区",
+      "pinyin": "jiāo qū",
+      "french": "Banlieue / suburb",
+      "example": {
+        "hanzi": "我们住在郊区。",
+        "pinyin": "Wǒ men zhù zài jiāo qū.",
+        "french": "Nous vivons en banlieue.",
+        "tokens": [
+          "我们",
+          "住",
+          "在",
+          "郊区"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_522",
+      "lessonId": "hsk4_u6_l66",
       "hanzi": "节约",
       "pinyin": "jié yuē",
       "french": "Économiser / épargner",
@@ -10524,8 +10302,8 @@
       }
     },
     {
-      "id": "hsk4_534",
-      "lessonId": "hsk4_u6_l67",
+      "id": "hsk4_523",
+      "lessonId": "hsk4_u6_l66",
       "hanzi": "招聘",
       "pinyin": "zhāo pìn",
       "french": "Embaucher / engager",
@@ -10543,8 +10321,8 @@
       }
     },
     {
-      "id": "hsk4_535",
-      "lessonId": "hsk4_u6_l67",
+      "id": "hsk4_524",
+      "lessonId": "hsk4_u6_l66",
       "hanzi": "活泼",
       "pinyin": "huó po",
       "french": "Dynamique / vif",
@@ -10562,27 +10340,8 @@
       }
     },
     {
-      "id": "hsk4_536",
-      "lessonId": "hsk4_u6_l67",
-      "hanzi": "干燥",
-      "pinyin": "gān zào",
-      "french": "Sec / sécher",
-      "example": {
-        "hanzi": "我们的环境真干燥！",
-        "pinyin": "Wǒ men de huán jìng zhēn gān zào!",
-        "french": "Notre environnement est vraiment : sec !",
-        "tokens": [
-          "我们",
-          "的",
-          "环境",
-          "真",
-          "干燥"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_537",
-      "lessonId": "hsk4_u6_l68",
+      "id": "hsk4_525",
+      "lessonId": "hsk4_u6_l66",
       "hanzi": "签证",
       "pinyin": "qiān zhèng",
       "french": "Visa",
@@ -10599,8 +10358,8 @@
       }
     },
     {
-      "id": "hsk4_538",
-      "lessonId": "hsk4_u6_l68",
+      "id": "hsk4_526",
+      "lessonId": "hsk4_u6_l66",
       "hanzi": "暖和",
       "pinyin": "nuǎn huo",
       "french": "Doux / tiède",
@@ -10616,8 +10375,8 @@
       }
     },
     {
-      "id": "hsk4_539",
-      "lessonId": "hsk4_u6_l68",
+      "id": "hsk4_527",
+      "lessonId": "hsk4_u6_l66",
       "hanzi": "打印",
       "pinyin": "dǎ yìn",
       "french": "Imprimer",
@@ -10634,27 +10393,8 @@
       }
     },
     {
-      "id": "hsk4_540",
-      "lessonId": "hsk4_u6_l68",
-      "hanzi": "农村",
-      "pinyin": "nóng cūn",
-      "french": "Campagne / village",
-      "example": {
-        "hanzi": "我很喜欢新农村。",
-        "pinyin": "Wǒ hěn xǐ huan xīn nóng cūn.",
-        "french": "J'aime beaucoup ce nouveau / cette nouvelle : campagne.",
-        "tokens": [
-          "我",
-          "很",
-          "喜欢",
-          "新",
-          "农村"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_541",
-      "lessonId": "hsk4_u6_l68",
+      "id": "hsk4_528",
+      "lessonId": "hsk4_u6_l66",
       "hanzi": "排列",
       "pinyin": "pái liè",
       "french": "Ranger / disposer en ordre",
@@ -10672,27 +10412,8 @@
       }
     },
     {
-      "id": "hsk4_542",
-      "lessonId": "hsk4_u6_l68",
-      "hanzi": "窄",
-      "pinyin": "zhǎi",
-      "french": "Étroit",
-      "example": {
-        "hanzi": "今天的情况很窄。",
-        "pinyin": "Jīn tiān de qíng kuàng hěn zhǎi.",
-        "french": "La situation d'aujourd'hui est très : étroit.",
-        "tokens": [
-          "今天",
-          "的",
-          "情况",
-          "很",
-          "窄"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_543",
-      "lessonId": "hsk4_u6_l68",
+      "id": "hsk4_529",
+      "lessonId": "hsk4_u6_l67",
       "hanzi": "积累",
       "pinyin": "jī lěi",
       "french": "Accumuler / accumulation",
@@ -10709,27 +10430,44 @@
       }
     },
     {
-      "id": "hsk4_544",
-      "lessonId": "hsk4_u6_l68",
-      "hanzi": "整齐",
-      "pinyin": "zhěng qí",
-      "french": "Bien rangé / ordonné",
+      "id": "hsk4_530",
+      "lessonId": "hsk4_u6_l67",
+      "hanzi": "迷路",
+      "pinyin": "mí lù",
+      "french": "Se perdre / s'égarer",
       "example": {
-        "hanzi": "今天的情况很整齐。",
-        "pinyin": "Jīn tiān de qíng kuàng hěn zhěng qí.",
-        "french": "La situation d'aujourd'hui est très : bien rangé.",
+        "hanzi": "他可能迷路了。",
+        "pinyin": "Tā kě néng mí lù le.",
+        "french": "Il s'est peut-être perdu.",
         "tokens": [
-          "今天",
-          "的",
-          "情况",
-          "很",
-          "整齐"
+          "他",
+          "可能",
+          "迷路",
+          "了"
         ]
       }
     },
     {
-      "id": "hsk4_545",
-      "lessonId": "hsk4_u6_l69",
+      "id": "hsk4_531",
+      "lessonId": "hsk4_u6_l67",
+      "hanzi": "景色",
+      "pinyin": "jǐng sè",
+      "french": "Paysage / vue",
+      "example": {
+        "hanzi": "大家需要明白景色。",
+        "pinyin": "Dà jiā xū yào míng bai jǐng sè.",
+        "french": "Tout le monde doit comprendre : paysage.",
+        "tokens": [
+          "大家",
+          "需要",
+          "明白",
+          "景色"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_532",
+      "lessonId": "hsk4_u6_l67",
       "hanzi": "表格",
       "pinyin": "biǎo gé",
       "french": "Formulaire / tableau",
@@ -10747,8 +10485,8 @@
       }
     },
     {
-      "id": "hsk4_546",
-      "lessonId": "hsk4_u6_l69",
+      "id": "hsk4_533",
+      "lessonId": "hsk4_u6_l67",
       "hanzi": "表扬",
       "pinyin": "biǎo yáng",
       "french": "Louer / exalter",
@@ -10764,8 +10502,27 @@
       }
     },
     {
-      "id": "hsk4_547",
-      "lessonId": "hsk4_u6_l69",
+      "id": "hsk4_534",
+      "lessonId": "hsk4_u6_l67",
+      "hanzi": "付款",
+      "pinyin": "fù kuǎn",
+      "french": "Payer une somme",
+      "example": {
+        "hanzi": "我想用信用卡付款。",
+        "pinyin": "Wǒ xiǎng yòng xìn yòng kǎ fù kuǎn.",
+        "french": "Je veux payer par carte de crédit.",
+        "tokens": [
+          "我",
+          "想",
+          "用",
+          "信用卡",
+          "付款"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_535",
+      "lessonId": "hsk4_u6_l67",
       "hanzi": "硕士",
       "pinyin": "shuò shì",
       "french": "Master / maitrise",
@@ -10783,8 +10540,8 @@
       }
     },
     {
-      "id": "hsk4_548",
-      "lessonId": "hsk4_u6_l69",
+      "id": "hsk4_536",
+      "lessonId": "hsk4_u6_l67",
       "hanzi": "牙膏",
       "pinyin": "yá gāo",
       "french": "Dentifrice",
@@ -10801,8 +10558,27 @@
       }
     },
     {
-      "id": "hsk4_549",
-      "lessonId": "hsk4_u6_l69",
+      "id": "hsk4_537",
+      "lessonId": "hsk4_u6_l68",
+      "hanzi": "房东",
+      "pinyin": "fáng dōng",
+      "french": "Propriétaire (d'un logement loué)",
+      "example": {
+        "hanzi": "这个房东非常好。",
+        "pinyin": "Zhè gè fáng dōng fēi cháng hǎo.",
+        "french": "Ce/cette propriétaire (d'un logement loué) est extrêmement bien.",
+        "tokens": [
+          "这",
+          "个",
+          "房东",
+          "非常",
+          "好"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_538",
+      "lessonId": "hsk4_u6_l68",
       "hanzi": "长城",
       "pinyin": "Cháng chéng",
       "french": "Grande Muraille",
@@ -10820,44 +10596,8 @@
       }
     },
     {
-      "id": "hsk4_550",
-      "lessonId": "hsk4_u6_l69",
-      "hanzi": "请客",
-      "pinyin": "qǐng kè",
-      "french": "Inviter",
-      "example": {
-        "hanzi": "今天是我请客。",
-        "pinyin": "Jīn tiān shì wǒ qǐng kè.",
-        "french": "Aujourd'hui c'est pour moi.",
-        "tokens": [
-          "今天",
-          "是",
-          "我",
-          "请客"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_551",
-      "lessonId": "hsk4_u6_l69",
-      "hanzi": "请假",
-      "pinyin": "qǐng jià",
-      "french": "Demander un congé",
-      "example": {
-        "hanzi": "大家一起请假吧！",
-        "pinyin": "Dà jiā yī qǐ qǐng jià ba!",
-        "french": "Allons demander un congé tous ensemble !",
-        "tokens": [
-          "大家",
-          "一起",
-          "请假",
-          "吧"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_552",
-      "lessonId": "hsk4_u6_l69",
+      "id": "hsk4_539",
+      "lessonId": "hsk4_u6_l68",
       "hanzi": "导游",
       "pinyin": "dǎo yóu",
       "french": "Guide touristique (personne) / guider",
@@ -10875,8 +10615,48 @@
       }
     },
     {
-      "id": "hsk4_553",
-      "lessonId": "hsk4_u6_l70",
+      "id": "hsk4_540",
+      "lessonId": "hsk4_u6_l68",
+      "hanzi": "小吃",
+      "pinyin": "xiǎo chī",
+      "french": "Collation / dessert",
+      "example": {
+        "hanzi": "大家都知道小吃。",
+        "pinyin": "Dà jiā dōu zhī dào xiǎo chī.",
+        "french": "Tout le monde connaît : collation.",
+        "tokens": [
+          "大家",
+          "都",
+          "知道",
+          "小吃"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_541",
+      "lessonId": "hsk4_u6_l68",
+      "hanzi": "信封",
+      "pinyin": "xìn fēng",
+      "french": "Enveloppe (papeterie)",
+      "example": {
+        "hanzi": "我在信封上写错了地址。",
+        "pinyin": "Wǒ zài xìn fēng shàng xiě cuò le dì zhǐ.",
+        "french": "Je me suis trompé d'adresse sur l'enveloppe.",
+        "tokens": [
+          "我",
+          "在",
+          "信封",
+          "上",
+          "写",
+          "错",
+          "了",
+          "地址"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_542",
+      "lessonId": "hsk4_u6_l68",
       "hanzi": "叶子",
       "pinyin": "yè zi",
       "french": "Feuille (d'un végétal)",
@@ -10894,8 +10674,8 @@
       }
     },
     {
-      "id": "hsk4_554",
-      "lessonId": "hsk4_u6_l70",
+      "id": "hsk4_543",
+      "lessonId": "hsk4_u6_l68",
       "hanzi": "打折",
       "pinyin": "dǎ zhé",
       "french": "Faire un rabais / vendre en solde",
@@ -10911,8 +10691,27 @@
       }
     },
     {
-      "id": "hsk4_555",
-      "lessonId": "hsk4_u6_l70",
+      "id": "hsk4_544",
+      "lessonId": "hsk4_u6_l68",
+      "hanzi": "词语",
+      "pinyin": "cí yǔ",
+      "french": "Mot / expression",
+      "example": {
+        "hanzi": "我很喜欢新词语。",
+        "pinyin": "Wǒ hěn xǐ huan xīn cí yǔ.",
+        "french": "J'aime beaucoup ce nouveau / cette nouvelle : mot.",
+        "tokens": [
+          "我",
+          "很",
+          "喜欢",
+          "新",
+          "词语"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_545",
+      "lessonId": "hsk4_u6_l69",
       "hanzi": "堵车",
       "pinyin": "dǔ chē",
       "french": "Embouteillage / congestion",
@@ -10928,30 +10727,27 @@
       }
     },
     {
-      "id": "hsk4_556",
-      "lessonId": "hsk4_u6_l70",
-      "hanzi": "个子",
-      "pinyin": "gè zi",
-      "french": "Taille / stature",
+      "id": "hsk4_546",
+      "lessonId": "hsk4_u6_l69",
+      "hanzi": "邮局",
+      "pinyin": "yóu jú",
+      "french": "Bureau de poste / la poste",
       "example": {
-        "hanzi": "他是班上个子最高的。",
-        "pinyin": "Tā shì bān shàng gè zi zuì gāo de.",
-        "french": "Il est le plus grand de la classe.",
+        "hanzi": "这个邮局很重要。",
+        "pinyin": "Zhè gè yóu jú hěn zhòng yào.",
+        "french": "Ce point « bureau de poste » est très important.",
         "tokens": [
-          "他",
-          "是",
-          "班",
-          "上",
-          "个子",
-          "最",
-          "高",
-          "的"
+          "这",
+          "个",
+          "邮局",
+          "很",
+          "重要"
         ]
       }
     },
     {
-      "id": "hsk4_557",
-      "lessonId": "hsk4_u6_l70",
+      "id": "hsk4_547",
+      "lessonId": "hsk4_u6_l69",
       "hanzi": "饺子",
       "pinyin": "jiǎo zi",
       "french": "Ravioli / gyoza",
@@ -10968,8 +10764,26 @@
       }
     },
     {
-      "id": "hsk4_558",
-      "lessonId": "hsk4_u6_l70",
+      "id": "hsk4_548",
+      "lessonId": "hsk4_u6_l69",
+      "hanzi": "应聘",
+      "pinyin": "yìng pìn",
+      "french": "Être recruté / répondre à une offre d'emploi",
+      "example": {
+        "hanzi": "大家一起应聘吧！",
+        "pinyin": "Dà jiā yī qǐ yìng pìn ba!",
+        "french": "Allons être recruté tous ensemble !",
+        "tokens": [
+          "大家",
+          "一起",
+          "应聘",
+          "吧"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_549",
+      "lessonId": "hsk4_u6_l69",
       "hanzi": "养成",
       "pinyin": "yǎng chéng",
       "french": "Acquérir (une habitude)",
@@ -10985,8 +10799,8 @@
       }
     },
     {
-      "id": "hsk4_559",
-      "lessonId": "hsk4_u6_l70",
+      "id": "hsk4_550",
+      "lessonId": "hsk4_u6_l69",
       "hanzi": "打针",
       "pinyin": "dǎ zhēn",
       "french": "Faire une piqure",
@@ -11003,8 +10817,25 @@
       }
     },
     {
-      "id": "hsk4_560",
-      "lessonId": "hsk4_u6_l70",
+      "id": "hsk4_551",
+      "lessonId": "hsk4_u6_l69",
+      "hanzi": "零钱",
+      "pinyin": "líng qián",
+      "french": "Argent de poche / monnaie",
+      "example": {
+        "hanzi": "有零钱吗？",
+        "pinyin": "Yǒu líng qián ma?",
+        "french": "Avez-vous de la petite monnaie ?",
+        "tokens": [
+          "有",
+          "零钱",
+          "吗"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_552",
+      "lessonId": "hsk4_u6_l69",
       "hanzi": "理发",
       "pinyin": "lǐ fà",
       "french": "Se faire couper les cheveux",
@@ -11021,8 +10852,8 @@
       }
     },
     {
-      "id": "hsk4_561",
-      "lessonId": "hsk4_u6_l71",
+      "id": "hsk4_553",
+      "lessonId": "hsk4_u6_l70",
       "hanzi": "语法",
       "pinyin": "yǔ fǎ",
       "french": "Grammaire",
@@ -11038,8 +10869,8 @@
       }
     },
     {
-      "id": "hsk4_562",
-      "lessonId": "hsk4_u6_l71",
+      "id": "hsk4_554",
+      "lessonId": "hsk4_u6_l70",
       "hanzi": "干杯",
       "pinyin": "gān bēi",
       "french": "Porter un toast / vider un verre",
@@ -11057,8 +10888,8 @@
       }
     },
     {
-      "id": "hsk4_563",
-      "lessonId": "hsk4_u6_l71",
+      "id": "hsk4_555",
+      "lessonId": "hsk4_u6_l70",
       "hanzi": "复印",
       "pinyin": "fù yìn",
       "french": "Photocopier",
@@ -11074,44 +10905,63 @@
       }
     },
     {
-      "id": "hsk4_564",
-      "lessonId": "hsk4_u6_l71",
-      "hanzi": "留学",
-      "pinyin": "liú xué",
-      "french": "Faire des études à l'étranger / étudier à l'étranger",
+      "id": "hsk4_556",
+      "lessonId": "hsk4_u6_l70",
+      "hanzi": "国籍",
+      "pinyin": "guó jí",
+      "french": "Nationalité",
       "example": {
-        "hanzi": "我想去留学。",
-        "pinyin": "Wǒ xiǎng qù liú xué.",
-        "french": "Je veux étudier à l'étranger.",
+        "hanzi": "大家都知道国籍。",
+        "pinyin": "Dà jiā dōu zhī dào guó jí.",
+        "french": "Tout le monde connaît : nationalité.",
         "tokens": [
-          "我",
-          "想",
-          "去",
-          "留学"
+          "大家",
+          "都",
+          "知道",
+          "国籍"
         ]
       }
     },
     {
-      "id": "hsk4_565",
-      "lessonId": "hsk4_u6_l71",
-      "hanzi": "湿润",
-      "pinyin": "shī rùn",
-      "french": "Humide",
+      "id": "hsk4_557",
+      "lessonId": "hsk4_u6_l70",
+      "hanzi": "勺子",
+      "pinyin": "sháo zi",
+      "french": "Cuillère / cuiller",
       "example": {
-        "hanzi": "请你多湿润。",
-        "pinyin": "Qǐng nǐ duō shī rùn.",
-        "french": "Veuillez souvent : humide.",
+        "hanzi": "把勺子给我。",
+        "pinyin": "Bǎ sháo zi gěi wǒ.",
+        "french": "Donne-moi la cuillère.",
         "tokens": [
-          "请",
-          "你",
-          "多",
-          "湿润"
+          "把",
+          "勺子",
+          "给",
+          "我"
         ]
       }
     },
     {
-      "id": "hsk4_566",
-      "lessonId": "hsk4_u6_l71",
+      "id": "hsk4_558",
+      "lessonId": "hsk4_u6_l70",
+      "hanzi": "包子",
+      "pinyin": "bāo zi",
+      "french": "Brioche à la vapeur / baozi",
+      "example": {
+        "hanzi": "这个包子很重要。",
+        "pinyin": "Zhè gè bāo zi hěn zhòng yào.",
+        "french": "Ce terme « brioche à la vapeur » est très important.",
+        "tokens": [
+          "这",
+          "个",
+          "包子",
+          "很",
+          "重要"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_559",
+      "lessonId": "hsk4_u6_l70",
       "hanzi": "流利",
       "pinyin": "liú lì",
       "french": "Fluide / aisé",
@@ -11129,29 +10979,25 @@
       }
     },
     {
-      "id": "hsk4_567",
-      "lessonId": "hsk4_u6_l71",
-      "hanzi": "词典",
-      "pinyin": "cí diǎn",
-      "french": "Dictionnaire / lexique",
+      "id": "hsk4_560",
+      "lessonId": "hsk4_u6_l70",
+      "hanzi": "橡皮",
+      "pinyin": "xiàng pí",
+      "french": "Gomme / caoutchouc",
       "example": {
-        "hanzi": "我有和你哥哥一样的词典。",
-        "pinyin": "Wǒ yǒu hé nǐ gē ge yī yàng de cí diǎn.",
-        "french": "J'ai le même dictionnaire que votre frère.",
+        "hanzi": "老师正在介绍橡皮。",
+        "pinyin": "Lǎo shī zhèng zài jiè shào xiàng pí.",
+        "french": "Le professeur présente : gomme.",
         "tokens": [
-          "我",
-          "有",
-          "和",
-          "你",
-          "哥哥",
-          "一样",
-          "的",
-          "词典"
+          "老师",
+          "正在",
+          "介绍",
+          "橡皮"
         ]
       }
     },
     {
-      "id": "hsk4_568",
+      "id": "hsk4_561",
       "lessonId": "hsk4_u6_l71",
       "hanzi": "凉快",
       "pinyin": "liáng kuai",
@@ -11168,8 +11014,8 @@
       }
     },
     {
-      "id": "hsk4_569",
-      "lessonId": "hsk4_u6_l72",
+      "id": "hsk4_562",
+      "lessonId": "hsk4_u6_l71",
       "hanzi": "长江",
       "pinyin": "Cháng Jiāng",
       "french": "Yangtsé / Yangzi Jiang (fleuve)",
@@ -11187,8 +11033,8 @@
       }
     },
     {
-      "id": "hsk4_570",
-      "lessonId": "hsk4_u6_l72",
+      "id": "hsk4_563",
+      "lessonId": "hsk4_u6_l71",
       "hanzi": "马虎",
       "pinyin": "mǎ hu",
       "french": "Négligent / sans soin",
@@ -11206,8 +11052,8 @@
       }
     },
     {
-      "id": "hsk4_571",
-      "lessonId": "hsk4_u6_l72",
+      "id": "hsk4_564",
+      "lessonId": "hsk4_u6_l71",
       "hanzi": "寒假",
       "pinyin": "hán jià",
       "french": "Vacances d'hiver",
@@ -11224,8 +11070,8 @@
       }
     },
     {
-      "id": "hsk4_572",
-      "lessonId": "hsk4_u6_l72",
+      "id": "hsk4_565",
+      "lessonId": "hsk4_u6_l71",
       "hanzi": "粗心",
       "pinyin": "cū xīn",
       "french": "Négligent / Étourdi",
@@ -11243,8 +11089,26 @@
       }
     },
     {
-      "id": "hsk4_573",
-      "lessonId": "hsk4_u6_l72",
+      "id": "hsk4_566",
+      "lessonId": "hsk4_u6_l71",
+      "hanzi": "烤鸭",
+      "pinyin": "kǎo yā",
+      "french": "Canard laqué",
+      "example": {
+        "hanzi": "我们讨论过烤鸭。",
+        "pinyin": "Wǒ men tǎo lùn guo kǎo yā.",
+        "french": "Nous avons déjà abordé : canard laqué.",
+        "tokens": [
+          "我们",
+          "讨论",
+          "过",
+          "烤鸭"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_567",
+      "lessonId": "hsk4_u6_l71",
       "hanzi": "预习",
       "pinyin": "yù xí",
       "french": "Préparer une leçon avant la classe (en tant qu'élève)",
@@ -11260,7 +11124,26 @@
       }
     },
     {
-      "id": "hsk4_574",
+      "id": "hsk4_568",
+      "lessonId": "hsk4_u6_l71",
+      "hanzi": "占线",
+      "pinyin": "zhàn xiàn",
+      "french": "Occupée",
+      "example": {
+        "hanzi": "明天再占线好吗？",
+        "pinyin": "Míng tiān zài zhàn xiàn hǎo ma?",
+        "french": "Et si on remettait à demain pour occupée ?",
+        "tokens": [
+          "明天",
+          "再",
+          "占线",
+          "好",
+          "吗"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_569",
       "lessonId": "hsk4_u6_l72",
       "hanzi": "京剧",
       "pinyin": "Jīng jù",
@@ -11279,26 +11162,7 @@
       }
     },
     {
-      "id": "hsk4_575",
-      "lessonId": "hsk4_u6_l72",
-      "hanzi": "分之",
-      "pinyin": "fēn zhī",
-      "french": "Partie d'un tout (indique une fraction) / ième",
-      "example": {
-        "hanzi": "老师有一个分之。",
-        "pinyin": "Lǎo shī yǒu yī gè fēn zhī.",
-        "french": "Le professeur a : partie d'un tout (indique une fraction).",
-        "tokens": [
-          "老师",
-          "有",
-          "一",
-          "个",
-          "分之"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_576",
+      "id": "hsk4_570",
       "lessonId": "hsk4_u6_l72",
       "hanzi": "填空",
       "pinyin": "tián kòng",
@@ -11315,8 +11179,27 @@
       }
     },
     {
-      "id": "hsk4_577",
-      "lessonId": "hsk4_u6_l73",
+      "id": "hsk4_571",
+      "lessonId": "hsk4_u6_l72",
+      "hanzi": "短信",
+      "pinyin": "duǎn xìn",
+      "french": "Message texte / texto",
+      "example": {
+        "hanzi": "我很喜欢新短信。",
+        "pinyin": "Wǒ hěn xǐ huan xīn duǎn xìn.",
+        "french": "J'aime beaucoup ce nouveau / cette nouvelle : message texte.",
+        "tokens": [
+          "我",
+          "很",
+          "喜欢",
+          "新",
+          "短信"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_572",
+      "lessonId": "hsk4_u6_l72",
       "hanzi": "不得不",
       "pinyin": "bù dé bù",
       "french": "Être obligé de",
@@ -11334,8 +11217,8 @@
       }
     },
     {
-      "id": "hsk4_578",
-      "lessonId": "hsk4_u6_l73",
+      "id": "hsk4_573",
+      "lessonId": "hsk4_u6_l72",
       "hanzi": "差不多",
       "pinyin": "chà bu duō",
       "french": "À peu près",
@@ -11354,8 +11237,8 @@
       }
     },
     {
-      "id": "hsk4_579",
-      "lessonId": "hsk4_u6_l73",
+      "id": "hsk4_574",
+      "lessonId": "hsk4_u6_l72",
       "hanzi": "巧克力",
       "pinyin": "qiǎo kè lì",
       "french": "Chocolat",
@@ -11373,8 +11256,8 @@
       }
     },
     {
-      "id": "hsk4_580",
-      "lessonId": "hsk4_u6_l73",
+      "id": "hsk4_575",
+      "lessonId": "hsk4_u6_l72",
       "hanzi": "受不了",
       "pinyin": "shòu bù liǎo",
       "french": "Insupportable / Ne plus supporter",
@@ -11390,8 +11273,8 @@
       }
     },
     {
-      "id": "hsk4_581",
-      "lessonId": "hsk4_u6_l73",
+      "id": "hsk4_576",
+      "lessonId": "hsk4_u6_l72",
       "hanzi": "开玩笑",
       "pinyin": "kāi wán xiào",
       "french": "Plaisanter",
@@ -11411,43 +11294,48 @@
       }
     },
     {
-      "id": "hsk4_582",
+      "id": "hsk4_577",
       "lessonId": "hsk4_u6_l73",
-      "hanzi": "笔记本",
-      "pinyin": "bǐ jì běn",
-      "french": "Notebook / (ordinateur) portable",
+      "hanzi": "小伙子",
+      "pinyin": "xiǎo huǒ zi",
+      "french": "Jeune homme / jeunot",
       "example": {
-        "hanzi": "我们今天看笔记本。",
-        "pinyin": "Wǒ men jīn tiān kàn bǐ jì běn.",
-        "french": "Aujourd'hui nous voyons : notebook.",
+        "hanzi": "他不像是一个聪明的小伙子。",
+        "pinyin": "Tā bù xiàng shì yī gè cōng ming de xiǎo huǒ zi.",
+        "french": "Il ne ressemble pas à un garçon intelligent.",
+        "tokens": [
+          "他",
+          "不",
+          "像",
+          "是",
+          "一",
+          "个",
+          "聪明",
+          "的",
+          "小伙子"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_578",
+      "lessonId": "hsk4_u6_l73",
+      "hanzi": "互联网",
+      "pinyin": "Hù lián wǎng",
+      "french": "Internet",
+      "example": {
+        "hanzi": "我们讨论过互联网。",
+        "pinyin": "Wǒ men tǎo lùn guo Hù lián wǎng.",
+        "french": "Nous avons déjà abordé : internet.",
         "tokens": [
           "我们",
-          "今天",
-          "看",
-          "笔记本"
+          "讨论",
+          "过",
+          "互联网"
         ]
       }
     },
     {
-      "id": "hsk4_583",
-      "lessonId": "hsk4_u6_l73",
-      "hanzi": "信用卡",
-      "pinyin": "xìn yòng kǎ",
-      "french": "Carte de crédit",
-      "example": {
-        "hanzi": "学校里有信用卡。",
-        "pinyin": "Xué xiào lǐ yǒu xìn yòng kǎ.",
-        "french": "Il y a : carte de crédit à l'école.",
-        "tokens": [
-          "学校",
-          "里",
-          "有",
-          "信用卡"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_584",
+      "id": "hsk4_579",
       "lessonId": "hsk4_u6_l73",
       "hanzi": "来不及",
       "pinyin": "lái bu jí",
@@ -11464,8 +11352,8 @@
       }
     },
     {
-      "id": "hsk4_585",
-      "lessonId": "hsk4_u6_l74",
+      "id": "hsk4_580",
+      "lessonId": "hsk4_u6_l73",
       "hanzi": "来得及",
       "pinyin": "lái de jí",
       "french": "Avoir le temps de",
@@ -11482,26 +11370,27 @@
       }
     },
     {
-      "id": "hsk4_586",
-      "lessonId": "hsk4_u6_l74",
-      "hanzi": "研究生",
-      "pinyin": "yán jiū shēng",
-      "french": "Doctorant / étudiant chercheur",
+      "id": "hsk4_581",
+      "lessonId": "hsk4_u6_l73",
+      "hanzi": "卫生间",
+      "pinyin": "wèi shēng jiān",
+      "french": "Salle de bains / toilettes",
       "example": {
-        "hanzi": "我们讨论过研究生。",
-        "pinyin": "Wǒ men tǎo lùn guo yán jiū shēng.",
-        "french": "Nous avons déjà abordé : doctorant.",
+        "hanzi": "这个卫生间很好。",
+        "pinyin": "Zhè gè wèi shēng jiān hěn hǎo.",
+        "french": "Ce terme « salle de bains » est très bien.",
         "tokens": [
-          "我们",
-          "讨论",
-          "过",
-          "研究生"
+          "这",
+          "个",
+          "卫生间",
+          "很",
+          "好"
         ]
       }
     },
     {
-      "id": "hsk4_587",
-      "lessonId": "hsk4_u6_l74",
+      "id": "hsk4_582",
+      "lessonId": "hsk4_u6_l73",
       "hanzi": "加油站",
       "pinyin": "jiā yóu zhàn",
       "french": "Station-service / station d'essence",
@@ -11518,27 +11407,26 @@
       }
     },
     {
-      "id": "hsk4_588",
-      "lessonId": "hsk4_u6_l74",
-      "hanzi": "做生意",
-      "pinyin": "zuò shēng yì",
-      "french": "Faire des affaires",
+      "id": "hsk4_583",
+      "lessonId": "hsk4_u6_l73",
+      "hanzi": "打招呼",
+      "pinyin": "dǎ zhāo hu",
+      "french": "Saluer / faire un signe de la main",
       "example": {
-        "hanzi": "我很喜欢新做生意。",
-        "pinyin": "Wǒ hěn xǐ huan xīn zuò shēng yì.",
-        "french": "J'aime beaucoup ce nouveau / cette nouvelle : faire des affaires.",
+        "hanzi": "大家一起打招呼吧！",
+        "pinyin": "Dà jiā yī qǐ dǎ zhāo hu ba!",
+        "french": "Allons saluer tous ensemble !",
         "tokens": [
-          "我",
-          "很",
-          "喜欢",
-          "新",
-          "做生意"
+          "大家",
+          "一起",
+          "打招呼",
+          "吧"
         ]
       }
     },
     {
-      "id": "hsk4_589",
-      "lessonId": "hsk4_u6_l74",
+      "id": "hsk4_584",
+      "lessonId": "hsk4_u6_l73",
       "hanzi": "乒乓球",
       "pinyin": "pīng pāng qiú",
       "french": "Tennis de table / ping-pong",
@@ -11556,25 +11444,7 @@
       }
     },
     {
-      "id": "hsk4_590",
-      "lessonId": "hsk4_u6_l74",
-      "hanzi": "洗衣机",
-      "pinyin": "xǐ yī jī",
-      "french": "Machine à laver le linge",
-      "example": {
-        "hanzi": "我们讨论过洗衣机。",
-        "pinyin": "Wǒ men tǎo lùn guo xǐ yī jī.",
-        "french": "Nous avons déjà abordé : machine à laver le linge.",
-        "tokens": [
-          "我们",
-          "讨论",
-          "过",
-          "洗衣机"
-        ]
-      }
-    },
-    {
-      "id": "hsk4_591",
+      "id": "hsk4_585",
       "lessonId": "hsk4_u6_l74",
       "hanzi": "西红柿",
       "pinyin": "xī hóng shì",
@@ -11593,7 +11463,7 @@
       }
     },
     {
-      "id": "hsk4_592",
+      "id": "hsk4_586",
       "lessonId": "hsk4_u6_l74",
       "hanzi": "大使馆",
       "pinyin": "dà shǐ guǎn",
@@ -11611,8 +11481,8 @@
       }
     },
     {
-      "id": "hsk4_593",
-      "lessonId": "hsk4_u6_l75",
+      "id": "hsk4_587",
+      "lessonId": "hsk4_u6_l74",
       "hanzi": "垃圾桶",
       "pinyin": "lā jī tǒng",
       "french": "Poubelle",
@@ -11630,8 +11500,8 @@
       }
     },
     {
-      "id": "hsk4_594",
-      "lessonId": "hsk4_u6_l75",
+      "id": "hsk4_588",
+      "lessonId": "hsk4_u6_l74",
       "hanzi": "塑料袋",
       "pinyin": "sù liào dài",
       "french": "Sac plastique",
@@ -11649,8 +11519,46 @@
       }
     },
     {
-      "id": "hsk4_595",
-      "lessonId": "hsk4_u6_l75",
+      "id": "hsk4_589",
+      "lessonId": "hsk4_u6_l74",
+      "hanzi": "矿泉水",
+      "pinyin": "kuàng quán shuǐ",
+      "french": "Eau minérale",
+      "example": {
+        "hanzi": "这个矿泉水很重要。",
+        "pinyin": "Zhè gè kuàng quán shuǐ hěn zhòng yào.",
+        "french": "Ce point « eau minérale » est très important.",
+        "tokens": [
+          "这",
+          "个",
+          "矿泉水",
+          "很",
+          "重要"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_590",
+      "lessonId": "hsk4_u6_l74",
+      "hanzi": "普通话",
+      "pinyin": "pǔ tōng huà",
+      "french": "Mandarin / putonghua",
+      "example": {
+        "hanzi": "您会讲普通话吗？",
+        "pinyin": "Nín huì jiǎng pǔ tōng huà ma?",
+        "french": "Savez-vous parler le mandarin ?",
+        "tokens": [
+          "您",
+          "会",
+          "讲",
+          "普通话",
+          "吗"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_591",
+      "lessonId": "hsk4_u6_l74",
       "hanzi": "羽毛球",
       "pinyin": "yǔ máo qiú",
       "french": "Badminton",
@@ -11667,8 +11575,8 @@
       }
     },
     {
-      "id": "hsk4_596",
-      "lessonId": "hsk4_u6_l75",
+      "id": "hsk4_592",
+      "lessonId": "hsk4_u6_l74",
       "hanzi": "售货员",
       "pinyin": "shòu huò yuán",
       "french": "Vendeur",
@@ -11687,25 +11595,83 @@
       }
     },
     {
-      "id": "hsk4_597",
+      "id": "hsk4_593",
       "lessonId": "hsk4_u6_l75",
-      "hanzi": "人民币",
-      "pinyin": "rén mín bì",
-      "french": "RMB / monnaie du peuple",
+      "hanzi": "登机牌",
+      "pinyin": "dēng jī pái",
+      "french": "Carte d'embarquement",
       "example": {
-        "hanzi": "我们讨论过人民币。",
-        "pinyin": "Wǒ men tǎo lùn guo rén mín bì.",
-        "french": "Nous avons déjà abordé : rMB.",
+        "hanzi": "这个登机牌很重要。",
+        "pinyin": "Zhè gè dēng jī pái hěn zhòng yào.",
+        "french": "Ce terme « carte d'embarquement » est très important.",
         "tokens": [
-          "我们",
-          "讨论",
-          "过",
-          "人民币"
+          "这",
+          "个",
+          "登机牌",
+          "很",
+          "重要"
         ]
       }
     },
     {
-      "id": "hsk4_598",
+      "id": "hsk4_594",
+      "lessonId": "hsk4_u6_l75",
+      "hanzi": "礼拜天",
+      "pinyin": "Lǐ bài tiān",
+      "french": "Dimanche",
+      "example": {
+        "hanzi": "她很喜欢礼拜天。",
+        "pinyin": "Tā hěn xǐ huan Lǐ bài tiān.",
+        "french": "Elle aime beaucoup : dimanche.",
+        "tokens": [
+          "她",
+          "很",
+          "喜欢",
+          "礼拜天"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_595",
+      "lessonId": "hsk4_u6_l75",
+      "hanzi": "弹钢琴",
+      "pinyin": "tán gāngqín",
+      "french": "Jouer du piano",
+      "example": {
+        "hanzi": "您能教我弹钢琴吗？",
+        "pinyin": "Nín néng jiāo wǒ tán gāngqín ma?",
+        "french": "Pouvez-vous m'apprendre à jouer du piano ?",
+        "tokens": [
+          "您",
+          "能",
+          "教",
+          "我",
+          "弹钢琴",
+          "吗"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_596",
+      "lessonId": "hsk4_u6_l75",
+      "hanzi": "百分之",
+      "pinyin": "bǎifēnzhī",
+      "french": "Pourcent / (%)",
+      "example": {
+        "hanzi": "这个百分之很重要。",
+        "pinyin": "Zhè gè bǎifēnzhī hěn zhòng yào.",
+        "french": "Ce terme « pourcent » est très important.",
+        "tokens": [
+          "这",
+          "个",
+          "百分之",
+          "很",
+          "重要"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_597",
       "lessonId": "hsk4_u6_l75",
       "hanzi": "放暑假",
       "pinyin": "fàng shǔ jià",
@@ -11719,6 +11685,24 @@
           "都",
           "知道",
           "放暑假"
+        ]
+      }
+    },
+    {
+      "id": "hsk4_598",
+      "lessonId": "hsk4_u6_l75",
+      "hanzi": "高速公路",
+      "pinyin": "gāo sù gōng lù",
+      "french": "Autoroute",
+      "example": {
+        "hanzi": "老师经常讲高速公路。",
+        "pinyin": "Lǎo shī jīng cháng jiǎng gāo sù gōng lù.",
+        "french": "Le professeur explique souvent : autoroute.",
+        "tokens": [
+          "老师",
+          "经常",
+          "讲",
+          "高速公路"
         ]
       }
     }

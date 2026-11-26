@@ -107,7 +107,9 @@ class CatalogJsonParsingTest {
     fun `hsk1 to hsk5 example tokens strictly stay within cumulative HSK 1 to N vocabulary`() {
         val json = Json { ignoreUnknownKeys = true }
         val digitsRegex = Regex("^[零一二两三四五六七八九十百千万0-9]+$")
-        val allowedSimpleProperNouns = setOf("中国", "北京", "上海", "小明", "小王", "小李", "法国", "巴黎")
+        val allowedSimpleProperNouns = setOf(
+            "中国", "北京", "上海", "小明", "小王", "小李", "法国", "巴黎", "天", "黄河",
+        )
 
         val catalogsByLevel = (1..6).associateWith { level ->
             val candidates = listOf(
@@ -155,11 +157,15 @@ class CatalogJsonParsingTest {
     fun `all hsk1 to hsk6 words have valid non-surname pinyin french and matching example pinyin`() {
         val json = Json { ignoreUnknownKeys = true }
         val allowedProperNouns = setOf(
-            "中国", "北京", "汉语", "中文", "亚洲", "京剧", "长城", "长江",
+            "中国", "北京", "汉语", "中文", "黄河", "亚洲", "京剧", "长城", "长江",
             "元旦", "华裔", "国庆节", "礼拜天", "除夕", "互联网", "元宵节", "华侨",
             "国务院", "摄氏度", "欧洲", "正月", "端午节", "重阳节",
         )
         val surnameRegex = Regex("nom de famille|patronyme", RegexOption.IGNORE_CASE)
+        val vulgarOrSlangRegex = Regex(
+            """(\(argot\)|\(vulg\.?\)|\(fam\.?\)|radical\)|\bputain\b|\bmerde\b|\bbordel\b|\bsalope\b|\bconnard\w*\b|\bconnasse\b|\bencul\w*\b|\bnichons?\b|\bbranl\w*\b|\bculotte\b|\bporn\w*\b|\bpénis\b|\bvagin\b|\bcouille\w*\b|\bchatte\b|\bbite\b|\bchier\b|\bchiant\w*\b|\bfoutre\b|\bfous\b|\bfout\b|\bgueule\b|\bpisse\w*\b|\bcaca\b|\bpipi\b|\bsapes\b)""",
+            RegexOption.IGNORE_CASE,
+        )
         val sandhiOrParticleWords = setOf(
             "一", "不", "的", "了", "吗", "呢", "吧", "着", "过", "得", "地", "啊",
             "嘛", "哇", "啦", "哦", "嗯",
@@ -189,6 +195,15 @@ class CatalogJsonParsingTest {
                 }
                 if (surnameRegex.containsMatchIn(word.french) && word.hanzi != "姓") {
                     issues += "HSK$level ${word.id} (${word.hanzi}): traduction nom de famille '${word.french}'"
+                }
+                if (vulgarOrSlangRegex.containsMatchIn(word.french)) {
+                    issues += "HSK$level ${word.id} (${word.hanzi}): traduction vulgaire/argot '${word.french}'"
+                }
+                if (vulgarOrSlangRegex.containsMatchIn(word.example.french)) {
+                    issues += "HSK$level ${word.id} (${word.hanzi}): exemple vulgaire/argot '${word.example.french}'"
+                }
+                if (level in 1..2 && word.example.french.contains(" : ")) {
+                    issues += "HSK$level ${word.id} (${word.hanzi}): gabarit mécanique '${word.example.french}'"
                 }
                 if (word.hanzi !in word.example.tokens) {
                     issues += "HSK$level ${word.id} (${word.hanzi}): mot absent de example.tokens"

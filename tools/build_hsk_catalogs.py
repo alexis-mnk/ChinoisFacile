@@ -28,6 +28,7 @@ from pypinyin import Style, pinyin as pypinyin_fn
 REPO_ROOT = Path(__file__).resolve().parent.parent
 CATALOG_DIR = REPO_ROOT / "app" / "src" / "main" / "assets" / "catalog"
 CACHE_DIR = Path(__file__).resolve().parent / ".cache"
+DATA_DIR = Path(__file__).resolve().parent / "data"
 
 HSK_URL = "https://raw.githubusercontent.com/drkameleon/complete-hsk-vocabulary/main/complete.min.json"
 CFDICT_URL = "https://chine.in/assets/cfdict/cfdict.u8"
@@ -46,7 +47,7 @@ NEUTRAL_TONE_PARTICLES = {"ma", "ne", "de", "le", "ba", "zhe", "guo", "a", "ya",
 
 LESSON_SIZES = {1: 5, 2: 5, 3: 5, 4: 8, 5: 10, 6: 10}
 
-# Progression pédagogique curatée des 150 mots officiels HSK 1 (6 unités × 5 leçons × 5 mots)
+# Progression pédagogique curatée des 150 mots officiels Hanban 2012 HSK 1 (6 unités × 5 leçons × 5 mots)
 HSK1_CURATED_UNITS: list[tuple[str, str, list[tuple[str, list[str]]]]] = [
     (
         "Unité 1 — Salutations, Pronoms & Bases",
@@ -55,7 +56,7 @@ HSK1_CURATED_UNITS: list[tuple[str, str, list[tuple[str, list[str]]]]] = [
             ("Leçon 1 — Salutations et politesse", ["你", "好", "谢谢", "再见", "喂"]),
             ("Leçon 2 — Excuses et courtoisie", ["请", "对不起", "没关系", "不客气", "高兴"]),
             ("Leçon 3 — Pronoms et être", ["我", "他", "她", "我们", "是"]),
-            ("Leçon 4 — Négation et questions", ["不", "没", "吗", "呢", "谁"]),
+            ("Leçon 4 — Négation et questions", ["不", "没有", "吗", "呢", "谁"]),
             ("Leçon 5 — Identité et démonstratifs", ["叫", "什么", "名字", "这", "那"]),
         ],
     ),
@@ -74,11 +75,11 @@ HSK1_CURATED_UNITS: list[tuple[str, str, list[tuple[str, list[str]]]]] = [
         "Unité 3 — Chiffres, Dates & Heures",
         "Compter, donner l'heure, la date et son âge.",
         [
-            ("Leçon 11 — Chiffres 0 à 4", ["零", "一", "二", "三", "四"]),
-            ("Leçon 12 — Chiffres 5 à 10", ["五", "六", "七", "八", "九"]),
-            ("Leçon 13 — Dizaines et âge", ["十", "几", "多少", "岁", "个"]),
-            ("Leçon 14 — Dates et calendrier", ["年", "月", "日", "星期", "今天"]),
-            ("Leçon 15 — Heures et moments", ["明天", "昨天", "现在", "点", "分钟"]),
+            ("Leçon 11 — Chiffres 1 à 5", ["一", "二", "三", "四", "五"]),
+            ("Leçon 12 — Chiffres 6 à 10", ["六", "七", "八", "九", "十"]),
+            ("Leçon 13 — Quantités et âge", ["几", "多少", "岁", "个", "号"]),
+            ("Leçon 14 — Dates et calendrier", ["年", "月", "星期", "今天", "明天"]),
+            ("Leçon 15 — Heures et moments", ["昨天", "现在", "点", "分钟", "一点儿"]),
         ],
     ),
     (
@@ -86,20 +87,20 @@ HSK1_CURATED_UNITS: list[tuple[str, str, list[tuple[str, list[str]]]]] = [
         "Se repérer dans l'espace et décrire son quotidien.",
         [
             ("Leçon 16 — Moments du jour", ["上午", "中午", "下午", "时候", "了"]),
-            ("Leçon 17 — Pays et lieux publics", ["中国", "北京", "饭馆", "商店", "医院"]),
-            ("Leçon 18 — Transports et déplacements", ["学校", "火车站", "飞机", "出租车", "电影"]),
-            ("Leçon 19 — Repères spatiaux", ["哪", "里", "前面", "后面", "上"]),
-            ("Leçon 20 — Meubles et objets", ["下", "桌子", "椅子", "杯子", "东西"]),
+            ("Leçon 17 — Pays et lieux publics", ["中国", "北京", "饭店", "商店", "医院"]),
+            ("Leçon 18 — Transports et logement", ["学校", "飞机", "出租车", "电影", "住"]),
+            ("Leçon 19 — Repères spatiaux", ["哪", "哪儿", "里", "前面", "后面"]),
+            ("Leçon 20 — Meubles et objets", ["上", "下", "桌子", "椅子", "杯子"]),
         ],
     ),
     (
         "Unité 5 — Actions, Achats & Météo",
         "Exprimer ses actions quotidiennes, faire des achats et parler du temps.",
         [
-            ("Leçon 21 — Déplacements et métiers", ["去", "来", "回", "住", "坐"]),
+            ("Leçon 21 — Déplacements et regard", ["去", "来", "回", "坐", "看"]),
             ("Leçon 22 — Travail et études", ["工作", "学习", "老师", "学生", "医生"]),
-            ("Leçon 23 — Perception et lecture", ["看", "看见", "听", "说话", "读"]),
-            ("Leçon 24 — Écrire, dormir et appeler", ["写", "字", "书", "睡觉", "打电话"]),
+            ("Leçon 23 — Perception et langage", ["看见", "听", "说", "读", "写"]),
+            ("Leçon 24 — Livres, sommeil et appels", ["字", "书", "睡觉", "打电话", "东西"]),
             ("Leçon 25 — Achats, argent et météo", ["买", "钱", "块", "天气", "下雨"]),
         ],
     ),
@@ -112,6 +113,76 @@ HSK1_CURATED_UNITS: list[tuple[str, str, list[tuple[str, list[str]]]]] = [
             ("Leçon 28 — Sensations et verbes d'action", ["冷", "热", "做", "开", "有"]),
             ("Leçon 29 — Capacité et connaissance", ["在", "会", "能", "想", "认识"]),
             ("Leçon 30 — Langue et connecteurs", ["汉语", "和", "都", "怎么", "怎么样"]),
+        ],
+    ),
+]
+
+# Progression pédagogique douce des 151 mots officiels Hanban 2012 HSK 2 (concret -> abstrait)
+HSK2_CURATED_UNITS: list[tuple[str, str, list[tuple[str, list[str]]]]] = [
+    (
+        "Unité 1 — Premiers échanges & Bases simples",
+        "Personnes, verbes courants et adverbes usuels du quotidien.",
+        [
+            ("Leçon 1 — Politesse et personnes", ["您", "大家", "男", "女", "孩子"]),
+            ("Leçon 2 — Verbes essentiels", ["要", "可以", "知道", "觉得", "希望"]),
+            ("Leçon 3 — Adverbes simples", ["也", "真", "非常", "最", "两"]),
+            ("Leçon 4 — Famille et proches", ["哥哥", "姐姐", "弟弟", "妹妹", "丈夫"]),
+            ("Leçon 5 — Présentation et identité", ["妻子", "姓", "介绍", "它", "快乐"]),
+        ],
+    ),
+    (
+        "Unité 2 — Temps, Chiffres & Repères",
+        "Chiffres, durées, calendrier et repères dans l'espace.",
+        [
+            ("Leçon 6 — Chiffres et ordre", ["零", "百", "千", "第一", "次"]),
+            ("Leçon 7 — Calendrier et moments", ["日", "去年", "生日", "早上", "晚上", "时间"]),
+            ("Leçon 8 — Durée et rythme", ["小时", "每", "开始", "准备", "完"]),
+            ("Leçon 9 — Lieu et direction", ["旁边", "外", "左边", "右边", "往"]),
+            ("Leçon 10 — Distance et position", ["近", "远", "离", "到", "进"]),
+        ],
+    ),
+    (
+        "Unité 3 — Nourriture, Objets & Achats",
+        "Boissons, repas, vêtements, objets du quotidien et couleurs.",
+        [
+            ("Leçon 11 — Boissons et repas", ["咖啡", "牛奶", "鸡蛋", "面条", "鱼"]),
+            ("Leçon 12 — Fruits, plats et restaurant", ["羊肉", "西瓜", "好吃", "服务员", "贵"]),
+            ("Leçon 13 — Prix et vêtements", ["便宜", "卖", "件", "穿", "洗"]),
+            ("Leçon 14 — Objets du quotidien", ["手机", "手表", "铅笔", "报纸", "新"]),
+            ("Leçon 15 — Couleurs et apparence", ["颜色", "红", "白", "黑", "长"]),
+        ],
+    ),
+    (
+        "Unité 4 — Lieux, Transports & Santé",
+        "Bâtiments, déplacements, météo, corps et santé.",
+        [
+            ("Leçon 16 — Maison et bâtiments", ["门", "房间", "教室", "公司", "宾馆"]),
+            ("Leçon 17 — Transports et trajets", ["火车站", "机场", "公共汽车", "路", "票"]),
+            ("Leçon 18 — Déplacements et actions", ["旅游", "走", "出", "送", "找"]),
+            ("Leçon 19 — Météo et traits physiques", ["晴", "阴", "雪", "高", "眼睛"]),
+            ("Leçon 20 — Corps, santé et repos", ["身体", "生病", "药", "累", "休息"]),
+        ],
+    ),
+    (
+        "Unité 5 — Activités, Études & Communication",
+        "Routine, sports, loisirs, études et échanges.",
+        [
+            ("Leçon 21 — Routine et travail", ["起床", "上班", "忙", "笑", "玩"]),
+            ("Leçon 22 — Sports et loisirs", ["运动", "跑步", "游泳", "踢足球", "打篮球"]),
+            ("Leçon 23 — Musique et études", ["唱歌", "跳舞", "课", "考试", "题"]),
+            ("Leçon 24 — Communication", ["说话", "问", "问题", "告诉", "懂"]),
+            ("Leçon 25 — Entraide et sens", ["帮助", "意思", "事情", "对", "等"]),
+        ],
+    ),
+    (
+        "Unité 6 — Grammaire, Nuances & Connecteurs",
+        "Aspects verbaux, comparaisons, nuances et connecteurs logiques.",
+        [
+            ("Leçon 26 — Temps et durée d'action", ["正在", "已经", "过", "着", "一下"]),
+            ("Leçon 27 — Adverbes et vitesse", ["还", "再", "一起", "快", "慢"]),
+            ("Leçon 28 — Structures et comparaison", ["就", "从", "比", "得", "错"]),
+            ("Leçon 29 — Interaction et modalité", ["给", "让", "别", "吧", "可能"]),
+            ("Leçon 30 — Cause, concession et logique", ["为什么", "因为", "所以", "虽然", "但是"]),
         ],
     ),
 ]
@@ -391,6 +462,9 @@ FRENCH_FALLBACK: dict[str, str] = {
     "纽扣儿": "Bouton (vêtement)",
     "摊儿": "Étal / Stand",
     "致力于": "Se consacrer à / S'engager pour",
+    "烟花爆竹": "Feux d'artifice et pétards",
+    "侃侃而谈": "Parler avec assurance et aisance",
+    "儒家": "École confucéenne / Confucianisme",
 }
 
 
@@ -410,10 +484,14 @@ def download_cached(url: str, filename: str) -> Path:
 
 
 SURNAME_RE = re.compile(r"nom de famille|patronyme|prénom", re.IGNORECASE)
+VULGAR_OR_SLANG_RE = re.compile(
+    r"(\(argot\)|\(vulg\.?\)|\(fam\.?\)|radical\)|\bputain\b|\bmerde\b|\bbordel\b|\bsalope\b|\bconnard\w*\b|\bconnasse\b|\bencul\w*\b|\bnichons?\b|\bbranl\w*\b|\bculotte\b|\bporn\w*\b|\bpénis\b|\bvagin\b|\bcouille\w*\b|\bchatte\b|\bbite\b|\bchier\b|\bchiant\w*\b|\bfoutre\b|\bfous\b|\bfout\b|\bgueule\b|\bpisse\w*\b|\bcaca\b|\bpipi\b|\bsalaud\b|\benfoiré\w*\b|\bbâtard\w*\b|\bnique\w*\b|\bpétasse\b|\bgarce\b|\bdégueulasse\b|\bemmerd\w*\b|\bculs?\b|\bprostitu\w*\b|\bsapes\b|\bcon\b|\bcons\b|\bconne\b)",
+    re.IGNORECASE,
+)
 
 # Seuls vrais noms propres HSK 1..6 autorisant une majuscule dans le pinyin
 ALLOWED_PROPER_NOUNS = {
-    "中国", "北京", "汉语", "中文", "亚洲", "京剧", "长城", "长江",
+    "中国", "北京", "汉语", "中文", "黄河", "亚洲", "京剧", "长城", "长江",
     "元旦", "华裔", "国庆节", "礼拜天", "除夕", "互联网", "元宵节", "华侨",
     "国务院", "摄氏度", "欧洲", "正月", "端午节", "重阳节",
 }
@@ -421,6 +499,11 @@ ALLOWED_PROPER_NOUNS = {
 # Table explicite de référence pour les polyphones clés (lecture standard HSK, pinyin numéroté minuscule)
 PREFERRED_PINYIN: dict[str, str] = {
     # Polyphones principaux HSK 1-4 demandés + cas audités
+    "喝": "he1",
+    "说": "shuo1",
+    "没有": "mei2you3",
+    "一点儿": "yi1dian3r5",
+    "哪儿": "na3r5",
     "还": "hai2",
     "都": "dou1",
     "长": "chang2",
@@ -443,6 +526,12 @@ PREFERRED_PINYIN: dict[str, str] = {
     "分": "fen1",
     "教": "jiao1",
     "过": "guo5",
+    "对": "dui4",
+    "等": "deng3",
+    "往": "wang3",
+    "错": "cuo4",
+    "一下": "yi1xia4",
+    "得罪": "de2zui5",
     "假": "jia3",
     "种": "zhong3",
     "倒": "dao3",
@@ -619,9 +708,31 @@ PREFERRED_PINYIN: dict[str, str] = {
 
 # Traductions françaises explicites pour les polyphones/cas sensibles (prioritaires sur CFDICT)
 FRENCH_OVERRIDES: dict[str, str] = {
+    "喝": "Boire",
+    "不客气": "De rien / Je vous en prie",
+    "吗": "Particule interrogative (est-ce que)",
+    "叫": "S'appeler / Appeler",
+    "那": "Ce ...-là / Cela",
+    "个": "Classificateur général",
+    "点": "Heure / Point / Un peu",
+    "上": "Sur / Dessus / Monter",
+    "回": "Revenir / Rentrer",
+    "本": "Classificateur des livres",
+    "能": "Pouvoir / Être capable de",
+    "想": "Vouloir / Penser",
+    "猫": "Chat",
+    "狗": "Chien",
+    "二": "Deux",
+    "飞机": "Avion",
+    "没有": "Ne pas avoir / Ne pas (passé)",
+    "一点儿": "Un peu",
+    "哪儿": "Où",
+    "说": "Dire / Parler",
+    "饭店": "Restaurant / Hôtel",
     "还": "Encore / Toujours",
     "都": "Tous / Tout",
-    "长": "Long / Longueur",
+    "长": "Long",
+    "晴": "Ensoleillé / Clair (météo)",
     "只": "Seulement / Uniquement",
     "没": "Ne pas (avoir / passé)",
     "得": "Particule de degré",
@@ -666,6 +777,35 @@ FRENCH_OVERRIDES: dict[str, str] = {
     "张": "Ouvrir / Classificateur (objets plats)",
     "比": "Comparer / Que",
     "别": "Ne pas (impératif) / Autre",
+    "让": "Laisser / Faire faire",
+    "穿": "Porter (un vêtement) / S'habiller",
+    "累": "Fatigué",
+    "鸡蛋": "Œuf",
+    "踢足球": "Jouer au football",
+    "一下": "Un instant / Un peu",
+    "男": "Masculin / Homme",
+    "女": "Féminin / Femme",
+    "对": "Juste / Correct / Envers",
+    "等": "Attendre / Etc.",
+    "往": "Vers / En direction de",
+    "面条": "Nouilles",
+    "铅笔": "Crayon",
+    "宾馆": "Hôtel",
+    "刷牙": "Se brosser les dents",
+    "刮风": "Venter / Le vent souffle",
+    "只有": "Seulement si / Il n'y a que",
+    "感兴趣": "S'intéresser à",
+    "电子邮件": "Courriel / E-mail",
+    "黄河": "Fleuve Jaune",
+    "鸟": "Oiseau",
+    "裤子": "Pantalon",
+    "春": "Printemps",
+    "玻璃": "Verre",
+    "屁股": "Fesses / Postérieur",
+    "犬": "Chien",
+    "得罪": "Offenser / Froisser",
+    "正当": "Légitime / Honnête",
+    "幢": "Classificateur des immeubles / bâtiments",
     "孙子": "Petit-fils",
     "奶奶": "Grand-mère paternelle",
     "脏": "Sale",
@@ -746,7 +886,7 @@ def clean_cfdict_sense(raw: str) -> str | None:
     s = raw.strip()
     if not s:
         return None
-    if SURNAME_RE.search(s):
+    if SURNAME_RE.search(s) or VULGAR_OR_SLANG_RE.search(s):
         return None
     # Supprimer les mentions de classificateurs ou renvois techniques
     if s.startswith(("CL:", "voir ", "Voir ", "variante ", "Variante ", "ancien ", "fig.")):
@@ -754,9 +894,9 @@ def clean_cfdict_sense(raw: str) -> str | None:
             return None
     s = re.sub(r"\bCL:[^;/)]+", "", s)
     s = re.sub(r"\[[^\]]+\]", "", s)
-    s = re.sub(r"\([^)]*\)", lambda m: "" if len(m.group(0)) > 28 or SURNAME_RE.search(m.group(0)) else m.group(0), s)
+    s = re.sub(r"\([^)]*\)", lambda m: "" if len(m.group(0)) > 28 or SURNAME_RE.search(m.group(0)) or VULGAR_OR_SLANG_RE.search(m.group(0)) else m.group(0), s)
     s = re.sub(r"\s{2,}", " ", s).strip(" ;,.-")
-    if not s or len(s) < 2 or SURNAME_RE.search(s):
+    if not s or len(s) < 2 or SURNAME_RE.search(s) or VULGAR_OR_SLANG_RE.search(s):
         return None
     return s
 
@@ -849,10 +989,14 @@ def select_best_form(
 
     non_variant = [
         f for f in pool
-        if not any(
-            kw in " ".join(f.get("m", [])).lower()
-            for kw in ("variant of", "old variant", "archaic", "used in ", "see ")
+        if not (
+            f.get("m")
+            and all(
+                any(kw in m.lower() for kw in ("variant of", "old variant", "archaic", "used in ", "see "))
+                for m in f["m"]
+            )
         )
+        and not VULGAR_OR_SLANG_RE.search(" ".join(f.get("m", [])))
     ]
     if non_variant:
         pool = non_variant
@@ -937,7 +1081,7 @@ def load_tatoeba_pairs(
         with cached_tsv.open("r", encoding="utf-8") as f:
             for line in f:
                 parts = line.rstrip("\n").split("\t")
-                if len(parts) == 2:
+                if len(parts) == 2 and not VULGAR_OR_SLANG_RE.search(parts[1]):
                     pairs.append((parts[0], parts[1]))
         return pairs
 
@@ -1162,17 +1306,22 @@ def build_word_dict(
     pinyin_val, _norm_num_py, french = resolved_meta[hanzi]
 
     prev_word = existing_words.get(hanzi)
-    if prev_word is not None:
+    if prev_word is not None and hanzi != "屁股":
         reused_ex = prev_word.get("example", {})
         toks = reused_ex.get("tokens", [])
         ex_hz = reused_ex.get("hanzi", "")
+        ex_fr = reused_ex.get("french", "")
         body = ex_hz.rstrip("。？！，、；：.,?!")
         punct = ex_hz[len(body) :] or "。"
         same_pinyin = norm_tonal_pinyin(prev_word.get("pinyin", "")) == norm_tonal_pinyin(pinyin_val)
+        same_french = prev_word.get("french", "") == french
         bad_prev_french = bool(SURNAME_RE.search(prev_word.get("french", "")))
+        bad_ex_french = bool(VULGAR_OR_SLANG_RE.search(ex_fr)) or ("terme hsk" in ex_fr.lower())
         if (
             same_pinyin
+            and same_french
             and not bad_prev_french
+            and not bad_ex_french
             and isinstance(toks, list)
             and len(toks) >= 3
             and len(toks) == len(set(toks))
@@ -1183,7 +1332,7 @@ def build_word_dict(
             updated_ex = {
                 "hanzi": ex_hz,
                 "pinyin": tokens_to_pinyin_sentence(toks, punct, word_to_pinyin),
-                "french": reused_ex["french"],
+                "french": ex_fr,
                 "tokens": toks,
             }
             w_id = f"hsk{level}_{word_num:0{id_width}d}"
@@ -1198,6 +1347,25 @@ def build_word_dict(
                 },
                 False,
             )
+
+    if hanzi == "屁股":
+        hc_toks = ["小", "孩子", "摔", "到", "了", "屁股"]
+        return (
+            {
+                "id": f"hsk{level}_{word_num:0{id_width}d}",
+                "lessonId": lesson_id,
+                "hanzi": hanzi,
+                "pinyin": pinyin_val,
+                "french": french,
+                "example": {
+                    "hanzi": "".join(hc_toks) + "。",
+                    "pinyin": tokens_to_pinyin_sentence(hc_toks, "。", word_to_pinyin),
+                    "french": "Le petit enfant est tombé sur les fesses.",
+                    "tokens": hc_toks,
+                },
+            },
+            False,
+        )
 
     best_tatoeba = None
     best_score = -10_000.0
@@ -1249,6 +1417,142 @@ def build_word_dict(
     )
 
 
+def load_hanban_2012_levels(
+    complete_by_hanzi: dict[str, dict[str, Any]],
+) -> tuple[dict[str, int], dict[int, list[dict[str, Any]]], dict[str, dict[str, Any]]]:
+    """
+    Charge les 6 listes officielles Hanban HSK 2.0 (2012) sauvegardées dans tools/data/hsk2012_l1..l6.txt
+    et associe chaque mot à son entrée complete.min.json (ou synthétise depuis le TSV pour les 51 absents).
+    """
+    word_level_map: dict[str, int] = {}
+    entries_by_level: dict[int, list[dict[str, Any]]] = {lv: [] for lv in range(1, 7)}
+    entry_by_hanzi: dict[str, dict[str, Any]] = {}
+
+    for lv in range(1, 7):
+        path = DATA_DIR / f"hsk2012_l{lv}.txt"
+        if not path.exists():
+            raise FileNotFoundError(f"Liste officielle Hanban 2012 introuvable : {path}")
+        for raw_line in path.read_text(encoding="utf-8").splitlines():
+            clean = raw_line.lstrip("\ufeff").strip()
+            if not clean or clean.startswith("#"):
+                continue
+            parts = clean.split("\t")
+            hanzi = parts[0].strip()
+            if not hanzi or hanzi in word_level_map:
+                continue
+
+            word_level_map[hanzi] = lv
+            jieba.add_word(hanzi, freq=100_000)
+
+            base_entry = complete_by_hanzi.get(hanzi)
+            if base_entry is not None:
+                entry = base_entry
+            else:
+                py_num = parts[2].strip() if len(parts) > 2 else ""
+                py_tonal = parts[3].strip() if len(parts) > 3 else ""
+                en_def = parts[4].strip() if len(parts) > 4 else ""
+                entry = {
+                    "s": hanzi,
+                    "q": 50_000,
+                    "p": ["i"] if len(hanzi) == 4 else ["v"] if en_def.startswith("to ") else [],
+                    "f": [
+                        {
+                            "t": hanzi,
+                            "i": {"y": py_tonal, "n": py_num},
+                            "m": [x.strip() for x in en_def.split(";") if x.strip()],
+                        }
+                    ],
+                }
+
+            entries_by_level[lv].append(entry)
+            entry_by_hanzi[hanzi] = entry
+
+    return word_level_map, entries_by_level, entry_by_hanzi
+
+
+def write_curated_catalog(
+    level: int,
+    curated_units: list[tuple[str, str, list[tuple[str, list[str]]]]],
+    existing_version: int,
+    official_entries: list[dict[str, Any]],
+    entry_by_hanzi: dict[str, dict[str, Any]],
+    resolved_meta: dict[str, tuple[str, str, str]],
+    word_to_pinyin: dict[str, str],
+    existing_words: dict[str, dict[str, Any]],
+    token_sentences: dict[str, list[tuple[str, str, list[str]]]],
+    word_level_map: dict[str, int],
+) -> None:
+    curated_words = [
+        hanzi
+        for _u_title, _u_desc, lessons in curated_units
+        for _l_title, words_list in lessons
+        for hanzi in words_list
+    ]
+    official_set = {e["s"] for e in official_entries}
+    assert len(curated_words) == len(official_set), (
+        f"HSK {level} curated count {len(curated_words)} != official {len(official_set)}"
+    )
+    assert len(set(curated_words)) == len(official_set), f"Doublon dans HSK{level}_CURATED_UNITS"
+    assert set(curated_words) == official_set, (
+        f"Écart HSK {level} curated vs officiel : "
+        f"manquants={official_set - set(curated_words)}, "
+        f"en trop={set(curated_words) - official_set}"
+    )
+
+    units_out: list[dict[str, Any]] = []
+    words_out: list[dict[str, Any]] = []
+    l_order = 1
+    w_num = 1
+    for u_idx, (u_title, u_desc, lesson_specs) in enumerate(curated_units, start=1):
+        u_id = f"hsk{level}_u{u_idx}"
+        u_lessons: list[dict[str, Any]] = []
+        for l_title, lesson_hanzi_list in lesson_specs:
+            l_id = f"hsk{level}_u{u_idx}_l{l_order}"
+            u_lessons.append({
+                "id": l_id,
+                "orderIndex": l_order,
+                "title": l_title,
+            })
+            l_order += 1
+            for hz in lesson_hanzi_list:
+                word_dict, _tat_used = build_word_dict(
+                    level=level,
+                    word_num=w_num,
+                    id_width=3,
+                    lesson_id=l_id,
+                    entry=entry_by_hanzi[hz],
+                    resolved_meta=resolved_meta,
+                    word_to_pinyin=word_to_pinyin,
+                    existing_words=existing_words,
+                    token_sentences=token_sentences,
+                    word_level_map=word_level_map,
+                )
+                words_out.append(word_dict)
+                w_num += 1
+        units_out.append({
+            "id": u_id,
+            "orderIndex": u_idx,
+            "title": u_title,
+            "description": u_desc,
+            "lessons": u_lessons,
+        })
+
+    catalog_obj = {
+        "hskLevel": level,
+        "catalogVersion": existing_version + 1,
+        "units": units_out,
+        "words": words_out,
+    }
+    (CATALOG_DIR / f"hsk{level}.json").write_text(
+        json.dumps(catalog_obj, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    print(
+        f"HSK {level} (v{catalog_obj['catalogVersion']}) : "
+        f"{len(units_out)} unités, {l_order - 1} leçons, {len(words_out)} mots"
+    )
+
+
 def main() -> int:
     hsk_path = download_cached(HSK_URL, "complete.min.json")
     cfdict_path = download_cached(CFDICT_URL, "cfdict.u8")
@@ -1257,6 +1561,10 @@ def main() -> int:
     links_path = download_cached(TATOEBA_LINKS_URL, "links.tar.bz2")
 
     hsk_entries: list[dict[str, Any]] = json.loads(hsk_path.read_text(encoding="utf-8"))
+    complete_by_hanzi: dict[str, dict[str, Any]] = {}
+    for entry in hsk_entries:
+        complete_by_hanzi.setdefault(entry["s"], entry)
+
     cfdict_by_pair, cfdict_toneless = load_cfdict(cfdict_path)
     tatoeba_pairs = load_tatoeba_pairs(cmn_path, fra_path, links_path)
 
@@ -1273,29 +1581,12 @@ def main() -> int:
         else:
             existing_versions[lv] = 1
 
-    # Extraire la liste officielle HSK 2.0 100 % exacte (o1..o6) sans doublon inter-niveaux
-    word_level_map: dict[str, int] = {}
-    official_entries_by_level: dict[int, list[dict[str, Any]]] = {lv: [] for lv in range(1, 7)}
-    official_entry_by_hanzi: dict[str, dict[str, Any]] = {}
+    # Charger la liste officielle Hanban HSK 2.0 (2012) stricte (4 995 mots uniques)
+    word_level_map, official_entries_by_level, official_entry_by_hanzi = load_hanban_2012_levels(
+        complete_by_hanzi
+    )
 
-    for entry in hsk_entries:
-        levels = []
-        for tag in entry.get("l", []):
-            match = OFFICIAL_TAG_RE.match(tag)
-            if match:
-                levels.append(int(match.group(1)))
-        if not levels:
-            continue
-        hanzi = entry["s"]
-        if hanzi in word_level_map:
-            continue
-        lv = min(levels)
-        word_level_map[hanzi] = lv
-        official_entries_by_level[lv].append(entry)
-        official_entry_by_hanzi[hanzi] = entry
-        jieba.add_word(hanzi, freq=100_000)
-
-    # Passe 1 : résoudre les pinyins et traductions autoritaires pour les 4 991 mots officiels
+    # Passe 1 : résoudre les pinyins et traductions autoritaires pour les 4 995 mots officiels
     missing_french: list[tuple[int, str, str]] = []
     resolved_meta: dict[str, tuple[str, str, str]] = {}
     word_to_pinyin: dict[str, str] = {
@@ -1305,6 +1596,7 @@ def main() -> int:
         "上海": "Shànghǎi",
         "法国": "Fǎguó",
         "巴黎": "Bālí",
+        "天": "tiān",
     }
     for lv in range(1, 7):
         for entry in official_entries_by_level[lv]:
@@ -1329,82 +1621,34 @@ def main() -> int:
             if tok in word_level_map and len(token_sentences[tok]) < 40:
                 token_sentences[tok].append((cmn_text, fra_text, tokens))
 
-    # --- HSK 1 : 6 unités curatées couvrant exactement les 150 mots officiels o1 ---
-    curated_hsk1_words = [
-        hanzi
-        for _u_title, _u_desc, lessons in HSK1_CURATED_UNITS
-        for _l_title, words_list in lessons
-        for hanzi in words_list
-    ]
-    official_o1_set = {e["s"] for e in official_entries_by_level[1]}
-    assert len(curated_hsk1_words) == len(official_o1_set), (
-        f"HSK 1 curated count {len(curated_hsk1_words)} != official {len(official_o1_set)}"
+    # --- HSK 1 (150) & HSK 2 (151) : progressions curatées ---
+    write_curated_catalog(
+        level=1,
+        curated_units=HSK1_CURATED_UNITS,
+        existing_version=existing_versions[1],
+        official_entries=official_entries_by_level[1],
+        entry_by_hanzi=official_entry_by_hanzi,
+        resolved_meta=resolved_meta,
+        word_to_pinyin=word_to_pinyin,
+        existing_words=existing_words,
+        token_sentences=token_sentences,
+        word_level_map=word_level_map,
     )
-    assert len(set(curated_hsk1_words)) == len(official_o1_set), "Doublon dans HSK1_CURATED_UNITS"
-    assert set(curated_hsk1_words) == official_o1_set, (
-        f"Écart HSK 1 curated vs officiel : "
-        f"manquants={official_o1_set - set(curated_hsk1_words)}, "
-        f"en trop={set(curated_hsk1_words) - official_o1_set}"
-    )
-
-    hsk1_units: list[dict[str, Any]] = []
-    hsk1_words: list[dict[str, Any]] = []
-    l_order = 1
-    w_num = 1
-    tatoeba_hits_hsk1 = 0
-    for u_idx, (u_title, u_desc, lesson_specs) in enumerate(HSK1_CURATED_UNITS, start=1):
-        u_id = f"hsk1_u{u_idx}"
-        u_lessons: list[dict[str, Any]] = []
-        for l_title, lesson_hanzi_list in lesson_specs:
-            l_id = f"hsk1_u{u_idx}_l{l_order}"
-            u_lessons.append({
-                "id": l_id,
-                "orderIndex": l_order,
-                "title": l_title,
-            })
-            l_order += 1
-            for hz in lesson_hanzi_list:
-                word_dict, tat_used = build_word_dict(
-                    level=1,
-                    word_num=w_num,
-                    id_width=3,
-                    lesson_id=l_id,
-                    entry=official_entry_by_hanzi[hz],
-                    resolved_meta=resolved_meta,
-                    word_to_pinyin=word_to_pinyin,
-                    existing_words=existing_words,
-                    token_sentences=token_sentences,
-                    word_level_map=word_level_map,
-                )
-                if tat_used:
-                    tatoeba_hits_hsk1 += 1
-                hsk1_words.append(word_dict)
-                w_num += 1
-        hsk1_units.append({
-            "id": u_id,
-            "orderIndex": u_idx,
-            "title": u_title,
-            "description": u_desc,
-            "lessons": u_lessons,
-        })
-
-    hsk1_catalog = {
-        "hskLevel": 1,
-        "catalogVersion": existing_versions[1] + 1,
-        "units": hsk1_units,
-        "words": hsk1_words,
-    }
-    (CATALOG_DIR / "hsk1.json").write_text(
-        json.dumps(hsk1_catalog, ensure_ascii=False, indent=2) + "\n",
-        encoding="utf-8",
-    )
-    print(
-        f"HSK 1 (v{hsk1_catalog['catalogVersion']}) : "
-        f"{len(hsk1_units)} unités, {l_order - 1} leçons, {len(hsk1_words)} mots"
+    write_curated_catalog(
+        level=2,
+        curated_units=HSK2_CURATED_UNITS,
+        existing_version=existing_versions[2],
+        official_entries=official_entries_by_level[2],
+        entry_by_hanzi=official_entry_by_hanzi,
+        resolved_meta=resolved_meta,
+        word_to_pinyin=word_to_pinyin,
+        existing_words=existing_words,
+        token_sentences=token_sentences,
+        word_level_map=word_level_map,
     )
 
-    # --- HSK 2 à HSK 6 : 100 % officiel o2..o6 avec tri incrémental et IDs propres ---
-    for level in range(2, 7):
+    # --- HSK 3 à HSK 6 : 100 % officiel Hanban 2012 avec tri incrémental et IDs propres ---
+    for level in range(3, 7):
         candidates = list(official_entries_by_level[level])
         candidates.sort(
             key=lambda e: (

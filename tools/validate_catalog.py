@@ -13,13 +13,20 @@ TONE_MARKS_RE = re.compile(r"[āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ]"
 TRAILING_PUNCT = "。？！，、；：.,?!"
 NEUTRAL_TONE_PARTICLES = {"ma", "ne", "de", "le", "ba", "zhe", "guo", "a", "ya", "wa", "na", "la", "o", "en"}
 DIGITS_RE = re.compile(r"^[零一二两三四五六七八九十百千万0-9]+$")
-ALLOWED_SIMPLE_PROPER_NOUNS = {"中国", "北京", "上海", "小明", "小王", "小李", "法国", "巴黎"}
+ALLOWED_SIMPLE_PROPER_NOUNS = {"中国", "北京", "上海", "小明", "小王", "小李", "法国", "巴黎", "天", "黄河"}
 ALLOWED_PROPER_NOUNS = {
-    "中国", "北京", "汉语", "中文", "亚洲", "京剧", "长城", "长江",
+    "中国", "北京", "汉语", "中文", "黄河", "亚洲", "京剧", "长城", "长江",
     "元旦", "华裔", "国庆节", "礼拜天", "除夕", "互联网", "元宵节", "华侨",
     "国务院", "摄氏度", "欧洲", "正月", "端午节", "重阳节",
 }
 SURNAME_RE = re.compile(r"nom de famille|patronyme", re.IGNORECASE)
+VULGAR_OR_SLANG_RE = re.compile(
+    r"(\(argot\)|\(vulg\.?\)|\(fam\.?\)|radical\)|\bputain\b|\bmerde\b|\bbordel\b|\bsalope\b|\bconnard\w*\b|\bconnasse\b|\bencul\w*\b|\bnichons?\b|\bbranl\w*\b|\bculotte\b|\bporn\w*\b|\bpénis\b|\bvagin\b|\bcouille\w*\b|\bchatte\b|\bbite\b|\bchier\b|\bchiant\w*\b|\bfoutre\b|\bfous\b|\bfout\b|\bgueule\b|\bpisse\w*\b|\bcaca\b|\bpipi\b|\bsalaud\b|\benfoiré\w*\b|\bbâtard\w*\b|\bnique\w*\b|\bpétasse\b|\bgarce\b|\bdégueulasse\b|\bemmerd\w*\b|\bculs?\b|\bprostitu\w*\b|\bsapes\b|\bcon\b|\bcons\b|\bconne\b)",
+    re.IGNORECASE,
+)
+MECHANICAL_TEMPLATE_RE = re.compile(
+    r"( : |Ce terme|Ce point|Nous sommes en train de|Veuillez sérieusement|Veuillez souvent|Veuillez retenir|Veuillez vous préparer|Il pratique chaque jour|J'aimerais apprendre à|J'ai très envie de|Allons .* tous ensemble|Remettons à demain pour|Et si on remettait à demain|Elle a souvent l'habitude de|Elle aime beaucoup|Nous avons déjà abordé|Tout le monde s'intéresse à|Le livre mentionne|Il faut un nouvel élément|La situation d'aujourd'hui est très|Cet endroit est particulièrement|Il trouve cela encore plus|L'attitude de chacun est très|Le cadre ici est vraiment|Chacun accomplit la tâche|Elle a exprimé son idée|Continuons d'avancer|Dans nos actions, il faut appliquer|Le professeur souligne souvent|Nous devons nous efforcer|Exercez-vous aujourd'hui)"
+)
 SANDHI_OR_PARTICLE_WORDS = {
     "一", "不", "的", "了", "吗", "呢", "吧", "着", "过", "得", "地", "啊",
     "嘛", "哇", "啦", "哦", "嗯",
@@ -41,31 +48,26 @@ def strip_tones(py: str) -> str:
 
 
 def load_official_hsk_map(repo_root: Path) -> tuple[dict[str, int], dict[int, set[str]]]:
-    """Charge la correspondance officielle HSK 2.0 (o1..o6) depuis tools/.cache/complete.min.json."""
-    official_path = repo_root / "tools" / ".cache" / "complete.min.json"
-    if not official_path.exists():
-        raise FileNotFoundError(
-            f"Référence officielle HSK 2.0 introuvable : {official_path}"
-        )
-
-    entries = json.loads(official_path.read_text(encoding="utf-8"))
+    """Charge la référence officielle Hanban HSK 2.0 (2012) depuis tools/data/hsk2012_l1..l6.txt."""
+    data_dir = repo_root / "tools" / "data"
     official_word_level: dict[str, int] = {}
     official_by_level: dict[int, set[str]] = {lv: set() for lv in range(1, 7)}
 
-    for entry in entries:
-        levels = []
-        for tag in entry.get("l", []):
-            match = OFFICIAL_TAG_RE.match(tag)
-            if match:
-                levels.append(int(match.group(1)))
-        if not levels:
-            continue
-        hanzi = entry["s"]
-        if hanzi in official_word_level:
-            continue
-        official_lv = min(levels)
-        official_word_level[hanzi] = official_lv
-        official_by_level[official_lv].add(hanzi)
+    for lv in range(1, 7):
+        path = data_dir / f"hsk2012_l{lv}.txt"
+        if not path.exists():
+            raise FileNotFoundError(
+                f"Liste officielle Hanban HSK 2.0 (2012) introuvable : {path}"
+            )
+        for line in path.read_text(encoding="utf-8").splitlines():
+            clean = line.lstrip("\ufeff").strip()
+            if not clean or clean.startswith("#"):
+                continue
+            hanzi = clean.split("\t")[0].strip()
+            if not hanzi or hanzi in official_word_level:
+                continue
+            official_word_level[hanzi] = lv
+            official_by_level[lv].add(hanzi)
 
     return official_word_level, official_by_level
 
@@ -209,6 +211,10 @@ def validate_catalog_files(catalog_dir: Path, repo_root: Path) -> int:
                 errors.append(
                     f"[{path.name}] {wid} ({hanzi}) a une traduction de nom de famille : {french!r}"
                 )
+            elif VULGAR_OR_SLANG_RE.search(french):
+                errors.append(
+                    f"[{path.name}] {wid} ({hanzi}) a une traduction vulgaire/argotique : {french!r}"
+                )
 
             ex_hanzi = example.get("hanzi", "")
             ex_pinyin = example.get("pinyin", "")
@@ -217,6 +223,16 @@ def validate_catalog_files(catalog_dir: Path, repo_root: Path) -> int:
 
             if not ex_hanzi.strip() or not ex_pinyin.strip() or not ex_french.strip():
                 errors.append(f"[{path.name}] {wid} a une phrase d'exemple incomplète")
+            elif VULGAR_OR_SLANG_RE.search(ex_french):
+                errors.append(
+                    f"[{path.name}] {wid} ({hanzi}) a un exemple vulgaire/argotique : {ex_french!r}"
+                )
+            elif isinstance(hsk_level, int) and hsk_level in (1, 2) and (
+                " : " in ex_french or MECHANICAL_TEMPLATE_RE.search(ex_french)
+            ):
+                errors.append(
+                    f"[{path.name}] {wid} ({hanzi}) utilise encore un gabarit mécanique : {ex_french!r}"
+                )
 
             if not isinstance(tokens, list) or len(tokens) < 3:
                 errors.append(f"[{path.name}] {wid} doit avoir au moins 3 tokens : {tokens!r}")

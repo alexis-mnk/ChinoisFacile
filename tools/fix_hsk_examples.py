@@ -27,10 +27,18 @@ CACHE_DIR = Path(__file__).resolve().parent / ".cache"
 
 DIGITS_RE = re.compile(r"^[零一二两三四五六七八九十百千万0-9]+$")
 TRAILING_PUNCT = "。？！，、；：.,?!"
-ALLOWED_SIMPLE_PROPER_NOUNS = {"中国", "北京", "上海", "小明", "小王", "小李", "法国", "巴黎"}
+ALLOWED_SIMPLE_PROPER_NOUNS = {"中国", "北京", "上海", "小明", "小王", "小李", "法国", "巴黎", "天", "黄河"}
+VULGAR_OR_SLANG_RE = re.compile(
+    r"(\(argot\)|\(vulg\.?\)|\(fam\.?\)|radical\)|\bputain\b|\bmerde\b|\bbordel\b|\bsalope\b|\bconnard\w*\b|\bconnasse\b|\bencul\w*\b|\bnichons?\b|\bbranl\w*\b|\bculotte\b|\bporn\w*\b|\bpénis\b|\bvagin\b|\bcouille\w*\b|\bchatte\b|\bbite\b|\bchier\b|\bchiant\w*\b|\bfoutre\b|\bfous\b|\bfout\b|\bgueule\b|\bpisse\w*\b|\bcaca\b|\bpipi\b|\bsalaud\b|\benfoiré\w*\b|\bbâtard\w*\b|\bnique\w*\b|\bpétasse\b|\bgarce\b|\bdégueulasse\b|\bemmerd\w*\b|\bculs?\b|\bprostitu\w*\b|\bsapes\b|\bt'es\b)",
+    re.IGNORECASE,
+)
+MECHANICAL_TEMPLATE_RE = re.compile(
+    r"( : |Ce terme|Ce point|Nous sommes en train de|Veuillez sérieusement|Veuillez souvent|Veuillez retenir|Veuillez vous préparer|Il pratique chaque jour|J'aimerais apprendre à|J'ai très envie de|Allons .* tous ensemble|Remettons à demain pour|Et si on remettait à demain|Elle a souvent l'habitude de|Elle aime beaucoup|Nous avons déjà abordé|Tout le monde s'intéresse à|Le livre mentionne|Il faut un nouvel élément|La situation d'aujourd'hui est très|Cet endroit est particulièrement|Il trouve cela encore plus|L'attitude de chacun est très|Le cadre ici est vraiment|Chacun accomplit la tâche|Elle a exprimé son idée|Continuons d'avancer|Dans nos actions, il faut appliquer|Le professeur souligne souvent|Nous devons nous efforcer|Exercez-vous aujourd'hui)"
+)
 
 # Surcharge explicite pour les mots courants de HSK 1 à HSK 3 afin d'offrir
-# des phrases courtes, naturelles et idiomatiques 100 % conformes au niveau officiel.
+# des phrases courtes, naturelles et idiomatiques 100 % conformes au niveau officiel
+# et sans gabarit mécanique ni vulgarité.
 HANDCRAFTED_EXAMPLES: dict[tuple[int, str], tuple[list[str], str, str]] = {
     # --- HSK 1 ---
     (1, "好"): (["你", "好", "认识", "很", "高兴"], "！", "Bonjour, ravi de faire ta connaissance !"),
@@ -42,55 +50,99 @@ HANDCRAFTED_EXAMPLES: dict[tuple[int, str], tuple[list[str], str, str]] = {
     (1, "请"): (["请", "你", "喝", "茶"], "。", "Je t'en prie, bois du thé."),
     (1, "对不起"): (["对不起", "我", "今天", "不", "去"], "。", "Désolé, je n'y vais pas aujourd'hui."),
     (1, "没关系"): (["没关系", "明天", "来", "我", "家"], "。", "Ce n'est pas grave, viens chez moi demain."),
-    (1, "没"): (["我", "没", "去", "学校"], "。", "Je ne suis pas allé à l'école."),
+    (1, "没有"): (["我", "没有", "钱"], "。", "Je n'ai pas d'argent."),
+    (1, "喝"): (["我", "喜欢", "喝", "茶"], "。", "J'aime boire du thé."),
     (1, "先生"): (["那", "个", "先生", "是", "医生"], "。", "Ce monsieur est médecin."),
     (1, "小姐"): (["这", "个", "小姐", "是", "中国", "人"], "。", "Cette demoiselle est chinoise."),
     (1, "菜"): (["我", "很", "喜欢", "中国", "菜"], "。", "J'aime beaucoup la cuisine chinoise."),
     (1, "苹果"): (["我", "喜欢", "吃", "苹果"], "。", "J'aime manger des pommes."),
-    (1, "猫"): (["她", "很", "喜欢", "这", "个", "猫"], "。", "Elle aime beaucoup ce chat."),
+    (1, "猫"): (["我", "喜欢", "这", "个", "小", "猫"], "。", "J'aime ce petit chat."),
     (1, "狗"): (["那", "个", "狗", "很", "大"], "。", "Ce chien est très grand."),
     (1, "八"): (["我", "八", "点", "去", "学校"], "。", "Je vais à l'école à huit heures."),
     (1, "二"): (["我", "有", "二", "十", "块", "钱"], "。", "J'ai vingt yuans."),
-    (1, "零"): (["现在", "零", "点", "了"], "。", "Il est maintenant minuit."),
+    (1, "号"): (["今天", "是", "五", "月", "三", "号"], "。", "Aujourd'hui nous sommes le 3 mai."),
+    (1, "年"): (["我", "学习", "汉语", "一", "年", "了"], "。", "J'étudie le chinois depuis un an."),
     (1, "小"): (["这", "个", "杯子", "很", "小"], "。", "Cette tasse est très petite."),
+    (1, "大"): (["这", "个", "苹果", "很", "大"], "。", "Cette pomme est très grosse."),
+    (1, "本"): (["我", "有", "三", "本", "书"], "。", "J'ai trois livres."),
+    (1, "些"): (["我", "买", "了", "些", "衣服"], "。", "J'ai acheté quelques vêtements."),
+    (1, "会"): (["明天", "天气", "会", "好", "吗"], "？", "Est-ce qu'il fera beau demain ?"),
     (1, "里"): (["老师", "在", "学校", "里"], "。", "Le professeur est dans l'école."),
-    (1, "饭馆"): (["我", "和", "朋友", "去", "饭馆"], "。", "Mon ami et moi allons au restaurant."),
-    (1, "火车站"): (["我", "现在", "去", "火车站"], "。", "Je vais maintenant à la gare."),
+    (1, "后面"): (["他", "在", "我", "后面"], "。", "Il est derrière moi."),
+    (1, "哪儿"): (["你", "明天", "去", "哪儿"], "？", "Où vas-tu demain ?"),
+    (1, "饭店"): (["我", "和", "朋友", "去", "饭店"], "。", "Mon ami et moi allons au restaurant."),
+    (1, "说"): (["她", "会", "说", "汉语"], "。", "Elle sait parler chinois."),
+    (1, "一点儿"): (["我", "会", "说", "一点儿", "汉语"], "。", "Je sais parler un peu chinois."),
     (1, "东西"): (["我", "去", "商店", "买", "东西"], "。", "Je vais au magasin acheter des choses."),
-    (1, "些"): (["我", "买", "了", "些", "水果"], "。", "J'ai acheté quelques fruits."),
     (1, "字"): (["这", "个", "字", "很", "漂亮"], "。", "Ce caractère est très joli."),
+    (1, "和"): (["爸爸", "和", "妈妈", "在", "家"], "。", "Papa et maman sont à la maison."),
     # --- HSK 2 ---
+    (2, "大家"): (["大家", "都", "在", "学校", "里"], "。", "Tout le monde est à l'école."),
+    (2, "男"): (["那", "个", "男", "同学", "很", "高"], "。", "Ce camarade masculin est très grand."),
+    (2, "女"): (["这", "个", "女", "医生", "很", "好"], "。", "Cette femme médecin est très gentille."),
     (2, "也"): (["我", "很", "高兴", "他", "也", "是"], "。", "Je suis très content, et lui aussi."),
-    (2, "所以"): (["今天", "下雨", "所以", "我", "在", "家"], "。", "Il pleut aujourd'hui, donc je reste à la maison."),
-    (2, "但是"): (["今天", "冷", "但是", "我", "很", "高兴"], "。", "Il fait froid aujourd'hui, mais je suis très content."),
-    (2, "介绍"): (["请", "给", "大家", "介绍", "你", "朋友"], "。", "Veuillez présenter votre ami à tout le monde."),
-    (2, "公共汽车"): (["公共汽车", "快", "来", "了"], "。", "Le bus va bientôt arriver."),
+    (2, "真"): (["我", "真", "的", "不", "知道"], "。", "Je ne sais vraiment pas."),
+    (2, "希望"): (["她", "希望", "有", "个", "孩子"], "。", "Elle espère avoir un enfant."),
+    (2, "妻子"): (["我", "的", "妻子", "是", "老师"], "。", "Ma femme est professeure."),
+    (2, "姓"): (["你", "姓", "什么"], "？", "Quel est ton nom de famille ?"),
+    (2, "零"): (["现在", "零", "点", "了"], "。", "Il est maintenant minuit."),
+    (2, "日"): (["今天", "是", "十", "月", "一", "日"], "。", "Aujourd'hui c'est le 1er octobre."),
+    (2, "百"): (["学校", "里", "有", "两", "百", "个", "学生"], "。", "Il y a deux cents élèves dans l'école."),
+    (2, "千"): (["这", "个", "电脑", "三", "千", "块"], "。", "Cet ordinateur coûte trois mille yuans."),
+    (2, "第一"): (["这", "是", "我", "第一", "次", "来", "中国"], "。", "C'est la première fois que je viens en Chine."),
+    (2, "每"): (["他", "每", "星期", "去", "一", "次", "北京"], "。", "Il va à Pékin une fois par semaine."),
+    (2, "外"): (["爸爸", "在", "门", "外", "说话"], "。", "Papa parle dehors devant la porte."),
     (2, "左边"): (["医院", "在", "学校", "左边"], "。", "L'hôpital est à gauche de l'école."),
     (2, "右边"): (["商店", "在", "医院", "右边"], "。", "Le magasin est à droite de l'hôpital."),
-    (2, "旅游"): (["我", "想", "去", "北京", "旅游"], "。", "Je veux voyager à Pékin."),
-    (2, "身体"): (["爸爸", "的", "身体", "很", "好"], "。", "La santé de papa est très bonne."),
-    (2, "第一"): (["这", "是", "我", "第一", "次", "来", "中国"], "。", "C'est la première fois que je viens en Chine."),
-    (2, "元"): (["这", "本", "书", "十", "元"], "。", "Ce livre coûte dix yuans."),
-    (2, "红"): (["我", "喜欢", "这", "个", "红", "苹果"], "。", "J'aime cette pomme rouge."),
-    (2, "手机"): (["我", "的", "新", "手机", "很", "贵"], "。", "Mon nouveau téléphone est très cher."),
-    (2, "白"): (["她", "穿", "着", "白", "衣服"], "。", "Elle porte des vêtements blancs."),
-    (2, "考试"): (["明天", "上午", "有", "汉语", "考试"], "。", "Demain matin il y a un examen de chinois."),
-    (2, "千"): (["这", "个", "电脑", "三", "千", "块"], "。", "Cet ordinateur coûte trois mille yuans."),
-    (2, "百"): (["学校", "里", "有", "两", "百", "个", "学生"], "。", "Il y a deux cents élèves dans l'école."),
-    (2, "好吃"): (["中国", "菜", "真", "好吃"], "！", "La cuisine chinoise est vraiment délicieuse !"),
+    (2, "往"): (["请", "往", "左边", "走"], "。", "Veuillez marcher vers la gauche."),
     (2, "鸡蛋"): (["我", "早上", "吃", "了", "两", "个", "鸡蛋"], "。", "J'ai mangé deux œufs ce matin."),
-    (2, "阴"): (["今天", "天气", "很", "阴"], "。", "Le temps est très couvert aujourd'hui."),
-    (2, "公斤"): (["我", "买", "了", "两", "公斤", "苹果"], "。", "J'ai acheté deux kilos de pommes."),
-    (2, "教室"): (["老师", "和", "学生", "都", "在", "教室", "里"], "。", "Le professeur et les élèves sont tous dans la salle de classe."),
-    (2, "西瓜"): (["这", "个", "大", "西瓜", "很", "好吃"], "。", "Cette grosse pastèque est très bonne."),
+    (2, "面条"): (["爸爸", "喜欢", "吃", "面条"], "。", "Papa aime manger des nouilles."),
     (2, "羊肉"): (["爸爸", "喜欢", "吃", "羊肉"], "。", "Papa aime manger du mouton."),
+    (2, "西瓜"): (["这", "个", "大", "西瓜", "很", "好吃"], "。", "Cette grosse pastèque est très bonne."),
+    (2, "好吃"): (["中国", "菜", "真", "好吃"], "！", "La cuisine chinoise est vraiment délicieuse !"),
     (2, "服务员"): (["服务员", "请", "给", "我", "一", "个", "杯子"], "。", "Serveur, s'il vous plaît, donnez-moi une tasse."),
+    (2, "贵"): (["这", "件", "新", "衣服", "很", "贵"], "。", "Ce nouveau vêtement est très cher."),
+    (2, "手机"): (["我", "的", "新", "手机", "很", "贵"], "。", "Mon nouveau téléphone est très cher."),
+    (2, "铅笔"): (["我", "想", "买", "新", "铅笔"], "。", "Je veux acheter un nouveau crayon."),
+    (2, "红"): (["我", "喜欢", "这", "个", "红", "苹果"], "。", "J'aime cette pomme rouge."),
+    (2, "白"): (["她", "穿", "着", "白", "衣服"], "。", "Elle porte des vêtements blancs."),
+    (2, "长"): (["去", "机场", "的", "路", "很", "长"], "。", "La route vers l'aéroport est très longue."),
+    (2, "门"): (["请", "开", "门"], "。", "Ouvre la porte, s'il te plaît."),
+    (2, "教室"): (["老师", "和", "学生", "都", "在", "教室", "里"], "。", "Le professeur et les élèves sont tous dans la salle de classe."),
+    (2, "宾馆"): (["这", "个", "宾馆", "离", "机场", "很", "近"], "。", "Cet hôtel est très proche de l'aéroport."),
+    (2, "火车站"): (["我", "现在", "去", "火车站"], "。", "Je vais maintenant à la gare."),
+    (2, "公共汽车"): (["公共汽车", "快", "来", "了"], "。", "Le bus va bientôt arriver."),
+    (2, "旅游"): (["我", "想", "去", "北京", "旅游"], "。", "Je veux voyager à Pékin."),
+    (2, "晴"): (["今天", "是", "晴", "天"], "。", "Il fait beau / le ciel est dégagé aujourd'hui."),
+    (2, "阴"): (["今天", "天气", "很", "阴"], "。", "Le temps est très couvert aujourd'hui."),
+    (2, "身体"): (["爸爸", "的", "身体", "很", "好"], "。", "La santé de papa est très bonne."),
+    (2, "踢足球"): (["我", "弟弟", "喜欢", "踢足球"], "。", "Mon petit frère aime jouer au football."),
+    (2, "考试"): (["明天", "上午", "有", "汉语", "考试"], "。", "Demain matin il y a un examen de chinois."),
+    (2, "题"): (["今天", "的", "考试", "题", "不", "多"], "。", "Il n'y a pas beaucoup de questions à l'examen d'aujourd'hui."),
+    (2, "说话"): (["我", "能", "和", "老师", "说话", "吗"], "？", "Puis-je parler au professeur ?"),
+    (2, "问"): (["我", "想", "问", "你", "一", "个", "问题"], "。", "Je voudrais te poser une question."),
+    (2, "对"): (["你", "说", "的", "很", "对"], "。", "Ce que tu dis est tout à fait juste."),
+    (2, "等"): (["请", "在", "门", "外", "等", "我"], "。", "Attends-moi devant la porte, s'il te plaît."),
+    (2, "过"): (["我", "去", "过", "北京"], "。", "Je suis déjà allé à Pékin."),
+    (2, "一下"): (["请", "等", "我", "一下"], "。", "Attends-moi un instant, s'il te plaît."),
+    (2, "快"): (["公共汽车", "快", "来", "了"], "。", "Le bus arrive bientôt."),
+    (2, "就"): (["我", "明天", "就", "去", "北京"], "。", "Je vais à Pékin dès demain."),
+    (2, "从"): (["我", "从", "北京", "来"], "。", "Je viens de Pékin."),
+    (2, "比"): (["今天", "比", "昨天", "冷"], "。", "Il fait plus froid aujourd'hui qu'hier."),
+    (2, "得"): (["她", "汉语", "说", "得", "很", "好"], "。", "Elle parle très bien chinois."),
+    (2, "吧"): (["我们", "一起", "去", "喝", "茶", "吧"], "。", "Allons boire du thé ensemble !"),
+    (2, "介绍"): (["请", "给", "大家", "介绍", "你", "朋友"], "。", "Veuillez présenter votre ami à tout le monde."),
+    (2, "为什么"): (["你", "为什么", "喜欢", "学习", "汉语"], "？", "Pourquoi aimes-tu apprendre le chinois ?"),
+    (2, "因为"): (["因为", "下雨", "我", "不", "去", "了"], "。", "Parce qu'il pleut, je n'y vais pas."),
+    (2, "所以"): (["今天", "下雨", "所以", "我", "在", "家"], "。", "Il pleut aujourd'hui, donc je reste à la maison."),
+    (2, "虽然"): (["虽然", "很", "累", "但是", "我", "高兴"], "。", "Bien que je sois très fatigué, je suis content."),
+    (2, "但是"): (["今天", "冷", "但是", "我", "很", "高兴"], "。", "Il fait froid aujourd'hui, mais je suis très content."),
     # --- HSK 3 ---
-    (3, "为什么"): (["你", "为什么", "喜欢", "学习", "汉语"], "？", "Pourquoi aimes-tu apprendre le chinois ?"),
+    (3, "刷牙"): (["我", "早上", "起床", "刷牙"], "。", "Je me lève le matin et je me brosse les dents."),
 }
 
 # Gabarits à jetons explicites et strictement bornés par niveau (min_level, tokens_tpl, punct, fr_tpl).
-# Chaque token fixe est vérifié au démarrage pour appartenir à HSK 1..min_level.
+# Chaque token fixe est vérifié au démarrage pour appartenir à HSK 1..min_level (Hanban 2012).
 VERB_TEMPLATES: list[tuple[int, list[str], str, str]] = [
     (1, ["我们", "现在", "{w}"], "。", "Nous sommes en train de : {fr}."),
     (1, ["他", "明天", "去", "{w}"], "。", "Il ira demain pour : {fr}."),
@@ -369,7 +421,15 @@ def main() -> int:
     args = parse_args()
     catalogs: dict[int, dict[str, Any]] = {}
     word_to_level: dict[str, int] = {}
-    word_to_pinyin: dict[str, str] = {}
+    word_to_pinyin: dict[str, str] = {
+        "小明": "Xiǎomíng",
+        "小王": "Xiǎowáng",
+        "小李": "Xiǎolǐ",
+        "上海": "Shànghǎi",
+        "法国": "Fǎguó",
+        "巴黎": "Bālí",
+        "天": "tiān",
+    }
 
     for lv in range(1, 7):
         data = json.loads((CATALOG_DIR / f"hsk{lv}.json").read_text(encoding="utf-8"))
@@ -380,21 +440,6 @@ def main() -> int:
             word_to_pinyin[hz] = w["pinyin"]
             jieba.add_word(hz, freq=100_000)
 
-    # Ajouter quelques noms propres simples dans word_to_pinyin / jieba
-    proper_pinyin = {
-        "中国": "Zhōngguó",
-        "北京": "Běijīng",
-        "上海": "Shànghǎi",
-        "小明": "Xiǎomíng",
-        "小王": "Xiǎowáng",
-        "小李": "Xiǎolǐ",
-        "法国": "Fǎguó",
-        "巴黎": "Bālí",
-    }
-    for k, v in proper_pinyin.items():
-        word_to_pinyin.setdefault(k, v)
-        jieba.add_word(k, freq=100_000)
-
     verify_static_templates(word_to_level)
 
     # Charger POS tags si complete.min.json est en cache
@@ -404,20 +449,25 @@ def main() -> int:
         for entry in json.loads(comp_path.read_text(encoding="utf-8")):
             pos_map[entry["s"]] = entry.get("p", [])
 
-    # Charger Tatoeba
+    # Charger Tatoeba en filtrant toute traduction vulgaire/argotique
     tatoeba_pairs: list[tuple[str, str]] = []
     tat_path = CACHE_DIR / "tatoeba_cmn_fra.tsv"
     if tat_path.exists():
         with tat_path.open("r", encoding="utf-8") as f:
             for line in f:
                 parts = line.rstrip("\n").split("\t")
-                if len(parts) == 2:
+                if len(parts) == 2 and not VULGAR_OR_SLANG_RE.search(parts[1]):
                     tatoeba_pairs.append((parts[0], parts[1]))
 
     for level in range(1, 6):
         data = catalogs[level]
         allowed_vocab = {hz for hz, lv in word_to_level.items() if lv <= level} | ALLOWED_SIMPLE_PROPER_NOUNS
         level_words_set = {w["hanzi"] for w in data["words"]}
+        lesson_order_map = {
+            lesson["id"]: lesson["orderIndex"]
+            for unit in data["units"]
+            for lesson in unit["lessons"]
+        }
 
         # Pré-indexer les phrases Tatoeba 100 % conformes à HSK 1..level
         tat_candidates: dict[str, list[tuple[int, str, str, list[str]]]] = defaultdict(list)
@@ -431,9 +481,8 @@ def main() -> int:
                 continue
             if "".join(tokens) != body:
                 continue
-            # S'assurer qu'aucun caractère d'un mot multi-caractères n'est artificiellement éclaté si jieba le reconnaît autrement
             for tok in tokens:
-                if tok in level_words_set and len(tat_candidates[tok]) < 25:
+                if tok in level_words_set and len(tat_candidates[tok]) < 40:
                     score = abs(len(tokens) - 5) * 2 + abs(len(body) - 9)
                     tat_candidates[tok].append((score, cmn_text, fra_text, tokens))
 
@@ -448,8 +497,27 @@ def main() -> int:
             old_body = old_hanzi.rstrip(TRAILING_PUNCT)
             old_punct = old_hanzi[len(old_body) :] or "。"
 
+            # 1. Phrase rédigée sur mesure prioritaire si disponible
+            if (level, hz) in HANDCRAFTED_EXAMPLES:
+                hc_tokens, hc_punct, hc_fr = HANDCRAFTED_EXAMPLES[(level, hz)]
+                new_ex = {
+                    "hanzi": "".join(hc_tokens) + hc_punct,
+                    "pinyin": tokens_to_pinyin(hc_tokens, hc_punct, word_to_pinyin),
+                    "french": hc_fr,
+                    "tokens": hc_tokens,
+                }
+                if ex != new_ex:
+                    w["example"] = new_ex
+                    modified = True
+                stats["handcrafted"] += 1
+                continue
+
+            is_tpl_or_vulgar = bool(VULGAR_OR_SLANG_RE.search(ex["french"])) or (
+                level in (1, 2) and bool(MECHANICAL_TEMPLATE_RE.search(ex["french"]))
+            )
             already_valid = (
-                hz in old_tokens
+                not is_tpl_or_vulgar
+                and hz in old_tokens
                 and all(is_token_allowed(t, level, allowed_vocab, word_to_level) for t in old_tokens)
                 and is_example_pinyin_consistent(hz, w["pinyin"], ex["pinyin"])
             )
@@ -459,28 +527,18 @@ def main() -> int:
 
             modified = True
 
-            # 1. Phrase rédigée sur mesure si disponible
-            if (level, hz) in HANDCRAFTED_EXAMPLES:
-                hc_tokens, hc_punct, hc_fr = HANDCRAFTED_EXAMPLES[(level, hz)]
-                w["example"] = {
-                    "hanzi": "".join(hc_tokens) + hc_punct,
-                    "pinyin": tokens_to_pinyin(hc_tokens, hc_punct, word_to_pinyin),
-                    "french": hc_fr,
-                    "tokens": hc_tokens,
-                }
-                stats["handcrafted"] += 1
-                continue
-
-            # 2. Re-segmentation stricte si la phrase existante n'utilise aucun mot > level
+            # 2. Re-segmentation stricte si la phrase existante est propre et sans mot > level
             has_higher_existing = any(word_to_level.get(t, 0) > level for t in old_tokens)
             if (
-                not has_higher_existing
+                not is_tpl_or_vulgar
+                and not has_higher_existing
                 and not has_higher_hsk_compound(old_body, level, word_to_level)
                 and "，" not in old_body
             ):
                 reseg = strict_segment(old_body, level, allowed_vocab, word_to_level, target=hz)
                 if (
                     reseg
+                    and hz in reseg
                     and 3 <= len(reseg) <= 10
                     and len(reseg) == len(set(reseg))
                     and "".join(reseg) == old_body
@@ -488,16 +546,29 @@ def main() -> int:
                         is_token_allowed(t, level, allowed_vocab, word_to_level) for t in reseg
                     )
                 ):
-                    ex["tokens"] = reseg
-                    ex["pinyin"] = tokens_to_pinyin(reseg, old_punct, word_to_pinyin)
-                    stats["resegmented"] += 1
-                    continue
+                    new_py = tokens_to_pinyin(reseg, old_punct, word_to_pinyin)
+                    if is_example_pinyin_consistent(hz, w["pinyin"], new_py):
+                        ex["tokens"] = reseg
+                        ex["pinyin"] = new_py
+                        stats["resegmented"] += 1
+                        continue
 
-            # 3. Phrase Tatoeba 100 % conforme au plafond HSK 1..level
+            # 3. Phrase Tatoeba 100 % conforme au plafond HSK 1..level (préfère le moins de mots futurs)
             cands = tat_candidates.get(hz, [])
             if cands:
-                cands.sort(key=lambda item: item[0])
-                _score, cmn_text, fra_text, tat_tokens = cands[0]
+                cur_l_ord = lesson_order_map[w["lessonId"]]
+                word_l_ord = {
+                    w2["hanzi"]: lesson_order_map[w2["lessonId"]]
+                    for w2 in data["words"]
+                }
+                cands_sorted = sorted(
+                    cands,
+                    key=lambda item: (
+                        sum(1 for t in item[3] if word_l_ord.get(t, 0) > cur_l_ord),
+                        item[0],
+                    ),
+                )
+                _score, cmn_text, fra_text, tat_tokens = cands_sorted[0]
                 body = cmn_text.rstrip("。？！")
                 punct = cmn_text[len(body) :] or "。"
                 w["example"] = {
