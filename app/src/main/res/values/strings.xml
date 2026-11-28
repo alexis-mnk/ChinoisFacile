@@ -13,8 +13,6 @@
     <string name="hsk_level_chip">HSK %1$d</string>
     <string name="home_stat_streak">%1$d d</string>
     <string name="home_stat_streak_label">Streak</string>
-    <string name="home_stat_xp">%1$d XP</string>
-    <string name="home_stat_xp_label">Total XP</string>
     <string name="home_stat_mastered">%1$d / %2$d</string>
     <string name="home_stat_mastered_label">Mastered</string>
 
@@ -123,8 +121,8 @@
     <string name="summary_subtitle">Great consistency, keep it up!</string>
     <string name="summary_accuracy_label">Accuracy</string>
     <string name="summary_accuracy_value">%1$d%%</string>
-    <string name="summary_xp_label">XP earned</string>
-    <string name="summary_xp_value">+%1$d XP</string>
+    <string name="summary_words_practiced_label">Words practiced</string>
+    <string name="summary_words_reviewed_label">Words reviewed</string>
     <string name="summary_streak_label">Current streak</string>
     <string name="summary_streak_value">%1$d day(s)</string>
     <string name="summary_unlocked_step_lesson">%1$s unlocked</string>
@@ -135,12 +133,21 @@
 
     <!-- Progress (StatsScreen) -->
     <string name="stats_title">Your Progress</string>
-    <string name="stats_total_xp_label">Total XP</string>
-    <string name="stats_current_streak_label">Current streak</string>
-    <string name="stats_longest_streak_label">Best streak</string>
+    <string name="stats_streak_days_title">%1$d-day streak</string>
+    <string name="stats_best_streak_short">Best: %1$d d</string>
+    <string name="stats_words_started_label">Words started</string>
+    <string name="stats_avg_accuracy_label">Avg. accuracy</string>
+    <string name="stats_no_accuracy_placeholder">—</string>
     <string name="stats_sessions_label">Sessions</string>
-    <string name="stats_days_value">%1$d d</string>
-    <string name="stats_mastery_title_hsk">HSK %1$d Vocabulary Mastery</string>
+    <string name="stats_quick_review_due_one">1 word due for review</string>
+    <string name="stats_quick_review_due_many">%1$d words due for review</string>
+    <string name="stats_quick_review_action">Review</string>
+    <string name="stats_quick_review_action_hsk">Review HSK %1$d</string>
+    <string name="stats_vocab_overview_title">Vocabulary Overview</string>
+    <string name="stats_overview_hsk_prefix">HSK</string>
+    <string name="stats_vocab_started_ratio">%1$d / %2$d words started</string>
+    <string name="stats_vocab_catalog_total">Total catalog: %1$s / %2$s</string>
+    <string name="stats_view_in_lexicon">View HSK %1$d in Lexicon</string>
     <string name="stats_mastered_count">%1$d mastered</string>
     <string name="stats_learning_count">%1$d learning</string>
     <string name="stats_new_count">%1$d new</string>
@@ -170,10 +177,7 @@
     <string name="stats_due_today">Due today</string>
     <string name="stats_due_in_days">Review in %1$d d</string>
     <string name="stats_due_tomorrow">Review tomorrow</string>
-    <string name="stats_global_mastery_title">Overall Mastery</string>
-    <string name="stats_global_mastery_subtitle">%1$d of %2$d words mastered</string>
     <string name="stats_due_count">%1$d due</string>
-    <string name="stats_by_level_title">Mastery by HSK Level</string>
 
     <!-- Lexicon (LexiconScreen) -->
     <string name="lexicon_title_hsk">HSK %1$d Lexicon (%2$d)</string>
@@ -203,14 +207,55 @@
     <string name="settings_theme_system">System</string>
     <string name="settings_theme_light">Light</string>
     <string name="settings_theme_dark">Dark</string>
-    <string name="settings_tts_title">Android Text-to-Speech (TTS)</string>
-    <string name="settings_tts_desc">Open system settings to install or configure the Chinese voice.</string>
     <string name="settings_data_title">Local Data</string>
-    <string name="settings_reset_desc">Resets XP, streak, SM-2 mastery, and unlocked units and quizzes.</string>
+    <string name="settings_reset_desc">Resets streak, session history, SM-2 mastery, and unlocked units and quizzes.</string>
     <string name="settings_reset_button">Reset my progress</string>
     <string name="settings_reset_dialog_title">Reset all progress?</string>
-    <string name="settings_reset_dialog_message">This will permanently erase your XP, daily streak, SM-2 word history, and re-lock all lessons and quizzes (except Lesson 1 of each level).</string>
+    <string name="settings_reset_dialog_message">This will permanently erase your daily streak, session accuracy, SM-2 word history, and re-lock all lessons and quizzes (except Lesson 1 of each level).</string>
     <string name="settings_reset_confirm">Reset</string>
     <string name="settings_reset_cancel">Cancel</string>
     <string name="settings_reset_done">Progress reset.</string>
+
+    <!-- Cloud Backup (SettingsScreen) -->
+    <string name="settings_cloud_title">Account &amp; Cloud Backup</string>
+    <string name="settings_cloud_signed_out_desc">Sign in with email to back up and restore your progress across devices.</string>
+    <string name="settings_cloud_sign_in_cta">Sign in / Create account</string>
+    <string name="settings_cloud_checking_session">Checking account status…</string>
+    <string name="settings_cloud_last_synced">Last synced: %1$s</string>
+    <string name="settings_cloud_not_synced">Last synced: Never</string>
+    <string name="settings_cloud_sync_now">Sync now</string>
+    <string name="settings_cloud_syncing">Syncing…</string>
+    <string name="settings_cloud_restore">Restore from cloud</string>
+    <string name="settings_cloud_restoring">Restoring…</string>
+    <string name="settings_cloud_sign_out">Sign out</string>
+    <string name="settings_cloud_delete_backup">Delete cloud backup</string>
+    <string name="settings_cloud_auth_tab_sign_in">Sign in</string>
+    <string name="settings_cloud_auth_tab_sign_up">Create account</string>
+    <string name="settings_cloud_email_label">Email</string>
+    <string name="settings_cloud_password_label">Password</string>
+    <string name="settings_cloud_password_hint">At least 6 characters</string>
+    <string name="settings_cloud_show_password_cd">Show password</string>
+    <string name="settings_cloud_hide_password_cd">Hide password</string>
+    <string name="settings_cloud_error_invalid_email">Please enter a valid email address.</string>
+    <string name="settings_cloud_error_short_password">Password must be at least 6 characters.</string>
+    <string name="settings_cloud_confirm_email_info">Account created! Check %1$s to confirm your account, then sign in.</string>
+    <string name="settings_cloud_restore_dialog_title">Restore from cloud?</string>
+    <string name="settings_cloud_restore_dialog_message">Replace local progress with cloud backup from %1$s?</string>
+    <string name="settings_cloud_backup_summary">%1$d words • %2$d sessions</string>
+    <string name="settings_cloud_restore_confirm">Restore</string>
+    <string name="settings_cloud_found_dialog_title">Cloud backup found</string>
+    <string name="settings_cloud_found_dialog_message">A cloud backup from %1$s was found for this account (%2$d words • %3$d sessions).</string>
+    <string name="settings_cloud_found_restore_button">Restore cloud backup (%1$s)</string>
+    <string name="settings_cloud_found_keep_local_button">Keep this device\'s progress</string>
+    <string name="settings_cloud_delete_dialog_title">Delete cloud backup?</string>
+    <string name="settings_cloud_delete_dialog_message">This removes your saved backup from the cloud. Your progress on this device will not be affected.</string>
+    <string name="settings_cloud_delete_confirm">Delete</string>
+    <string name="settings_cloud_snackbar_signed_in">Signed in as %1$s.</string>
+    <string name="settings_cloud_snackbar_account_created">Account created and signed in.</string>
+    <string name="settings_cloud_snackbar_signed_out">Signed out.</string>
+    <string name="settings_cloud_snackbar_synced">Progress backed up to cloud.</string>
+    <string name="settings_cloud_snackbar_restored">Progress restored from cloud.</string>
+    <string name="settings_cloud_snackbar_no_backup">No cloud backup found for this account.</string>
+    <string name="settings_cloud_snackbar_deleted">Cloud backup deleted.</string>
+    <string name="settings_cloud_cancel">Cancel</string>
 </resources>

@@ -11,6 +11,18 @@ from pathlib import Path
 
 TONE_MARKS_RE = re.compile(r"[āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ]")
 TRAILING_PUNCT = "。？！，、；：.,?!"
+STRICT_QUALITY_LEVELS = (1, 2, 3, 4, 5, 6)
+CANTONESE_CHARS_RE = re.compile(r"[乜嘢嘅咗佢喺唔咁嗰啲攞睇冇係]")
+PY_SEGMENT_RE = re.compile(r"[A-Za-zĀÁǍÀĒÉĚÈĪÍǏÌŌÓǑÒŪÚǓÙǕǗǙǛāáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜüÜ0-9]+")
+_INITIALS = ["", "b", "p", "m", "f", "d", "t", "n", "l", "g", "k", "h", "j", "q", "x", "zh", "ch", "sh", "r", "z", "c", "s", "y", "w"]
+_FINALS = [
+    "a", "o", "e", "i", "u", "v",
+    "ai", "ei", "ao", "ou", "an", "en", "ang", "eng", "ong", "er",
+    "ia", "ie", "iao", "iu", "ian", "in", "iang", "ing", "iong",
+    "ua", "uo", "ue", "uai", "ui", "uan", "un", "uang", "ueng",
+    "ve", "van", "vn",
+]
+_VALID_PY_SYLLABLES = {i + f for i in _INITIALS for f in _FINALS} | {"n", "ng", "m", "hm", "hng", "r"}
 NEUTRAL_TONE_PARTICLES = {"ma", "ne", "de", "le", "ba", "zhe", "guo", "a", "ya", "wa", "na", "la", "o", "en"}
 DIGITS_RE = re.compile(r"^[零一二两三四五六七八九十百千万0-9]+$")
 ALLOWED_SIMPLE_PROPER_NOUNS = {"中国", "北京", "上海", "小明", "小王", "小李", "法国", "巴黎", "天", "黄河"}
@@ -78,6 +90,53 @@ def norm_pinyin(py: str) -> str:
 def strip_tones(py: str) -> str:
     nfd = unicodedata.normalize("NFD", py)
     return "".join(ch for ch in nfd if unicodedata.category(ch) != "Mn")
+
+
+def _strip_tone_ascii(ch: str) -> str:
+    base = strip_tones(ch).lower()
+    if base == "ü":
+        return "v"
+    return base[0] if base else ch.lower()
+
+
+def count_aligned_pinyin_syllables(ex_py: str) -> int:
+    norm = ex_py.replace("u:", "ü").replace("U:", "Ü")
+    total = 0
+    for seg in PY_SEGMENT_RE.findall(norm):
+        if seg.isdigit():
+            total += 1
+            continue
+        plain = "".join(_strip_tone_ascii(c) for c in seg)
+        n = len(seg)
+        dp: list[int | None] = [None] * (n + 1)
+        dp[0] = 0
+        for i in range(n):
+            if dp[i] is None:
+                continue
+            for j in range(min(n, i + 6), i, -1):
+                if plain[i:j] in _VALID_PY_SYLLABLES:
+                    cand = dp[i] + 1
+                    if dp[j] is None or cand < dp[j]:
+                        dp[j] = cand
+        total += dp[n] if dp[n] is not None else 1
+    return total
+
+
+def count_token_units(tokens: list[str]) -> int:
+    total = 0
+    for tok in tokens:
+        units = 0
+        in_digits = False
+        for ch in tok:
+            if "0" <= ch <= "9":
+                if not in_digits:
+                    units += 1
+                    in_digits = True
+            else:
+                in_digits = False
+                units += 1
+        total += max(1, units)
+    return total
 
 
 def load_official_hsk_map(repo_root: Path) -> tuple[dict[str, int], dict[int, set[str]]]:
@@ -181,6 +240,7 @@ def validate_catalog_files(catalog_dir: Path, repo_root: Path) -> int:
             errors.append(f"[{path.name}] non-consecutive lesson orderIndex: {lesson_orders}")
 
         local_hanzi: set[str] = set()
+        seen_example_sentences: dict[str, str] = {}
         for word in words:
             wid = word.get("id", "")
             lesson_id = word.get("lessonId", "")
@@ -256,7 +316,7 @@ def validate_catalog_files(catalog_dir: Path, repo_root: Path) -> int:
                 errors.append(f"[{path.name}] {wid} ({hanzi}) has vulgar/slang example: {ex_english!r}")
             elif has_residual_french(ex_english):
                 errors.append(f"[{path.name}] {wid} ({hanzi}) has residual French example: {ex_english!r}")
-            elif isinstance(hsk_level, int) and hsk_level in (1, 2, 3, 4) and MECHANICAL_TEMPLATE_RE.search(ex_english):
+            elif isinstance(hsk_level, int) and hsk_level in (1, 2, 3, 4, 5, 6) and MECHANICAL_TEMPLATE_RE.search(ex_english):
                 errors.append(f"[{path.name}] {wid} ({hanzi}) still uses mechanical template: {ex_english!r}")
 
             if not isinstance(tokens, list) or len(tokens) < 3:
@@ -284,6 +344,38 @@ def validate_catalog_files(catalog_dir: Path, repo_root: Path) -> int:
                     if not is_sandhi_ok:
                         errors.append(
                             f"[{path.name}] {wid} ({hanzi}) pinyin {pinyin!r} missing from example.pinyin {ex_pinyin!r}"
+                        )
+
+            if isinstance(hsk_level, int) and hsk_level in STRICT_QUALITY_LEVELS:
+                prev_wid = seen_example_sentences.get(ex_hanzi)
+                if prev_wid is not None:
+                    errors.append(
+                        f"[{path.name}] {wid} ({hanzi}) duplicates example sentence from {prev_wid}: {ex_hanzi!r}"
+                    )
+                else:
+                    seen_example_sentences[ex_hanzi] = wid
+
+                if hanzi and ex_hanzi.count(hanzi) != 1:
+                    errors.append(
+                        f"[{path.name}] {wid} ({hanzi}) appears {ex_hanzi.count(hanzi)} times in example.hanzi: {ex_hanzi!r}"
+                    )
+
+                if CANTONESE_CHARS_RE.search(ex_hanzi):
+                    errors.append(
+                        f"[{path.name}] {wid} ({hanzi}) contains Cantonese/dialect character: {ex_hanzi!r}"
+                    )
+
+                if ex_hanzi.endswith("？") != ex_english.strip().endswith("?"):
+                    errors.append(
+                        f"[{path.name}] {wid} ({hanzi}) question mark mismatch: {ex_hanzi!r} vs {ex_english!r}"
+                    )
+
+                if isinstance(tokens, list) and tokens and ex_pinyin.strip():
+                    py_syls = count_aligned_pinyin_syllables(ex_pinyin)
+                    tok_units = count_token_units(tokens)
+                    if py_syls != tok_units:
+                        errors.append(
+                            f"[{path.name}] {wid} ({hanzi}) pinyin/token alignment mismatch ({py_syls} != {tok_units}): {ex_pinyin!r}"
                         )
 
         if isinstance(hsk_level, int) and 1 <= hsk_level <= 6:

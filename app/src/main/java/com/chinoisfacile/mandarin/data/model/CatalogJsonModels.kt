@@ -1,6 +1,7 @@
 package com.chinoisfacile.mandarin.data.model
 
 import androidx.compose.runtime.Immutable
+import com.chinoisfacile.mandarin.domain.srs.StudyDayStatus
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -121,6 +122,12 @@ data class GlobalStatsOverview(
     val totalMasteredCount: Int,
     val totalLearningCount: Int,
     val totalDueCount: Int,
+    val selectedHskLevel: Int = 1,
+    val lastSevenDays: List<StudyDayStatus> = emptyList(),
+    val averageAccuracyPercent: Int? = null,
+    val focusLevel: HskLevelMastery? = null,
+    val quickReviewTargetLevel: Int? = null,
+    val levelsWithDueCount: Int = 0,
 )
 
 @Immutable
@@ -180,7 +187,6 @@ data class WordWithProgress(
 
 @Immutable
 data class UserStats(
-    val totalXp: Int = 0,
     val currentStreak: Int = 0,
     val longestStreak: Int = 0,
     val lastStudyEpochDay: Long? = null,
@@ -196,7 +202,6 @@ data class WordReviewSummary(
 
 @Immutable
 data class SessionCompletionSummary(
-    val earnedXp: Int,
     val accuracyPercent: Int,
     val currentStreak: Int,
     val unlockedNextStepLessonTitle: String?,

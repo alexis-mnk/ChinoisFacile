@@ -1,6 +1,6 @@
 {
   "hskLevel": 3,
-  "catalogVersion": 16,
+  "catalogVersion": 17,
   "units": [
     {
       "id": "hsk3_u1",
@@ -455,14 +455,16 @@
       "pinyin": "yòng",
       "english": "To use / to employ",
       "example": {
-        "hanzi": "我正在用电脑。",
-        "pinyin": "Wǒ zhèng zài yòng diàn nǎo.",
-        "english": "I'm using the computer.",
+        "hanzi": "我习惯用手机看新闻。",
+        "pinyin": "Wǒ xí guàn yòng shǒu jī kàn xīn wén.",
+        "english": "I'm used to reading the news on my phone.",
         "tokens": [
           "我",
-          "正在",
+          "习惯",
           "用",
-          "电脑"
+          "手机",
+          "看",
+          "新闻"
         ]
       }
     },
@@ -473,16 +475,18 @@
       "pinyin": "rú guǒ",
       "english": "If / in case",
       "example": {
-        "hanzi": "如果你会唱歌就好了。",
-        "pinyin": "Rú guǒ nǐ huì chàng gē jiù hǎo le.",
-        "english": "If you can sing, that's good enough.",
+        "hanzi": "如果明天下雨，我们就不去爬山了。",
+        "pinyin": "Rú guǒ míng tiān xià yǔ, wǒ men jiù bù qù pá shān le.",
+        "english": "If it rains tomorrow, we won't go hiking.",
         "tokens": [
           "如果",
-          "你",
-          "会",
-          "唱歌",
+          "明天",
+          "下雨",
+          "我们",
           "就",
-          "好",
+          "不",
+          "去",
+          "爬山",
           "了"
         ]
       }
@@ -535,15 +539,16 @@
       "pinyin": "gèng",
       "english": "Even more",
       "example": {
-        "hanzi": "你应该更小心的。",
-        "pinyin": "Nǐ yīng gāi gèng xiǎo xīn de.",
-        "english": "You should've been more prudent.",
+        "hanzi": "上海比北京更热吗？",
+        "pinyin": "Shàng hǎi bǐ Běi jīng gèng rè ma?",
+        "english": "Is Shanghai even hotter than Beijing?",
         "tokens": [
-          "你",
-          "应该",
+          "上海",
+          "比",
+          "北京",
           "更",
-          "小心",
-          "的"
+          "热",
+          "吗"
         ]
       }
     },
@@ -670,14 +675,19 @@
       "pinyin": "xiàng",
       "english": "Towards / to face",
       "example": {
-        "hanzi": "我向妈妈学习。",
-        "pinyin": "Wǒ xiàng mā ma xué xí.",
-        "english": "I follow my mom's example.",
+        "hanzi": "小王向大家介绍了他的新同事。",
+        "pinyin": "Xiǎo Wáng xiàng dà jiā jiè shào le tā de xīn tóng shì.",
+        "english": "Xiaowang introduced his new colleague to everyone.",
         "tokens": [
-          "我",
+          "小王",
           "向",
-          "妈妈",
-          "学习"
+          "大家",
+          "介绍",
+          "了",
+          "他",
+          "的",
+          "新",
+          "同事"
         ]
       }
     },
@@ -766,16 +776,17 @@
       "pinyin": "dài",
       "english": "Band / belt",
       "example": {
-        "hanzi": "你应该带护照去银行。",
-        "pinyin": "Nǐ yīng gāi dài hù zhào qù yín háng.",
-        "english": "You should bring your passport to the bank.",
+        "hanzi": "明天可能会下雨，记得带伞。",
+        "pinyin": "Míng tiān kě néng huì xià yǔ, jì de dài sǎn.",
+        "english": "It might rain tomorrow, remember to bring an umbrella.",
         "tokens": [
-          "你",
-          "应该",
+          "明天",
+          "可能",
+          "会",
+          "下雨",
+          "记得",
           "带",
-          "护照",
-          "去",
-          "银行"
+          "伞"
         ]
       }
     },
@@ -804,14 +815,16 @@
       "pinyin": "fā xiàn",
       "english": "To notice; to become aware of / to discover; to find; to detect",
       "example": {
-        "hanzi": "你还发现什么了？",
-        "pinyin": "Nǐ hái fā xiàn shén me le?",
-        "english": "What else have you figured out?",
+        "hanzi": "我刚才发现忘记带护照了。",
+        "pinyin": "Wǒ gāng cái fā xiàn wàng jì dài hù zhào le.",
+        "english": "I just realized I forgot to bring my passport.",
         "tokens": [
-          "你",
-          "还",
+          "我",
+          "刚才",
           "发现",
-          "什么",
+          "忘记",
+          "带",
+          "护照",
           "了"
         ]
       }
@@ -842,15 +855,20 @@
       "pinyin": "yī zhí",
       "english": "Always / Straight ahead",
       "example": {
-        "hanzi": "我一直不相信他。",
-        "pinyin": "Wǒ yī zhí bù xiāng xìn tā.",
-        "english": "I have never believed him.",
+        "hanzi": "从这里一直往东走就到了。",
+        "pinyin": "Cóng zhè lǐ yī zhí wǎng dōng zǒu jiù dào le.",
+        "english": "Go straight east from here and you'll arrive.",
         "tokens": [
-          "我",
+          "从",
+          "这",
+          "里",
           "一直",
-          "不",
-          "相信",
-          "他"
+          "往",
+          "东",
+          "走",
+          "就",
+          "到",
+          "了"
         ]
       }
     },
@@ -861,15 +879,18 @@
       "pinyin": "wèi le",
       "english": "For; for the purpose of; in order to",
       "example": {
-        "hanzi": "他结婚是为了钱。",
-        "pinyin": "Tā jié hūn shì wèi le qián.",
-        "english": "He married for money.",
+        "hanzi": "为了提高汉语水平，我每天练习。",
+        "pinyin": "Wèi le tí gāo Hàn yǔ shuǐ píng, wǒ měi tiān liàn xí.",
+        "english": "To improve my Chinese level, I practice every day.",
         "tokens": [
-          "他",
-          "结婚",
-          "是",
           "为了",
-          "钱"
+          "提高",
+          "汉语",
+          "水平",
+          "我",
+          "每",
+          "天",
+          "练习"
         ]
       }
     },
@@ -880,13 +901,13 @@
       "pinyin": "yī yàng",
       "english": "Same / Alike",
       "example": {
-        "hanzi": "他和我一样高。",
-        "pinyin": "Tā hé wǒ yī yàng gāo.",
-        "english": "He is as tall as I.",
+        "hanzi": "他和哥哥一样高。",
+        "pinyin": "Tā hé gē ge yī yàng gāo.",
+        "english": "He is as tall as his older brother.",
         "tokens": [
           "他",
           "和",
-          "我",
+          "哥哥",
           "一样",
           "高"
         ]
@@ -939,14 +960,14 @@
       "pinyin": "zhòng yào",
       "english": "Important / significant",
       "example": {
-        "hanzi": "那对我不重要。",
-        "pinyin": "Nà duì wǒ bù zhòng yào.",
-        "english": "That's not important to me.",
+        "hanzi": "健康比钱更重要。",
+        "pinyin": "Jiàn kāng bǐ qián gèng zhòng yào.",
+        "english": "Health is more important than money.",
         "tokens": [
-          "那",
-          "对",
-          "我",
-          "不",
+          "健康",
+          "比",
+          "钱",
+          "更",
           "重要"
         ]
       }
@@ -958,15 +979,17 @@
       "pinyin": "bì xū",
       "english": "To have to / must",
       "example": {
-        "hanzi": "我们必须去学校了。",
-        "pinyin": "Wǒ men bì xū qù xué xiào le.",
-        "english": "We must go to school.",
+        "hanzi": "明天早上考试，我今天必须复习。",
+        "pinyin": "Míng tiān zǎo shang kǎo shì, wǒ jīn tiān bì xū fù xí.",
+        "english": "There's an exam tomorrow morning, so I must review today.",
         "tokens": [
-          "我们",
+          "明天",
+          "早上",
+          "考试",
+          "我",
+          "今天",
           "必须",
-          "去",
-          "学校",
-          "了"
+          "复习"
         ]
       }
     },
@@ -997,14 +1020,20 @@
       "pinyin": "zuì hòu",
       "english": "Final / last",
       "example": {
-        "hanzi": "最后她没有来。",
-        "pinyin": "Zuì hòu tā méi yǒu lái.",
-        "english": "In the end, she did not come.",
+        "hanzi": "我想了很久，最后决定去中国留学。",
+        "pinyin": "Wǒ xiǎng le hěn jiǔ, zuì hòu jué dìng qù Zhōng guó liú xué.",
+        "english": "I thought about it for a long time and finally decided to study abroad in China.",
         "tokens": [
+          "我",
+          "想",
+          "了",
+          "很",
+          "久",
           "最后",
-          "她",
-          "没有",
-          "来"
+          "决定",
+          "去",
+          "中国",
+          "留学"
         ]
       }
     },
@@ -1015,14 +1044,18 @@
       "pinyin": "lǎo",
       "english": "Old (of people) / venerable (person)",
       "example": {
-        "hanzi": "妈妈比爸爸老。",
-        "pinyin": "Mā ma bǐ bà ba lǎo.",
-        "english": "Mom is older than Dad.",
+        "hanzi": "爷爷虽然老了，但是身体很健康。",
+        "pinyin": "Yé ye suī rán lǎo le, dàn shì shēn tǐ hěn jiàn kāng.",
+        "english": "Although Grandpa is old, he is very healthy.",
         "tokens": [
-          "妈妈",
-          "比",
-          "爸爸",
-          "老"
+          "爷爷",
+          "虽然",
+          "老",
+          "了",
+          "但是",
+          "身体",
+          "很",
+          "健康"
         ]
       }
     },
@@ -1052,15 +1085,17 @@
       "pinyin": "bǐ sài",
       "english": "Competition (sports etc) / match",
       "example": {
-        "hanzi": "我们去看了比赛。",
-        "pinyin": "Wǒ men qù kàn le bǐ sài.",
-        "english": "We went to watch the match.",
+        "hanzi": "弟弟参加学校的游泳比赛了。",
+        "pinyin": "Dì di cān jiā xué xiào de yóu yǒng bǐ sài le.",
+        "english": "My younger brother joined the school swimming competition.",
         "tokens": [
-          "我们",
-          "去",
-          "看",
-          "了",
-          "比赛"
+          "弟弟",
+          "参加",
+          "学校",
+          "的",
+          "游泳",
+          "比赛",
+          "了"
         ]
       }
     },
@@ -1096,7 +1131,7 @@
       "example": {
         "hanzi": "她不喜欢这条裙子的颜色。",
         "pinyin": "Tā bù xǐ huan zhè tiáo qún zi de yán sè.",
-        "english": "She doesn't like the colour of this dress.",
+        "english": "She doesn't like the color of this skirt.",
         "tokens": [
           "她",
           "不",
@@ -1135,16 +1170,17 @@
       "pinyin": "fàng",
       "english": "To put / to place",
       "example": {
-        "hanzi": "把你的自行车放好。",
-        "pinyin": "Bǎ nǐ de zì xíng chē fàng hǎo.",
-        "english": "Put away your bicycle.",
+        "hanzi": "请把护照放进包里。",
+        "pinyin": "Qǐng bǎ hù zhào fàng jìn bāo lǐ.",
+        "english": "Please put your passport into the bag.",
         "tokens": [
+          "请",
           "把",
-          "你",
-          "的",
-          "自行车",
+          "护照",
           "放",
-          "好"
+          "进",
+          "包",
+          "里"
         ]
       }
     },
@@ -1155,16 +1191,19 @@
       "pinyin": "ná",
       "english": "To hold / to seize",
       "example": {
-        "hanzi": "你自己拿蛋糕吃吧。",
-        "pinyin": "Nǐ zì jǐ ná dàn gāo chī ba.",
-        "english": "Please help yourself to the cake.",
+        "hanzi": "请把桌子上的词典拿给我。",
+        "pinyin": "Qǐng bǎ zhuō zi shàng de cí diǎn ná gěi wǒ.",
+        "english": "Please hand me the dictionary on the table.",
         "tokens": [
-          "你",
-          "自己",
+          "请",
+          "把",
+          "桌子",
+          "上",
+          "的",
+          "词典",
           "拿",
-          "蛋糕",
-          "吃",
-          "吧"
+          "给",
+          "我"
         ]
       }
     },
@@ -1175,14 +1214,18 @@
       "pinyin": "xiān",
       "english": "Early / prior",
       "example": {
-        "hanzi": "先谢谢您了。",
-        "pinyin": "Xiān xiè xie nín le.",
-        "english": "Thanking you in advance.",
+        "hanzi": "我们先进教室，老师一会儿就来。",
+        "pinyin": "Wǒ men xiān jìn jiào shì, lǎo shī yī huì r jiù lái.",
+        "english": "Let's go into the classroom first; the teacher will be here shortly.",
         "tokens": [
+          "我们",
           "先",
-          "谢谢",
-          "您",
-          "了"
+          "进",
+          "教室",
+          "老师",
+          "一会儿",
+          "就",
+          "来"
         ]
       }
     },
@@ -1292,16 +1335,17 @@
       "pinyin": "guó jiā",
       "english": "Country; nation; state",
       "example": {
-        "hanzi": "我希望了解您的国家。",
-        "pinyin": "Wǒ xī wàng liǎo jiě nín de guó jiā.",
-        "english": "I would like to understand your home country.",
+        "hanzi": "你去过哪些国家旅游？",
+        "pinyin": "Nǐ qù guo nǎ xiē guó jiā lǚ yóu?",
+        "english": "Which countries have you traveled to?",
         "tokens": [
-          "我",
-          "希望",
-          "了解",
-          "您",
-          "的",
-          "国家"
+          "你",
+          "去",
+          "过",
+          "哪",
+          "些",
+          "国家",
+          "旅游"
         ]
       }
     },
@@ -1352,13 +1396,18 @@
       "pinyin": "xuǎn zé",
       "english": "To select / to pick",
       "example": {
-        "hanzi": "这是你的选择。",
-        "pinyin": "Zhè shì nǐ de xuǎn zé.",
-        "english": "It's your choice.",
+        "hanzi": "去上海工作是一个很好的选择。",
+        "pinyin": "Qù Shàng hǎi gōng zuò shì yī gè hěn hǎo de xuǎn zé.",
+        "english": "Going to work in Shanghai is a great choice.",
         "tokens": [
-          "这",
+          "去",
+          "上海",
+          "工作",
           "是",
-          "你",
+          "一",
+          "个",
+          "很",
+          "好",
           "的",
           "选择"
         ]
@@ -1432,16 +1481,18 @@
       "pinyin": "bié ren",
       "english": "Other people; others; other person",
       "example": {
-        "hanzi": "他非常想让别人满意。",
-        "pinyin": "Tā fēi cháng xiǎng ràng bié ren mǎn yì.",
-        "english": "He is eager to please.",
+        "hanzi": "在图书馆里别影响别人看书。",
+        "pinyin": "Zài tú shū guǎn lǐ bié yǐng xiǎng bié ren kàn shū.",
+        "english": "Don't disturb other people reading in the library.",
         "tokens": [
-          "他",
-          "非常",
-          "想",
-          "让",
+          "在",
+          "图书馆",
+          "里",
+          "别",
+          "影响",
           "别人",
-          "满意"
+          "看",
+          "书"
         ]
       }
     },
@@ -1452,14 +1503,17 @@
       "pinyin": "zhàn",
       "english": "Station / to stand",
       "example": {
-        "hanzi": "你去哪站？",
-        "pinyin": "Nǐ qù nǎ zhàn?",
-        "english": "Which station are you going to?",
+        "hanzi": "地铁站离我家很近。",
+        "pinyin": "Dì tiě zhàn lí wǒ jiā hěn jìn.",
+        "english": "The subway station is very close to my home.",
         "tokens": [
-          "你",
-          "去",
-          "哪",
-          "站"
+          "地铁",
+          "站",
+          "离",
+          "我",
+          "家",
+          "很",
+          "近"
         ]
       }
     },
@@ -1509,17 +1563,16 @@
       "pinyin": "yāo qiú",
       "english": "To request / to require",
       "example": {
-        "hanzi": "我被要求在这里等。",
-        "pinyin": "Wǒ bèi yāo qiú zài zhè lǐ děng.",
-        "english": "I was asked to wait here.",
+        "hanzi": "老师要求我们认真完成作业。",
+        "pinyin": "Lǎo shī yāo qiú wǒ men rèn zhēn wán chéng zuò yè.",
+        "english": "The teacher requires us to finish our homework carefully.",
         "tokens": [
-          "我",
-          "被",
+          "老师",
           "要求",
-          "在",
-          "这",
-          "里",
-          "等"
+          "我们",
+          "认真",
+          "完成",
+          "作业"
         ]
       }
     },
@@ -1530,15 +1583,18 @@
       "pinyin": "dāng rán",
       "english": "Only natural / as it should be",
       "example": {
-        "hanzi": "我当然告诉了她。",
-        "pinyin": "Wǒ dāng rán gào su le tā.",
-        "english": "Of course, I told her.",
+        "hanzi": "大家是好朋友，我当然愿意帮忙！",
+        "pinyin": "Dà jiā shì hǎo péng you, wǒ dāng rán yuàn yì bāng máng!",
+        "english": "We're all good friends, of course I'm happy to help!",
         "tokens": [
+          "大家",
+          "是",
+          "好",
+          "朋友",
           "我",
           "当然",
-          "告诉",
-          "了",
-          "她"
+          "愿意",
+          "帮忙"
         ]
       }
     },
@@ -1568,15 +1624,19 @@
       "pinyin": "xiāng xìn",
       "english": "To be convinced (that sth is true); to believe; to accept sth as true",
       "example": {
-        "hanzi": "我一直不相信他。",
-        "pinyin": "Wǒ yī zhí bù xiāng xìn tā.",
-        "english": "I have never believed him.",
+        "hanzi": "我相信你一定能解决这个问题。",
+        "pinyin": "Wǒ xiāng xìn nǐ yī dìng néng jiě jué zhè gè wèn tí.",
+        "english": "I believe you can definitely solve this problem.",
         "tokens": [
           "我",
-          "一直",
-          "不",
           "相信",
-          "他"
+          "你",
+          "一定",
+          "能",
+          "解决",
+          "这",
+          "个",
+          "问题"
         ]
       }
     },
@@ -1607,16 +1667,19 @@
       "pinyin": "jiě jué",
       "english": "To solve; to resolve; to settle (a problem)",
       "example": {
-        "hanzi": "你要让我来解决。",
-        "pinyin": "Nǐ yào ràng wǒ lái jiě jué.",
-        "english": "You need to let me handle this.",
+        "hanzi": "我们一起想办法解决这个问题吧。",
+        "pinyin": "Wǒ men yī qǐ xiǎng bàn fǎ jiě jué zhè gè wèn tí ba.",
+        "english": "Let's figure out a way to solve this problem together.",
         "tokens": [
-          "你",
-          "要",
-          "让",
-          "我",
-          "来",
-          "解决"
+          "我们",
+          "一起",
+          "想",
+          "办法",
+          "解决",
+          "这",
+          "个",
+          "问题",
+          "吧"
         ]
       }
     },
@@ -1650,15 +1713,17 @@
       "pinyin": "wán chéng",
       "english": "To complete; to accomplish",
       "example": {
-        "hanzi": "是什么时候完成的？",
-        "pinyin": "Shì shén me shí hou wán chéng de?",
-        "english": "When was it finished?",
+        "hanzi": "我已经完成了今天的作业。",
+        "pinyin": "Wǒ yǐ jīng wán chéng le jīn tiān de zuò yè.",
+        "english": "I have already finished today's homework.",
         "tokens": [
-          "是",
-          "什么",
-          "时候",
+          "我",
+          "已经",
           "完成",
-          "的"
+          "了",
+          "今天",
+          "的",
+          "作业"
         ]
       }
     },
@@ -1746,15 +1811,19 @@
       "pinyin": "tè bié",
       "english": "Unusual; special / very; especially; particularly",
       "example": {
-        "hanzi": "她特别喜欢吃水果。",
-        "pinyin": "Tā tè bié xǐ huan chī shuǐ guǒ.",
-        "english": "She especially likes eating fruit.",
+        "hanzi": "这家饭店的鱼做得特别好吃。",
+        "pinyin": "Zhè jiā fàn diàn de yú zuò de tè bié hǎo chī.",
+        "english": "The fish at this restaurant is cooked especially well.",
         "tokens": [
-          "她",
+          "这",
+          "家",
+          "饭店",
+          "的",
+          "鱼",
+          "做",
+          "得",
           "特别",
-          "喜欢",
-          "吃",
-          "水果"
+          "好吃"
         ]
       }
     },
@@ -1787,14 +1856,16 @@
       "pinyin": "zhù yì",
       "english": "To take note of; to pay attention to",
       "example": {
-        "hanzi": "你必须注意他。",
-        "pinyin": "Nǐ bì xū zhù yì tā.",
-        "english": "You must pay attention to him.",
+        "hanzi": "最近天气冷，请注意身体！",
+        "pinyin": "Zuì jìn tiān qì lěng, qǐng zhù yì shēn tǐ!",
+        "english": "The weather has been cold lately, please take care of your health!",
         "tokens": [
-          "你",
-          "必须",
+          "最近",
+          "天气",
+          "冷",
+          "请",
           "注意",
-          "他"
+          "身体"
         ]
       }
     },
@@ -1805,15 +1876,18 @@
       "pinyin": "jiǎng",
       "english": "To speak / to explain",
       "example": {
-        "hanzi": "他讲了一小时。",
-        "pinyin": "Tā jiǎng le yī xiǎo shí.",
-        "english": "He spoke for one hour.",
+        "hanzi": "爷爷每天晚上给孩子讲故事。",
+        "pinyin": "Yé ye měi tiān wǎn shang gěi hái zi jiǎng gù shi.",
+        "english": "Grandpa tells stories to the children every night.",
         "tokens": [
-          "他",
+          "爷爷",
+          "每",
+          "天",
+          "晚上",
+          "给",
+          "孩子",
           "讲",
-          "了",
-          "一",
-          "小时"
+          "故事"
         ]
       }
     },
@@ -1864,7 +1938,7 @@
       "english": "To exceed / to climb over",
       "example": {
         "hanzi": "飞机越过了黄河。",
-        "pinyin": "Fēi jī yuè guo le huánghé.",
+        "pinyin": "Fēi jī yuè guo le Huáng hé.",
         "english": "The airplane crossed over the Yellow River.",
         "tokens": [
           "飞机",
@@ -1882,16 +1956,18 @@
       "pinyin": "chéng shì",
       "english": "City; town",
       "example": {
-        "hanzi": "我打算住在城市里。",
-        "pinyin": "Wǒ dǎ suàn zhù zài chéng shì lǐ.",
-        "english": "I plan to stay in the city.",
+        "hanzi": "上海是一个非常大的城市。",
+        "pinyin": "Shàng hǎi shì yī gè fēi cháng dà de chéng shì.",
+        "english": "Shanghai is a very big city.",
         "tokens": [
-          "我",
-          "打算",
-          "住",
-          "在",
-          "城市",
-          "里"
+          "上海",
+          "是",
+          "一",
+          "个",
+          "非常",
+          "大",
+          "的",
+          "城市"
         ]
       }
     },
@@ -1902,15 +1978,17 @@
       "pinyin": "yǐng xiǎng",
       "english": "Influence / effect",
       "example": {
-        "hanzi": "这对他没有影响。",
-        "pinyin": "Zhè duì tā méi yǒu yǐng xiǎng.",
-        "english": "It has had no effect on him.",
+        "hanzi": "天气变化会影响我们的健康。",
+        "pinyin": "Tiān qì biàn huà huì yǐng xiǎng wǒ men de jiàn kāng.",
+        "english": "Weather changes can affect our health.",
         "tokens": [
-          "这",
-          "对",
-          "他",
-          "没有",
-          "影响"
+          "天气",
+          "变化",
+          "会",
+          "影响",
+          "我们",
+          "的",
+          "健康"
         ]
       }
     },
@@ -1940,14 +2018,16 @@
       "pinyin": "mǎ",
       "english": "Horse / horse or cavalry piece in Chinese chess",
       "example": {
-        "hanzi": "这是我的马。",
-        "pinyin": "Zhè shì wǒ de mǎ.",
-        "english": "This is my horse.",
+        "hanzi": "他以前在北方骑过马。",
+        "pinyin": "Tā yǐ qián zài běi fāng qí guo mǎ.",
+        "english": "He used to ride horses in the north.",
         "tokens": [
-          "这",
-          "是",
-          "我",
-          "的",
+          "他",
+          "以前",
+          "在",
+          "北方",
+          "骑",
+          "过",
           "马"
         ]
       }
@@ -2035,15 +2115,17 @@
       "pinyin": "liǎn",
       "english": "Face",
       "example": {
-        "hanzi": "他叫我洗脸。",
-        "pinyin": "Tā jiào wǒ xǐ liǎn.",
-        "english": "He told me to wash my face.",
+        "hanzi": "我早上起床先洗脸刷牙。",
+        "pinyin": "Wǒ zǎo shang qǐ chuáng xiān xǐ liǎn shuā yá.",
+        "english": "When I get up in the morning, I wash my face and brush my teeth first.",
         "tokens": [
-          "他",
-          "叫",
           "我",
+          "早上",
+          "起床",
+          "先",
           "洗",
-          "脸"
+          "脸",
+          "刷牙"
         ]
       }
     },
@@ -2092,15 +2174,16 @@
       "pinyin": "chú le",
       "english": "Besides / apart from (... also...)",
       "example": {
-        "hanzi": "除了茶我还喜欢咖啡。",
-        "pinyin": "Chú le chá wǒ hái xǐ huan kā fēi.",
-        "english": "Besides tea, I also like coffee.",
+        "hanzi": "除了茶，我还喜欢喝咖啡。",
+        "pinyin": "Chú le chá, wǒ hái xǐ huan hē kā fēi.",
+        "english": "Besides tea, I also like drinking coffee.",
         "tokens": [
           "除了",
           "茶",
           "我",
           "还",
           "喜欢",
+          "喝",
           "咖啡"
         ]
       }
@@ -2150,15 +2233,18 @@
       "pinyin": "duàn",
       "english": "Paragraph / section",
       "example": {
-        "hanzi": "请读这一段。",
-        "pinyin": "Qǐng dú zhè yī duàn.",
-        "english": "Please read this paragraph.",
+        "hanzi": "老师让我们读这一段故事。",
+        "pinyin": "Lǎo shī ràng wǒ men dú zhè yī duàn gù shi.",
+        "english": "The teacher asked us to read this passage of the story.",
         "tokens": [
-          "请",
+          "老师",
+          "让",
+          "我们",
           "读",
           "这",
           "一",
-          "段"
+          "段",
+          "故事"
         ]
       }
     },
@@ -2306,15 +2392,16 @@
       "pinyin": "jiǎn dān",
       "english": "Simple / not complicated",
       "example": {
-        "hanzi": "问我简单些的。",
-        "pinyin": "Wèn wǒ jiǎn dān xiē de.",
-        "english": "Ask me something easier.",
+        "hanzi": "今天的数学题非常简单。",
+        "pinyin": "Jīn tiān de shù xué tí fēi cháng jiǎn dān.",
+        "english": "Today's math problems are very simple.",
         "tokens": [
-          "问",
-          "我",
-          "简单",
-          "些",
-          "的"
+          "今天",
+          "的",
+          "数学",
+          "题",
+          "非常",
+          "简单"
         ]
       }
     },
@@ -2346,15 +2433,19 @@
       "pinyin": "yuàn yì",
       "english": "To wish / to want",
       "example": {
-        "hanzi": "我什么都愿意做。",
-        "pinyin": "Wǒ shén me dōu yuàn yì zuò.",
-        "english": "I'll do anything.",
+        "hanzi": "周末你愿意和我一起去爬山吗？",
+        "pinyin": "Zhōu mò nǐ yuàn yì hé wǒ yī qǐ qù pá shān ma?",
+        "english": "Would you like to go hiking with me this weekend?",
         "tokens": [
-          "我",
-          "什么",
-          "都",
+          "周末",
+          "你",
           "愿意",
-          "做"
+          "和",
+          "我",
+          "一起",
+          "去",
+          "爬山",
+          "吗"
         ]
       }
     },
@@ -2365,13 +2456,16 @@
       "pinyin": "yīn yuè",
       "english": "Music",
       "example": {
-        "hanzi": "我们在学习音乐。",
-        "pinyin": "Wǒ men zài xué xí yīn yuè.",
-        "english": "We study music.",
+        "hanzi": "她晚上喜欢听安静的音乐。",
+        "pinyin": "Tā wǎn shang xǐ huan tīng ān jìng de yīn yuè.",
+        "english": "She likes listening to quiet music in the evening.",
         "tokens": [
-          "我们",
-          "在",
-          "学习",
+          "她",
+          "晚上",
+          "喜欢",
+          "听",
+          "安静",
+          "的",
           "音乐"
         ]
       }
@@ -2402,15 +2496,20 @@
       "pinyin": "bāo",
       "english": "To cover / to wrap",
       "example": {
-        "hanzi": "那是我的包。",
-        "pinyin": "Nà shì wǒ de bāo.",
-        "english": "That is my bag.",
+        "hanzi": "我把词典和伞放进包里了。",
+        "pinyin": "Wǒ bǎ cí diǎn hé sǎn fàng jìn bāo lǐ le.",
+        "english": "I put the dictionary and umbrella into my bag.",
         "tokens": [
-          "那",
-          "是",
           "我",
-          "的",
-          "包"
+          "把",
+          "词典",
+          "和",
+          "伞",
+          "放",
+          "进",
+          "包",
+          "里",
+          "了"
         ]
       }
     },
@@ -2460,15 +2559,18 @@
       "pinyin": "zhào piàn",
       "english": "Photograph / picture",
       "example": {
-        "hanzi": "那是我妹妹的照片。",
-        "pinyin": "Nà shì wǒ mèi mei de zhào piàn.",
-        "english": "That's my younger sister's photograph.",
+        "hanzi": "请给我看一下你的旅游照片。",
+        "pinyin": "Qǐng gěi wǒ kàn yíxià nǐ de lǚ yóu zhào piàn.",
+        "english": "Please show me your travel photos.",
         "tokens": [
-          "那",
-          "是",
+          "请",
+          "给",
           "我",
-          "妹妹",
+          "看",
+          "一下",
+          "你",
           "的",
+          "旅游",
           "照片"
         ]
       }
@@ -2480,16 +2582,18 @@
       "pinyin": "yín háng",
       "english": "Bank",
       "example": {
-        "hanzi": "你应该带护照去银行。",
-        "pinyin": "Nǐ yīng gāi dài hù zhào qù yín háng.",
-        "english": "You should bring your passport to the bank.",
+        "hanzi": "我去银行换了一些钱。",
+        "pinyin": "Wǒ qù yín háng huàn le yī xiē qián.",
+        "english": "I went to the bank to exchange some money.",
         "tokens": [
-          "你",
-          "应该",
-          "带",
-          "护照",
+          "我",
           "去",
-          "银行"
+          "银行",
+          "换",
+          "了",
+          "一",
+          "些",
+          "钱"
         ]
       }
     },
@@ -2500,15 +2604,20 @@
       "pinyin": "gù shi",
       "english": "Story",
       "example": {
-        "hanzi": "我相信那个故事。",
-        "pinyin": "Wǒ xiāng xìn nà gè gù shi.",
-        "english": "I believe that story.",
+        "hanzi": "这本书里的中国故事非常有意思。",
+        "pinyin": "Zhè běn shū lǐ de Zhōng guó gù shi fēi cháng yǒu yì si.",
+        "english": "The Chinese stories in this book are really interesting.",
         "tokens": [
-          "我",
-          "相信",
-          "那",
-          "个",
-          "故事"
+          "这",
+          "本",
+          "书",
+          "里",
+          "的",
+          "中国",
+          "故事",
+          "非常",
+          "有",
+          "意思"
         ]
       }
     },
@@ -2555,14 +2664,15 @@
       "pinyin": "kě ài",
       "english": "Adorable / cute",
       "example": {
-        "hanzi": "我知道她很可爱。",
-        "pinyin": "Wǒ zhī dào tā hěn kě ài.",
-        "english": "I know that she is cute.",
+        "hanzi": "那只大熊猫非常可爱！",
+        "pinyin": "Nà zhī dà xióng māo fēi cháng kě ài!",
+        "english": "That giant panda is adorable!",
         "tokens": [
-          "我",
-          "知道",
-          "她",
-          "很",
+          "那",
+          "只",
+          "大",
+          "熊猫",
+          "非常",
           "可爱"
         ]
       }
@@ -2694,15 +2804,18 @@
       "pinyin": "huì yì",
       "english": "Meeting / conference",
       "example": {
-        "hanzi": "会议明天就结束了。",
-        "pinyin": "Huì yì míng tiān jiù jié shù le.",
-        "english": "The meeting will end tomorrow.",
+        "hanzi": "经理下午两点有一个会议。",
+        "pinyin": "Jīng lǐ xià wǔ liǎng diǎn yǒu yī gè huì yì.",
+        "english": "The manager has a meeting at two this afternoon.",
         "tokens": [
-          "会议",
-          "明天",
-          "就",
-          "结束",
-          "了"
+          "经理",
+          "下午",
+          "两",
+          "点",
+          "有",
+          "一",
+          "个",
+          "会议"
         ]
       }
     },
@@ -2713,10 +2826,16 @@
       "pinyin": "shì",
       "english": "To test / to try",
       "example": {
-        "hanzi": "我能试一下吗？",
-        "pinyin": "Wǒ néng shì yíxià ma?",
-        "english": "May I try it on?",
+        "hanzi": "这件白衬衫真漂亮，我能试一下吗？",
+        "pinyin": "Zhè jiàn bái chèn shān zhēn piào liang, wǒ néng shì yíxià ma?",
+        "english": "This white shirt is really nice, may I try it on?",
         "tokens": [
+          "这",
+          "件",
+          "白",
+          "衬衫",
+          "真",
+          "漂亮",
           "我",
           "能",
           "试",
@@ -2771,14 +2890,17 @@
       "pinyin": "jiàn kāng",
       "english": "Health / healthy",
       "example": {
-        "hanzi": "我希望你很健康。",
-        "pinyin": "Wǒ xī wàng nǐ hěn jiàn kāng.",
-        "english": "I hope that you are very well.",
+        "hanzi": "每天锻炼能让身体更健康。",
+        "pinyin": "Měi tiān duàn liàn néng ràng shēn tǐ gèng jiàn kāng.",
+        "english": "Exercising every day can make your body healthier.",
         "tokens": [
-          "我",
-          "希望",
-          "你",
-          "很",
+          "每",
+          "天",
+          "锻炼",
+          "能",
+          "让",
+          "身体",
+          "更",
           "健康"
         ]
       }
@@ -2790,14 +2912,21 @@
       "pinyin": "xī",
       "english": "West",
       "example": {
-        "hanzi": "请往西走。",
-        "pinyin": "Qǐng wǎng xī zǒu.",
-        "english": "Please walk west.",
+        "hanzi": "从地铁站往西走两百米就是。",
+        "pinyin": "Cóng dì tiě zhàn wǎng xī zǒu liǎng bǎi mǐ jiù shì.",
+        "english": "Walk two hundred meters west from the subway station and you're there.",
         "tokens": [
-          "请",
+          "从",
+          "地铁",
+          "站",
           "往",
           "西",
-          "走"
+          "走",
+          "两",
+          "百",
+          "米",
+          "就",
+          "是"
         ]
       }
     },
@@ -2866,14 +2995,16 @@
       "pinyin": "tóng yì",
       "english": "To agree / to consent",
       "example": {
-        "hanzi": "大家都同意你。",
-        "pinyin": "Dà jiā dōu tóng yì nǐ.",
-        "english": "All agree with you.",
+        "hanzi": "大家都同意这个办法。",
+        "pinyin": "Dà jiā dōu tóng yì zhè gè bàn fǎ.",
+        "english": "Everyone agrees with this plan.",
         "tokens": [
           "大家",
           "都",
           "同意",
-          "你"
+          "这",
+          "个",
+          "办法"
         ]
       }
     },
@@ -2903,15 +3034,19 @@
       "pinyin": "jī hū",
       "english": "Almost; nearly; practically",
       "example": {
-        "hanzi": "我也几乎哭了！",
-        "pinyin": "Wǒ yě jī hū kū le!",
-        "english": "I almost cried too!",
+        "hanzi": "最近太忙了，我几乎没有时间休息。",
+        "pinyin": "Zuì jìn tài máng le, wǒ jī hū méi yǒu shí jiān xiū xi.",
+        "english": "I've been so busy lately that I barely have time to rest.",
         "tokens": [
+          "最近",
+          "太",
+          "忙",
+          "了",
           "我",
-          "也",
           "几乎",
-          "哭",
-          "了"
+          "没有",
+          "时间",
+          "休息"
         ]
       }
     },
@@ -2922,15 +3057,19 @@
       "pinyin": "rèn zhēn",
       "english": "Conscientious / earnest",
       "example": {
-        "hanzi": "他弟弟很认真学习。",
-        "pinyin": "Tā dì di hěn rèn zhēn xué xí.",
-        "english": "His brother studies hard.",
+        "hanzi": "她每天都很认真地学习汉语。",
+        "pinyin": "Tā měi tiān dōu hěn rèn zhēn de xué xí Hàn yǔ.",
+        "english": "She studies Chinese very diligently every day.",
         "tokens": [
-          "他",
-          "弟弟",
+          "她",
+          "每",
+          "天",
+          "都",
           "很",
           "认真",
-          "学习"
+          "地",
+          "学习",
+          "汉语"
         ]
       }
     },
@@ -3020,14 +3159,19 @@
       "pinyin": "zuǐ",
       "english": "Mouth / beak",
       "example": {
-        "hanzi": "把嘴张开！",
-        "pinyin": "Bǎ zuǐ zhāng kāi!",
-        "english": "Open your mouth!",
+        "hanzi": "医生让他把嘴张开检查一下。",
+        "pinyin": "Yī shēng ràng tā bǎ zuǐ zhāng kāi jiǎn chá yíxià.",
+        "english": "The doctor asked him to open his mouth for a checkup.",
         "tokens": [
+          "医生",
+          "让",
+          "他",
           "把",
           "嘴",
           "张",
-          "开"
+          "开",
+          "检查",
+          "一下"
         ]
       }
     },
@@ -3077,15 +3221,18 @@
       "pinyin": "nián qīng",
       "english": "Young",
       "example": {
-        "hanzi": "她比他女儿年轻。",
-        "pinyin": "Tā bǐ tā nǚ ér nián qīng.",
-        "english": "She's younger than his daughter.",
+        "hanzi": "那位经理非常年轻，也很聪明。",
+        "pinyin": "Nà wèi jīng lǐ fēi cháng nián qīng, yě hěn cōng ming.",
+        "english": "That manager is very young and also very smart.",
         "tokens": [
-          "她",
-          "比",
-          "他",
-          "女儿",
-          "年轻"
+          "那",
+          "位",
+          "经理",
+          "非常",
+          "年轻",
+          "也",
+          "很",
+          "聪明"
         ]
       }
     },
@@ -3294,15 +3441,17 @@
       "pinyin": "yī biān",
       "english": "On one hand / At the same time",
       "example": {
-        "hanzi": "请在一边等我。",
-        "pinyin": "Qǐng zài yī biān děng wǒ.",
-        "english": "Please wait for me on the side.",
+        "hanzi": "请先把行李箱放在一边。",
+        "pinyin": "Qǐng xiān bǎ xíng li xiāng fàng zài yī biān.",
+        "english": "Please put the suitcase off to the side first.",
         "tokens": [
           "请",
+          "先",
+          "把",
+          "行李箱",
+          "放",
           "在",
-          "一边",
-          "等",
-          "我"
+          "一边"
         ]
       }
     },
@@ -3313,15 +3462,22 @@
       "pinyin": "xí guàn",
       "english": "Habit / custom",
       "example": {
-        "hanzi": "最后我还是习惯了。",
-        "pinyin": "Zuì hòu wǒ hái shi xí guàn le.",
-        "english": "I eventually got used to it.",
+        "hanzi": "来北京一年了，我已经习惯这里的天气。",
+        "pinyin": "Lái Běi jīng yī nián le, wǒ yǐ jīng xí guàn zhè lǐ de tiān qì.",
+        "english": "After a year in Beijing, I've already gotten used to the weather here.",
         "tokens": [
-          "最后",
+          "来",
+          "北京",
+          "一",
+          "年",
+          "了",
           "我",
-          "还是",
+          "已经",
           "习惯",
-          "了"
+          "这",
+          "里",
+          "的",
+          "天气"
         ]
       }
     },
@@ -3412,16 +3568,18 @@
       "pinyin": "dǎ suàn",
       "english": "To plan / to intend",
       "example": {
-        "hanzi": "我打算住在城市里。",
-        "pinyin": "Wǒ dǎ suàn zhù zài chéng shì lǐ.",
-        "english": "I plan to stay in the city.",
+        "hanzi": "我们打算下个月去巴黎旅游。",
+        "pinyin": "Wǒ men dǎ suàn xià gè yuè qù Bā lí lǚ yóu.",
+        "english": "We plan to travel to Paris next month.",
         "tokens": [
-          "我",
+          "我们",
           "打算",
-          "住",
-          "在",
-          "城市",
-          "里"
+          "下",
+          "个",
+          "月",
+          "去",
+          "巴黎",
+          "旅游"
         ]
       }
     },
@@ -3451,15 +3609,16 @@
       "pinyin": "xiǎo xīn",
       "english": "To be careful / to take care",
       "example": {
-        "hanzi": "你应该更小心的。",
-        "pinyin": "Nǐ yīng gāi gèng xiǎo xīn de.",
-        "english": "You should've been more prudent.",
+        "hanzi": "骑自行车的时候请小心！",
+        "pinyin": "Qí zì xíng chē de shí hou qǐng xiǎo xīn!",
+        "english": "Please be careful when riding a bicycle!",
         "tokens": [
-          "你",
-          "应该",
-          "更",
-          "小心",
-          "的"
+          "骑",
+          "自行车",
+          "的",
+          "时候",
+          "请",
+          "小心"
         ]
       }
     },
@@ -3470,14 +3629,18 @@
       "pinyin": "dòng wù",
       "english": "Animal",
       "example": {
-        "hanzi": "她很喜欢动物。",
-        "pinyin": "Tā hěn xǐ huan dòng wù.",
-        "english": "She is fond of animals.",
+        "hanzi": "周末我们带孩子去看动物吧！",
+        "pinyin": "Zhōu mò wǒ men dài hái zi qù kàn dòng wù ba!",
+        "english": "Let's take the kids to see the animals this weekend!",
         "tokens": [
-          "她",
-          "很",
-          "喜欢",
-          "动物"
+          "周末",
+          "我们",
+          "带",
+          "孩子",
+          "去",
+          "看",
+          "动物",
+          "吧"
         ]
       }
     },
@@ -3488,11 +3651,15 @@
       "pinyin": "è",
       "english": "To be hungry / hungry",
       "example": {
-        "hanzi": "我现在很饿。",
-        "pinyin": "Wǒ xiàn zài hěn è.",
-        "english": "I am very hungry right now.",
+        "hanzi": "我中午没有吃米饭，现在很饿。",
+        "pinyin": "Wǒ zhōng wǔ méi yǒu chī mǐ fàn, xiàn zài hěn è.",
+        "english": "I didn't eat lunch at noon, so I'm very hungry now.",
         "tokens": [
           "我",
+          "中午",
+          "没有",
+          "吃",
+          "米饭",
           "现在",
           "很",
           "饿"
@@ -3547,15 +3714,18 @@
       "pinyin": "jiè",
       "english": "To lend / to borrow",
       "example": {
-        "hanzi": "也借我用吧！",
-        "pinyin": "Yě jiè wǒ yòng ba!",
-        "english": "Lend it to me too!",
+        "hanzi": "我从图书馆借了两本词典。",
+        "pinyin": "Wǒ cóng tú shū guǎn jiè le liǎng běn cí diǎn.",
+        "english": "I borrowed two dictionaries from the library.",
         "tokens": [
-          "也",
-          "借",
           "我",
-          "用",
-          "吧"
+          "从",
+          "图书馆",
+          "借",
+          "了",
+          "两",
+          "本",
+          "词典"
         ]
       }
     },
@@ -3606,14 +3776,16 @@
       "pinyin": "hài pà",
       "english": "To be afraid / to be scared",
       "example": {
-        "hanzi": "他开始害怕了。",
-        "pinyin": "Tā kāi shǐ hài pà le.",
-        "english": "He began to feel afraid.",
+        "hanzi": "弟弟很害怕大黑狗。",
+        "pinyin": "Dì di hěn hài pà dà hēi gǒu.",
+        "english": "My younger brother is very afraid of big black dogs.",
         "tokens": [
-          "他",
-          "开始",
+          "弟弟",
+          "很",
           "害怕",
-          "了"
+          "大",
+          "黑",
+          "狗"
         ]
       }
     },
@@ -3645,15 +3817,17 @@
       "pinyin": "lán",
       "english": "Blue / indigo plant",
       "example": {
-        "hanzi": "她有双蓝眼睛。",
-        "pinyin": "Tā yǒu shuāng lán yǎn jing.",
-        "english": "She has blue eyes.",
+        "hanzi": "哥哥穿着一件蓝衬衫。",
+        "pinyin": "Gē ge chuān zhe yī jiàn lán chèn shān.",
+        "english": "My older brother is wearing a blue shirt.",
         "tokens": [
-          "她",
-          "有",
-          "双",
+          "哥哥",
+          "穿",
+          "着",
+          "一",
+          "件",
           "蓝",
-          "眼睛"
+          "衬衫"
         ]
       }
     },
@@ -3664,14 +3838,18 @@
       "pinyin": "zhào gu",
       "english": "To take care of / to show consideration",
       "example": {
-        "hanzi": "照顾好你自己。",
-        "pinyin": "Zhào gu hǎo nǐ zì jǐ.",
-        "english": "Take good care of yourself.",
+        "hanzi": "妈妈生病了，我在家照顾她。",
+        "pinyin": "Mā ma shēng bìng le, wǒ zài jiā zhào gu tā.",
+        "english": "Mom is sick, so I'm taking care of her at home.",
         "tokens": [
+          "妈妈",
+          "生病",
+          "了",
+          "我",
+          "在",
+          "家",
           "照顾",
-          "好",
-          "你",
-          "自己"
+          "她"
         ]
       }
     },
@@ -3702,15 +3880,19 @@
       "pinyin": "téng",
       "english": "(it) hurts; sore / to love dearly",
       "example": {
-        "hanzi": "她疼得哭了。",
-        "pinyin": "Tā téng de kū le.",
-        "english": "She gave a cry of pain.",
+        "hanzi": "我昨天爬山太久，今天腿很疼。",
+        "pinyin": "Wǒ zuó tiān pá shān tài jiǔ, jīn tiān tuǐ hěn téng.",
+        "english": "I hiked for too long yesterday, so my legs really hurt today.",
         "tokens": [
-          "她",
-          "疼",
-          "得",
-          "哭",
-          "了"
+          "我",
+          "昨天",
+          "爬山",
+          "太",
+          "久",
+          "今天",
+          "腿",
+          "很",
+          "疼"
         ]
       }
     },
@@ -3721,15 +3903,18 @@
       "pinyin": "qí guài",
       "english": "Strange / odd",
       "example": {
-        "hanzi": "这件事情很奇怪。",
-        "pinyin": "Zhè jiàn shì qing hěn qí guài.",
-        "english": "This matter is very strange.",
+        "hanzi": "今天天气真奇怪，早上冷中午热。",
+        "pinyin": "Jīn tiān tiān qì zhēn qí guài, zǎo shang lěng zhōng wǔ rè.",
+        "english": "The weather is really strange today—cold in the morning and hot at noon.",
         "tokens": [
-          "这",
-          "件",
-          "事情",
-          "很",
-          "奇怪"
+          "今天",
+          "天气",
+          "真",
+          "奇怪",
+          "早上",
+          "冷",
+          "中午",
+          "热"
         ]
       }
     },
@@ -3740,14 +3925,18 @@
       "pinyin": "lǐ wù",
       "english": "Gift; present",
       "example": {
-        "hanzi": "非常谢谢你的礼物。",
-        "pinyin": "Fēi cháng xiè xie nǐ de lǐ wù.",
-        "english": "Thank you very much for your gift.",
+        "hanzi": "哥哥从法国给我带了生日礼物。",
+        "pinyin": "Gē ge cóng Fǎ guó gěi wǒ dài le shēng rì lǐ wù.",
+        "english": "My older brother brought me a birthday gift from France.",
         "tokens": [
-          "非常",
-          "谢谢",
-          "你",
-          "的",
+          "哥哥",
+          "从",
+          "法国",
+          "给",
+          "我",
+          "带",
+          "了",
+          "生日",
           "礼物"
         ]
       }
@@ -3799,15 +3988,17 @@
       "pinyin": "mǎn yì",
       "english": "Satisfied / pleased",
       "example": {
-        "hanzi": "他非常想让别人满意。",
-        "pinyin": "Tā fēi cháng xiǎng ràng bié ren mǎn yì.",
-        "english": "He is eager to please.",
+        "hanzi": "妈妈对这个新房间非常满意。",
+        "pinyin": "Mā ma duì zhè gè xīn fáng jiān fēi cháng mǎn yì.",
+        "english": "Mom is very satisfied with this new room.",
         "tokens": [
-          "他",
+          "妈妈",
+          "对",
+          "这",
+          "个",
+          "新",
+          "房间",
           "非常",
-          "想",
-          "让",
-          "别人",
           "满意"
         ]
       }
@@ -3859,14 +4050,16 @@
       "pinyin": "jīng lǐ",
       "english": "Manager / director",
       "example": {
-        "hanzi": "他是经理吗？",
-        "pinyin": "Tā shì jīng lǐ ma?",
-        "english": "Is he the manager?",
+        "hanzi": "刚才经理在办公室打电话呢。",
+        "pinyin": "Gāng cái jīng lǐ zài bàn gōng shì dǎ diàn huà ne.",
+        "english": "The manager was just making a phone call in the office.",
         "tokens": [
-          "他",
-          "是",
+          "刚才",
           "经理",
-          "吗"
+          "在",
+          "办公室",
+          "打电话",
+          "呢"
         ]
       }
     },
@@ -3956,15 +4149,18 @@
       "pinyin": "cōng ming",
       "english": "Intelligent / clever",
       "example": {
-        "hanzi": "她不比你聪明。",
-        "pinyin": "Tā bù bǐ nǐ cōng ming.",
-        "english": "She is less intelligent than you.",
+        "hanzi": "我弟弟非常聪明，数学成绩很好。",
+        "pinyin": "Wǒ dì di fēi cháng cōng ming, shù xué chéng jì hěn hǎo.",
+        "english": "My younger brother is very smart and gets great math grades.",
         "tokens": [
-          "她",
-          "不",
-          "比",
-          "你",
-          "聪明"
+          "我",
+          "弟弟",
+          "非常",
+          "聪明",
+          "数学",
+          "成绩",
+          "很",
+          "好"
         ]
       }
     },
@@ -4036,15 +4232,19 @@
       "pinyin": "fāng biàn",
       "english": "Convenient / suitable",
       "example": {
-        "hanzi": "这方便得多了。",
-        "pinyin": "Zhè fāng biàn de duō le.",
-        "english": "It's much more convenient.",
+        "hanzi": "我家附近有地铁站，上班很方便。",
+        "pinyin": "Wǒ jiā fù jìn yǒu dì tiě zhàn, shàng bān hěn fāng biàn.",
+        "english": "There's a subway station near my home, so commuting to work is very convenient.",
         "tokens": [
-          "这",
-          "方便",
-          "得",
-          "多",
-          "了"
+          "我",
+          "家",
+          "附近",
+          "有",
+          "地铁",
+          "站",
+          "上班",
+          "很",
+          "方便"
         ]
       }
     },
@@ -4113,15 +4313,18 @@
       "pinyin": "qí",
       "english": "To sit astride / to ride (a horse, bike etc)",
       "example": {
-        "hanzi": "我们都喜欢骑自行车。",
-        "pinyin": "Wǒ men dōu xǐ huan qí zì xíng chē.",
-        "english": "We all like cycling.",
+        "hanzi": "哥哥每天早上骑自行车去公司。",
+        "pinyin": "Gē ge měi tiān zǎo shang qí zì xíng chē qù gōng sī.",
+        "english": "My older brother rides a bicycle to the office every morning.",
         "tokens": [
-          "我们",
-          "都",
-          "喜欢",
+          "哥哥",
+          "每",
+          "天",
+          "早上",
           "骑",
-          "自行车"
+          "自行车",
+          "去",
+          "公司"
         ]
       }
     },
@@ -4132,14 +4335,21 @@
       "pinyin": "bān",
       "english": "To move (i.e. relocate oneself) / to move",
       "example": {
-        "hanzi": "他搬了家。",
-        "pinyin": "Tā bān le jiā.",
-        "english": "He's moved away.",
+        "hanzi": "我们下个月要搬到上海去住了。",
+        "pinyin": "Wǒ men xià gè yuè yào bān dào Shàng hǎi qù zhù le.",
+        "english": "We're moving to Shanghai to live next month.",
         "tokens": [
-          "他",
+          "我们",
+          "下",
+          "个",
+          "月",
+          "要",
           "搬",
-          "了",
-          "家"
+          "到",
+          "上海",
+          "去",
+          "住",
+          "了"
         ]
       }
     },
@@ -4150,16 +4360,19 @@
       "pinyin": "tóng shì",
       "english": "Colleague; co-worker",
       "example": {
-        "hanzi": "他是我的新同事。",
-        "pinyin": "Tā shì wǒ de xīn tóng shì.",
-        "english": "He is my new colleague.",
+        "hanzi": "中午我和同事在公司附近吃面条。",
+        "pinyin": "Zhōng wǔ wǒ hé tóng shì zài gōng sī fù jìn chī miàn tiáo.",
+        "english": "At noon I had noodles near the office with my colleague.",
         "tokens": [
-          "他",
-          "是",
+          "中午",
           "我",
-          "的",
-          "新",
-          "同事"
+          "和",
+          "同事",
+          "在",
+          "公司",
+          "附近",
+          "吃",
+          "面条"
         ]
       }
     },
@@ -4230,16 +4443,18 @@
       "pinyin": "pàng",
       "english": "Fat / Plump",
       "example": {
-        "hanzi": "我的小猫很胖。",
-        "pinyin": "Wǒ de xiǎo māo hěn pàng.",
-        "english": "My little cat is very chubby.",
+        "hanzi": "爷爷最近运动少，比以前胖了。",
+        "pinyin": "Yé ye zuì jìn yùn dòng shǎo, bǐ yǐ qián pàng le.",
+        "english": "Grandpa has exercised less lately and put on weight compared to before.",
         "tokens": [
-          "我",
-          "的",
-          "小",
-          "猫",
-          "很",
-          "胖"
+          "爷爷",
+          "最近",
+          "运动",
+          "少",
+          "比",
+          "以前",
+          "胖",
+          "了"
         ]
       }
     },
@@ -4330,13 +4545,19 @@
       "pinyin": "ān jìng",
       "english": "Quiet / peaceful",
       "example": {
-        "hanzi": "她很安静。",
-        "pinyin": "Tā hěn ān jìng.",
-        "english": "She is quiet.",
+        "hanzi": "图书馆里非常安静，大家都在看书。",
+        "pinyin": "Tú shū guǎn lǐ fēi cháng ān jìng, dà jiā dōu zài kàn shū.",
+        "english": "The library is very quiet; everyone is reading.",
         "tokens": [
-          "她",
-          "很",
-          "安静"
+          "图书馆",
+          "里",
+          "非常",
+          "安静",
+          "大家",
+          "都",
+          "在",
+          "看",
+          "书"
         ]
       }
     },
@@ -4385,14 +4606,20 @@
       "pinyin": "lǜ",
       "english": "Green",
       "example": {
-        "hanzi": "我喜欢绿颜色。",
-        "pinyin": "Wǒ xǐ huan lǜ yán sè.",
-        "english": "I like the green colour.",
+        "hanzi": "春天的公园里有很多绿树。",
+        "pinyin": "Chūn tiān de gōng yuán lǐ yǒu hěn duō lǜ shù.",
+        "english": "There are many green trees in the park in spring.",
         "tokens": [
-          "我",
-          "喜欢",
+          "春",
+          "天",
+          "的",
+          "公园",
+          "里",
+          "有",
+          "很",
+          "多",
           "绿",
-          "颜色"
+          "树"
         ]
       }
     },
@@ -4403,14 +4630,18 @@
       "pinyin": "liáo tiān",
       "english": "To chat / to gossip",
       "example": {
-        "hanzi": "我没有朋友可以聊天。",
-        "pinyin": "Wǒ méi yǒu péng you kě yǐ liáo tiān.",
-        "english": "I have no friend to talk with.",
+        "hanzi": "周末我喜欢和朋友一起喝茶聊天。",
+        "pinyin": "Zhōu mò wǒ xǐ huan hé péng you yī qǐ hē chá liáo tiān.",
+        "english": "On weekends I like drinking tea and chatting with friends.",
         "tokens": [
+          "周末",
           "我",
-          "没有",
+          "喜欢",
+          "和",
           "朋友",
-          "可以",
+          "一起",
+          "喝",
+          "茶",
           "聊天"
         ]
       }
@@ -4422,15 +4653,18 @@
       "pinyin": "pí jiǔ",
       "english": "Beer (loanword)",
       "example": {
-        "hanzi": "那时候我不喜欢啤酒。",
-        "pinyin": "Nà shí hou wǒ bù xǐ huan pí jiǔ.",
-        "english": "I didn't like beer at that time.",
+        "hanzi": "天气太热了，爸爸想喝点啤酒。",
+        "pinyin": "Tiān qì tài rè le, bà ba xiǎng hē diǎn pí jiǔ.",
+        "english": "It's so hot, Dad wants to drink some beer.",
         "tokens": [
-          "那",
-          "时候",
-          "我",
-          "不",
-          "喜欢",
+          "天气",
+          "太",
+          "热",
+          "了",
+          "爸爸",
+          "想",
+          "喝",
+          "点",
           "啤酒"
         ]
       }
@@ -4442,16 +4676,20 @@
       "pinyin": "dàn gāo",
       "english": "Cake",
       "example": {
-        "hanzi": "你自己拿蛋糕吃吧。",
-        "pinyin": "Nǐ zì jǐ ná dàn gāo chī ba.",
-        "english": "Please help yourself to the cake.",
+        "hanzi": "今天是妹妹的生日，妈妈买了大蛋糕。",
+        "pinyin": "Jīn tiān shì mèi mei de shēng rì, mā ma mǎi le dà dàn gāo.",
+        "english": "Today is my younger sister's birthday, so Mom bought a big cake.",
         "tokens": [
-          "你",
-          "自己",
-          "拿",
-          "蛋糕",
-          "吃",
-          "吧"
+          "今天",
+          "是",
+          "妹妹",
+          "的",
+          "生日",
+          "妈妈",
+          "买",
+          "了",
+          "大",
+          "蛋糕"
         ]
       }
     },
@@ -4462,12 +4700,16 @@
       "pinyin": "xīn xiān",
       "english": "Fresh (experience, food etc) / freshness",
       "example": {
-        "hanzi": "面包不新鲜。",
-        "pinyin": "Miàn bāo bù xīn xiān.",
-        "english": "The bread isn't fresh.",
+        "hanzi": "超市里今天的水果非常新鲜。",
+        "pinyin": "Chāo shì lǐ jīn tiān de shuǐ guǒ fēi cháng xīn xiān.",
+        "english": "The fruit at the supermarket today is very fresh.",
         "tokens": [
-          "面包",
-          "不",
+          "超市",
+          "里",
+          "今天",
+          "的",
+          "水果",
+          "非常",
           "新鲜"
         ]
       }
@@ -4479,13 +4721,16 @@
       "pinyin": "nán guò",
       "english": "To feel sad / to feel unwell",
       "example": {
-        "hanzi": "我知道你难过。",
-        "pinyin": "Wǒ zhī dào nǐ nán guò.",
-        "english": "I know you're upset.",
+        "hanzi": "小猫生病了，妹妹非常难过。",
+        "pinyin": "Xiǎo māo shēng bìng le, mèi mei fēi cháng nán guò.",
+        "english": "The kitten got sick, so my younger sister is very sad.",
         "tokens": [
-          "我",
-          "知道",
-          "你",
+          "小",
+          "猫",
+          "生病",
+          "了",
+          "妹妹",
+          "非常",
           "难过"
         ]
       }
@@ -4497,15 +4742,20 @@
       "pinyin": "kè rén",
       "english": "Visitor / guest",
       "example": {
-        "hanzi": "做我的客人吧。",
-        "pinyin": "Zuò wǒ de kè rén ba.",
-        "english": "Be my guest.",
+        "hanzi": "今天晚上家里有客人，妈妈在做菜。",
+        "pinyin": "Jīn tiān wǎn shang jiā lǐ yǒu kè rén, mā ma zài zuò cài.",
+        "english": "We have guests at home tonight, so Mom is cooking.",
         "tokens": [
-          "做",
-          "我",
-          "的",
+          "今天",
+          "晚上",
+          "家",
+          "里",
+          "有",
           "客人",
-          "吧"
+          "妈妈",
+          "在",
+          "做",
+          "菜"
         ]
       }
     },
@@ -4555,15 +4805,17 @@
       "pinyin": "shù xué",
       "english": "Mathematics / mathematical",
       "example": {
-        "hanzi": "我不太喜欢数学。",
-        "pinyin": "Wǒ bù tài xǐ huan shù xué.",
-        "english": "I don't like math very much.",
+        "hanzi": "姐姐的数学成绩一直很好。",
+        "pinyin": "Jiě jie de shù xué chéng jì yī zhí hěn hǎo.",
+        "english": "My older sister's math grades have always been very good.",
         "tokens": [
-          "我",
-          "不",
-          "太",
-          "喜欢",
-          "数学"
+          "姐姐",
+          "的",
+          "数学",
+          "成绩",
+          "一直",
+          "很",
+          "好"
         ]
       }
     },
@@ -4636,14 +4888,20 @@
       "pinyin": "lín jū",
       "english": "Neighbor / next door",
       "example": {
-        "hanzi": "他是我邻居。",
-        "pinyin": "Tā shì wǒ lín jū.",
-        "english": "He's my neighbour.",
+        "hanzi": "我的新邻居非常热情，住在三楼。",
+        "pinyin": "Wǒ de xīn lín jū fēi cháng rè qíng, zhù zài sān lóu.",
+        "english": "My new neighbor is very warm and lives on the third floor.",
         "tokens": [
-          "他",
-          "是",
           "我",
-          "邻居"
+          "的",
+          "新",
+          "邻居",
+          "非常",
+          "热情",
+          "住",
+          "在",
+          "三",
+          "楼"
         ]
       }
     },
@@ -4673,14 +4931,21 @@
       "pinyin": "ěr duo",
       "english": "Ear / handle (on a cup)",
       "example": {
-        "hanzi": "我们用耳朵听。",
-        "pinyin": "Wǒ men yòng ěr duo tīng.",
-        "english": "We hear with our ears.",
+        "hanzi": "冬天刮风很冷，我的耳朵都疼了。",
+        "pinyin": "Dōng tiān guā fēng hěn lěng, wǒ de ěr duo dōu téng le.",
+        "english": "It's freezing and windy in winter; even my ears hurt.",
         "tokens": [
-          "我们",
-          "用",
+          "冬",
+          "天",
+          "刮风",
+          "很",
+          "冷",
+          "我",
+          "的",
           "耳朵",
-          "听"
+          "都",
+          "疼",
+          "了"
         ]
       }
     },
@@ -4712,17 +4977,20 @@
       "pinyin": "jié rì",
       "english": "Holiday / festival",
       "example": {
-        "hanzi": "大家都很喜欢这个节日。",
-        "pinyin": "Dà jiā dōu hěn xǐ huan zhè gè jié rì.",
-        "english": "Everyone likes this festival very much.",
+        "hanzi": "节日的时候，我们会回家看爷爷奶奶。",
+        "pinyin": "Jié rì de shí hou, wǒ men huì huí jiā kàn yé ye nǎi nai.",
+        "english": "During the holiday, we go home to visit Grandpa and Grandma.",
         "tokens": [
-          "大家",
-          "都",
-          "很",
-          "喜欢",
-          "这",
-          "个",
-          "节日"
+          "节日",
+          "的",
+          "时候",
+          "我们",
+          "会",
+          "回",
+          "家",
+          "看",
+          "爷爷",
+          "奶奶"
         ]
       }
     },
@@ -4733,15 +5001,17 @@
       "pinyin": "bí zi",
       "english": "Nose",
       "example": {
-        "hanzi": "她的鼻子很小。",
-        "pinyin": "Tā de bí zi hěn xiǎo.",
-        "english": "Her nose is very small.",
+        "hanzi": "我感冒了，鼻子很不舒服。",
+        "pinyin": "Wǒ gǎn mào le, bí zi hěn bù shū fu.",
+        "english": "I caught a cold, and my nose feels really uncomfortable.",
         "tokens": [
-          "她",
-          "的",
+          "我",
+          "感冒",
+          "了",
           "鼻子",
           "很",
-          "小"
+          "不",
+          "舒服"
         ]
       }
     },
@@ -4752,16 +5022,18 @@
       "pinyin": "shū shu",
       "english": "Father's younger brother / uncle",
       "example": {
-        "hanzi": "我叔叔住在学校附近。",
-        "pinyin": "Wǒ shū shu zhù zài xué xiào fù jìn.",
-        "english": "My uncle lives near the school.",
+        "hanzi": "叔叔送了我一辆新自行车。",
+        "pinyin": "Shū shu sòng le wǒ yī liàng xīn zì xíng chē.",
+        "english": "My uncle gave me a new bicycle.",
         "tokens": [
-          "我",
           "叔叔",
-          "住",
-          "在",
-          "学校",
-          "附近"
+          "送",
+          "了",
+          "我",
+          "一",
+          "辆",
+          "新",
+          "自行车"
         ]
       }
     },
@@ -4772,15 +5044,18 @@
       "pinyin": "xǐ zǎo",
       "english": "To bathe / to take a shower",
       "example": {
-        "hanzi": "一般我在晚上洗澡。",
-        "pinyin": "Yī bān wǒ zài wǎn shang xǐ zǎo.",
-        "english": "I usually have my bath at night.",
+        "hanzi": "弟弟踢足球回家，先去洗澡了。",
+        "pinyin": "Dì di tīzúqiú huí jiā, xiān qù xǐ zǎo le.",
+        "english": "My younger brother came home from playing soccer and went to take a shower first.",
         "tokens": [
-          "一般",
-          "我",
-          "在",
-          "晚上",
-          "洗澡"
+          "弟弟",
+          "踢足球",
+          "回",
+          "家",
+          "先",
+          "去",
+          "洗澡",
+          "了"
         ]
       }
     },
@@ -4812,16 +5087,18 @@
       "pinyin": "mào zi",
       "english": "Hat / cap",
       "example": {
-        "hanzi": "她喜欢我的帽子吗？",
-        "pinyin": "Tā xǐ huan wǒ de mào zi ma?",
-        "english": "Does she like my hat?",
+        "hanzi": "今天刮风了，弟弟找不到帽子。",
+        "pinyin": "Jīn tiān guā fēng le, dì di zhǎo bù dào mào zi.",
+        "english": "It's windy today, and my younger brother can't find his hat.",
         "tokens": [
-          "她",
-          "喜欢",
-          "我",
-          "的",
-          "帽子",
-          "吗"
+          "今天",
+          "刮风",
+          "了",
+          "弟弟",
+          "找",
+          "不",
+          "到",
+          "帽子"
         ]
       }
     },
@@ -4873,15 +5150,19 @@
       "pinyin": "chí dào",
       "english": "To arrive late",
       "example": {
-        "hanzi": "我知道我们会迟到。",
-        "pinyin": "Wǒ zhī dào wǒ men huì chí dào.",
-        "english": "I knew we'd be late.",
+        "hanzi": "今天下雨，好几个同事上班迟到了。",
+        "pinyin": "Jīn tiān xià yǔ, hǎo jǐ gè tóng shì shàng bān chí dào le.",
+        "english": "It's raining today, and several colleagues arrived late for work.",
         "tokens": [
-          "我",
-          "知道",
-          "我们",
-          "会",
-          "迟到"
+          "今天",
+          "下雨",
+          "好",
+          "几",
+          "个",
+          "同事",
+          "上班",
+          "迟到",
+          "了"
         ]
       }
     },
@@ -4932,15 +5213,18 @@
       "pinyin": "kù zi",
       "english": "Pants / Trousers",
       "example": {
-        "hanzi": "那是我的裤子。",
-        "pinyin": "Nà shì wǒ de kù zi.",
-        "english": "Those are my pants.",
+        "hanzi": "这条黑裤子穿着非常舒服。",
+        "pinyin": "Zhè tiáo hēi kù zi chuān zhe fēi cháng shū fu.",
+        "english": "These black pants are very comfortable to wear.",
         "tokens": [
-          "那",
-          "是",
-          "我",
-          "的",
-          "裤子"
+          "这",
+          "条",
+          "黑",
+          "裤子",
+          "穿",
+          "着",
+          "非常",
+          "舒服"
         ]
       }
     },
@@ -5011,13 +5295,19 @@
       "pinyin": "shàng wǎng",
       "english": "To go online / to connect to the Internet",
       "example": {
-        "hanzi": "我上网了。",
-        "pinyin": "Wǒ shàng wǎng le.",
-        "english": "I am online.",
+        "hanzi": "弟弟每天晚上用电脑上网看新闻。",
+        "pinyin": "Dì di měi tiān wǎn shang yòng diàn nǎo shàng wǎng kàn xīn wén.",
+        "english": "My younger brother goes online on the computer every evening to read the news.",
         "tokens": [
-          "我",
+          "弟弟",
+          "每",
+          "天",
+          "晚上",
+          "用",
+          "电脑",
           "上网",
-          "了"
+          "看",
+          "新闻"
         ]
       }
     },
@@ -5048,15 +5338,19 @@
       "pinyin": "miàn bāo",
       "english": "Bread",
       "example": {
-        "hanzi": "我非常喜欢吃面包。",
-        "pinyin": "Wǒ fēi cháng xǐ huan chī miàn bāo.",
-        "english": "I love bread.",
+        "hanzi": "早上我在超市买了面包和牛奶。",
+        "pinyin": "Zǎo shang wǒ zài chāo shì mǎi le miàn bāo hé niú nǎi.",
+        "english": "I bought bread and milk at the supermarket this morning.",
         "tokens": [
+          "早上",
           "我",
-          "非常",
-          "喜欢",
-          "吃",
-          "面包"
+          "在",
+          "超市",
+          "买",
+          "了",
+          "面包",
+          "和",
+          "牛奶"
         ]
       }
     },
@@ -5148,14 +5442,17 @@
       "pinyin": "zháo jí",
       "english": "To worry; to feel anxious / to feel a sense of urgency; to be in a hurry",
       "example": {
-        "hanzi": "她更着急了。",
-        "pinyin": "Tā gèng zháo jí le.",
-        "english": "She grew even more worried.",
+        "hanzi": "飞机快起飞了，他非常着急。",
+        "pinyin": "Fēi jī kuài qǐ fēi le, tā fēi cháng zháo jí.",
+        "english": "The plane is about to take off, so he is very anxious.",
         "tokens": [
-          "她",
-          "更",
-          "着急",
-          "了"
+          "飞机",
+          "快",
+          "起飞",
+          "了",
+          "他",
+          "非常",
+          "着急"
         ]
       }
     },
@@ -5186,11 +5483,16 @@
       "pinyin": "bǎo",
       "english": "To eat till full / satisfied",
       "example": {
-        "hanzi": "我吃饱了！",
-        "pinyin": "Wǒ chī bǎo le!",
-        "english": "I'm full!",
+        "hanzi": "今天菜真好吃，我已经吃饱了！",
+        "pinyin": "Jīn tiān cài zhēn hǎo chī, wǒ yǐ jīng chī bǎo le!",
+        "english": "The food is really delicious today; I'm already full!",
         "tokens": [
+          "今天",
+          "菜",
+          "真",
+          "好吃",
           "我",
+          "已经",
           "吃",
           "饱",
           "了"
@@ -5264,14 +5566,16 @@
       "pinyin": "gōng jīn",
       "english": "Kilogram (kg)",
       "example": {
-        "hanzi": "我瘦了三公斤。",
-        "pinyin": "Wǒ shòu le sān gōng jīn.",
-        "english": "I lost three kilograms.",
+        "hanzi": "这个大行李箱有二十公斤。",
+        "pinyin": "Zhè gè dà xíng li xiāng yǒu èrshí gōng jīn.",
+        "english": "This big suitcase weighs twenty kilograms.",
         "tokens": [
-          "我",
-          "瘦",
-          "了",
-          "三",
+          "这",
+          "个",
+          "大",
+          "行李箱",
+          "有",
+          "二十",
           "公斤"
         ]
       }
@@ -5400,14 +5704,19 @@
       "pinyin": "xiāng jiāo",
       "english": "Banana",
       "example": {
-        "hanzi": "我喜欢吃香蕉。",
-        "pinyin": "Wǒ xǐ huan chī xiāng jiāo.",
-        "english": "I like eating bananas.",
+        "hanzi": "超市里的香蕉非常甜，也很便宜。",
+        "pinyin": "Chāo shì lǐ de xiāng jiāo fēi cháng tián, yě hěn pián yi.",
+        "english": "The bananas at the supermarket are very sweet and also cheap.",
         "tokens": [
-          "我",
-          "喜欢",
-          "吃",
-          "香蕉"
+          "超市",
+          "里",
+          "的",
+          "香蕉",
+          "非常",
+          "甜",
+          "也",
+          "很",
+          "便宜"
         ]
       }
     },
@@ -5456,15 +5765,19 @@
       "pinyin": "sǎn",
       "english": "Umbrella / parasol",
       "example": {
-        "hanzi": "这是我的伞。",
-        "pinyin": "Zhè shì wǒ de sǎn.",
-        "english": "This is my umbrella.",
+        "hanzi": "今天下雨，我把伞忘记在办公室了。",
+        "pinyin": "Jīn tiān xià yǔ, wǒ bǎ sǎn wàng jì zài bàn gōng shì le.",
+        "english": "It's raining today, and I left my umbrella at the office.",
         "tokens": [
-          "这",
-          "是",
+          "今天",
+          "下雨",
           "我",
-          "的",
-          "伞"
+          "把",
+          "伞",
+          "忘记",
+          "在",
+          "办公室",
+          "了"
         ]
       }
     },
@@ -5475,13 +5788,18 @@
       "pinyin": "yǒu míng",
       "english": "Famous / well-known",
       "example": {
-        "hanzi": "这个公园很有名。",
-        "pinyin": "Zhè gè gōng yuán hěn yǒu míng.",
-        "english": "This park is very famous.",
+        "hanzi": "这家老饭店的鱼在中国很有名。",
+        "pinyin": "Zhè jiā lǎo fàn diàn de yú zài Zhōng guó hěn yǒu míng.",
+        "english": "This old restaurant's fish is very famous in China.",
         "tokens": [
           "这",
-          "个",
-          "公园",
+          "家",
+          "老",
+          "饭店",
+          "的",
+          "鱼",
+          "在",
+          "中国",
           "很",
           "有名"
         ]
@@ -5494,14 +5812,17 @@
       "pinyin": "dǎ sǎo",
       "english": "To clean / to sweep",
       "example": {
-        "hanzi": "打扫我们的房间吧。",
-        "pinyin": "Dǎ sǎo wǒ men de fáng jiān ba.",
-        "english": "Let's clean our room.",
+        "hanzi": "周末我们一起把房间打扫干净吧！",
+        "pinyin": "Zhōu mò wǒ men yī qǐ bǎ fáng jiān dǎ sǎo gān jìng ba!",
+        "english": "Let's clean the room thoroughly together this weekend!",
         "tokens": [
-          "打扫",
+          "周末",
           "我们",
-          "的",
+          "一起",
+          "把",
           "房间",
+          "打扫",
+          "干净",
           "吧"
         ]
       }
@@ -5572,13 +5893,16 @@
       "pinyin": "xióng māo",
       "english": "Panda",
       "example": {
-        "hanzi": "熊猫很聪明。",
-        "pinyin": "Xióng māo hěn cōng ming.",
-        "english": "Pandas are very clever.",
+        "hanzi": "中国的大熊猫非常有名。",
+        "pinyin": "Zhōng guó de dà xióng māo fēi cháng yǒu míng.",
+        "english": "China's giant pandas are very famous.",
         "tokens": [
+          "中国",
+          "的",
+          "大",
           "熊猫",
-          "很",
-          "聪明"
+          "非常",
+          "有名"
         ]
       }
     },
@@ -5589,16 +5913,17 @@
       "pinyin": "hù zhào",
       "english": "Passport",
       "example": {
-        "hanzi": "你应该带护照去银行。",
-        "pinyin": "Nǐ yīng gāi dài hù zhào qù yín háng.",
-        "english": "You should bring your passport to the bank.",
+        "hanzi": "去法国旅游必须带好护照。",
+        "pinyin": "Qù Fǎ guó lǚ yóu bì xū dài hǎo hù zhào.",
+        "english": "You must bring your passport when traveling to France.",
         "tokens": [
-          "你",
-          "应该",
-          "带",
-          "护照",
           "去",
-          "银行"
+          "法国",
+          "旅游",
+          "必须",
+          "带",
+          "好",
+          "护照"
         ]
       }
     },
@@ -5609,14 +5934,16 @@
       "pinyin": "cài dān",
       "english": "Menu",
       "example": {
-        "hanzi": "这是你的菜单。",
-        "pinyin": "Zhè shì nǐ de cài dān.",
-        "english": "Here is your menu.",
+        "hanzi": "服务员，请给我看一下菜单。",
+        "pinyin": "Fú wù yuán, qǐng gěi wǒ kàn yíxià cài dān.",
+        "english": "Waiter, please let me take a look at the menu.",
         "tokens": [
-          "这",
-          "是",
-          "你",
-          "的",
+          "服务员",
+          "请",
+          "给",
+          "我",
+          "看",
+          "一下",
           "菜单"
         ]
       }
@@ -5630,7 +5957,7 @@
       "example": {
         "hanzi": "她是个二年级学生。",
         "pinyin": "Tā shì gè èr nián jí xué sheng.",
-        "english": "She is a second year student.",
+        "english": "She is a second-year student.",
         "tokens": [
           "她",
           "是",
@@ -5668,14 +5995,18 @@
       "pinyin": "kě",
       "english": "Thirsty",
       "example": {
-        "hanzi": "我现在不特别渴。",
-        "pinyin": "Wǒ xiàn zài bù tè bié kě.",
-        "english": "I'm not particularly thirsty right now.",
+        "hanzi": "今天爬山太累了，我现在非常渴。",
+        "pinyin": "Jīn tiān pá shān tài lèi le, wǒ xiàn zài fēi cháng kě.",
+        "english": "Hiking today was so tiring; I'm really thirsty right now.",
         "tokens": [
+          "今天",
+          "爬山",
+          "太",
+          "累",
+          "了",
           "我",
           "现在",
-          "不",
-          "特别",
+          "非常",
           "渴"
         ]
       }
@@ -5727,15 +6058,20 @@
       "pinyin": "jù zi",
       "english": "Sentence",
       "example": {
-        "hanzi": "请读这个句子。",
-        "pinyin": "Qǐng dú zhè gè jù zi.",
-        "english": "Please read this sentence.",
+        "hanzi": "这个汉语句子很简单，我能听懂。",
+        "pinyin": "Zhè gè Hàn yǔ jù zi hěn jiǎn dān, wǒ néng tīng dǒng.",
+        "english": "This Chinese sentence is very simple; I can understand it.",
         "tokens": [
-          "请",
-          "读",
           "这",
           "个",
-          "句子"
+          "汉语",
+          "句子",
+          "很",
+          "简单",
+          "我",
+          "能",
+          "听",
+          "懂"
         ]
       }
     },
@@ -5746,13 +6082,18 @@
       "pinyin": "kuài zi",
       "english": "Chopsticks",
       "example": {
-        "hanzi": "筷子怎么用？",
-        "pinyin": "Kuài zi zěn me yòng?",
-        "english": "How do I use chopsticks?",
+        "hanzi": "我已经会用筷子吃面条了！",
+        "pinyin": "Wǒ yǐ jīng huì yòng kuài zi chī miàn tiáo le!",
+        "english": "I already know how to eat noodles with chopsticks!",
         "tokens": [
+          "我",
+          "已经",
+          "会",
+          "用",
           "筷子",
-          "怎么",
-          "用"
+          "吃",
+          "面条",
+          "了"
         ]
       }
     },
@@ -5763,14 +6104,17 @@
       "pinyin": "gè zi",
       "english": "Height / stature",
       "example": {
-        "hanzi": "她个子很高。",
-        "pinyin": "Tā gè zi hěn gāo.",
-        "english": "She is tall.",
+        "hanzi": "哥哥个子很高，非常喜欢打篮球。",
+        "pinyin": "Gē ge gè zi hěn gāo, fēi cháng xǐ huan dǎ lán qiú.",
+        "english": "My older brother is very tall and loves playing basketball.",
         "tokens": [
-          "她",
+          "哥哥",
           "个子",
           "很",
-          "高"
+          "高",
+          "非常",
+          "喜欢",
+          "打篮球"
         ]
       }
     },
@@ -5804,7 +6148,7 @@
       "example": {
         "hanzi": "上周末我爬山去了。",
         "pinyin": "Shàng zhōu mò wǒ pá shān qù le.",
-        "english": "On the weekend, I climbed the mountain.",
+        "english": "I went hiking last weekend.",
         "tokens": [
           "上",
           "周末",
@@ -5862,17 +6206,17 @@
       "pinyin": "cí diǎn",
       "english": "Dictionary / also written 辞典",
       "example": {
-        "hanzi": "我有和你哥哥一样的词典。",
-        "pinyin": "Wǒ yǒu hé nǐ gē ge yī yàng de cí diǎn.",
-        "english": "I have the same dictionary as your brother has.",
+        "hanzi": "遇到不认识的字可以看词典。",
+        "pinyin": "Yù dào bù rèn shi de zì kě yǐ kàn cí diǎn.",
+        "english": "When you come across a character you don't know, you can check the dictionary.",
         "tokens": [
-          "我",
-          "有",
-          "和",
-          "你",
-          "哥哥",
-          "一样",
+          "遇到",
+          "不",
+          "认识",
           "的",
+          "字",
+          "可以",
+          "看",
           "词典"
         ]
       }
@@ -5960,14 +6304,16 @@
       "pinyin": "zì xíng chē",
       "english": "Bicycle; bike",
       "example": {
-        "hanzi": "我们都喜欢骑自行车。",
-        "pinyin": "Wǒ men dōu xǐ huan qí zì xíng chē.",
-        "english": "We all like cycling.",
+        "hanzi": "学校前面放着很多自行车。",
+        "pinyin": "Xué xiào qián miàn fàng zhe hěn duō zì xíng chē.",
+        "english": "There are many bicycles parked in front of the school.",
         "tokens": [
-          "我们",
-          "都",
-          "喜欢",
-          "骑",
+          "学校",
+          "前面",
+          "放",
+          "着",
+          "很",
+          "多",
           "自行车"
         ]
       }
@@ -5979,14 +6325,18 @@
       "pinyin": "tú shū guǎn",
       "english": "Library",
       "example": {
-        "hanzi": "我去图书馆看书。",
-        "pinyin": "Wǒ qù tú shū guǎn kàn shū.",
-        "english": "I am going to the library to read.",
+        "hanzi": "下午我去图书馆借几本历史书。",
+        "pinyin": "Xià wǔ wǒ qù tú shū guǎn jiè jǐ běn lì shǐ shū.",
+        "english": "I'm going to the library this afternoon to borrow a few history books.",
         "tokens": [
+          "下午",
           "我",
           "去",
           "图书馆",
-          "看",
+          "借",
+          "几",
+          "本",
+          "历史",
           "书"
         ]
       }
@@ -6059,15 +6409,16 @@
       "pinyin": "zhào xiàng jī",
       "english": "Camera",
       "example": {
-        "hanzi": "那是我妹妹的照相机。",
-        "pinyin": "Nà shì wǒ mèi mei de zhào xiàng jī.",
-        "english": "That is my sister's camera.",
+        "hanzi": "去巴黎旅游别忘记带照相机！",
+        "pinyin": "Qù Bā lí lǚ yóu bié wàng jì dài zhào xiàng jī!",
+        "english": "Don't forget to bring your camera when traveling to Paris!",
         "tokens": [
-          "那",
-          "是",
-          "我",
-          "妹妹",
-          "的",
+          "去",
+          "巴黎",
+          "旅游",
+          "别",
+          "忘记",
+          "带",
           "照相机"
         ]
       }
@@ -6098,17 +6449,20 @@
       "pinyin": "xíng li xiāng",
       "english": "Suitcase / baggage compartment",
       "example": {
-        "hanzi": "这个红行李箱是我的。",
-        "pinyin": "Zhè gè hóng xíng li xiāng shì wǒ de.",
-        "english": "This red suitcase is mine.",
+        "hanzi": "我把衣服和皮鞋都放进了行李箱。",
+        "pinyin": "Wǒ bǎ yī fu hé pí xié dōu fàng jìn le xíng li xiāng.",
+        "english": "I packed both my clothes and leather shoes into the suitcase.",
         "tokens": [
-          "这",
-          "个",
-          "红",
-          "行李箱",
-          "是",
           "我",
-          "的"
+          "把",
+          "衣服",
+          "和",
+          "皮鞋",
+          "都",
+          "放",
+          "进",
+          "了",
+          "行李箱"
         ]
       }
     },

@@ -355,6 +355,7 @@ private fun LexiconGridTile(
     Surface(
         modifier = Modifier
             .fillMaxWidth()
+            .height(100.dp)
             .clip(RoundedCornerShape(12.dp))
             .clickable(onClick = onClick),
         shape = RoundedCornerShape(12.dp),
@@ -363,7 +364,7 @@ private fun LexiconGridTile(
     ) {
         Box(
             modifier = Modifier
-                .fillMaxWidth()
+                .fillMaxSize()
                 .padding(horizontal = 6.dp, vertical = 10.dp),
         ) {
             Box(
@@ -377,6 +378,7 @@ private fun LexiconGridTile(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .align(Alignment.Center)
                     .padding(top = 4.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
@@ -393,10 +395,10 @@ private fun LexiconGridTile(
                 ToneColoredPinyinText(
                     pinyin = item.word.pinyin,
                     toneColorsEnabled = toneColorsEnabled,
-                    style = MaterialTheme.typography.bodyMedium,
+                    style = MaterialTheme.typography.bodyMedium.copy(lineHeight = 14.sp),
                     fontSize = 12.sp,
                     fallbackColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                    maxLines = 1,
+                    maxLines = 2,
                     overflow = TextOverflow.Ellipsis,
                     textAlign = TextAlign.Center,
                 )

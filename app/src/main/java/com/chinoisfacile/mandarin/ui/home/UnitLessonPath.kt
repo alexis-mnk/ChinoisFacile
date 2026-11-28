@@ -60,9 +60,10 @@ import com.chinoisfacile.mandarin.ui.theme.MandarinTheme
 import kotlin.math.min
 import kotlin.math.roundToInt
 
-private val STEP_ROW_HEIGHT = 180.dp
+private val STEP_ROW_HEIGHT = 204.dp
 private val HEADER_OFFSET_FROM_ROW_TOP = 26.dp
 private val NODE_CENTER_OFFSET_BELOW_HEADER = 64.dp
+private val OUTGOING_ANCHOR_Y = 164.dp
 private val NODE_DIAMETER = 70.dp
 private val SHADOW_DEPTH = 5.dp
 private val HALO_DIAMETER = 84.dp
@@ -119,24 +120,27 @@ fun StepPathRow(
         val centerXPx = widthPx / 2f
         val leftXPx = centerXPx - pairHalfOffsetPx
         val rightXPx = centerXPx + pairHalfOffsetPx
-        val cy = rowHeightPx / 2f
+        val cy = with(density) { (HEADER_OFFSET_FROM_ROW_TOP + NODE_CENTER_OFFSET_BELOW_HEADER).toPx() }
+        val outgoingStartY = with(density) { OUTGOING_ANCHOR_Y.toPx() }
+        val outgoingSpan = (rowHeightPx - outgoingStartY).coerceAtLeast(1f)
+        val incomingCtrlOffsetPx = with(density) { 36.dp.toPx() }
         val nodeColumnWidthPx = with(density) { NODE_COLUMN_WIDTH.toPx() }
 
         Canvas(modifier = Modifier.fillMaxSize()) {
             val activeStrokePx = 6.dp.toPx()
             val lockedStrokePx = 5.dp.toPx()
 
-            // Incoming top half of cubic Bézier from previous step's Quiz N-1 to this Lesson N (De Casteljau split at t = 0.5)
+            // Incoming top half of cubic Bézier from previous step's Quiz N-1 to this Lesson N (C1-continuous at row boundary)
             if (item.hasIncomingFromPreviousStep) {
                 val incomingPath = Path().apply {
-                    moveTo(leftXPx, cy)
+                    moveTo(centerXPx, 0f)
                     cubicTo(
+                        (leftXPx + centerXPx) / 2f,
+                        outgoingSpan * 0.35f,
                         leftXPx,
-                        rowHeightPx * 0.25f,
-                        (centerXPx + leftXPx) / 2f,
-                        rowHeightPx * 0.125f,
-                        centerXPx,
-                        0f,
+                        (cy - incomingCtrlOffsetPx).coerceAtLeast(outgoingSpan * 0.4f),
+                        leftXPx,
+                        cy,
                     )
                 }
                 if (item.isIncomingTransitionUnlocked) {
@@ -158,15 +162,15 @@ fun StepPathRow(
                 }
             }
 
-            // Outgoing bottom half of cubic Bézier from this Quiz N to next step's Lesson N+1 (De Casteljau split at t = 0.5)
+            // Outgoing bottom half of cubic Bézier anchored strictly below Quiz N's badge and label
             if (item.hasOutgoingToNextStep) {
                 val outgoingPath = Path().apply {
-                    moveTo(rightXPx, cy)
+                    moveTo(rightXPx, outgoingStartY)
                     cubicTo(
                         rightXPx,
-                        rowHeightPx * 0.75f,
+                        outgoingStartY + outgoingSpan * 0.52f,
                         (rightXPx + centerXPx) / 2f,
-                        rowHeightPx * 0.875f,
+                        rowHeightPx - outgoingSpan * 0.35f,
                         centerXPx,
                         rowHeightPx,
                     )

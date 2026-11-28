@@ -242,7 +242,6 @@ class LessonViewModel(
             val summary = repository.recordSessionCompletion(
                 lessonId = lessonId,
                 outcomes = completion.outcomes,
-                earnedXp = completion.earnedXp,
                 accuracyPercent = completion.accuracyPercent,
             )
 

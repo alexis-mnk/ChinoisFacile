@@ -104,4 +104,30 @@ interface LessonDao {
         """,
     )
     suspend fun resetAllLessonsProgress()
+
+    @Query(
+        """
+        SELECT * FROM lessons
+        WHERE isUnlocked = 1 OR isCompleted = 1 OR bestScore > 0 OR completedCount > 0
+        """,
+    )
+    suspend fun getProgressedLessons(): List<LessonEntity>
+
+    @Query(
+        """
+        UPDATE lessons
+        SET isUnlocked = :isUnlocked,
+            isCompleted = :isCompleted,
+            bestScore = :bestScore,
+            completedCount = :completedCount
+        WHERE id = :lessonId
+        """,
+    )
+    suspend fun restoreLessonProgress(
+        lessonId: String,
+        isUnlocked: Boolean,
+        isCompleted: Boolean,
+        bestScore: Int,
+        completedCount: Int,
+    )
 }

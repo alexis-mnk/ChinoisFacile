@@ -1,9 +1,7 @@
 package com.chinoisfacile.mandarin.ui.settings
 
-import android.content.Intent
-import android.provider.Settings
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -20,9 +18,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.OpenInNew
 import androidx.compose.material.icons.filled.DeleteForever
-import androidx.compose.material.icons.filled.RecordVoiceOver
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -47,7 +43,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -63,13 +58,22 @@ fun SettingsScreen(
     modifier: Modifier = Modifier,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    val context = LocalContext.current
     val snackbarHostState = remember { SnackbarHostState() }
-    val resetSuccessMsg = stringResource(R.string.settings_reset_done)
+    val pendingSnackbarText = when (val msg = uiState.snackbarMessage) {
+        is SettingsSnackbarMessage.FromRes -> {
+            if (msg.formatArg != null) {
+                stringResource(msg.resId, msg.formatArg)
+            } else {
+                stringResource(msg.resId)
+            }
+        }
+        is SettingsSnackbarMessage.Plain -> msg.text
+        null -> null
+    }
 
-    LaunchedEffect(uiState.resetSuccessEvent) {
-        if (uiState.resetSuccessEvent > 0) {
-            snackbarHostState.showSnackbar(resetSuccessMsg)
+    LaunchedEffect(uiState.snackbarMessage?.id) {
+        if (pendingSnackbarText != null) {
+            snackbarHostState.showSnackbar(pendingSnackbarText)
         }
     }
 
@@ -96,6 +100,32 @@ fun SettingsScreen(
         )
     }
 
+    if (uiState.cloud.authDialog.visible) {
+        CloudAuthDialog(
+            state = uiState.cloud.authDialog,
+            onDismiss = viewModel::onDismissAuthDialog,
+            onModeChange = viewModel::onChangeAuthMode,
+            onEmailChange = viewModel::onAuthEmailChange,
+            onPasswordChange = viewModel::onAuthPasswordChange,
+            onSubmit = viewModel::onSubmitAuth,
+        )
+    }
+
+    uiState.cloud.restorePrompt?.let { prompt ->
+        RestoreBackupDialog(
+            prompt = prompt,
+            onConfirmRestore = viewModel::onConfirmRestorePrompt,
+            onDismiss = viewModel::onDismissRestorePrompt,
+        )
+    }
+
+    if (uiState.cloud.showDeleteCloudDialog) {
+        DeleteCloudBackupDialog(
+            onConfirmDelete = viewModel::onConfirmDeleteCloudBackup,
+            onDismiss = viewModel::onDismissDeleteCloudDialog,
+        )
+    }
+
     Box(
         modifier = modifier
             .fillMaxSize()
@@ -118,6 +148,7 @@ fun SettingsScreen(
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(16.dp),
                     colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                    border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
                 ) {
                     Column(modifier = Modifier.padding(16.dp)) {
                         Text(
@@ -160,6 +191,7 @@ fun SettingsScreen(
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(16.dp),
                     colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                    border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
                 ) {
                     Column(modifier = Modifier.padding(16.dp)) {
                         Text(
@@ -195,51 +227,20 @@ fun SettingsScreen(
                             checked = uiState.soundEffectsEnabled,
                             onCheckedChange = viewModel::onToggleSoundEffects,
                         )
-                        HorizontalDivider(
-                            modifier = Modifier.padding(vertical = 12.dp),
-                            color = MaterialTheme.colorScheme.outline.copy(alpha = 0.4f),
-                        )
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .clickable {
-                                    val ttsIntent = Intent("com.android.settings.TTS_SETTINGS")
-                                    runCatching {
-                                        context.startActivity(ttsIntent)
-                                    }.onFailure {
-                                        runCatching {
-                                            context.startActivity(Intent(Settings.ACTION_SETTINGS))
-                                        }
-                                    }
-                                }
-                                .padding(vertical = 4.dp),
-                            verticalAlignment = Alignment.CenterVertically,
-                        ) {
-                            Icon(
-                                imageVector = Icons.Default.RecordVoiceOver,
-                                contentDescription = null,
-                                tint = MaterialTheme.colorScheme.primary,
-                            )
-                            Spacer(modifier = Modifier.width(12.dp))
-                            Column(modifier = Modifier.weight(1f)) {
-                                Text(
-                                    text = stringResource(R.string.settings_tts_title),
-                                    style = MaterialTheme.typography.bodyLarge,
-                                    fontWeight = FontWeight.Medium,
-                                )
-                                Text(
-                                    text = stringResource(R.string.settings_tts_desc),
-                                    style = MaterialTheme.typography.bodyMedium,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                )
-                            }
-                            Icon(
-                                imageVector = Icons.AutoMirrored.Filled.OpenInNew,
-                                contentDescription = null,
-                                tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                            )
-                        }
                     }
+                }
+            }
+
+            if (uiState.cloud.isConfigured) {
+                item(key = "settings_cloud_backup") {
+                    CloudBackupCard(
+                        cloud = uiState.cloud,
+                        onOpenAuthDialog = viewModel::onOpenAuthDialog,
+                        onSyncNow = viewModel::onSyncNow,
+                        onRestoreFromCloud = viewModel::onRequestRestoreFromCloud,
+                        onSignOut = viewModel::onSignOut,
+                        onDeleteCloudBackup = viewModel::onRequestDeleteCloudBackup,
+                    )
                 }
             }
 
@@ -248,6 +249,7 @@ fun SettingsScreen(
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(16.dp),
                     colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                    border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
                 ) {
                     Column(modifier = Modifier.padding(16.dp)) {
                         Text(

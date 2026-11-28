@@ -1,7 +1,6 @@
 package com.chinoisfacile.mandarin.domain.lesson
 
 import com.chinoisfacile.mandarin.data.model.VocabWord
-import com.chinoisfacile.mandarin.domain.srs.StreakCalculator
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotEquals
 import org.junit.Assert.assertNull
@@ -148,10 +147,6 @@ class LessonSessionEngineTest {
         assertEquals(3, completion.completedCount)
         assertEquals(3, completion.totalCount)
         assertEquals(33, completion.accuracyPercent)
-        assertEquals(
-            3 * StreakCalculator.XP_PER_EXERCISE + StreakCalculator.XP_SESSION_BONUS,
-            completion.earnedXp,
-        )
 
         val outcomesById = completion.outcomes.associateBy { it.wordId }
         assertEquals(0, outcomesById.getValue("w1").correctAttempts)
@@ -188,10 +183,6 @@ class LessonSessionEngineTest {
         assertEquals(2, completion.completedCount)
         assertEquals(2, completion.totalCount)
         assertEquals(100, completion.accuracyPercent)
-        assertEquals(
-            2 * StreakCalculator.XP_PER_EXERCISE + StreakCalculator.XP_SESSION_BONUS,
-            completion.earnedXp,
-        )
         assertEquals(1, completion.outcomes.size)
         assertEquals("w2", completion.outcomes.single().wordId)
         assertTrue(completion.outcomes.none { it.wordId == "w1" })

@@ -7,6 +7,7 @@ import com.chinoisfacile.mandarin.data.local.GrammarNotesLoader
 import com.chinoisfacile.mandarin.data.local.UserPreferencesDataStore
 import com.chinoisfacile.mandarin.data.local.entity.UserStatsEntity
 import com.chinoisfacile.mandarin.data.local.entity.WordProgressEntity
+import com.chinoisfacile.mandarin.data.model.BackupSnapshot
 import com.chinoisfacile.mandarin.data.model.GlobalStatsOverview
 import com.chinoisfacile.mandarin.data.model.GrammarNote
 import com.chinoisfacile.mandarin.data.model.HskLevelMastery
@@ -16,17 +17,22 @@ import com.chinoisfacile.mandarin.data.model.MasteryLevel
 import com.chinoisfacile.mandarin.data.model.SessionCompletionSummary
 import com.chinoisfacile.mandarin.data.model.ThemeMode
 import com.chinoisfacile.mandarin.data.model.UserStats
+import com.chinoisfacile.mandarin.data.model.UserStatsBackup
 import com.chinoisfacile.mandarin.data.model.VocabWord
 import com.chinoisfacile.mandarin.data.model.WordReviewSummary
 import com.chinoisfacile.mandarin.data.model.WordWithProgress
 import com.chinoisfacile.mandarin.data.model.computeMasteryLevel
+import com.chinoisfacile.mandarin.data.model.toBackup
+import com.chinoisfacile.mandarin.data.model.toBackupOrNull
 import com.chinoisfacile.mandarin.data.model.toDomain
+import com.chinoisfacile.mandarin.data.model.toEntity
 import com.chinoisfacile.mandarin.data.model.toSummary
 import com.chinoisfacile.mandarin.domain.lesson.WordSessionOutcome
 import com.chinoisfacile.mandarin.domain.progression.QuickReviewEligibility
 import com.chinoisfacile.mandarin.domain.progression.StepLessonCardItem
 import com.chinoisfacile.mandarin.domain.progression.StepLessonDeckBuilder
 import com.chinoisfacile.mandarin.domain.progression.UnitProgressionResolver
+import com.chinoisfacile.mandarin.domain.srs.ProgressMetricsCalculator
 import com.chinoisfacile.mandarin.domain.srs.Sm2Scheduler
 import com.chinoisfacile.mandarin.domain.srs.Sm2State
 import com.chinoisfacile.mandarin.domain.srs.StreakCalculator
@@ -83,6 +89,7 @@ class MandarinRepository(
     private val grammarNotesLoader: GrammarNotesLoader,
     private val sm2Scheduler: Sm2Scheduler,
     private val streakCalculator: StreakCalculator,
+    private val onProgressChanged: () -> Unit = {},
 ) {
     private val lessonDao = database.lessonDao()
     private val wordDao = database.wordDao()
@@ -234,61 +241,107 @@ class MandarinRepository(
 
     fun observeGlobalStatsOverview(
         todayEpochDay: Long = LocalDate.now().toEpochDay(),
-    ): Flow<GlobalStatsOverview> = combine(
-        wordDao.observeAllWordLevelRefs(),
-        progressDao.observeAllProgress(),
-        statsDao.observeStats(),
-    ) { wordRefs, progressList, statsEntity ->
-        val progressById = progressList.associateBy { it.wordId }
-        val refsByLevel = wordRefs.groupBy { it.hskLevel }
-
-        val levelSummaries = (1..6).map { level ->
-            val levelRefs = refsByLevel[level].orEmpty()
-            var mastered = 0
-            var learning = 0
-            var due = 0
-            var newCount = 0
-
-            for (ref in levelRefs) {
-                val progress = progressById[ref.id]
-                when (computeMasteryLevel(progress)) {
-                    MasteryLevel.MASTERED -> {
-                        mastered += 1
-                        if (progress != null && progress.nextReviewEpochDay <= todayEpochDay) {
-                            due += 1
-                        }
-                    }
-                    MasteryLevel.LEARNING -> {
-                        learning += 1
-                        if (progress != null && progress.nextReviewEpochDay <= todayEpochDay) {
-                            due += 1
-                        }
-                    }
-                    MasteryLevel.NEW -> newCount += 1
-                }
-            }
-
-            HskLevelMastery(
-                hskLevel = level,
-                totalCount = levelRefs.size,
-                masteredCount = mastered,
-                learningCount = learning,
-                dueCount = due,
-                newCount = newCount,
-            )
+    ): Flow<GlobalStatsOverview> {
+        val roomSnapshotFlow = combine(
+            wordDao.observeAllWordLevelRefs(),
+            progressDao.observeAllProgress(),
+            statsDao.observeStats(),
+        ) { wordRefs, progressList, statsEntity ->
+            Triple(wordRefs, progressList, statsEntity)
+        }
+        val prefsFlow = combine(
+            preferences.selectedHskLevel,
+            preferences.studyEpochDays,
+            preferences.sessionAccuracyTotals,
+        ) { selectedHskLevel, recordedStudyDays, accuracyTotals ->
+            Triple(selectedHskLevel, recordedStudyDays, accuracyTotals)
         }
 
-        GlobalStatsOverview(
-            stats = statsEntity?.toDomain() ?: UserStats(),
-            levels = levelSummaries,
-            totalWordsCount = levelSummaries.sumOf { it.totalCount },
-            totalMasteredCount = levelSummaries.sumOf { it.masteredCount },
-            totalLearningCount = levelSummaries.sumOf { it.learningCount },
-            totalDueCount = levelSummaries.sumOf { it.dueCount },
-        )
+        return combine(roomSnapshotFlow, prefsFlow) { (wordRefs, progressList, statsEntity), (selectedHskLevel, recordedStudyDays, accuracyTotals) ->
+            val progressById = progressList.associateBy { it.wordId }
+            val refsByLevel = wordRefs.groupBy { it.hskLevel }
+
+            val levelSummaries = (1..6).map { level ->
+                val levelRefs = refsByLevel[level].orEmpty()
+                var mastered = 0
+                var learning = 0
+                var due = 0
+                var newCount = 0
+
+                for (ref in levelRefs) {
+                    val progress = progressById[ref.id]
+                    when (computeMasteryLevel(progress)) {
+                        MasteryLevel.MASTERED -> {
+                            mastered += 1
+                            if (progress != null && progress.nextReviewEpochDay <= todayEpochDay) {
+                                due += 1
+                            }
+                        }
+                        MasteryLevel.LEARNING -> {
+                            learning += 1
+                            if (progress != null && progress.nextReviewEpochDay <= todayEpochDay) {
+                                due += 1
+                            }
+                        }
+                        MasteryLevel.NEW -> newCount += 1
+                    }
+                }
+
+                HskLevelMastery(
+                    hskLevel = level,
+                    totalCount = levelRefs.size,
+                    masteredCount = mastered,
+                    learningCount = learning,
+                    dueCount = due,
+                    newCount = newCount,
+                )
+            }
+
+            val userStats = statsEntity?.toDomain() ?: UserStats()
+            val progressReviewedDays = progressList
+                .mapNotNullTo(HashSet()) { it.lastReviewedEpochDay }
+            val lastSevenDays = ProgressMetricsCalculator.buildLastSevenDays(
+                todayEpochDay = todayEpochDay,
+                recordedStudyDays = recordedStudyDays,
+                progressReviewedDays = progressReviewedDays,
+                lastStudyEpochDay = userStats.lastStudyEpochDay,
+                currentStreak = userStats.currentStreak,
+            )
+            val totalCorrect = progressList.sumOf { it.correctCount }
+            val totalWrong = progressList.sumOf { it.wrongCount }
+            val averageAccuracyPercent = ProgressMetricsCalculator.computeAverageAccuracy(
+                accuracySum = accuracyTotals.first,
+                accuracyCount = accuracyTotals.second,
+                totalCorrect = totalCorrect,
+                totalWrong = totalWrong,
+            )
+            val focusLevel = ProgressMetricsCalculator.resolveFocusLevel(
+                levels = levelSummaries,
+                selectedHskLevel = selectedHskLevel,
+            )
+            val quickReviewTargetLevel = ProgressMetricsCalculator.resolveQuickReviewTargetLevel(
+                levels = levelSummaries,
+                selectedHskLevel = selectedHskLevel,
+            )
+
+            GlobalStatsOverview(
+                stats = userStats,
+                levels = levelSummaries,
+                totalWordsCount = levelSummaries.sumOf { it.totalCount },
+                totalMasteredCount = levelSummaries.sumOf { it.masteredCount },
+                totalLearningCount = levelSummaries.sumOf { it.learningCount },
+                totalDueCount = levelSummaries.sumOf { it.dueCount },
+                selectedHskLevel = selectedHskLevel,
+                lastSevenDays = lastSevenDays,
+                averageAccuracyPercent = averageAccuracyPercent,
+                focusLevel = focusLevel,
+                quickReviewTargetLevel = quickReviewTargetLevel,
+                levelsWithDueCount = levelSummaries.count { it.dueCount > 0 },
+            )
+        }
+            .distinctUntilChanged()
+            .flowOn(Dispatchers.Default)
     }
-        .distinctUntilChanged()
-        .flowOn(Dispatchers.Default)
 
     suspend fun getLessonPayload(lessonId: String): SessionPayload {
         ensureSeeded()
@@ -371,6 +424,7 @@ class MandarinRepository(
         if (lesson != null && !lesson.isUnlocked) {
             lessonDao.unlockLesson(lesson.id)
         }
+        onProgressChanged()
     }
 
     suspend fun getQuickReviewPayload(
@@ -423,7 +477,6 @@ class MandarinRepository(
     suspend fun recordSessionCompletion(
         lessonId: String?,
         outcomes: List<WordSessionOutcome>,
-        earnedXp: Int,
         accuracyPercent: Int,
         todayEpochDay: Long = LocalDate.now().toEpochDay(),
     ): SessionCompletionSummary {
@@ -431,7 +484,7 @@ class MandarinRepository(
         val allWordsById = wordDao.getAllWords().associateBy { it.id }
         val completedStepLessons = preferences.getCompletedStepLessons()
 
-        return database.withTransaction {
+        val summary = database.withTransaction {
             val wordIds = outcomes.map { it.wordId }.distinct()
             val existingProgress = if (wordIds.isEmpty()) {
                 emptyMap()
@@ -494,7 +547,7 @@ class MandarinRepository(
             )
             statsDao.upsertStats(
                 currentStats.copy(
-                    totalXp = currentStats.totalXp + earnedXp,
+                    totalXp = 0,
                     currentStreak = streakResult.currentStreak,
                     longestStreak = streakResult.longestStreak,
                     lastStudyEpochDay = streakResult.lastStudyEpochDay,
@@ -526,13 +579,74 @@ class MandarinRepository(
             }
 
             SessionCompletionSummary(
-                earnedXp = earnedXp,
                 accuracyPercent = accuracyPercent,
                 currentStreak = streakResult.currentStreak,
                 unlockedNextStepLessonTitle = unlockedNextStepTitle,
                 reviewedWords = reviewSummaries,
             )
         }
+        preferences.recordSessionMetrics(
+            todayEpochDay = todayEpochDay,
+            accuracyPercent = accuracyPercent,
+        )
+        onProgressChanged()
+        return summary
+    }
+
+    suspend fun exportBackupSnapshot(nowEpochMillis: Long = System.currentTimeMillis()): BackupSnapshot {
+        ensureSeeded()
+        val progress = progressDao.getAllProgress().map { it.toBackup() }
+        val stats = (statsDao.getStatsOnce() ?: UserStatsEntity()).toBackup()
+        val lessonProgress = lessonDao.getProgressedLessons().mapNotNull { it.toBackupOrNull() }
+        val backupPrefs = preferences.getBackupPreferences()
+        return BackupSnapshot(
+            schemaVersion = BackupSnapshot.CURRENT_SCHEMA_VERSION,
+            updatedAtEpochMillis = nowEpochMillis,
+            wordProgress = progress,
+            userStats = stats,
+            preferences = backupPrefs,
+            lessonProgress = lessonProgress,
+        )
+    }
+
+    suspend fun restoreBackupSnapshot(snapshot: BackupSnapshot) {
+        seeder.invalidateVerification()
+        ensureSeeded()
+        database.withTransaction {
+            progressDao.clearAllProgress()
+            if (snapshot.wordProgress.isNotEmpty()) {
+                progressDao.upsertProgress(snapshot.wordProgress.map { it.toEntity() })
+                progressDao.deleteOrphanedProgress()
+            }
+
+            statsDao.upsertStats(snapshot.userStats.toEntity())
+
+            lessonDao.resetAllLessonsProgress()
+            for (lp in snapshot.lessonProgress) {
+                lessonDao.restoreLessonProgress(
+                    lessonId = lp.lessonId,
+                    isUnlocked = lp.isUnlocked,
+                    isCompleted = lp.isCompleted,
+                    bestScore = lp.bestScore.coerceIn(0, 100),
+                    completedCount = lp.completedCount.coerceAtLeast(0),
+                )
+            }
+            for (stepLessonId in snapshot.preferences.completedStepLessons) {
+                lessonDao.unlockLesson(stepLessonId)
+            }
+        }
+        preferences.restoreBackupPreferences(snapshot.preferences)
+    }
+
+    suspend fun hasLocalProgress(): Boolean {
+        ensureSeeded()
+        if (progressDao.getAllProgress().isNotEmpty()) return true
+        val stats = statsDao.getStatsOnce()
+        if (stats != null && (stats.sessionsCompleted > 0 || stats.longestStreak > 0 || stats.currentStreak > 0)) {
+            return true
+        }
+        if (preferences.getCompletedStepLessons().isNotEmpty()) return true
+        return lessonDao.getProgressedLessons().isNotEmpty()
     }
 
     suspend fun resetAllProgress() {
@@ -544,6 +658,7 @@ class MandarinRepository(
             lessonDao.resetAllLessonsProgress()
         }
         preferences.clearCompletedStepLessons()
+        preferences.clearSessionMetrics()
     }
 
     companion object {

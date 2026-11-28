@@ -114,6 +114,11 @@ fun HomeScreen(
             listState.layoutInfo.visibleItemsInfo.none { it.key == activeStepKey }
         }
     }
+    val isFabExpanded by remember {
+        derivedStateOf {
+            listState.firstVisibleItemIndex == 0 && listState.firstVisibleItemScrollOffset < 40
+        }
+    }
 
     previewTarget?.let { lesson ->
         LessonPreviewSheet(
@@ -132,13 +137,14 @@ fun HomeScreen(
         LazyColumn(
             state = listState,
             modifier = Modifier.fillMaxSize(),
-            contentPadding = PaddingValues(16.dp),
+            contentPadding = PaddingValues(top = 16.dp, bottom = 88.dp),
         ) {
             if (uiState.isSeeding) {
                 item(key = "seeding_banner", contentType = "seeding_banner") {
                     Surface(
                         modifier = Modifier
                             .fillMaxWidth()
+                            .padding(horizontal = 16.dp)
                             .padding(bottom = 14.dp),
                         shape = RoundedCornerShape(12.dp),
                         color = MaterialTheme.colorScheme.secondaryContainer,
@@ -160,7 +166,9 @@ fun HomeScreen(
                 Text(
                     text = stringResource(R.string.home_title_hsk, uiState.selectedHskLevel),
                     style = MaterialTheme.typography.headlineMedium,
-                    modifier = Modifier.padding(bottom = 12.dp),
+                    modifier = Modifier
+                        .padding(horizontal = 16.dp)
+                        .padding(bottom = 12.dp),
                 )
             }
 
@@ -168,6 +176,7 @@ fun HomeScreen(
                 HskLevelSelector(
                     selectedLevel = uiState.selectedHskLevel,
                     onSelectLevel = viewModel::onSelectHskLevel,
+                    contentPadding = PaddingValues(horizontal = 16.dp),
                     modifier = Modifier.padding(bottom = 12.dp),
                 )
             }
@@ -177,7 +186,9 @@ fun HomeScreen(
                     QuickReviewButton(
                         dueWordsCount = uiState.dueWordsCount,
                         onClick = { onStartQuickReview(uiState.selectedHskLevel) },
-                        modifier = Modifier.padding(bottom = 12.dp),
+                        modifier = Modifier
+                            .padding(horizontal = 16.dp)
+                            .padding(bottom = 12.dp),
                     )
                 }
             }
@@ -191,10 +202,12 @@ fun HomeScreen(
                     is HomePathItem.UnitHeader -> {
                         UnitBanner(
                             unit = pathItem.unit,
-                            modifier = Modifier.padding(
-                                top = if (pathItem.isFirstUnit) 2.dp else 20.dp,
-                                bottom = 14.dp,
-                            ),
+                            modifier = Modifier
+                                .padding(horizontal = 16.dp)
+                                .padding(
+                                    top = if (pathItem.isFirstUnit) 2.dp else 20.dp,
+                                    bottom = 14.dp,
+                                ),
                         )
                     }
 
@@ -218,6 +231,7 @@ fun HomeScreen(
                                 }
                             },
                             onQuizClick = { lesson -> previewTarget = lesson },
+                            modifier = Modifier.padding(horizontal = 16.dp),
                         )
                     }
                 }
@@ -233,6 +247,7 @@ fun HomeScreen(
                 .padding(16.dp),
         ) {
             ExtendedFloatingActionButton(
+                expanded = isFabExpanded,
                 onClick = {
                     if (activeStepItemIndex >= 0) {
                         coroutineScope.launch {
@@ -245,7 +260,7 @@ fun HomeScreen(
                 icon = {
                     Icon(
                         imageVector = Icons.Default.PlayArrow,
-                        contentDescription = null,
+                        contentDescription = stringResource(R.string.home_jump_to_active),
                     )
                 },
                 text = {

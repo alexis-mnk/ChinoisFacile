@@ -1,6 +1,6 @@
 {
   "hskLevel": 1,
-  "catalogVersion": 16,
+  "catalogVersion": 17,
   "units": [
     {
       "id": "hsk1_u1",
@@ -299,13 +299,14 @@
       "pinyin": "qǐng",
       "english": "Please / To invite",
       "example": {
-        "hanzi": "请你喝茶。",
-        "pinyin": "Qǐng nǐ hē chá.",
-        "english": "Please have some tea.",
+        "hanzi": "请坐，喝点茶。",
+        "pinyin": "Qǐng zuò, hē diǎn chá.",
+        "english": "Please have a seat and have some tea.",
         "tokens": [
           "请",
-          "你",
+          "坐",
           "喝",
+          "点",
           "茶"
         ]
       }
@@ -317,14 +318,16 @@
       "pinyin": "duì bu qǐ",
       "english": "Sorry / Excuse me",
       "example": {
-        "hanzi": "太对不起你了！",
-        "pinyin": "Tài duì bu qǐ nǐ le!",
-        "english": "I am so sorry!",
+        "hanzi": "对不起，今天我不能去。",
+        "pinyin": "Duì bu qǐ, jīn tiān wǒ bù néng qù.",
+        "english": "Sorry, I can't go today.",
         "tokens": [
-          "太",
           "对不起",
-          "你",
-          "了"
+          "今天",
+          "我",
+          "不",
+          "能",
+          "去"
         ]
       }
     },
@@ -335,13 +338,16 @@
       "pinyin": "méi guān xi",
       "english": "No problem / It's okay",
       "example": {
-        "hanzi": "老师说没关系。",
-        "pinyin": "Lǎo shī shuō méi guān xi.",
-        "english": "The teacher said it doesn't matter.",
+        "hanzi": "没关系，你明天来我家。",
+        "pinyin": "Méi guān xi, nǐ míng tiān lái wǒ jiā.",
+        "english": "It's okay, come to my place tomorrow.",
         "tokens": [
-          "老师",
-          "说",
-          "没关系"
+          "没关系",
+          "你",
+          "明天",
+          "来",
+          "我",
+          "家"
         ]
       }
     },
@@ -352,13 +358,15 @@
       "pinyin": "bù kè qi",
       "english": "You're welcome",
       "example": {
-        "hanzi": "朋友说不客气。",
-        "pinyin": "Péng you shuō bù kè qi.",
-        "english": "My friend said you're welcome.",
+        "hanzi": "不客气，我们是好朋友！",
+        "pinyin": "Bù kè qi, wǒ men shì hǎo péng you!",
+        "english": "You're welcome, we're good friends!",
         "tokens": [
-          "朋友",
-          "说",
-          "不客气"
+          "不客气",
+          "我们",
+          "是",
+          "好",
+          "朋友"
         ]
       }
     },
@@ -387,15 +395,17 @@
       "pinyin": "wǒ",
       "english": "I / Me",
       "example": {
-        "hanzi": "这是我的妈妈。",
-        "pinyin": "Zhè shì wǒ de mā ma.",
-        "english": "This is my mom.",
+        "hanzi": "我今天下午在家看书。",
+        "pinyin": "Wǒ jīn tiān xià wǔ zài jiā kàn shū.",
+        "english": "I am reading at home this afternoon.",
         "tokens": [
-          "这",
-          "是",
           "我",
-          "的",
-          "妈妈"
+          "今天",
+          "下午",
+          "在",
+          "家",
+          "看",
+          "书"
         ]
       }
     },
@@ -407,7 +417,7 @@
       "english": "He / Him",
       "example": {
         "hanzi": "他是法国人。",
-        "pinyin": "Tā shì Fǎguó rén.",
+        "pinyin": "Tā shì Fǎ guó rén.",
         "english": "He is French.",
         "tokens": [
           "他",
@@ -424,15 +434,16 @@
       "pinyin": "tā",
       "english": "She / Her",
       "example": {
-        "hanzi": "她是我的同学。",
-        "pinyin": "Tā shì wǒ de tóng xué.",
-        "english": "She is my classmate.",
+        "hanzi": "她明天坐飞机去上海。",
+        "pinyin": "Tā míng tiān zuò fēi jī qù Shàng hǎi.",
+        "english": "She is flying to Shanghai tomorrow.",
         "tokens": [
           "她",
-          "是",
-          "我",
-          "的",
-          "同学"
+          "明天",
+          "坐",
+          "飞机",
+          "去",
+          "上海"
         ]
       }
     },
@@ -443,13 +454,16 @@
       "pinyin": "wǒ men",
       "english": "We / Us",
       "example": {
-        "hanzi": "我们是同学。",
-        "pinyin": "Wǒ men shì tóng xué.",
-        "english": "We're classmates.",
+        "hanzi": "我们都在北京学习汉语。",
+        "pinyin": "Wǒ men dōu zài Běi jīng xué xí Hàn yǔ.",
+        "english": "We are all studying Chinese in Beijing.",
         "tokens": [
           "我们",
-          "是",
-          "同学"
+          "都",
+          "在",
+          "北京",
+          "学习",
+          "汉语"
         ]
       }
     },
@@ -460,15 +474,16 @@
       "pinyin": "shì",
       "english": "To be",
       "example": {
-        "hanzi": "这是我的妈妈。",
-        "pinyin": "Zhè shì wǒ de mā ma.",
-        "english": "This is my mom.",
+        "hanzi": "小王是我们的汉语老师。",
+        "pinyin": "Xiǎo Wáng shì wǒ men de Hàn yǔ lǎo shī.",
+        "english": "Xiaowang is our Chinese teacher.",
         "tokens": [
-          "这",
+          "小王",
           "是",
-          "我",
+          "我们",
           "的",
-          "妈妈"
+          "汉语",
+          "老师"
         ]
       }
     },
@@ -498,13 +513,14 @@
       "pinyin": "méi yǒu",
       "english": "Don't have / Did not",
       "example": {
-        "hanzi": "我没有钱。",
-        "pinyin": "Wǒ méi yǒu qián.",
-        "english": "I don't have money.",
+        "hanzi": "桌子上没有苹果。",
+        "pinyin": "Zhuō zi shàng méi yǒu píng guǒ.",
+        "english": "There are no apples on the table.",
         "tokens": [
-          "我",
+          "桌子",
+          "上",
           "没有",
-          "钱"
+          "苹果"
         ]
       }
     },
@@ -515,15 +531,14 @@
       "pinyin": "ma",
       "english": "Question particle",
       "example": {
-        "hanzi": "你在听我说吗？",
-        "pinyin": "Nǐ zài tīng wǒ shuō ma?",
-        "english": "Do you hear what I'm saying?",
+        "hanzi": "你会说汉语吗？",
+        "pinyin": "Nǐ huì shuō Hàn yǔ ma?",
+        "english": "Can you speak Chinese?",
         "tokens": [
           "你",
-          "在",
-          "听",
-          "我",
+          "会",
           "说",
+          "汉语",
           "吗"
         ]
       }
@@ -535,12 +550,15 @@
       "pinyin": "ne",
       "english": "Question particle (and you?)",
       "example": {
-        "hanzi": "你妈妈呢？",
-        "pinyin": "Nǐ mā ma ne?",
-        "english": "Where's your mom?",
+        "hanzi": "我喜欢喝茶，你呢？",
+        "pinyin": "Wǒ xǐ huan hē chá, nǐ ne?",
+        "english": "I like drinking tea, and you?",
         "tokens": [
+          "我",
+          "喜欢",
+          "喝",
+          "茶",
           "你",
-          "妈妈",
           "呢"
         ]
       }
@@ -571,15 +589,16 @@
       "pinyin": "jiào",
       "english": "To be called / To call",
       "example": {
-        "hanzi": "你去叫他来。",
-        "pinyin": "Nǐ qù jiào tā lái.",
-        "english": "Tell him to come.",
+        "hanzi": "你的汉语老师叫什么？",
+        "pinyin": "Nǐ de Hàn yǔ lǎo shī jiào shén me?",
+        "english": "What is your Chinese teacher's name?",
         "tokens": [
           "你",
-          "去",
+          "的",
+          "汉语",
+          "老师",
           "叫",
-          "他",
-          "来"
+          "什么"
         ]
       }
     },
@@ -590,13 +609,14 @@
       "pinyin": "shén me",
       "english": "What",
       "example": {
-        "hanzi": "你做了什么？",
-        "pinyin": "Nǐ zuò le shén me?",
-        "english": "What did you do?",
+        "hanzi": "今天中午我们吃什么？",
+        "pinyin": "Jīn tiān zhōng wǔ wǒ men chī shén me?",
+        "english": "What are we eating for lunch today?",
         "tokens": [
-          "你",
-          "做",
-          "了",
+          "今天",
+          "中午",
+          "我们",
+          "吃",
           "什么"
         ]
       }
@@ -626,15 +646,18 @@
       "pinyin": "zhè",
       "english": "This",
       "example": {
-        "hanzi": "这是我的书。",
-        "pinyin": "Zhè shì wǒ de shū.",
-        "english": "This is my book.",
+        "hanzi": "这本汉语书是你的吗？",
+        "pinyin": "Zhè běn Hàn yǔ shū shì nǐ de ma?",
+        "english": "Is this Chinese book yours?",
         "tokens": [
           "这",
+          "本",
+          "汉语",
+          "书",
           "是",
-          "我",
+          "你",
           "的",
-          "书"
+          "吗"
         ]
       }
     },
@@ -645,14 +668,15 @@
       "pinyin": "nà",
       "english": "That",
       "example": {
-        "hanzi": "那是我朋友。",
-        "pinyin": "Nà shì wǒ péng you.",
-        "english": "That is my friend.",
+        "hanzi": "那家商店很大。",
+        "pinyin": "Nà jiā shāng diàn hěn dà.",
+        "english": "That store is very big.",
         "tokens": [
           "那",
-          "是",
-          "我",
-          "朋友"
+          "家",
+          "商店",
+          "很",
+          "大"
         ]
       }
     },
@@ -699,15 +723,17 @@
       "pinyin": "mā ma",
       "english": "Mom / Mother",
       "example": {
-        "hanzi": "这是我的妈妈。",
-        "pinyin": "Zhè shì wǒ de mā ma.",
-        "english": "This is my mom.",
+        "hanzi": "妈妈上午去医院看医生了。",
+        "pinyin": "Mā ma shàng wǔ qù yī yuàn kàn yī shēng le.",
+        "english": "Mom went to the hospital to see the doctor this morning.",
         "tokens": [
-          "这",
-          "是",
-          "我",
-          "的",
-          "妈妈"
+          "妈妈",
+          "上午",
+          "去",
+          "医院",
+          "看",
+          "医生",
+          "了"
         ]
       }
     },
@@ -755,14 +781,16 @@
       "pinyin": "rén",
       "english": "Person / People",
       "example": {
-        "hanzi": "我是中国人。",
-        "pinyin": "Wǒ shì Zhōng guó rén.",
-        "english": "I am Chinese.",
+        "hanzi": "今天商店里人很多。",
+        "pinyin": "Jīn tiān shāng diàn lǐ rén hěn duō.",
+        "english": "There are a lot of people in the store today.",
         "tokens": [
-          "我",
-          "是",
-          "中国",
-          "人"
+          "今天",
+          "商店",
+          "里",
+          "人",
+          "很",
+          "多"
         ]
       }
     },
@@ -773,15 +801,19 @@
       "pinyin": "péng you",
       "english": "Friend",
       "example": {
-        "hanzi": "他是我的朋友。",
-        "pinyin": "Tā shì wǒ de péng you.",
-        "english": "He is my friend.",
+        "hanzi": "昨天我和好朋友去看了电影。",
+        "pinyin": "Zuó tiān wǒ hé hǎo péng you qù kàn le diàn yǐng.",
+        "english": "Yesterday I went to see a movie with my good friend.",
         "tokens": [
-          "他",
-          "是",
+          "昨天",
           "我",
-          "的",
-          "朋友"
+          "和",
+          "好",
+          "朋友",
+          "去",
+          "看",
+          "了",
+          "电影"
         ]
       }
     },
@@ -792,15 +824,16 @@
       "pinyin": "xiān sheng",
       "english": "Mister / Sir",
       "example": {
-        "hanzi": "那个先生是医生。",
-        "pinyin": "Nà gè xiān sheng shì yī shēng.",
-        "english": "That gentleman is a doctor.",
+        "hanzi": "先生，你想吃点什么？",
+        "pinyin": "Xiān sheng, nǐ xiǎng chī diǎn shén me?",
+        "english": "Sir, what would you like to eat?",
         "tokens": [
-          "那",
-          "个",
           "先生",
-          "是",
-          "医生"
+          "你",
+          "想",
+          "吃",
+          "点",
+          "什么"
         ]
       }
     },
@@ -811,16 +844,18 @@
       "pinyin": "xiǎo jie",
       "english": "Miss / Young lady",
       "example": {
-        "hanzi": "那个小姐是中国人。",
-        "pinyin": "Nà gè xiǎo jie shì Zhōng guó rén.",
-        "english": "That young lady is Chinese.",
+        "hanzi": "小姐，这个杯子是你的吗？",
+        "pinyin": "Xiǎo jie, zhè gè bēi zi shì nǐ de ma?",
+        "english": "Miss, is this cup yours?",
         "tokens": [
-          "那",
-          "个",
           "小姐",
+          "这",
+          "个",
+          "杯子",
           "是",
-          "中国",
-          "人"
+          "你",
+          "的",
+          "吗"
         ]
       }
     },
@@ -831,15 +866,18 @@
       "pinyin": "tóng xué",
       "english": "Classmate",
       "example": {
-        "hanzi": "他是我的同学。",
-        "pinyin": "Tā shì wǒ de tóng xué.",
-        "english": "He is my classmate.",
+        "hanzi": "我的同学都在学校看书。",
+        "pinyin": "Wǒ de tóng xué dōu zài xué xiào kàn shū.",
+        "english": "My classmates are all reading at school.",
         "tokens": [
-          "他",
-          "是",
           "我",
           "的",
-          "同学"
+          "同学",
+          "都",
+          "在",
+          "学校",
+          "看",
+          "书"
         ]
       }
     },
@@ -850,13 +888,16 @@
       "pinyin": "ài",
       "english": "To love",
       "example": {
-        "hanzi": "我爱北京。",
-        "pinyin": "Wǒ ài Běi jīng.",
-        "english": "I love Beijing.",
+        "hanzi": "爸爸妈妈都很爱女儿。",
+        "pinyin": "Bà ba mā ma dōu hěn ài nǚ ér.",
+        "english": "Mom and Dad both love their daughter very much.",
         "tokens": [
-          "我",
+          "爸爸",
+          "妈妈",
+          "都",
+          "很",
           "爱",
-          "北京"
+          "女儿"
         ]
       }
     },
@@ -867,14 +908,16 @@
       "pinyin": "xǐ huan",
       "english": "To like",
       "example": {
-        "hanzi": "我不喜欢学校。",
-        "pinyin": "Wǒ bù xǐ huan xué xiào.",
-        "english": "I don't like school.",
+        "hanzi": "我女儿很喜欢看电影。",
+        "pinyin": "Wǒ nǚ ér hěn xǐ huan kàn diàn yǐng.",
+        "english": "My daughter loves watching movies.",
         "tokens": [
           "我",
-          "不",
+          "女儿",
+          "很",
           "喜欢",
-          "学校"
+          "看",
+          "电影"
         ]
       }
     },
@@ -905,13 +948,17 @@
       "pinyin": "hē",
       "english": "To drink",
       "example": {
-        "hanzi": "我喜欢喝茶。",
-        "pinyin": "Wǒ xǐ huan hē chá.",
-        "english": "I like drinking tea.",
+        "hanzi": "天气很冷，我想喝热茶。",
+        "pinyin": "Tiān qì hěn lěng, wǒ xiǎng hē rè chá.",
+        "english": "It's very cold, I want to drink hot tea.",
         "tokens": [
+          "天气",
+          "很",
+          "冷",
           "我",
-          "喜欢",
+          "想",
           "喝",
+          "热",
           "茶"
         ]
       }
@@ -923,12 +970,15 @@
       "pinyin": "shuǐ",
       "english": "Water",
       "example": {
-        "hanzi": "我不喝水。",
-        "pinyin": "Wǒ bù hē shuǐ.",
-        "english": "I don't drink water.",
+        "hanzi": "今天很热，我想喝水。",
+        "pinyin": "Jīn tiān hěn rè, wǒ xiǎng hē shuǐ.",
+        "english": "It's very hot today, I want to drink some water.",
         "tokens": [
+          "今天",
+          "很",
+          "热",
           "我",
-          "不",
+          "想",
           "喝",
           "水"
         ]
@@ -941,14 +991,15 @@
       "pinyin": "chá",
       "english": "Tea",
       "example": {
-        "hanzi": "这是谁的茶？",
-        "pinyin": "Zhè shì shéi de chá?",
-        "english": "Whose tea is this?",
+        "hanzi": "爸爸下午喜欢喝中国茶。",
+        "pinyin": "Bà ba xià wǔ xǐ huan hē Zhōng guó chá.",
+        "english": "Dad likes drinking Chinese tea in the afternoon.",
         "tokens": [
-          "这",
-          "是",
-          "谁",
-          "的",
+          "爸爸",
+          "下午",
+          "喜欢",
+          "喝",
+          "中国",
           "茶"
         ]
       }
@@ -998,15 +1049,16 @@
       "pinyin": "shuǐ guǒ",
       "english": "Fruit",
       "example": {
-        "hanzi": "她很喜欢吃水果。",
-        "pinyin": "Tā hěn xǐ huan chī shuǐ guǒ.",
-        "english": "She really likes eating fruit.",
+        "hanzi": "商店里的水果很多。",
+        "pinyin": "Shāng diàn lǐ de shuǐ guǒ hěn duō.",
+        "english": "There is a lot of fruit in the store.",
         "tokens": [
-          "她",
+          "商店",
+          "里",
+          "的",
+          "水果",
           "很",
-          "喜欢",
-          "吃",
-          "水果"
+          "多"
         ]
       }
     },
@@ -1017,13 +1069,16 @@
       "pinyin": "píng guǒ",
       "english": "Apple",
       "example": {
-        "hanzi": "我喜欢吃苹果。",
-        "pinyin": "Wǒ xǐ huan chī píng guǒ.",
-        "english": "I like eating apples.",
+        "hanzi": "妈妈买了五个大苹果。",
+        "pinyin": "Mā ma mǎi le wǔ gè dà píng guǒ.",
+        "english": "Mom bought five big apples.",
         "tokens": [
-          "我",
-          "喜欢",
-          "吃",
+          "妈妈",
+          "买",
+          "了",
+          "五",
+          "个",
+          "大",
           "苹果"
         ]
       }
@@ -1035,15 +1090,17 @@
       "pinyin": "māo",
       "english": "Cat",
       "example": {
-        "hanzi": "我很喜欢小猫。",
-        "pinyin": "Wǒ hěn xǐ huan xiǎo māo.",
-        "english": "I really like kittens.",
+        "hanzi": "小猫在桌子上睡觉呢。",
+        "pinyin": "Xiǎo māo zài zhuō zi shàng shuì jiào ne.",
+        "english": "The kitten is sleeping on the table.",
         "tokens": [
-          "我",
-          "很",
-          "喜欢",
           "小",
-          "猫"
+          "猫",
+          "在",
+          "桌子",
+          "上",
+          "睡觉",
+          "呢"
         ]
       }
     },
@@ -1054,15 +1111,16 @@
       "pinyin": "gǒu",
       "english": "Dog",
       "example": {
-        "hanzi": "他的狗很大。",
-        "pinyin": "Tā de gǒu hěn dà.",
-        "english": "His dog is very big.",
+        "hanzi": "他的狗在椅子后面。",
+        "pinyin": "Tā de gǒu zài yǐ zi hòu mian.",
+        "english": "His dog is behind the chair.",
         "tokens": [
           "他",
           "的",
           "狗",
-          "很",
-          "大"
+          "在",
+          "椅子",
+          "后面"
         ]
       }
     },
@@ -1073,15 +1131,15 @@
       "pinyin": "de",
       "english": "Possessive particle",
       "example": {
-        "hanzi": "这是我的妈妈。",
-        "pinyin": "Zhè shì wǒ de mā ma.",
-        "english": "This is my mom.",
+        "hanzi": "小李的汉语很好。",
+        "pinyin": "Xiǎo Lǐ de Hàn yǔ hěn hǎo.",
+        "english": "Xiaoli's Chinese is very good.",
         "tokens": [
-          "这",
-          "是",
-          "我",
+          "小李",
           "的",
-          "妈妈"
+          "汉语",
+          "很",
+          "好"
         ]
       }
     },
@@ -1092,12 +1150,15 @@
       "pinyin": "hěn",
       "english": "Very",
       "example": {
-        "hanzi": "今天天气很好。",
-        "pinyin": "Jīn tiān tiān qì hěn hǎo.",
-        "english": "It's fine today.",
+        "hanzi": "这家医院的医生很好。",
+        "pinyin": "Zhè jiā yī yuàn de yī shēng hěn hǎo.",
+        "english": "The doctors at this hospital are very good.",
         "tokens": [
-          "今天",
-          "天气",
+          "这",
+          "家",
+          "医院",
+          "的",
+          "医生",
           "很",
           "好"
         ]
@@ -1131,7 +1192,7 @@
       "example": {
         "hanzi": "那是一家医院。",
         "pinyin": "Nà shì yī jiā yī yuàn.",
-        "english": "It's a hospital.",
+        "english": "That is a hospital.",
         "tokens": [
           "那",
           "是",
@@ -1284,15 +1345,18 @@
       "pinyin": "jiǔ",
       "english": "Nine",
       "example": {
-        "hanzi": "他说九点了。",
-        "pinyin": "Tā shuō jiǔ diǎn le.",
-        "english": "He said that it was nine o'clock.",
+        "hanzi": "现在九点了，我想回家。",
+        "pinyin": "Xiàn zài jiǔ diǎn le, wǒ xiǎng huí jiā.",
+        "english": "It's nine o'clock now; I want to go home.",
         "tokens": [
-          "他",
-          "说",
+          "现在",
           "九",
           "点",
-          "了"
+          "了",
+          "我",
+          "想",
+          "回",
+          "家"
         ]
       }
     },
@@ -1339,12 +1403,13 @@
       "pinyin": "duō shao",
       "english": "How many / How much",
       "example": {
-        "hanzi": "这东西多少钱？",
-        "pinyin": "Zhè dōng xi duō shao qián?",
-        "english": "How much is this thing?",
+        "hanzi": "这个电脑多少钱？",
+        "pinyin": "Zhè gè diàn nǎo duō shao qián?",
+        "english": "How much is this computer?",
         "tokens": [
           "这",
-          "东西",
+          "个",
+          "电脑",
           "多少",
           "钱"
         ]
@@ -1376,15 +1441,17 @@
       "pinyin": "gè",
       "english": "General measure word",
       "example": {
-        "hanzi": "我不喜欢这个。",
-        "pinyin": "Wǒ bù xǐ huan zhè gè.",
-        "english": "I don't like this one.",
+        "hanzi": "我买了三个大杯子。",
+        "pinyin": "Wǒ mǎi le sān gè dà bēi zi.",
+        "english": "I bought three big cups.",
         "tokens": [
           "我",
-          "不",
-          "喜欢",
-          "这",
-          "个"
+          "买",
+          "了",
+          "三",
+          "个",
+          "大",
+          "杯子"
         ]
       }
     },
@@ -1435,14 +1502,17 @@
       "pinyin": "yuè",
       "english": "Month / Moon",
       "example": {
-        "hanzi": "现在是五月。",
-        "pinyin": "Xiàn zài shì wǔ yuè.",
-        "english": "It is May now.",
+        "hanzi": "我八月去上海看朋友。",
+        "pinyin": "Wǒ bā yuè qù Shàng hǎi kàn péng you.",
+        "english": "I'm going to Shanghai in August to visit a friend.",
         "tokens": [
-          "现在",
-          "是",
-          "五",
-          "月"
+          "我",
+          "八",
+          "月",
+          "去",
+          "上海",
+          "看",
+          "朋友"
         ]
       }
     },
@@ -1473,7 +1543,7 @@
       "example": {
         "hanzi": "今天天气很好。",
         "pinyin": "Jīn tiān tiān qì hěn hǎo.",
-        "english": "It's fine today.",
+        "english": "The weather is very nice today.",
         "tokens": [
           "今天",
           "天气",
@@ -1507,14 +1577,18 @@
       "pinyin": "zuó tiān",
       "english": "Yesterday",
       "example": {
-        "hanzi": "我昨天很高兴。",
-        "pinyin": "Wǒ zuó tiān hěn gāo xìng.",
-        "english": "I was happy yesterday.",
+        "hanzi": "昨天下雨了，我在家看书。",
+        "pinyin": "Zuó tiān xià yǔ le, wǒ zài jiā kàn shū.",
+        "english": "It rained yesterday, so I stayed home and read.",
         "tokens": [
-          "我",
           "昨天",
-          "很",
-          "高兴"
+          "下雨",
+          "了",
+          "我",
+          "在",
+          "家",
+          "看",
+          "书"
         ]
       }
     },
@@ -1544,15 +1618,16 @@
       "pinyin": "diǎn",
       "english": "O'clock / Dot / A little",
       "example": {
-        "hanzi": "我想吃点东西。",
-        "pinyin": "Wǒ xiǎng chī diǎn dōng xi.",
-        "english": "I'd like something to eat.",
+        "hanzi": "你明天几点来学校？",
+        "pinyin": "Nǐ míng tiān jǐ diǎn lái xué xiào?",
+        "english": "What time are you coming to school tomorrow?",
         "tokens": [
-          "我",
-          "想",
-          "吃",
+          "你",
+          "明天",
+          "几",
           "点",
-          "东西"
+          "来",
+          "学校"
         ]
       }
     },
@@ -1755,14 +1830,16 @@
       "pinyin": "shāng diàn",
       "english": "Shop / Store",
       "example": {
-        "hanzi": "他去了商店。",
-        "pinyin": "Tā qù le shāng diàn.",
-        "english": "He went to the store.",
+        "hanzi": "下午我去商店买衣服。",
+        "pinyin": "Xià wǔ wǒ qù shāng diàn mǎi yī fu.",
+        "english": "I'm going to the store to buy clothes this afternoon.",
         "tokens": [
-          "他",
+          "下午",
+          "我",
           "去",
-          "了",
-          "商店"
+          "商店",
+          "买",
+          "衣服"
         ]
       }
     },
@@ -1792,15 +1869,17 @@
       "pinyin": "xué xiào",
       "english": "School",
       "example": {
-        "hanzi": "那是我们的学校。",
-        "pinyin": "Nà shì wǒ men de xué xiào.",
-        "english": "That is our school.",
+        "hanzi": "我儿子在那个学校学习。",
+        "pinyin": "Wǒ ér zi zài nà gè xué xiào xué xí.",
+        "english": "My son studies at that school.",
         "tokens": [
+          "我",
+          "儿子",
+          "在",
           "那",
-          "是",
-          "我们",
-          "的",
-          "学校"
+          "个",
+          "学校",
+          "学习"
         ]
       }
     },
@@ -1849,14 +1928,15 @@
       "pinyin": "diàn yǐng",
       "english": "Movie",
       "example": {
-        "hanzi": "她喜欢看中国电影。",
-        "pinyin": "Tā xǐ huan kàn Zhōng guó diàn yǐng.",
-        "english": "She likes watching Chinese movies.",
+        "hanzi": "明天下午我们去看电影。",
+        "pinyin": "Míng tiān xià wǔ wǒ men qù kàn diàn yǐng.",
+        "english": "Tomorrow afternoon we're going to see a movie.",
         "tokens": [
-          "她",
-          "喜欢",
+          "明天",
+          "下午",
+          "我们",
+          "去",
           "看",
-          "中国",
           "电影"
         ]
       }
@@ -1960,13 +2040,13 @@
       "pinyin": "hòu mian",
       "english": "Behind",
       "example": {
-        "hanzi": "他在我后面。",
-        "pinyin": "Tā zài wǒ hòu mian.",
-        "english": "He is behind me.",
+        "hanzi": "医院在学校后面。",
+        "pinyin": "Yī yuàn zài xué xiào hòu mian.",
+        "english": "The hospital is behind the school.",
         "tokens": [
-          "他",
+          "医院",
           "在",
-          "我",
+          "学校",
           "后面"
         ]
       }
@@ -1978,15 +2058,16 @@
       "pinyin": "shàng",
       "english": "On / Above / To go up",
       "example": {
-        "hanzi": "我爱上了你。",
-        "pinyin": "Wǒ ài shàng le nǐ.",
-        "english": "I fell in love with you.",
+        "hanzi": "桌子上有很多水果。",
+        "pinyin": "Zhuō zi shàng yǒu hěn duō shuǐ guǒ.",
+        "english": "There is a lot of fruit on the table.",
         "tokens": [
-          "我",
-          "爱",
+          "桌子",
           "上",
-          "了",
-          "你"
+          "有",
+          "很",
+          "多",
+          "水果"
         ]
       }
     },
@@ -1997,15 +2078,16 @@
       "pinyin": "xià",
       "english": "Below / Under / To go down",
       "example": {
-        "hanzi": "下一个是谁？",
-        "pinyin": "Xià yī gè shì shéi?",
-        "english": "Who's next?",
+        "hanzi": "小狗在桌子下睡觉。",
+        "pinyin": "Xiǎo gǒu zài zhuō zi xià shuì jiào.",
+        "english": "The puppy is sleeping under the table.",
         "tokens": [
+          "小",
+          "狗",
+          "在",
+          "桌子",
           "下",
-          "一",
-          "个",
-          "是",
-          "谁"
+          "睡觉"
         ]
       }
     },
@@ -2055,13 +2137,16 @@
       "pinyin": "bēi zi",
       "english": "Cup / Glass",
       "example": {
-        "hanzi": "这是谁的杯子？",
-        "pinyin": "Zhè shì shéi de bēi zi?",
-        "english": "Whose cup is this?",
+        "hanzi": "我想买一个漂亮的杯子。",
+        "pinyin": "Wǒ xiǎng mǎi yī gè piào liang de bēi zi.",
+        "english": "I want to buy a pretty cup.",
         "tokens": [
-          "这",
-          "是",
-          "谁",
+          "我",
+          "想",
+          "买",
+          "一",
+          "个",
+          "漂亮",
           "的",
           "杯子"
         ]
@@ -2093,13 +2178,16 @@
       "pinyin": "lái",
       "english": "To come",
       "example": {
-        "hanzi": "她来了！",
-        "pinyin": "Tā lái le!",
-        "english": "She's coming!",
+        "hanzi": "明天我的朋友来北京。",
+        "pinyin": "Míng tiān wǒ de péng you lái Běi jīng.",
+        "english": "My friend is coming to Beijing tomorrow.",
         "tokens": [
-          "她",
+          "明天",
+          "我",
+          "的",
+          "朋友",
           "来",
-          "了"
+          "北京"
         ]
       }
     },
@@ -2110,13 +2198,14 @@
       "pinyin": "huí",
       "english": "To return / Go back",
       "example": {
-        "hanzi": "你什么时候回家？",
-        "pinyin": "Nǐ shén me shí hou huí jiā?",
-        "english": "When will you come home?",
+        "hanzi": "爸爸下午六点回家。",
+        "pinyin": "Bà ba xià wǔ liù diǎn huí jiā.",
+        "english": "Dad comes home at six in the afternoon.",
         "tokens": [
-          "你",
-          "什么",
-          "时候",
+          "爸爸",
+          "下午",
+          "六",
+          "点",
           "回",
           "家"
         ]
@@ -2222,14 +2311,18 @@
       "pinyin": "xué sheng",
       "english": "Student",
       "example": {
-        "hanzi": "你是学生吗？",
-        "pinyin": "Nǐ shì xué sheng ma?",
-        "english": "Are you a student?",
+        "hanzi": "这个学校有很多中国学生。",
+        "pinyin": "Zhè gè xué xiào yǒu hěn duō Zhōng guó xué sheng.",
+        "english": "This school has many Chinese students.",
         "tokens": [
-          "你",
-          "是",
-          "学生",
-          "吗"
+          "这",
+          "个",
+          "学校",
+          "有",
+          "很",
+          "多",
+          "中国",
+          "学生"
         ]
       }
     },
@@ -2240,16 +2333,17 @@
       "pinyin": "yī shēng",
       "english": "Doctor",
       "example": {
-        "hanzi": "我的医生叫什么名字？",
-        "pinyin": "Wǒ de yī shēng jiào shén me míng zi?",
-        "english": "What's the name of my doctor?",
+        "hanzi": "我朋友是北京医院的医生。",
+        "pinyin": "Wǒ péng you shì Běi jīng yī yuàn de yī shēng.",
+        "english": "My friend is a doctor at a Beijing hospital.",
         "tokens": [
           "我",
+          "朋友",
+          "是",
+          "北京",
+          "医院",
           "的",
-          "医生",
-          "叫",
-          "什么",
-          "名字"
+          "医生"
         ]
       }
     },
@@ -2260,15 +2354,17 @@
       "pinyin": "kàn jiàn",
       "english": "To see",
       "example": {
-        "hanzi": "我今天看见她了。",
-        "pinyin": "Wǒ jīn tiān kàn jiàn tā le.",
-        "english": "I saw her today.",
+        "hanzi": "我在商店前面看见了老师。",
+        "pinyin": "Wǒ zài shāng diàn qián miàn kàn jiàn le lǎo shī.",
+        "english": "I saw the teacher in front of the store.",
         "tokens": [
           "我",
-          "今天",
+          "在",
+          "商店",
+          "前面",
           "看见",
-          "她",
-          "了"
+          "了",
+          "老师"
         ]
       }
     },
@@ -2279,16 +2375,16 @@
       "pinyin": "tīng",
       "english": "To listen / Hear",
       "example": {
-        "hanzi": "你在听我说吗？",
-        "pinyin": "Nǐ zài tīng wǒ shuō ma?",
-        "english": "Do you hear what I'm saying?",
+        "hanzi": "我喜欢听老师读汉语。",
+        "pinyin": "Wǒ xǐ huan tīng lǎo shī dú Hàn yǔ.",
+        "english": "I like listening to the teacher read Chinese.",
         "tokens": [
-          "你",
-          "在",
-          "听",
           "我",
-          "说",
-          "吗"
+          "喜欢",
+          "听",
+          "老师",
+          "读",
+          "汉语"
         ]
       }
     },
@@ -2376,14 +2472,18 @@
       "pinyin": "shū",
       "english": "Book",
       "example": {
-        "hanzi": "这是我的书。",
-        "pinyin": "Zhè shì wǒ de shū.",
-        "english": "This is my book.",
+        "hanzi": "他在商店买了一本汉语书。",
+        "pinyin": "Tā zài shāng diàn mǎi le yī běn Hàn yǔ shū.",
+        "english": "He bought a Chinese book at the store.",
         "tokens": [
-          "这",
-          "是",
-          "我",
-          "的",
+          "他",
+          "在",
+          "商店",
+          "买",
+          "了",
+          "一",
+          "本",
+          "汉语",
           "书"
         ]
       }
@@ -2452,16 +2552,17 @@
       "pinyin": "mǎi",
       "english": "To buy",
       "example": {
-        "hanzi": "我买了一本书。",
-        "pinyin": "Wǒ mǎi le yī běn shū.",
-        "english": "I bought a book.",
+        "hanzi": "妈妈今天买了很多水果。",
+        "pinyin": "Mā ma jīn tiān mǎi le hěn duō shuǐ guǒ.",
+        "english": "Mom bought a lot of fruit today.",
         "tokens": [
-          "我",
+          "妈妈",
+          "今天",
           "买",
           "了",
-          "一",
-          "本",
-          "书"
+          "很",
+          "多",
+          "水果"
         ]
       }
     },
@@ -2472,13 +2573,15 @@
       "pinyin": "qián",
       "english": "Money",
       "example": {
-        "hanzi": "这东西多少钱？",
-        "pinyin": "Zhè dōng xi duō shao qián?",
-        "english": "How much is this thing?",
+        "hanzi": "这本书五十块钱。",
+        "pinyin": "Zhè běn shū wǔshí kuài qián.",
+        "english": "This book costs fifty yuan.",
         "tokens": [
           "这",
-          "东西",
-          "多少",
+          "本",
+          "书",
+          "五十",
+          "块",
           "钱"
         ]
       }
@@ -2490,14 +2593,16 @@
       "pinyin": "kuài",
       "english": "Yuan (currency) / Piece",
       "example": {
-        "hanzi": "这个几块？",
-        "pinyin": "Zhè gè jǐ kuài?",
-        "english": "How much is it?",
+        "hanzi": "三个苹果十块钱。",
+        "pinyin": "Sān gè píng guǒ shí kuài qián.",
+        "english": "Three apples cost ten yuan.",
         "tokens": [
-          "这",
+          "三",
           "个",
-          "几",
-          "块"
+          "苹果",
+          "十",
+          "块",
+          "钱"
         ]
       }
     },
@@ -2545,14 +2650,17 @@
       "pinyin": "yī fu",
       "english": "Clothes",
       "example": {
-        "hanzi": "我买了些衣服。",
-        "pinyin": "Wǒ mǎi le xiē yī fu.",
-        "english": "I have bought some clothes.",
+        "hanzi": "妈妈在商店买了漂亮的衣服。",
+        "pinyin": "Mā ma zài shāng diàn mǎi le piào liang de yī fu.",
+        "english": "Mom bought pretty clothes at the store.",
         "tokens": [
-          "我",
+          "妈妈",
+          "在",
+          "商店",
           "买",
           "了",
-          "些",
+          "漂亮",
+          "的",
           "衣服"
         ]
       }
@@ -2622,15 +2730,17 @@
       "pinyin": "xiē",
       "english": "Some / A few",
       "example": {
-        "hanzi": "我买了些衣服。",
-        "pinyin": "Wǒ mǎi le xiē yī fu.",
-        "english": "I bought some clothes.",
+        "hanzi": "我在商店买了些水果。",
+        "pinyin": "Wǒ zài shāng diàn mǎi le xiē shuǐ guǒ.",
+        "english": "I bought some fruit at the store.",
         "tokens": [
           "我",
+          "在",
+          "商店",
           "买",
           "了",
           "些",
-          "衣服"
+          "水果"
         ]
       }
     },
@@ -2660,15 +2770,16 @@
       "pinyin": "xiǎo",
       "english": "Small / Little",
       "example": {
-        "hanzi": "这个杯子很小。",
-        "pinyin": "Zhè gè bēi zi hěn xiǎo.",
-        "english": "This cup is very small.",
+        "hanzi": "这个杯子太小了。",
+        "pinyin": "Zhè gè bēi zi tài xiǎo le.",
+        "english": "This cup is too small.",
         "tokens": [
           "这",
           "个",
           "杯子",
-          "很",
-          "小"
+          "太",
+          "小",
+          "了"
         ]
       }
     },
@@ -2679,15 +2790,16 @@
       "pinyin": "duō",
       "english": "Many / Much",
       "example": {
-        "hanzi": "你想太多了。",
-        "pinyin": "Nǐ xiǎng tài duō le.",
-        "english": "You think too much.",
+        "hanzi": "北京有很多好饭店。",
+        "pinyin": "Běi jīng yǒu hěn duō hǎo fàn diàn.",
+        "english": "Beijing has many great restaurants.",
         "tokens": [
-          "你",
-          "想",
-          "太",
+          "北京",
+          "有",
+          "很",
           "多",
-          "了"
+          "好",
+          "饭店"
         ]
       }
     },
@@ -2698,13 +2810,17 @@
       "pinyin": "shǎo",
       "english": "Few / Little",
       "example": {
-        "hanzi": "少了什么？",
-        "pinyin": "Shǎo le shén me?",
-        "english": "What is missing?",
+        "hanzi": "今天商店里的人很少。",
+        "pinyin": "Jīn tiān shāng diàn lǐ de rén hěn shǎo.",
+        "english": "There are very few people in the store today.",
         "tokens": [
-          "少",
-          "了",
-          "什么"
+          "今天",
+          "商店",
+          "里",
+          "的",
+          "人",
+          "很",
+          "少"
         ]
       }
     },
@@ -2734,12 +2850,14 @@
       "pinyin": "lěng",
       "english": "Cold",
       "example": {
-        "hanzi": "今天天气很冷。",
-        "pinyin": "Jīn tiān tiān qì hěn lěng.",
-        "english": "Today's weather is very cold.",
+        "hanzi": "十二月的北京很冷。",
+        "pinyin": "Shíèr yuè de Běi jīng hěn lěng.",
+        "english": "Beijing is very cold in December.",
         "tokens": [
-          "今天",
-          "天气",
+          "十二",
+          "月",
+          "的",
+          "北京",
           "很",
           "冷"
         ]
@@ -2752,12 +2870,14 @@
       "pinyin": "rè",
       "english": "Hot",
       "example": {
-        "hanzi": "今天天气很热。",
-        "pinyin": "Jīn tiān tiān qì hěn rè.",
-        "english": "Today's weather is very hot.",
+        "hanzi": "七月的上海很热。",
+        "pinyin": "Qī yuè de Shàng hǎi hěn rè.",
+        "english": "Shanghai is very hot in July.",
         "tokens": [
-          "今天",
-          "天气",
+          "七",
+          "月",
+          "的",
+          "上海",
           "很",
           "热"
         ]
@@ -2770,14 +2890,17 @@
       "pinyin": "zuò",
       "english": "To do / Make",
       "example": {
-        "hanzi": "你做了什么？",
-        "pinyin": "Nǐ zuò le shén me?",
-        "english": "What did you do?",
+        "hanzi": "爸爸今天在家做中国菜。",
+        "pinyin": "Bà ba jīn tiān zài jiā zuò Zhōng guó cài.",
+        "english": "Dad is cooking Chinese food at home today.",
         "tokens": [
-          "你",
+          "爸爸",
+          "今天",
+          "在",
+          "家",
           "做",
-          "了",
-          "什么"
+          "中国",
+          "菜"
         ]
       }
     },
@@ -2825,16 +2948,16 @@
       "pinyin": "zài",
       "english": "At / In / Currently",
       "example": {
-        "hanzi": "你在听我说吗？",
-        "pinyin": "Nǐ zài tīng wǒ shuō ma?",
-        "english": "Do you hear what I'm saying?",
+        "hanzi": "小王中午在饭店吃米饭。",
+        "pinyin": "Xiǎo Wáng zhōng wǔ zài fàn diàn chī mǐ fàn.",
+        "english": "Xiaowang is eating rice at the restaurant at noon.",
         "tokens": [
-          "你",
+          "小王",
+          "中午",
           "在",
-          "听",
-          "我",
-          "说",
-          "吗"
+          "饭店",
+          "吃",
+          "米饭"
         ]
       }
     },
@@ -2845,15 +2968,16 @@
       "pinyin": "huì",
       "english": "Can (learned skill) / Will",
       "example": {
-        "hanzi": "明天天气会好吗？",
-        "pinyin": "Míng tiān tiān qì huì hǎo ma?",
-        "english": "Will the weather be nice tomorrow?",
+        "hanzi": "我朋友会做中国菜。",
+        "pinyin": "Wǒ péng you huì zuò Zhōng guó cài.",
+        "english": "My friend knows how to cook Chinese food.",
         "tokens": [
-          "明天",
-          "天气",
+          "我",
+          "朋友",
           "会",
-          "好",
-          "吗"
+          "做",
+          "中国",
+          "菜"
         ]
       }
     },
@@ -2864,15 +2988,18 @@
       "pinyin": "néng",
       "english": "Can / Be able to",
       "example": {
-        "hanzi": "我们能在哪儿打电话？",
-        "pinyin": "Wǒ men néng zài nǎ r dǎ diàn huà?",
-        "english": "Where can we make a phone call?",
+        "hanzi": "今天下雨了，我不能去学校。",
+        "pinyin": "Jīn tiān xià yǔ le, wǒ bù néng qù xué xiào.",
+        "english": "It's raining today, so I can't go to school.",
         "tokens": [
-          "我们",
+          "今天",
+          "下雨",
+          "了",
+          "我",
+          "不",
           "能",
-          "在",
-          "哪儿",
-          "打电话"
+          "去",
+          "学校"
         ]
       }
     },
@@ -2883,14 +3010,16 @@
       "pinyin": "xiǎng",
       "english": "To want / Think / Miss",
       "example": {
-        "hanzi": "我很想你。",
-        "pinyin": "Wǒ hěn xiǎng nǐ.",
-        "english": "I miss you.",
+        "hanzi": "中午我想吃中国菜。",
+        "pinyin": "Zhōng wǔ wǒ xiǎng chī Zhōng guó cài.",
+        "english": "I'd like to eat Chinese food for lunch.",
         "tokens": [
+          "中午",
           "我",
-          "很",
           "想",
-          "你"
+          "吃",
+          "中国",
+          "菜"
         ]
       }
     },
@@ -2959,15 +3088,16 @@
       "pinyin": "dōu",
       "english": "All / Both",
       "example": {
-        "hanzi": "我什么都不喜欢。",
-        "pinyin": "Wǒ shén me dōu bù xǐ huan.",
-        "english": "I don't like anything.",
+        "hanzi": "我们都是北京的学生。",
+        "pinyin": "Wǒ men dōu shì Běi jīng de xué sheng.",
+        "english": "We are all students in Beijing.",
         "tokens": [
-          "我",
-          "什么",
+          "我们",
           "都",
-          "不",
-          "喜欢"
+          "是",
+          "北京",
+          "的",
+          "学生"
         ]
       }
     },

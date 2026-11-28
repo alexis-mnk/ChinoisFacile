@@ -6,9 +6,11 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
+import androidx.datastore.preferences.core.longPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.core.stringSetPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import com.chinoisfacile.mandarin.data.model.BackupPreferences
 import com.chinoisfacile.mandarin.data.model.LexiconViewMode
 import com.chinoisfacile.mandarin.data.model.ThemeMode
 import kotlinx.coroutines.flow.Flow
@@ -56,6 +58,21 @@ class UserPreferencesDataStore(context: Context) {
 
     val completedStepLessons: Flow<Set<String>> = dataStore.data
         .map { prefs -> prefs[KEY_COMPLETED_STEP_LESSONS] ?: emptySet() }
+        .distinctUntilChanged()
+
+    val studyEpochDays: Flow<Set<Long>> = dataStore.data
+        .map { prefs ->
+            (prefs[KEY_STUDY_EPOCH_DAYS] ?: emptySet())
+                .mapNotNullTo(HashSet()) { it.toLongOrNull() }
+        }
+        .distinctUntilChanged()
+
+    val sessionAccuracyTotals: Flow<Pair<Int, Int>> = dataStore.data
+        .map { prefs ->
+            val sum = prefs[KEY_SESSION_ACCURACY_SUM] ?: 0
+            val count = prefs[KEY_SESSION_ACCURACY_COUNT] ?: 0
+            sum to count
+        }
         .distinctUntilChanged()
 
     suspend fun getCompletedStepLessons(): Set<String> = completedStepLessons.first()
@@ -127,10 +144,87 @@ class UserPreferencesDataStore(context: Context) {
         }
     }
 
+    suspend fun recordSessionMetrics(
+        todayEpochDay: Long,
+        accuracyPercent: Int,
+    ) {
+        val cutoffDay = todayEpochDay - MAX_RETAINED_STUDY_DAYS
+        val boundedAccuracy = accuracyPercent.coerceIn(0, 100)
+        dataStore.edit { prefs ->
+            val retainedDays = (prefs[KEY_STUDY_EPOCH_DAYS] ?: emptySet())
+                .mapNotNull { it.toLongOrNull() }
+                .filter { it >= cutoffDay }
+                .toMutableSet()
+            retainedDays += todayEpochDay
+            prefs[KEY_STUDY_EPOCH_DAYS] = retainedDays.mapTo(HashSet()) { it.toString() }
+
+            val prevSum = prefs[KEY_SESSION_ACCURACY_SUM] ?: 0
+            val prevCount = prefs[KEY_SESSION_ACCURACY_COUNT] ?: 0
+            prefs[KEY_SESSION_ACCURACY_SUM] = prevSum + boundedAccuracy
+            prefs[KEY_SESSION_ACCURACY_COUNT] = prevCount + 1
+        }
+    }
+
+    val cloudLastSyncedAtMillis: Flow<Long?> = dataStore.data
+        .map { prefs -> prefs[KEY_CLOUD_LAST_SYNCED_AT] }
+        .distinctUntilChanged()
+
+    suspend fun clearSessionMetrics() {
+        dataStore.edit { prefs ->
+            prefs.remove(KEY_STUDY_EPOCH_DAYS)
+            prefs.remove(KEY_SESSION_ACCURACY_SUM)
+            prefs.remove(KEY_SESSION_ACCURACY_COUNT)
+        }
+    }
+
+    suspend fun setCloudLastSyncedAtMillis(epochMillis: Long?) {
+        dataStore.edit { prefs ->
+            if (epochMillis == null) {
+                prefs.remove(KEY_CLOUD_LAST_SYNCED_AT)
+            } else {
+                prefs[KEY_CLOUD_LAST_SYNCED_AT] = epochMillis
+            }
+        }
+    }
+
+    suspend fun getBackupPreferences(): BackupPreferences {
+        val prefs = dataStore.data.first()
+        return BackupPreferences(
+            completedStepLessons = prefs[KEY_COMPLETED_STEP_LESSONS]?.toSet() ?: emptySet(),
+            studyEpochDays = (prefs[KEY_STUDY_EPOCH_DAYS] ?: emptySet())
+                .filterTo(HashSet()) { it.toLongOrNull() != null },
+            sessionAccuracySum = (prefs[KEY_SESSION_ACCURACY_SUM] ?: 0).coerceAtLeast(0),
+            sessionAccuracyCount = (prefs[KEY_SESSION_ACCURACY_COUNT] ?: 0).coerceAtLeast(0),
+        )
+    }
+
+    suspend fun restoreBackupPreferences(backupPrefs: BackupPreferences) {
+        val sanitizedStudyDays = backupPrefs.studyEpochDays
+            .filterTo(HashSet()) { it.toLongOrNull() != null }
+        dataStore.edit { prefs ->
+            if (backupPrefs.completedStepLessons.isEmpty()) {
+                prefs.remove(KEY_COMPLETED_STEP_LESSONS)
+            } else {
+                prefs[KEY_COMPLETED_STEP_LESSONS] = backupPrefs.completedStepLessons
+            }
+            prefs.remove(KEY_LEGACY_COMPLETED_UNIT_LESSONS)
+
+            if (sanitizedStudyDays.isEmpty()) {
+                prefs.remove(KEY_STUDY_EPOCH_DAYS)
+            } else {
+                prefs[KEY_STUDY_EPOCH_DAYS] = sanitizedStudyDays
+            }
+
+            prefs[KEY_SESSION_ACCURACY_SUM] = backupPrefs.sessionAccuracySum.coerceAtLeast(0)
+            prefs[KEY_SESSION_ACCURACY_COUNT] = backupPrefs.sessionAccuracyCount.coerceAtLeast(0)
+        }
+    }
+
     private companion object {
         const val MIN_HSK_LEVEL = 1
         const val MAX_HSK_LEVEL = 6
         const val DEFAULT_HSK_LEVEL = 1
+        const val MAX_RETAINED_STUDY_DAYS = 30L
 
         val KEY_SHOW_PINYIN_BY_DEFAULT = booleanPreferencesKey("show_pinyin_by_default")
         val KEY_TONE_COLORS_ENABLED = booleanPreferencesKey("tone_colors_enabled")
@@ -141,6 +235,10 @@ class UserPreferencesDataStore(context: Context) {
         val KEY_COMPLETED_STEP_LESSONS = stringSetPreferencesKey("completed_step_lessons")
         val KEY_LEGACY_COMPLETED_UNIT_LESSONS = stringSetPreferencesKey("completed_unit_lessons")
         val KEY_LEGACY_SEEDED_CATALOG_VERSION = intPreferencesKey("seeded_catalog_version")
+        val KEY_STUDY_EPOCH_DAYS = stringSetPreferencesKey("study_epoch_days")
+        val KEY_SESSION_ACCURACY_SUM = intPreferencesKey("session_accuracy_sum")
+        val KEY_SESSION_ACCURACY_COUNT = intPreferencesKey("session_accuracy_count")
+        val KEY_CLOUD_LAST_SYNCED_AT = longPreferencesKey("cloud_last_synced_at_millis")
 
         fun seededCatalogVersionKey(hskLevel: Int): Preferences.Key<Int> =
             intPreferencesKey("seeded_catalog_version_hsk_$hskLevel")

@@ -201,6 +201,9 @@ fun AppNavHost(
                 StatsScreen(
                     viewModel = viewModel,
                     onOpenLevelInLexicon = { navigateToTab(Routes.LEXICON) },
+                    onStartQuickReview = { hskLevel ->
+                        navController.navigate(Routes.quickReviewRoute(hskLevel))
+                    },
                 )
             }
 

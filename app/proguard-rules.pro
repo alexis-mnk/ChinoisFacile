@@ -54,3 +54,32 @@
 -keepnames class kotlinx.coroutines.internal.MainDispatcherFactory {}
 -keepnames class kotlinx.coroutines.CoroutineExceptionHandler {}
 -dontwarn kotlinx.coroutines.debug.**
+
+# Supabase-kt, Ktor & OkHttp (optional Cloud Backup)
+-keepattributes *Annotation*,Signature,InnerClasses,EnclosingMethod
+-keep class io.github.jan.supabase.** { *; }
+-keep class com.chinoisfacile.mandarin.data.cloud.** { *; }
+-keepclassmembers class com.chinoisfacile.mandarin.data.cloud.** {
+    *** Companion;
+    kotlinx.serialization.KSerializer serializer(...);
+}
+-keep class com.chinoisfacile.mandarin.data.cloud.**$Companion {
+    kotlinx.serialization.KSerializer serializer(...);
+}
+-keep class com.chinoisfacile.mandarin.data.cloud.**$$serializer { *; }
+
+-keep class io.ktor.client.** { *; }
+-keep class io.ktor.utils.** { *; }
+-keep class io.ktor.serialization.** { *; }
+-keep class io.ktor.client.engine.okhttp.OkHttpEngineContainer { *; }
+-if class io.ktor.client.engine.okhttp.OkHttpEngineContainer
+-keep class io.ktor.client.engine.okhttp.** { *; }
+-keep class * implements io.ktor.client.engine.HttpClientEngineContainer { *; }
+-keep class * implements io.ktor.client.plugins.api.ClientPlugin { *; }
+
+-dontwarn okhttp3.**
+-dontwarn okio.**
+-dontwarn sun.misc.Unsafe
+-keep class okhttp3.** { *; }
+-keep interface okhttp3.** { *; }
+-keep class okio.** { *; }

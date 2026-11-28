@@ -19,6 +19,21 @@ val hasReleaseKeystore = if (keystorePropertiesFile.exists()) {
     false
 }
 
+val localPropertiesFile = rootProject.file("local.properties")
+val localProperties = Properties()
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.inputStream().use { localProperties.load(it) }
+}
+fun escapeBuildConfigString(value: String): String =
+    value.replace("\\", "\\\\").replace("\"", "\\\"")
+
+val supabaseUrl = escapeBuildConfigString(
+    localProperties.getProperty("SUPABASE_URL", "").trim()
+)
+val supabaseAnonKey = escapeBuildConfigString(
+    localProperties.getProperty("SUPABASE_ANON_KEY", "").trim()
+)
+
 android {
     namespace = "com.chinoisfacile.mandarin"
     compileSdk = 35
@@ -27,10 +42,13 @@ android {
         applicationId = "com.chinoisfacile.mandarin"
         minSdk = 26
         targetSdk = 35
-        versionCode = 6
-        versionName = "1.1.2"
+        versionCode = 7
+        versionName = "1.1.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "SUPABASE_URL", "\"$supabaseUrl\"")
+        buildConfigField("String", "SUPABASE_ANON_KEY", "\"$supabaseAnonKey\"")
     }
 
     signingConfigs {
@@ -69,6 +87,7 @@ android {
 
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 
     packaging {
@@ -104,6 +123,11 @@ dependencies {
     implementation(libs.androidx.datastore.preferences)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.kotlinx.coroutines.android)
+
+    implementation(platform(libs.supabase.bom))
+    implementation(libs.supabase.auth)
+    implementation(libs.supabase.postgrest)
+    implementation(libs.ktor.client.okhttp)
 
     debugImplementation(libs.androidx.compose.ui.tooling)
 

@@ -4,6 +4,9 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
+import com.chinoisfacile.mandarin.data.cloud.CloudBackupRepository
+import com.chinoisfacile.mandarin.data.cloud.NoOpCloudBackupRepository
+import com.chinoisfacile.mandarin.data.cloud.SupabaseCloudBackupRepository
 import com.chinoisfacile.mandarin.data.local.AppDatabase
 import com.chinoisfacile.mandarin.data.local.CatalogSeeder
 import com.chinoisfacile.mandarin.data.local.GrammarNotesLoader
@@ -57,6 +60,12 @@ class AppContainer(context: Context) {
     val streakCalculator: StreakCalculator by lazy { StreakCalculator() }
     val exerciseGenerator: ExerciseGenerator by lazy { ExerciseGenerator() }
 
+    private val isCloudConfigured: Boolean =
+        BuildConfig.SUPABASE_URL.isNotBlank() && BuildConfig.SUPABASE_ANON_KEY.isNotBlank()
+
+    @Volatile
+    private var cloudInitialized = false
+
     val repository: MandarinRepository by lazy {
         MandarinRepository(
             database = database,
@@ -65,7 +74,26 @@ class AppContainer(context: Context) {
             grammarNotesLoader = grammarNotesLoader,
             sm2Scheduler = sm2Scheduler,
             streakCalculator = streakCalculator,
+            onProgressChanged = {
+                if (isCloudConfigured) {
+                    cloudBackupRepository.triggerAutoSyncIfSignedIn()
+                }
+            },
         )
+    }
+
+    val cloudBackupRepository: CloudBackupRepository by lazy {
+        cloudInitialized = true
+        if (isCloudConfigured) {
+            SupabaseCloudBackupRepository(
+                supabaseUrl = BuildConfig.SUPABASE_URL,
+                supabaseAnonKey = BuildConfig.SUPABASE_ANON_KEY,
+                mandarinRepository = repository,
+                preferences = preferencesDataStore,
+            )
+        } else {
+            NoOpCloudBackupRepository()
+        }
     }
 
     @Volatile
@@ -97,6 +125,9 @@ class AppContainer(context: Context) {
         if (sfxInitialized) {
             soundEffects.release()
         }
+        if (cloudInitialized) {
+            cloudBackupRepository.close()
+        }
     }
 
     fun homeViewModelFactory(): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
@@ -123,7 +154,7 @@ class AppContainer(context: Context) {
     fun settingsViewModelFactory(): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return SettingsViewModel(repository, soundEffects) as T
+            return SettingsViewModel(repository, soundEffects, cloudBackupRepository) as T
         }
     }
 

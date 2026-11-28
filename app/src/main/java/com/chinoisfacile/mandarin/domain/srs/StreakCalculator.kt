@@ -29,9 +29,4 @@ class StreakCalculator {
             lastStudyEpochDay = max(lastStudyEpochDay ?: todayEpochDay, todayEpochDay),
         )
     }
-
-    companion object {
-        const val XP_PER_EXERCISE = 10
-        const val XP_SESSION_BONUS = 20
-    }
 }

@@ -1,7 +1,5 @@
 package com.chinoisfacile.mandarin.domain.lesson
 
-import com.chinoisfacile.mandarin.domain.srs.StreakCalculator
-
 enum class SessionPhase {
     MAIN,
     MISTAKE_REVIEW,
@@ -11,7 +9,6 @@ data class SessionCompletionData(
     val completedCount: Int,
     val totalCount: Int,
     val accuracyPercent: Int,
-    val earnedXp: Int,
     val outcomes: List<WordSessionOutcome>,
 )
 
@@ -31,7 +28,7 @@ sealed interface SessionAdvanceResult {
 
 /**
  * Pure two-phase session queue and scoring state machine:
- * - [SessionPhase.MAIN]: first-attempt accuracy, XP, and SM-2 outcomes are recorded here.
+ * - [SessionPhase.MAIN]: first-attempt accuracy and SM-2 outcomes are recorded here.
  * - [SessionPhase.MISTAKE_REVIEW]: failed exercises are replayed until all are solved,
  *   without altering first-attempt score or erasing the initial SM-2 penalty.
  */
@@ -203,8 +200,6 @@ class LessonSessionEngine {
         } else {
             100
         }
-        val earnedXp = completedCount * StreakCalculator.XP_PER_EXERCISE +
-            StreakCalculator.XP_SESSION_BONUS
         val outcomes = firstTryWordStats.map { (wordId, stats) ->
             WordSessionOutcome(
                 wordId = wordId,
@@ -217,7 +212,6 @@ class LessonSessionEngine {
             completedCount = completedCount,
             totalCount = totalCount,
             accuracyPercent = accuracyPercent,
-            earnedXp = earnedXp,
             outcomes = outcomes,
         )
     }

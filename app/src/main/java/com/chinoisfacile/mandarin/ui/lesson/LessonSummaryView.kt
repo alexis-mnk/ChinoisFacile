@@ -93,8 +93,14 @@ fun LessonSummaryView(
                         modifier = Modifier.weight(1f),
                     )
                     SummaryStatCard(
-                        label = stringResource(R.string.summary_xp_label),
-                        value = stringResource(R.string.summary_xp_value, summary.earnedXp),
+                        label = stringResource(
+                            if (isQuizSession) {
+                                R.string.summary_words_practiced_label
+                            } else {
+                                R.string.summary_words_reviewed_label
+                            },
+                        ),
+                        value = summary.reviewedWords.size.toString(),
                         modifier = Modifier.weight(1f),
                     )
                     SummaryStatCard(

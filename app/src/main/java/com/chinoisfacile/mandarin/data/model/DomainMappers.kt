@@ -97,7 +97,6 @@ fun GrammarNoteDto.toDomain(): GrammarNote = GrammarNote(
 )
 
 fun UserStatsEntity.toDomain(): UserStats = UserStats(
-    totalXp = totalXp,
     currentStreak = currentStreak,
     longestStreak = longestStreak,
     lastStudyEpochDay = lastStudyEpochDay,
